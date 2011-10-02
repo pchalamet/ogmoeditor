@@ -14,6 +14,7 @@ namespace OgmoEditor
     {
         public string Name;
         public string WorkingDirectory;
+        public string LastFilename;
 
         [NonSerialized()]
         public bool Changed = false;
@@ -22,14 +23,45 @@ namespace OgmoEditor
         {
             Name = "New Project";
             WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            LastFilename = "";
         }
 
-        public void Save(string filename)
+        public void Save()
         {
-            Changed = false;
+            //If it hasn't been saved yet, go to SaveAs
+            if (LastFilename == "")
+            {
+                SaveAs();
+                return;
+            }
 
+            Changed = false;
             BinaryFormatter bf = new BinaryFormatter();
-            bf.Serialize(new FileStream(filename, FileMode.OpenOrCreate), this);
+            Stream s = new FileStream(LastFilename, FileMode.OpenOrCreate);
+            bf.Serialize(s, this);
+            s.Close();
+        }
+
+        public void SaveAs()
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.InitialDirectory = WorkingDirectory;
+            dialog.RestoreDirectory = true;
+            dialog.FileName = Name;
+            dialog.DefaultExt = ".oep";
+            dialog.OverwritePrompt = true;
+            dialog.Filter = "Ogmo Editor Project Files|*.oep";
+
+            if (dialog.ShowDialog() == DialogResult.Cancel)
+                return;
+
+            LastFilename = dialog.FileName;
+
+            Changed = false;
+            BinaryFormatter bf = new BinaryFormatter();
+            Stream s = dialog.OpenFile();
+            bf.Serialize(s, this);
+            s.Close();
         }
     }
 }

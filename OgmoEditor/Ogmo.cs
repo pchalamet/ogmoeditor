@@ -21,6 +21,7 @@ namespace OgmoEditor
         static public event ProjectCallback OnProjectAdd;
         static public event ProjectCallback OnProjectRemove;
 
+        [STAThread]
         static void Main(string[] args)
         {
             Application.EnableVisualStyles();
@@ -43,13 +44,20 @@ namespace OgmoEditor
         /*
          *  Project stuff
          */
-        static public Project LoadProject(string filename)
+        static public void LoadProject()
         {
-            if (!File.Exists(filename))
-                throw new Exception("Loading a project file that does not exist!");
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Ogmo Editor Project Files|*.oep";
+
+            if (dialog.ShowDialog() == DialogResult.Cancel)
+                return;
 
             BinaryFormatter bf = new BinaryFormatter();
-            return (Project)bf.Deserialize(new FileStream(filename, FileMode.Open));
+            Stream s = dialog.OpenFile();
+            Project project = (Project)bf.Deserialize(s);
+            s.Close();
+
+            AddProject(project);
         }
 
         static public void AddProject(Project project)
@@ -89,12 +97,14 @@ namespace OgmoEditor
             get { return currentProject; }
             set
             {
+                //Do not change if its already selected
                 if (currentProject == value)
                     return;
 
-                Console.WriteLine("Set Current Project to: " + value.Name);
-
+                //Change the project
                 currentProject = value;
+
+                //Call the change event
                 if (OnProjectChange != null)
                     OnProjectChange(currentProject, CurrentProjectID);
             }

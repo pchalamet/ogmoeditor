@@ -31,7 +31,17 @@ namespace OgmoEditor
 
         private void onProjectChange(Project project, int projectID)
         {
-            MasterTreeView.SelectedNode = MasterTreeView.Nodes[projectID];
+            //Select the project in the tree view
+            if (project == null)
+                MasterTreeView.SelectedNode = null;
+            else
+                MasterTreeView.SelectedNode = MasterTreeView.Nodes[projectID];
+
+            //Enable/Disable menu items
+            closeProjectToolStripMenuItem.Enabled = (project != null);
+            newLevelToolStripMenuItem.Enabled = (project != null);
+            saveProjectToolStripMenuItem.Enabled = (project != null);
+            saveProjectAsToolStripMenuItem.Enabled = (project != null);
         }
 
         private void onProjectAdd(Project project, int projectID)
@@ -47,6 +57,26 @@ namespace OgmoEditor
         private void MasterTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             Ogmo.CurrentProjectID = MasterTreeView.Nodes.IndexOf(e.Node);
+        }
+
+        private void closeProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ogmo.RemoveProject(Ogmo.CurrentProject);
+        }
+
+        private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ogmo.CurrentProject.Save();
+        }
+
+        private void saveProjectAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ogmo.CurrentProject.SaveAs();
+        }
+
+        private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ogmo.LoadProject();
         }
     }
 }
