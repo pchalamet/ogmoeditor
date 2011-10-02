@@ -20,5 +20,10 @@ namespace OgmoEditor
         {
             Application.Exit();
         }
+
+        private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ogmo.AddProject(new Project());
+        }
     }
 }
