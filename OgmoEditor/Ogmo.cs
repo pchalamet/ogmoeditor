@@ -13,11 +13,20 @@ namespace OgmoEditor
         public const float VERSION = .5f;
 
         static public readonly MainWindow MainWindow = new MainWindow();
+        static public List<Project> Projects { get; private set; }
+        static private Project currentProject;
+
+        public delegate void ProjectCallback(Project project, int projectID);
+        static public event ProjectCallback OnProjectChange;
+        static public event ProjectCallback OnProjectAdd;
+        static public event ProjectCallback OnProjectRemove;
 
         static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             InitializeDirectories();
+
+            Projects = new List<Project>();
 
             Application.Run(MainWindow);
         }
@@ -31,6 +40,9 @@ namespace OgmoEditor
                 Directory.CreateDirectory("Projects");
         }
 
+        /*
+         *  Project stuff
+         */
         static public Project LoadProject(string filename)
         {
             if (!File.Exists(filename))
@@ -42,8 +54,56 @@ namespace OgmoEditor
 
         static public void AddProject(Project project)
         {
-            TreeView tree = (TreeView)MainWindow.Controls["MasterTreeView"];
-            tree.Nodes.Add(new TreeNode(project.Name));
+            //Add it to the list
+            Projects.Add(project);
+
+            //Call the added event
+            if (OnProjectAdd != null)
+                OnProjectAdd(project, Projects.Count - 1);
+
+            CurrentProject = project;
+        }
+
+        static public void RemoveProject(Project project)
+        {
+            //Remove it from a list
+            int id = Projects.FindIndex(e => e == project);
+            Projects.Remove(project);
+
+            //Call removed event
+            if (OnProjectRemove != null)
+                OnProjectRemove(project, id);
+
+            //If it's the current project, switch to another one
+            if (CurrentProject == project)
+            {
+                if (Projects.Count > 0)
+                    CurrentProject = Projects[0];
+                else
+                    CurrentProject = null;
+            }
+        }
+
+        static public Project CurrentProject
+        {
+            get { return currentProject; }
+            set
+            {
+                if (currentProject == value)
+                    return;
+
+                Console.WriteLine("Set Current Project to: " + value.Name);
+
+                currentProject = value;
+                if (OnProjectChange != null)
+                    OnProjectChange(currentProject, CurrentProjectID);
+            }
+        }
+
+        static public int CurrentProjectID
+        {
+            get { return Projects.FindIndex(e => e == currentProject); }
+            set { CurrentProject = Projects[value]; }
         }
     }
 }

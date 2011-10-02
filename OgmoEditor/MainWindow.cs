@@ -14,6 +14,9 @@ namespace OgmoEditor
         public MainWindow()
         {
             InitializeComponent();
+            Ogmo.OnProjectChange += onProjectChange;
+            Ogmo.OnProjectAdd += onProjectAdd;
+            Ogmo.OnProjectRemove += onProjectRemove;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -23,7 +26,27 @@ namespace OgmoEditor
 
         private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.AddProject(new Project());
+            Ogmo.AddProject(new Project()); 
+        }
+
+        private void onProjectChange(Project project, int projectID)
+        {
+            MasterTreeView.SelectedNode = MasterTreeView.Nodes[projectID];
+        }
+
+        private void onProjectAdd(Project project, int projectID)
+        {
+            MasterTreeView.Nodes.Add(new TreeNode(project.Name));
+        }
+
+        private void onProjectRemove(Project project, int projectID)
+        {
+            MasterTreeView.Nodes.RemoveAt(projectID);
+        }
+
+        private void MasterTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            Ogmo.CurrentProjectID = MasterTreeView.Nodes.IndexOf(e.Node);
         }
     }
 }
