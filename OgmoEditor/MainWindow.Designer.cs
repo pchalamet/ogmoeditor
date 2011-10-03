@@ -32,19 +32,22 @@
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.projectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveProjectAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.levelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveLevelAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.duplicateLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeOtherLevelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MasterTreeView = new System.Windows.Forms.TreeView();
             this.projectNodeContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.saveProjectToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,9 +60,9 @@
             this.saveLevelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.saveLevelAsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.closeLevelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.duplicateLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closeOtherLevelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.duplicateLevelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeOtherLevelsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStrip.SuspendLayout();
             this.projectNodeContextMenu.SuspendLayout();
             this.levelNodeContextMenu.SuspendLayout();
@@ -76,7 +79,9 @@
             // MenuStrip
             // 
             this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.projectToolStripMenuItem,
+            this.levelToolStripMenuItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
             this.MenuStrip.Size = new System.Drawing.Size(784, 24);
@@ -86,22 +91,29 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newProjectToolStripMenuItem,
-            this.openProjectToolStripMenuItem,
-            this.saveProjectToolStripMenuItem,
-            this.saveProjectAsToolStripMenuItem,
-            this.closeProjectToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.newLevelToolStripMenuItem,
-            this.openLevelToolStripMenuItem,
-            this.saveLevelToolStripMenuItem,
-            this.saveLevelAsToolStripMenuItem,
-            this.closeLevelToolStripMenuItem,
-            this.toolStripSeparator2,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // projectToolStripMenuItem
+            // 
+            this.projectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newProjectToolStripMenuItem,
+            this.openProjectToolStripMenuItem,
+            this.saveProjectToolStripMenuItem,
+            this.saveProjectAsToolStripMenuItem,
+            this.closeProjectToolStripMenuItem});
+            this.projectToolStripMenuItem.Name = "projectToolStripMenuItem";
+            this.projectToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.projectToolStripMenuItem.Text = "Project";
             // 
             // newProjectToolStripMenuItem
             // 
@@ -141,16 +153,26 @@
             this.closeProjectToolStripMenuItem.Text = "Close Project";
             this.closeProjectToolStripMenuItem.Click += new System.EventHandler(this.closeProjectToolStripMenuItem_Click);
             // 
-            // toolStripSeparator1
+            // levelToolStripMenuItem
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(160, 6);
+            this.levelToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newLevelToolStripMenuItem,
+            this.openLevelToolStripMenuItem,
+            this.saveLevelToolStripMenuItem,
+            this.saveLevelAsToolStripMenuItem,
+            this.closeLevelToolStripMenuItem,
+            this.toolStripSeparator5,
+            this.duplicateLevelToolStripMenuItem,
+            this.closeOtherLevelsToolStripMenuItem});
+            this.levelToolStripMenuItem.Name = "levelToolStripMenuItem";
+            this.levelToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.levelToolStripMenuItem.Text = "Level";
             // 
             // newLevelToolStripMenuItem
             // 
             this.newLevelToolStripMenuItem.Enabled = false;
             this.newLevelToolStripMenuItem.Name = "newLevelToolStripMenuItem";
-            this.newLevelToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.newLevelToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.newLevelToolStripMenuItem.Text = "New Level";
             this.newLevelToolStripMenuItem.Click += new System.EventHandler(this.newLevelToolStripMenuItem_Click);
             // 
@@ -158,7 +180,7 @@
             // 
             this.openLevelToolStripMenuItem.Enabled = false;
             this.openLevelToolStripMenuItem.Name = "openLevelToolStripMenuItem";
-            this.openLevelToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.openLevelToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.openLevelToolStripMenuItem.Text = "Open Level";
             this.openLevelToolStripMenuItem.Click += new System.EventHandler(this.openLevelToolStripMenuItem_Click);
             // 
@@ -166,7 +188,7 @@
             // 
             this.saveLevelToolStripMenuItem.Enabled = false;
             this.saveLevelToolStripMenuItem.Name = "saveLevelToolStripMenuItem";
-            this.saveLevelToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.saveLevelToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.saveLevelToolStripMenuItem.Text = "Save Level";
             this.saveLevelToolStripMenuItem.Click += new System.EventHandler(this.saveLevelToolStripMenuItem_Click);
             // 
@@ -174,7 +196,7 @@
             // 
             this.saveLevelAsToolStripMenuItem.Enabled = false;
             this.saveLevelAsToolStripMenuItem.Name = "saveLevelAsToolStripMenuItem";
-            this.saveLevelAsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.saveLevelAsToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.saveLevelAsToolStripMenuItem.Text = "Save Level As...";
             this.saveLevelAsToolStripMenuItem.Click += new System.EventHandler(this.saveLevelAsToolStripMenuItem_Click);
             // 
@@ -182,21 +204,30 @@
             // 
             this.closeLevelToolStripMenuItem.Enabled = false;
             this.closeLevelToolStripMenuItem.Name = "closeLevelToolStripMenuItem";
-            this.closeLevelToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.closeLevelToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.closeLevelToolStripMenuItem.Text = "Close Level";
             this.closeLevelToolStripMenuItem.Click += new System.EventHandler(this.closeLevelToolStripMenuItem_Click);
             // 
-            // toolStripSeparator2
+            // toolStripSeparator5
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(160, 6);
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(168, 6);
             // 
-            // exitToolStripMenuItem
+            // duplicateLevelToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.duplicateLevelToolStripMenuItem.Enabled = false;
+            this.duplicateLevelToolStripMenuItem.Name = "duplicateLevelToolStripMenuItem";
+            this.duplicateLevelToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.duplicateLevelToolStripMenuItem.Text = "Duplicate Level";
+            this.duplicateLevelToolStripMenuItem.Click += new System.EventHandler(this.duplicateLevelToolStripMenuItem_Click);
+            // 
+            // closeOtherLevelsToolStripMenuItem
+            // 
+            this.closeOtherLevelsToolStripMenuItem.Enabled = false;
+            this.closeOtherLevelsToolStripMenuItem.Name = "closeOtherLevelsToolStripMenuItem";
+            this.closeOtherLevelsToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.closeOtherLevelsToolStripMenuItem.Text = "Close Other Levels";
+            this.closeOtherLevelsToolStripMenuItem.Click += new System.EventHandler(this.closeOtherLevelsToolStripMenuItem_Click);
             // 
             // MasterTreeView
             // 
@@ -220,28 +251,28 @@
             this.newLevelToolStripMenuItem1,
             this.openLevelToolStripMenuItem1});
             this.projectNodeContextMenu.Name = "ProjectNodeContextMenu";
-            this.projectNodeContextMenu.Size = new System.Drawing.Size(164, 120);
+            this.projectNodeContextMenu.Size = new System.Drawing.Size(164, 142);
             // 
             // saveProjectToolStripMenuItem1
             // 
             this.saveProjectToolStripMenuItem1.Name = "saveProjectToolStripMenuItem1";
             this.saveProjectToolStripMenuItem1.Size = new System.Drawing.Size(163, 22);
             this.saveProjectToolStripMenuItem1.Text = "Save Project";
-            this.saveProjectToolStripMenuItem1.Click += new System.EventHandler(this.saveProjectToolStripMenuItem1_Click);
+            this.saveProjectToolStripMenuItem1.Click += new System.EventHandler(this.saveProjectToolStripMenuItem_Click);
             // 
             // saveProjectAsToolStripMenuItem1
             // 
             this.saveProjectAsToolStripMenuItem1.Name = "saveProjectAsToolStripMenuItem1";
             this.saveProjectAsToolStripMenuItem1.Size = new System.Drawing.Size(163, 22);
             this.saveProjectAsToolStripMenuItem1.Text = "Save Project As...";
-            this.saveProjectAsToolStripMenuItem1.Click += new System.EventHandler(this.saveProjectAsToolStripMenuItem1_Click);
+            this.saveProjectAsToolStripMenuItem1.Click += new System.EventHandler(this.saveProjectAsToolStripMenuItem_Click);
             // 
             // closeProjectToolStripMenuItem1
             // 
             this.closeProjectToolStripMenuItem1.Name = "closeProjectToolStripMenuItem1";
             this.closeProjectToolStripMenuItem1.Size = new System.Drawing.Size(163, 22);
             this.closeProjectToolStripMenuItem1.Text = "Close Project";
-            this.closeProjectToolStripMenuItem1.Click += new System.EventHandler(this.closeProjectToolStripMenuItem1_Click);
+            this.closeProjectToolStripMenuItem1.Click += new System.EventHandler(this.closeProjectToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
@@ -253,14 +284,14 @@
             this.newLevelToolStripMenuItem1.Name = "newLevelToolStripMenuItem1";
             this.newLevelToolStripMenuItem1.Size = new System.Drawing.Size(163, 22);
             this.newLevelToolStripMenuItem1.Text = "New Level";
-            this.newLevelToolStripMenuItem1.Click += new System.EventHandler(this.newLevelToolStripMenuItem1_Click);
+            this.newLevelToolStripMenuItem1.Click += new System.EventHandler(this.newLevelToolStripMenuItem_Click);
             // 
             // openLevelToolStripMenuItem1
             // 
             this.openLevelToolStripMenuItem1.Name = "openLevelToolStripMenuItem1";
             this.openLevelToolStripMenuItem1.Size = new System.Drawing.Size(163, 22);
             this.openLevelToolStripMenuItem1.Text = "Open Level";
-            this.openLevelToolStripMenuItem1.Click += new System.EventHandler(this.openLevelToolStripMenuItem1_Click);
+            this.openLevelToolStripMenuItem1.Click += new System.EventHandler(this.openLevelToolStripMenuItem_Click);
             // 
             // levelNodeContextMenu
             // 
@@ -269,10 +300,10 @@
             this.saveLevelAsToolStripMenuItem1,
             this.closeLevelToolStripMenuItem1,
             this.toolStripSeparator3,
-            this.duplicateLevelToolStripMenuItem,
-            this.closeOtherLevelsToolStripMenuItem});
+            this.duplicateLevelToolStripMenuItem1,
+            this.closeOtherLevelsToolStripMenuItem1});
             this.levelNodeContextMenu.Name = "levelNodeContextMenu";
-            this.levelNodeContextMenu.Size = new System.Drawing.Size(172, 142);
+            this.levelNodeContextMenu.Size = new System.Drawing.Size(172, 120);
             // 
             // saveLevelToolStripMenuItem1
             // 
@@ -295,24 +326,24 @@
             this.closeLevelToolStripMenuItem1.Text = "Close Level";
             this.closeLevelToolStripMenuItem1.Click += new System.EventHandler(this.closeLevelToolStripMenuItem1_Click);
             // 
-            // duplicateLevelToolStripMenuItem
-            // 
-            this.duplicateLevelToolStripMenuItem.Name = "duplicateLevelToolStripMenuItem";
-            this.duplicateLevelToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-            this.duplicateLevelToolStripMenuItem.Text = "Duplicate Level";
-            this.duplicateLevelToolStripMenuItem.Click += new System.EventHandler(this.duplicateLevelToolStripMenuItem_Click);
-            // 
-            // closeOtherLevelsToolStripMenuItem
-            // 
-            this.closeOtherLevelsToolStripMenuItem.Name = "closeOtherLevelsToolStripMenuItem";
-            this.closeOtherLevelsToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-            this.closeOtherLevelsToolStripMenuItem.Text = "Close Other Levels";
-            this.closeOtherLevelsToolStripMenuItem.Click += new System.EventHandler(this.closeOtherLevelsToolStripMenuItem_Click);
-            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(168, 6);
+            // 
+            // duplicateLevelToolStripMenuItem1
+            // 
+            this.duplicateLevelToolStripMenuItem1.Name = "duplicateLevelToolStripMenuItem1";
+            this.duplicateLevelToolStripMenuItem1.Size = new System.Drawing.Size(171, 22);
+            this.duplicateLevelToolStripMenuItem1.Text = "Duplicate Level";
+            this.duplicateLevelToolStripMenuItem1.Click += new System.EventHandler(this.duplicateLevelToolStripMenuItem1_Click);
+            // 
+            // closeOtherLevelsToolStripMenuItem1
+            // 
+            this.closeOtherLevelsToolStripMenuItem1.Name = "closeOtherLevelsToolStripMenuItem1";
+            this.closeOtherLevelsToolStripMenuItem1.Size = new System.Drawing.Size(171, 22);
+            this.closeOtherLevelsToolStripMenuItem1.Text = "Close Other Levels";
+            this.closeOtherLevelsToolStripMenuItem1.Click += new System.EventHandler(this.closeOtherLevelsToolStripMenuItem1_Click);
             // 
             // MainWindow
             // 
@@ -343,31 +374,34 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.TreeView MasterTreeView;
-        private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem openProjectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newLevelToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem closeProjectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveProjectAsToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip projectNodeContextMenu;
         private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem saveProjectAsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem closeProjectToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem newLevelToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem openLevelToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveLevelToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveLevelAsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem closeLevelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openLevelToolStripMenuItem1;
         private System.Windows.Forms.ContextMenuStrip levelNodeContextMenu;
         private System.Windows.Forms.ToolStripMenuItem saveLevelToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem saveLevelAsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem closeLevelToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem duplicateLevelToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem closeOtherLevelsToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem projectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openProjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveProjectAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem closeProjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem levelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newLevelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openLevelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveLevelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveLevelAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem closeLevelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem duplicateLevelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeOtherLevelsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
 }

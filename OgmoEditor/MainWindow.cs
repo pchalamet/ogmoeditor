@@ -72,12 +72,16 @@ namespace OgmoEditor
                 saveLevelToolStripMenuItem.Enabled = false;
                 saveLevelAsToolStripMenuItem.Enabled = false;
                 closeLevelToolStripMenuItem.Enabled = false;
+                duplicateLevelToolStripMenuItem.Enabled = false;
+                closeOtherLevelsToolStripMenuItem.Enabled = false;
             }
             else
             {
                 saveLevelToolStripMenuItem.Enabled = true;
                 saveLevelAsToolStripMenuItem.Enabled = true;
                 closeLevelToolStripMenuItem.Enabled = true;
+                duplicateLevelToolStripMenuItem.Enabled = true;
+                closeOtherLevelsToolStripMenuItem.Enabled = true;
             }
         }
 
@@ -145,34 +149,19 @@ namespace OgmoEditor
             Ogmo.Project.CloseLevel(Ogmo.Project.GetLevelFromNode(MasterTreeView.SelectedNode));
         }
 
+        private void duplicateLevelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ogmo.Project.AddLevel(Ogmo.Project.GetLevelFromNode(MasterTreeView.SelectedNode).Duplicate());
+        }
+
+        private void closeOtherLevelsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ogmo.Project.CloseOtherLevels(Ogmo.Project.GetLevelFromNode(MasterTreeView.SelectedNode));
+        }
+
         /*
          *  Clicking the project node context menu items
          */
-        private void saveProjectToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            Ogmo.Project.Save();
-        }
-
-        private void saveProjectAsToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            Ogmo.Project.SaveAs();
-        }
-
-        private void closeProjectToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            Ogmo.CloseProject();
-        }
-
-        private void newLevelToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            Ogmo.Project.NewLevel();
-        }
-
-        private void openLevelToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            Ogmo.Project.OpenLevel();
-        }
-
         private void saveLevelToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Ogmo.Project.GetLevelFromNode(rightClickedNode).Save();
@@ -188,15 +177,15 @@ namespace OgmoEditor
             Ogmo.Project.CloseLevel(Ogmo.Project.GetLevelFromNode(rightClickedNode));
         }
 
-        private void duplicateLevelToolStripMenuItem_Click(object sender, EventArgs e)
+        private void duplicateLevelToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Ogmo.Project.AddLevel(Ogmo.Project.GetLevelFromNode(rightClickedNode).Duplicate());
         }
 
-        private void closeOtherLevelsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void closeOtherLevelsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Ogmo.Project.CloseOtherLevels(Ogmo.Project.GetLevelFromNode(rightClickedNode));
         }
-        
+
     }
 }
