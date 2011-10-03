@@ -36,11 +36,12 @@ namespace OgmoEditor
 
         public Project()
         {
-            //Init project properties
+            //Init default project properties
             Name = Ogmo.NEW_PROJECT_NAME;
             WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             LastFilename = "";
             LayerDefinitions = new List<LayerDefinition>();
+            LevelDefaultSize = LevelMinimumSize = LevelMaximumSize = new Size(640, 480);
 
             //Init running vars
             InitializeRunningVars();
@@ -56,7 +57,9 @@ namespace OgmoEditor
             WorkingDirectory = info.GetString("WorkingDirectory");
             LastFilename = info.GetString("LastFilename");
             LayerDefinitions = (List<LayerDefinition>)info.GetValue("LayerDefinitions", typeof(List<LayerDefinition>));
-            LevelDefaultSize = LevelMinimumSize = LevelMaximumSize = new Size(640, 480);
+            LevelDefaultSize = (Size)info.GetValue("LevelDefaultSize", typeof(Size));
+            LevelMinimumSize = (Size)info.GetValue("LevelMinimumSize", typeof(Size));
+            LevelMaximumSize = (Size)info.GetValue("LevelMaximumSize", typeof(Size));
 
             //Init running vars
             InitializeRunningVars();
@@ -68,6 +71,9 @@ namespace OgmoEditor
             info.AddValue("WorkingDirectory", WorkingDirectory);
             info.AddValue("LastFilename", LastFilename);
             info.AddValue("LayerDefinitions", LayerDefinitions);
+            info.AddValue("LevelDefaultSize", LevelDefaultSize);
+            info.AddValue("LevelMinimumSize", LevelMinimumSize);
+            info.AddValue("LevelMaximumSize", LevelMaximumSize);
         }
 
         private void InitializeRunningVars()

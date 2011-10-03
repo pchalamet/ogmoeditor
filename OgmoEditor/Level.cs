@@ -5,18 +5,24 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.IO;
+using System.Drawing;
 
 namespace OgmoEditor
 {
-    public class Level : Panel
+    public class Level
     {
+        //Running instance variables
         private Project project;
         public string SavePath;
         public TreeNode TreeNode;
         public bool Changed { get; private set; }
+        public Control Control { get; private set; }
+        private float scale;
+
+        //Actual parameters to be edited/exported
+        public Size Size { get; private set; }
 
         public Level(Project project, string filename)
-            : base()
         {
             this.project = project;
 
@@ -41,7 +47,6 @@ namespace OgmoEditor
         }
 
         public Level(Project project, XmlDocument xml)
-            : base()
         {
             this.project = project;
 
@@ -55,12 +60,29 @@ namespace OgmoEditor
         {
             TreeNode = new TreeNode();
             RemoveChanged();
-            Paint += new PaintEventHandler(levelPaint);
+
+            Control = new Control();
+            Control.BackColor = Color.Black;
+            Control.Size = Size;
+            Control.Location = new Point(300, 100);
+            Control.Paint += new PaintEventHandler(Control_Paint);
+            Control.MouseWheel += new MouseEventHandler(Control_MouseWheel);
+            Control.Focus();
+            scale = 1;
         }
 
-        private void levelPaint(object sender, PaintEventArgs e)
+        void Control_MouseWheel(object sender, MouseEventArgs e)
         {
+            Console.WriteLine("yo");
+            scale = Math.Min(Math.Max(.25f, scale + e.Delta * .25f), 2);
+            Control.Scale(new SizeF(scale, scale));
+        }
 
+        private void Control_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            Pen p = new Pen(Color.Red, 1);
+            g.DrawLine(p, 50, 50, 200, 200);
         }
 
         /*

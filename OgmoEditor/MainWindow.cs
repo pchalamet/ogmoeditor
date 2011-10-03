@@ -12,6 +12,7 @@ namespace OgmoEditor
     public partial class MainWindow : Form
     {
         private TreeNode rightClickedNode;
+        private Level currentLevel;
 
         public MainWindow()
         {
@@ -78,6 +79,12 @@ namespace OgmoEditor
                 duplicateLevelToolStripMenuItem.Enabled = false;
                 closeOtherLevelsToolStripMenuItem.Enabled = false;
                 saveAsImageToolStripMenuItem.Enabled = false;
+
+                if (currentLevel != null)
+                {
+                    Controls.Remove(currentLevel.Control);
+                    currentLevel = null;
+                }
             }
             else
             {
@@ -87,6 +94,11 @@ namespace OgmoEditor
                 duplicateLevelToolStripMenuItem.Enabled = true;
                 closeOtherLevelsToolStripMenuItem.Enabled = true;
                 saveAsImageToolStripMenuItem.Enabled = true;
+
+                if (currentLevel != null)
+                    Controls.Remove(currentLevel.Control);
+                currentLevel = Ogmo.Project.GetLevelFromNode(e.Node);
+                Controls.Add(currentLevel.Control);
             }
         }
 
@@ -169,6 +181,11 @@ namespace OgmoEditor
             Ogmo.Project.OpenAllLevels();
         }
 
+        private void projectViewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MasterTreeView.Visible = !MasterTreeView.Visible;
+        }
+
         /*
          *  Clicking the project node context menu items
          */
@@ -196,6 +213,5 @@ namespace OgmoEditor
         {
             Ogmo.Project.CloseOtherLevels(Ogmo.Project.GetLevelFromNode(rightClickedNode));
         }
-
     }
 }
