@@ -15,7 +15,7 @@ namespace OgmoEditor
         {
             InitializeComponent();
             Ogmo.OnProjectStart += onProjectStart;
-            Ogmo.OnProjectUnload += onProjectUnload;
+            Ogmo.OnProjectClose += onProjectUnload;
         }
 
         /*
@@ -30,9 +30,10 @@ namespace OgmoEditor
 
             //Disable menu items
             closeProjectToolStripMenuItem.Enabled = true;
-            newLevelToolStripMenuItem.Enabled = true;
             saveProjectToolStripMenuItem.Enabled = true;
             saveProjectAsToolStripMenuItem.Enabled = true;
+            newLevelToolStripMenuItem.Enabled = true;
+            openLevelToolStripMenuItem.Enabled = true;
         }
 
         private void onProjectUnload(Project project)
@@ -42,9 +43,10 @@ namespace OgmoEditor
 
             //Disable menu items
             closeProjectToolStripMenuItem.Enabled = false;
-            newLevelToolStripMenuItem.Enabled = false;
             saveProjectToolStripMenuItem.Enabled = false;
             saveProjectAsToolStripMenuItem.Enabled = false;
+            newLevelToolStripMenuItem.Enabled = false;
+            openLevelToolStripMenuItem.Enabled = false;
         }
 
         /*
@@ -62,7 +64,7 @@ namespace OgmoEditor
 
         private void closeProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.UnloadProject();
+            Ogmo.CloseProject();
         }
 
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
@@ -80,6 +82,16 @@ namespace OgmoEditor
             Ogmo.LoadProject();
         }
 
+        private void newLevelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ogmo.Project.NewLevel();
+        }
+
+        private void openLevelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ogmo.Project.OpenLevel();
+        }
+
         /*
          *  Clicking the project node context menu items
          */
@@ -95,7 +107,17 @@ namespace OgmoEditor
 
         private void closeProjectToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Ogmo.UnloadProject();
+            Ogmo.CloseProject();
+        }
+
+        private void newLevelToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Ogmo.Project.NewLevel();
+        }
+
+        private void openLevelToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Ogmo.Project.OpenLevel();
         }
 
     }

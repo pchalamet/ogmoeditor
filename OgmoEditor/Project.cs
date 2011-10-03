@@ -28,11 +28,12 @@ namespace OgmoEditor
         //Non-serialzed instance vars
         public TreeNode TreeNode;
         public bool Changed { get; private set; }
+        public List<Level> Levels { get; private set; }
 
         public Project()
         {
             //Init project properties
-            Name = "New Project";
+            Name = Ogmo.NEW_PROJECT_NAME;
             WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             LastFilename = "";
             LayerDefinitions = new List<LayerDefinition>();
@@ -69,6 +70,7 @@ namespace OgmoEditor
         {
             TreeNode = new TreeNode(Name);
             Changed = false;
+            Levels = new List<Level>();
         }
 
         /*
@@ -123,6 +125,53 @@ namespace OgmoEditor
 
             Changed = true;
             TreeNode.Name = Name + '*';
+        }
+
+        /*
+         *  Level Stuff
+         */
+        public string GetNewLevelFilename()
+        {
+            int i = 0;
+            string filename;
+
+            do
+            {
+                filename = WorkingDirectory + @"\" + Ogmo.NEW_LEVEL_NAME + i.ToString() + Ogmo.LEVEL_EXT;
+                i++;
+            }
+            while (File.Exists(filename));              
+
+            return filename;
+        }
+
+        public void NewLevel()
+        {
+            AddLevel(new Level(this, GetNewLevelFilename()));  
+        }
+
+        public void OpenLevel()
+        {
+            //Get the file to load from the user
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Multiselect = true;
+            dialog.Filter = "Ogmo Editor Level Files|*" + Ogmo.LEVEL_EXT;
+            if (dialog.ShowDialog() == DialogResult.Cancel)
+                return;
+
+            //Load it
+            foreach (string f in dialog.FileNames)
+            {
+                Level level = new Level(this, f);
+                AddLevel(level);
+            }
+        }
+
+        private void AddLevel(Level level)
+        {
+            Levels.Add(level);
+            TreeNode.Nodes.Add(level.TreeNode);
+            TreeNode.Expand();
         }
     }
 }

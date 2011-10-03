@@ -13,13 +13,17 @@ namespace OgmoEditor
     static public class Ogmo
     {
         public const float VERSION = .5f;
+        public const string PROJECT_EXT = ".oep";
+        public const string LEVEL_EXT = ".oel";
+        public const string NEW_PROJECT_NAME = "New Project";
+        public const string NEW_LEVEL_NAME = "NewLevel";
 
         static public readonly MainWindow MainWindow = new MainWindow();
         static public Project Project { get; private set; }
 
         public delegate void ProjectCallback(Project project);
         static public event ProjectCallback OnProjectStart;
-        static public event ProjectCallback OnProjectUnload;
+        static public event ProjectCallback OnProjectClose;
 
         [STAThread]
         static void Main(string[] args)
@@ -46,13 +50,13 @@ namespace OgmoEditor
         {
             //Get the file to load from the user
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Ogmo Editor Project Files|*.oep";
+            dialog.Filter = "Ogmo Editor Project Files|*" + PROJECT_EXT;
             if (dialog.ShowDialog() == DialogResult.Cancel)
                 return;
 
             //Close the current project before loading the new one
             if (Project != null)
-                UnloadProject();
+                CloseProject();
 
             //Load it
             BinaryFormatter bf = new BinaryFormatter();
@@ -73,18 +77,14 @@ namespace OgmoEditor
             Project = project;
         }
 
-        static public void UnloadProject()
+        static public void CloseProject()
         {
             //Call removed event
-            if (OnProjectUnload != null)
-                OnProjectUnload(Project);
+            if (OnProjectClose != null)
+                OnProjectClose(Project);
 
             //Remove it!
             Project = null;
         }
-
-        /*
-         *  Level Stuff
-         */
     }
 }
