@@ -32,6 +32,7 @@ namespace OgmoEditor
 
         //Events
         public event Ogmo.LevelCallback OnLevelAdded;
+        public event Ogmo.LevelCallback OnLevelClosed;
 
         public Project()
         {
@@ -71,8 +72,8 @@ namespace OgmoEditor
 
         private void InitializeRunningVars()
         {
-            TreeNode = new TreeNode(Name);
-            Changed = false;
+            TreeNode = new TreeNode();
+            RemoveChanged();
             Levels = new List<Level>();
         }
 
@@ -88,13 +89,9 @@ namespace OgmoEditor
                 return;
             }
 
-            Changed = false;
-            TreeNode.Name = Name;
+            writeTo(LastFilename);
 
-            BinaryFormatter bf = new BinaryFormatter();
-            Stream s = new FileStream(LastFilename, FileMode.OpenOrCreate);
-            bf.Serialize(s, this);
-            s.Close();
+            RemoveChanged();
         }
 
         public void SaveAs()
@@ -103,64 +100,59 @@ namespace OgmoEditor
             dialog.InitialDirectory = WorkingDirectory;
             dialog.RestoreDirectory = true;
             dialog.FileName = Name;
-            dialog.DefaultExt = ".oep";
+            dialog.DefaultExt = Ogmo.PROJECT_EXT;
             dialog.OverwritePrompt = true;
-            dialog.Filter = "Ogmo Editor Project Files|*.oep";
+            dialog.Filter = Ogmo.PROJECT_FILTER;
 
             //Show dialog, handle cancel
             if (dialog.ShowDialog() == DialogResult.Cancel)
                 return;
 
-            Changed = false;
             LastFilename = dialog.FileName;
-            TreeNode.Name = Name;
-    
+            writeTo(dialog.FileName);
+
+            RemoveChanged();
+        }
+
+        private void writeTo(string filename)
+        {
             BinaryFormatter bf = new BinaryFormatter();
-            Stream s = dialog.OpenFile();
-            bf.Serialize(s, this);
-            s.Close();
+            Stream stream = new FileStream(filename, FileMode.OpenOrCreate);
+            bf.Serialize(stream, this);
+            stream.Close();
+        }
+
+        /*
+         *  Changed system
+         */
+        public void RemoveChanged()
+        {
+            Changed = false;
+            TreeNode.Text = Name;
         }
 
         public void SetChanged()
         {
-            if (Changed)
-                return;
-
             Changed = true;
-            TreeNode.Name = Name + '*';
+            TreeNode.Text = Name + '*';
         }
 
         /*
          *  Level Stuff
          */
-        public string GetNewLevelFilename()
-        {
-            int i = 0;
-            string filename;
-
-            do
-            {
-                filename = WorkingDirectory + @"\" + Ogmo.NEW_LEVEL_NAME + i.ToString() + Ogmo.LEVEL_EXT;
-                i++;
-            }
-            while (File.Exists(filename) || HasLevelWithFilename(filename));              
-
-            return filename;
-        }
-
-        public bool HasLevelWithFilename(string filename)
-        {
-            return Levels.Find(e => e.Filename == filename) != null;
-        }
-
         public bool IsLevelNode(TreeNode node)
         {
             return Levels.Find(e => e.TreeNode == node) != null;
         }
 
+        public Level GetLevelFromNode(TreeNode node)
+        {
+            return Levels.Find(e => e.TreeNode == node);
+        }
+
         public void NewLevel()
         {
-            AddLevel(new Level(this, GetNewLevelFilename()));  
+            AddLevel(new Level(this, Ogmo.NEW_LEVEL_NAME));  
         }
 
         public void OpenLevel()
@@ -168,7 +160,7 @@ namespace OgmoEditor
             //Get the file to load from the user
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Multiselect = true;
-            dialog.Filter = "Ogmo Editor Level Files|*" + Ogmo.LEVEL_EXT;
+            dialog.Filter = Ogmo.LEVEL_FILTER;
             if (dialog.ShowDialog() == DialogResult.Cancel)
                 return;
 
@@ -180,7 +172,7 @@ namespace OgmoEditor
             }
         }
 
-        private void AddLevel(Level level)
+        public void AddLevel(Level level)
         {
             Levels.Add(level);
             TreeNode.Nodes.Add(level.TreeNode);
@@ -188,6 +180,25 @@ namespace OgmoEditor
 
             if (OnLevelAdded != null)
                 OnLevelAdded(level);
+        }
+
+        public void CloseLevel(Level level)
+        {
+            Levels.Remove(level);
+            TreeNode.Nodes.Remove(level.TreeNode);
+
+            if (OnLevelClosed != null)
+                OnLevelClosed(level);
+        }
+
+        public void CloseOtherLevels(Level level)
+        {
+            List<Level> temp = new List<Level>(Levels);
+            foreach (Level lev in temp)
+            {
+                if (lev != level)
+                    CloseLevel(lev);
+            }
         }
     }
 }
