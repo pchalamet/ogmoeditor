@@ -14,9 +14,8 @@ namespace OgmoEditor
         public MainWindow()
         {
             InitializeComponent();
-            Ogmo.OnProjectChange += onProjectChange;
-            Ogmo.OnProjectAdd += onProjectAdd;
-            Ogmo.OnProjectRemove += onProjectRemove;
+            Ogmo.OnProjectStart += onProjectStart;
+            Ogmo.OnProjectUnload += onProjectUnload;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -26,42 +25,43 @@ namespace OgmoEditor
 
         private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.AddProject(new Project()); 
+            Ogmo.StartProject(new Project()); 
         }
 
-        private void onProjectChange(Project project, int projectID)
+        private void onProjectStart(Project project)
         {
-            //Select the project in the tree view
-            if (project == null)
-                MasterTreeView.SelectedNode = null;
-            else
-                MasterTreeView.SelectedNode = MasterTreeView.Nodes[projectID];
+            //Init the tree view
+            TreeNode node = new TreeNode(project.Name);
+            MasterTreeView.Nodes.Add(node);
+            MasterTreeView.SelectedNode = node;
 
-            //Enable/Disable menu items
-            closeProjectToolStripMenuItem.Enabled = (project != null);
-            newLevelToolStripMenuItem.Enabled = (project != null);
-            saveProjectToolStripMenuItem.Enabled = (project != null);
-            saveProjectAsToolStripMenuItem.Enabled = (project != null);
+            //Disable menu items
+            closeProjectToolStripMenuItem.Enabled = true;
+            newLevelToolStripMenuItem.Enabled = true;
+            saveProjectToolStripMenuItem.Enabled = true;
+            saveProjectAsToolStripMenuItem.Enabled = true;
         }
 
-        private void onProjectAdd(Project project, int projectID)
+        private void onProjectUnload(Project project)
         {
-            MasterTreeView.Nodes.Add(new TreeNode(project.Name));
-        }
+            //Clear the tree view
+            MasterTreeView.Nodes.Clear();
 
-        private void onProjectRemove(Project project, int projectID)
-        {
-            MasterTreeView.Nodes.RemoveAt(projectID);
+            //Disable menu items
+            closeProjectToolStripMenuItem.Enabled = false;
+            newLevelToolStripMenuItem.Enabled = false;
+            saveProjectToolStripMenuItem.Enabled = false;
+            saveProjectAsToolStripMenuItem.Enabled = false;
         }
 
         private void MasterTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            Ogmo.CurrentProjectID = MasterTreeView.Nodes.IndexOf(e.Node);
+            
         }
 
         private void closeProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.RemoveProject(Ogmo.CurrentProject);
+            Ogmo.UnloadProject();
         }
 
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
