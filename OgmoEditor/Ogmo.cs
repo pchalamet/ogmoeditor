@@ -73,11 +73,11 @@ namespace OgmoEditor
 
         static public void StartProject(Project project)
         {
+            Project = project;
+
             //Call the added event
             if (OnProjectStart != null)
                 OnProjectStart(project);
-
-            Project = project;
         }
 
         static public void CloseProject()

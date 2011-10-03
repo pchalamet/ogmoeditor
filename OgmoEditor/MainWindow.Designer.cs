@@ -32,6 +32,10 @@
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.visitWebsiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.projectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,6 +43,8 @@
             this.saveProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveProjectAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.openAllLevelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.levelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,9 +52,11 @@
             this.saveLevelAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.duplicateLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeOtherLevelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.duplicateLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.projectViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MasterTreeView = new System.Windows.Forms.TreeView();
             this.projectNodeContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.saveProjectToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,23 +73,29 @@
             this.duplicateLevelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.closeOtherLevelsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsImageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.openAllLevelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.visitWebsiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.projectViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.projectEditTabControl = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.MainStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.mouseCoordinatesLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.StatusStrip.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             this.projectNodeContextMenu.SuspendLayout();
             this.levelNodeContextMenu.SuspendLayout();
+            this.projectEditTabControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // StatusStrip
             // 
+            this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MainStatusLabel,
+            this.mouseCoordinatesLabel});
             this.StatusStrip.Location = new System.Drawing.Point(0, 540);
             this.StatusStrip.Name = "StatusStrip";
+            this.StatusStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StatusStrip.Size = new System.Drawing.Size(784, 22);
             this.StatusStrip.TabIndex = 0;
             this.StatusStrip.Text = "statusStrip1";
@@ -111,10 +125,33 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.fileToolStripMenuItem.Text = "Ogmo";
             // 
+            // visitWebsiteToolStripMenuItem
+            // 
+            this.visitWebsiteToolStripMenuItem.Name = "visitWebsiteToolStripMenuItem";
+            this.visitWebsiteToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.visitWebsiteToolStripMenuItem.Text = "Visit Website";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            // 
+            // checkForUpdatesToolStripMenuItem
+            // 
+            this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
+            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.checkForUpdatesToolStripMenuItem.Text = "Check for Updates";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(168, 6);
+            // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -169,6 +206,19 @@
             this.closeProjectToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.closeProjectToolStripMenuItem.Text = "Close Project";
             this.closeProjectToolStripMenuItem.Click += new System.EventHandler(this.closeProjectToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(160, 6);
+            // 
+            // openAllLevelsToolStripMenuItem
+            // 
+            this.openAllLevelsToolStripMenuItem.Enabled = false;
+            this.openAllLevelsToolStripMenuItem.Name = "openAllLevelsToolStripMenuItem";
+            this.openAllLevelsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.openAllLevelsToolStripMenuItem.Text = "Open All Levels";
+            this.openAllLevelsToolStripMenuItem.Click += new System.EventHandler(this.openAllLevelsToolStripMenuItem_Click);
             // 
             // levelToolStripMenuItem
             // 
@@ -237,14 +287,6 @@
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(222, 6);
             // 
-            // duplicateLevelToolStripMenuItem
-            // 
-            this.duplicateLevelToolStripMenuItem.Enabled = false;
-            this.duplicateLevelToolStripMenuItem.Name = "duplicateLevelToolStripMenuItem";
-            this.duplicateLevelToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-            this.duplicateLevelToolStripMenuItem.Text = "Duplicate Level";
-            this.duplicateLevelToolStripMenuItem.Click += new System.EventHandler(this.duplicateLevelToolStripMenuItem_Click);
-            // 
             // closeOtherLevelsToolStripMenuItem
             // 
             this.closeOtherLevelsToolStripMenuItem.Enabled = false;
@@ -253,6 +295,14 @@
             this.closeOtherLevelsToolStripMenuItem.Text = "Close Other Levels";
             this.closeOtherLevelsToolStripMenuItem.Click += new System.EventHandler(this.closeOtherLevelsToolStripMenuItem_Click);
             // 
+            // duplicateLevelToolStripMenuItem
+            // 
+            this.duplicateLevelToolStripMenuItem.Enabled = false;
+            this.duplicateLevelToolStripMenuItem.Name = "duplicateLevelToolStripMenuItem";
+            this.duplicateLevelToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.duplicateLevelToolStripMenuItem.Text = "Duplicate Level";
+            this.duplicateLevelToolStripMenuItem.Click += new System.EventHandler(this.duplicateLevelToolStripMenuItem_Click);
+            // 
             // saveAsImageToolStripMenuItem
             // 
             this.saveAsImageToolStripMenuItem.Enabled = false;
@@ -260,11 +310,32 @@
             this.saveAsImageToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.saveAsImageToolStripMenuItem.Text = "Save As Image...";
             // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.projectViewToolStripMenuItem});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.viewToolStripMenuItem.Text = "View";
+            // 
+            // projectViewToolStripMenuItem
+            // 
+            this.projectViewToolStripMenuItem.Checked = true;
+            this.projectViewToolStripMenuItem.CheckOnClick = true;
+            this.projectViewToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.projectViewToolStripMenuItem.Name = "projectViewToolStripMenuItem";
+            this.projectViewToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.projectViewToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.projectViewToolStripMenuItem.Text = "Project View";
+            this.projectViewToolStripMenuItem.Click += new System.EventHandler(this.projectViewToolStripMenuItem_Click);
+            // 
             // MasterTreeView
             // 
             this.MasterTreeView.AccessibleName = "";
             this.MasterTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
+            this.MasterTreeView.BackColor = System.Drawing.SystemColors.Window;
+            this.MasterTreeView.HideSelection = false;
             this.MasterTreeView.Location = new System.Drawing.Point(2, 27);
             this.MasterTreeView.Name = "MasterTreeView";
             this.MasterTreeView.Size = new System.Drawing.Size(150, 510);
@@ -383,60 +454,83 @@
             this.saveAsImageToolStripMenuItem1.Size = new System.Drawing.Size(171, 22);
             this.saveAsImageToolStripMenuItem1.Text = "Save As Image...";
             // 
-            // openAllLevelsToolStripMenuItem
+            // projectEditTabControl
             // 
-            this.openAllLevelsToolStripMenuItem.Enabled = false;
-            this.openAllLevelsToolStripMenuItem.Name = "openAllLevelsToolStripMenuItem";
-            this.openAllLevelsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.openAllLevelsToolStripMenuItem.Text = "Open All Levels";
-            this.openAllLevelsToolStripMenuItem.Click += new System.EventHandler(this.openAllLevelsToolStripMenuItem_Click);
+            this.projectEditTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.projectEditTabControl.Controls.Add(this.tabPage1);
+            this.projectEditTabControl.Controls.Add(this.tabPage2);
+            this.projectEditTabControl.Controls.Add(this.tabPage3);
+            this.projectEditTabControl.Controls.Add(this.tabPage4);
+            this.projectEditTabControl.Controls.Add(this.tabPage5);
+            this.projectEditTabControl.Location = new System.Drawing.Point(158, 27);
+            this.projectEditTabControl.Name = "projectEditTabControl";
+            this.projectEditTabControl.SelectedIndex = 0;
+            this.projectEditTabControl.Size = new System.Drawing.Size(626, 510);
+            this.projectEditTabControl.TabIndex = 3;
             // 
-            // toolStripSeparator1
+            // tabPage1
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(160, 6);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(618, 484);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Settings";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // visitWebsiteToolStripMenuItem
+            // tabPage2
             // 
-            this.visitWebsiteToolStripMenuItem.Name = "visitWebsiteToolStripMenuItem";
-            this.visitWebsiteToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-            this.visitWebsiteToolStripMenuItem.Text = "Visit Website";
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(618, 484);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Layers";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // aboutToolStripMenuItem
+            // MainStatusLabel
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-            this.aboutToolStripMenuItem.Text = "About";
+            this.MainStatusLabel.Name = "MainStatusLabel";
+            this.MainStatusLabel.Size = new System.Drawing.Size(0, 17);
             // 
-            // checkForUpdatesToolStripMenuItem
+            // mouseCoordinatesLabel
             // 
-            this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-            this.checkForUpdatesToolStripMenuItem.Text = "Check for Updates";
+            this.mouseCoordinatesLabel.Name = "mouseCoordinatesLabel";
+            this.mouseCoordinatesLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.mouseCoordinatesLabel.Size = new System.Drawing.Size(33, 17);
+            this.mouseCoordinatesLabel.Text = "(0, 0)";
             // 
-            // toolStripSeparator2
+            // tabPage3
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(168, 6);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(618, 484);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Tilesets";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // viewToolStripMenuItem
+            // tabPage4
             // 
-            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.projectViewToolStripMenuItem});
-            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.viewToolStripMenuItem.Text = "View";
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(618, 484);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Objects";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // projectViewToolStripMenuItem
+            // tabPage5
             // 
-            this.projectViewToolStripMenuItem.Checked = true;
-            this.projectViewToolStripMenuItem.CheckOnClick = true;
-            this.projectViewToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.projectViewToolStripMenuItem.Name = "projectViewToolStripMenuItem";
-            this.projectViewToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.projectViewToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.projectViewToolStripMenuItem.Text = "Project View";
-            this.projectViewToolStripMenuItem.Click += new System.EventHandler(this.projectViewToolStripMenuItem_Click);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(618, 484);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Values";
+            this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // MainWindow
             // 
@@ -444,6 +538,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::OgmoEditor.Properties.Resources.bg;
             this.ClientSize = new System.Drawing.Size(784, 562);
+            this.Controls.Add(this.projectEditTabControl);
             this.Controls.Add(this.MasterTreeView);
             this.Controls.Add(this.StatusStrip);
             this.Controls.Add(this.MenuStrip);
@@ -451,10 +546,13 @@
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "MainWindow";
             this.Text = "Ogmo Editor";
+            this.StatusStrip.ResumeLayout(false);
+            this.StatusStrip.PerformLayout();
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
             this.projectNodeContextMenu.ResumeLayout(false);
             this.levelNodeContextMenu.ResumeLayout(false);
+            this.projectEditTabControl.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -506,5 +604,13 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem projectViewToolStripMenuItem;
+        private System.Windows.Forms.TabControl projectEditTabControl;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.ToolStripStatusLabel MainStatusLabel;
+        private System.Windows.Forms.ToolStripStatusLabel mouseCoordinatesLabel;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabPage5;
     }
 }

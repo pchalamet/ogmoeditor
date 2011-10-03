@@ -18,7 +18,8 @@ namespace OgmoEditor
         {
             InitializeComponent();
             Ogmo.OnProjectStart += onProjectStart;
-            Ogmo.OnProjectClose += onProjectUnload;
+            Ogmo.OnProjectClose += onProjectClose;
+            Controls.Remove(projectEditTabControl);
         }
 
         /*
@@ -41,9 +42,10 @@ namespace OgmoEditor
 
             //Add events
             project.OnLevelAdded += onLevelAdded;
+            project.OnLevelClosed += onLevelClosed;
         }
 
-        private void onProjectUnload(Project project)
+        private void onProjectClose(Project project)
         {
             //Clear the tree view
             MasterTreeView.Nodes.Clear();
@@ -55,9 +57,27 @@ namespace OgmoEditor
             newLevelToolStripMenuItem.Enabled = false;
             openLevelToolStripMenuItem.Enabled = false;
             openAllLevelsToolStripMenuItem.Enabled = false;
+            saveLevelToolStripMenuItem.Enabled = false;
+            saveLevelAsToolStripMenuItem.Enabled = false;
+            closeLevelToolStripMenuItem.Enabled = false;
+            duplicateLevelToolStripMenuItem.Enabled = false;
+            closeOtherLevelsToolStripMenuItem.Enabled = false;
+            saveAsImageToolStripMenuItem.Enabled = false;
+
+            //Remove the level edit view
+            if (currentLevel != null)
+            {
+                Controls.Remove(currentLevel.Control);
+                currentLevel = null;
+            }
+
+            //Remove the project edit view
+            if (Controls.Contains(projectEditTabControl))
+                Controls.Remove(projectEditTabControl);
 
             //Remove events
             project.OnLevelAdded -= onLevelAdded;
+            project.OnLevelClosed -= onLevelClosed;
         }
 
         private void onLevelAdded(Level level)
@@ -66,12 +86,17 @@ namespace OgmoEditor
             MasterTreeView.SelectedNode = level.TreeNode;
         }
 
+        private void onLevelClosed(Level level)
+        {
+            
+        }
+
         /*
          *  Tree view events
          */
         private void MasterTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (Ogmo.Project == null || !Ogmo.Project.IsLevelNode(e.Node))
+            if (e.Node == Ogmo.Project.TreeNode)
             {
                 saveLevelToolStripMenuItem.Enabled = false;
                 saveLevelAsToolStripMenuItem.Enabled = false;
@@ -80,11 +105,16 @@ namespace OgmoEditor
                 closeOtherLevelsToolStripMenuItem.Enabled = false;
                 saveAsImageToolStripMenuItem.Enabled = false;
 
+                //Remove the level edit view
                 if (currentLevel != null)
                 {
                     Controls.Remove(currentLevel.Control);
                     currentLevel = null;
                 }
+
+                //Add the project edit view
+                if (!Controls.Contains(projectEditTabControl))
+                    Controls.Add(projectEditTabControl);
             }
             else
             {
@@ -95,10 +125,15 @@ namespace OgmoEditor
                 closeOtherLevelsToolStripMenuItem.Enabled = true;
                 saveAsImageToolStripMenuItem.Enabled = true;
 
+                //Add the level edit view
                 if (currentLevel != null)
                     Controls.Remove(currentLevel.Control);
                 currentLevel = Ogmo.Project.GetLevelFromNode(e.Node);
                 Controls.Add(currentLevel.Control);
+
+                //Remove the project edit view
+                if (Controls.Contains(projectEditTabControl))
+                    Controls.Remove(projectEditTabControl);
             }
         }
 

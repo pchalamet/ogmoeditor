@@ -66,16 +66,8 @@ namespace OgmoEditor
             Control.Size = Size;
             Control.Location = new Point(300, 100);
             Control.Paint += new PaintEventHandler(Control_Paint);
-            Control.MouseWheel += new MouseEventHandler(Control_MouseWheel);
             Control.Focus();
             scale = 1;
-        }
-
-        void Control_MouseWheel(object sender, MouseEventArgs e)
-        {
-            Console.WriteLine("yo");
-            scale = Math.Min(Math.Max(.25f, scale + e.Delta * .25f), 2);
-            Control.Scale(new SizeF(scale, scale));
         }
 
         private void Control_Paint(object sender, PaintEventArgs e)
@@ -83,6 +75,17 @@ namespace OgmoEditor
             Graphics g = e.Graphics;
             Pen p = new Pen(Color.Red, 1);
             g.DrawLine(p, 50, 50, 200, 200);
+        }
+
+        public string Name
+        {
+            get
+            {
+                if (SavePath == "")
+                    return Ogmo.NEW_LEVEL_NAME;
+                else
+                    return Path.GetFileName(SavePath);
+            }
         }
 
         /*
@@ -130,7 +133,7 @@ namespace OgmoEditor
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.InitialDirectory = project.WorkingDirectory;
             dialog.RestoreDirectory = true;
-            dialog.FileName = Path.GetFileName(SavePath);
+            dialog.FileName = Name;
             dialog.DefaultExt = Ogmo.LEVEL_EXT;
             dialog.OverwritePrompt = true;
             dialog.Filter = Ogmo.LEVEL_FILTER;
