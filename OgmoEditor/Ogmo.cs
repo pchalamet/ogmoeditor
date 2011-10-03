@@ -18,10 +18,11 @@ namespace OgmoEditor
         public const string NEW_PROJECT_NAME = "New Project";
         public const string NEW_LEVEL_NAME = "NewLevel";
 
+        public delegate void ProjectCallback(Project project);
+        public delegate void LevelCallback(Level level);
+
         static public readonly MainWindow MainWindow = new MainWindow();
         static public Project Project { get; private set; }
-
-        public delegate void ProjectCallback(Project project);
         static public event ProjectCallback OnProjectStart;
         static public event ProjectCallback OnProjectClose;
 

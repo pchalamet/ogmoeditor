@@ -30,6 +30,9 @@ namespace OgmoEditor
         public bool Changed { get; private set; }
         public List<Level> Levels { get; private set; }
 
+        //Events
+        public event Ogmo.LevelCallback OnLevelAdded;
+
         public Project()
         {
             //Init project properties
@@ -140,9 +143,19 @@ namespace OgmoEditor
                 filename = WorkingDirectory + @"\" + Ogmo.NEW_LEVEL_NAME + i.ToString() + Ogmo.LEVEL_EXT;
                 i++;
             }
-            while (File.Exists(filename));              
+            while (File.Exists(filename) || HasLevelWithFilename(filename));              
 
             return filename;
+        }
+
+        public bool HasLevelWithFilename(string filename)
+        {
+            return Levels.Find(e => e.Filename == filename) != null;
+        }
+
+        public bool IsLevelNode(TreeNode node)
+        {
+            return Levels.Find(e => e.TreeNode == node) != null;
         }
 
         public void NewLevel()
@@ -172,6 +185,9 @@ namespace OgmoEditor
             Levels.Add(level);
             TreeNode.Nodes.Add(level.TreeNode);
             TreeNode.Expand();
+
+            if (OnLevelAdded != null)
+                OnLevelAdded(level);
         }
     }
 }

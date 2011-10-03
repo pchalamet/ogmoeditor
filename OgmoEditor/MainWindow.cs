@@ -19,7 +19,7 @@ namespace OgmoEditor
         }
 
         /*
-         *  Project events
+         *  Ogmo event Callbacks
          */
         private void onProjectStart(Project project)
         {
@@ -34,6 +34,9 @@ namespace OgmoEditor
             saveProjectAsToolStripMenuItem.Enabled = true;
             newLevelToolStripMenuItem.Enabled = true;
             openLevelToolStripMenuItem.Enabled = true;
+
+            //Add events
+            project.OnLevelAdded += onLevelAdded;
         }
 
         private void onProjectUnload(Project project)
@@ -47,6 +50,33 @@ namespace OgmoEditor
             saveProjectAsToolStripMenuItem.Enabled = false;
             newLevelToolStripMenuItem.Enabled = false;
             openLevelToolStripMenuItem.Enabled = false;
+
+            //Remove events
+            project.OnLevelAdded -= onLevelAdded;
+        }
+
+        private void onLevelAdded(Level level)
+        {
+            level.TreeNode.ContextMenuStrip = levelNodeContextMenu;
+        }
+
+        /*
+         *  Tree view events
+         */
+        private void MasterTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (Ogmo.Project == null || !Ogmo.Project.IsLevelNode(e.Node))
+            {
+                saveLevelToolStripMenuItem.Enabled = false;
+                saveLevelAsToolStripMenuItem.Enabled = false;
+                closeLevelToolStripMenuItem.Enabled = false;
+            }
+            else
+            {
+                saveLevelToolStripMenuItem.Enabled = true;
+                saveLevelAsToolStripMenuItem.Enabled = true;
+                closeLevelToolStripMenuItem.Enabled = true;
+            }
         }
 
         /*
@@ -119,6 +149,5 @@ namespace OgmoEditor
         {
             Ogmo.Project.OpenLevel();
         }
-
     }
 }
