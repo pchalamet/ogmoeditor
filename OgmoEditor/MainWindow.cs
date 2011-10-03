@@ -18,22 +18,15 @@ namespace OgmoEditor
             Ogmo.OnProjectUnload += onProjectUnload;
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Ogmo.StartProject(new Project()); 
-        }
-
+        /*
+         *  Project events
+         */
         private void onProjectStart(Project project)
         {
             //Init the tree view
-            TreeNode node = new TreeNode(project.Name);
-            MasterTreeView.Nodes.Add(node);
-            MasterTreeView.SelectedNode = node;
+            project.TreeNode.ContextMenuStrip = projectNodeContextMenu;
+            MasterTreeView.Nodes.Add(project.TreeNode);
+            MasterTreeView.SelectedNode = project.TreeNode;
 
             //Disable menu items
             closeProjectToolStripMenuItem.Enabled = true;
@@ -54,9 +47,17 @@ namespace OgmoEditor
             saveProjectAsToolStripMenuItem.Enabled = false;
         }
 
-        private void MasterTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        /*
+         *  Clicking the File context menu itmes
+         */
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            Application.Exit();
+        }
+
+        private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ogmo.StartProject(new Project());
         }
 
         private void closeProjectToolStripMenuItem_Click(object sender, EventArgs e)
@@ -66,17 +67,36 @@ namespace OgmoEditor
 
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.CurrentProject.Save();
+            Ogmo.Project.Save();
         }
 
         private void saveProjectAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.CurrentProject.SaveAs();
+            Ogmo.Project.SaveAs();
         }
 
         private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Ogmo.LoadProject();
         }
+
+        /*
+         *  Clicking the project node context menu items
+         */
+        private void saveProjectToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Ogmo.Project.Save();
+        }
+
+        private void saveProjectAsToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Ogmo.Project.SaveAs();
+        }
+
+        private void closeProjectToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Ogmo.UnloadProject();
+        }
+
     }
 }

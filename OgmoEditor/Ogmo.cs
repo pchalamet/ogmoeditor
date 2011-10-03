@@ -15,7 +15,7 @@ namespace OgmoEditor
         public const float VERSION = .5f;
 
         static public readonly MainWindow MainWindow = new MainWindow();
-        static private Project currentProject;
+        static public Project Project { get; private set; }
 
         public delegate void ProjectCallback(Project project);
         static public event ProjectCallback OnProjectStart;
@@ -51,7 +51,7 @@ namespace OgmoEditor
                 return;
 
             //Close the current project before loading the new one
-            if (currentProject != null)
+            if (Project != null)
                 UnloadProject();
 
             //Load it
@@ -70,22 +70,21 @@ namespace OgmoEditor
             if (OnProjectStart != null)
                 OnProjectStart(project);
 
-            currentProject = project;
+            Project = project;
         }
 
         static public void UnloadProject()
         {
             //Call removed event
             if (OnProjectUnload != null)
-                OnProjectUnload(currentProject);
+                OnProjectUnload(Project);
 
             //Remove it!
-            currentProject = null;
+            Project = null;
         }
 
-        static public Project CurrentProject
-        {
-            get { return currentProject; }
-        }
+        /*
+         *  Level Stuff
+         */
     }
 }
