@@ -18,7 +18,7 @@ namespace OgmoEditor
         public const string PROJECT_FILTER = "Ogmo Editor Project File|*" + PROJECT_EXT;
         public const string LEVEL_FILTER = "Ogmo Editor Level File|*" + LEVEL_EXT;
         public const string NEW_PROJECT_NAME = "New Project";
-        public const string NEW_LEVEL_NAME = "Untitled";
+        public const string NEW_LEVEL_NAME = "New Level";
 
         public delegate void ProjectCallback(Project project);
         public delegate void LevelCallback(Level level);

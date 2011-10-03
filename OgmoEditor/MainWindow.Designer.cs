@@ -48,6 +48,7 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.duplicateLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeOtherLevelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MasterTreeView = new System.Windows.Forms.TreeView();
             this.projectNodeContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.saveProjectToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,8 +64,9 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.duplicateLevelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.closeOtherLevelsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsImageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.openAllLevelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuStrip.SuspendLayout();
             this.projectNodeContextMenu.SuspendLayout();
             this.levelNodeContextMenu.SuspendLayout();
@@ -112,7 +114,9 @@
             this.openProjectToolStripMenuItem,
             this.saveProjectToolStripMenuItem,
             this.saveProjectAsToolStripMenuItem,
-            this.closeProjectToolStripMenuItem});
+            this.closeProjectToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.openAllLevelsToolStripMenuItem});
             this.projectToolStripMenuItem.Name = "projectToolStripMenuItem";
             this.projectToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.projectToolStripMenuItem.Text = "Project";
@@ -164,8 +168,8 @@
             this.saveLevelAsToolStripMenuItem,
             this.closeLevelToolStripMenuItem,
             this.toolStripSeparator5,
-            this.duplicateLevelToolStripMenuItem,
             this.closeOtherLevelsToolStripMenuItem,
+            this.duplicateLevelToolStripMenuItem,
             this.saveAsImageToolStripMenuItem});
             this.levelToolStripMenuItem.Name = "levelToolStripMenuItem";
             this.levelToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
@@ -220,13 +224,13 @@
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(168, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(222, 6);
             // 
             // duplicateLevelToolStripMenuItem
             // 
             this.duplicateLevelToolStripMenuItem.Enabled = false;
             this.duplicateLevelToolStripMenuItem.Name = "duplicateLevelToolStripMenuItem";
-            this.duplicateLevelToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.duplicateLevelToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.duplicateLevelToolStripMenuItem.Text = "Duplicate Level";
             this.duplicateLevelToolStripMenuItem.Click += new System.EventHandler(this.duplicateLevelToolStripMenuItem_Click);
             // 
@@ -234,9 +238,16 @@
             // 
             this.closeOtherLevelsToolStripMenuItem.Enabled = false;
             this.closeOtherLevelsToolStripMenuItem.Name = "closeOtherLevelsToolStripMenuItem";
-            this.closeOtherLevelsToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.closeOtherLevelsToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.closeOtherLevelsToolStripMenuItem.Text = "Close Other Levels";
             this.closeOtherLevelsToolStripMenuItem.Click += new System.EventHandler(this.closeOtherLevelsToolStripMenuItem_Click);
+            // 
+            // saveAsImageToolStripMenuItem
+            // 
+            this.saveAsImageToolStripMenuItem.Enabled = false;
+            this.saveAsImageToolStripMenuItem.Name = "saveAsImageToolStripMenuItem";
+            this.saveAsImageToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.saveAsImageToolStripMenuItem.Text = "Save As Image...";
             // 
             // MasterTreeView
             // 
@@ -355,18 +366,24 @@
             this.closeOtherLevelsToolStripMenuItem1.Text = "Close Other Levels";
             this.closeOtherLevelsToolStripMenuItem1.Click += new System.EventHandler(this.closeOtherLevelsToolStripMenuItem1_Click);
             // 
-            // saveAsImageToolStripMenuItem
-            // 
-            this.saveAsImageToolStripMenuItem.Enabled = false;
-            this.saveAsImageToolStripMenuItem.Name = "saveAsImageToolStripMenuItem";
-            this.saveAsImageToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-            this.saveAsImageToolStripMenuItem.Text = "Save As Image...";
-            // 
             // saveAsImageToolStripMenuItem1
             // 
             this.saveAsImageToolStripMenuItem1.Name = "saveAsImageToolStripMenuItem1";
             this.saveAsImageToolStripMenuItem1.Size = new System.Drawing.Size(171, 22);
             this.saveAsImageToolStripMenuItem1.Text = "Save As Image...";
+            // 
+            // openAllLevelsToolStripMenuItem
+            // 
+            this.openAllLevelsToolStripMenuItem.Enabled = false;
+            this.openAllLevelsToolStripMenuItem.Name = "openAllLevelsToolStripMenuItem";
+            this.openAllLevelsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.openAllLevelsToolStripMenuItem.Text = "Open All Levels";
+            this.openAllLevelsToolStripMenuItem.Click += new System.EventHandler(this.openAllLevelsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(160, 6);
             // 
             // MainWindow
             // 
@@ -428,5 +445,7 @@
         private System.Windows.Forms.ToolStripMenuItem closeOtherLevelsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsImageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsImageToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem openAllLevelsToolStripMenuItem;
     }
 }

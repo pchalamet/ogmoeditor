@@ -36,6 +36,7 @@ namespace OgmoEditor
             saveProjectAsToolStripMenuItem.Enabled = true;
             newLevelToolStripMenuItem.Enabled = true;
             openLevelToolStripMenuItem.Enabled = true;
+            openAllLevelsToolStripMenuItem.Enabled = true;
 
             //Add events
             project.OnLevelAdded += onLevelAdded;
@@ -52,6 +53,7 @@ namespace OgmoEditor
             saveProjectAsToolStripMenuItem.Enabled = false;
             newLevelToolStripMenuItem.Enabled = false;
             openLevelToolStripMenuItem.Enabled = false;
+            openAllLevelsToolStripMenuItem.Enabled = false;
 
             //Remove events
             project.OnLevelAdded -= onLevelAdded;
@@ -159,6 +161,11 @@ namespace OgmoEditor
         private void closeOtherLevelsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Ogmo.Project.CloseOtherLevels(Ogmo.Project.GetLevelFromNode(MasterTreeView.SelectedNode));
+        }
+
+        private void openAllLevelsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ogmo.Project.OpenAllLevels();
         }
 
         /*

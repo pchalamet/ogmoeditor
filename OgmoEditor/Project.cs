@@ -150,6 +150,11 @@ namespace OgmoEditor
             return Levels.Find(e => e.TreeNode == node);
         }
 
+        public Level GetLevelByPath(string path)
+        {
+            return Levels.Find(e => e.SavePath == path);
+        }
+
         public void NewLevel()
         {
             AddLevel(new Level(this, Ogmo.NEW_LEVEL_NAME));  
@@ -198,6 +203,16 @@ namespace OgmoEditor
             {
                 if (lev != level)
                     CloseLevel(lev);
+            }
+        }
+
+        public void OpenAllLevels()
+        {
+            var files = Directory.EnumerateFiles(WorkingDirectory, "*.oel");
+            foreach (string str in files)
+            {
+                if (GetLevelByPath(str) == null)
+                    AddLevel(new Level(this, str));
             }
         }
     }
