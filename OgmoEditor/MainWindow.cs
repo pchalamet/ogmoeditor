@@ -74,6 +74,7 @@ namespace OgmoEditor
                 closeLevelToolStripMenuItem.Enabled = false;
                 duplicateLevelToolStripMenuItem.Enabled = false;
                 closeOtherLevelsToolStripMenuItem.Enabled = false;
+                saveAsImageToolStripMenuItem.Enabled = false;
             }
             else
             {
@@ -82,6 +83,7 @@ namespace OgmoEditor
                 closeLevelToolStripMenuItem.Enabled = true;
                 duplicateLevelToolStripMenuItem.Enabled = true;
                 closeOtherLevelsToolStripMenuItem.Enabled = true;
+                saveAsImageToolStripMenuItem.Enabled = true;
             }
         }
 
