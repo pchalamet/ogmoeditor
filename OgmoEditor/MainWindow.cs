@@ -62,6 +62,7 @@ namespace OgmoEditor
         private void onLevelAdded(Level level)
         {
             level.TreeNode.ContextMenuStrip = levelNodeContextMenu;
+            MasterTreeView.SelectedNode = level.TreeNode;
         }
 
         /*

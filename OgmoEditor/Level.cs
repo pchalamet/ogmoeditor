@@ -127,10 +127,7 @@ namespace OgmoEditor
         {
             //Generate the XML and write it!            
             XmlDocument doc = GenerateXML();
-            FileStream stream = new FileStream(filename, FileMode.OpenOrCreate);
-            XmlWriter writer = XmlWriter.Create(stream);
-            doc.WriteTo(writer);
-            stream.Close();
+            doc.Save(filename);
         }
 
         public Level Duplicate()
