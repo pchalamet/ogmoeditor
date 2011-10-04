@@ -132,6 +132,7 @@
             this.workingDirectoryChooser.TabIndex = 34;
             this.workingDirectoryChooser.Text = "...";
             this.workingDirectoryChooser.UseVisualStyleBackColor = true;
+            this.workingDirectoryChooser.Click += new System.EventHandler(this.workingDirectoryChooser_Click);
             // 
             // label8
             // 

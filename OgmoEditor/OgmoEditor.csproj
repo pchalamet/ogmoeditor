@@ -77,7 +77,7 @@
     </Compile>
     <Compile Include="Ogmo.cs" />
     <Compile Include="Project.cs" />
-    <Compile Include="ProjectEditors\IProjectEditor.cs" />
+    <Compile Include="ProjectEditors\IProjectChanger.cs" />
     <Compile Include="ProjectEditors\ProjectEditor.cs">
       <SubType>Form</SubType>
     </Compile>
