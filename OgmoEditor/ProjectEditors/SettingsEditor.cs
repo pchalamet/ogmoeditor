@@ -19,11 +19,22 @@ namespace OgmoEditor.ProjectEditors
         public void LoadFromProject(Project project)
         {
             projectNameTextBox.Text = project.Name;
+            workingDirectoryTextBox.Text = project.WorkingDirectory;
+            defaultWidthTextBox.Text = project.LevelDefaultSize.Width.ToString();
+            defaultHeightTextBox.Text = project.LevelDefaultSize.Height.ToString();
+            minWidthTextBox.Text = project.LevelMinimumSize.Width.ToString();
+            minHeightTextBox.Text = project.LevelMinimumSize.Height.ToString();
+            maxWidthTextBox.Text = project.LevelMaximumSize.Width.ToString();
+            maxHeightTextBox.Text = project.LevelMaximumSize.Height.ToString();
         }
 
         public void ApplyToProject(Project project)
         {
             project.Name = projectNameTextBox.Text;
+            project.WorkingDirectory = workingDirectoryTextBox.Text;
+            ProjParse.GetSize(ref project.LevelDefaultSize, defaultWidthTextBox, defaultHeightTextBox);
+            ProjParse.GetSize(ref project.LevelMinimumSize, minWidthTextBox, minHeightTextBox);
+            ProjParse.GetSize(ref project.LevelMaximumSize, maxWidthTextBox, maxHeightTextBox);
         }
     }
 }
