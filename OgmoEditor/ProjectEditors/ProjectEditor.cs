@@ -25,7 +25,7 @@ namespace OgmoEditor.ProjectEditors
 
         private void LoadFromProject()
         {
-
+            //Settings
         }
 
         private void onClose(object sender, FormClosedEventArgs e)
@@ -33,7 +33,7 @@ namespace OgmoEditor.ProjectEditors
             Owner.Enabled = true;
         }
 
-        public void Apply()
+        public void Save()
         {
             Close();
         }
@@ -41,6 +41,19 @@ namespace OgmoEditor.ProjectEditors
         public void Cancel()
         {
             Close();
+        }
+
+        /*
+         *  Control events
+         */
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            Cancel();
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            Save();
         }
     }
 }

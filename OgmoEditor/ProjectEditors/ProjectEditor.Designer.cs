@@ -63,6 +63,8 @@
             this.tilesetsTabPage = new System.Windows.Forms.TabPage();
             this.objectsTabPage = new System.Windows.Forms.TabPage();
             this.valuesTabPage = new System.Windows.Forms.TabPage();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.settingsTabPage.SuspendLayout();
             this.layersTabPage.SuspendLayout();
@@ -82,7 +84,7 @@
             this.tabControl.Location = new System.Drawing.Point(2, 3);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(523, 515);
+            this.tabControl.Size = new System.Drawing.Size(581, 516);
             this.tabControl.TabIndex = 1;
             // 
             // settingsTabPage
@@ -109,7 +111,7 @@
             this.settingsTabPage.Location = new System.Drawing.Point(4, 22);
             this.settingsTabPage.Name = "settingsTabPage";
             this.settingsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.settingsTabPage.Size = new System.Drawing.Size(515, 489);
+            this.settingsTabPage.Size = new System.Drawing.Size(573, 490);
             this.settingsTabPage.TabIndex = 0;
             this.settingsTabPage.Text = "Settings";
             this.settingsTabPage.UseVisualStyleBackColor = true;
@@ -412,11 +414,33 @@
             this.valuesTabPage.Text = "Values";
             this.valuesTabPage.UseVisualStyleBackColor = true;
             // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(497, 527);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 2;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // saveButton
+            // 
+            this.saveButton.Location = new System.Drawing.Point(337, 527);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(154, 23);
+            this.saveButton.TabIndex = 3;
+            this.saveButton.Text = "Save";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
             // ProjectEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(537, 561);
+            this.ClientSize = new System.Drawing.Size(584, 562);
+            this.Controls.Add(this.saveButton);
+            this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.tabControl);
             this.Name = "ProjectEditor";
             this.Text = "ProjectEditor";
@@ -467,5 +491,7 @@
         private System.Windows.Forms.TabPage tilesetsTabPage;
         private System.Windows.Forms.TabPage objectsTabPage;
         private System.Windows.Forms.TabPage valuesTabPage;
+        private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.Button saveButton;
     }
 }
