@@ -42,7 +42,7 @@
             this.projectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveProjectAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -61,7 +61,7 @@
             this.projectViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MasterTreeView = new System.Windows.Forms.TreeView();
             this.projectNodeContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.saveProjectToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.editProjectToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.saveProjectAsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.closeProjectToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -165,7 +165,7 @@
             this.projectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newProjectToolStripMenuItem,
             this.openProjectToolStripMenuItem,
-            this.saveProjectToolStripMenuItem,
+            this.editProjectToolStripMenuItem,
             this.saveProjectAsToolStripMenuItem,
             this.closeProjectToolStripMenuItem,
             this.toolStripSeparator1,
@@ -188,13 +188,13 @@
             this.openProjectToolStripMenuItem.Text = "Open Project...";
             this.openProjectToolStripMenuItem.Click += new System.EventHandler(this.openProjectToolStripMenuItem_Click);
             // 
-            // saveProjectToolStripMenuItem
+            // editProjectToolStripMenuItem
             // 
-            this.saveProjectToolStripMenuItem.Enabled = false;
-            this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
-            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.saveProjectToolStripMenuItem.Text = "Save Project";
-            this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.saveProjectToolStripMenuItem_Click);
+            this.editProjectToolStripMenuItem.Enabled = false;
+            this.editProjectToolStripMenuItem.Name = "editProjectToolStripMenuItem";
+            this.editProjectToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.editProjectToolStripMenuItem.Text = "Edit Project";
+            this.editProjectToolStripMenuItem.Click += new System.EventHandler(this.editProjectToolStripMenuItem_Click);
             // 
             // saveProjectAsToolStripMenuItem
             // 
@@ -347,11 +347,12 @@
             this.MasterTreeView.TabIndex = 2;
             this.MasterTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.MasterTreeView_AfterSelect);
             this.MasterTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.MasterTreeView_NodeMouseClick);
+            this.MasterTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.MasterTreeView_NodeMouseDoubleClick);
             // 
             // projectNodeContextMenu
             // 
             this.projectNodeContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveProjectToolStripMenuItem1,
+            this.editProjectToolStripMenuItem1,
             this.saveProjectAsToolStripMenuItem1,
             this.closeProjectToolStripMenuItem1,
             this.toolStripSeparator4,
@@ -360,12 +361,12 @@
             this.projectNodeContextMenu.Name = "ProjectNodeContextMenu";
             this.projectNodeContextMenu.Size = new System.Drawing.Size(164, 120);
             // 
-            // saveProjectToolStripMenuItem1
+            // editProjectToolStripMenuItem1
             // 
-            this.saveProjectToolStripMenuItem1.Name = "saveProjectToolStripMenuItem1";
-            this.saveProjectToolStripMenuItem1.Size = new System.Drawing.Size(163, 22);
-            this.saveProjectToolStripMenuItem1.Text = "Save Project";
-            this.saveProjectToolStripMenuItem1.Click += new System.EventHandler(this.saveProjectToolStripMenuItem_Click);
+            this.editProjectToolStripMenuItem1.Name = "editProjectToolStripMenuItem1";
+            this.editProjectToolStripMenuItem1.Size = new System.Drawing.Size(163, 22);
+            this.editProjectToolStripMenuItem1.Text = "Edit Project";
+            this.editProjectToolStripMenuItem1.Click += new System.EventHandler(this.editProjectToolStripMenuItem_Click);
             // 
             // saveProjectAsToolStripMenuItem1
             // 
@@ -418,7 +419,6 @@
             this.saveLevelToolStripMenuItem1.Name = "saveLevelToolStripMenuItem1";
             this.saveLevelToolStripMenuItem1.Size = new System.Drawing.Size(171, 22);
             this.saveLevelToolStripMenuItem1.Text = "Save Level";
-            this.saveLevelToolStripMenuItem1.Click += new System.EventHandler(this.saveLevelToolStripMenuItem1_Click);
             // 
             // saveLevelAsToolStripMenuItem1
             // 
@@ -491,7 +491,6 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.TreeView MasterTreeView;
         private System.Windows.Forms.ContextMenuStrip projectNodeContextMenu;
-        private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem saveProjectAsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem closeProjectToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
@@ -507,7 +506,6 @@
         private System.Windows.Forms.ToolStripMenuItem projectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openProjectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveProjectAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem levelToolStripMenuItem;
@@ -531,5 +529,7 @@
         private System.Windows.Forms.ToolStripMenuItem projectViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel MainStatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel mouseCoordinatesLabel;
+        private System.Windows.Forms.ToolStripMenuItem editProjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editProjectToolStripMenuItem1;
     }
 }

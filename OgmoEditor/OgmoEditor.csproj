@@ -77,10 +77,10 @@
     </Compile>
     <Compile Include="Ogmo.cs" />
     <Compile Include="Project.cs" />
-    <Compile Include="ProjectEditor.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="ProjectEditors\ProjectEditor.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ProjectEditor.Designer.cs">
+    <Compile Include="ProjectEditors\ProjectEditor.Designer.cs">
       <DependentUpon>ProjectEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -101,7 +101,7 @@
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProjectEditor.resx">
+    <EmbeddedResource Include="ProjectEditors\ProjectEditor.resx">
       <DependentUpon>ProjectEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using OgmoEditor.ProjectEditors;
 
 namespace OgmoEditor
 {
@@ -13,13 +14,19 @@ namespace OgmoEditor
     {
         private TreeNode rightClickedNode;
         private Level currentLevel;
-        private ProjectEditor projectEditor;
 
         public MainWindow()
         {
             InitializeComponent();
             Ogmo.OnProjectStart += onProjectStart;
             Ogmo.OnProjectClose += onProjectClose;
+        }
+
+        private void editProject()
+        {
+            Enabled = false;
+            ProjectEditor editor = new ProjectEditor(Ogmo.Project);
+            editor.Show(this);
         }
 
         /*
@@ -34,7 +41,7 @@ namespace OgmoEditor
 
             //Disable menu items
             closeProjectToolStripMenuItem.Enabled = true;
-            saveProjectToolStripMenuItem.Enabled = true;
+            editProjectToolStripMenuItem.Enabled = true;
             saveProjectAsToolStripMenuItem.Enabled = true;
             newLevelToolStripMenuItem.Enabled = true;
             openLevelToolStripMenuItem.Enabled = true;
@@ -52,7 +59,7 @@ namespace OgmoEditor
 
             //Disable menu items
             closeProjectToolStripMenuItem.Enabled = false;
-            saveProjectToolStripMenuItem.Enabled = false;
+            editProjectToolStripMenuItem.Enabled = false;
             saveProjectAsToolStripMenuItem.Enabled = false;
             newLevelToolStripMenuItem.Enabled = false;
             openLevelToolStripMenuItem.Enabled = false;
@@ -70,10 +77,6 @@ namespace OgmoEditor
                 Controls.Remove(currentLevel.Control);
                 currentLevel = null;
             }
-
-            //Remove the project edit view
-            if (projectEditor != null)
-                Controls.Remove(projectEditor);
 
             //Remove events
             project.OnLevelAdded -= onLevelAdded;
@@ -111,10 +114,6 @@ namespace OgmoEditor
                     Controls.Remove(currentLevel.Control);
                     currentLevel = null;
                 }
-
-                //Add the project edit view
-                if (projectEditor == null)
-                    Controls.Add(projectEditor = new ProjectEditor(Ogmo.Project));
             }
             else
             {
@@ -130,13 +129,6 @@ namespace OgmoEditor
                     Controls.Remove(currentLevel.Control);
                 currentLevel = Ogmo.Project.GetLevelFromNode(e.Node);
                 Controls.Add(currentLevel.Control);
-
-                //Remove the project edit view
-                if (projectEditor != null)
-                {
-                    Controls.Remove(projectEditor);
-                    projectEditor = null;
-                }
             }
         }
 
@@ -144,6 +136,12 @@ namespace OgmoEditor
         {
             if (e.Button == MouseButtons.Right)
                 rightClickedNode = e.Node;
+        }
+
+        private void MasterTreeView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Node == Ogmo.Project.TreeNode)
+                editProject();
         }
 
         /*
@@ -164,9 +162,9 @@ namespace OgmoEditor
             Ogmo.CloseProject();
         }
 
-        private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        private void editProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.Project.Save();
+            editProject();
         }
 
         private void saveProjectAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -225,13 +223,8 @@ namespace OgmoEditor
         }
 
         /*
-         *  Clicking the project node context menu items
+         *  Clicking the project/level node context menu items
          */
-        private void saveLevelToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            Ogmo.Project.GetLevelFromNode(rightClickedNode).Save();
-        }
-
         private void saveLevelAsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Ogmo.Project.GetLevelFromNode(rightClickedNode).SaveAs();

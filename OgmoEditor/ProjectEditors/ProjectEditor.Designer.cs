@@ -1,13 +1,13 @@
-﻿namespace OgmoEditor
+﻿namespace OgmoEditor.ProjectEditors
 {
     partial class ProjectEditor
     {
-        /// <summary> 
+        /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
+        /// <summary>
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -20,10 +20,10 @@
             base.Dispose(disposing);
         }
 
-        #region Component Designer generated code
+        #region Windows Form Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
+        /// <summary>
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
@@ -79,11 +79,11 @@
             this.tabControl.Controls.Add(this.tilesetsTabPage);
             this.tabControl.Controls.Add(this.objectsTabPage);
             this.tabControl.Controls.Add(this.valuesTabPage);
-            this.tabControl.Location = new System.Drawing.Point(4, 4);
+            this.tabControl.Location = new System.Drawing.Point(2, 3);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(592, 493);
-            this.tabControl.TabIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(523, 515);
+            this.tabControl.TabIndex = 1;
             // 
             // settingsTabPage
             // 
@@ -109,7 +109,7 @@
             this.settingsTabPage.Location = new System.Drawing.Point(4, 22);
             this.settingsTabPage.Name = "settingsTabPage";
             this.settingsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.settingsTabPage.Size = new System.Drawing.Size(584, 467);
+            this.settingsTabPage.Size = new System.Drawing.Size(515, 489);
             this.settingsTabPage.TabIndex = 0;
             this.settingsTabPage.Text = "Settings";
             this.settingsTabPage.UseVisualStyleBackColor = true;
@@ -270,7 +270,6 @@
             this.projectNameTextBox.Name = "projectNameTextBox";
             this.projectNameTextBox.Size = new System.Drawing.Size(197, 20);
             this.projectNameTextBox.TabIndex = 0;
-            this.projectNameTextBox.Validated += new System.EventHandler(this.projectNameTextBox_Validated);
             // 
             // layersTabPage
             // 
@@ -417,10 +416,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Transparent;
+            this.ClientSize = new System.Drawing.Size(537, 561);
             this.Controls.Add(this.tabControl);
             this.Name = "ProjectEditor";
-            this.Size = new System.Drawing.Size(596, 497);
+            this.Text = "ProjectEditor";
             this.tabControl.ResumeLayout(false);
             this.settingsTabPage.ResumeLayout(false);
             this.settingsTabPage.PerformLayout();
@@ -435,12 +434,7 @@
 
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage settingsTabPage;
-        private System.Windows.Forms.TabPage layersTabPage;
-        private System.Windows.Forms.TabPage tilesetsTabPage;
-        private System.Windows.Forms.TabPage objectsTabPage;
-        private System.Windows.Forms.TabPage valuesTabPage;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox projectNameTextBox;
+        private System.Windows.Forms.Button lockToDefaultButton;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox workingDirectoryTextBox;
         private System.Windows.Forms.Button workingDirectoryChooser;
@@ -457,16 +451,21 @@
         private System.Windows.Forms.TextBox minWidthTextBox;
         private System.Windows.Forms.TextBox defaultHeightTextBox;
         private System.Windows.Forms.TextBox defaultWidthTextBox;
-        private System.Windows.Forms.Button lockToDefaultButton;
-        private System.Windows.Forms.ListView layerListView;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox projectNameTextBox;
+        private System.Windows.Forms.TabPage layersTabPage;
         private System.Windows.Forms.Panel layerPropertiesPanel;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox layerNameTextBox;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ComboBox layerTypeComboBox;
         private System.Windows.Forms.TextBox gridHeightTextBox;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox gridWidthTextBox;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox layerTypeComboBox;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ListView layerListView;
+        private System.Windows.Forms.TabPage tilesetsTabPage;
+        private System.Windows.Forms.TabPage objectsTabPage;
+        private System.Windows.Forms.TabPage valuesTabPage;
     }
 }
