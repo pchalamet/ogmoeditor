@@ -13,19 +13,20 @@ namespace OgmoEditor.ProjectEditors
     {
         private Project project;
 
+        private SettingsEditor settings;
+
         public ProjectEditor(Project project)
         {
             this.project = project;
             InitializeComponent();
-            LoadFromProject();
+
+            //Add the editors
+            settings = new SettingsEditor();
+            settings.LoadFromProject(project);
+            settingsTabPage.Controls.Add(settings);
 
             //Events
             FormClosed += onClose;
-        }
-
-        private void LoadFromProject()
-        {
-            //Settings
         }
 
         private void onClose(object sender, FormClosedEventArgs e)
@@ -40,6 +41,7 @@ namespace OgmoEditor.ProjectEditors
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            settings.ApplyToProject(project);
             Close();
         }
     }

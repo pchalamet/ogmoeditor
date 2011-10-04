@@ -40,6 +40,8 @@ namespace OgmoEditor
             MasterTreeView.SelectedNode = project.TreeNode;
 
             //Disable menu items
+            newProjectToolStripMenuItem.Enabled = false;
+            openProjectToolStripMenuItem.Enabled = false;
             closeProjectToolStripMenuItem.Enabled = true;
             editProjectToolStripMenuItem.Enabled = true;
             saveProjectAsToolStripMenuItem.Enabled = true;
@@ -58,6 +60,8 @@ namespace OgmoEditor
             MasterTreeView.Nodes.Clear();
 
             //Disable menu items
+            newProjectToolStripMenuItem.Enabled = true;
+            openProjectToolStripMenuItem.Enabled = true;
             closeProjectToolStripMenuItem.Enabled = false;
             editProjectToolStripMenuItem.Enabled = false;
             saveProjectAsToolStripMenuItem.Enabled = false;
