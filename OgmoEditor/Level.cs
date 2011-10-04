@@ -17,7 +17,6 @@ namespace OgmoEditor
         public TreeNode TreeNode;
         public bool Changed { get; private set; }
         public Control Control { get; private set; }
-        private float scale;
 
         //Actual parameters to be edited/exported
         public Size Size { get; private set; }
@@ -67,7 +66,6 @@ namespace OgmoEditor
             Control.Location = new Point(300, 100);
             Control.Paint += new PaintEventHandler(Control_Paint);
             Control.Focus();
-            scale = 1;
         }
 
         private void Control_Paint(object sender, PaintEventArgs e)

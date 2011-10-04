@@ -13,13 +13,13 @@ namespace OgmoEditor
     {
         private TreeNode rightClickedNode;
         private Level currentLevel;
+        private ProjectEditor projectEditor;
 
         public MainWindow()
         {
             InitializeComponent();
             Ogmo.OnProjectStart += onProjectStart;
             Ogmo.OnProjectClose += onProjectClose;
-            Controls.Remove(projectEditTabControl);
         }
 
         /*
@@ -72,8 +72,8 @@ namespace OgmoEditor
             }
 
             //Remove the project edit view
-            if (Controls.Contains(projectEditTabControl))
-                Controls.Remove(projectEditTabControl);
+            if (projectEditor != null)
+                Controls.Remove(projectEditor);
 
             //Remove events
             project.OnLevelAdded -= onLevelAdded;
@@ -113,8 +113,8 @@ namespace OgmoEditor
                 }
 
                 //Add the project edit view
-                if (!Controls.Contains(projectEditTabControl))
-                    Controls.Add(projectEditTabControl);
+                if (projectEditor == null)
+                    Controls.Add(projectEditor = new ProjectEditor(Ogmo.Project));
             }
             else
             {
@@ -132,8 +132,11 @@ namespace OgmoEditor
                 Controls.Add(currentLevel.Control);
 
                 //Remove the project edit view
-                if (Controls.Contains(projectEditTabControl))
-                    Controls.Remove(projectEditTabControl);
+                if (projectEditor != null)
+                {
+                    Controls.Remove(projectEditor);
+                    projectEditor = null;
+                }
             }
         }
 

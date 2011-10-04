@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
+            this.MainStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.mouseCoordinatesLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.visitWebsiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,19 +75,10 @@
             this.duplicateLevelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.closeOtherLevelsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsImageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.projectEditTabControl = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.MainStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.mouseCoordinatesLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.StatusStrip.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             this.projectNodeContextMenu.SuspendLayout();
             this.levelNodeContextMenu.SuspendLayout();
-            this.projectEditTabControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // StatusStrip
@@ -99,6 +92,18 @@
             this.StatusStrip.Size = new System.Drawing.Size(784, 22);
             this.StatusStrip.TabIndex = 0;
             this.StatusStrip.Text = "statusStrip1";
+            // 
+            // MainStatusLabel
+            // 
+            this.MainStatusLabel.Name = "MainStatusLabel";
+            this.MainStatusLabel.Size = new System.Drawing.Size(0, 17);
+            // 
+            // mouseCoordinatesLabel
+            // 
+            this.mouseCoordinatesLabel.Name = "mouseCoordinatesLabel";
+            this.mouseCoordinatesLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.mouseCoordinatesLabel.Size = new System.Drawing.Size(33, 17);
+            this.mouseCoordinatesLabel.Text = "(0, 0)";
             // 
             // MenuStrip
             // 
@@ -454,91 +459,12 @@
             this.saveAsImageToolStripMenuItem1.Size = new System.Drawing.Size(171, 22);
             this.saveAsImageToolStripMenuItem1.Text = "Save As Image...";
             // 
-            // projectEditTabControl
-            // 
-            this.projectEditTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.projectEditTabControl.Controls.Add(this.tabPage1);
-            this.projectEditTabControl.Controls.Add(this.tabPage2);
-            this.projectEditTabControl.Controls.Add(this.tabPage3);
-            this.projectEditTabControl.Controls.Add(this.tabPage4);
-            this.projectEditTabControl.Controls.Add(this.tabPage5);
-            this.projectEditTabControl.Location = new System.Drawing.Point(158, 27);
-            this.projectEditTabControl.Name = "projectEditTabControl";
-            this.projectEditTabControl.SelectedIndex = 0;
-            this.projectEditTabControl.Size = new System.Drawing.Size(626, 510);
-            this.projectEditTabControl.TabIndex = 3;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(618, 484);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Settings";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(618, 484);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Layers";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // MainStatusLabel
-            // 
-            this.MainStatusLabel.Name = "MainStatusLabel";
-            this.MainStatusLabel.Size = new System.Drawing.Size(0, 17);
-            // 
-            // mouseCoordinatesLabel
-            // 
-            this.mouseCoordinatesLabel.Name = "mouseCoordinatesLabel";
-            this.mouseCoordinatesLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.mouseCoordinatesLabel.Size = new System.Drawing.Size(33, 17);
-            this.mouseCoordinatesLabel.Text = "(0, 0)";
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(618, 484);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Tilesets";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(618, 484);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Objects";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // tabPage5
-            // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(618, 484);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "Values";
-            this.tabPage5.UseVisualStyleBackColor = true;
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::OgmoEditor.Properties.Resources.bg;
             this.ClientSize = new System.Drawing.Size(784, 562);
-            this.Controls.Add(this.projectEditTabControl);
             this.Controls.Add(this.MasterTreeView);
             this.Controls.Add(this.StatusStrip);
             this.Controls.Add(this.MenuStrip);
@@ -552,7 +478,6 @@
             this.MenuStrip.PerformLayout();
             this.projectNodeContextMenu.ResumeLayout(false);
             this.levelNodeContextMenu.ResumeLayout(false);
-            this.projectEditTabControl.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -604,13 +529,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem projectViewToolStripMenuItem;
-        private System.Windows.Forms.TabControl projectEditTabControl;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ToolStripStatusLabel MainStatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel mouseCoordinatesLabel;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TabPage tabPage5;
     }
 }

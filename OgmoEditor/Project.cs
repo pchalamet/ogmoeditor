@@ -17,13 +17,13 @@ namespace OgmoEditor
     public class Project : ISerializable
     {
         //Serialized project properties
-        public string Name;
-        public string WorkingDirectory;
-        public string LastFilename;
-        public List<LayerDefinition> LayerDefinitions;
-        public Size LevelDefaultSize;
-        public Size LevelMinimumSize;
-        public Size LevelMaximumSize;
+        private string name;
+        private string workingDirectory;
+        private Size levelDefaultSize;
+        private Size levelMinimumSize;
+        private Size levelMaximumSize;
+        private string lastFilename;
+        public List<LayerDefinition> LayerDefinitions { get; private set; }
 
         //Non-serialzed instance vars
         public TreeNode TreeNode;
@@ -37,11 +37,11 @@ namespace OgmoEditor
         public Project()
         {
             //Init default project properties
-            Name = Ogmo.NEW_PROJECT_NAME;
-            WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            LastFilename = "";
+            name = Ogmo.NEW_PROJECT_NAME;
+            workingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            lastFilename = "";
             LayerDefinitions = new List<LayerDefinition>();
-            LevelDefaultSize = LevelMinimumSize = LevelMaximumSize = new Size(640, 480);
+            levelDefaultSize = levelMinimumSize = levelMaximumSize = new Size(640, 480);
 
             //Init running vars
             InitializeRunningVars();
@@ -53,13 +53,13 @@ namespace OgmoEditor
         public Project(SerializationInfo info, StreamingContext ctxt)
         {
             //Init project properties
-            Name = info.GetString("Name");
-            WorkingDirectory = info.GetString("WorkingDirectory");
-            LastFilename = info.GetString("LastFilename");
+            name = info.GetString("Name");
+            workingDirectory = info.GetString("WorkingDirectory");
+            lastFilename = info.GetString("LastFilename");
             LayerDefinitions = (List<LayerDefinition>)info.GetValue("LayerDefinitions", typeof(List<LayerDefinition>));
-            LevelDefaultSize = (Size)info.GetValue("LevelDefaultSize", typeof(Size));
-            LevelMinimumSize = (Size)info.GetValue("LevelMinimumSize", typeof(Size));
-            LevelMaximumSize = (Size)info.GetValue("LevelMaximumSize", typeof(Size));
+            levelDefaultSize = (Size)info.GetValue("LevelDefaultSize", typeof(Size));
+            levelMinimumSize = (Size)info.GetValue("LevelMinimumSize", typeof(Size));
+            levelMaximumSize = (Size)info.GetValue("LevelMaximumSize", typeof(Size));
 
             //Init running vars
             InitializeRunningVars();
@@ -67,13 +67,13 @@ namespace OgmoEditor
 
         public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
         {
-            info.AddValue("Name", Name);
-            info.AddValue("WorkingDirectory", WorkingDirectory);
-            info.AddValue("LastFilename", LastFilename);
+            info.AddValue("Name", name);
+            info.AddValue("WorkingDirectory", workingDirectory);
+            info.AddValue("LastFilename", lastFilename);
             info.AddValue("LayerDefinitions", LayerDefinitions);
-            info.AddValue("LevelDefaultSize", LevelDefaultSize);
-            info.AddValue("LevelMinimumSize", LevelMinimumSize);
-            info.AddValue("LevelMaximumSize", LevelMaximumSize);
+            info.AddValue("LevelDefaultSize", levelDefaultSize);
+            info.AddValue("LevelMinimumSize", levelMinimumSize);
+            info.AddValue("LevelMaximumSize", levelMaximumSize);
         }
 
         private void InitializeRunningVars()
@@ -84,18 +84,86 @@ namespace OgmoEditor
         }
 
         /*
+         *  Properties
+         */
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                if (name != value)
+                {
+                    name = value;
+                    SetChanged();
+                }
+            }
+        }
+
+        public string WorkingDirectory
+        {
+            get { return workingDirectory; }
+            set
+            {
+                if (workingDirectory != value)
+                {
+                    workingDirectory = value;
+                    SetChanged();
+                }
+            }
+        }
+
+        public Size LevelDefaultSize
+        {
+            get { return levelDefaultSize; }
+            set
+            {
+                if (levelDefaultSize != value)
+                {
+                    levelDefaultSize = value;
+                    SetChanged();
+                }
+            }
+        }
+
+        public Size LevelMinimumSize
+        {
+            get { return levelMinimumSize; }
+            set
+            {
+                if (levelMinimumSize != value)
+                {
+                    levelMinimumSize = value;
+                    SetChanged();
+                }
+            }
+        }
+
+        public Size LevelMaximumSize
+        {
+            get { return levelMaximumSize; }
+            set
+            {
+                if (levelMaximumSize != value)
+                {
+                    levelMaximumSize = value;
+                    SetChanged();
+                }
+            }
+        }
+
+        /*
          *  Saving the project file
          */
         public void Save()
         {
             //If it hasn't been saved yet, go to SaveAs
-            if (LastFilename == "")
+            if (lastFilename == "")
             {
                 SaveAs();
                 return;
             }
 
-            writeTo(LastFilename);
+            writeTo(lastFilename);
 
             RemoveChanged();
         }
@@ -103,9 +171,9 @@ namespace OgmoEditor
         public void SaveAs()
         {
             SaveFileDialog dialog = new SaveFileDialog();
-            dialog.InitialDirectory = WorkingDirectory;
+            dialog.InitialDirectory = workingDirectory;
             dialog.RestoreDirectory = true;
-            dialog.FileName = Name;
+            dialog.FileName = name;
             dialog.DefaultExt = Ogmo.PROJECT_EXT;
             dialog.OverwritePrompt = true;
             dialog.Filter = Ogmo.PROJECT_FILTER;
@@ -114,7 +182,7 @@ namespace OgmoEditor
             if (dialog.ShowDialog() == DialogResult.Cancel)
                 return;
 
-            LastFilename = dialog.FileName;
+            lastFilename = dialog.FileName;
             writeTo(dialog.FileName);
 
             RemoveChanged();
@@ -134,13 +202,13 @@ namespace OgmoEditor
         public void RemoveChanged()
         {
             Changed = false;
-            TreeNode.Text = Name;
+            TreeNode.Text = name;
         }
 
         public void SetChanged()
         {
             Changed = true;
-            TreeNode.Text = Name + '*';
+            TreeNode.Text = name + '*';
         }
 
         /*
@@ -214,7 +282,7 @@ namespace OgmoEditor
 
         public void OpenAllLevels()
         {
-            var files = Directory.EnumerateFiles(WorkingDirectory, "*.oel");
+            var files = Directory.EnumerateFiles(workingDirectory, "*.oel");
             foreach (string str in files)
             {
                 if (GetLevelByPath(str) == null)

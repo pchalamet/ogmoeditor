@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 
 namespace OgmoEditor.Definitions.LayerDefinitions
 {
@@ -9,6 +10,7 @@ namespace OgmoEditor.Definitions.LayerDefinitions
     public class LayerDefinition
     {
         public string Name;
+        public Size Grid;
 
         public LayerDefinition(string name)
         {
