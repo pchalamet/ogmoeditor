@@ -33,27 +33,14 @@ namespace OgmoEditor.ProjectEditors
             Owner.Enabled = true;
         }
 
-        public void Save()
-        {
-            Close();
-        }
-
-        public void Cancel()
-        {
-            Close();
-        }
-
-        /*
-         *  Control events
-         */
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            Cancel();
+            Close();
         }
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            Save();
+            Close();
         }
     }
 }
