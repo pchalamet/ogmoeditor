@@ -152,7 +152,7 @@
             this.removeButton.TabIndex = 35;
             this.removeButton.Text = "Remove";
             this.removeButton.UseVisualStyleBackColor = true;
-            this.removeButton.Click += new System.EventHandler(this.button1_Click);
+            this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
             // 
             // LayersEditor
             // 

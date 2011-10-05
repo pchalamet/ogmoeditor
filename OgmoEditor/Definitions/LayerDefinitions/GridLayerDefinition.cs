@@ -14,7 +14,7 @@ namespace OgmoEditor.Definitions.LayerDefinitions
         public GridLayerDefinition(string name)
             : base(name)
         {
-      
+            Color = Color.Black;
         }
     }
 }

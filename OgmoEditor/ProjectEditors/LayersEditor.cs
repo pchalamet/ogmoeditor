@@ -103,7 +103,7 @@ namespace OgmoEditor.ProjectEditors
             listView.SelectedIndices.Add(item.Index);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void removeButton_Click(object sender, EventArgs e)
         {
             ListViewItem item = listView.SelectedItems[0];
             int index = item.Index;
