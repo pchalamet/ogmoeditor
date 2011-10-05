@@ -42,6 +42,7 @@ namespace OgmoEditor.ProjectEditors
         private void saveButton_Click(object sender, EventArgs e)
         {
             settings.ApplyToProject(project);
+            project.Changed = true;
             Close();
         }
     }

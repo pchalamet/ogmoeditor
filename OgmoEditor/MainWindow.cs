@@ -39,12 +39,14 @@ namespace OgmoEditor
             MasterTreeView.Nodes.Add(project.TreeNode);
             MasterTreeView.SelectedNode = project.TreeNode;
 
-            //Disable menu items
+            //Enable menu items
             newProjectToolStripMenuItem.Enabled = false;
             openProjectToolStripMenuItem.Enabled = false;
             closeProjectToolStripMenuItem.Enabled = true;
             editProjectToolStripMenuItem.Enabled = true;
+            saveProjectToolStripMenuItem.Enabled = true;
             saveProjectAsToolStripMenuItem.Enabled = true;
+
             newLevelToolStripMenuItem.Enabled = true;
             openLevelToolStripMenuItem.Enabled = true;
             openAllLevelsToolStripMenuItem.Enabled = true;
@@ -64,7 +66,9 @@ namespace OgmoEditor
             openProjectToolStripMenuItem.Enabled = true;
             closeProjectToolStripMenuItem.Enabled = false;
             editProjectToolStripMenuItem.Enabled = false;
+            saveProjectToolStripMenuItem.Enabled = false;
             saveProjectAsToolStripMenuItem.Enabled = false;
+
             newLevelToolStripMenuItem.Enabled = false;
             openLevelToolStripMenuItem.Enabled = false;
             openAllLevelsToolStripMenuItem.Enabled = false;
@@ -169,6 +173,11 @@ namespace OgmoEditor
         private void editProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             editProject();
+        }
+
+        private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ogmo.Project.Save();
         }
 
         private void saveProjectAsToolStripMenuItem_Click(object sender, EventArgs e)

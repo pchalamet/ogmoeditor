@@ -26,6 +26,7 @@ namespace OgmoEditor
         public List<LayerDefinition> LayerDefinitions;
 
         //Non-serialzed instance vars
+        private bool changed;
         public TreeNode TreeNode;
         public List<Level> Levels { get; private set; }
 
@@ -74,6 +75,16 @@ namespace OgmoEditor
             }
         }
 
+        public bool Changed
+        {
+            get { return changed; }
+            set
+            {
+                changed = value;
+                TreeNode.Text = Name + (changed ? "*" : "");
+            }
+        }
+
         public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
         {
             info.AddValue("Name", Name);
@@ -87,6 +98,7 @@ namespace OgmoEditor
 
         private void InitializeRunningVars()
         {
+            changed = false;
             TreeNode = new TreeNode(Name);  
             Levels = new List<Level>();
         }
@@ -104,6 +116,7 @@ namespace OgmoEditor
             }
 
             writeTo(LastFilename);
+            Changed = false;
         }
 
         public void SaveAs()
@@ -122,6 +135,7 @@ namespace OgmoEditor
 
             LastFilename = dialog.FileName;
             writeTo(dialog.FileName);
+            Changed = false;
         }
 
         private void writeTo(string filename)

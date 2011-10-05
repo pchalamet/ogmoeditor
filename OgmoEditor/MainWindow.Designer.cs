@@ -74,6 +74,8 @@
             this.closeOtherLevelsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsImageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.openAllLevelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveProjectToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.StatusStrip.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             this.projectNodeContextMenu.SuspendLayout();
@@ -165,6 +167,7 @@
             this.newProjectToolStripMenuItem,
             this.openProjectToolStripMenuItem,
             this.editProjectToolStripMenuItem,
+            this.saveProjectToolStripMenuItem,
             this.saveProjectAsToolStripMenuItem,
             this.closeProjectToolStripMenuItem});
             this.projectToolStripMenuItem.Name = "projectToolStripMenuItem";
@@ -328,6 +331,8 @@
             this.MasterTreeView.HideSelection = false;
             this.MasterTreeView.Location = new System.Drawing.Point(2, 27);
             this.MasterTreeView.Name = "MasterTreeView";
+            this.MasterTreeView.ShowPlusMinus = false;
+            this.MasterTreeView.ShowRootLines = false;
             this.MasterTreeView.Size = new System.Drawing.Size(150, 510);
             this.MasterTreeView.TabIndex = 2;
             this.MasterTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.MasterTreeView_AfterSelect);
@@ -338,13 +343,14 @@
             // 
             this.projectNodeContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editProjectToolStripMenuItem1,
+            this.saveProjectToolStripMenuItem1,
             this.saveProjectAsToolStripMenuItem1,
             this.closeProjectToolStripMenuItem1,
             this.toolStripSeparator4,
             this.newLevelToolStripMenuItem1,
             this.openLevelToolStripMenuItem1});
             this.projectNodeContextMenu.Name = "ProjectNodeContextMenu";
-            this.projectNodeContextMenu.Size = new System.Drawing.Size(164, 120);
+            this.projectNodeContextMenu.Size = new System.Drawing.Size(164, 142);
             // 
             // editProjectToolStripMenuItem1
             // 
@@ -451,6 +457,21 @@
             this.openAllLevelsToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.openAllLevelsToolStripMenuItem.Text = "Open All Levels";
             // 
+            // saveProjectToolStripMenuItem
+            // 
+            this.saveProjectToolStripMenuItem.Enabled = false;
+            this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
+            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.saveProjectToolStripMenuItem.Text = "Save Project";
+            this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.saveProjectToolStripMenuItem_Click);
+            // 
+            // saveProjectToolStripMenuItem1
+            // 
+            this.saveProjectToolStripMenuItem1.Name = "saveProjectToolStripMenuItem1";
+            this.saveProjectToolStripMenuItem1.Size = new System.Drawing.Size(163, 22);
+            this.saveProjectToolStripMenuItem1.Text = "Save Project";
+            this.saveProjectToolStripMenuItem1.Click += new System.EventHandler(this.saveProjectToolStripMenuItem_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -522,5 +543,7 @@
         private System.Windows.Forms.ToolStripMenuItem editProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editProjectToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem openAllLevelsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem1;
     }
 }
