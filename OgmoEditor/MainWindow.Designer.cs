@@ -329,6 +329,7 @@
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "MainWindow";
             this.Text = "Ogmo Editor";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.StatusStrip.ResumeLayout(false);
             this.StatusStrip.PerformLayout();
             this.MenuStrip.ResumeLayout(false);

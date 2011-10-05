@@ -63,7 +63,7 @@
             this.masterTreeView.Name = "masterTreeView";
             this.masterTreeView.ShowPlusMinus = false;
             this.masterTreeView.ShowRootLines = false;
-            this.masterTreeView.Size = new System.Drawing.Size(120, 100);
+            this.masterTreeView.Size = new System.Drawing.Size(120, 184);
             this.masterTreeView.TabIndex = 4;
             this.masterTreeView.TabStop = false;
             this.masterTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.MasterTreeView_NodeMouseClick);
@@ -192,7 +192,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(144, 124);
+            this.ClientSize = new System.Drawing.Size(144, 208);
             this.Controls.Add(this.masterTreeView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MaximizeBox = false;
