@@ -17,15 +17,26 @@ namespace OgmoEditor
         {
             InitializeComponent();
 
+            SetProject(null);
+
             Ogmo.OnProjectStart += onProjectStart;
             Ogmo.OnProjectClose += onProjectClose;
         }
 
+        public void SetProject(Project project)
+        {
+            masterTreeView.Nodes.Clear();
+            if (project != null)
+            {
+                masterTreeView.Nodes.Add(project.TreeNode);
+                project.TreeNode.ContextMenuStrip = projectNodeContextMenu;
+            }
+        }
+
         private void onProjectStart(Project project)
         {
-            masterTreeView.Nodes.Add(project.TreeNode);
+            SetProject(project);
             masterTreeView.SelectedNode = project.TreeNode;
-            project.TreeNode.ContextMenuStrip = projectNodeContextMenu;
 
             project.OnLevelAdded += onLevelAdded;
             project.OnLevelClosed += onLevelClosed;
@@ -33,7 +44,7 @@ namespace OgmoEditor
 
         private void onProjectClose(Project project)
         {
-            masterTreeView.Nodes.Clear();
+            SetProject(null);
 
             project.OnLevelAdded -= onLevelAdded;
             project.OnLevelClosed -= onLevelClosed;
@@ -47,7 +58,7 @@ namespace OgmoEditor
 
         private void onLevelClosed(Level level)
         {
-            masterTreeView.Nodes.Remove(level.TreeNode);
+
         }
 
         public TreeNode SelectedNode
@@ -129,6 +140,15 @@ namespace OgmoEditor
         private void openLevelToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Ogmo.Project.OpenLevel();
+        }
+
+        private void ProjectView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                Visible = false;
+                e.Cancel = true;
+            }
         }
     }
 }

@@ -18,7 +18,10 @@ namespace OgmoEditor
         public MainWindow()
         {
             InitializeComponent();
+
             projectView = new ProjectView();
+            projectView.Show(this);
+            projectView.Visible = false;
 
             Ogmo.OnProjectStart += onProjectStart;
             Ogmo.OnProjectClose += onProjectClose;
@@ -30,7 +33,7 @@ namespace OgmoEditor
         private void onProjectStart(Project project)
         {
             //Init the tree view
-            projectView.Show(this);
+            projectView.Visible = true;
             
             //Enable menu items
             newProjectToolStripMenuItem.Enabled = false;
@@ -42,6 +45,7 @@ namespace OgmoEditor
             newLevelToolStripMenuItem.Enabled = true;
             openLevelToolStripMenuItem.Enabled = true;
             openAllLevelsToolStripMenuItem.Enabled = true;
+            projectViewToolStripMenuItem.Enabled = true;
 
             //Add events
             project.OnLevelAdded += onLevelAdded;
@@ -51,7 +55,7 @@ namespace OgmoEditor
         private void onProjectClose(Project project)
         {
             //Remove project view
-            projectView.Close();
+            projectView.Visible = false;
 
             //Disable menu items
             newProjectToolStripMenuItem.Enabled = true;
@@ -70,6 +74,7 @@ namespace OgmoEditor
             duplicateLevelToolStripMenuItem.Enabled = false;
             closeOtherLevelsToolStripMenuItem.Enabled = false;
             saveAsImageToolStripMenuItem.Enabled = false;
+            projectViewToolStripMenuItem.Enabled = false;
 
             //No current level
             if (currentLevel != null)
@@ -203,9 +208,15 @@ namespace OgmoEditor
         /*
          *  View events
          */
+        private void viewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            projectViewToolStripMenuItem.Checked = projectView.Visible;
+        }
+
         private void projectViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             projectView.Visible = !projectView.Visible;
+            Focus();
         }
 
     }

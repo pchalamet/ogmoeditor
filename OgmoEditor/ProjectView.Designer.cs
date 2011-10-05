@@ -57,12 +57,13 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.masterTreeView.BackColor = System.Drawing.SystemColors.Window;
+            this.masterTreeView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.masterTreeView.HideSelection = false;
             this.masterTreeView.Location = new System.Drawing.Point(12, 12);
             this.masterTreeView.Name = "masterTreeView";
             this.masterTreeView.ShowPlusMinus = false;
             this.masterTreeView.ShowRootLines = false;
-            this.masterTreeView.Size = new System.Drawing.Size(160, 288);
+            this.masterTreeView.Size = new System.Drawing.Size(120, 100);
             this.masterTreeView.TabIndex = 4;
             this.masterTreeView.TabStop = false;
             this.masterTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.MasterTreeView_NodeMouseClick);
@@ -191,13 +192,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(184, 312);
-            this.ControlBox = false;
+            this.ClientSize = new System.Drawing.Size(144, 124);
             this.Controls.Add(this.masterTreeView);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(200, 600);
-            this.MinimumSize = new System.Drawing.Size(200, 200);
+            this.MinimumSize = new System.Drawing.Size(140, 120);
             this.Name = "ProjectView";
-            this.Text = "ProjectView";
+            this.Text = "Project View";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ProjectView_FormClosing);
             this.projectNodeContextMenu.ResumeLayout(false);
             this.levelNodeContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);

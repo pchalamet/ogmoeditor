@@ -58,13 +58,8 @@
             this.saveAsImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.projectViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.infoSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.levelPanel = new System.Windows.Forms.Panel();
             this.StatusStrip.SuspendLayout();
             this.MenuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.infoSplitContainer)).BeginInit();
-            this.infoSplitContainer.Panel2.SuspendLayout();
-            this.infoSplitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // StatusStrip
@@ -310,48 +305,17 @@
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
+            this.viewToolStripMenuItem.Click += new System.EventHandler(this.viewToolStripMenuItem_Click);
             // 
             // projectViewToolStripMenuItem
             // 
-            this.projectViewToolStripMenuItem.Checked = true;
             this.projectViewToolStripMenuItem.CheckOnClick = true;
-            this.projectViewToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.projectViewToolStripMenuItem.Enabled = false;
             this.projectViewToolStripMenuItem.Name = "projectViewToolStripMenuItem";
             this.projectViewToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
             this.projectViewToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.projectViewToolStripMenuItem.Text = "Project View";
             this.projectViewToolStripMenuItem.Click += new System.EventHandler(this.projectViewToolStripMenuItem_Click);
-            // 
-            // infoSplitContainer
-            // 
-            this.infoSplitContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.infoSplitContainer.BackColor = System.Drawing.Color.Transparent;
-            this.infoSplitContainer.Location = new System.Drawing.Point(0, 27);
-            this.infoSplitContainer.Name = "infoSplitContainer";
-            this.infoSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.infoSplitContainer.Panel1MinSize = 150;
-            // 
-            // infoSplitContainer.Panel2
-            // 
-            this.infoSplitContainer.Panel2.Controls.Add(this.levelPanel);
-            this.infoSplitContainer.Panel2MinSize = 150;
-            this.infoSplitContainer.Size = new System.Drawing.Size(150, 510);
-            this.infoSplitContainer.SplitterDistance = 200;
-            this.infoSplitContainer.SplitterIncrement = 10;
-            this.infoSplitContainer.TabIndex = 4;
-            // 
-            // levelPanel
-            // 
-            this.levelPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.levelPanel.BackColor = System.Drawing.SystemColors.Window;
-            this.levelPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.levelPanel.Location = new System.Drawing.Point(3, 5);
-            this.levelPanel.Name = "levelPanel";
-            this.levelPanel.Size = new System.Drawing.Size(144, 298);
-            this.levelPanel.TabIndex = 4;
             // 
             // MainWindow
             // 
@@ -359,7 +323,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::OgmoEditor.Properties.Resources.bg;
             this.ClientSize = new System.Drawing.Size(784, 562);
-            this.Controls.Add(this.infoSplitContainer);
             this.Controls.Add(this.StatusStrip);
             this.Controls.Add(this.MenuStrip);
             this.MainMenuStrip = this.MenuStrip;
@@ -370,9 +333,6 @@
             this.StatusStrip.PerformLayout();
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
-            this.infoSplitContainer.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.infoSplitContainer)).EndInit();
-            this.infoSplitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -410,7 +370,5 @@
         private System.Windows.Forms.ToolStripMenuItem editProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openAllLevelsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem;
-        private System.Windows.Forms.SplitContainer infoSplitContainer;
-        private System.Windows.Forms.Panel levelPanel;
     }
 }
