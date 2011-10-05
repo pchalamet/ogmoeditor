@@ -59,7 +59,6 @@
             this.saveAsImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.projectViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MasterTreeView = new System.Windows.Forms.TreeView();
             this.projectNodeContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editProjectToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.saveProjectToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,10 +75,17 @@
             this.duplicateLevelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.closeOtherLevelsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsImageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.infoSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.MasterTreeView = new System.Windows.Forms.TreeView();
+            this.levelPanel = new System.Windows.Forms.Panel();
             this.StatusStrip.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             this.projectNodeContextMenu.SuspendLayout();
             this.levelNodeContextMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.infoSplitContainer)).BeginInit();
+            this.infoSplitContainer.Panel1.SuspendLayout();
+            this.infoSplitContainer.Panel2.SuspendLayout();
+            this.infoSplitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // StatusStrip
@@ -333,26 +339,9 @@
             this.projectViewToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.projectViewToolStripMenuItem.Name = "projectViewToolStripMenuItem";
             this.projectViewToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.projectViewToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.projectViewToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.projectViewToolStripMenuItem.Text = "Project View";
             this.projectViewToolStripMenuItem.Click += new System.EventHandler(this.projectViewToolStripMenuItem_Click);
-            // 
-            // MasterTreeView
-            // 
-            this.MasterTreeView.AccessibleName = "";
-            this.MasterTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.MasterTreeView.BackColor = System.Drawing.SystemColors.Window;
-            this.MasterTreeView.HideSelection = false;
-            this.MasterTreeView.Location = new System.Drawing.Point(2, 27);
-            this.MasterTreeView.Name = "MasterTreeView";
-            this.MasterTreeView.ShowPlusMinus = false;
-            this.MasterTreeView.ShowRootLines = false;
-            this.MasterTreeView.Size = new System.Drawing.Size(150, 510);
-            this.MasterTreeView.TabIndex = 2;
-            this.MasterTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.MasterTreeView_AfterSelect);
-            this.MasterTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.MasterTreeView_NodeMouseClick);
-            this.MasterTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.MasterTreeView_NodeMouseDoubleClick);
             // 
             // projectNodeContextMenu
             // 
@@ -472,13 +461,67 @@
             this.saveAsImageToolStripMenuItem1.Size = new System.Drawing.Size(171, 22);
             this.saveAsImageToolStripMenuItem1.Text = "Save As Image...";
             // 
+            // infoSplitContainer
+            // 
+            this.infoSplitContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.infoSplitContainer.BackColor = System.Drawing.Color.Transparent;
+            this.infoSplitContainer.Location = new System.Drawing.Point(0, 27);
+            this.infoSplitContainer.Name = "infoSplitContainer";
+            this.infoSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // infoSplitContainer.Panel1
+            // 
+            this.infoSplitContainer.Panel1.Controls.Add(this.MasterTreeView);
+            this.infoSplitContainer.Panel1MinSize = 150;
+            // 
+            // infoSplitContainer.Panel2
+            // 
+            this.infoSplitContainer.Panel2.Controls.Add(this.levelPanel);
+            this.infoSplitContainer.Panel2MinSize = 150;
+            this.infoSplitContainer.Size = new System.Drawing.Size(150, 510);
+            this.infoSplitContainer.SplitterDistance = 200;
+            this.infoSplitContainer.SplitterIncrement = 10;
+            this.infoSplitContainer.TabIndex = 4;
+            // 
+            // MasterTreeView
+            // 
+            this.MasterTreeView.AccessibleName = "";
+            this.MasterTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.MasterTreeView.BackColor = System.Drawing.SystemColors.Window;
+            this.MasterTreeView.HideSelection = false;
+            this.MasterTreeView.Location = new System.Drawing.Point(3, 3);
+            this.MasterTreeView.Name = "MasterTreeView";
+            this.MasterTreeView.ShowPlusMinus = false;
+            this.MasterTreeView.ShowRootLines = false;
+            this.MasterTreeView.Size = new System.Drawing.Size(144, 194);
+            this.MasterTreeView.TabIndex = 3;
+            this.MasterTreeView.TabStop = false;
+            this.MasterTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.MasterTreeView_AfterSelect);
+            this.MasterTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.MasterTreeView_NodeMouseClick);
+            this.MasterTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.MasterTreeView_NodeMouseDoubleClick);
+            // 
+            // levelPanel
+            // 
+            this.levelPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.levelPanel.BackColor = System.Drawing.SystemColors.Window;
+            this.levelPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.levelPanel.Location = new System.Drawing.Point(3, 5);
+            this.levelPanel.Name = "levelPanel";
+            this.levelPanel.Size = new System.Drawing.Size(144, 298);
+            this.levelPanel.TabIndex = 4;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::OgmoEditor.Properties.Resources.bg;
             this.ClientSize = new System.Drawing.Size(784, 562);
-            this.Controls.Add(this.MasterTreeView);
+            this.Controls.Add(this.infoSplitContainer);
             this.Controls.Add(this.StatusStrip);
             this.Controls.Add(this.MenuStrip);
             this.MainMenuStrip = this.MenuStrip;
@@ -491,6 +534,10 @@
             this.MenuStrip.PerformLayout();
             this.projectNodeContextMenu.ResumeLayout(false);
             this.levelNodeContextMenu.ResumeLayout(false);
+            this.infoSplitContainer.Panel1.ResumeLayout(false);
+            this.infoSplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.infoSplitContainer)).EndInit();
+            this.infoSplitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -502,7 +549,6 @@
         private System.Windows.Forms.MenuStrip MenuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.TreeView MasterTreeView;
         private System.Windows.Forms.ContextMenuStrip projectNodeContextMenu;
         private System.Windows.Forms.ToolStripMenuItem saveProjectAsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem closeProjectToolStripMenuItem1;
@@ -545,5 +591,8 @@
         private System.Windows.Forms.ToolStripMenuItem openAllLevelsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem1;
+        private System.Windows.Forms.SplitContainer infoSplitContainer;
+        private System.Windows.Forms.TreeView MasterTreeView;
+        private System.Windows.Forms.Panel levelPanel;
     }
 }

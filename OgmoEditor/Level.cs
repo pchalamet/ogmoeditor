@@ -16,7 +16,6 @@ namespace OgmoEditor
         public string SavePath;
         public TreeNode TreeNode;
         public bool Changed { get; private set; }
-        public Control Control { get; private set; }
 
         //Actual parameters to be edited/exported
         public Size Size { get; private set; }
@@ -59,13 +58,6 @@ namespace OgmoEditor
         {
             TreeNode = new TreeNode();
             RemoveChanged();
-
-            Control = new Control();
-            Control.BackColor = Color.Black;
-            Control.Size = Size;
-            Control.Location = new Point(300, 100);
-            Control.Paint += new PaintEventHandler(Control_Paint);
-            Control.Focus();
         }
 
         private void Control_Paint(object sender, PaintEventArgs e)

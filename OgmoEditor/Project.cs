@@ -10,6 +10,7 @@ using System.Runtime.Serialization.Formatters;
 using OgmoEditor.Definitions.LayerDefinitions;
 using System.Runtime.Serialization;
 using System.Drawing;
+using System.Xml.Serialization;
 
 namespace OgmoEditor
 {

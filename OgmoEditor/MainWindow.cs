@@ -46,7 +46,6 @@ namespace OgmoEditor
             editProjectToolStripMenuItem.Enabled = true;
             saveProjectToolStripMenuItem.Enabled = true;
             saveProjectAsToolStripMenuItem.Enabled = true;
-
             newLevelToolStripMenuItem.Enabled = true;
             openLevelToolStripMenuItem.Enabled = true;
             openAllLevelsToolStripMenuItem.Enabled = true;
@@ -79,12 +78,9 @@ namespace OgmoEditor
             closeOtherLevelsToolStripMenuItem.Enabled = false;
             saveAsImageToolStripMenuItem.Enabled = false;
 
-            //Remove the level edit view
+            //No current level
             if (currentLevel != null)
-            {
-                Controls.Remove(currentLevel.Control);
                 currentLevel = null;
-            }
 
             //Remove events
             project.OnLevelAdded -= onLevelAdded;
@@ -116,12 +112,9 @@ namespace OgmoEditor
                 closeOtherLevelsToolStripMenuItem.Enabled = false;
                 saveAsImageToolStripMenuItem.Enabled = false;
 
-                //Remove the level edit view
+                //No current level
                 if (currentLevel != null)
-                {
-                    Controls.Remove(currentLevel.Control);
                     currentLevel = null;
-                }
             }
             else
             {
@@ -132,11 +125,8 @@ namespace OgmoEditor
                 closeOtherLevelsToolStripMenuItem.Enabled = true;
                 saveAsImageToolStripMenuItem.Enabled = true;
 
-                //Add the level edit view
-                if (currentLevel != null)
-                    Controls.Remove(currentLevel.Control);
+                //Make the level the current one
                 currentLevel = Ogmo.Project.GetLevelFromNode(e.Node);
-                Controls.Add(currentLevel.Control);
             }
         }
 
@@ -149,7 +139,10 @@ namespace OgmoEditor
         private void MasterTreeView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Node == Ogmo.Project.TreeNode)
+            {
+                Ogmo.Project.TreeNode.Expand();
                 editProject();
+            }
         }
 
         /*
@@ -260,5 +253,6 @@ namespace OgmoEditor
         {
             Ogmo.Project.CloseOtherLevels(Ogmo.Project.GetLevelFromNode(rightClickedNode));
         }
+
     }
 }
