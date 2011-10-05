@@ -7,6 +7,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Diagnostics;
 using System.Xml.Serialization;
+using OgmoEditor.ProjectEditors;
 
 namespace OgmoEditor
 {
@@ -89,6 +90,13 @@ namespace OgmoEditor
 
             //Remove it!
             Project = null;
+        }
+
+        static public void EditProject()
+        {
+            MainWindow.Enabled = false;
+            ProjectEditor editor = new ProjectEditor(Ogmo.Project);
+            editor.Show(MainWindow);
         }
     }
 }
