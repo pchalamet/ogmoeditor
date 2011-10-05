@@ -39,6 +39,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.addButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
+            this.moveUpButton = new System.Windows.Forms.Button();
+            this.moveDownButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listView
@@ -47,7 +49,7 @@
             this.listView.Location = new System.Drawing.Point(4, 4);
             this.listView.MultiSelect = false;
             this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(183, 454);
+            this.listView.Size = new System.Drawing.Size(183, 424);
             this.listView.TabIndex = 0;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.List;
@@ -135,7 +137,7 @@
             // 
             // addButton
             // 
-            this.addButton.Location = new System.Drawing.Point(3, 464);
+            this.addButton.Location = new System.Drawing.Point(4, 434);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(89, 23);
             this.addButton.TabIndex = 34;
@@ -146,7 +148,7 @@
             // removeButton
             // 
             this.removeButton.Enabled = false;
-            this.removeButton.Location = new System.Drawing.Point(98, 464);
+            this.removeButton.Location = new System.Drawing.Point(99, 434);
             this.removeButton.Name = "removeButton";
             this.removeButton.Size = new System.Drawing.Size(89, 23);
             this.removeButton.TabIndex = 35;
@@ -154,10 +156,34 @@
             this.removeButton.UseVisualStyleBackColor = true;
             this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
             // 
+            // moveUpButton
+            // 
+            this.moveUpButton.Enabled = false;
+            this.moveUpButton.Location = new System.Drawing.Point(4, 462);
+            this.moveUpButton.Name = "moveUpButton";
+            this.moveUpButton.Size = new System.Drawing.Size(89, 23);
+            this.moveUpButton.TabIndex = 36;
+            this.moveUpButton.Text = "Move Up";
+            this.moveUpButton.UseVisualStyleBackColor = true;
+            this.moveUpButton.Click += new System.EventHandler(this.moveUpButton_Click);
+            // 
+            // moveDownButton
+            // 
+            this.moveDownButton.Enabled = false;
+            this.moveDownButton.Location = new System.Drawing.Point(98, 462);
+            this.moveDownButton.Name = "moveDownButton";
+            this.moveDownButton.Size = new System.Drawing.Size(89, 23);
+            this.moveDownButton.TabIndex = 37;
+            this.moveDownButton.Text = "Move Down";
+            this.moveDownButton.UseVisualStyleBackColor = true;
+            this.moveDownButton.Click += new System.EventHandler(this.moveDownButton_Click);
+            // 
             // LayersEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.moveDownButton);
+            this.Controls.Add(this.moveUpButton);
             this.Controls.Add(this.removeButton);
             this.Controls.Add(this.addButton);
             this.Controls.Add(this.label4);
@@ -189,5 +215,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Button removeButton;
+        private System.Windows.Forms.Button moveUpButton;
+        private System.Windows.Forms.Button moveDownButton;
     }
 }

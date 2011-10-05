@@ -25,7 +25,7 @@ namespace OgmoEditor.ProjectEditors
             foreach (LayerDefinition d in layerDefinitions)
             {
                 ListViewItem item = new ListViewItem();
-                setItemFromDefinition(ref item, d);
+                setItemFromDefinition(item, d);
                 listView.Items.Add(item);
             }
         }
@@ -35,7 +35,7 @@ namespace OgmoEditor.ProjectEditors
             project.LayerDefinitions = layerDefinitions;
         }
 
-        private void setItemFromDefinition(ref ListViewItem item, LayerDefinition definition)
+        private void setItemFromDefinition(ListViewItem item, LayerDefinition definition)
         {
             item.Text = definition.Name;
         }
@@ -94,7 +94,7 @@ namespace OgmoEditor.ProjectEditors
             LayerDefinition def = getDefaultLayer();
             ListViewItem item = new ListViewItem();
 
-            setItemFromDefinition(ref item, def);
+            setItemFromDefinition(item, def);
 
             layerDefinitions.Add(def);
             listView.Items.Add(item);
@@ -118,11 +118,43 @@ namespace OgmoEditor.ProjectEditors
             }
         }
 
+        private void moveUpButton_Click(object sender, EventArgs e)
+        {
+            int index = listView.SelectedIndices[0];
+
+            LayerDefinition temp = layerDefinitions[index];
+            layerDefinitions[index] = layerDefinitions[index - 1];
+            layerDefinitions[index - 1] = temp;
+
+            setItemFromDefinition(listView.Items[index], layerDefinitions[index]);
+            setItemFromDefinition(listView.Items[index - 1], layerDefinitions[index - 1]);
+
+            listView.SelectedIndices.Clear();
+            listView.SelectedIndices.Add(index - 1);
+        }
+
+        private void moveDownButton_Click(object sender, EventArgs e)
+        {
+            int index = listView.SelectedIndices[0];
+
+            LayerDefinition temp = layerDefinitions[index];
+            layerDefinitions[index] = layerDefinitions[index + 1];
+            layerDefinitions[index + 1] = temp;
+
+            setItemFromDefinition(listView.Items[index], layerDefinitions[index]);
+            setItemFromDefinition(listView.Items[index + 1], layerDefinitions[index + 1]);
+
+            listView.SelectedIndices.Clear();
+            listView.SelectedIndices.Add(index + 1);
+        }
+
         private void listView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             if (listView.SelectedItems.Count > 0)
             {
                 removeButton.Enabled = true;
+                moveUpButton.Enabled = listView.SelectedIndices[0] > 0;
+                moveDownButton.Enabled = listView.SelectedIndices[0] < listView.Items.Count - 1;
                 nameTextBox.Enabled = true;
                 gridXTextBox.Enabled = true;
                 gridYTextBox.Enabled = true;
@@ -132,6 +164,8 @@ namespace OgmoEditor.ProjectEditors
             else
             {
                 removeButton.Enabled = false;
+                moveUpButton.Enabled = false;
+                moveDownButton.Enabled = false;
                 nameTextBox.Enabled = false;
                 gridXTextBox.Enabled = false;
                 gridYTextBox.Enabled = false;
@@ -176,7 +210,5 @@ namespace OgmoEditor.ProjectEditors
             layerDefinitions[listView.SelectedIndices[0]] = newDef;
             setControlsFromDefinition(newDef);
         }
-
-        
     }
 }
