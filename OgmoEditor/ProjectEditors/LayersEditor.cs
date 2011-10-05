@@ -106,8 +106,16 @@ namespace OgmoEditor.ProjectEditors
         private void button1_Click(object sender, EventArgs e)
         {
             ListViewItem item = listView.SelectedItems[0];
-            layerDefinitions.RemoveAt(item.Index);
+            int index = item.Index;
+
+            layerDefinitions.RemoveAt(index);
             listView.Items.Remove(item);
+
+            if (listView.Items.Count > 0)
+            {
+                listView.SelectedIndices.Clear();
+                listView.SelectedIndices.Add(Math.Min(listView.Items.Count - 1, index));
+            }
         }
 
         private void listView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
