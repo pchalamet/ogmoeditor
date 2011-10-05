@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using OgmoEditor.Definitions.LayerDefinitions;
 
 namespace OgmoEditor.ProjectEditors
 {
@@ -20,6 +21,7 @@ namespace OgmoEditor.ProjectEditors
 
             //Load the contents of the editors
             settingsEditor.LoadFromProject(project);
+            layersEditor.LoadFromProject(project);
 
             //Events
             FormClosed += onClose;
@@ -38,6 +40,7 @@ namespace OgmoEditor.ProjectEditors
         private void saveButton_Click(object sender, EventArgs e)
         {
             settingsEditor.ApplyToProject(project);
+            layersEditor.ApplyToProject(project);
             project.Changed = true;
             Close();
         }

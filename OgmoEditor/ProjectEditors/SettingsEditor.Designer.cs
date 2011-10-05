@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lockToDefaultButton = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.workingDirectoryTextBox = new System.Windows.Forms.TextBox();
             this.maxHeightTextBox = new System.Windows.Forms.TextBox();
@@ -48,15 +47,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // lockToDefaultButton
-            // 
-            this.lockToDefaultButton.Location = new System.Drawing.Point(192, 212);
-            this.lockToDefaultButton.Name = "lockToDefaultButton";
-            this.lockToDefaultButton.Size = new System.Drawing.Size(107, 23);
-            this.lockToDefaultButton.TabIndex = 37;
-            this.lockToDefaultButton.Text = "Lock to Default";
-            this.lockToDefaultButton.UseVisualStyleBackColor = true;
             // 
             // label9
             // 
@@ -211,7 +201,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.lockToDefaultButton);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.workingDirectoryTextBox);
             this.Controls.Add(this.maxHeightTextBox);
@@ -239,7 +228,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button lockToDefaultButton;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox workingDirectoryTextBox;
         private System.Windows.Forms.TextBox maxHeightTextBox;

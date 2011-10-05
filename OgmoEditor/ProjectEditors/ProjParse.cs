@@ -16,7 +16,9 @@ namespace OgmoEditor.ProjectEditors
                 to = Convert.ToInt32(box.Text);
             }
             catch
-            { }
+            {
+                box.Text = to.ToString();
+            }
         }
 
         static public void GetSize(ref Size to, TextBox x, TextBox y)
@@ -26,14 +28,18 @@ namespace OgmoEditor.ProjectEditors
                 to.Width = Convert.ToInt32(x.Text);
             }
             catch
-            { }
+            {
+                x.Text = to.Width.ToString();
+            }
 
             try
             {
                 to.Height = Convert.ToInt32(y.Text);
             }
             catch
-            { }
+            {
+                y.Text = to.Height.ToString();
+            }
         }
     }
 }

@@ -33,21 +33,11 @@
             this.objectsTabPage = new System.Windows.Forms.TabPage();
             this.tilesetsTabPage = new System.Windows.Forms.TabPage();
             this.layersTabPage = new System.Windows.Forms.TabPage();
-            this.layerPropertiesPanel = new System.Windows.Forms.Panel();
-            this.layerNameTextBox = new System.Windows.Forms.TextBox();
-            this.gridHeightTextBox = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.gridWidthTextBox = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.layerTypeComboBox = new System.Windows.Forms.ComboBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.layerListView = new System.Windows.Forms.ListView();
+            this.layersEditor = new OgmoEditor.ProjectEditors.LayersEditor();
             this.settingsTabPage = new System.Windows.Forms.TabPage();
             this.settingsEditor = new OgmoEditor.ProjectEditors.SettingsEditor();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.layersTabPage.SuspendLayout();
-            this.layerPropertiesPanel.SuspendLayout();
             this.settingsTabPage.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.SuspendLayout();
@@ -55,9 +45,9 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(497, 527);
+            this.cancelButton.Location = new System.Drawing.Point(504, 521);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.Size = new System.Drawing.Size(75, 38);
             this.cancelButton.TabIndex = 2;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -65,9 +55,9 @@
             // 
             // applyButton
             // 
-            this.applyButton.Location = new System.Drawing.Point(337, 527);
+            this.applyButton.Location = new System.Drawing.Point(344, 521);
             this.applyButton.Name = "applyButton";
-            this.applyButton.Size = new System.Drawing.Size(154, 23);
+            this.applyButton.Size = new System.Drawing.Size(154, 38);
             this.applyButton.TabIndex = 3;
             this.applyButton.Text = "Apply";
             this.applyButton.UseVisualStyleBackColor = true;
@@ -95,8 +85,7 @@
             // 
             // layersTabPage
             // 
-            this.layersTabPage.Controls.Add(this.layerPropertiesPanel);
-            this.layersTabPage.Controls.Add(this.layerListView);
+            this.layersTabPage.Controls.Add(this.layersEditor);
             this.layersTabPage.Location = new System.Drawing.Point(4, 22);
             this.layersTabPage.Name = "layersTabPage";
             this.layersTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -105,104 +94,12 @@
             this.layersTabPage.Text = "Layers";
             this.layersTabPage.UseVisualStyleBackColor = true;
             // 
-            // layerPropertiesPanel
+            // layersEditor
             // 
-            this.layerPropertiesPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.layerPropertiesPanel.Controls.Add(this.layerNameTextBox);
-            this.layerPropertiesPanel.Controls.Add(this.gridHeightTextBox);
-            this.layerPropertiesPanel.Controls.Add(this.label11);
-            this.layerPropertiesPanel.Controls.Add(this.gridWidthTextBox);
-            this.layerPropertiesPanel.Controls.Add(this.label13);
-            this.layerPropertiesPanel.Controls.Add(this.layerTypeComboBox);
-            this.layerPropertiesPanel.Controls.Add(this.label12);
-            this.layerPropertiesPanel.Controls.Add(this.label10);
-            this.layerPropertiesPanel.Location = new System.Drawing.Point(245, 23);
-            this.layerPropertiesPanel.Margin = new System.Windows.Forms.Padding(0, 20, 20, 20);
-            this.layerPropertiesPanel.Name = "layerPropertiesPanel";
-            this.layerPropertiesPanel.Size = new System.Drawing.Size(323, 430);
-            this.layerPropertiesPanel.TabIndex = 1;
-            // 
-            // layerNameTextBox
-            // 
-            this.layerNameTextBox.Location = new System.Drawing.Point(63, 19);
-            this.layerNameTextBox.Name = "layerNameTextBox";
-            this.layerNameTextBox.Size = new System.Drawing.Size(146, 20);
-            this.layerNameTextBox.TabIndex = 0;
-            // 
-            // gridHeightTextBox
-            // 
-            this.gridHeightTextBox.Location = new System.Drawing.Point(149, 45);
-            this.gridHeightTextBox.Name = "gridHeightTextBox";
-            this.gridHeightTextBox.Size = new System.Drawing.Size(62, 20);
-            this.gridHeightTextBox.TabIndex = 11;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(131, 48);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(12, 13);
-            this.label11.TabIndex = 10;
-            this.label11.Text = "x";
-            // 
-            // gridWidthTextBox
-            // 
-            this.gridWidthTextBox.Location = new System.Drawing.Point(63, 45);
-            this.gridWidthTextBox.Name = "gridWidthTextBox";
-            this.gridWidthTextBox.Size = new System.Drawing.Size(62, 20);
-            this.gridWidthTextBox.TabIndex = 9;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(26, 74);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(31, 13);
-            this.label13.TabIndex = 8;
-            this.label13.Text = "Type";
-            // 
-            // layerTypeComboBox
-            // 
-            this.layerTypeComboBox.FormattingEnabled = true;
-            this.layerTypeComboBox.Items.AddRange(new object[] {
-            "Grid",
-            "Tiles",
-            "Objects",
-            "Shapes"});
-            this.layerTypeComboBox.Location = new System.Drawing.Point(63, 71);
-            this.layerTypeComboBox.Name = "layerTypeComboBox";
-            this.layerTypeComboBox.Size = new System.Drawing.Size(121, 21);
-            this.layerTypeComboBox.TabIndex = 7;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(31, 48);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(26, 13);
-            this.label12.TabIndex = 5;
-            this.label12.Text = "Grid";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(22, 22);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(35, 13);
-            this.label10.TabIndex = 1;
-            this.label10.Text = "Name";
-            // 
-            // layerListView
-            // 
-            this.layerListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.layerListView.Location = new System.Drawing.Point(23, 23);
-            this.layerListView.Margin = new System.Windows.Forms.Padding(20);
-            this.layerListView.Name = "layerListView";
-            this.layerListView.Size = new System.Drawing.Size(198, 444);
-            this.layerListView.TabIndex = 0;
-            this.layerListView.UseCompatibleStateImageBehavior = false;
-            this.layerListView.View = System.Windows.Forms.View.Details;
+            this.layersEditor.Location = new System.Drawing.Point(0, 0);
+            this.layersEditor.Name = "layersEditor";
+            this.layersEditor.Size = new System.Drawing.Size(573, 490);
+            this.layersEditor.TabIndex = 0;
             // 
             // settingsTabPage
             // 
@@ -254,8 +151,6 @@
             this.Name = "ProjectEditor";
             this.Text = "ProjectEditor";
             this.layersTabPage.ResumeLayout(false);
-            this.layerPropertiesPanel.ResumeLayout(false);
-            this.layerPropertiesPanel.PerformLayout();
             this.settingsTabPage.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -269,18 +164,9 @@
         private System.Windows.Forms.TabPage objectsTabPage;
         private System.Windows.Forms.TabPage tilesetsTabPage;
         private System.Windows.Forms.TabPage layersTabPage;
-        private System.Windows.Forms.Panel layerPropertiesPanel;
-        private System.Windows.Forms.TextBox layerNameTextBox;
-        private System.Windows.Forms.TextBox gridHeightTextBox;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox gridWidthTextBox;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ComboBox layerTypeComboBox;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ListView layerListView;
         private System.Windows.Forms.TabPage settingsTabPage;
         private System.Windows.Forms.TabControl tabControl;
         private SettingsEditor settingsEditor;
+        private LayersEditor layersEditor;
     }
 }
