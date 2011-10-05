@@ -44,9 +44,11 @@
             this.label10 = new System.Windows.Forms.Label();
             this.layerListView = new System.Windows.Forms.ListView();
             this.settingsTabPage = new System.Windows.Forms.TabPage();
+            this.settingsEditor = new OgmoEditor.ProjectEditors.SettingsEditor();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.layersTabPage.SuspendLayout();
             this.layerPropertiesPanel.SuspendLayout();
+            this.settingsTabPage.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -204,6 +206,7 @@
             // 
             // settingsTabPage
             // 
+            this.settingsTabPage.Controls.Add(this.settingsEditor);
             this.settingsTabPage.Location = new System.Drawing.Point(4, 22);
             this.settingsTabPage.Name = "settingsTabPage";
             this.settingsTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -211,6 +214,13 @@
             this.settingsTabPage.TabIndex = 0;
             this.settingsTabPage.Text = "Settings";
             this.settingsTabPage.UseVisualStyleBackColor = true;
+            // 
+            // settingsEditor
+            // 
+            this.settingsEditor.Location = new System.Drawing.Point(0, 0);
+            this.settingsEditor.Name = "settingsEditor";
+            this.settingsEditor.Size = new System.Drawing.Size(573, 490);
+            this.settingsEditor.TabIndex = 0;
             // 
             // tabControl
             // 
@@ -246,6 +256,7 @@
             this.layersTabPage.ResumeLayout(false);
             this.layerPropertiesPanel.ResumeLayout(false);
             this.layerPropertiesPanel.PerformLayout();
+            this.settingsTabPage.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -270,5 +281,6 @@
         private System.Windows.Forms.ListView layerListView;
         private System.Windows.Forms.TabPage settingsTabPage;
         private System.Windows.Forms.TabControl tabControl;
+        private SettingsEditor settingsEditor;
     }
 }

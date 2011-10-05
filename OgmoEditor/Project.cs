@@ -85,6 +85,14 @@ namespace OgmoEditor
             }
         }
 
+        public bool AbleToCreateLevels
+        {
+            get
+            {
+                return LayerDefinitions.Count > 0;
+            }
+        }
+
         public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
         {
             info.AddValue("Name", Name);

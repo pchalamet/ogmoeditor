@@ -43,6 +43,7 @@
             this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveProjectAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.levelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,6 +53,7 @@
             this.saveLevelAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.openAllLevelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeOtherLevelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.duplicateLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,6 +62,7 @@
             this.MasterTreeView = new System.Windows.Forms.TreeView();
             this.projectNodeContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editProjectToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveProjectToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.saveProjectAsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.closeProjectToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -73,9 +76,6 @@
             this.duplicateLevelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.closeOtherLevelsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsImageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.openAllLevelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveProjectToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.StatusStrip.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             this.projectNodeContextMenu.SuspendLayout();
@@ -196,6 +196,14 @@
             this.editProjectToolStripMenuItem.Text = "Edit Project";
             this.editProjectToolStripMenuItem.Click += new System.EventHandler(this.editProjectToolStripMenuItem_Click);
             // 
+            // saveProjectToolStripMenuItem
+            // 
+            this.saveProjectToolStripMenuItem.Enabled = false;
+            this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
+            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.saveProjectToolStripMenuItem.Text = "Save Project";
+            this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.saveProjectToolStripMenuItem_Click);
+            // 
             // saveProjectAsToolStripMenuItem
             // 
             this.saveProjectAsToolStripMenuItem.Enabled = false;
@@ -280,6 +288,13 @@
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(222, 6);
             // 
+            // openAllLevelsToolStripMenuItem
+            // 
+            this.openAllLevelsToolStripMenuItem.Enabled = false;
+            this.openAllLevelsToolStripMenuItem.Name = "openAllLevelsToolStripMenuItem";
+            this.openAllLevelsToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.openAllLevelsToolStripMenuItem.Text = "Open All Levels";
+            // 
             // closeOtherLevelsToolStripMenuItem
             // 
             this.closeOtherLevelsToolStripMenuItem.Enabled = false;
@@ -318,7 +333,7 @@
             this.projectViewToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.projectViewToolStripMenuItem.Name = "projectViewToolStripMenuItem";
             this.projectViewToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.projectViewToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.projectViewToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.projectViewToolStripMenuItem.Text = "Project View";
             this.projectViewToolStripMenuItem.Click += new System.EventHandler(this.projectViewToolStripMenuItem_Click);
             // 
@@ -358,6 +373,13 @@
             this.editProjectToolStripMenuItem1.Size = new System.Drawing.Size(163, 22);
             this.editProjectToolStripMenuItem1.Text = "Edit Project";
             this.editProjectToolStripMenuItem1.Click += new System.EventHandler(this.editProjectToolStripMenuItem_Click);
+            // 
+            // saveProjectToolStripMenuItem1
+            // 
+            this.saveProjectToolStripMenuItem1.Name = "saveProjectToolStripMenuItem1";
+            this.saveProjectToolStripMenuItem1.Size = new System.Drawing.Size(163, 22);
+            this.saveProjectToolStripMenuItem1.Text = "Save Project";
+            this.saveProjectToolStripMenuItem1.Click += new System.EventHandler(this.saveProjectToolStripMenuItem_Click);
             // 
             // saveProjectAsToolStripMenuItem1
             // 
@@ -449,28 +471,6 @@
             this.saveAsImageToolStripMenuItem1.Name = "saveAsImageToolStripMenuItem1";
             this.saveAsImageToolStripMenuItem1.Size = new System.Drawing.Size(171, 22);
             this.saveAsImageToolStripMenuItem1.Text = "Save As Image...";
-            // 
-            // openAllLevelsToolStripMenuItem
-            // 
-            this.openAllLevelsToolStripMenuItem.Enabled = false;
-            this.openAllLevelsToolStripMenuItem.Name = "openAllLevelsToolStripMenuItem";
-            this.openAllLevelsToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-            this.openAllLevelsToolStripMenuItem.Text = "Open All Levels";
-            // 
-            // saveProjectToolStripMenuItem
-            // 
-            this.saveProjectToolStripMenuItem.Enabled = false;
-            this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
-            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.saveProjectToolStripMenuItem.Text = "Save Project";
-            this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.saveProjectToolStripMenuItem_Click);
-            // 
-            // saveProjectToolStripMenuItem1
-            // 
-            this.saveProjectToolStripMenuItem1.Name = "saveProjectToolStripMenuItem1";
-            this.saveProjectToolStripMenuItem1.Size = new System.Drawing.Size(163, 22);
-            this.saveProjectToolStripMenuItem1.Text = "Save Project";
-            this.saveProjectToolStripMenuItem1.Click += new System.EventHandler(this.saveProjectToolStripMenuItem_Click);
             // 
             // MainWindow
             // 

@@ -230,6 +230,9 @@ namespace OgmoEditor
             Ogmo.Project.OpenAllLevels();
         }
 
+        /*
+         *  View events
+         */
         private void projectViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MasterTreeView.Visible = !MasterTreeView.Visible;
