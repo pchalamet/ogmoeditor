@@ -37,7 +37,6 @@
             this.defaultHeightTextBox = new System.Windows.Forms.TextBox();
             this.defaultWidthTextBox = new System.Windows.Forms.TextBox();
             this.projectNameTextBox = new System.Windows.Forms.TextBox();
-            this.workingDirectoryChooser = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -47,6 +46,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.relativePathCheckbox = new System.Windows.Forms.CheckBox();
+            this.pathExistsLabel = new System.Windows.Forms.Label();
+            this.projectUnsavedLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label9
@@ -62,9 +63,9 @@
             // 
             this.workingDirectoryTextBox.Location = new System.Drawing.Point(131, 61);
             this.workingDirectoryTextBox.Name = "workingDirectoryTextBox";
-            this.workingDirectoryTextBox.ReadOnly = true;
-            this.workingDirectoryTextBox.Size = new System.Drawing.Size(165, 20);
+            this.workingDirectoryTextBox.Size = new System.Drawing.Size(197, 20);
             this.workingDirectoryTextBox.TabIndex = 35;
+            this.workingDirectoryTextBox.TextChanged += new System.EventHandler(this.workingDirectoryTextBox_TextChanged);
             // 
             // maxHeightTextBox
             // 
@@ -114,16 +115,6 @@
             this.projectNameTextBox.Name = "projectNameTextBox";
             this.projectNameTextBox.Size = new System.Drawing.Size(197, 20);
             this.projectNameTextBox.TabIndex = 19;
-            // 
-            // workingDirectoryChooser
-            // 
-            this.workingDirectoryChooser.Location = new System.Drawing.Point(302, 61);
-            this.workingDirectoryChooser.Name = "workingDirectoryChooser";
-            this.workingDirectoryChooser.Size = new System.Drawing.Size(26, 20);
-            this.workingDirectoryChooser.TabIndex = 34;
-            this.workingDirectoryChooser.Text = "...";
-            this.workingDirectoryChooser.UseVisualStyleBackColor = true;
-            this.workingDirectoryChooser.Click += new System.EventHandler(this.workingDirectoryChooser_Click);
             // 
             // label8
             // 
@@ -209,10 +200,34 @@
             this.relativePathCheckbox.UseVisualStyleBackColor = true;
             this.relativePathCheckbox.CheckedChanged += new System.EventHandler(this.relativePathCheckbox_CheckedChanged);
             // 
+            // pathExistsLabel
+            // 
+            this.pathExistsLabel.AutoSize = true;
+            this.pathExistsLabel.ForeColor = System.Drawing.Color.OrangeRed;
+            this.pathExistsLabel.Location = new System.Drawing.Point(335, 63);
+            this.pathExistsLabel.Name = "pathExistsLabel";
+            this.pathExistsLabel.Size = new System.Drawing.Size(113, 13);
+            this.pathExistsLabel.TabIndex = 38;
+            this.pathExistsLabel.Text = "Directory doesn\'t exist!";
+            this.pathExistsLabel.Visible = false;
+            // 
+            // projectUnsavedLabel
+            // 
+            this.projectUnsavedLabel.AutoSize = true;
+            this.projectUnsavedLabel.ForeColor = System.Drawing.Color.OrangeRed;
+            this.projectUnsavedLabel.Location = new System.Drawing.Point(282, 88);
+            this.projectUnsavedLabel.Name = "projectUnsavedLabel";
+            this.projectUnsavedLabel.Size = new System.Drawing.Size(166, 13);
+            this.projectUnsavedLabel.TabIndex = 39;
+            this.projectUnsavedLabel.Text = "Project file hasn\'t been saved yet!";
+            this.projectUnsavedLabel.Visible = false;
+            // 
             // SettingsEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.projectUnsavedLabel);
+            this.Controls.Add(this.pathExistsLabel);
             this.Controls.Add(this.relativePathCheckbox);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.workingDirectoryTextBox);
@@ -223,7 +238,6 @@
             this.Controls.Add(this.defaultHeightTextBox);
             this.Controls.Add(this.defaultWidthTextBox);
             this.Controls.Add(this.projectNameTextBox);
-            this.Controls.Add(this.workingDirectoryChooser);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -250,7 +264,6 @@
         private System.Windows.Forms.TextBox defaultHeightTextBox;
         private System.Windows.Forms.TextBox defaultWidthTextBox;
         private System.Windows.Forms.TextBox projectNameTextBox;
-        private System.Windows.Forms.Button workingDirectoryChooser;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
@@ -260,5 +273,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox relativePathCheckbox;
+        private System.Windows.Forms.Label pathExistsLabel;
+        private System.Windows.Forms.Label projectUnsavedLabel;
     }
 }

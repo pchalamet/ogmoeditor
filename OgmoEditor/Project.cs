@@ -11,6 +11,7 @@ using OgmoEditor.Definitions.LayerDefinitions;
 using System.Runtime.Serialization;
 using System.Drawing;
 using System.Xml.Serialization;
+using System.Diagnostics;
 
 namespace OgmoEditor
 {
@@ -20,6 +21,7 @@ namespace OgmoEditor
         //Serialized project properties
         private string name;
         public string WorkingDirectory;
+        public bool WorkingDirectoryRelative;
         public Size LevelDefaultSize;
         public Size LevelMinimumSize;
         public Size LevelMaximumSize;
@@ -75,6 +77,20 @@ namespace OgmoEditor
             {
                 changed = value;
                 TreeNode.Text = Name + (changed ? "*" : "");
+            }
+        }
+
+        [XmlIgnore]
+        public string SavedDirectory
+        {
+            get
+            {
+                string dir = LastFilename;
+                if (dir == "")
+                    return "";
+
+                string filename = Path.GetFileName(dir);
+                return dir.Remove(dir.IndexOf(filename));
             }
         }
 
