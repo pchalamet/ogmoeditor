@@ -29,7 +29,7 @@ namespace OgmoEditor.ProjectEditors
 
         private void onClose(object sender, FormClosedEventArgs e)
         {
-            Owner.Enabled = true;
+            (Owner as MainWindow).EnableEditing();
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

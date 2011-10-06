@@ -46,6 +46,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.relativePathCheckbox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label9
@@ -67,42 +68,42 @@
             // 
             // maxHeightTextBox
             // 
-            this.maxHeightTextBox.Location = new System.Drawing.Point(207, 186);
+            this.maxHeightTextBox.Location = new System.Drawing.Point(207, 226);
             this.maxHeightTextBox.Name = "maxHeightTextBox";
             this.maxHeightTextBox.Size = new System.Drawing.Size(62, 20);
             this.maxHeightTextBox.TabIndex = 26;
             // 
             // maxWidthTextBox
             // 
-            this.maxWidthTextBox.Location = new System.Drawing.Point(121, 186);
+            this.maxWidthTextBox.Location = new System.Drawing.Point(121, 226);
             this.maxWidthTextBox.Name = "maxWidthTextBox";
             this.maxWidthTextBox.Size = new System.Drawing.Size(62, 20);
             this.maxWidthTextBox.TabIndex = 25;
             // 
             // minHeightTextBox
             // 
-            this.minHeightTextBox.Location = new System.Drawing.Point(207, 160);
+            this.minHeightTextBox.Location = new System.Drawing.Point(207, 200);
             this.minHeightTextBox.Name = "minHeightTextBox";
             this.minHeightTextBox.Size = new System.Drawing.Size(62, 20);
             this.minHeightTextBox.TabIndex = 24;
             // 
             // minWidthTextBox
             // 
-            this.minWidthTextBox.Location = new System.Drawing.Point(121, 160);
+            this.minWidthTextBox.Location = new System.Drawing.Point(121, 200);
             this.minWidthTextBox.Name = "minWidthTextBox";
             this.minWidthTextBox.Size = new System.Drawing.Size(62, 20);
             this.minWidthTextBox.TabIndex = 23;
             // 
             // defaultHeightTextBox
             // 
-            this.defaultHeightTextBox.Location = new System.Drawing.Point(207, 134);
+            this.defaultHeightTextBox.Location = new System.Drawing.Point(207, 174);
             this.defaultHeightTextBox.Name = "defaultHeightTextBox";
             this.defaultHeightTextBox.Size = new System.Drawing.Size(62, 20);
             this.defaultHeightTextBox.TabIndex = 22;
             // 
             // defaultWidthTextBox
             // 
-            this.defaultWidthTextBox.Location = new System.Drawing.Point(121, 134);
+            this.defaultWidthTextBox.Location = new System.Drawing.Point(121, 174);
             this.defaultWidthTextBox.Name = "defaultWidthTextBox";
             this.defaultWidthTextBox.Size = new System.Drawing.Size(62, 20);
             this.defaultWidthTextBox.TabIndex = 21;
@@ -127,7 +128,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(64, 189);
+            this.label8.Location = new System.Drawing.Point(64, 229);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(51, 13);
             this.label8.TabIndex = 33;
@@ -136,7 +137,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(67, 163);
+            this.label7.Location = new System.Drawing.Point(67, 203);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(48, 13);
             this.label7.TabIndex = 32;
@@ -145,7 +146,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(74, 137);
+            this.label6.Location = new System.Drawing.Point(74, 177);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(41, 13);
             this.label6.TabIndex = 31;
@@ -155,7 +156,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(59, 113);
+            this.label5.Location = new System.Drawing.Point(59, 153);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(66, 13);
             this.label5.TabIndex = 30;
@@ -164,7 +165,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(189, 189);
+            this.label4.Location = new System.Drawing.Point(189, 229);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(12, 13);
             this.label4.TabIndex = 29;
@@ -173,7 +174,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(189, 163);
+            this.label3.Location = new System.Drawing.Point(189, 203);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(12, 13);
             this.label3.TabIndex = 28;
@@ -182,7 +183,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(189, 137);
+            this.label2.Location = new System.Drawing.Point(189, 177);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(12, 13);
             this.label2.TabIndex = 27;
@@ -197,10 +198,22 @@
             this.label1.TabIndex = 20;
             this.label1.Text = "Project Name";
             // 
+            // relativePathCheckbox
+            // 
+            this.relativePathCheckbox.AutoSize = true;
+            this.relativePathCheckbox.Location = new System.Drawing.Point(131, 87);
+            this.relativePathCheckbox.Name = "relativePathCheckbox";
+            this.relativePathCheckbox.Size = new System.Drawing.Size(128, 17);
+            this.relativePathCheckbox.TabIndex = 37;
+            this.relativePathCheckbox.Text = "Relative to project file";
+            this.relativePathCheckbox.UseVisualStyleBackColor = true;
+            this.relativePathCheckbox.CheckedChanged += new System.EventHandler(this.relativePathCheckbox_CheckedChanged);
+            // 
             // SettingsEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.relativePathCheckbox);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.workingDirectoryTextBox);
             this.Controls.Add(this.maxHeightTextBox);
@@ -246,5 +259,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox relativePathCheckbox;
     }
 }

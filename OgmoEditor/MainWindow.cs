@@ -27,6 +27,20 @@ namespace OgmoEditor
             Ogmo.OnProjectClose += onProjectClose;
         }
 
+        public void EnableEditing()
+        {
+            Enabled = true;
+            foreach (var f in OwnedForms)
+                f.Enabled = true;
+        }
+
+        public void DisableEditing()
+        {
+            Enabled = false;
+            foreach (var f in OwnedForms)
+                f.Enabled = false;
+        }
+
         /*
          *  Ogmo event Callbacks
          */
@@ -147,6 +161,7 @@ namespace OgmoEditor
 
         private void editProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DisableEditing();
             Ogmo.EditProject();
         }
 

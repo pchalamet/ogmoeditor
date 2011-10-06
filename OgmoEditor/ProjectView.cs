@@ -80,6 +80,7 @@ namespace OgmoEditor
             if (e.Node == Ogmo.Project.TreeNode)
             {
                 Ogmo.Project.TreeNode.Expand();
+                (Owner as MainWindow).DisableEditing();
                 Ogmo.EditProject();
             }
         }
@@ -114,6 +115,7 @@ namespace OgmoEditor
 
         private void editProjectToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            (Owner as MainWindow).DisableEditing();
             Ogmo.EditProject();
         }
 

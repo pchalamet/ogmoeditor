@@ -3,14 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.Xml.Serialization;
 
 namespace OgmoEditor.Definitions.LayerDefinitions
 {
-    [Serializable()]
+    [XmlRoot("layer")]
     public class LayerDefinition
     {
         public string Name;
         public Size Grid;
+
+        public LayerDefinition()
+        {
+            Name = "";
+        }
 
         public LayerDefinition(string name)
         {

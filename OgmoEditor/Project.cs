@@ -14,8 +14,8 @@ using System.Xml.Serialization;
 
 namespace OgmoEditor
 {
-    [Serializable()]
-    public class Project : ISerializable
+    [XmlRoot("project")]
+    public class Project
     {
         //Serialized project properties
         private string name;
@@ -28,7 +28,9 @@ namespace OgmoEditor
 
         //Non-serialzed instance vars
         private bool changed;
+        [XmlIgnore]
         public TreeNode TreeNode;
+        [XmlIgnore]
         public List<Level> Levels { get; private set; }
 
         //Events
@@ -48,22 +50,11 @@ namespace OgmoEditor
             InitializeRunningVars();
         }
 
-        /*
-         *  Serialization stuff
-         */
-        public Project(SerializationInfo info, StreamingContext ctxt)
+        private void InitializeRunningVars()
         {
-            //Init project properties
-            name = info.GetString("Name");
-            WorkingDirectory = info.GetString("WorkingDirectory");
-            LastFilename = info.GetString("LastFilename");
-            LayerDefinitions = (List<LayerDefinition>)info.GetValue("LayerDefinitions", typeof(List<LayerDefinition>));
-            LevelDefaultSize = (Size)info.GetValue("LevelDefaultSize", typeof(Size));
-            LevelMinimumSize = (Size)info.GetValue("LevelMinimumSize", typeof(Size));
-            LevelMaximumSize = (Size)info.GetValue("LevelMaximumSize", typeof(Size));
-
-            //Init running vars
-            InitializeRunningVars();
+            changed = false;
+            TreeNode = new TreeNode(Name);
+            Levels = new List<Level>();
         }
 
         public string Name
@@ -76,6 +67,7 @@ namespace OgmoEditor
             }
         }
 
+        [XmlIgnore]
         public bool Changed
         {
             get { return changed; }
@@ -84,24 +76,6 @@ namespace OgmoEditor
                 changed = value;
                 TreeNode.Text = Name + (changed ? "*" : "");
             }
-        }
-
-        public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
-        {
-            info.AddValue("Name", Name);
-            info.AddValue("WorkingDirectory", WorkingDirectory);
-            info.AddValue("LastFilename", LastFilename);
-            info.AddValue("LayerDefinitions", LayerDefinitions);
-            info.AddValue("LevelDefaultSize", LevelDefaultSize);
-            info.AddValue("LevelMinimumSize", LevelMinimumSize);
-            info.AddValue("LevelMaximumSize", LevelMaximumSize);
-        }
-
-        private void InitializeRunningVars()
-        {
-            changed = false;
-            TreeNode = new TreeNode(Name);  
-            Levels = new List<Level>();
         }
 
         /*
@@ -141,9 +115,9 @@ namespace OgmoEditor
 
         private void writeTo(string filename)
         {
-            BinaryFormatter bf = new BinaryFormatter();
+            XmlSerializer xs = new XmlSerializer(typeof(Project));
             Stream stream = new FileStream(filename, FileMode.OpenOrCreate);
-            bf.Serialize(stream, this);
+            xs.Serialize(stream, this);
             stream.Close();
         }
 

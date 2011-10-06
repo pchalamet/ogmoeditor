@@ -49,5 +49,10 @@ namespace OgmoEditor.ProjectEditors
 
             workingDirectoryTextBox.Text = dialog.SelectedPath;
         }
+
+        private void relativePathCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine(Directory.Exists(".."));
+        }
     }
 }
