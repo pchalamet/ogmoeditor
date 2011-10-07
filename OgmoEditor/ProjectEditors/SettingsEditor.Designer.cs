@@ -43,46 +43,47 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.valuesEditor = new OgmoEditor.ProjectEditors.ValuesEditor();
             this.SuspendLayout();
             // 
             // maxHeightTextBox
             // 
-            this.maxHeightTextBox.Location = new System.Drawing.Point(207, 189);
+            this.maxHeightTextBox.Location = new System.Drawing.Point(207, 152);
             this.maxHeightTextBox.Name = "maxHeightTextBox";
             this.maxHeightTextBox.Size = new System.Drawing.Size(62, 20);
             this.maxHeightTextBox.TabIndex = 26;
             // 
             // maxWidthTextBox
             // 
-            this.maxWidthTextBox.Location = new System.Drawing.Point(121, 189);
+            this.maxWidthTextBox.Location = new System.Drawing.Point(121, 152);
             this.maxWidthTextBox.Name = "maxWidthTextBox";
             this.maxWidthTextBox.Size = new System.Drawing.Size(62, 20);
             this.maxWidthTextBox.TabIndex = 25;
             // 
             // minHeightTextBox
             // 
-            this.minHeightTextBox.Location = new System.Drawing.Point(207, 163);
+            this.minHeightTextBox.Location = new System.Drawing.Point(207, 126);
             this.minHeightTextBox.Name = "minHeightTextBox";
             this.minHeightTextBox.Size = new System.Drawing.Size(62, 20);
             this.minHeightTextBox.TabIndex = 24;
             // 
             // minWidthTextBox
             // 
-            this.minWidthTextBox.Location = new System.Drawing.Point(121, 163);
+            this.minWidthTextBox.Location = new System.Drawing.Point(121, 126);
             this.minWidthTextBox.Name = "minWidthTextBox";
             this.minWidthTextBox.Size = new System.Drawing.Size(62, 20);
             this.minWidthTextBox.TabIndex = 23;
             // 
             // defaultHeightTextBox
             // 
-            this.defaultHeightTextBox.Location = new System.Drawing.Point(207, 137);
+            this.defaultHeightTextBox.Location = new System.Drawing.Point(207, 100);
             this.defaultHeightTextBox.Name = "defaultHeightTextBox";
             this.defaultHeightTextBox.Size = new System.Drawing.Size(62, 20);
             this.defaultHeightTextBox.TabIndex = 22;
             // 
             // defaultWidthTextBox
             // 
-            this.defaultWidthTextBox.Location = new System.Drawing.Point(121, 137);
+            this.defaultWidthTextBox.Location = new System.Drawing.Point(121, 100);
             this.defaultWidthTextBox.Name = "defaultWidthTextBox";
             this.defaultWidthTextBox.Size = new System.Drawing.Size(62, 20);
             this.defaultWidthTextBox.TabIndex = 21;
@@ -97,7 +98,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(64, 192);
+            this.label8.Location = new System.Drawing.Point(64, 155);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(51, 13);
             this.label8.TabIndex = 33;
@@ -106,7 +107,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(67, 166);
+            this.label7.Location = new System.Drawing.Point(67, 129);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(48, 13);
             this.label7.TabIndex = 32;
@@ -115,7 +116,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(74, 140);
+            this.label6.Location = new System.Drawing.Point(74, 103);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(41, 13);
             this.label6.TabIndex = 31;
@@ -125,7 +126,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(59, 116);
+            this.label5.Location = new System.Drawing.Point(59, 79);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(66, 13);
             this.label5.TabIndex = 30;
@@ -134,7 +135,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(189, 192);
+            this.label4.Location = new System.Drawing.Point(189, 155);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(12, 13);
             this.label4.TabIndex = 29;
@@ -143,7 +144,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(189, 166);
+            this.label3.Location = new System.Drawing.Point(189, 129);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(12, 13);
             this.label3.TabIndex = 28;
@@ -152,7 +153,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(189, 140);
+            this.label2.Location = new System.Drawing.Point(189, 103);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(12, 13);
             this.label2.TabIndex = 27;
@@ -167,10 +168,19 @@
             this.label1.TabIndex = 20;
             this.label1.Text = "Project Name";
             // 
+            // valuesEditor
+            // 
+            this.valuesEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.valuesEditor.Location = new System.Drawing.Point(57, 209);
+            this.valuesEditor.Name = "valuesEditor";
+            this.valuesEditor.Size = new System.Drawing.Size(341, 191);
+            this.valuesEditor.TabIndex = 34;
+            // 
             // SettingsEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.valuesEditor);
             this.Controls.Add(this.maxHeightTextBox);
             this.Controls.Add(this.maxWidthTextBox);
             this.Controls.Add(this.minHeightTextBox);
@@ -210,5 +220,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private ValuesEditor valuesEditor;
     }
 }

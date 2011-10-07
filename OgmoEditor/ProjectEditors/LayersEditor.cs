@@ -23,21 +23,12 @@ namespace OgmoEditor.ProjectEditors
         {
             layerDefinitions = new List<LayerDefinition>(project.LayerDefinitions);
             foreach (LayerDefinition d in layerDefinitions)
-            {
-                ListViewItem item = new ListViewItem();
-                setItemFromDefinition(item, d);
-                listView.Items.Add(item);
-            }
+                listBox.Items.Add(d.Name);
         }
 
         public void ApplyToProject(Project project)
         {
             project.LayerDefinitions = layerDefinitions;
-        }
-
-        private void setItemFromDefinition(ListViewItem item, LayerDefinition definition)
-        {
-            item.Text = definition.Name;
         }
 
         private void setControlsFromDefinition(LayerDefinition definition)
@@ -92,101 +83,61 @@ namespace OgmoEditor.ProjectEditors
         private void addButton_Click(object sender, EventArgs e)
         {
             LayerDefinition def = getDefaultLayer();
-            ListViewItem item = new ListViewItem();
-
-            setItemFromDefinition(item, def);
 
             layerDefinitions.Add(def);
-            listView.Items.Add(item);
-
-            listView.SelectedIndices.Clear();
-            listView.SelectedIndices.Add(item.Index);
+            listBox.SelectedIndex = listBox.Items.Add(def.Name);
         }
 
         private void removeButton_Click(object sender, EventArgs e)
         {
-            ListViewItem item = listView.SelectedItems[0];
-            int index = item.Index;
+            int index = listBox.SelectedIndex;
 
             layerDefinitions.RemoveAt(index);
-            listView.Items.Remove(item);
+            listBox.Items.RemoveAt(index);
 
-            if (listView.Items.Count > 0)
-            {
-                listView.SelectedIndices.Clear();
-                listView.SelectedIndices.Add(Math.Min(listView.Items.Count - 1, index));
-            }
+            listBox.SelectedIndex = Math.Min(listBox.Items.Count - 1, index);
         }
 
         private void moveUpButton_Click(object sender, EventArgs e)
         {
-            int index = listView.SelectedIndices[0];
+            int index = listBox.SelectedIndex;
 
             LayerDefinition temp = layerDefinitions[index];
             layerDefinitions[index] = layerDefinitions[index - 1];
             layerDefinitions[index - 1] = temp;
 
-            setItemFromDefinition(listView.Items[index], layerDefinitions[index]);
-            setItemFromDefinition(listView.Items[index - 1], layerDefinitions[index - 1]);
-
-            listView.SelectedIndices.Clear();
-            listView.SelectedIndices.Add(index - 1);
+            listBox.Items[index] = layerDefinitions[index].Name;
+            listBox.Items[index - 1] = layerDefinitions[index - 1].Name;
+            listBox.SelectedIndex = index - 1;
         }
 
         private void moveDownButton_Click(object sender, EventArgs e)
         {
-            int index = listView.SelectedIndices[0];
+            int index = listBox.SelectedIndex;
 
             LayerDefinition temp = layerDefinitions[index];
             layerDefinitions[index] = layerDefinitions[index + 1];
             layerDefinitions[index + 1] = temp;
 
-            setItemFromDefinition(listView.Items[index], layerDefinitions[index]);
-            setItemFromDefinition(listView.Items[index + 1], layerDefinitions[index + 1]);
-
-            listView.SelectedIndices.Clear();
-            listView.SelectedIndices.Add(index + 1);
-        }
-
-        private void listView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
-        {
-            if (listView.SelectedItems.Count > 0)
-            {
-                removeButton.Enabled = true;
-                moveUpButton.Enabled = listView.SelectedIndices[0] > 0;
-                moveDownButton.Enabled = listView.SelectedIndices[0] < listView.Items.Count - 1;
-                nameTextBox.Enabled = true;
-                gridXTextBox.Enabled = true;
-                gridYTextBox.Enabled = true;
-                typeComboBox.Enabled = true;
-                setControlsFromDefinition(layerDefinitions[listView.SelectedIndices[0]]);
-            }
-            else
-            {
-                removeButton.Enabled = false;
-                moveUpButton.Enabled = false;
-                moveDownButton.Enabled = false;
-                nameTextBox.Enabled = false;
-                gridXTextBox.Enabled = false;
-                gridYTextBox.Enabled = false;
-                typeComboBox.Enabled = false;    
-            }
+            listBox.Items[index] = layerDefinitions[index].Name;
+            listBox.Items[index - 1] = layerDefinitions[index + 1].Name;
+            listBox.SelectedIndex = index + 1;
         }
 
         private void nameTextBox_Validated(object sender, EventArgs e)
         {
-            layerDefinitions[listView.SelectedIndices[0]].Name = nameTextBox.Text;
-            listView.SelectedItems[0].Text = nameTextBox.Text;
+            layerDefinitions[listBox.SelectedIndex].Name = nameTextBox.Text;
+            listBox.Items[listBox.SelectedIndex] = (nameTextBox.Text == "" ? "(blank)" : nameTextBox.Text);
         }
 
         private void gridXTextBox_Validated(object sender, EventArgs e)
         {
-            ProjParse.GetSize(ref layerDefinitions[listView.SelectedIndices[0]].Grid, gridXTextBox, gridYTextBox);
+            //ProjParse.GetSize(ref layerDefinitions[listBox.SelectedIndex].Grid, gridXTextBox, gridYTextBox);
         }
 
         private void typeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LayerDefinition oldDef = layerDefinitions[listView.SelectedIndices[0]];
+            LayerDefinition oldDef = layerDefinitions[listBox.SelectedIndex];
             LayerDefinition newDef;
 
             if (typeComboBox.SelectedIndex == 0)
@@ -207,8 +158,33 @@ namespace OgmoEditor.ProjectEditors
             }
 
             newDef.Grid = oldDef.Grid;
-            layerDefinitions[listView.SelectedIndices[0]] = newDef;
+            layerDefinitions[listBox.SelectedIndex] = newDef;
             setControlsFromDefinition(newDef);
+        }
+
+        private void listBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox.SelectedIndex != -1)
+            {
+                removeButton.Enabled = true;
+                moveUpButton.Enabled = listBox.SelectedIndex > 0;
+                moveDownButton.Enabled = listBox.SelectedIndex < listBox.Items.Count - 1;
+                nameTextBox.Enabled = true;
+                gridXTextBox.Enabled = true;
+                gridYTextBox.Enabled = true;
+                typeComboBox.Enabled = true;
+                setControlsFromDefinition(layerDefinitions[listBox.SelectedIndex]);
+            }
+            else
+            {
+                removeButton.Enabled = false;
+                moveUpButton.Enabled = false;
+                moveDownButton.Enabled = false;
+                nameTextBox.Enabled = false;
+                gridXTextBox.Enabled = false;
+                gridYTextBox.Enabled = false;
+                typeComboBox.Enabled = false;
+            }
         }
     }
 }

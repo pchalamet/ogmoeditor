@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView = new System.Windows.Forms.ListView();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.gridYTextBox = new System.Windows.Forms.TextBox();
@@ -41,19 +40,8 @@
             this.removeButton = new System.Windows.Forms.Button();
             this.moveUpButton = new System.Windows.Forms.Button();
             this.moveDownButton = new System.Windows.Forms.Button();
+            this.listBox = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
-            // 
-            // listView
-            // 
-            this.listView.HideSelection = false;
-            this.listView.Location = new System.Drawing.Point(4, 4);
-            this.listView.MultiSelect = false;
-            this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(183, 424);
-            this.listView.TabIndex = 0;
-            this.listView.UseCompatibleStateImageBehavior = false;
-            this.listView.View = System.Windows.Forms.View.List;
-            this.listView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listView_ItemSelectionChanged);
             // 
             // nameTextBox
             // 
@@ -178,10 +166,20 @@
             this.moveDownButton.UseVisualStyleBackColor = true;
             this.moveDownButton.Click += new System.EventHandler(this.moveDownButton_Click);
             // 
+            // listBox
+            // 
+            this.listBox.FormattingEnabled = true;
+            this.listBox.Location = new System.Drawing.Point(4, 4);
+            this.listBox.Name = "listBox";
+            this.listBox.Size = new System.Drawing.Size(184, 420);
+            this.listBox.TabIndex = 38;
+            this.listBox.SelectedIndexChanged += new System.EventHandler(this.listBox_SelectedIndexChanged);
+            // 
             // LayersEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.listBox);
             this.Controls.Add(this.moveDownButton);
             this.Controls.Add(this.moveUpButton);
             this.Controls.Add(this.removeButton);
@@ -194,7 +192,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nameTextBox);
-            this.Controls.Add(this.listView);
             this.Name = "LayersEditor";
             this.Size = new System.Drawing.Size(573, 490);
             this.ResumeLayout(false);
@@ -204,7 +201,6 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView listView;
         private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox gridYTextBox;
@@ -217,5 +213,6 @@
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.Button moveUpButton;
         private System.Windows.Forms.Button moveDownButton;
+        private System.Windows.Forms.ListBox listBox;
     }
 }

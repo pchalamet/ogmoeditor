@@ -39,6 +39,8 @@ namespace OgmoEditor.ProjectEditors
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+
+
             settingsEditor.ApplyToProject(project);
             layersEditor.ApplyToProject(project);
             project.Changed = true;

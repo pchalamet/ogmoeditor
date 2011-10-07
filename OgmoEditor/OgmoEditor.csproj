@@ -90,6 +90,12 @@
     <Compile Include="ProjectEditors\LayersEditor.Designer.cs">
       <DependentUpon>LayersEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProjectEditors\ObjectsEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ProjectEditors\ObjectsEditor.Designer.cs">
+      <DependentUpon>ObjectsEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProjectEditors\ProjectEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +108,18 @@
     </Compile>
     <Compile Include="ProjectEditors\SettingsEditor.Designer.cs">
       <DependentUpon>SettingsEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectEditors\TilesetsEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ProjectEditors\TilesetsEditor.Designer.cs">
+      <DependentUpon>TilesetsEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectEditors\ValuesEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ProjectEditors\ValuesEditor.Designer.cs">
+      <DependentUpon>ValuesEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -126,11 +144,20 @@
     <EmbeddedResource Include="ProjectEditors\LayersEditor.resx">
       <DependentUpon>LayersEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProjectEditors\ObjectsEditor.resx">
+      <DependentUpon>ObjectsEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProjectEditors\ProjectEditor.resx">
       <DependentUpon>ProjectEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProjectEditors\SettingsEditor.resx">
       <DependentUpon>SettingsEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectEditors\TilesetsEditor.resx">
+      <DependentUpon>TilesetsEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectEditors\ValuesEditor.resx">
+      <DependentUpon>ValuesEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -37,9 +37,6 @@ namespace OgmoEditor
         {
             Application.EnableVisualStyles();
             InitializeDirectories();
-
-            Debug.WriteLine(Util.GetPathAbsolute(@"..\..\N\file.png", @"A\B\C\D"));
-
             Application.Run(MainWindow);
         }
 
@@ -59,8 +56,10 @@ namespace OgmoEditor
         {
             Project project = new Project();
             if (project.SaveAs())
+            {
                 StartProject(project);
-            EditProject();
+                EditProject();
+            }
         }
 
         static public void LoadProject()
