@@ -74,10 +74,6 @@ namespace OgmoEditor
             duplicateLevelToolStripMenuItem.Enabled = false;
             closeOtherLevelsToolStripMenuItem.Enabled = false;
             saveAsImageToolStripMenuItem.Enabled = false;
-
-            //Remove events
-            project.OnLevelAdded -= onLevelAdded;
-            project.OnLevelClosed -= onLevelClosed;
         }
 
         private void onLevelAdded(Level level)

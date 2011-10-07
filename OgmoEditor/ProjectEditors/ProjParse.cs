@@ -42,6 +42,9 @@ namespace OgmoEditor.ProjectEditors
             }
         }
 
+        /*
+         *  Error checking
+         */
         static public string Error(string error)
         {
             return "-" + error + "\n";
@@ -52,7 +55,7 @@ namespace OgmoEditor.ProjectEditors
             if (x.Text != "")
                 return "";
             else
-                return Error(name + " can not be left blank");
+                return Error(name + " is blank");
         }
 
         static public string CheckPosInt(TextBox x, string name)
@@ -63,12 +66,28 @@ namespace OgmoEditor.ProjectEditors
                 if (i > 0)
                     return "";
                 else 
-                    return Error(name + " must be defined as a positive integer");
+                    return Error(name + " is not a positive integer");
             }
             catch
             {
-                return Error(name + " must be defined as a positive integer");
+                return Error(name + " is not a positive integer");
             }
+        }
+
+        static public string CheckPosInt(int i, string name)
+        {
+            if (i > 0)
+                return "";
+            else
+                return Error(name + " is not a positive integer");
+        }
+
+        static public string CheckPosSize(Size size, string name)
+        {
+            string s = "";
+            s += CheckPosInt(size.Width, name + " Width");
+            s += CheckPosInt(size.Height, name + " Height");
+            return s;
         }
     }
 }

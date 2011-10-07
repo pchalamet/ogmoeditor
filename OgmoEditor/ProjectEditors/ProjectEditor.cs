@@ -31,13 +31,19 @@ namespace OgmoEditor.ProjectEditors
 
         private void onClose(object sender, FormClosedEventArgs e)
         {
+            if (e.CloseReason == CloseReason.UserClosing)
+                cancel();
             (Owner as MainWindow).EnableEditing();
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
             Close();
+            cancel();
+        }
 
+        private void cancel()
+        {
             if (newProject)
                 Ogmo.CloseProject();
         }

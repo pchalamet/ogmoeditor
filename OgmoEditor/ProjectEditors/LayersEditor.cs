@@ -23,8 +23,27 @@ namespace OgmoEditor.ProjectEditors
         {
             string s = "";
 
+            //Must have some layers
             if (layerDefinitions.Count == 0)
                 s += ProjParse.Error("No layers are defined");
+
+            List<string> found = new List<string>();
+            foreach (LayerDefinition l in layerDefinitions)
+            {
+                //Check for duplicate layer names
+                if (l.Name != "" && !found.Contains(l.Name) && layerDefinitions.FindAll(e => e.Name == l.Name).Count > 1)
+                {
+                    found.Add(l.Name);
+                    s += ProjParse.Error("There are multiple layers with the name \"" + l.Name + "\"");
+                }
+
+                //Check the grid size
+                s += ProjParse.CheckPosSize(l.Grid, "Layer \"" + l.Name + "\" Grid");
+            }
+
+            //Check for blank layer names
+            if (layerDefinitions.Find(e => e.Name == "") != null)
+                s += ProjParse.Error("There are layer(s) with blank names");
 
             return s;
         }
