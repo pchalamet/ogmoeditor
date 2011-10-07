@@ -6,13 +6,12 @@ using System.Drawing;
 
 namespace OgmoEditor.Definitions.LayerDefinitions
 {
-    [Serializable()]
     public class GridLayerDefinition : LayerDefinition
     {
         public Color Color;
 
-        public GridLayerDefinition(string name)
-            : base(name)
+        public GridLayerDefinition()
+            : base()
         {
             Color = Color.Black;
         }

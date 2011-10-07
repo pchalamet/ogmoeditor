@@ -41,5 +41,34 @@ namespace OgmoEditor.ProjectEditors
                 y.Text = to.Height.ToString();
             }
         }
+
+        static public string Error(string error)
+        {
+            return "-" + error + "\n";
+        }
+
+        static public string CheckString(TextBox x, string name)
+        {
+            if (x.Text != "")
+                return "";
+            else
+                return Error(name + " can not be left blank");
+        }
+
+        static public string CheckPosInt(TextBox x, string name)
+        {
+            try
+            {
+                int i = Convert.ToInt32(x.Text);
+                if (i > 0)
+                    return "";
+                else 
+                    return Error(name + " must be defined as a positive integer");
+            }
+            catch
+            {
+                return Error(name + " must be defined as a positive integer");
+            }
+        }
     }
 }

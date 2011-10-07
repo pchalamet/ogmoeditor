@@ -55,10 +55,10 @@ namespace OgmoEditor
         static public void NewProject()
         {
             Project project = new Project();
-            if (project.SaveAs())
+            if (project.SaveAs(false))
             {
                 StartProject(project);
-                EditProject();
+                EditProject(true);
             }
         }
 
@@ -103,10 +103,10 @@ namespace OgmoEditor
             Project = null;
         }
 
-        static public void EditProject()
+        static public void EditProject(bool newProject = false)
         {
             MainWindow.Enabled = false;
-            ProjectEditor editor = new ProjectEditor(Ogmo.Project);
+            ProjectEditor editor = new ProjectEditor(Ogmo.Project, newProject);
             editor.Show(MainWindow);
         }
 

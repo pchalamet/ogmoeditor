@@ -5,13 +5,12 @@ using System.Text;
 
 namespace OgmoEditor.Definitions.LayerDefinitions
 {
-    [Serializable()]
     public class TileLayerDefinition : LayerDefinition
     {
         public bool MultipleTilesets;
 
-        public TileLayerDefinition(string name)
-            : base(name)
+        public TileLayerDefinition()
+            : base()
         {
             MultipleTilesets = false;
         }

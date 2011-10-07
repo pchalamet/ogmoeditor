@@ -13,10 +13,12 @@ namespace OgmoEditor.ProjectEditors
     public partial class ProjectEditor : Form
     {
         private Project project;
+        private bool newProject;
 
-        public ProjectEditor(Project project)
+        public ProjectEditor(Project project, bool newProject = false)
         {
             this.project = project;
+            this.newProject = newProject;
             InitializeComponent();
 
             //Load the contents of the editors
@@ -35,16 +37,29 @@ namespace OgmoEditor.ProjectEditors
         private void cancelButton_Click(object sender, EventArgs e)
         {
             Close();
+
+            if (newProject)
+                Ogmo.CloseProject();
         }
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-
+            string errors = "";
+            errors += settingsEditor.ErrorCheck();
+            errors += layersEditor.ErrorCheck();
+            if (errors != "")
+            {
+                MessageBox.Show(this, "Project could not be saved because of the following errors:\n" + errors);
+                return;
+            }
 
             settingsEditor.ApplyToProject(project);
             layersEditor.ApplyToProject(project);
             project.Changed = true;
             Close();
+
+            if (newProject)
+                project.Save();
         }
     }
 }

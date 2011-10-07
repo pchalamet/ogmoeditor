@@ -126,7 +126,7 @@ namespace OgmoEditor
             Changed = false;
         }
 
-        public bool SaveAs()
+        public bool SaveAs(bool write = true)
         {
             SaveFileDialog dialog = new SaveFileDialog();
             if (LastFilename == "")
@@ -147,8 +147,11 @@ namespace OgmoEditor
             if (OnPathChanged != null)
                 OnPathChanged(this);
 
-            writeTo(dialog.FileName);
-            Changed = false;
+            if (write)
+            {
+                writeTo(dialog.FileName);
+                Changed = false;
+            }
 
             return true;
         }

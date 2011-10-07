@@ -7,7 +7,11 @@ using System.Xml.Serialization;
 
 namespace OgmoEditor.Definitions.LayerDefinitions
 {
-    [XmlRoot("layer")]
+    [XmlInclude(typeof(GridLayerDefinition))]
+    [XmlInclude(typeof(TileLayerDefinition))]
+    [XmlInclude(typeof(ObjectLayerDefinition))]
+    [XmlInclude(typeof(ShapeLayerDefinition))]
+
     public class LayerDefinition
     {
         public string Name;
@@ -16,11 +20,6 @@ namespace OgmoEditor.Definitions.LayerDefinitions
         public LayerDefinition()
         {
             Name = "";
-        }
-
-        public LayerDefinition(string name)
-        {
-            Name = name;
         }
 
         public override string ToString()

@@ -19,6 +19,16 @@ namespace OgmoEditor.ProjectEditors
             InitializeComponent();
         }
 
+        public string ErrorCheck()
+        {
+            string s = "";
+
+            if (layerDefinitions.Count == 0)
+                s += ProjParse.Error("No layers are defined");
+
+            return s;
+        }
+
         public void LoadFromProject(Project project)
         {
             layerDefinitions = new List<LayerDefinition>(project.LayerDefinitions);
@@ -67,7 +77,8 @@ namespace OgmoEditor.ProjectEditors
             }
             while (layerNameTaken(name));
 
-            GridLayerDefinition grid = new GridLayerDefinition(name);
+            GridLayerDefinition grid = new GridLayerDefinition();
+            grid.Name = name;
             grid.Grid = new Size(16, 16);
             return grid;
         }
@@ -142,21 +153,23 @@ namespace OgmoEditor.ProjectEditors
 
             if (typeComboBox.SelectedIndex == 0)
             {
-                newDef = new GridLayerDefinition(oldDef.Name);
+                newDef = new GridLayerDefinition();
+                
             }
             else if (typeComboBox.SelectedIndex == 1)
             {
-                newDef = new TileLayerDefinition(oldDef.Name);
+                newDef = new TileLayerDefinition();
             }
             else if (typeComboBox.SelectedIndex == 2)
             {
-                newDef = new ObjectLayerDefinition(oldDef.Name);
+                newDef = new ObjectLayerDefinition();
             }
             else
             {
-                newDef = new ShapeLayerDefinition(oldDef.Name);
+                newDef = new ShapeLayerDefinition();
             }
 
+            newDef.Name = oldDef.Name;
             newDef.Grid = oldDef.Grid;
             layerDefinitions[listBox.SelectedIndex] = newDef;
             setControlsFromDefinition(newDef);
