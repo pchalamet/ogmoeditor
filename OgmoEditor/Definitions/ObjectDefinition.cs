@@ -11,6 +11,16 @@ namespace OgmoEditor.Definitions
     {
         [XmlAttribute]
         public string Name;
+        [XmlAttribute]
+        public int Limit;
+        [XmlAttribute]
+        public bool ResizableX;
+        [XmlAttribute]
+        public bool ResizableY;
+        [XmlAttribute]
+        public bool Rotatable;
+        [XmlAttribute]
+        public float RotateIncrement;
 
         public Size Size;
         public Point Origin;

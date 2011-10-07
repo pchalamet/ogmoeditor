@@ -30,6 +30,16 @@ namespace OgmoEditor
         public Size LevelMaximumSize;
         public string LastFilename;
 
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                name = value;
+                TreeNode.Text = value;
+            }
+        }
+
         //Definitions
         public List<LayerDefinition> LayerDefinitions;
         public List<ValueDefinition> LevelValuesDefinitions;
@@ -61,9 +71,6 @@ namespace OgmoEditor
 
             //Init running vars
             InitializeRunningVars();
-
-            ObjectDefinition obj = new ObjectDefinition();
-            ObjectDefinitions.Add(obj);
         }
 
         private void InitializeRunningVars()
@@ -71,16 +78,6 @@ namespace OgmoEditor
             changed = false;
             TreeNode = new TreeNode(Name);
             Levels = new List<Level>();
-        }
-
-        public string Name
-        {
-            get { return name; }
-            set
-            {
-                name = value;
-                TreeNode.Text = value;
-            }
         }
 
         [XmlIgnore]

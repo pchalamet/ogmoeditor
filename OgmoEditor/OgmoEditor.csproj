@@ -115,7 +115,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Definitions\ValueDefinitions\ValueDefinition.cs" />
-    <Compile Include="ILevelXML.cs" />
     <Compile Include="Value.cs" />
   </ItemGroup>
   <ItemGroup>
