@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace OgmoEditor.ProjectEditors
 {
@@ -51,12 +52,22 @@ namespace OgmoEditor.ProjectEditors
             if (dialog.ShowDialog() == DialogResult.Cancel)
                 return;
 
-            workingDirectoryTextBox.Text = dialog.SelectedPath;
+            if (relativePathCheckbox.Checked)
+                workingDirectoryTextBox.Text = Util.GetPathRelativeTo(dialog.SelectedPath, Ogmo.Project.SavedDirectory);
+            else
+                workingDirectoryTextBox.Text = dialog.SelectedPath;
+
+            updateWarningVisibilities();
         }
 
         private void relativePathCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             updateWarningVisibilities();
+
+            if (relativePathCheckbox.Checked)
+                workingDirectoryTextBox.Text = Util.GetPathRelativeTo(workingDirectoryTextBox.Text, Ogmo.Project.SavedDirectory);
+            else
+                workingDirectoryTextBox.Text = Util.GetPathAbsolute(workingDirectoryTextBox.Text, Ogmo.Project.SavedDirectory);
         }
 
         private void updateWarningVisibilities()
@@ -74,11 +85,6 @@ namespace OgmoEditor.ProjectEditors
                 projectUnsavedLabel.Visible = false;
                 pathExistsLabel.Visible = !Directory.Exists(workingDirectoryTextBox.Text);
             }
-        }
-
-        private void workingDirectoryTextBox_TextChanged(object sender, EventArgs e)
-        {
-            updateWarningVisibilities();
         }
     }
 }

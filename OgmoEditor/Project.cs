@@ -44,6 +44,7 @@ namespace OgmoEditor
         public List<LayerDefinition> LayerDefinitions;
         public List<ValueDefinition> LevelValuesDefinitions;
         public List<ObjectDefinition> ObjectDefinitions;
+        public List<Tileset> Tilesets;
 
         //Non-serialzed instance vars
         private bool changed;
@@ -68,6 +69,7 @@ namespace OgmoEditor
             LayerDefinitions = new List<LayerDefinition>();
             LevelValuesDefinitions = new List<ValueDefinition>();
             ObjectDefinitions = new List<ObjectDefinition>();
+            Tilesets = new List<Tileset>();
 
             //Init running vars
             InitializeRunningVars();
@@ -101,7 +103,7 @@ namespace OgmoEditor
                     return "";
 
                 string filename = Path.GetFileName(dir);
-                return dir.Remove(dir.IndexOf(filename));
+                return dir.Remove(dir.IndexOf(filename) - 1);
             }
         }
 
@@ -111,10 +113,27 @@ namespace OgmoEditor
             get
             {
                 if (WorkingDirectoryRelative)
-                    return Directory.Exists(Ogmo.Project.SavedDirectory + WorkingDirectory);
+                    return Directory.Exists(SavedDirectory + WorkingDirectory);
                 else
                     return Directory.Exists(WorkingDirectory);
             }
+        }
+
+        [XmlIgnore]
+        public string AbsoluteWorkingDirectory
+        {
+            get
+            {
+                if (WorkingDirectoryRelative)
+                    return SavedDirectory + WorkingDirectory + Path.DirectorySeparatorChar;
+                else
+                    return WorkingDirectory + Path.DirectorySeparatorChar;
+            }
+        }
+
+        public string GetPath(string path)
+        {
+            return AbsoluteWorkingDirectory + path;
         }
 
         /*

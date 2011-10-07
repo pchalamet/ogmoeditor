@@ -48,6 +48,7 @@
             this.relativePathCheckbox = new System.Windows.Forms.CheckBox();
             this.pathExistsLabel = new System.Windows.Forms.Label();
             this.projectUnsavedLabel = new System.Windows.Forms.Label();
+            this.workingDirectoryChooser = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label9
@@ -63,9 +64,9 @@
             // 
             this.workingDirectoryTextBox.Location = new System.Drawing.Point(131, 61);
             this.workingDirectoryTextBox.Name = "workingDirectoryTextBox";
-            this.workingDirectoryTextBox.Size = new System.Drawing.Size(197, 20);
+            this.workingDirectoryTextBox.ReadOnly = true;
+            this.workingDirectoryTextBox.Size = new System.Drawing.Size(165, 20);
             this.workingDirectoryTextBox.TabIndex = 35;
-            this.workingDirectoryTextBox.TextChanged += new System.EventHandler(this.workingDirectoryTextBox_TextChanged);
             // 
             // maxHeightTextBox
             // 
@@ -222,10 +223,21 @@
             this.projectUnsavedLabel.Text = "Project file hasn\'t been saved yet!";
             this.projectUnsavedLabel.Visible = false;
             // 
+            // workingDirectoryChooser
+            // 
+            this.workingDirectoryChooser.Location = new System.Drawing.Point(302, 59);
+            this.workingDirectoryChooser.Name = "workingDirectoryChooser";
+            this.workingDirectoryChooser.Size = new System.Drawing.Size(26, 23);
+            this.workingDirectoryChooser.TabIndex = 40;
+            this.workingDirectoryChooser.Text = "...";
+            this.workingDirectoryChooser.UseVisualStyleBackColor = true;
+            this.workingDirectoryChooser.Click += new System.EventHandler(this.workingDirectoryChooser_Click);
+            // 
             // SettingsEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.workingDirectoryChooser);
             this.Controls.Add(this.projectUnsavedLabel);
             this.Controls.Add(this.pathExistsLabel);
             this.Controls.Add(this.relativePathCheckbox);
@@ -275,5 +287,6 @@
         private System.Windows.Forms.CheckBox relativePathCheckbox;
         private System.Windows.Forms.Label pathExistsLabel;
         private System.Windows.Forms.Label projectUnsavedLabel;
+        private System.Windows.Forms.Button workingDirectoryChooser;
     }
 }
