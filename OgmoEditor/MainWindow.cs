@@ -100,7 +100,7 @@ namespace OgmoEditor
 
         private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.StartProject(new Project());
+            Ogmo.NewProject();
         }
 
         private void closeProjectToolStripMenuItem_Click(object sender, EventArgs e)

@@ -23,8 +23,6 @@ namespace OgmoEditor
     {
         //Serialized project properties
         private string name;
-        public string WorkingDirectory;
-        public bool WorkingDirectoryRelative;
         public Size LevelDefaultSize;
         public Size LevelMinimumSize;
         public Size LevelMaximumSize;
@@ -56,12 +54,12 @@ namespace OgmoEditor
         //Events
         public event Ogmo.LevelCallback OnLevelAdded;
         public event Ogmo.LevelCallback OnLevelClosed;
+        public event Ogmo.ProjectCallback OnPathChanged;
 
         public Project()
         {
             //Init default project properties
             name = Ogmo.NEW_PROJECT_NAME;
-            WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             LastFilename = "";
             LevelDefaultSize = LevelMinimumSize = LevelMaximumSize = new Size(640, 480);
 
@@ -107,33 +105,9 @@ namespace OgmoEditor
             }
         }
 
-        [XmlIgnore]
-        public bool WorkingDirectoryValid
-        {
-            get
-            {
-                if (WorkingDirectoryRelative)
-                    return Directory.Exists(SavedDirectory + WorkingDirectory);
-                else
-                    return Directory.Exists(WorkingDirectory);
-            }
-        }
-
-        [XmlIgnore]
-        public string AbsoluteWorkingDirectory
-        {
-            get
-            {
-                if (WorkingDirectoryRelative)
-                    return SavedDirectory + WorkingDirectory + Path.DirectorySeparatorChar;
-                else
-                    return WorkingDirectory + Path.DirectorySeparatorChar;
-            }
-        }
-
         public string GetPath(string path)
         {
-            return AbsoluteWorkingDirectory + path;
+            return SavedDirectory + Path.DirectorySeparatorChar + path;
         }
 
         /*
@@ -152,10 +126,13 @@ namespace OgmoEditor
             Changed = false;
         }
 
-        public void SaveAs()
+        public bool SaveAs()
         {
             SaveFileDialog dialog = new SaveFileDialog();
-            dialog.InitialDirectory = WorkingDirectory;
+            if (LastFilename == "")
+                dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            else
+                dialog.InitialDirectory = SavedDirectory;
             dialog.RestoreDirectory = true;
             dialog.FileName = Name;
             dialog.DefaultExt = Ogmo.PROJECT_EXT;
@@ -164,11 +141,16 @@ namespace OgmoEditor
 
             //Show dialog, handle cancel
             if (dialog.ShowDialog() == DialogResult.Cancel)
-                return;
+                return false;
 
             LastFilename = dialog.FileName;
+            if (OnPathChanged != null)
+                OnPathChanged(this);
+
             writeTo(dialog.FileName);
             Changed = false;
+
+            return true;
         }
 
         private void writeTo(string filename)
@@ -250,7 +232,7 @@ namespace OgmoEditor
 
         public void OpenAllLevels()
         {
-            var files = Directory.EnumerateFiles(WorkingDirectory, "*.oel");
+            var files = Directory.EnumerateFiles(SavedDirectory, "*.oel");
             foreach (string str in files)
             {
                 if (GetLevelByPath(str) == null)

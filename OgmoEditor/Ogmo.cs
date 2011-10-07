@@ -38,6 +38,8 @@ namespace OgmoEditor
             Application.EnableVisualStyles();
             InitializeDirectories();
 
+            Debug.WriteLine(Util.GetPathAbsolute(@"..\..\N\file.png", @"A\B\C\D"));
+
             Application.Run(MainWindow);
         }
 
@@ -53,6 +55,14 @@ namespace OgmoEditor
         /*
          *  Project stuff
          */
+        static public void NewProject()
+        {
+            Project project = new Project();
+            if (project.SaveAs())
+                StartProject(project);
+            EditProject();
+        }
+
         static public void LoadProject()
         {
             //Get the file to load from the user

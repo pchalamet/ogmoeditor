@@ -16,6 +16,9 @@ namespace OgmoEditor
 
         static public string GetPathRelativeTo(string relativePath, string absolutePath)
         {
+            if (relativePath == "")
+                return absolutePath;
+
             string[] relative = relativePath.Split(Path.DirectorySeparatorChar);
             string[] absolute = absolutePath.Split(Path.DirectorySeparatorChar);
 
@@ -64,7 +67,30 @@ namespace OgmoEditor
 
         static public string GetPathAbsolute(string path, string relativeTo)
         {
-            return "";
+            if (path == "")
+                return relativeTo;
+
+            string[] rel = path.Split(Path.DirectorySeparatorChar);
+            string[] abs = relativeTo.Split(Path.DirectorySeparatorChar);
+
+            int backs = 0;
+            int i;
+            for (i = 0; i < rel.Length; i++)
+            {
+                if (rel[i] == "..")
+                    backs++;
+                else
+                    break;
+            }
+
+            string[] final = new string[rel.Length + abs.Length - backs * 2];
+            for (i = 0; i < abs.Length - backs; i++)
+                final[i] = abs[i];
+
+            for (int j = 0; j < rel.Length - backs; j++)
+                final[j + i] = rel[backs + j];
+
+            return string.Join(Convert.ToString(Path.DirectorySeparatorChar), final, 0, final.Length);
         }
 
     }

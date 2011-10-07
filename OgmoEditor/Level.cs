@@ -118,10 +118,10 @@ namespace OgmoEditor
             RemoveChanged();
         }
 
-        public void SaveAs()
+        public bool SaveAs()
         {
             SaveFileDialog dialog = new SaveFileDialog();
-            dialog.InitialDirectory = project.WorkingDirectory;
+            dialog.InitialDirectory = project.SavedDirectory;
             dialog.RestoreDirectory = true;
             dialog.FileName = Name;
             dialog.DefaultExt = Ogmo.LEVEL_EXT;
@@ -130,12 +130,14 @@ namespace OgmoEditor
 
             //Handle cancel
             if (dialog.ShowDialog() == DialogResult.Cancel)
-                return;
+                return false;
 
             SavePath = dialog.FileName;
             writeTo(dialog.FileName);
 
             RemoveChanged();
+
+            return true;
         }
 
         private void writeTo(string filename)
