@@ -34,30 +34,28 @@ namespace OgmoEditor.ProjectEditors
             get { return values; }
             set
             {
-                values = value;
+                values = new List<ValueDefinition>(value);
+                foreach (ValueDefinition v in values)
+                    listBox.Items.Add(v.Name);
             }
         }
 
-        private void listBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void setControlsFromValue(ValueDefinition v)
         {
-            removeButton.Enabled = listBox.SelectedIndex != -1;
+            removeButton.Enabled = true;
+
+            nameTextBox.CausesValidation = true;
+            nameTextBox.Enabled = true; 
+            nameTextBox.Text = v.Name;
         }
 
-        private void createButton_Click(object sender, EventArgs e)
+        private void disableControls()
         {
-            IntValueDefinition v = new IntValueDefinition();
-            v.Name = getNewName();
-            values.Add(v);
-            listBox.Items.Add(v.Name);
-        }
+            removeButton.Enabled = false;
 
-        private void removeButton_Click(object sender, EventArgs e)
-        {
-            int index = listBox.SelectedIndex;
-            values.RemoveAt(listBox.SelectedIndex);
-            listBox.Items.RemoveAt(listBox.SelectedIndex);
-
-            listBox.SelectedIndex = Math.Min(listBox.Items.Count - 1, index);
+            nameTextBox.CausesValidation = false;
+            nameTextBox.Enabled = false;        
+            nameTextBox.Text = ""; 
         }
 
         private string getNewName()
@@ -95,6 +93,40 @@ namespace OgmoEditor.ProjectEditors
                 s += ProjParse.Error(container + " contains value(s) with blank name");
 
             return s;
+        }
+
+        /*
+         *  Events
+         */
+        private void listBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox.SelectedIndex != -1)
+                setControlsFromValue(values[listBox.SelectedIndex]);
+            else
+                disableControls();
+        }
+
+        private void createButton_Click(object sender, EventArgs e)
+        {
+            IntValueDefinition v = new IntValueDefinition();
+            v.Name = getNewName();
+            values.Add(v);
+            listBox.SelectedIndex = listBox.Items.Add(v.Name);
+        }
+
+        private void removeButton_Click(object sender, EventArgs e)
+        {
+            int index = listBox.SelectedIndex;
+            values.RemoveAt(listBox.SelectedIndex);
+            listBox.Items.RemoveAt(listBox.SelectedIndex);
+
+            listBox.SelectedIndex = Math.Min(listBox.Items.Count - 1, index);
+        }
+
+        private void nameTextBox_Validated(object sender, EventArgs e)
+        {
+            values[listBox.SelectedIndex].Name = nameTextBox.Text;
+            listBox.Items[listBox.SelectedIndex] = nameTextBox.Text;
         }
     }
 }

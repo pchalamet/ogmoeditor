@@ -40,7 +40,7 @@ namespace OgmoEditor
 
         //Definitions
         public List<LayerDefinition> LayerDefinitions;
-        public List<ValueDefinition> LevelValuesDefinitions;
+        public List<ValueDefinition> LevelValueDefinitions;
         public List<ObjectDefinition> ObjectDefinitions;
         public List<Tileset> Tilesets;
 
@@ -65,7 +65,7 @@ namespace OgmoEditor
 
             //Definitions
             LayerDefinitions = new List<LayerDefinition>();
-            LevelValuesDefinitions = new List<ValueDefinition>();
+            LevelValueDefinitions = new List<ValueDefinition>();
             ObjectDefinitions = new List<ObjectDefinition>();
             Tilesets = new List<Tileset>();
 
@@ -118,15 +118,15 @@ namespace OgmoEditor
             //If it hasn't been saved yet, go to SaveAs
             if (LastFilename == "")
             {
-                SaveAs();
-                return;
+                if (!SaveAs())
+                    return;
             }
 
             writeTo(LastFilename);
             Changed = false;
         }
 
-        public bool SaveAs(bool write = true)
+        public bool SaveAs()
         {
             SaveFileDialog dialog = new SaveFileDialog();
             if (LastFilename == "")
@@ -146,12 +146,6 @@ namespace OgmoEditor
             LastFilename = dialog.FileName;
             if (OnPathChanged != null)
                 OnPathChanged(this);
-
-            if (write)
-            {
-                writeTo(dialog.FileName);
-                Changed = false;
-            }
 
             return true;
         }

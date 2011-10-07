@@ -117,7 +117,8 @@ namespace OgmoEditor
 
         private void saveProjectAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.Project.SaveAs();
+            if (Ogmo.Project.SaveAs())
+                Ogmo.Project.Save();
         }
 
         private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)

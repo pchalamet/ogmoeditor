@@ -70,6 +70,7 @@
     <Compile Include="Definitions\LayerDefinitions\TileLayerDefinition.cs" />
     <Compile Include="Definitions\ObjectDefinition.cs" />
     <Compile Include="Definitions\ValueDefinitions\BoolValueDefinition.cs" />
+    <Compile Include="Definitions\ValueDefinitions\ColorValueDefinition.cs" />
     <Compile Include="Definitions\ValueDefinitions\EnumValueDefinition.cs" />
     <Compile Include="Definitions\ValueDefinitions\FloatValueDefinition.cs" />
     <Compile Include="Definitions\ValueDefinitions\IntValueDefinition.cs" />
@@ -82,6 +83,7 @@
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Ogmo.cs" />
+    <Compile Include="OgmoColor.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="ProjectEditors\IProjectChanger.cs" />
     <Compile Include="ProjectEditors\LayersEditor.cs">

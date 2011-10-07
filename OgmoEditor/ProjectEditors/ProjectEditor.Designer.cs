@@ -149,7 +149,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(600, 600);
             this.Name = "ProjectEditor";
-            this.Text = "ProjectEditor";
+            this.Text = "Project Editor";
             this.layersTabPage.ResumeLayout(false);
             this.settingsTabPage.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using OgmoEditor.Definitions.LayerDefinitions;
+using System.Diagnostics;
 
 namespace OgmoEditor.ProjectEditors
 {
@@ -31,21 +32,14 @@ namespace OgmoEditor.ProjectEditors
 
         private void onClose(object sender, FormClosedEventArgs e)
         {
-            if (e.CloseReason == CloseReason.UserClosing)
-                cancel();
+            if (newProject)
+                Ogmo.CloseProject();
             (Owner as MainWindow).EnableEditing();
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
             Close();
-            cancel();
-        }
-
-        private void cancel()
-        {
-            if (newProject)
-                Ogmo.CloseProject();
         }
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -62,10 +56,14 @@ namespace OgmoEditor.ProjectEditors
             settingsEditor.ApplyToProject(project);
             layersEditor.ApplyToProject(project);
             project.Changed = true;
-            Close();
 
             if (newProject)
+            {
+                newProject = false;
                 project.Save();
+            }
+
+            Close();
         }
     }
 }

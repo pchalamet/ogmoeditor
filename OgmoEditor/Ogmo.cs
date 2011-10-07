@@ -37,6 +37,7 @@ namespace OgmoEditor
         {
             Application.EnableVisualStyles();
             InitializeDirectories();
+
             Application.Run(MainWindow);
         }
 
@@ -55,7 +56,7 @@ namespace OgmoEditor
         static public void NewProject()
         {
             Project project = new Project();
-            if (project.SaveAs(false))
+            if (project.SaveAs())
             {
                 StartProject(project);
                 EditProject(true);
