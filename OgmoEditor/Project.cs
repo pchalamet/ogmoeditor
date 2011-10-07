@@ -12,6 +12,9 @@ using System.Runtime.Serialization;
 using System.Drawing;
 using System.Xml.Serialization;
 using System.Diagnostics;
+using System.Collections;
+using OgmoEditor.Definitions.ValueDefinitions;
+using OgmoEditor.Definitions;
 
 namespace OgmoEditor
 {
@@ -26,7 +29,11 @@ namespace OgmoEditor
         public Size LevelMinimumSize;
         public Size LevelMaximumSize;
         public string LastFilename;
+
+        //Definitions
         public List<LayerDefinition> LayerDefinitions;
+        public List<ValueDefinition> LevelValuesDefinitions;
+        public List<ObjectDefinition> ObjectDefinitions;
 
         //Non-serialzed instance vars
         private bool changed;
@@ -45,11 +52,18 @@ namespace OgmoEditor
             name = Ogmo.NEW_PROJECT_NAME;
             WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             LastFilename = "";
-            LayerDefinitions = new List<LayerDefinition>();
             LevelDefaultSize = LevelMinimumSize = LevelMaximumSize = new Size(640, 480);
+
+            //Definitions
+            LayerDefinitions = new List<LayerDefinition>();
+            LevelValuesDefinitions = new List<ValueDefinition>();
+            ObjectDefinitions = new List<ObjectDefinition>();
 
             //Init running vars
             InitializeRunningVars();
+
+            ObjectDefinition obj = new ObjectDefinition();
+            ObjectDefinitions.Add(obj);
         }
 
         private void InitializeRunningVars()
@@ -94,6 +108,18 @@ namespace OgmoEditor
             }
         }
 
+        [XmlIgnore]
+        public bool WorkingDirectoryValid
+        {
+            get
+            {
+                if (WorkingDirectoryRelative)
+                    return Directory.Exists(Ogmo.Project.SavedDirectory + WorkingDirectory);
+                else
+                    return Directory.Exists(WorkingDirectory);
+            }
+        }
+
         /*
          *  Saving the project file
          */
@@ -132,7 +158,7 @@ namespace OgmoEditor
         private void writeTo(string filename)
         {
             XmlSerializer xs = new XmlSerializer(typeof(Project));
-            Stream stream = new FileStream(filename, FileMode.OpenOrCreate);
+            Stream stream = new FileStream(filename, FileMode.Create);
             xs.Serialize(stream, this);
             stream.Close();
         }

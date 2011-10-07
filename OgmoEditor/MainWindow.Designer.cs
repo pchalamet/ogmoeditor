@@ -57,7 +57,7 @@
             this.duplicateLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.projectViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.masterTabControl = new System.Windows.Forms.TabControl();
             this.StatusStrip.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -300,22 +300,18 @@
             // 
             // viewToolStripMenuItem
             // 
-            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.projectViewToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
-            this.viewToolStripMenuItem.Click += new System.EventHandler(this.viewToolStripMenuItem_Click);
             // 
-            // projectViewToolStripMenuItem
+            // masterTabControl
             // 
-            this.projectViewToolStripMenuItem.CheckOnClick = true;
-            this.projectViewToolStripMenuItem.Enabled = false;
-            this.projectViewToolStripMenuItem.Name = "projectViewToolStripMenuItem";
-            this.projectViewToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.projectViewToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.projectViewToolStripMenuItem.Text = "Project View";
-            this.projectViewToolStripMenuItem.Click += new System.EventHandler(this.projectViewToolStripMenuItem_Click);
+            this.masterTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.masterTabControl.Location = new System.Drawing.Point(0, 24);
+            this.masterTabControl.Name = "masterTabControl";
+            this.masterTabControl.SelectedIndex = 0;
+            this.masterTabControl.Size = new System.Drawing.Size(784, 516);
+            this.masterTabControl.TabIndex = 2;
             // 
             // MainWindow
             // 
@@ -323,6 +319,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::OgmoEditor.Properties.Resources.bg;
             this.ClientSize = new System.Drawing.Size(784, 562);
+            this.Controls.Add(this.masterTabControl);
             this.Controls.Add(this.StatusStrip);
             this.Controls.Add(this.MenuStrip);
             this.MainMenuStrip = this.MenuStrip;
@@ -365,11 +362,11 @@
         private System.Windows.Forms.ToolStripMenuItem checkForUpdatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem projectViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel MainStatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel mouseCoordinatesLabel;
         private System.Windows.Forms.ToolStripMenuItem editProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openAllLevelsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem;
+        private System.Windows.Forms.TabControl masterTabControl;
     }
 }

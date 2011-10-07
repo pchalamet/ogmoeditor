@@ -27,8 +27,10 @@ namespace OgmoEditor
 
         static public readonly MainWindow MainWindow = new MainWindow();
         static public Project Project { get; private set; }
+        static public Level CurrentLevel { get; private set; }
         static public event ProjectCallback OnProjectStart;
         static public event ProjectCallback OnProjectClose;
+        static public event LevelCallback OnLevelChanged;
 
         [STAThread]
         static void Main(string[] args)
@@ -64,9 +66,9 @@ namespace OgmoEditor
                 CloseProject();
 
             //Load it
-            BinaryFormatter bf = new BinaryFormatter();
+            XmlSerializer xs = new XmlSerializer(typeof(Project));
             Stream s = dialog.OpenFile();
-            Project project = (Project)bf.Deserialize(s);
+            Project project = (Project)xs.Deserialize(s);
             s.Close();
 
             //Start the project
@@ -97,6 +99,17 @@ namespace OgmoEditor
             MainWindow.Enabled = false;
             ProjectEditor editor = new ProjectEditor(Ogmo.Project);
             editor.Show(MainWindow);
+        }
+
+        /*
+         *  Level stuff
+         */
+        static public void SetLevel(Level level)
+        {
+            CurrentLevel = level;
+
+            if (OnLevelChanged != null)
+                OnLevelChanged(level);
         }
     }
 }
