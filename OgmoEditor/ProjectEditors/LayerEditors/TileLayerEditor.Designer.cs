@@ -28,18 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.multipleTilesetsCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
+            // 
+            // multipleTilesetsCheckBox
+            // 
+            this.multipleTilesetsCheckBox.AutoSize = true;
+            this.multipleTilesetsCheckBox.Location = new System.Drawing.Point(18, 15);
+            this.multipleTilesetsCheckBox.Name = "multipleTilesetsCheckBox";
+            this.multipleTilesetsCheckBox.Size = new System.Drawing.Size(124, 17);
+            this.multipleTilesetsCheckBox.TabIndex = 0;
+            this.multipleTilesetsCheckBox.Text = "Allow multiple tilesets";
+            this.multipleTilesetsCheckBox.UseVisualStyleBackColor = true;
+            this.multipleTilesetsCheckBox.CheckedChanged += new System.EventHandler(this.multipleTilesetsCheckBox_CheckedChanged);
             // 
             // TileLayerEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.multipleTilesetsCheckBox);
             this.Name = "TileLayerEditor";
             this.Size = new System.Drawing.Size(353, 358);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.CheckBox multipleTilesetsCheckBox;
     }
 }
