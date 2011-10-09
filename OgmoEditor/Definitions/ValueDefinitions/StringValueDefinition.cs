@@ -14,12 +14,15 @@ namespace OgmoEditor.Definitions.ValueDefinitions
         public string Default;
         [XmlAttribute]
         public int MaxChars;
+        [XmlAttribute]
+        public bool MultiLine;
 
         public StringValueDefinition()
             : base()
         {
             Default = "";
             MaxChars = -1;
+            MultiLine = false;
         }
 
         public override System.Windows.Forms.UserControl GetEditor()

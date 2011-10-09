@@ -23,7 +23,7 @@ namespace OgmoEditor.ProjectEditors
         public string ErrorCheck()
         {
             string s = "";
-            s += ProjParse.CheckString(projectNameTextBox, "Project Name");
+            s += ProjParse.CheckNonblankString(projectNameTextBox, "Project Name");
             s += ProjParse.CheckPosInt(defaultWidthTextBox, "Default Level Width");
             s += ProjParse.CheckPosInt(defaultHeightTextBox, "Default Level Height");
             s += ProjParse.CheckPosInt(minWidthTextBox, "Minimum Level Width");

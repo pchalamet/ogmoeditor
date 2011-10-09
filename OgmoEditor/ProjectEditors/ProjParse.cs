@@ -62,7 +62,7 @@ namespace OgmoEditor.ProjectEditors
             return "-" + error + "\n";
         }
 
-        static public string CheckString(TextBox x, string name)
+        static public string CheckNonblankString(TextBox x, string name)
         {
             if (x.Text != "")
                 return "";
@@ -75,10 +75,7 @@ namespace OgmoEditor.ProjectEditors
             try
             {
                 int i = Convert.ToInt32(x.Text);
-                if (i > 0)
-                    return "";
-                else 
-                    return Error(name + " is not a positive integer");
+                return CheckPosInt(i, name);
             }
             catch
             {

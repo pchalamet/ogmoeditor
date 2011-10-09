@@ -11,14 +11,11 @@ namespace OgmoEditor.Definitions.ValueDefinitions
     {
         [XmlAttribute]
         string[] Values;
-        [XmlAttribute]
-        int DefaultIndex;
 
         public EnumValueDefinition()
             : base()
         {
             Values = new string[] { "default" };
-            DefaultIndex = 0;
         }
 
         public override System.Windows.Forms.UserControl GetEditor()
