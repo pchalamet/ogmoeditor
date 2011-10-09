@@ -18,6 +18,7 @@ namespace OgmoEditor.ProjectEditors.ValueEditors
         {
             this.def = def;
             InitializeComponent();
+            Location = new Point(99, 53);
         }
     }
 }

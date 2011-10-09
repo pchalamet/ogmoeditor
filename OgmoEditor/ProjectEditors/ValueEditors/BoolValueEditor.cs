@@ -18,6 +18,14 @@ namespace OgmoEditor.ProjectEditors.ValueEditors
         {
             this.def = def;
             InitializeComponent();
+            Location = new Point(99, 53);
+
+            defaultCheckBox.Checked = def.Default;
+        }
+
+        private void defaultCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            def.Default = defaultCheckBox.Checked;
         }
     }
 }
