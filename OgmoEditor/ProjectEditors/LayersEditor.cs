@@ -17,6 +17,10 @@ namespace OgmoEditor.ProjectEditors
         public LayersEditor()
         {
             InitializeComponent();
+
+            //Init the type combobox items
+            foreach (var s in LayerDefinition.LAYER_NAMES)
+                typeComboBox.Items.Add(s);
         }
 
         public string ErrorCheck()
@@ -65,23 +69,7 @@ namespace OgmoEditor.ProjectEditors
             nameTextBox.Text = definition.Name;
             gridXTextBox.Text = definition.Grid.Width.ToString();
             gridYTextBox.Text = definition.Grid.Height.ToString();
-
-            if (definition is GridLayerDefinition)
-            {
-                typeComboBox.SelectedIndex = 0;
-            }
-            else if (definition is TileLayerDefinition)
-            {
-                typeComboBox.SelectedIndex = 1;
-            }
-            else if (definition is ObjectLayerDefinition)
-            {
-                typeComboBox.SelectedIndex = 2;
-            }
-            else if (definition is ShapeLayerDefinition)
-            {
-                typeComboBox.SelectedIndex = 3;
-            }
+            typeComboBox.SelectedIndex = LayerDefinition.LAYER_TYPES.FindIndex(e => e == definition.GetType());
         }
 
         private LayerDefinition getDefaultLayer()
@@ -170,23 +158,7 @@ namespace OgmoEditor.ProjectEditors
             LayerDefinition oldDef = layerDefinitions[listBox.SelectedIndex];
             LayerDefinition newDef;
 
-            if (typeComboBox.SelectedIndex == 0)
-            {
-                newDef = new GridLayerDefinition();
-                
-            }
-            else if (typeComboBox.SelectedIndex == 1)
-            {
-                newDef = new TileLayerDefinition();
-            }
-            else if (typeComboBox.SelectedIndex == 2)
-            {
-                newDef = new ObjectLayerDefinition();
-            }
-            else
-            {
-                newDef = new ShapeLayerDefinition();
-            }
+            newDef = (LayerDefinition)Activator.CreateInstance(LayerDefinition.LAYER_TYPES[typeComboBox.SelectedIndex]);
 
             newDef.Name = oldDef.Name;
             newDef.Grid = oldDef.Grid;
