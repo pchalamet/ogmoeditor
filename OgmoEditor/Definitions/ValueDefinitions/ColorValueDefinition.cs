@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using System.Drawing;
+using OgmoEditor.ProjectEditors.ValueEditors;
 
 namespace OgmoEditor.Definitions.ValueDefinitions
 {
@@ -19,6 +20,11 @@ namespace OgmoEditor.Definitions.ValueDefinitions
         {
             Default = new OgmoColor(255, 255, 255);
             ExportAlphaChannel = true;
+        }
+
+        public override System.Windows.Forms.UserControl GetEditor()
+        {
+            return new ColorValueEditor(this);
         }
     }
 }

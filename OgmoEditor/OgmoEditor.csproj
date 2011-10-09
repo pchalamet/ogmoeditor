@@ -117,11 +117,41 @@
     <Compile Include="ProjectEditors\TilesetsEditor.Designer.cs">
       <DependentUpon>TilesetsEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProjectEditors\ValueEditors\BoolValueEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ProjectEditors\ValueEditors\BoolValueEditor.Designer.cs">
+      <DependentUpon>BoolValueEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectEditors\ValueEditors\ColorValueEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ProjectEditors\ValueEditors\ColorValueEditor.Designer.cs">
+      <DependentUpon>ColorValueEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectEditors\ValueEditors\EnumValueEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ProjectEditors\ValueEditors\EnumValueEditor.Designer.cs">
+      <DependentUpon>EnumValueEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectEditors\ValueEditors\FloatValueEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ProjectEditors\ValueEditors\FloatValueEditor.Designer.cs">
+      <DependentUpon>FloatValueEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProjectEditors\ValueEditors\IntValueEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ProjectEditors\ValueEditors\IntValueEditor.Designer.cs">
       <DependentUpon>IntValueEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectEditors\ValueEditors\StringValueEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ProjectEditors\ValueEditors\StringValueEditor.Designer.cs">
+      <DependentUpon>StringValueEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="ProjectEditors\ValuesEditor.cs">
       <SubType>UserControl</SubType>
@@ -164,8 +194,23 @@
     <EmbeddedResource Include="ProjectEditors\TilesetsEditor.resx">
       <DependentUpon>TilesetsEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProjectEditors\ValueEditors\BoolValueEditor.resx">
+      <DependentUpon>BoolValueEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectEditors\ValueEditors\ColorValueEditor.resx">
+      <DependentUpon>ColorValueEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectEditors\ValueEditors\EnumValueEditor.resx">
+      <DependentUpon>EnumValueEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectEditors\ValueEditors\FloatValueEditor.resx">
+      <DependentUpon>FloatValueEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProjectEditors\ValueEditors\IntValueEditor.resx">
       <DependentUpon>IntValueEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectEditors\ValueEditors\StringValueEditor.resx">
+      <DependentUpon>StringValueEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProjectEditors\ValuesEditor.resx">
       <DependentUpon>ValuesEditor.cs</DependentUpon>
@@ -205,7 +250,9 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ProjectEditors\LayerEditors\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
