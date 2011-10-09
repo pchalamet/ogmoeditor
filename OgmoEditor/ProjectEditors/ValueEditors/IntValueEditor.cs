@@ -28,22 +28,22 @@ namespace OgmoEditor.ProjectEditors.ValueEditors
 
         private void defaultTextBox_Validated(object sender, EventArgs e)
         {
-            ProjParse.GetInt(ref def.Default, defaultTextBox);
+            ProjParse.Parse(ref def.Default, defaultTextBox);
         }
 
         private void minTextBox_Validated(object sender, EventArgs e)
         {
-            ProjParse.GetInt(ref def.Min, minTextBox);
+            ProjParse.Parse(ref def.Min, minTextBox);
         }
 
         private void maxTextBox_TextChanged(object sender, EventArgs e)
         {
-            ProjParse.GetInt(ref def.Max, maxTextBox);
+            ProjParse.Parse(ref def.Max, maxTextBox);
         }
 
         private void uiComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            def.UIType = IntValueDefinition.UITypes.Field + uiComboBox.SelectedIndex;
+            def.UIType = (IntValueDefinition.UITypes)uiComboBox.SelectedIndex;
         }
     }
 }

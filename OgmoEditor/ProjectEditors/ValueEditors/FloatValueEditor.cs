@@ -19,6 +19,37 @@ namespace OgmoEditor.ProjectEditors.ValueEditors
             this.def = def;
             InitializeComponent();
             Location = new Point(99, 53);
+
+            defaultTextBox.Text = def.Default.ToString();
+            roundTextBox.Text = def.Round.ToString();
+            minTextBox.Text = def.Min.ToString();
+            maxTextBox.Text = def.Max.ToString();
+            uiComboBox.SelectedIndex = (int)def.UIType;
+        }
+
+        private void defaultTextBox_Validated(object sender, EventArgs e)
+        {
+            ProjParse.Parse(ref def.Default, defaultTextBox);
+        }
+
+        private void roundTextBox_Validated(object sender, EventArgs e)
+        {
+            ProjParse.Parse(ref def.Round, defaultTextBox);
+        }
+
+        private void minTextBox_Validated(object sender, EventArgs e)
+        {
+            ProjParse.Parse(ref def.Min, defaultTextBox);
+        }
+
+        private void maxTextBox_Validated(object sender, EventArgs e)
+        {
+            ProjParse.Parse(ref def.Max, defaultTextBox);
+        }
+
+        private void uiComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            def.UIType = (FloatValueDefinition.UITypes)uiComboBox.SelectedIndex;
         }
     }
 }

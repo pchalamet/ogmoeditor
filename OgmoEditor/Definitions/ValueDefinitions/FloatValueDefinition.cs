@@ -10,6 +10,8 @@ namespace OgmoEditor.Definitions.ValueDefinitions
     [XmlRoot("float")]
     public class FloatValueDefinition : ValueDefinition
     {
+        public enum UITypes { Field, Slider };
+
         [XmlAttribute]
         public float Default;
         [XmlAttribute]
@@ -17,7 +19,9 @@ namespace OgmoEditor.Definitions.ValueDefinitions
         [XmlAttribute]
         public float Max;
         [XmlAttribute]
-        public float Inc;
+        public float Round;
+        [XmlAttribute]
+        public UITypes UIType;
 
         public FloatValueDefinition()
             : base()
@@ -25,7 +29,8 @@ namespace OgmoEditor.Definitions.ValueDefinitions
             Default = 0;
             Min = float.MinValue;
             Max = float.MaxValue;
-            Inc = .1f;
+            Round = .1f;
+            UIType = UITypes.Field;
         }
 
         public override System.Windows.Forms.UserControl GetEditor()

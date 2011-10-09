@@ -9,7 +9,7 @@ namespace OgmoEditor.ProjectEditors
 {
     static class ProjParse
     {
-        static public void GetInt(ref int to, TextBox box)
+        static public void Parse(ref int to, TextBox box)
         {
             try
             {
@@ -21,7 +21,19 @@ namespace OgmoEditor.ProjectEditors
             }
         }
 
-        static public void GetSize(ref Size to, TextBox x, TextBox y)
+        static public void Parse(ref float to, TextBox box)
+        {
+            try
+            {
+                to = Convert.ToSingle(box.Text);
+            }
+            catch
+            {
+                box.Text = to.ToString();
+            }
+        }
+
+        static public void Parse(ref Size to, TextBox x, TextBox y)
         {
             try
             {

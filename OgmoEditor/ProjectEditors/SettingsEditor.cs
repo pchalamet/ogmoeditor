@@ -49,9 +49,9 @@ namespace OgmoEditor.ProjectEditors
         public void ApplyToProject(Project project)
         {
             project.Name = projectNameTextBox.Text;
-            ProjParse.GetSize(ref project.LevelDefaultSize, defaultWidthTextBox, defaultHeightTextBox);
-            ProjParse.GetSize(ref project.LevelMinimumSize, minWidthTextBox, minHeightTextBox);
-            ProjParse.GetSize(ref project.LevelMaximumSize, maxWidthTextBox, maxHeightTextBox);
+            ProjParse.Parse(ref project.LevelDefaultSize, defaultWidthTextBox, defaultHeightTextBox);
+            ProjParse.Parse(ref project.LevelMinimumSize, minWidthTextBox, minHeightTextBox);
+            ProjParse.Parse(ref project.LevelMaximumSize, maxWidthTextBox, maxHeightTextBox);
             project.LevelValueDefinitions = valuesEditor.Values;
         }
 
