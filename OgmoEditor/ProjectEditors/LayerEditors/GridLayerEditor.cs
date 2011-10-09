@@ -19,6 +19,13 @@ namespace OgmoEditor.ProjectEditors.LayerEditors
             this.def = def;
             InitializeComponent();
             Location = new Point(206, 117);
+
+            colorChooser.Color = def.Color;
+        }
+
+        private void colorChooser_ColorChanged(OgmoColor color)
+        {
+            def.Color = color;
         }
     }
 }

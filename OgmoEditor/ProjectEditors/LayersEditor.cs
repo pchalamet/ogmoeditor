@@ -13,10 +13,12 @@ namespace OgmoEditor.ProjectEditors
     public partial class LayersEditor : UserControl, IProjectChanger
     {
         private List<LayerDefinition> layerDefinitions;
+        private UserControl layerEditor;
 
         public LayersEditor()
         {
             InitializeComponent();
+            layerEditor = null;
 
             //Init the type combobox items
             foreach (var s in LayerDefinition.LAYER_NAMES)
@@ -66,10 +68,47 @@ namespace OgmoEditor.ProjectEditors
 
         private void setControlsFromDefinition(LayerDefinition definition)
         {
+            //Enabled stuff
+            removeButton.Enabled = true;
+            moveUpButton.Enabled = listBox.SelectedIndex > 0;
+            moveDownButton.Enabled = listBox.SelectedIndex < listBox.Items.Count - 1;
+            nameTextBox.Enabled = true;
+            gridXTextBox.Enabled = true;
+            gridYTextBox.Enabled = true;
+            typeComboBox.Enabled = true;
+
+            //Load properties
             nameTextBox.Text = definition.Name;
             gridXTextBox.Text = definition.Grid.Width.ToString();
             gridYTextBox.Text = definition.Grid.Height.ToString();
             typeComboBox.SelectedIndex = LayerDefinition.LAYER_TYPES.FindIndex(e => e == definition.GetType());
+
+            //Remove the old layer editor
+            if (layerEditor != null)
+                Controls.Remove(layerEditor);
+
+            //Add the new one
+            layerEditor = definition.GetEditor();
+            if (layerEditor != null)
+                Controls.Add(layerEditor);
+        }
+
+        private void disableControls()
+        {
+            //Disable all
+            removeButton.Enabled = false;
+            moveUpButton.Enabled = false;
+            moveDownButton.Enabled = false;
+            nameTextBox.Enabled = false;
+            gridXTextBox.Enabled = false;
+            gridYTextBox.Enabled = false;
+            typeComboBox.Enabled = false;
+
+            if (layerEditor != null)
+            {
+                Controls.Remove(layerEditor);
+                layerEditor = null;
+            }
         }
 
         private LayerDefinition getDefaultLayer()
@@ -138,7 +177,7 @@ namespace OgmoEditor.ProjectEditors
             layerDefinitions[index + 1] = temp;
 
             listBox.Items[index] = layerDefinitions[index].Name;
-            listBox.Items[index - 1] = layerDefinitions[index + 1].Name;
+            listBox.Items[index + 1] = layerDefinitions[index + 1].Name;
             listBox.SelectedIndex = index + 1;
         }
 
@@ -150,7 +189,7 @@ namespace OgmoEditor.ProjectEditors
 
         private void gridXTextBox_Validated(object sender, EventArgs e)
         {
-            //ProjParse.GetSize(ref layerDefinitions[listBox.SelectedIndex].Grid, gridXTextBox, gridYTextBox);
+            ProjParse.Parse(ref layerDefinitions[listBox.SelectedIndex].Grid, gridXTextBox, gridYTextBox);
         }
 
         private void typeComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -169,26 +208,9 @@ namespace OgmoEditor.ProjectEditors
         private void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBox.SelectedIndex != -1)
-            {
-                removeButton.Enabled = true;
-                moveUpButton.Enabled = listBox.SelectedIndex > 0;
-                moveDownButton.Enabled = listBox.SelectedIndex < listBox.Items.Count - 1;
-                nameTextBox.Enabled = true;
-                gridXTextBox.Enabled = true;
-                gridYTextBox.Enabled = true;
-                typeComboBox.Enabled = true;
                 setControlsFromDefinition(layerDefinitions[listBox.SelectedIndex]);
-            }
             else
-            {
-                removeButton.Enabled = false;
-                moveUpButton.Enabled = false;
-                moveDownButton.Enabled = false;
-                nameTextBox.Enabled = false;
-                gridXTextBox.Enabled = false;
-                gridYTextBox.Enabled = false;
-                typeComboBox.Enabled = false;
-            }
+                disableControls();
         }
     }
 }
