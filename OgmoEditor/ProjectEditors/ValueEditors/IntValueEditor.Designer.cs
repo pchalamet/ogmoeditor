@@ -41,7 +41,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(36, 72);
+            this.label6.Location = new System.Drawing.Point(23, 71);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(18, 13);
             this.label6.TabIndex = 15;
@@ -54,7 +54,7 @@
             this.uiComboBox.Items.AddRange(new object[] {
             "Field",
             "Slider"});
-            this.uiComboBox.Location = new System.Drawing.Point(60, 69);
+            this.uiComboBox.Location = new System.Drawing.Point(47, 68);
             this.uiComboBox.Name = "uiComboBox";
             this.uiComboBox.Size = new System.Drawing.Size(77, 21);
             this.uiComboBox.TabIndex = 14;
@@ -63,7 +63,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(130, 45);
+            this.label5.Location = new System.Drawing.Point(130, 44);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(27, 13);
             this.label5.TabIndex = 13;
@@ -71,16 +71,16 @@
             // 
             // maxTextBox
             // 
-            this.maxTextBox.Location = new System.Drawing.Point(163, 42);
+            this.maxTextBox.Location = new System.Drawing.Point(159, 41);
             this.maxTextBox.Name = "maxTextBox";
-            this.maxTextBox.Size = new System.Drawing.Size(63, 20);
+            this.maxTextBox.Size = new System.Drawing.Size(77, 20);
             this.maxTextBox.TabIndex = 12;
             this.maxTextBox.TextChanged += new System.EventHandler(this.maxTextBox_TextChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(30, 45);
+            this.label4.Location = new System.Drawing.Point(17, 44);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(24, 13);
             this.label4.TabIndex = 11;
@@ -88,16 +88,16 @@
             // 
             // minTextBox
             // 
-            this.minTextBox.Location = new System.Drawing.Point(60, 42);
+            this.minTextBox.Location = new System.Drawing.Point(47, 41);
             this.minTextBox.Name = "minTextBox";
-            this.minTextBox.Size = new System.Drawing.Size(63, 20);
+            this.minTextBox.Size = new System.Drawing.Size(77, 20);
             this.minTextBox.TabIndex = 10;
             this.minTextBox.Validated += new System.EventHandler(this.minTextBox_Validated);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 18);
+            this.label3.Location = new System.Drawing.Point(0, 17);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 13);
             this.label3.TabIndex = 9;
@@ -105,7 +105,7 @@
             // 
             // defaultTextBox
             // 
-            this.defaultTextBox.Location = new System.Drawing.Point(60, 15);
+            this.defaultTextBox.Location = new System.Drawing.Point(47, 14);
             this.defaultTextBox.Name = "defaultTextBox";
             this.defaultTextBox.Size = new System.Drawing.Size(77, 20);
             this.defaultTextBox.TabIndex = 8;
