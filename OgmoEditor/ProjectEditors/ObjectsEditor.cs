@@ -9,11 +9,26 @@ using System.Windows.Forms;
 
 namespace OgmoEditor.ProjectEditors
 {
-    public partial class ObjectsEditor : UserControl
+    public partial class ObjectsEditor : UserControl, IProjectChanger
     {
         public ObjectsEditor()
         {
             InitializeComponent();
+        }
+
+        public string ErrorCheck()
+        {
+            return "";
+        }
+
+        public void LoadFromProject(Project project)
+        {
+
+        }
+
+        public void ApplyToProject(Project project)
+        {
+
         }
     }
 }

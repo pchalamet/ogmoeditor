@@ -25,6 +25,8 @@ namespace OgmoEditor.ProjectEditors
             //Load the contents of the editors
             settingsEditor.LoadFromProject(project);
             layersEditor.LoadFromProject(project);
+            tilesetsEditor.LoadFromProject(project);
+            objectsEditor.LoadFromProject(project);
 
             //Events
             FormClosed += onClose;
@@ -55,6 +57,8 @@ namespace OgmoEditor.ProjectEditors
 
             settingsEditor.ApplyToProject(project);
             layersEditor.ApplyToProject(project);
+            tilesetsEditor.ApplyToProject(project);
+            objectsEditor.ApplyToProject(project);
             project.Changed = true;
 
             if (newProject)
