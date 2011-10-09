@@ -5,12 +5,14 @@ using System.Text;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
+using System.Diagnostics;
 
 namespace OgmoEditor
 {
     [XmlRoot("Color")]
     public struct OgmoColor
     {
+        private const string HEX = "0123456789ABCDEF";
         private const string REGEX32 = @"^(#|0x|)([0-9a-fA-F]{8})$";
         private const string REGEX24 = @"^(#|0x|)([0-9a-fA-F]{6})$";
 
@@ -45,23 +47,30 @@ namespace OgmoEditor
             {
                 color = removePrefix(color);
 
-                A = (byte)(Convert.ToByte(color[0]) * 16 + Convert.ToByte(color[1]));
-                R = (byte)(Convert.ToByte(color[2]) * 16 + Convert.ToByte(color[3]));
-                G = (byte)(Convert.ToByte(color[4]) * 16 + Convert.ToByte(color[5]));
-                B = (byte)(Convert.ToByte(color[6]) * 16 + Convert.ToByte(color[7]));
+                A = (byte)(hexToByte(color[0]) * 16 + hexToByte(color[1]));
+                R = (byte)(hexToByte(color[2]) * 16 + hexToByte(color[3]));
+                G = (byte)(hexToByte(color[4]) * 16 + hexToByte(color[5]));
+                B = (byte)(hexToByte(color[6]) * 16 + hexToByte(color[7]));
             }
             else if (IsValid24(color))
             {
                 color = removePrefix(color);
 
+                Debug.WriteLine(hexToByte(color[0]));
+
                 A = 255;
-                R = (byte)(Convert.ToByte(color[0]) * 16 + Convert.ToByte(color[1]));
-                G = (byte)(Convert.ToByte(color[2]) * 16 + Convert.ToByte(color[3]));
-                B = (byte)(Convert.ToByte(color[4]) * 16 + Convert.ToByte(color[5]));
+                R = (byte)(hexToByte(color[0]) * 16 + hexToByte(color[1]));
+                G = (byte)(hexToByte(color[2]) * 16 + hexToByte(color[3]));
+                B = (byte)(hexToByte(color[4]) * 16 + hexToByte(color[5]));
             }
             else
                 throw new Exception("String was not properly formatted to be converted to a color!");
 
+        }
+
+        static private byte hexToByte(char c)
+        {
+            return (byte)HEX.IndexOf(char.ToUpper(c));
         }
 
         static private string removePrefix(string from)

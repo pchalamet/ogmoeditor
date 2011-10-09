@@ -54,6 +54,18 @@ namespace OgmoEditor.ProjectEditors
             }
         }
 
+        static public void Parse(ref OgmoColor to, TextBox box)
+        {
+            try
+            {
+                to = new OgmoColor(box.Text);
+            }
+            catch
+            {
+                box.Text = to.ToString();
+            }
+        }
+
         /*
          *  Error checking
          */

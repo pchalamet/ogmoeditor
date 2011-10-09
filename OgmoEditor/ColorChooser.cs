@@ -6,6 +6,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics;
+using OgmoEditor.ProjectEditors;
 
 namespace OgmoEditor
 {
@@ -40,13 +42,6 @@ namespace OgmoEditor
             }
         }
 
-        private void displayBox_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-
-            
-        }
-
         private void colorButton_Click(object sender, EventArgs e)
         {
             //Show the dialog
@@ -60,6 +55,19 @@ namespace OgmoEditor
 
             //Get the new color
             Color = (OgmoColor)dialog.Color;
+        }
+
+        private void hexTextBox_Validated(object sender, EventArgs e)
+        {
+            OgmoColor col = color;
+            ProjParse.Parse(ref col, hexTextBox);
+            Color = col;
+        }
+
+        private void hexTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                hexTextBox_Validated(sender, e);
         }
     }
 }

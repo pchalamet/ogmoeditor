@@ -34,12 +34,12 @@
             // 
             // hexTextBox
             // 
-            this.hexTextBox.Enabled = false;
             this.hexTextBox.Location = new System.Drawing.Point(4, 4);
             this.hexTextBox.Name = "hexTextBox";
-            this.hexTextBox.ReadOnly = true;
             this.hexTextBox.Size = new System.Drawing.Size(54, 20);
             this.hexTextBox.TabIndex = 0;
+            this.hexTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.hexTextBox_KeyDown);
+            this.hexTextBox.Validated += new System.EventHandler(this.hexTextBox_Validated);
             // 
             // colorButton
             // 
