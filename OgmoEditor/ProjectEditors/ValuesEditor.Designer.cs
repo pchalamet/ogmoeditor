@@ -138,7 +138,6 @@
             this.Controls.Add(this.listBox);
             this.Name = "ValuesEditor";
             this.Size = new System.Drawing.Size(341, 191);
-            this.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.ValuesEditor_ControlAdded);
             this.ResumeLayout(false);
             this.PerformLayout();
 

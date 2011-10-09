@@ -185,12 +185,6 @@ namespace OgmoEditor.ProjectEditors
             listBox.Items[listBox.SelectedIndex] = nameTextBox.Text;
         }
 
-        private void ValuesEditor_ControlAdded(object sender, ControlEventArgs e)
-        {
-            if (e.Control is IntValueEditor)
-                Debug.WriteLine("add");
-        }
-
         private void typeComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
             ValueDefinition oldDef = values[listBox.SelectedIndex];
