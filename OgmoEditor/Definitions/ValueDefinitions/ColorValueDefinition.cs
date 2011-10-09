@@ -10,14 +10,14 @@ namespace OgmoEditor.Definitions.ValueDefinitions
     public class ColorValueDefinition : ValueDefinition
     {
         [XmlAttribute]
-        public Color Default;
+        public OgmoColor Default;
         [XmlAttribute]
         public bool ExportAlphaChannel;
 
         public ColorValueDefinition()
             : base()
         {
-            Default = new Color();
+            Default = new OgmoColor(255, 255, 255);
             ExportAlphaChannel = true;
         }
     }

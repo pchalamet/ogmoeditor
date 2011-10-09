@@ -117,6 +117,12 @@
     <Compile Include="ProjectEditors\TilesetsEditor.Designer.cs">
       <DependentUpon>TilesetsEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProjectEditors\ValueEditors\IntValueEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ProjectEditors\ValueEditors\IntValueEditor.Designer.cs">
+      <DependentUpon>IntValueEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProjectEditors\ValuesEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -157,6 +163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ProjectEditors\TilesetsEditor.resx">
       <DependentUpon>TilesetsEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectEditors\ValueEditors\IntValueEditor.resx">
+      <DependentUpon>IntValueEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProjectEditors\ValuesEditor.resx">
       <DependentUpon>ValuesEditor.cs</DependentUpon>

@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using OgmoEditor.Definitions.ValueDefinitions;
 using System.Diagnostics;
+using OgmoEditor.ProjectEditors.ValueEditors;
 
 namespace OgmoEditor.ProjectEditors
 {
@@ -16,11 +17,13 @@ namespace OgmoEditor.ProjectEditors
         private const string NEW_VALUE = "NewValue";
 
         private List<ValueDefinition> values;
+        private UserControl valueEditor;
 
         public ValuesEditor()
         {
             InitializeComponent();
             values = new List<ValueDefinition>();
+            valueEditor = null;
         }
 
         public string Title
@@ -44,9 +47,53 @@ namespace OgmoEditor.ProjectEditors
         {
             removeButton.Enabled = true;
 
+            //Set the name
             nameTextBox.CausesValidation = true;
             nameTextBox.Enabled = true; 
             nameTextBox.Text = v.Name;
+
+            //Set the type
+            typeComboBox.CausesValidation = true;
+            typeComboBox.Enabled = true;
+
+            //Set the value editor UI
+            if (valueEditor != null)
+            {
+                Controls.Remove(valueEditor);
+                valueEditor = null;
+            }
+
+            if (v is IntValueDefinition)
+            {
+                typeComboBox.SelectedIndex = 0;
+                valueEditor = new IntValueEditor(v as IntValueDefinition);
+                Controls.Add(valueEditor);
+            }
+            else if (v is BoolValueDefinition)
+            {
+                typeComboBox.SelectedIndex = 1;
+                valueEditor = null;
+            }
+            else if (v is FloatValueDefinition)
+            {
+                typeComboBox.SelectedIndex = 2;
+                valueEditor = null;
+            }
+            else if (v is StringValueDefinition)
+            {
+                typeComboBox.SelectedIndex = 3;
+                valueEditor = null;
+            }
+            else if (v is EnumValueDefinition)
+            {
+                typeComboBox.SelectedIndex = 4;
+                valueEditor = null;
+            }
+            else if (v is ColorValueDefinition)
+            {
+                typeComboBox.SelectedIndex = 5;
+                valueEditor = null;
+            }
         }
 
         private void disableControls()
@@ -55,7 +102,16 @@ namespace OgmoEditor.ProjectEditors
 
             nameTextBox.CausesValidation = false;
             nameTextBox.Enabled = false;        
-            nameTextBox.Text = ""; 
+            nameTextBox.Text = "";
+
+            typeComboBox.CausesValidation = false;
+            typeComboBox.Enabled = false;
+
+            if (valueEditor != null)
+            {
+                Controls.Remove(valueEditor);
+                valueEditor = null;
+            }
         }
 
         private string getNewName()
@@ -127,6 +183,35 @@ namespace OgmoEditor.ProjectEditors
         {
             values[listBox.SelectedIndex].Name = nameTextBox.Text;
             listBox.Items[listBox.SelectedIndex] = nameTextBox.Text;
+        }
+
+        private void ValuesEditor_ControlAdded(object sender, ControlEventArgs e)
+        {
+            if (e.Control is IntValueEditor)
+                Debug.WriteLine("add");
+        }
+
+        private void typeComboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            ValueDefinition oldDef = values[listBox.SelectedIndex];
+            ValueDefinition newDef = null;
+
+            if (typeComboBox.SelectedIndex == 0)
+                newDef = new IntValueDefinition();
+            else if (typeComboBox.SelectedIndex == 1)
+                newDef = new BoolValueDefinition();
+            else if (typeComboBox.SelectedIndex == 2)
+                newDef = new FloatValueDefinition();
+            else if (typeComboBox.SelectedIndex == 3)
+                newDef = new StringValueDefinition();
+            else if (typeComboBox.SelectedIndex == 4)
+                newDef = new EnumValueDefinition();
+            else if (typeComboBox.SelectedIndex == 5)
+                newDef = new ColorValueDefinition();
+
+            newDef.Name = oldDef.Name;
+            values[listBox.SelectedIndex] = newDef;
+            setControlsFromValue(newDef);
         }
     }
 }

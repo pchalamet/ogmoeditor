@@ -34,6 +34,8 @@
             this.removeButton = new System.Windows.Forms.Button();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.typeComboBox = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // listBox
@@ -79,26 +81,54 @@
             // nameTextBox
             // 
             this.nameTextBox.Enabled = false;
-            this.nameTextBox.Location = new System.Drawing.Point(154, 27);
+            this.nameTextBox.Location = new System.Drawing.Point(137, 27);
             this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(127, 20);
+            this.nameTextBox.Size = new System.Drawing.Size(75, 20);
             this.nameTextBox.TabIndex = 4;
             this.nameTextBox.Validated += new System.EventHandler(this.nameTextBox_Validated);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(113, 30);
+            this.label1.Location = new System.Drawing.Point(96, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 5;
             this.label1.Text = "Name";
+            // 
+            // typeComboBox
+            // 
+            this.typeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.typeComboBox.FormattingEnabled = true;
+            this.typeComboBox.Items.AddRange(new object[] {
+            "Integer",
+            "Boolean",
+            "Float",
+            "String",
+            "Enum",
+            "Color"});
+            this.typeComboBox.Location = new System.Drawing.Point(255, 27);
+            this.typeComboBox.Name = "typeComboBox";
+            this.typeComboBox.Size = new System.Drawing.Size(83, 21);
+            this.typeComboBox.TabIndex = 6;
+            this.typeComboBox.SelectionChangeCommitted += new System.EventHandler(this.typeComboBox_SelectionChangeCommitted);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(218, 31);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(31, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Type";
             // 
             // ValuesEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.typeComboBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.removeButton);
@@ -107,6 +137,7 @@
             this.Controls.Add(this.listBox);
             this.Name = "ValuesEditor";
             this.Size = new System.Drawing.Size(341, 191);
+            this.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.ValuesEditor_ControlAdded);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -120,5 +151,7 @@
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox typeComboBox;
+        private System.Windows.Forms.Label label2;
     }
 }
