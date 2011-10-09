@@ -107,7 +107,7 @@
             this.typeComboBox.Name = "typeComboBox";
             this.typeComboBox.Size = new System.Drawing.Size(93, 21);
             this.typeComboBox.TabIndex = 32;
-            this.typeComboBox.SelectedIndexChanged += new System.EventHandler(this.typeComboBox_SelectedIndexChanged);
+            this.typeComboBox.SelectionChangeCommitted += new System.EventHandler(this.typeComboBox_SelectionChangeCommitted);
             // 
             // label4
             // 

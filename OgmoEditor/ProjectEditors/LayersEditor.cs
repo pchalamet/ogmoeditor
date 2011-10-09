@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using OgmoEditor.Definitions.LayerDefinitions;
+using System.Diagnostics;
 
 namespace OgmoEditor.ProjectEditors
 {
@@ -192,7 +193,15 @@ namespace OgmoEditor.ProjectEditors
             ProjParse.Parse(ref layerDefinitions[listBox.SelectedIndex].Grid, gridXTextBox, gridYTextBox);
         }
 
-        private void typeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void listBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox.SelectedIndex != -1)
+                setControlsFromDefinition(layerDefinitions[listBox.SelectedIndex]);
+            else
+                disableControls();
+        }
+
+        private void typeComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
             LayerDefinition oldDef = layerDefinitions[listBox.SelectedIndex];
             LayerDefinition newDef;
@@ -203,14 +212,6 @@ namespace OgmoEditor.ProjectEditors
             newDef.Grid = oldDef.Grid;
             layerDefinitions[listBox.SelectedIndex] = newDef;
             setControlsFromDefinition(newDef);
-        }
-
-        private void listBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (listBox.SelectedIndex != -1)
-                setControlsFromDefinition(layerDefinitions[listBox.SelectedIndex]);
-            else
-                disableControls();
         }
     }
 }
