@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using OgmoEditor.ProjectEditors.LayerEditors;
 
 namespace OgmoEditor.Definitions.LayerDefinitions
 {
@@ -13,6 +14,11 @@ namespace OgmoEditor.Definitions.LayerDefinitions
             : base()
         {
             MultipleTilesets = false;
+        }
+
+        public override System.Windows.Forms.UserControl GetEditor()
+        {
+            return new TileLayerEditor(this);
         }
     }
 }

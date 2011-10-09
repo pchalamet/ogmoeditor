@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using OgmoEditor.ProjectEditors.LayerEditors;
 
 namespace OgmoEditor.Definitions.LayerDefinitions
 {
     public class GridLayerDefinition : LayerDefinition
     {
-        public Color Color;
+        public OgmoColor Color;
 
         public GridLayerDefinition()
             : base()
         {
-            Color = Color.Black;
+            Color = new OgmoColor(0, 0, 0);
+        }
+
+        public override System.Windows.Forms.UserControl GetEditor()
+        {
+            return new GridLayerEditor(this);
         }
     }
 }

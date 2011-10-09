@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Xml.Serialization;
+using System.Windows.Forms;
 
 namespace OgmoEditor.Definitions.LayerDefinitions
 {
     [XmlInclude(typeof(GridLayerDefinition))]
     [XmlInclude(typeof(TileLayerDefinition))]
     [XmlInclude(typeof(ObjectLayerDefinition))]
-    [XmlInclude(typeof(ShapeLayerDefinition))]
 
     public class LayerDefinition
     {
@@ -28,6 +28,11 @@ namespace OgmoEditor.Definitions.LayerDefinitions
         public override string ToString()
         {
             return Name + " - " + GetType().ToString();
+        }
+
+        public virtual UserControl GetEditor()
+        {
+            return null;
         }
     }
 }

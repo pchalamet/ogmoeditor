@@ -72,7 +72,6 @@
     <Compile Include="Definitions\LayerDefinitions\GridLayerDefinition.cs" />
     <Compile Include="Definitions\LayerDefinitions\LayerDefinition.cs" />
     <Compile Include="Definitions\LayerDefinitions\ObjectLayerDefinition.cs" />
-    <Compile Include="Definitions\LayerDefinitions\ShapeLayerDefinition.cs" />
     <Compile Include="Definitions\LayerDefinitions\TileLayerDefinition.cs" />
     <Compile Include="Definitions\ObjectDefinition.cs" />
     <Compile Include="Definitions\ValueDefinitions\BoolValueDefinition.cs" />
@@ -92,6 +91,18 @@
     <Compile Include="OgmoColor.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="ProjectEditors\IProjectChanger.cs" />
+    <Compile Include="ProjectEditors\LayerEditors\GridLayerEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ProjectEditors\LayerEditors\GridLayerEditor.Designer.cs">
+      <DependentUpon>GridLayerEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectEditors\LayerEditors\TileLayerEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ProjectEditors\LayerEditors\TileLayerEditor.Designer.cs">
+      <DependentUpon>TileLayerEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProjectEditors\LayersEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -188,6 +199,12 @@
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProjectEditors\LayerEditors\GridLayerEditor.resx">
+      <DependentUpon>GridLayerEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectEditors\LayerEditors\TileLayerEditor.resx">
+      <DependentUpon>TileLayerEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProjectEditors\LayersEditor.resx">
       <DependentUpon>LayersEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -259,9 +276,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ProjectEditors\LayerEditors\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
