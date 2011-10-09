@@ -101,13 +101,6 @@
             this.typeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.typeComboBox.Enabled = false;
             this.typeComboBox.FormattingEnabled = true;
-            this.typeComboBox.Items.AddRange(new object[] {
-            "Integer",
-            "Boolean",
-            "Float",
-            "String",
-            "Enum",
-            "Color"});
             this.typeComboBox.Location = new System.Drawing.Point(255, 27);
             this.typeComboBox.Name = "typeComboBox";
             this.typeComboBox.Size = new System.Drawing.Size(83, 21);

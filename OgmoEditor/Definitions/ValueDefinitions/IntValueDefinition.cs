@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
+using OgmoEditor.ProjectEditors.ValueEditors;
+using System.Windows.Forms;
 
 namespace OgmoEditor.Definitions.ValueDefinitions
 {
@@ -27,6 +29,11 @@ namespace OgmoEditor.Definitions.ValueDefinitions
             Min = int.MinValue;
             Max = int.MaxValue;
             UIType = UITypes.Field;
+        }
+
+        public override UserControl GetEditor()
+        {
+            return new IntValueEditor(this);
         }
 
     }

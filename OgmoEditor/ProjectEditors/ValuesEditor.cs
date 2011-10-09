@@ -24,6 +24,10 @@ namespace OgmoEditor.ProjectEditors
             InitializeComponent();
             values = new List<ValueDefinition>();
             valueEditor = null;
+
+            //Initialize the type dropdown
+            foreach (var s in ValueDefinition.VALUE_NAMES)
+                typeComboBox.Items.Add(s);
         }
 
         public string Title
@@ -55,45 +59,16 @@ namespace OgmoEditor.ProjectEditors
             //Set the type
             typeComboBox.CausesValidation = true;
             typeComboBox.Enabled = true;
+            typeComboBox.SelectedIndex = ValueDefinition.VALUE_TYPES.FindIndex(e => e == v.GetType());
 
-            //Set the value editor UI
+            //Remove the old value editor
             if (valueEditor != null)
-            {
                 Controls.Remove(valueEditor);
-                valueEditor = null;
-            }
 
-            if (v is IntValueDefinition)
-            {
-                typeComboBox.SelectedIndex = 0;
-                valueEditor = new IntValueEditor(v as IntValueDefinition);
+            //Add the new one!
+            valueEditor = v.GetEditor();
+            if (valueEditor != null)
                 Controls.Add(valueEditor);
-            }
-            else if (v is BoolValueDefinition)
-            {
-                typeComboBox.SelectedIndex = 1;
-                valueEditor = null;
-            }
-            else if (v is FloatValueDefinition)
-            {
-                typeComboBox.SelectedIndex = 2;
-                valueEditor = null;
-            }
-            else if (v is StringValueDefinition)
-            {
-                typeComboBox.SelectedIndex = 3;
-                valueEditor = null;
-            }
-            else if (v is EnumValueDefinition)
-            {
-                typeComboBox.SelectedIndex = 4;
-                valueEditor = null;
-            }
-            else if (v is ColorValueDefinition)
-            {
-                typeComboBox.SelectedIndex = 5;
-                valueEditor = null;
-            }
         }
 
         private void disableControls()
@@ -190,18 +165,14 @@ namespace OgmoEditor.ProjectEditors
             ValueDefinition oldDef = values[listBox.SelectedIndex];
             ValueDefinition newDef = null;
 
-            if (typeComboBox.SelectedIndex == 0)
-                newDef = new IntValueDefinition();
-            else if (typeComboBox.SelectedIndex == 1)
-                newDef = new BoolValueDefinition();
-            else if (typeComboBox.SelectedIndex == 2)
-                newDef = new FloatValueDefinition();
-            else if (typeComboBox.SelectedIndex == 3)
-                newDef = new StringValueDefinition();
-            else if (typeComboBox.SelectedIndex == 4)
-                newDef = new EnumValueDefinition();
-            else if (typeComboBox.SelectedIndex == 5)
-                newDef = new ColorValueDefinition();
+            for (int i = 0; i < ValueDefinition.VALUE_TYPES.Count; i++)
+            {
+                if (typeComboBox.SelectedIndex == i)
+                {
+                    newDef = (ValueDefinition)Activator.CreateInstance(ValueDefinition.VALUE_TYPES[i]);
+                    break;
+                }
+            }
 
             newDef.Name = oldDef.Name;
             values[listBox.SelectedIndex] = newDef;
