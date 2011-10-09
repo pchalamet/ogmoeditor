@@ -10,12 +10,12 @@ namespace OgmoEditor.Definitions.ValueDefinitions
     public class EnumValueDefinition : ValueDefinition
     {
         [XmlAttribute]
-        string[] Values;
+        public string[] Elements;
 
         public EnumValueDefinition()
             : base()
         {
-            Values = new string[] { "default" };
+            Elements = new string[] { "default" };
         }
 
         public override System.Windows.Forms.UserControl GetEditor()

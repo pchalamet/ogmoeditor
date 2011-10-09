@@ -19,6 +19,15 @@ namespace OgmoEditor.ProjectEditors.ValueEditors
             this.def = def;
             InitializeComponent();
             Location = new Point(99, 53);
+
+            elementsTextBox.Text = string.Join("\n", def.Elements, 0, def.Elements.Length);
         }
+
+        private void elementsTextBox_Validated(object sender, EventArgs e)
+        {
+            def.Elements = elementsTextBox.Text.Split('\n');
+        }
+
+
     }
 }
