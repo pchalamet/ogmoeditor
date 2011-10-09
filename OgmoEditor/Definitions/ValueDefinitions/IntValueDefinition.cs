@@ -11,8 +11,6 @@ namespace OgmoEditor.Definitions.ValueDefinitions
     [XmlRoot("int")]
     public class IntValueDefinition : ValueDefinition
     {
-        public enum UITypes { Field, Slider };
-
         [XmlAttribute]
         public int Default;
         [XmlAttribute]
@@ -20,7 +18,7 @@ namespace OgmoEditor.Definitions.ValueDefinitions
         [XmlAttribute]
         public int Max;
         [XmlAttribute]
-        public UITypes UIType;
+        public NumberUITypes UIType;
 
         public IntValueDefinition()
             : base()
@@ -28,7 +26,7 @@ namespace OgmoEditor.Definitions.ValueDefinitions
             Default = 0;
             Min = int.MinValue;
             Max = int.MaxValue;
-            UIType = UITypes.Field;
+            UIType = NumberUITypes.Field;
         }
 
         public override UserControl GetEditor()

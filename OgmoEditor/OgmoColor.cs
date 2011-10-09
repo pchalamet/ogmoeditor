@@ -4,17 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Text.RegularExpressions;
+using System.Xml.Serialization;
 
 namespace OgmoEditor
 {
+    [XmlRoot("Color")]
     public struct OgmoColor
     {
         private const string REGEX32 = @"^(#|0x|)([0-9a-fA-F]{8})$";
         private const string REGEX24 = @"^(#|0x|)([0-9a-fA-F]{6})$";
 
+        [XmlAttribute]
         public byte A;
+        [XmlAttribute]
         public byte R;
+        [XmlAttribute]
         public byte G;
+        [XmlAttribute]
         public byte B;
 
         public OgmoColor(Color color)

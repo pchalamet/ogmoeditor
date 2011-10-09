@@ -19,6 +19,8 @@ namespace OgmoEditor.Definitions.ValueDefinitions
         static public readonly List<Type> VALUE_TYPES = new List<Type>(new Type[] { typeof(IntValueDefinition), typeof(BoolValueDefinition), typeof(FloatValueDefinition), typeof(StringValueDefinition), typeof(EnumValueDefinition), typeof(ColorValueDefinition) });
         static public readonly List<string> VALUE_NAMES = new List<string>(new string[] { "Integer", "Boolean", "Float", "String", "Enum", "Color" });
 
+        public enum NumberUITypes { Field, Slider };
+
         [XmlAttribute]
         public string Name;
 

@@ -10,7 +10,6 @@ namespace OgmoEditor.Definitions.ValueDefinitions
 {
     public class ColorValueDefinition : ValueDefinition
     {
-        [XmlAttribute]
         public OgmoColor Default;
         [XmlAttribute]
         public bool ExportAlphaChannel;

@@ -49,7 +49,7 @@ namespace OgmoEditor.ProjectEditors.ValueEditors
 
         private void uiComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            def.UIType = (FloatValueDefinition.UITypes)uiComboBox.SelectedIndex;
+            def.UIType = (ValueDefinition.NumberUITypes)uiComboBox.SelectedIndex;
         }
     }
 }
