@@ -76,19 +76,6 @@ namespace OgmoEditor
             return color;
         }
 
-        public override string ToString()
-        {
-            return "#" + A.ToString("X").PadLeft(2, '0') + R.ToString("X").PadLeft(2, '0') + G.ToString("X").PadLeft(2, '0') + B.ToString("X").PadLeft(2, '0');
-        }
-
-        public string ToString(bool alpha)
-        {
-            if (alpha)
-                return ToString();
-            else
-                return "#" + R.ToString("X").PadLeft(2, '0') + G.ToString("X").PadLeft(2, '0') + B.ToString("X").PadLeft(2, '0');
-        }
-
         static public bool IsValid24(string color)
         {
             return Regex.IsMatch(color, REGEX24);
@@ -102,6 +89,29 @@ namespace OgmoEditor
         /*
          *  Operators
          */
+        public override string ToString()
+        {
+            return "#" + R.ToString("X").PadLeft(2, '0') + G.ToString("X").PadLeft(2, '0') + B.ToString("X").PadLeft(2, '0');
+        }
+
+        public string ToString(bool alpha)
+        {
+            if (alpha)
+                return "#" + A.ToString("X").PadLeft(2, '0') + R.ToString("X").PadLeft(2, '0') + G.ToString("X").PadLeft(2, '0') + B.ToString("X").PadLeft(2, '0');
+            else
+                return ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
         static public implicit operator OgmoColor(string from)
         {
             return new OgmoColor(from);

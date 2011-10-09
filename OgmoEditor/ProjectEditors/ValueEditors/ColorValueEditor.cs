@@ -19,6 +19,13 @@ namespace OgmoEditor.ProjectEditors.ValueEditors
             this.def = def;
             InitializeComponent();
             Location = new Point(99, 53);
+
+            defaultColorChooser.Color = def.Default;
+        }
+
+        private void defaultColorChooser_ColorChanged(OgmoColor color)
+        {
+            def.Default = color;
         }
     }
 }
