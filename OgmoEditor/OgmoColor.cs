@@ -78,7 +78,7 @@ namespace OgmoEditor
 
         public override string ToString()
         {
-            return A.ToString("X").PadLeft(2, '0') + R.ToString("X").PadLeft(2, '0') + G.ToString("X").PadLeft(2, '0') + B.ToString("X").PadLeft(2, '0');
+            return "#" + A.ToString("X").PadLeft(2, '0') + R.ToString("X").PadLeft(2, '0') + G.ToString("X").PadLeft(2, '0') + B.ToString("X").PadLeft(2, '0');
         }
 
         public string ToString(bool alpha)
@@ -86,7 +86,7 @@ namespace OgmoEditor
             if (alpha)
                 return ToString();
             else
-                return R.ToString("X").PadLeft(2, '0') + G.ToString("X").PadLeft(2, '0') + B.ToString("X").PadLeft(2, '0');
+                return "#" + R.ToString("X").PadLeft(2, '0') + G.ToString("X").PadLeft(2, '0') + B.ToString("X").PadLeft(2, '0');
         }
 
         static public bool IsValid24(string color)
@@ -116,5 +116,15 @@ namespace OgmoEditor
         {
             return new OgmoColor(from);
         }
+
+        static public bool operator ==(OgmoColor a, OgmoColor b)
+        {
+            return a.A == b.A && a.R == b.R && a.G == b.G && a.B == b.B;
+        }
+
+        static public bool operator !=(OgmoColor a, OgmoColor b)
+        {
+            return a.A != b.A || a.R != b.R || a.G != b.G || a.B != b.B;
+        }   
     }
 }

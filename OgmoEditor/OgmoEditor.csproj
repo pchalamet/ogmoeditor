@@ -63,6 +63,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColorChooser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ColorChooser.Designer.cs">
+      <DependentUpon>ColorChooser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Definitions\LayerDefinitions\GridLayerDefinition.cs" />
     <Compile Include="Definitions\LayerDefinitions\LayerDefinition.cs" />
     <Compile Include="Definitions\LayerDefinitions\ObjectLayerDefinition.cs" />
@@ -176,6 +182,9 @@
     <Compile Include="Value.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ColorChooser.resx">
+      <DependentUpon>ColorChooser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
