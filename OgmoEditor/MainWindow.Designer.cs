@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.MainStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.mouseCoordinatesLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -322,6 +323,7 @@
             this.Controls.Add(this.masterTabControl);
             this.Controls.Add(this.StatusStrip);
             this.Controls.Add(this.MenuStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.MenuStrip;
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "MainWindow";
