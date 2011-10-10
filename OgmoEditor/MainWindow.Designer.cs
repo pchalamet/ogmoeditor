@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.MainStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.mouseCoordinatesLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -64,9 +65,6 @@
             // 
             // StatusStrip
             // 
-            this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MainStatusLabel,
-            this.mouseCoordinatesLabel});
             this.StatusStrip.Location = new System.Drawing.Point(0, 540);
             this.StatusStrip.Name = "StatusStrip";
             this.StatusStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -88,11 +86,6 @@
             // 
             // MenuStrip
             // 
-            this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.projectToolStripMenuItem,
-            this.levelToolStripMenuItem,
-            this.viewToolStripMenuItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
             this.MenuStrip.Size = new System.Drawing.Size(784, 24);
@@ -322,6 +315,7 @@
             this.Controls.Add(this.masterTabControl);
             this.Controls.Add(this.StatusStrip);
             this.Controls.Add(this.MenuStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.MenuStrip;
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "MainWindow";
