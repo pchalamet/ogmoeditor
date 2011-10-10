@@ -49,6 +49,8 @@ namespace OgmoEditor.ProjectEditors
             string errors = "";
             errors += settingsEditor.ErrorCheck();
             errors += layersEditor.ErrorCheck();
+            errors += tilesetsEditor.ErrorCheck();
+            errors += objectsEditor.ErrorCheck();
             if (errors != "")
             {
                 MessageBox.Show(this, "Project could not be saved because of the following errors:\n" + errors);
