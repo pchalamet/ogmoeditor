@@ -36,6 +36,7 @@ namespace OgmoEditor.ProjectEditors
             set { titleLabel.Text = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<ValueDefinition> Values
         {
             get { return values; }

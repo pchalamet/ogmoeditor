@@ -120,7 +120,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.label2);
             this.Controls.Add(this.typeComboBox);
             this.Controls.Add(this.label1);
@@ -130,7 +129,7 @@
             this.Controls.Add(this.titleLabel);
             this.Controls.Add(this.listBox);
             this.Name = "ValuesEditor";
-            this.Size = new System.Drawing.Size(341, 191);
+            this.Size = new System.Drawing.Size(343, 193);
             this.ResumeLayout(false);
             this.PerformLayout();
 

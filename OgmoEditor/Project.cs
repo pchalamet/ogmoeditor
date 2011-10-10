@@ -23,6 +23,7 @@ namespace OgmoEditor
     {
         //Serialized project properties
         private string name;
+        public OgmoColor BackgroundColor;
         public Size LevelDefaultSize;
         public Size LevelMinimumSize;
         public Size LevelMaximumSize;
@@ -60,6 +61,7 @@ namespace OgmoEditor
         {
             //Init default project properties
             name = Ogmo.NEW_PROJECT_NAME;
+            BackgroundColor = OgmoColor.DefaultBackgroundColor;
             LastFilename = "";
             LevelDefaultSize = LevelMinimumSize = LevelMaximumSize = new Size(640, 480);
 

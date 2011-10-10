@@ -16,8 +16,6 @@ namespace OgmoEditor.ProjectEditors
         public SettingsEditor()
         {
             InitializeComponent();
-
-            valuesEditor.Title = "Level Values";
         }
 
         public string ErrorCheck()
@@ -37,21 +35,25 @@ namespace OgmoEditor.ProjectEditors
         public void LoadFromProject(Project project)
         {
             projectNameTextBox.Text = project.Name;
+            backgroundColorChooser.Color = project.BackgroundColor;
             defaultWidthTextBox.Text = project.LevelDefaultSize.Width.ToString();
             defaultHeightTextBox.Text = project.LevelDefaultSize.Height.ToString();
             minWidthTextBox.Text = project.LevelMinimumSize.Width.ToString();
             minHeightTextBox.Text = project.LevelMinimumSize.Height.ToString();
             maxWidthTextBox.Text = project.LevelMaximumSize.Width.ToString();
             maxHeightTextBox.Text = project.LevelMaximumSize.Height.ToString();
+
             valuesEditor.Values = project.LevelValueDefinitions;
         }
 
         public void ApplyToProject(Project project)
         {
             project.Name = projectNameTextBox.Text;
+            project.BackgroundColor = backgroundColorChooser.Color;
             ProjParse.Parse(ref project.LevelDefaultSize, defaultWidthTextBox, defaultHeightTextBox);
             ProjParse.Parse(ref project.LevelMinimumSize, minWidthTextBox, minHeightTextBox);
             ProjParse.Parse(ref project.LevelMaximumSize, maxWidthTextBox, maxHeightTextBox);
+
             project.LevelValueDefinitions = valuesEditor.Values;
         }
 
