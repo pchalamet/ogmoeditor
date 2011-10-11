@@ -22,27 +22,18 @@ namespace OgmoEditor
     public class Project
     {
         //Serialized project properties
-        private string name;
+        public string Name;
         public OgmoColor BackgroundColor;
         public Size LevelDefaultSize;
         public Size LevelMinimumSize;
         public Size LevelMaximumSize;
         public string LastFilename;
 
-        public string Name
-        {
-            get { return name; }
-            set
-            {
-                name = value;
-            }
-        }
-
         //Definitions
-        public List<LayerDefinition> LayerDefinitions;
         public List<ValueDefinition> LevelValueDefinitions;
-        public List<ObjectDefinition> ObjectDefinitions;
+        public List<LayerDefinition> LayerDefinitions;
         public List<Tileset> Tilesets;
+        public List<ObjectDefinition> ObjectDefinitions;
 
         //Non-serialzed instance vars
         private bool changed;
@@ -57,22 +48,48 @@ namespace OgmoEditor
         public Project()
         {
             //Init default project properties
-            name = Ogmo.NEW_PROJECT_NAME;
+            Name = Ogmo.NEW_PROJECT_NAME;
             BackgroundColor = OgmoColor.DefaultBackgroundColor;
             LastFilename = "";
             LevelDefaultSize = LevelMinimumSize = LevelMaximumSize = new Size(640, 480);
 
             //Definitions
-            LayerDefinitions = new List<LayerDefinition>();
             LevelValueDefinitions = new List<ValueDefinition>();
-            ObjectDefinitions = new List<ObjectDefinition>();
+            LayerDefinitions = new List<LayerDefinition>();
             Tilesets = new List<Tileset>();
+            ObjectDefinitions = new List<ObjectDefinition>(); 
 
             //Init running vars
             InitializeRunningVars();
         }
 
+        public Project(Project copy)
+        {
+            Name = copy.Name;
+            BackgroundColor = copy.BackgroundColor;
+            LastFilename = copy.LastFilename;
+            LevelDefaultSize = copy.LevelDefaultSize;
+            LevelMinimumSize = copy.LevelMinimumSize;
+            LevelMaximumSize = copy.LevelMaximumSize;
 
+            LevelValueDefinitions = new List<ValueDefinition>();
+            foreach (var d in copy.LevelValueDefinitions)
+                LevelValueDefinitions.Add(d.Clone();
+
+            LayerDefinitions = new List<LayerDefinition>();   
+            foreach (var d in copy.LayerDefinitions)
+                LayerDefinitions.Add(d.Clone());
+  
+            Tilesets = new List<Tileset>();
+            foreach (var d in copy.Tilesets)
+                Tilesets.Add(d.Clone());
+
+            ObjectDefinitions = new List<ObjectDefinition>();
+            foreach (var d in copy.ObjectDefinitions)
+                ObjectDefinitions.Add(d.Clone());
+            
+            InitializeRunningVars();
+        }
 
         private void InitializeRunningVars()
         {
