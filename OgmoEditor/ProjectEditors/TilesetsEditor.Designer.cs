@@ -46,6 +46,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tileSpacingTextBox = new System.Windows.Forms.TextBox();
+            this.imageSizeLabel = new System.Windows.Forms.Label();
+            this.totalTilesLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.previewBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,6 +69,7 @@
             this.moveDownButton.TabIndex = 42;
             this.moveDownButton.Text = "Move Down";
             this.moveDownButton.UseVisualStyleBackColor = true;
+            this.moveDownButton.Click += new System.EventHandler(this.moveDownButton_Click);
             // 
             // moveUpButton
             // 
@@ -77,6 +80,7 @@
             this.moveUpButton.TabIndex = 41;
             this.moveUpButton.Text = "Move Up";
             this.moveUpButton.UseVisualStyleBackColor = true;
+            this.moveUpButton.Click += new System.EventHandler(this.moveUpButton_Click);
             // 
             // removeButton
             // 
@@ -87,6 +91,7 @@
             this.removeButton.TabIndex = 40;
             this.removeButton.Text = "Remove";
             this.removeButton.UseVisualStyleBackColor = true;
+            this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
             // 
             // addButton
             // 
@@ -110,7 +115,7 @@
             // nameTextBox
             // 
             this.nameTextBox.Enabled = false;
-            this.nameTextBox.Location = new System.Drawing.Point(280, 289);
+            this.nameTextBox.Location = new System.Drawing.Point(280, 341);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(100, 20);
             this.nameTextBox.TabIndex = 45;
@@ -119,7 +124,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(239, 292);
+            this.label1.Location = new System.Drawing.Point(239, 344);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 46;
@@ -127,8 +132,7 @@
             // 
             // imageFileTextBox
             // 
-            this.imageFileTextBox.Enabled = false;
-            this.imageFileTextBox.Location = new System.Drawing.Point(280, 315);
+            this.imageFileTextBox.Location = new System.Drawing.Point(280, 367);
             this.imageFileTextBox.Name = "imageFileTextBox";
             this.imageFileTextBox.ReadOnly = true;
             this.imageFileTextBox.Size = new System.Drawing.Size(138, 20);
@@ -137,7 +141,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(219, 318);
+            this.label2.Location = new System.Drawing.Point(219, 370);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 48;
@@ -146,7 +150,7 @@
             // imageFileButton
             // 
             this.imageFileButton.Enabled = false;
-            this.imageFileButton.Location = new System.Drawing.Point(424, 313);
+            this.imageFileButton.Location = new System.Drawing.Point(424, 365);
             this.imageFileButton.Name = "imageFileButton";
             this.imageFileButton.Size = new System.Drawing.Size(27, 23);
             this.imageFileButton.TabIndex = 49;
@@ -158,7 +162,7 @@
             // 
             this.imageFileWarningLabel.AutoSize = true;
             this.imageFileWarningLabel.ForeColor = System.Drawing.Color.OrangeRed;
-            this.imageFileWarningLabel.Location = new System.Drawing.Point(457, 318);
+            this.imageFileWarningLabel.Location = new System.Drawing.Point(457, 370);
             this.imageFileWarningLabel.Name = "imageFileWarningLabel";
             this.imageFileWarningLabel.Size = new System.Drawing.Size(94, 13);
             this.imageFileWarningLabel.TabIndex = 50;
@@ -168,7 +172,7 @@
             // tileSizeYTextBox
             // 
             this.tileSizeYTextBox.Enabled = false;
-            this.tileSizeYTextBox.Location = new System.Drawing.Point(366, 341);
+            this.tileSizeYTextBox.Location = new System.Drawing.Point(366, 393);
             this.tileSizeYTextBox.Name = "tileSizeYTextBox";
             this.tileSizeYTextBox.Size = new System.Drawing.Size(62, 20);
             this.tileSizeYTextBox.TabIndex = 52;
@@ -177,7 +181,7 @@
             // tileSizeXTextBox
             // 
             this.tileSizeXTextBox.Enabled = false;
-            this.tileSizeXTextBox.Location = new System.Drawing.Point(280, 341);
+            this.tileSizeXTextBox.Location = new System.Drawing.Point(280, 393);
             this.tileSizeXTextBox.Name = "tileSizeXTextBox";
             this.tileSizeXTextBox.Size = new System.Drawing.Size(62, 20);
             this.tileSizeXTextBox.TabIndex = 51;
@@ -186,7 +190,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(227, 344);
+            this.label6.Location = new System.Drawing.Point(227, 396);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(47, 13);
             this.label6.TabIndex = 54;
@@ -195,7 +199,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(348, 344);
+            this.label3.Location = new System.Drawing.Point(348, 396);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(12, 13);
             this.label3.TabIndex = 53;
@@ -204,7 +208,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(208, 370);
+            this.label4.Location = new System.Drawing.Point(208, 422);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(66, 13);
             this.label4.TabIndex = 55;
@@ -213,16 +217,38 @@
             // tileSpacingTextBox
             // 
             this.tileSpacingTextBox.Enabled = false;
-            this.tileSpacingTextBox.Location = new System.Drawing.Point(280, 367);
+            this.tileSpacingTextBox.Location = new System.Drawing.Point(280, 419);
             this.tileSpacingTextBox.Name = "tileSpacingTextBox";
             this.tileSpacingTextBox.Size = new System.Drawing.Size(62, 20);
             this.tileSpacingTextBox.TabIndex = 56;
             this.tileSpacingTextBox.Validated += new System.EventHandler(this.tileSpacingTextBox_Validated);
             // 
+            // imageSizeLabel
+            // 
+            this.imageSizeLabel.AutoSize = true;
+            this.imageSizeLabel.Location = new System.Drawing.Point(208, 276);
+            this.imageSizeLabel.Name = "imageSizeLabel";
+            this.imageSizeLabel.Size = new System.Drawing.Size(65, 13);
+            this.imageSizeLabel.TabIndex = 57;
+            this.imageSizeLabel.Text = "Image Size: ";
+            this.imageSizeLabel.Visible = false;
+            // 
+            // totalTilesLabel
+            // 
+            this.totalTilesLabel.AutoSize = true;
+            this.totalTilesLabel.Location = new System.Drawing.Point(208, 296);
+            this.totalTilesLabel.Name = "totalTilesLabel";
+            this.totalTilesLabel.Size = new System.Drawing.Size(59, 13);
+            this.totalTilesLabel.TabIndex = 58;
+            this.totalTilesLabel.Text = "Total Tiles:";
+            this.totalTilesLabel.Visible = false;
+            // 
             // TilesetsEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.totalTilesLabel);
+            this.Controls.Add(this.imageSizeLabel);
             this.Controls.Add(this.tileSpacingTextBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tileSizeYTextBox);
@@ -269,5 +295,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox tileSpacingTextBox;
+        private System.Windows.Forms.Label imageSizeLabel;
+        private System.Windows.Forms.Label totalTilesLabel;
     }
 }
