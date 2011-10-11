@@ -144,6 +144,28 @@ namespace OgmoEditor.ProjectEditors
             return s;
         }
 
+        static public string CheckDefinitionList(List<ObjectDefinition> defs)
+        {
+            string s = "";
+
+            //Check for duplicate value names
+            List<string> found = new List<string>();
+            foreach (ObjectDefinition v in defs)
+            {
+                if (v.Name != "" && !found.Contains(v.Name) && defs.FindAll(e => e.Name == v.Name).Count > 1)
+                {
+                    s += ProjParse.Error("There are multiple objects with the name \"" + v.Name + "\"");
+                    found.Add(v.Name);
+                }
+            }
+
+            //Check for blank value names
+            if (defs.Find(e => e.Name == "") != null)
+                s += ProjParse.Error("There are object(s) with blank name");
+
+            return s;
+        }
+
         static public string CheckPath(string relPath, string absPath, string name)
         {
             if (!File.Exists(Util.GetPathAbsolute(relPath, absPath)))

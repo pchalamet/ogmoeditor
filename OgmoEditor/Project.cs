@@ -135,12 +135,15 @@ namespace OgmoEditor
 
             //Check for duplicates and blanks
             ProjParse.CheckDefinitionList(Tilesets);
-
             foreach (var t in Tilesets)
             {
                 //File must exist
                 s += ProjParse.CheckPath(t.Path, SavedDirectory, "Tileset \"" + t.Name + "\" image file");
             }
+
+            /*
+             *  OBJECTS
+             */
 
             return s;
         }
