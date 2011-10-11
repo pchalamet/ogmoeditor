@@ -35,5 +35,23 @@ namespace OgmoEditor.Definitions.ValueDefinitions
         {
             return new FloatValueEditor(this);
         }
+
+        public override string ErrorCheck()
+        {
+            string s = base.ErrorCheck();
+            return s;
+        }
+
+        public override ValueDefinition Clone()
+        {
+            FloatValueDefinition def = new FloatValueDefinition();
+            def.Name = Name;
+            def.Default = Default;
+            def.Min = Min;
+            def.Max = Max;
+            def.Round = Round;
+            def.UIType = UIType;
+            return def;
+        }
     }
 }

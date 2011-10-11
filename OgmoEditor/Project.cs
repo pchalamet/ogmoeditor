@@ -35,7 +35,6 @@ namespace OgmoEditor
             set
             {
                 name = value;
-                TreeNode.Text = value;
             }
         }
 
@@ -47,8 +46,6 @@ namespace OgmoEditor
 
         //Non-serialzed instance vars
         private bool changed;
-        [XmlIgnore]
-        public TreeNode TreeNode;
         [XmlIgnore]
         public List<Level> Levels { get; private set; }
 
@@ -75,10 +72,11 @@ namespace OgmoEditor
             InitializeRunningVars();
         }
 
+
+
         private void InitializeRunningVars()
         {
             changed = false;
-            TreeNode = new TreeNode(Name);
             Levels = new List<Level>();
         }
 
@@ -89,7 +87,6 @@ namespace OgmoEditor
             set
             {
                 changed = value;
-                TreeNode.Text = Name + (changed ? "*" : "");
             }
         }
 
@@ -203,8 +200,6 @@ namespace OgmoEditor
         public void AddLevel(Level level)
         {
             Levels.Add(level);
-            TreeNode.Nodes.Add(level.TreeNode);
-            TreeNode.Expand();
 
             if (OnLevelAdded != null)
                 OnLevelAdded(level);
@@ -213,7 +208,6 @@ namespace OgmoEditor
         public void CloseLevel(Level level)
         {
             Levels.Remove(level);
-            TreeNode.Nodes.Remove(level.TreeNode);
 
             if (OnLevelClosed != null)
                 OnLevelClosed(level);

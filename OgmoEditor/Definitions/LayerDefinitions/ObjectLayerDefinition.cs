@@ -12,5 +12,24 @@ namespace OgmoEditor.Definitions.LayerDefinitions
         {
 
         }
+
+        public override System.Windows.Forms.UserControl GetEditor()
+        {
+            return null;
+        }
+
+        public override string ErrorCheck()
+        {
+            string s = base.ErrorCheck();
+            return s;
+        }
+
+        public override LayerDefinition Clone()
+        {
+            ObjectLayerDefinition def = new ObjectLayerDefinition();
+            def.Name = Name;
+            def.Grid = Grid;
+            return def;
+        }
     }
 }

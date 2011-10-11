@@ -74,6 +74,7 @@
     <Compile Include="Definitions\LayerDefinitions\ObjectLayerDefinition.cs" />
     <Compile Include="Definitions\LayerDefinitions\TileLayerDefinition.cs" />
     <Compile Include="Definitions\ObjectDefinition.cs" />
+    <Compile Include="Definitions\Tileset.cs" />
     <Compile Include="Definitions\ValueDefinitions\BoolValueDefinition.cs" />
     <Compile Include="Definitions\ValueDefinitions\ColorValueDefinition.cs" />
     <Compile Include="Definitions\ValueDefinitions\EnumValueDefinition.cs" />

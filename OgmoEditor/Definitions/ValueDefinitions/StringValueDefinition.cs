@@ -29,5 +29,21 @@ namespace OgmoEditor.Definitions.ValueDefinitions
         {
             return new StringValueEditor(this);
         }
+
+        public override string ErrorCheck()
+        {
+            string s = base.ErrorCheck();
+            return s;
+        }
+
+        public override ValueDefinition Clone()
+        {
+            StringValueDefinition def = new StringValueDefinition();
+            def.Name = Name;
+            def.Default = Default;
+            def.MaxChars = MaxChars;
+            def.MultiLine = MultiLine;
+            return def;
+        }
     }
 }

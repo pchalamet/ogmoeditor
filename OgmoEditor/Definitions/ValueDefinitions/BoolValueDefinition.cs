@@ -22,5 +22,19 @@ namespace OgmoEditor.Definitions.ValueDefinitions
         {
             return new BoolValueEditor(this);
         }
+
+        public override string ErrorCheck()
+        {
+            string s = base.ErrorCheck();
+            return s;
+        }
+
+        public override ValueDefinition Clone()
+        {
+            BoolValueDefinition def = new BoolValueDefinition();
+            def.Name = Name;
+            def.Default = Default;           
+            return def;
+        }
     }
 }

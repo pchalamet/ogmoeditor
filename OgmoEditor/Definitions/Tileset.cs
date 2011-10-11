@@ -9,16 +9,31 @@ namespace OgmoEditor.Definitions
     public class Tileset
     {
         public string Name;
-        private string path;
+        public string Path;
         public Size TileSize;
         public int TileSep;
 
         public Tileset()
         {
             Name = "";
-            path = "";
+            Path = "";
             TileSize = new Size(16, 16);
             TileSep = 0;
+        }
+
+        public string ErrorCheck()
+        {
+            return "";
+        }
+
+        public Tileset Clone()
+        {
+            Tileset set = new Tileset();
+            set.Name = Name;
+            set.Path = Path;
+            set.TileSize = TileSize;
+            set.TileSep = TileSep;
+            return set;
         }
     }
 }

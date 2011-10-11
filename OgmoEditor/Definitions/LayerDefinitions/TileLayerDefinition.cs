@@ -20,5 +20,20 @@ namespace OgmoEditor.Definitions.LayerDefinitions
         {
             return new TileLayerEditor(this);
         }
+
+        public override string ErrorCheck()
+        {
+            string s = base.ErrorCheck();
+            return s;
+        }
+
+        public override LayerDefinition Clone()
+        {
+            TileLayerDefinition def = new TileLayerDefinition();
+            def.Name = Name;
+            def.Grid = Grid;
+            def.MultipleTilesets = MultipleTilesets;
+            return def;
+        }
     }
 }

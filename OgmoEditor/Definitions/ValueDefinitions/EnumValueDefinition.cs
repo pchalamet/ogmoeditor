@@ -22,5 +22,19 @@ namespace OgmoEditor.Definitions.ValueDefinitions
         {
             return new EnumValueEditor(this);
         }
+
+        public override string ErrorCheck()
+        {
+            string s = base.ErrorCheck();
+            return s;
+        }
+
+        public override ValueDefinition Clone()
+        {
+            EnumValueDefinition def = new EnumValueDefinition();
+            def.Name = Name;
+            def.Elements = (string[])Elements.Clone();
+            return def;
+        }
     }
 }

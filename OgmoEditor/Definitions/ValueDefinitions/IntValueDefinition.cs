@@ -34,5 +34,22 @@ namespace OgmoEditor.Definitions.ValueDefinitions
             return new IntValueEditor(this);
         }
 
+        public override string ErrorCheck()
+        {
+            string s = base.ErrorCheck();
+            return s;
+        }
+
+        public override ValueDefinition Clone()
+        {
+            IntValueDefinition def = new IntValueDefinition();
+            def.Name = Name;
+            def.Default = Default;
+            def.Min = Min;
+            def.Max = Max;
+            def.UIType = UIType;
+            return def;
+        }
+
     }
 }

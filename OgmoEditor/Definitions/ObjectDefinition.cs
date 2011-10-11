@@ -30,6 +30,27 @@ namespace OgmoEditor.Definitions
         {
             
         }
+
+        public string ErrorCheck()
+        {
+            return "";
+        }
+
+        public ObjectDefinition Clone()
+        {
+            ObjectDefinition def = new ObjectDefinition();
+            def.Name = Name;
+            def.Limit = Limit;
+            def.ResizableX = ResizableX;
+            def.ResizableY = ResizableY;
+            def.Rotatable = Rotatable;
+            def.RotateIncrement = RotateIncrement;
+            def.Size = Size;
+            def.Origin = Origin;
+            def.ImageDefinition = ImageDefinition;
+            return def;
+        }
+
     }
 
     [XmlRoot("Image")]
