@@ -134,7 +134,7 @@ namespace OgmoEditor
              */
 
             //Check for duplicates and blanks
-            ProjParse.CheckDefinitionList(Tilesets);
+            s += ProjParse.CheckDefinitionList(Tilesets);
             foreach (var t in Tilesets)
             {
                 //File must exist
@@ -144,6 +144,9 @@ namespace OgmoEditor
             /*
              *  OBJECTS
              */
+
+            //Check for duplicates and blanks
+            s += ProjParse.CheckDefinitionList(ObjectDefinitions);
 
             return s;
         }
