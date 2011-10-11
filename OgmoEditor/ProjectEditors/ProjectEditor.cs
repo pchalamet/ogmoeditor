@@ -13,20 +13,24 @@ namespace OgmoEditor.ProjectEditors
 {
     public partial class ProjectEditor : Form
     {
-        private Project project;
-        private bool newProject;
+        private Project oldProject;
+        private Project newProject;
+        private bool autoSave;
 
-        public ProjectEditor(Project project, bool newProject = false)
+        public ProjectEditor(Project project, bool autoSave = false)
         {
-            this.project = project;
-            this.newProject = newProject;
+            this.oldProject = project;
+            this.autoSave = autoSave;
             InitializeComponent();
 
+            newProject = new Project();
+            newProject.CloneFrom(oldProject);
+
             //Load the contents of the editors
-            settingsEditor.LoadFromProject(project);
-            layersEditor.LoadFromProject(project);
-            tilesetsEditor.LoadFromProject(project);
-            objectsEditor.LoadFromProject(project);
+            settingsEditor.LoadFromProject(newProject);
+            layersEditor.LoadFromProject(newProject);
+            tilesetsEditor.LoadFromProject(newProject);
+            objectsEditor.LoadFromProject(newProject);
 
             //Events
             FormClosed += onClose;
@@ -34,7 +38,7 @@ namespace OgmoEditor.ProjectEditors
 
         private void onClose(object sender, FormClosedEventArgs e)
         {
-            if (newProject)
+            if (autoSave)
                 Ogmo.CloseProject();
             (Owner as MainWindow).EnableEditing();
         }
@@ -57,17 +61,19 @@ namespace OgmoEditor.ProjectEditors
                 return;
             }
 
-            settingsEditor.ApplyToProject(project);
-            layersEditor.ApplyToProject(project);
-            tilesetsEditor.ApplyToProject(project);
-            objectsEditor.ApplyToProject(project);
-            project.Changed = true;
+            settingsEditor.ApplyToProject(newProject);
+            layersEditor.ApplyToProject(newProject);
+            tilesetsEditor.ApplyToProject(newProject);
+            objectsEditor.ApplyToProject(newProject);
+            oldProject.CloneFrom(newProject);
 
-            if (newProject)
+            if (autoSave)
             {
-                newProject = false;
-                project.Save();
+                autoSave = false;
+                oldProject.Save();
             }
+            else
+                oldProject.Changed = true;
 
             Close();
         }

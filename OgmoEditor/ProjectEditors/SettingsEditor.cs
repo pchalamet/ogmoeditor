@@ -43,7 +43,7 @@ namespace OgmoEditor.ProjectEditors
             maxWidthTextBox.Text = project.LevelMaximumSize.Width.ToString();
             maxHeightTextBox.Text = project.LevelMaximumSize.Height.ToString();
 
-            valuesEditor.Values = project.LevelValueDefinitions;
+            valuesEditor.SetList(project.LevelValueDefinitions);
         }
 
         public void ApplyToProject(Project project)
@@ -53,8 +53,6 @@ namespace OgmoEditor.ProjectEditors
             ProjParse.Parse(ref project.LevelDefaultSize, defaultWidthTextBox, defaultHeightTextBox);
             ProjParse.Parse(ref project.LevelMinimumSize, minWidthTextBox, minHeightTextBox);
             ProjParse.Parse(ref project.LevelMaximumSize, maxWidthTextBox, maxHeightTextBox);
-
-            project.LevelValueDefinitions = valuesEditor.Values;
         }
 
     }

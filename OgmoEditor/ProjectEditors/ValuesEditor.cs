@@ -22,7 +22,7 @@ namespace OgmoEditor.ProjectEditors
         public ValuesEditor()
         {
             InitializeComponent();
-            values = new List<ValueDefinition>();
+            this.values = new List<ValueDefinition>();
             valueEditor = null;
 
             //Initialize the type dropdown
@@ -30,22 +30,20 @@ namespace OgmoEditor.ProjectEditors
                 typeComboBox.Items.Add(s);
         }
 
+        public void SetList(List<ValueDefinition> values)
+        {
+            this.values = values;
+
+            //Initialize the visual value list
+            listBox.Items.Clear();
+            foreach (ValueDefinition v in values)
+                listBox.Items.Add(v.Name);
+        }
+
         public string Title
         {
             get { return titleLabel.Text; }
             set { titleLabel.Text = value; }
-        }
-
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public List<ValueDefinition> Values
-        {
-            get { return values; }
-            set
-            {
-                values = new List<ValueDefinition>(value);
-                foreach (ValueDefinition v in values)
-                    listBox.Items.Add(v.Name);
-            }
         }
 
         private void setControlsFromValue(ValueDefinition v)

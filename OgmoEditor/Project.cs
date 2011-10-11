@@ -63,7 +63,7 @@ namespace OgmoEditor
             InitializeRunningVars();
         }
 
-        public Project(Project copy)
+        public void CloneFrom(Project copy)
         {
             Name = copy.Name;
             BackgroundColor = copy.BackgroundColor;
@@ -74,7 +74,7 @@ namespace OgmoEditor
 
             LevelValueDefinitions = new List<ValueDefinition>();
             foreach (var d in copy.LevelValueDefinitions)
-                LevelValueDefinitions.Add(d.Clone();
+                LevelValueDefinitions.Add(d.Clone());
 
             LayerDefinitions = new List<LayerDefinition>();   
             foreach (var d in copy.LayerDefinitions)
@@ -87,8 +87,6 @@ namespace OgmoEditor
             ObjectDefinitions = new List<ObjectDefinition>();
             foreach (var d in copy.ObjectDefinitions)
                 ObjectDefinitions.Add(d.Clone());
-            
-            InitializeRunningVars();
         }
 
         private void InitializeRunningVars()
