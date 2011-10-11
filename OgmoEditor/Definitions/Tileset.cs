@@ -8,6 +8,8 @@ namespace OgmoEditor.Definitions
 {
     public class Tileset
     {
+        public const string FILE_FILTER = "PNG image file|*.png|BMP image file|*.bmp";
+
         public string Name;
         public string Path;
         public Size TileSize;

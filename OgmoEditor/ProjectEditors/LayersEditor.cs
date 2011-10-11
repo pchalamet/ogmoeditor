@@ -57,14 +57,14 @@ namespace OgmoEditor.ProjectEditors
 
         public void LoadFromProject(Project project)
         {
-            layerDefinitions = new List<LayerDefinition>(project.LayerDefinitions);
+            layerDefinitions = project.LayerDefinitions;
             foreach (LayerDefinition d in layerDefinitions)
                 listBox.Items.Add(d.Name);
         }
 
         public void ApplyToProject(Project project)
         {
-            project.LayerDefinitions = layerDefinitions;
+            
         }
 
         private void setControlsFromDefinition(LayerDefinition definition)

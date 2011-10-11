@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Diagnostics;
 
 namespace OgmoEditor
 {
@@ -11,7 +12,12 @@ namespace OgmoEditor
         static public string GetFilePathRelativeTo(string filePath, string absolutePath)
         {
             string dir = filePath.Remove(filePath.IndexOf(Path.GetFileName(filePath)) - 1);
-            return GetPathRelativeTo(dir, absolutePath) + Path.DirectorySeparatorChar + Path.GetFileName(filePath);
+
+            string result = GetPathRelativeTo(dir, absolutePath);
+            if (result != "")
+                result += Path.DirectorySeparatorChar;
+
+            return result + Path.GetFileName(filePath);
         }
 
         static public string GetPathRelativeTo(string relativePath, string absolutePath)
@@ -22,44 +28,44 @@ namespace OgmoEditor
             string[] relative = relativePath.Split(Path.DirectorySeparatorChar);
             string[] absolute = absolutePath.Split(Path.DirectorySeparatorChar);
 
-            int i;
-            for (i = 0; i < absolute.Length && i < relative.Length; i++)
+            int matches;
+            for (matches = 0; matches < absolute.Length && matches < relative.Length; matches++)
             {
-                if (relative[i] != absolute[i])
+                if (relative[matches] != absolute[matches])
                     break;
             }
 
             string[] final;
-            if (i < absolute.Length)
+            if (matches < absolute.Length)
             {
-                if (i >= relative.Length)
+                if (matches >= relative.Length)
                 {
                     //The absolute path needs to go back to the file
-                    final = new string[absolute.Length - i];
-                    for (int j = 0; j < absolute.Length - i; j++)
+                    final = new string[absolute.Length - matches];
+                    for (int j = 0; j < absolute.Length - matches; j++)
                         final[j] = "..";
                 }
                 else
                 {
                     //The absolute path needs to go back a bit then forward
-                    final = new string[relative.Length - i + (absolute.Length - i)];
+                    final = new string[relative.Length - matches + (absolute.Length - matches)];
                     int j;
 
                     //Write the backs
-                    for (j = 0; j < (absolute.Length - i); j++)
+                    for (j = 0; j < (absolute.Length - matches); j++)
                         final[j] = "..";
 
                     //Write the forwards
-                    for (int k = i; k < relative.Length; k++)
-                        final[j + k - i] = relative[k];
+                    for (int k = matches; k < relative.Length; k++)
+                        final[j + k - matches] = relative[k];
                 }
             }
             else
             {
                 //The absolute path is all good
-                final = new string[relative.Length - i];
-                for (int j = i; j < relative.Length; j++)
-                    final[j - i] = relative[i];
+                final = new string[relative.Length - matches];
+                for (int j = matches; j < relative.Length; j++)
+                    final[j - matches] = relative[matches];
             }
 
             return string.Join(Convert.ToString(Path.DirectorySeparatorChar), final, 0, final.Length);

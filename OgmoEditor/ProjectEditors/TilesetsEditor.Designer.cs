@@ -33,7 +33,7 @@
             this.moveUpButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.previewBox = new System.Windows.Forms.PictureBox();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.imageFileTextBox = new System.Windows.Forms.TextBox();
@@ -46,7 +46,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tileSpacingTextBox = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.previewBox)).BeginInit();
             this.SuspendLayout();
             // 
             // listBox
@@ -56,6 +56,7 @@
             this.listBox.Name = "listBox";
             this.listBox.Size = new System.Drawing.Size(184, 420);
             this.listBox.TabIndex = 43;
+            this.listBox.SelectedIndexChanged += new System.EventHandler(this.listBox_SelectedIndexChanged);
             // 
             // moveDownButton
             // 
@@ -95,15 +96,16 @@
             this.addButton.TabIndex = 39;
             this.addButton.Text = "Create";
             this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
-            // pictureBox1
+            // previewBox
             // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(193, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(377, 258);
-            this.pictureBox1.TabIndex = 44;
-            this.pictureBox1.TabStop = false;
+            this.previewBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.previewBox.Location = new System.Drawing.Point(193, 3);
+            this.previewBox.Name = "previewBox";
+            this.previewBox.Size = new System.Drawing.Size(377, 258);
+            this.previewBox.TabIndex = 44;
+            this.previewBox.TabStop = false;
             // 
             // nameTextBox
             // 
@@ -112,6 +114,7 @@
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(100, 20);
             this.nameTextBox.TabIndex = 45;
+            this.nameTextBox.Validated += new System.EventHandler(this.nameTextBox_Validated);
             // 
             // label1
             // 
@@ -149,6 +152,7 @@
             this.imageFileButton.TabIndex = 49;
             this.imageFileButton.Text = "...";
             this.imageFileButton.UseVisualStyleBackColor = true;
+            this.imageFileButton.Click += new System.EventHandler(this.imageFileButton_Click);
             // 
             // imageFileWarningLabel
             // 
@@ -168,6 +172,7 @@
             this.tileSizeYTextBox.Name = "tileSizeYTextBox";
             this.tileSizeYTextBox.Size = new System.Drawing.Size(62, 20);
             this.tileSizeYTextBox.TabIndex = 52;
+            this.tileSizeYTextBox.Validated += new System.EventHandler(this.tileSizeYTextBox_Validated);
             // 
             // tileSizeXTextBox
             // 
@@ -176,6 +181,7 @@
             this.tileSizeXTextBox.Name = "tileSizeXTextBox";
             this.tileSizeXTextBox.Size = new System.Drawing.Size(62, 20);
             this.tileSizeXTextBox.TabIndex = 51;
+            this.tileSizeXTextBox.Validated += new System.EventHandler(this.tileSizeXTextBox_Validated);
             // 
             // label6
             // 
@@ -211,6 +217,7 @@
             this.tileSpacingTextBox.Name = "tileSpacingTextBox";
             this.tileSpacingTextBox.Size = new System.Drawing.Size(62, 20);
             this.tileSpacingTextBox.TabIndex = 56;
+            this.tileSpacingTextBox.Validated += new System.EventHandler(this.tileSpacingTextBox_Validated);
             // 
             // TilesetsEditor
             // 
@@ -228,7 +235,7 @@
             this.Controls.Add(this.imageFileTextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nameTextBox);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.previewBox);
             this.Controls.Add(this.listBox);
             this.Controls.Add(this.moveDownButton);
             this.Controls.Add(this.moveUpButton);
@@ -236,7 +243,7 @@
             this.Controls.Add(this.addButton);
             this.Name = "TilesetsEditor";
             this.Size = new System.Drawing.Size(573, 490);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.previewBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -249,7 +256,7 @@
         private System.Windows.Forms.Button moveUpButton;
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.Button addButton;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox previewBox;
         private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox imageFileTextBox;
