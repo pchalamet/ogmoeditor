@@ -38,11 +38,6 @@ namespace OgmoEditor.ProjectEditors
             directory = project.SavedDirectory;
         }
 
-        public void ApplyToProject(Project project)
-        {
-
-        }
-
         private void setControlsFromTileset(Tileset t)
         {
             removeButton.Enabled = true;
@@ -215,12 +210,6 @@ namespace OgmoEditor.ProjectEditors
         }
 
         private void tileSizeXTextBox_Validated(object sender, EventArgs e)
-        {
-            ProjParse.Parse(ref tilesets[listBox.SelectedIndex].TileSize, tileSizeXTextBox, tileSizeYTextBox);
-            updateTotalTiles();
-        }
-
-        private void tileSizeYTextBox_Validated(object sender, EventArgs e)
         {
             ProjParse.Parse(ref tilesets[listBox.SelectedIndex].TileSize, tileSizeXTextBox, tileSizeYTextBox);
             updateTotalTiles();

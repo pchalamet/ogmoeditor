@@ -55,6 +55,7 @@
             this.maxHeightTextBox.Name = "maxHeightTextBox";
             this.maxHeightTextBox.Size = new System.Drawing.Size(62, 20);
             this.maxHeightTextBox.TabIndex = 26;
+            this.maxHeightTextBox.Validated += new System.EventHandler(this.maxWidthTextBox_TextChanged);
             // 
             // maxWidthTextBox
             // 
@@ -62,6 +63,7 @@
             this.maxWidthTextBox.Name = "maxWidthTextBox";
             this.maxWidthTextBox.Size = new System.Drawing.Size(62, 20);
             this.maxWidthTextBox.TabIndex = 25;
+            this.maxWidthTextBox.TextChanged += new System.EventHandler(this.maxWidthTextBox_TextChanged);
             // 
             // minHeightTextBox
             // 
@@ -69,6 +71,7 @@
             this.minHeightTextBox.Name = "minHeightTextBox";
             this.minHeightTextBox.Size = new System.Drawing.Size(62, 20);
             this.minHeightTextBox.TabIndex = 24;
+            this.minHeightTextBox.Validated += new System.EventHandler(this.minWidthTextBox_Validated);
             // 
             // minWidthTextBox
             // 
@@ -76,6 +79,7 @@
             this.minWidthTextBox.Name = "minWidthTextBox";
             this.minWidthTextBox.Size = new System.Drawing.Size(62, 20);
             this.minWidthTextBox.TabIndex = 23;
+            this.minWidthTextBox.Validated += new System.EventHandler(this.minWidthTextBox_Validated);
             // 
             // defaultHeightTextBox
             // 
@@ -83,6 +87,7 @@
             this.defaultHeightTextBox.Name = "defaultHeightTextBox";
             this.defaultHeightTextBox.Size = new System.Drawing.Size(62, 20);
             this.defaultHeightTextBox.TabIndex = 22;
+            this.defaultHeightTextBox.Validated += new System.EventHandler(this.defaultWidthTextBox_Validated);
             // 
             // defaultWidthTextBox
             // 
@@ -90,6 +95,7 @@
             this.defaultWidthTextBox.Name = "defaultWidthTextBox";
             this.defaultWidthTextBox.Size = new System.Drawing.Size(62, 20);
             this.defaultWidthTextBox.TabIndex = 21;
+            this.defaultWidthTextBox.Validated += new System.EventHandler(this.defaultWidthTextBox_Validated);
             // 
             // projectNameTextBox
             // 
@@ -97,6 +103,7 @@
             this.projectNameTextBox.Name = "projectNameTextBox";
             this.projectNameTextBox.Size = new System.Drawing.Size(197, 20);
             this.projectNameTextBox.TabIndex = 19;
+            this.projectNameTextBox.Validated += new System.EventHandler(this.projectNameTextBox_Validated);
             // 
             // label8
             // 
@@ -186,6 +193,7 @@
             this.backgroundColorChooser.Name = "backgroundColorChooser";
             this.backgroundColorChooser.Size = new System.Drawing.Size(108, 28);
             this.backgroundColorChooser.TabIndex = 36;
+            this.backgroundColorChooser.ColorChanged += new OgmoEditor.ColorChooser.ColorCallback(this.backgroundColorChooser_ColorChanged);
             // 
             // valuesEditor
             // 

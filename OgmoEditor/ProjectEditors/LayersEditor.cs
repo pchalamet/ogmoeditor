@@ -33,11 +33,6 @@ namespace OgmoEditor.ProjectEditors
                 listBox.Items.Add(d.Name);
         }
 
-        public void ApplyToProject(Project project)
-        {
-            
-        }
-
         private void setControlsFromDefinition(LayerDefinition definition)
         {
             //Enabled stuff

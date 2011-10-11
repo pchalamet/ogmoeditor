@@ -176,7 +176,7 @@
             this.tileSizeYTextBox.Name = "tileSizeYTextBox";
             this.tileSizeYTextBox.Size = new System.Drawing.Size(62, 20);
             this.tileSizeYTextBox.TabIndex = 52;
-            this.tileSizeYTextBox.Validated += new System.EventHandler(this.tileSizeYTextBox_Validated);
+            this.tileSizeYTextBox.Validated += new System.EventHandler(this.tileSizeXTextBox_Validated);
             // 
             // tileSizeXTextBox
             // 

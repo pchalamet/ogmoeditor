@@ -13,6 +13,8 @@ namespace OgmoEditor.ProjectEditors
 {
     public partial class SettingsEditor : UserControl, IProjectChanger
     {
+        private Project project;
+
         public SettingsEditor()
         {
             InitializeComponent();
@@ -20,6 +22,8 @@ namespace OgmoEditor.ProjectEditors
 
         public void LoadFromProject(Project project)
         {
+            this.project = project;
+
             projectNameTextBox.Text = project.Name;
             backgroundColorChooser.Color = project.BackgroundColor;
             defaultWidthTextBox.Text = project.LevelDefaultSize.Width.ToString();
@@ -32,12 +36,28 @@ namespace OgmoEditor.ProjectEditors
             valuesEditor.SetList(project.LevelValueDefinitions);
         }
 
-        public void ApplyToProject(Project project)
+        private void projectNameTextBox_Validated(object sender, EventArgs e)
         {
             project.Name = projectNameTextBox.Text;
-            project.BackgroundColor = backgroundColorChooser.Color;
+        }
+
+        private void backgroundColorChooser_ColorChanged(OgmoColor color)
+        {
+            project.BackgroundColor = color;
+        }
+
+        private void defaultWidthTextBox_Validated(object sender, EventArgs e)
+        {
             ProjParse.Parse(ref project.LevelDefaultSize, defaultWidthTextBox, defaultHeightTextBox);
+        }
+
+        private void minWidthTextBox_Validated(object sender, EventArgs e)
+        {
             ProjParse.Parse(ref project.LevelMinimumSize, minWidthTextBox, minHeightTextBox);
+        }
+
+        private void maxWidthTextBox_TextChanged(object sender, EventArgs e)
+        {
             ProjParse.Parse(ref project.LevelMaximumSize, maxWidthTextBox, maxHeightTextBox);
         }
 

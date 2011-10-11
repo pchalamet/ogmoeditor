@@ -50,6 +50,7 @@ namespace OgmoEditor.ProjectEditors
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            //Check for errors
             string errors = newProject.ErrorCheck();
             if (errors != "")
             {
@@ -57,12 +58,10 @@ namespace OgmoEditor.ProjectEditors
                 return;
             }
 
-            settingsEditor.ApplyToProject(newProject);
-            layersEditor.ApplyToProject(newProject);
-            tilesetsEditor.ApplyToProject(newProject);
-            objectsEditor.ApplyToProject(newProject);
+            //Copy the edited project onto the old one
             oldProject.CloneFrom(newProject);
 
+            //Save it if in auto-save mode. Otherwise, just mark it as changed
             if (autoSave)
             {
                 autoSave = false;
@@ -71,6 +70,7 @@ namespace OgmoEditor.ProjectEditors
             else
                 oldProject.Changed = true;
 
+            //Close the project editor
             Close();
         }
     }

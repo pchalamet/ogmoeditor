@@ -105,9 +105,9 @@ namespace OgmoEditor
              */
 
             s += ProjParse.CheckNonblankString(Name, "Project Name");
-            s += ProjParse.CheckPosSize(LevelDefaultSize, "Default Level Width");
-            s += ProjParse.CheckPosSize(LevelMinimumSize, "Minimum Level Width");
-            s += ProjParse.CheckPosSize(LevelMaximumSize, "Maximum Level Width");
+            s += ProjParse.CheckPosSize(LevelDefaultSize, "Default Level");
+            s += ProjParse.CheckPosSize(LevelMinimumSize, "Minimum Level");
+            s += ProjParse.CheckPosSize(LevelMaximumSize, "Maximum Level");
             s += ProjParse.CheckDefinitionList(LevelValueDefinitions, "Level");
 
             /*

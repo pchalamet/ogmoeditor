@@ -25,10 +25,5 @@ namespace OgmoEditor.ProjectEditors
         {
 
         }
-
-        public void ApplyToProject(Project project)
-        {
-
-        }
     }
 }
