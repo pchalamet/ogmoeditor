@@ -7,7 +7,6 @@ namespace OgmoEditor.ProjectEditors
 {
     public interface IProjectChanger
     {
-        string ErrorCheck();
         void LoadFromProject(Project project);
         void ApplyToProject(Project project);
     }

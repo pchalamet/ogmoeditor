@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.Collections;
 using OgmoEditor.Definitions.ValueDefinitions;
 using OgmoEditor.Definitions;
+using OgmoEditor.ProjectEditors;
 
 namespace OgmoEditor
 {
@@ -93,6 +94,55 @@ namespace OgmoEditor
         {
             changed = false;
             Levels = new List<Level>();
+        }
+
+        public string ErrorCheck()
+        {
+            string s = "";
+
+            /*
+             *  PROJECT SETTINGS
+             */
+
+            s += ProjParse.CheckNonblankString(Name, "Project Name");
+            s += ProjParse.CheckPosSize(LevelDefaultSize, "Default Level Width");
+            s += ProjParse.CheckPosSize(LevelMinimumSize, "Minimum Level Width");
+            s += ProjParse.CheckPosSize(LevelMaximumSize, "Maximum Level Width");
+            s += ProjParse.CheckDefinitionList(LevelValueDefinitions, "Level");
+
+            /*
+             *  LAYER DEFINITIONS
+             */
+
+            //Must have at least 1 layer
+            if (LayerDefinitions.Count == 0)
+                s += ProjParse.Error("No layers are defined");
+
+            //Check for duplicates and blanks
+            s += ProjParse.CheckDefinitionList(LayerDefinitions);
+
+            //Must have a tileset if you have a tile layer
+            if (LayerDefinitions.Find(l => l is TileLayerDefinition) != null && Tilesets.Count == 0)
+                s += ProjParse.Error("Tile layer(s) are defined, but no tilesets are defined");
+
+            //Must have an object if you have an object layer
+            if (LayerDefinitions.Find(l => l is ObjectLayerDefinition) != null && ObjectDefinitions.Count == 0)
+                s += ProjParse.Error("Object layer(s) are defined, but no objects are defined");
+
+            /*
+             *  TILESETS
+             */
+
+            //Check for duplicates and blanks
+            ProjParse.CheckDefinitionList(Tilesets);
+
+            foreach (var t in Tilesets)
+            {
+                //File must exist
+                s += ProjParse.CheckPath(t.Path, SavedDirectory, "Tileset \"" + t.Name + "\" image file");
+            }
+
+            return s;
         }
 
         [XmlIgnore]

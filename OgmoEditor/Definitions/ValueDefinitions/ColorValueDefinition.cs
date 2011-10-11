@@ -23,12 +23,6 @@ namespace OgmoEditor.Definitions.ValueDefinitions
             return new ColorValueEditor(this);
         }
 
-        public override string ErrorCheck()
-        {
-            string s = base.ErrorCheck();
-            return s;
-        }
-
         public override ValueDefinition Clone()
         {
             ColorValueDefinition def = new ColorValueDefinition();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.IO;
 
 namespace OgmoEditor.Definitions
 {
@@ -21,11 +22,6 @@ namespace OgmoEditor.Definitions
             Path = "";
             TileSize = new Size(16, 16);
             TileSep = 0;
-        }
-
-        public string ErrorCheck()
-        {
-            return "";
         }
 
         public Tileset Clone()

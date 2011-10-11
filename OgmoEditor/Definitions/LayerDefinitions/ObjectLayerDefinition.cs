@@ -18,12 +18,6 @@ namespace OgmoEditor.Definitions.LayerDefinitions
             return null;
         }
 
-        public override string ErrorCheck()
-        {
-            string s = base.ErrorCheck();
-            return s;
-        }
-
         public override LayerDefinition Clone()
         {
             ObjectLayerDefinition def = new ObjectLayerDefinition();

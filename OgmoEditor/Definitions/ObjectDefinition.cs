@@ -31,11 +31,6 @@ namespace OgmoEditor.Definitions
             
         }
 
-        public string ErrorCheck()
-        {
-            return "";
-        }
-
         public ObjectDefinition Clone()
         {
             ObjectDefinition def = new ObjectDefinition();

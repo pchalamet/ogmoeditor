@@ -36,7 +36,6 @@ namespace OgmoEditor.ProjectEditors
                 listBox.Items.Add(t.Name);
 
             directory = project.SavedDirectory;
-            Debug.WriteLine(directory);
         }
 
         public void ApplyToProject(Project project)

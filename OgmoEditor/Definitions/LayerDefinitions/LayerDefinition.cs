@@ -35,11 +35,6 @@ namespace OgmoEditor.Definitions.LayerDefinitions
             return null;
         }
 
-        public virtual string ErrorCheck()
-        {
-            return "";
-        }
-
         public virtual LayerDefinition Clone()
         {
             throw new Exception("LayerDefinition subclasses must override virtual method Clone!");

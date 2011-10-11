@@ -103,28 +103,6 @@ namespace OgmoEditor.ProjectEditors
             return name;
         }
 
-        public string ErrorCheck(string container)
-        {
-            string s = "";
-
-            //Check for duplicate value names
-            List<string> found = new List<string>();
-            foreach (ValueDefinition v in values)
-            {
-                if (v.Name != "" && !found.Contains(v.Name) && values.FindAll(e => e.Name == v.Name).Count > 1)
-                {                  
-                    s += ProjParse.Error(container + " contains multiple values with the name \"" + v.Name + "\"");
-                    found.Add(v.Name);
-                }
-            }
-
-            //Check for blank value names
-            if (values.Find(e => e.Name == "") != null)
-                s += ProjParse.Error(container + " contains value(s) with blank name");
-
-            return s;
-        }
-
         /*
          *  Events
          */

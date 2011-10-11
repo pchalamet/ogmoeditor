@@ -18,20 +18,6 @@ namespace OgmoEditor.ProjectEditors
             InitializeComponent();
         }
 
-        public string ErrorCheck()
-        {
-            string s = "";
-            s += ProjParse.CheckNonblankString(projectNameTextBox, "Project Name");
-            s += ProjParse.CheckPosInt(defaultWidthTextBox, "Default Level Width");
-            s += ProjParse.CheckPosInt(defaultHeightTextBox, "Default Level Height");
-            s += ProjParse.CheckPosInt(minWidthTextBox, "Minimum Level Width");
-            s += ProjParse.CheckPosInt(minHeightTextBox, "Minimum Level Height");
-            s += ProjParse.CheckPosInt(maxWidthTextBox, "Maximum Level Width");
-            s += ProjParse.CheckPosInt(maxHeightTextBox, "Maximum Level Height");
-            s += valuesEditor.ErrorCheck("Level");
-            return s;
-        }
-
         public void LoadFromProject(Project project)
         {
             projectNameTextBox.Text = project.Name;

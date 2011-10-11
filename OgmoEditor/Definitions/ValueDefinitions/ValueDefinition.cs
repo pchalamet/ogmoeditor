@@ -34,11 +34,6 @@ namespace OgmoEditor.Definitions.ValueDefinitions
             return null;
         }
 
-        public virtual string ErrorCheck()
-        {
-            return "";
-        }
-
         public virtual ValueDefinition Clone()
         {
             throw new Exception("ValueDefinition subclasses must override virtual method Clone!");

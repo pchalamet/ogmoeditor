@@ -22,12 +22,6 @@ namespace OgmoEditor.Definitions.LayerDefinitions
             return new GridLayerEditor(this);
         }
 
-        public override string ErrorCheck()
-        {
-            string s = base.ErrorCheck();
-            return s;
-        }
-
         public override LayerDefinition Clone()
         {
             GridLayerDefinition def = new GridLayerDefinition();
