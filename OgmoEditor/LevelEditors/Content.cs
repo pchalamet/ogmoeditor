@@ -11,14 +11,25 @@ namespace OgmoEditor.LevelEditors
     public class Content
     {
         public Texture2D TexBG { get; private set; }
+        public Texture2D TexLogo { get; private set; }
 
-        public void Load(GraphicsDevice device)
+        private GraphicsDevice device;
+
+        public Content(GraphicsDevice device)
         {
-            FileStream s;
+            this.device = device;
 
-            s = new FileStream(Path.Combine(Ogmo.ProgramDirectory, @"Content\bg.png"), FileMode.Open);
-            TexBG = Texture2D.FromStream(device, s);
+            TexBG = Read("bg.png");
+            TexLogo = Read("logo.png");
+        }
+
+        private Texture2D Read(string filename)
+        {
+            FileStream s = new FileStream(Path.Combine(Ogmo.ProgramDirectory, "Content", filename), FileMode.Open);
+            Texture2D tex = Texture2D.FromStream(device, s);
             s.Close();
+
+            return tex;
         }
     }
 }
