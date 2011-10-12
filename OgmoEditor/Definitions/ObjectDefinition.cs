@@ -34,10 +34,13 @@ namespace OgmoEditor.Definitions
             Limit = -1;
             Size = new Size(16, 16);
             RotateIncrement = 15;
+
             ValueDefinitions = new List<ValueDefinition>();
 
+            ImageDefinition.ImagePath = "";
             ImageDefinition.RectColor = new OgmoColor(255, 0, 0);
             ImageDefinition.ClipRect = new Rectangle(0, 0, 16, 16);
+
             NodesDefinition.Limit = -1;
         }
 
@@ -80,13 +83,13 @@ namespace OgmoEditor.Definitions
     [XmlRoot("Nodes")]
     public struct ObjectNodesDefinition
     {
-        public enum DrawModes { None, Path, Circuit, Fan };
+        public enum PathMode { None, Path, Circuit, Fan };
 
         [XmlAttribute]
         public bool Enabled;
         [XmlAttribute]
         public int Limit;
         [XmlAttribute]
-        public DrawModes DrawMode;
+        public PathMode DrawMode;
     }
 }

@@ -147,6 +147,12 @@ namespace OgmoEditor
 
             //Check for duplicates and blanks
             s += ProjParse.CheckDefinitionList(ObjectDefinitions);
+            foreach (var o in ObjectDefinitions)
+            {
+                //Image file must exist if it is using an image file to draw
+                if (o.ImageDefinition.DrawMode == ObjectImageDefinition.DrawModes.Image)
+                    s += ProjParse.CheckPath(o.ImageDefinition.ImagePath, SavedDirectory, "Object \"" + o.Name + "\" image file");
+            }
 
             return s;
         }

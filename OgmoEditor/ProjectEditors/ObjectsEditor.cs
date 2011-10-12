@@ -314,7 +314,7 @@ namespace OgmoEditor.ProjectEditors
 
         private void nodeDrawComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            objects[listBox.SelectedIndex].NodesDefinition.DrawMode = (ObjectNodesDefinition.DrawModes)nodeDrawComboBox.SelectedIndex;
+            objects[listBox.SelectedIndex].NodesDefinition.DrawMode = (ObjectNodesDefinition.PathMode)nodeDrawComboBox.SelectedIndex;
         }
 
         /*
