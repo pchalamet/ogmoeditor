@@ -8,6 +8,8 @@ namespace OgmoEditor.LevelEditors
 {
     public class Camera
     {
+        static private readonly float[] ZOOMS = new float[] { .25f, .33f, .5f, .66f, 1, 1.5f, 2, 3 };
+
         private Matrix matrix;
         private Matrix inverse;
 
@@ -120,6 +122,34 @@ namespace OgmoEditor.LevelEditors
                 changed = true;
                 zoom = value;
             }
+        }
+
+        public void ZoomIn()
+        {
+            int index;
+            for (index = 0; index < ZOOMS.Length; index++)
+            {
+                if (zoom <= ZOOMS[index])
+                    break;
+            }
+
+
+            zoom = ZOOMS[Math.Min(ZOOMS.Length - 1, index + 1)];
+            changed = true;
+        }
+
+        public void ZoomOut()
+        {
+            int index;
+            for (index = 0; index < ZOOMS.Length; index++)
+            {
+                if (zoom <= ZOOMS[index])
+                    break;
+            }
+
+
+            zoom = ZOOMS[Math.Max(0, index - 1)];
+            changed = true;
         }
     }
 }

@@ -9,6 +9,7 @@ using OgmoEditor.LevelEditors;
 using OgmoEditor.XNA;
 using Microsoft.Xna.Framework.Content;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace OgmoEditor.LevelEditors
 {
@@ -47,7 +48,11 @@ namespace OgmoEditor.LevelEditors
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             //Events
+            Application.Idle += delegate { Invalidate(); };
             this.Resize += onResize;
+            this.MouseClick += onMouseClick;
+            this.MouseMove += onMouseMove;
+            this.MouseWheel += onMouseWheel;
         }
 
         private void initLevelCanvas()
@@ -68,10 +73,9 @@ namespace OgmoEditor.LevelEditors
             //Draw the level onto the level canvas
             GraphicsDevice.SetRenderTarget(levelCanvas);
             GraphicsDevice.Clear(Ogmo.Project.BackgroundColor.toXNA());
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Camera.Matrix);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone);
             
             spriteBatch.End();
-
 
             //Draw the background and logo
             GraphicsDevice.SetRenderTarget(null);
@@ -94,6 +98,24 @@ namespace OgmoEditor.LevelEditors
             //Update the screen bounds
             DrawBounds = new Rectangle(0, 0, Width, Height);
             Camera.Origin = new Vector2(Width / 2, Height / 2);
+        }
+
+        private void onMouseClick(object sender, MouseEventArgs e)
+        {
+            
+        }
+
+        private void onMouseMove(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void onMouseWheel(object sender, MouseEventArgs e)
+        {
+            if (e.Delta > 0)
+                Camera.ZoomIn();
+            else
+                Camera.ZoomOut();
         }
     }
 }

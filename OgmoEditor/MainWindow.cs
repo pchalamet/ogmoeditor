@@ -109,6 +109,9 @@ namespace OgmoEditor
                 duplicateLevelToolStripMenuItem.Enabled =
                 closeOtherLevelsToolStripMenuItem.Enabled =
                 saveAsImageToolStripMenuItem.Enabled = (masterTabControl.SelectedIndex < Ogmo.Levels.Count);
+
+            if (masterTabControl.SelectedTab != null)
+                masterTabControl.SelectedTab.Controls[0].Focus();
         }
 
         /*
