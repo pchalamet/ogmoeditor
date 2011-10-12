@@ -132,6 +132,7 @@
             // 
             // imageFileTextBox
             // 
+            this.imageFileTextBox.Enabled = false;
             this.imageFileTextBox.Location = new System.Drawing.Point(280, 367);
             this.imageFileTextBox.Name = "imageFileTextBox";
             this.imageFileTextBox.ReadOnly = true;

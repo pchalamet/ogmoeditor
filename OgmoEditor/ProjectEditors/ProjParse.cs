@@ -58,6 +58,27 @@ namespace OgmoEditor.ProjectEditors
             }
         }
 
+        static public void Parse(ref Point to, TextBox x, TextBox y)
+        {
+            try
+            {
+                to.X = Convert.ToInt32(x.Text);
+            }
+            catch
+            {
+                x.Text = to.X.ToString();
+            }
+
+            try
+            {
+                to.Y = Convert.ToInt32(y.Text);
+            }
+            catch
+            {
+                y.Text = to.Y.ToString();
+            }
+        }
+
         static public void Parse(ref OgmoColor to, TextBox box)
         {
             try

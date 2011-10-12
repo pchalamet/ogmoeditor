@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using System.Drawing;
+using OgmoEditor.Definitions.ValueDefinitions;
 
 namespace OgmoEditor.Definitions
 {
@@ -25,10 +26,14 @@ namespace OgmoEditor.Definitions
         public Size Size;
         public Point Origin;
         public ObjectImageDefinition ImageDefinition;
+        public List<ValueDefinition> ValueDefinitions;
 
         public ObjectDefinition()
         {
-            
+            Limit = -1;
+            Size = new Size(16, 16);
+            RotateIncrement = 15;
+            ValueDefinitions = new List<ValueDefinition>();
         }
 
         public ObjectDefinition Clone()
@@ -43,6 +48,9 @@ namespace OgmoEditor.Definitions
             def.Size = Size;
             def.Origin = Origin;
             def.ImageDefinition = ImageDefinition;
+            def.ValueDefinitions = new List<ValueDefinition>();
+            foreach (var d in ValueDefinitions)
+                def.ValueDefinitions.Add(d.Clone());
             return def;
         }
 

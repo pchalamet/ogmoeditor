@@ -24,11 +24,6 @@ namespace OgmoEditor.ProjectEditors
             InitializeComponent();
         }
 
-        public string ErrorCheck()
-        {
-            return "";
-        }
-
         public void LoadFromProject(Project project)
         {
             tilesets = project.Tilesets;

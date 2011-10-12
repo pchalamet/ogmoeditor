@@ -35,6 +35,7 @@ namespace OgmoEditor.ProjectEditors
             this.values = values;
 
             //Initialize the visual value list
+            listBox.SelectedIndex = -1;
             listBox.Items.Clear();
             foreach (ValueDefinition v in values)
                 listBox.Items.Add(v.Name);
