@@ -37,6 +37,7 @@ namespace OgmoEditor.Definitions
             ValueDefinitions = new List<ValueDefinition>();
 
             ImageDefinition.RectColor = new OgmoColor(255, 0, 0);
+            ImageDefinition.ClipRect = new Rectangle(0, 0, 16, 16);
             NodesDefinition.Limit = -1;
         }
 

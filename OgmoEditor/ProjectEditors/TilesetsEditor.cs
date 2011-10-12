@@ -219,7 +219,7 @@ namespace OgmoEditor.ProjectEditors
         private void imageFileButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = Tileset.FILE_FILTER;
+            dialog.Filter = Ogmo.IMAGE_FILE_FILTER;
             dialog.CheckFileExists = true;
 
             if (checkImageFile())

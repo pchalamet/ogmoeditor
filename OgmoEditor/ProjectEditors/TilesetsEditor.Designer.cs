@@ -105,7 +105,8 @@
             // 
             // previewBox
             // 
-            this.previewBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.previewBox.BackgroundImage = global::OgmoEditor.Properties.Resources.bg;
+            this.previewBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.previewBox.Location = new System.Drawing.Point(193, 3);
             this.previewBox.Name = "previewBox";
             this.previewBox.Size = new System.Drawing.Size(377, 258);

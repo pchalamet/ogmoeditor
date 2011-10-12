@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using OgmoEditor.Definitions;
+using System.IO;
+using System.Diagnostics;
 
 namespace OgmoEditor.ProjectEditors
 {
@@ -15,6 +17,7 @@ namespace OgmoEditor.ProjectEditors
         private const string NEW_NAME = "NewObject";
 
         private List<ObjectDefinition> objects;
+        private string directory;
 
         public ObjectsEditor()
         {
@@ -26,6 +29,8 @@ namespace OgmoEditor.ProjectEditors
             objects = project.ObjectDefinitions;
             foreach (var o in objects)
                 listBox.Items.Add(o.Name);
+
+            directory = project.SavedDirectory;
         }
 
         private void setControlsFromObject(ObjectDefinition def)
@@ -75,6 +80,14 @@ namespace OgmoEditor.ProjectEditors
             graphicTypeComboBox.SelectedIndex = (int)def.ImageDefinition.DrawMode;
             GraphicFieldsVisibility = (int)def.ImageDefinition.DrawMode;
             rectangleColorChooser.Color = def.ImageDefinition.RectColor;
+            imageFileTextBox.Text = def.ImageDefinition.ImagePath;
+            imageFileClipXTextBox.Text = def.ImageDefinition.ClipRect.X.ToString();
+            imageFileClipYTextBox.Text = def.ImageDefinition.ClipRect.Y.ToString();
+            imageFileClipWTextBox.Text = def.ImageDefinition.ClipRect.Width.ToString();
+            imageFileClipHTextBox.Text = def.ImageDefinition.ClipRect.Height.ToString();
+            imageFileTiledCheckBox.Checked = def.ImageDefinition.Tiled;
+            imageFileWarningLabel.Visible = !checkImageFile();
+            loadImageFilePreview();
         }
 
         private void disableControls()
@@ -99,6 +112,7 @@ namespace OgmoEditor.ProjectEditors
             RotationFieldsVisible = false;
             NodesFieldsVisible = false;
             GraphicFieldsVisibility = -1;
+            clearImageFilePreview();
         }
 
         private ObjectDefinition GetDefault()
@@ -144,11 +158,47 @@ namespace OgmoEditor.ProjectEditors
             set
             {
                 rectangleGraphicPanel.Visible = rectangleGraphicPanel.Enabled = (value == 0);
+                imageFileGraphicPanel.Visible = imageFileGraphicPanel.Enabled = (value == 1);
             }
         }
 
+        private bool checkImageFile()
+        {
+            return File.Exists(Util.GetPathAbsolute(imageFileTextBox.Text, directory));
+        }
+
+        private void loadImageFilePreview(bool setClipRect = false)
+        {
+            imageFilePreviewBox.ImageLocation = Util.GetPathAbsolute(imageFileTextBox.Text, directory);
+            if (imageFilePreviewBox.Image == null)
+            {
+                imageFilePreviewBox.Padding = new Padding(0, 0, 0, 0);
+            }
+            else
+            {
+                imageFilePreviewBox.Padding = new Padding(
+                    imageFilePreviewBox.Width / 2 - imageFilePreviewBox.Image.Width / 2,
+                    imageFilePreviewBox.Height / 2 - imageFilePreviewBox.Image.Height / 2, 0, 0);
+
+                if (setClipRect)
+                {
+                    Debug.WriteLine("yo");
+                    objects[listBox.SelectedIndex].ImageDefinition.ClipRect = new Rectangle(0, 0, imageFilePreviewBox.Image.Width, imageFilePreviewBox.Image.Height);
+                    imageFileClipXTextBox.Text = 0.ToString();
+                    imageFileClipYTextBox.Text = 0.ToString();
+                    imageFileClipWTextBox.Text = imageFilePreviewBox.Image.Width.ToString();
+                    imageFileClipHTextBox.Text = imageFilePreviewBox.Image.Height.ToString();
+                }
+            }
+        }
+
+        private void clearImageFilePreview()
+        {
+            imageFilePreviewBox.Image = null;
+        }
+
         /*
-         *  Events
+         *  Selector Events
          */
         private void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -200,6 +250,9 @@ namespace OgmoEditor.ProjectEditors
             listBox.SelectedIndex = index + 1;
         }
 
+        /*
+         *  Basic Settings Events
+         */
         private void nameTextBox_Validated(object sender, EventArgs e)
         {
             objects[listBox.SelectedIndex].Name = nameTextBox.Text;
@@ -221,6 +274,9 @@ namespace OgmoEditor.ProjectEditors
             ProjParse.Parse(ref objects[listBox.SelectedIndex].Origin, originXTextBox, originYTextBox);
         }
 
+        /*
+         *  Size/Rotate Events
+         */
         private void resizableXCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             objects[listBox.SelectedIndex].ResizableX = resizableXCheckBox.Checked;
@@ -242,6 +298,9 @@ namespace OgmoEditor.ProjectEditors
             ProjParse.Parse(ref objects[listBox.SelectedIndex].RotateIncrement, rotationIncrementTextBox);
         }
 
+        /*
+         *  Nodes Events
+         */
         private void nodesCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             objects[listBox.SelectedIndex].NodesDefinition.Enabled = nodesCheckBox.Checked;
@@ -258,6 +317,9 @@ namespace OgmoEditor.ProjectEditors
             objects[listBox.SelectedIndex].NodesDefinition.DrawMode = (ObjectNodesDefinition.DrawModes)nodeDrawComboBox.SelectedIndex;
         }
 
+        /*
+         *  Graphics Events
+         */
         private void graphicTypeComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
             objects[listBox.SelectedIndex].ImageDefinition.DrawMode = (ObjectImageDefinition.DrawModes)graphicTypeComboBox.SelectedIndex;
@@ -267,6 +329,37 @@ namespace OgmoEditor.ProjectEditors
         private void rectangleColorChooser_ColorChanged(OgmoColor color)
         {
             objects[listBox.SelectedIndex].ImageDefinition.RectColor = color;
+        }
+
+        private void imageFileTiledCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            objects[listBox.SelectedIndex].ImageDefinition.Tiled = imageFileTiledCheckBox.Checked;
+        }
+
+        private void imageFileClipXTextBox_Validated(object sender, EventArgs e)
+        {
+            ProjParse.Parse(ref objects[listBox.SelectedIndex].ImageDefinition.ClipRect, imageFileClipXTextBox, imageFileClipYTextBox, imageFileClipWTextBox, imageFileClipHTextBox);
+        }
+
+        private void imageFileButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = Ogmo.IMAGE_FILE_FILTER;
+            dialog.CheckFileExists = true;
+
+            if (checkImageFile())
+                dialog.InitialDirectory = Path.GetFullPath(Util.GetPathAbsolute(imageFileTextBox.Text, directory));
+            else
+                dialog.InitialDirectory = directory;
+
+            if (dialog.ShowDialog() == DialogResult.Cancel)
+                return;
+
+            imageFileTextBox.Text = Util.GetFilePathRelativeTo(dialog.FileName, directory);
+            imageFileWarningLabel.Visible = !checkImageFile();
+            loadImageFilePreview(true);
+
+            objects[listBox.SelectedIndex].ImageDefinition.ImagePath = imageFileTextBox.Text;
         }
     }
 }

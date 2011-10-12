@@ -21,6 +21,7 @@ namespace OgmoEditor
         public const string NEW_PROJECT_NAME = "New Project";
         public const string NEW_LEVEL_NAME = "New Level";
         public const string NEW_LAYER_NAME = "NewLayer";
+        public const string IMAGE_FILE_FILTER = "PNG image file|*.png|BMP image file|*.bmp";
 
         public delegate void ProjectCallback(Project project);
         public delegate void LevelCallback(Level level);

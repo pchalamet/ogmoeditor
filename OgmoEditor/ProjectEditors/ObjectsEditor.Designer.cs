@@ -63,9 +63,23 @@
             this.graphicTypeComboBox = new System.Windows.Forms.ComboBox();
             this.rectangleGraphicPanel = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
+            this.imageFileGraphicPanel = new System.Windows.Forms.Panel();
+            this.imageFileClipHTextBox = new System.Windows.Forms.TextBox();
+            this.imageFileClipWTextBox = new System.Windows.Forms.TextBox();
+            this.imageFileClipYTextBox = new System.Windows.Forms.TextBox();
+            this.imageFileClipXTextBox = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.imageFileWarningLabel = new System.Windows.Forms.Label();
+            this.imageFileButton = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.imageFileTextBox = new System.Windows.Forms.TextBox();
+            this.imageFileTiledCheckBox = new System.Windows.Forms.CheckBox();
+            this.imageFilePreviewBox = new System.Windows.Forms.PictureBox();
             this.rectangleColorChooser = new OgmoEditor.ColorChooser();
             this.valuesEditor = new OgmoEditor.ProjectEditors.ValuesEditor();
             this.rectangleGraphicPanel.SuspendLayout();
+            this.imageFileGraphicPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imageFilePreviewBox)).BeginInit();
             this.SuspendLayout();
             // 
             // listBox
@@ -422,6 +436,126 @@
             this.label12.TabIndex = 0;
             this.label12.Text = "Color";
             // 
+            // imageFileGraphicPanel
+            // 
+            this.imageFileGraphicPanel.Controls.Add(this.imageFileClipHTextBox);
+            this.imageFileGraphicPanel.Controls.Add(this.imageFileClipWTextBox);
+            this.imageFileGraphicPanel.Controls.Add(this.imageFileClipYTextBox);
+            this.imageFileGraphicPanel.Controls.Add(this.imageFileClipXTextBox);
+            this.imageFileGraphicPanel.Controls.Add(this.label14);
+            this.imageFileGraphicPanel.Controls.Add(this.imageFileWarningLabel);
+            this.imageFileGraphicPanel.Controls.Add(this.imageFileButton);
+            this.imageFileGraphicPanel.Controls.Add(this.label13);
+            this.imageFileGraphicPanel.Controls.Add(this.imageFileTextBox);
+            this.imageFileGraphicPanel.Controls.Add(this.imageFileTiledCheckBox);
+            this.imageFileGraphicPanel.Controls.Add(this.imageFilePreviewBox);
+            this.imageFileGraphicPanel.Enabled = false;
+            this.imageFileGraphicPanel.Location = new System.Drawing.Point(211, 393);
+            this.imageFileGraphicPanel.Name = "imageFileGraphicPanel";
+            this.imageFileGraphicPanel.Size = new System.Drawing.Size(343, 88);
+            this.imageFileGraphicPanel.TabIndex = 85;
+            this.imageFileGraphicPanel.Visible = false;
+            // 
+            // imageFileClipHTextBox
+            // 
+            this.imageFileClipHTextBox.Location = new System.Drawing.Point(265, 37);
+            this.imageFileClipHTextBox.Name = "imageFileClipHTextBox";
+            this.imageFileClipHTextBox.Size = new System.Drawing.Size(42, 20);
+            this.imageFileClipHTextBox.TabIndex = 87;
+            this.imageFileClipHTextBox.Validated += new System.EventHandler(this.imageFileClipXTextBox_Validated);
+            // 
+            // imageFileClipWTextBox
+            // 
+            this.imageFileClipWTextBox.Location = new System.Drawing.Point(217, 37);
+            this.imageFileClipWTextBox.Name = "imageFileClipWTextBox";
+            this.imageFileClipWTextBox.Size = new System.Drawing.Size(42, 20);
+            this.imageFileClipWTextBox.TabIndex = 86;
+            this.imageFileClipWTextBox.Validated += new System.EventHandler(this.imageFileClipXTextBox_Validated);
+            // 
+            // imageFileClipYTextBox
+            // 
+            this.imageFileClipYTextBox.Location = new System.Drawing.Point(169, 37);
+            this.imageFileClipYTextBox.Name = "imageFileClipYTextBox";
+            this.imageFileClipYTextBox.Size = new System.Drawing.Size(42, 20);
+            this.imageFileClipYTextBox.TabIndex = 85;
+            this.imageFileClipYTextBox.Validated += new System.EventHandler(this.imageFileClipXTextBox_Validated);
+            // 
+            // imageFileClipXTextBox
+            // 
+            this.imageFileClipXTextBox.Location = new System.Drawing.Point(120, 37);
+            this.imageFileClipXTextBox.Name = "imageFileClipXTextBox";
+            this.imageFileClipXTextBox.Size = new System.Drawing.Size(42, 20);
+            this.imageFileClipXTextBox.TabIndex = 84;
+            this.imageFileClipXTextBox.Validated += new System.EventHandler(this.imageFileClipXTextBox_Validated);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(92, 40);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(24, 13);
+            this.label14.TabIndex = 55;
+            this.label14.Text = "Clip";
+            // 
+            // imageFileWarningLabel
+            // 
+            this.imageFileWarningLabel.AutoSize = true;
+            this.imageFileWarningLabel.ForeColor = System.Drawing.Color.OrangeRed;
+            this.imageFileWarningLabel.Location = new System.Drawing.Point(263, 12);
+            this.imageFileWarningLabel.Name = "imageFileWarningLabel";
+            this.imageFileWarningLabel.Size = new System.Drawing.Size(77, 13);
+            this.imageFileWarningLabel.TabIndex = 54;
+            this.imageFileWarningLabel.Text = "Does not exist!";
+            this.imageFileWarningLabel.Visible = false;
+            // 
+            // imageFileButton
+            // 
+            this.imageFileButton.Location = new System.Drawing.Point(231, 7);
+            this.imageFileButton.Name = "imageFileButton";
+            this.imageFileButton.Size = new System.Drawing.Size(27, 23);
+            this.imageFileButton.TabIndex = 53;
+            this.imageFileButton.Text = "...";
+            this.imageFileButton.UseVisualStyleBackColor = true;
+            this.imageFileButton.Click += new System.EventHandler(this.imageFileButton_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(92, 12);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(23, 13);
+            this.label13.TabIndex = 52;
+            this.label13.Text = "File";
+            // 
+            // imageFileTextBox
+            // 
+            this.imageFileTextBox.Location = new System.Drawing.Point(120, 9);
+            this.imageFileTextBox.Name = "imageFileTextBox";
+            this.imageFileTextBox.ReadOnly = true;
+            this.imageFileTextBox.Size = new System.Drawing.Size(105, 20);
+            this.imageFileTextBox.TabIndex = 51;
+            // 
+            // imageFileTiledCheckBox
+            // 
+            this.imageFileTiledCheckBox.AutoSize = true;
+            this.imageFileTiledCheckBox.Location = new System.Drawing.Point(95, 63);
+            this.imageFileTiledCheckBox.Name = "imageFileTiledCheckBox";
+            this.imageFileTiledCheckBox.Size = new System.Drawing.Size(75, 17);
+            this.imageFileTiledCheckBox.TabIndex = 1;
+            this.imageFileTiledCheckBox.Text = "Tile Image";
+            this.imageFileTiledCheckBox.UseVisualStyleBackColor = true;
+            this.imageFileTiledCheckBox.CheckedChanged += new System.EventHandler(this.imageFileTiledCheckBox_CheckedChanged);
+            // 
+            // imageFilePreviewBox
+            // 
+            this.imageFilePreviewBox.BackgroundImage = global::OgmoEditor.Properties.Resources.bg;
+            this.imageFilePreviewBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.imageFilePreviewBox.Location = new System.Drawing.Point(4, 4);
+            this.imageFilePreviewBox.Name = "imageFilePreviewBox";
+            this.imageFilePreviewBox.Size = new System.Drawing.Size(82, 81);
+            this.imageFilePreviewBox.TabIndex = 0;
+            this.imageFilePreviewBox.TabStop = false;
+            // 
             // rectangleColorChooser
             // 
             this.rectangleColorChooser.Location = new System.Drawing.Point(51, 5);
@@ -443,6 +577,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.imageFileGraphicPanel);
             this.Controls.Add(this.rectangleGraphicPanel);
             this.Controls.Add(this.graphicTypeComboBox);
             this.Controls.Add(this.label11);
@@ -482,6 +617,9 @@
             this.Size = new System.Drawing.Size(573, 490);
             this.rectangleGraphicPanel.ResumeLayout(false);
             this.rectangleGraphicPanel.PerformLayout();
+            this.imageFileGraphicPanel.ResumeLayout(false);
+            this.imageFileGraphicPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imageFilePreviewBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -526,5 +664,17 @@
         private System.Windows.Forms.Panel rectangleGraphicPanel;
         private ColorChooser rectangleColorChooser;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Panel imageFileGraphicPanel;
+        private System.Windows.Forms.TextBox imageFileClipHTextBox;
+        private System.Windows.Forms.TextBox imageFileClipWTextBox;
+        private System.Windows.Forms.TextBox imageFileClipYTextBox;
+        private System.Windows.Forms.TextBox imageFileClipXTextBox;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label imageFileWarningLabel;
+        private System.Windows.Forms.Button imageFileButton;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox imageFileTextBox;
+        private System.Windows.Forms.CheckBox imageFileTiledCheckBox;
+        private System.Windows.Forms.PictureBox imageFilePreviewBox;
     }
 }
