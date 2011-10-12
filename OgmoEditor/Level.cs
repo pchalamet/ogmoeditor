@@ -14,7 +14,6 @@ namespace OgmoEditor
         //Running instance variables
         private Project project;
         public string SavePath;
-        public TreeNode TreeNode;
         public bool Changed { get; private set; }
 
         //Actual parameters to be edited/exported
@@ -56,15 +55,7 @@ namespace OgmoEditor
 
         private void InitializeRunningVars()
         {
-            TreeNode = new TreeNode();
             RemoveChanged();
-        }
-
-        private void Control_Paint(object sender, PaintEventArgs e)
-        {
-            Graphics g = e.Graphics;
-            Pen p = new Pen(Color.Red, 1);
-            g.DrawLine(p, 50, 50, 200, 200);
         }
 
         public string Name
@@ -158,16 +149,11 @@ namespace OgmoEditor
         private void RemoveChanged()
         {
             Changed = false;
-            if (SavePath == "")
-                TreeNode.Text = Ogmo.NEW_LEVEL_NAME;
-            else
-                TreeNode.Text = Path.GetFileName(SavePath);
         }
 
         public void SetChanged()
         {
             Changed = true;
-            TreeNode.Text = Path.GetFileName(SavePath) + '*';
         }
 
     }

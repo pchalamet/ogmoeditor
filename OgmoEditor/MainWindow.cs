@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using OgmoEditor.ProjectEditors;
+using OgmoEditor.LevelEditors;
 
 namespace OgmoEditor
 {
@@ -78,12 +79,15 @@ namespace OgmoEditor
 
         private void onLevelAdded(Level level)
         {
-            
+            TabPage t = new TabPage(level.Name);
+            t.Controls.Add(new LevelEditor(level));
+            t.BackgroundImage = global::OgmoEditor.Properties.Resources.bg;
+            masterTabControl.TabPages.Add(t);
         }
 
         private void onLevelClosed(Level level)
         {
-            
+            masterTabControl.TabPages.RemoveAt(Ogmo.Project.Levels.IndexOf(level));
         }
 
         /*

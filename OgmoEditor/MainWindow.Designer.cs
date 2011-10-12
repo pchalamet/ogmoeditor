@@ -318,7 +318,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::OgmoEditor.Properties.Resources.bg;
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.masterTabControl);
             this.Controls.Add(this.StatusStrip);

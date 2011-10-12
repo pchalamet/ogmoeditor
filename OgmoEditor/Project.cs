@@ -237,16 +237,6 @@ namespace OgmoEditor
         /*
          *  Level Stuff
          */
-        public bool IsLevelNode(TreeNode node)
-        {
-            return Levels.Find(e => e.TreeNode == node) != null;
-        }
-
-        public Level GetLevelFromNode(TreeNode node)
-        {
-            return Levels.Find(e => e.TreeNode == node);
-        }
-
         public Level GetLevelByPath(string path)
         {
             return Levels.Find(e => e.SavePath == path);
