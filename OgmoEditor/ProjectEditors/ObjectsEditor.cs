@@ -45,6 +45,7 @@ namespace OgmoEditor.ProjectEditors
             rotatableCheckBox.Enabled = true;
             valuesEditor.Enabled = true;
             nodesCheckBox.Enabled = true;
+            graphicTypeComboBox.Enabled = true;
 
             //Basics
             nameTextBox.Text = def.Name;
@@ -69,6 +70,9 @@ namespace OgmoEditor.ProjectEditors
 
             //Values
             valuesEditor.SetList(def.ValueDefinitions);
+
+            //Graphic
+            graphicTypeComboBox.SelectedIndex = (int)def.ImageDefinition.DrawMode;
         }
 
         private void disableControls()
@@ -88,6 +92,7 @@ namespace OgmoEditor.ProjectEditors
             rotatableCheckBox.Enabled = false;
             nodesCheckBox.Enabled = false;
             valuesEditor.Enabled = false;
+            graphicTypeComboBox.Enabled = false;
 
             RotationFieldsVisible = false;
             NodesFieldsVisible = false;
@@ -128,6 +133,14 @@ namespace OgmoEditor.ProjectEditors
                 nodeLimitLabel.Visible = value;
                 nodeDrawComboBox.Visible = nodeDrawComboBox.Enabled = value;
                 nodeDrawLabel.Visible = value;
+            }
+        }
+
+        private ObjectImageDefinition.DrawModes ImageFieldsVisibility
+        {
+            set
+            {
+
             }
         }
 
@@ -240,6 +253,11 @@ namespace OgmoEditor.ProjectEditors
         private void nodeDrawComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
             objects[listBox.SelectedIndex].NodesDefinition.DrawMode = (ObjectNodesDefinition.DrawModes)nodeDrawComboBox.SelectedIndex;
+        }
+
+        private void graphicTypeComboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            objects[listBox.SelectedIndex].ImageDefinition.DrawMode = (ObjectImageDefinition.DrawModes)graphicTypeComboBox.SelectedIndex;
         }
 
 

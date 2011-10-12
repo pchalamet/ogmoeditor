@@ -58,8 +58,10 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.valuesEditor = new OgmoEditor.ProjectEditors.ValuesEditor();
             this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.graphicTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.valuesEditor = new OgmoEditor.ProjectEditors.ValuesEditor();
             this.SuspendLayout();
             // 
             // listBox
@@ -365,15 +367,6 @@
             this.label9.Size = new System.Drawing.Size(348, 2);
             this.label9.TabIndex = 79;
             // 
-            // valuesEditor
-            // 
-            this.valuesEditor.Enabled = false;
-            this.valuesEditor.Location = new System.Drawing.Point(211, 163);
-            this.valuesEditor.Name = "valuesEditor";
-            this.valuesEditor.Size = new System.Drawing.Size(343, 193);
-            this.valuesEditor.TabIndex = 70;
-            this.valuesEditor.Title = "Values";
-            // 
             // label10
             // 
             this.label10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -384,10 +377,44 @@
             this.label10.Size = new System.Drawing.Size(348, 2);
             this.label10.TabIndex = 80;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(208, 369);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(71, 13);
+            this.label11.TabIndex = 81;
+            this.label11.Text = "Graphic Type";
+            // 
+            // graphicTypeComboBox
+            // 
+            this.graphicTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.graphicTypeComboBox.Enabled = false;
+            this.graphicTypeComboBox.FormattingEnabled = true;
+            this.graphicTypeComboBox.Items.AddRange(new object[] {
+            "Rectangle",
+            "Image File"});
+            this.graphicTypeComboBox.Location = new System.Drawing.Point(285, 366);
+            this.graphicTypeComboBox.Name = "graphicTypeComboBox";
+            this.graphicTypeComboBox.Size = new System.Drawing.Size(86, 21);
+            this.graphicTypeComboBox.TabIndex = 82;
+            this.graphicTypeComboBox.SelectionChangeCommitted += new System.EventHandler(this.graphicTypeComboBox_SelectionChangeCommitted);
+            // 
+            // valuesEditor
+            // 
+            this.valuesEditor.Enabled = false;
+            this.valuesEditor.Location = new System.Drawing.Point(211, 163);
+            this.valuesEditor.Name = "valuesEditor";
+            this.valuesEditor.Size = new System.Drawing.Size(343, 193);
+            this.valuesEditor.TabIndex = 70;
+            this.valuesEditor.Title = "Values";
+            // 
             // ObjectsEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.graphicTypeComboBox);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label5);
@@ -461,5 +488,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox graphicTypeComboBox;
     }
 }
