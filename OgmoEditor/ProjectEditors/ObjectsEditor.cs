@@ -73,6 +73,8 @@ namespace OgmoEditor.ProjectEditors
 
             //Graphic
             graphicTypeComboBox.SelectedIndex = (int)def.ImageDefinition.DrawMode;
+            GraphicFieldsVisibility = (int)def.ImageDefinition.DrawMode;
+            rectangleColorChooser.Color = def.ImageDefinition.RectColor;
         }
 
         private void disableControls()
@@ -96,6 +98,7 @@ namespace OgmoEditor.ProjectEditors
 
             RotationFieldsVisible = false;
             NodesFieldsVisible = false;
+            GraphicFieldsVisibility = -1;
         }
 
         private ObjectDefinition GetDefault()
@@ -136,11 +139,11 @@ namespace OgmoEditor.ProjectEditors
             }
         }
 
-        private ObjectImageDefinition.DrawModes ImageFieldsVisibility
+        private int GraphicFieldsVisibility
         {
             set
             {
-
+                rectangleGraphicPanel.Visible = rectangleGraphicPanel.Enabled = (value == 0);
             }
         }
 
@@ -258,8 +261,12 @@ namespace OgmoEditor.ProjectEditors
         private void graphicTypeComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
             objects[listBox.SelectedIndex].ImageDefinition.DrawMode = (ObjectImageDefinition.DrawModes)graphicTypeComboBox.SelectedIndex;
+            GraphicFieldsVisibility = graphicTypeComboBox.SelectedIndex;
         }
 
-
+        private void rectangleColorChooser_ColorChanged(OgmoColor color)
+        {
+            objects[listBox.SelectedIndex].ImageDefinition.RectColor = color;
+        }
     }
 }

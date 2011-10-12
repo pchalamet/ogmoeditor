@@ -35,6 +35,9 @@ namespace OgmoEditor.Definitions
             Size = new Size(16, 16);
             RotateIncrement = 15;
             ValueDefinitions = new List<ValueDefinition>();
+
+            ImageDefinition.RectColor = new OgmoColor(255, 0, 0);
+            NodesDefinition.Limit = -1;
         }
 
         public ObjectDefinition Clone()
@@ -69,6 +72,7 @@ namespace OgmoEditor.Definitions
         [XmlAttribute]
         public bool Tiled;
 
+        public OgmoColor RectColor;
         public Rectangle ClipRect;
     }
 

@@ -61,7 +61,11 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.graphicTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.rectangleGraphicPanel = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
+            this.rectangleColorChooser = new OgmoEditor.ColorChooser();
             this.valuesEditor = new OgmoEditor.ProjectEditors.ValuesEditor();
+            this.rectangleGraphicPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBox
@@ -400,6 +404,32 @@
             this.graphicTypeComboBox.TabIndex = 82;
             this.graphicTypeComboBox.SelectionChangeCommitted += new System.EventHandler(this.graphicTypeComboBox_SelectionChangeCommitted);
             // 
+            // rectangleGraphicPanel
+            // 
+            this.rectangleGraphicPanel.Controls.Add(this.rectangleColorChooser);
+            this.rectangleGraphicPanel.Controls.Add(this.label12);
+            this.rectangleGraphicPanel.Location = new System.Drawing.Point(211, 393);
+            this.rectangleGraphicPanel.Name = "rectangleGraphicPanel";
+            this.rectangleGraphicPanel.Size = new System.Drawing.Size(343, 88);
+            this.rectangleGraphicPanel.TabIndex = 83;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(14, 11);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(31, 13);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Color";
+            // 
+            // rectangleColorChooser
+            // 
+            this.rectangleColorChooser.Location = new System.Drawing.Point(51, 5);
+            this.rectangleColorChooser.Name = "rectangleColorChooser";
+            this.rectangleColorChooser.Size = new System.Drawing.Size(108, 28);
+            this.rectangleColorChooser.TabIndex = 1;
+            this.rectangleColorChooser.ColorChanged += new OgmoEditor.ColorChooser.ColorCallback(this.rectangleColorChooser_ColorChanged);
+            // 
             // valuesEditor
             // 
             this.valuesEditor.Enabled = false;
@@ -413,6 +443,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.rectangleGraphicPanel);
             this.Controls.Add(this.graphicTypeComboBox);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
@@ -449,6 +480,8 @@
             this.Controls.Add(this.addButton);
             this.Name = "ObjectsEditor";
             this.Size = new System.Drawing.Size(573, 490);
+            this.rectangleGraphicPanel.ResumeLayout(false);
+            this.rectangleGraphicPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -490,5 +523,8 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox graphicTypeComboBox;
+        private System.Windows.Forms.Panel rectangleGraphicPanel;
+        private ColorChooser rectangleColorChooser;
+        private System.Windows.Forms.Label label12;
     }
 }
