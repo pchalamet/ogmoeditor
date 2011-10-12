@@ -38,12 +38,8 @@ namespace OgmoEditor
 
         //Non-serialzed instance vars
         private bool changed;
-        [XmlIgnore]
-        public List<Level> Levels { get; private set; }
 
         //Events
-        public event Ogmo.LevelCallback OnLevelAdded;
-        public event Ogmo.LevelCallback OnLevelClosed;
         public event Ogmo.ProjectCallback OnPathChanged;
 
         public Project()
@@ -93,7 +89,6 @@ namespace OgmoEditor
         private void InitializeRunningVars()
         {
             changed = false;
-            Levels = new List<Level>();
         }
 
         public string ErrorCheck()
@@ -232,72 +227,6 @@ namespace OgmoEditor
             Stream stream = new FileStream(filename, FileMode.Create);
             xs.Serialize(stream, this);
             stream.Close();
-        }
-
-        /*
-         *  Level Stuff
-         */
-        public Level GetLevelByPath(string path)
-        {
-            return Levels.Find(e => e.SavePath == path);
-        }
-
-        public void NewLevel()
-        {
-            AddLevel(new Level(this, Ogmo.NEW_LEVEL_NAME));  
-        }
-
-        public void OpenLevel()
-        {
-            //Get the file to load from the user
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Multiselect = true;
-            dialog.Filter = Ogmo.LEVEL_FILTER;
-            if (dialog.ShowDialog() == DialogResult.Cancel)
-                return;
-
-            //Load it
-            foreach (string f in dialog.FileNames)
-            {
-                Level level = new Level(this, f);
-                AddLevel(level);
-            }
-        }
-
-        public void AddLevel(Level level)
-        {
-            Levels.Add(level);
-
-            if (OnLevelAdded != null)
-                OnLevelAdded(level);
-        }
-
-        public void CloseLevel(Level level)
-        {
-            Levels.Remove(level);
-
-            if (OnLevelClosed != null)
-                OnLevelClosed(level);
-        }
-
-        public void CloseOtherLevels(Level level)
-        {
-            List<Level> temp = new List<Level>(Levels);
-            foreach (Level lev in temp)
-            {
-                if (lev != level)
-                    CloseLevel(lev);
-            }
-        }
-
-        public void OpenAllLevels()
-        {
-            var files = Directory.EnumerateFiles(SavedDirectory, "*.oel");
-            foreach (string str in files)
-            {
-                if (GetLevelByPath(str) == null)
-                    AddLevel(new Level(this, str));
-            }
         }
     }
 }

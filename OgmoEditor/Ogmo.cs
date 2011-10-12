@@ -21,7 +21,7 @@ namespace OgmoEditor
         public const string PROJECT_FILTER = "Ogmo Editor Project File|*" + PROJECT_EXT;
         public const string LEVEL_FILTER = "Ogmo Editor Level File|*" + LEVEL_EXT;
         public const string NEW_PROJECT_NAME = "New Project";
-        public const string NEW_LEVEL_NAME = "New Level";
+        public const string NEW_LEVEL_NAME = "Unsaved Level";
         public const string NEW_LAYER_NAME = "NewLayer";
         public const string IMAGE_FILE_FILTER = "PNG image file|*.png|BMP image file|*.bmp";
 
@@ -29,31 +29,35 @@ namespace OgmoEditor
         public delegate void LevelCallback(Level level);
 
         static public readonly MainWindow MainWindow = new MainWindow();
-        static public Project Project { get; private set; }
-        static public Level CurrentLevel { get; private set; }
         static public string ProgramDirectory { get; private set; }
+
+        static public Project Project { get; private set; }
+        static public List<Level> Levels { get; private set; }
+
         static public event ProjectCallback OnProjectStart;
         static public event ProjectCallback OnProjectClose;
-        static public event LevelCallback OnLevelChanged;
+        static public event Ogmo.LevelCallback OnLevelAdded;
+        static public event Ogmo.LevelCallback OnLevelClosed;
 
         [STAThread]
         static void Main(string[] args)
         {
             Application.EnableVisualStyles();
-            initializeDirectories();
+            initialize();
 
             Application.Run(MainWindow);
         }
 
-        /*
-         *  Create the directory system
-         */
-        static private void initializeDirectories()
+        static private void initialize()
         {
             ProgramDirectory = Application.ExecutablePath.Remove(Application.ExecutablePath.IndexOf(Path.GetFileName(Application.ExecutablePath)));
 
+            //Initialize directory system
             if (!Directory.Exists("Projects"))
                 Directory.CreateDirectory("Projects");
+
+            //The levels holder
+            Levels = new List<Level>();
         }
 
         /*
@@ -118,14 +122,69 @@ namespace OgmoEditor
         }
 
         /*
-         *  Level stuff
+         *  Level Stuff
          */
-        static public void SetLevel(Level level)
+        static public Level GetLevelByPath(string path)
         {
-            CurrentLevel = level;
+            return Levels.Find(e => e.SavePath == path);
+        }
 
-            if (OnLevelChanged != null)
-                OnLevelChanged(level);
+        static public void NewLevel()
+        {
+            AddLevel(new Level(Project, ""));
+        }
+
+        static public void OpenLevel()
+        {
+            //Get the file to load from the user
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Multiselect = true;
+            dialog.Filter = Ogmo.LEVEL_FILTER;
+            if (dialog.ShowDialog() == DialogResult.Cancel)
+                return;
+
+            //Load it
+            foreach (string f in dialog.FileNames)
+            {
+                Level level = new Level(Project, f);
+                AddLevel(level);
+            }
+        }
+
+        static public void AddLevel(Level level)
+        {
+            Levels.Add(level);
+
+            if (OnLevelAdded != null)
+                OnLevelAdded(level);
+        }
+
+        static public void CloseLevel(Level level)
+        {
+            if (OnLevelClosed != null)
+                OnLevelClosed(level);
+
+            Levels.Remove(level);
+        }
+
+        static public void CloseOtherLevels(Level level)
+        {
+            List<Level> temp = new List<Level>(Levels);
+            foreach (Level lev in temp)
+            {
+                if (lev != level)
+                    CloseLevel(lev);
+            }
+        }
+
+        static public void OpenAllLevels()
+        {
+            var files = Directory.EnumerateFiles(Project.SavedDirectory, "*.oel");
+            foreach (string str in files)
+            {
+                if (GetLevelByPath(str) == null)
+                    AddLevel(new Level(Project, str));
+            }
         }
     }
 }

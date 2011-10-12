@@ -51,6 +51,9 @@ namespace OgmoEditor.LevelEditors
             XDraw.TextureFill(spriteBatch, content.TexBG, DrawBounds);
             spriteBatch.Draw(content.TexLogo, new Vector2(DrawBounds.Width / 2, DrawBounds.Height / 2), null, Color.White, 0, new Vector2(content.TexLogo.Width/2, content.TexLogo.Height/2), 3, SpriteEffects.None, 0);
             spriteBatch.End();
+
+            //Draw the level background
+
         }
 
         /*

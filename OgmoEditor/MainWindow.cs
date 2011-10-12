@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using OgmoEditor.ProjectEditors;
 using OgmoEditor.LevelEditors;
 using OgmoEditor.XNA;
+using System.Diagnostics;
 
 namespace OgmoEditor
 {
@@ -20,6 +21,8 @@ namespace OgmoEditor
 
             Ogmo.OnProjectStart += onProjectStart;
             Ogmo.OnProjectClose += onProjectClose;
+            Ogmo.OnLevelAdded += onLevelAdded;
+            Ogmo.OnLevelClosed += onLevelClosed;
         }
 
         public void EnableEditing()
@@ -34,6 +37,17 @@ namespace OgmoEditor
             Enabled = false;
             foreach (var f in OwnedForms)
                 f.Enabled = false;
+        }
+
+        public int SelectedLevelIndex
+        {
+            get { return masterTabControl.SelectedIndex; }
+            set { masterTabControl.SelectedIndex = value; }
+        }
+
+        public void SetLevel(Level level)
+        {
+            masterTabControl.SelectedIndex = Ogmo.Levels.IndexOf(level);
         }
 
         /*
@@ -51,10 +65,6 @@ namespace OgmoEditor
             newLevelToolStripMenuItem.Enabled = true;
             openLevelToolStripMenuItem.Enabled = true;
             openAllLevelsToolStripMenuItem.Enabled = true;
-
-            //Add events
-            project.OnLevelAdded += onLevelAdded;
-            project.OnLevelClosed += onLevelClosed;
         }
 
         private void onProjectClose(Project project)
@@ -83,11 +93,35 @@ namespace OgmoEditor
             TabPage t = new TabPage(level.Name);
             t.Controls.Add(new LevelEditor(level));
             masterTabControl.TabPages.Add(t);
+            masterTabControl.SelectedTab = t;
         }
 
         private void onLevelClosed(Level level)
         {
-            masterTabControl.TabPages.RemoveAt(Ogmo.Project.Levels.IndexOf(level));
+            masterTabControl.TabPages.RemoveAt(Ogmo.Levels.IndexOf(level));
+        }
+
+        private void refreshLevelState()
+        {
+            saveLevelToolStripMenuItem.Enabled =
+                saveLevelAsToolStripMenuItem.Enabled =
+                closeLevelToolStripMenuItem.Enabled =
+                duplicateLevelToolStripMenuItem.Enabled =
+                closeOtherLevelsToolStripMenuItem.Enabled =
+                saveAsImageToolStripMenuItem.Enabled = (masterTabControl.SelectedIndex < Ogmo.Levels.Count);
+        }
+
+        /*
+         *  Tab control events
+         */
+        private void masterTabControl_TabIndexChanged(object sender, EventArgs e)
+        {
+            refreshLevelState();
+        }
+
+        private void masterTabControl_ControlAdded(object sender, ControlEventArgs e)
+        {
+            refreshLevelState();
         }
 
         /*
@@ -132,42 +166,42 @@ namespace OgmoEditor
 
         private void newLevelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.Project.NewLevel();
+            Ogmo.NewLevel();
         }
 
         private void openLevelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.Project.OpenLevel();
+            Ogmo.OpenLevel();
         }
 
         private void saveLevelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.CurrentLevel.Save();
+            Ogmo.Levels[SelectedLevelIndex].Save();
         }
 
         private void saveLevelAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.CurrentLevel.SaveAs();
+            Ogmo.Levels[SelectedLevelIndex].SaveAs();
         }
 
         private void closeLevelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.Project.CloseLevel(Ogmo.CurrentLevel);
+            Ogmo.CloseLevel(Ogmo.Levels[SelectedLevelIndex]);
         }
 
         private void duplicateLevelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.Project.AddLevel(Ogmo.CurrentLevel.Duplicate());
+            Ogmo.AddLevel(Ogmo.Levels[SelectedLevelIndex].Duplicate());
         }
 
         private void closeOtherLevelsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.Project.CloseOtherLevels(Ogmo.CurrentLevel);
+            Ogmo.CloseOtherLevels(Ogmo.Levels[SelectedLevelIndex]);
         }
 
         private void openAllLevelsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.Project.OpenAllLevels();
+            Ogmo.OpenAllLevels();
         }
 
     }

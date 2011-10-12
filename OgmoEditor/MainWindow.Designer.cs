@@ -313,6 +313,10 @@
             this.masterTabControl.SelectedIndex = 0;
             this.masterTabControl.Size = new System.Drawing.Size(784, 516);
             this.masterTabControl.TabIndex = 2;
+            this.masterTabControl.SelectedIndexChanged += new System.EventHandler(this.masterTabControl_TabIndexChanged);
+            this.masterTabControl.TabIndexChanged += new System.EventHandler(this.masterTabControl_TabIndexChanged);
+            this.masterTabControl.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.masterTabControl_ControlAdded);
+            this.masterTabControl.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.masterTabControl_ControlAdded);
             // 
             // MainWindow
             // 
@@ -327,7 +331,6 @@
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "MainWindow";
             this.Text = "Ogmo Editor";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.StatusStrip.ResumeLayout(false);
             this.StatusStrip.PerformLayout();
             this.MenuStrip.ResumeLayout(false);
