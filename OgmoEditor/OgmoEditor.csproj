@@ -84,7 +84,7 @@
     <Compile Include="Definitions\ValueDefinitions\IntValueDefinition.cs" />
     <Compile Include="Definitions\ValueDefinitions\StringValueDefinition.cs" />
     <Compile Include="Level.cs" />
-    <Compile Include="LevelEditors\XDraw.cs" />
+    <Compile Include="LevelEditors\Camera.cs" />
     <Compile Include="LevelEditors\LevelEditor.cs">
       <SubType>Component</SubType>
     </Compile>

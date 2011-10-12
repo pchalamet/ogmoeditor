@@ -17,7 +17,9 @@ namespace OgmoEditor.LevelEditors
         private Level level;
         private Content content;
         private SpriteBatch spriteBatch;
+        private RenderTarget2D levelCanvas;
 
+        public Camera Camera { get; private set; }
         public Rectangle DrawBounds { get; private set; }
 
         public LevelEditor(Level level)
@@ -31,8 +33,12 @@ namespace OgmoEditor.LevelEditors
 
         protected override void Initialize()
         {
-            //Init the screen bounds
+            //Init the screen bounds and camera
+            Camera = new Camera();
+            Camera.Origin = new Vector2(Width / 2, Height / 2);
+            centerCamera();
             DrawBounds = new Rectangle(0, 0, Width, Height);
+            initLevelCanvas();
 
             //Load the content
             content = new Content(GraphicsDevice);
@@ -44,16 +50,40 @@ namespace OgmoEditor.LevelEditors
             this.Resize += onResize;
         }
 
+        private void initLevelCanvas()
+        {
+            if (levelCanvas != null)
+                levelCanvas.Dispose();
+            levelCanvas = new RenderTarget2D(GraphicsDevice, level.Size.Width, level.Size.Height); 
+        }
+
+        private void centerCamera()
+        {
+            Camera.X = level.Size.Width / 2;
+            Camera.Y = level.Size.Height / 2;
+        }
+
         protected override void Draw()
         {
+            //Draw the level onto the level canvas
+            GraphicsDevice.SetRenderTarget(levelCanvas);
+            GraphicsDevice.Clear(Ogmo.Project.BackgroundColor.toXNA());
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Camera.Matrix);
+            
+            spriteBatch.End();
+
+
             //Draw the background and logo
+            GraphicsDevice.SetRenderTarget(null);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone);
-            XDraw.TextureFill(spriteBatch, content.TexBG, DrawBounds);
+            content.DrawTextureFill(spriteBatch, content.TexBG, DrawBounds);
             spriteBatch.Draw(content.TexLogo, new Vector2(DrawBounds.Width / 2, DrawBounds.Height / 2), null, Color.White, 0, new Vector2(content.TexLogo.Width/2, content.TexLogo.Height/2), 3, SpriteEffects.None, 0);
             spriteBatch.End();
 
-            //Draw the level background
-
+            //Draw the level onto the control, positioned and scaled by the camera
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Camera.Matrix);
+            spriteBatch.Draw(levelCanvas, Vector2.Zero, Color.White);
+            spriteBatch.End();
         }
 
         /*
@@ -63,6 +93,7 @@ namespace OgmoEditor.LevelEditors
         {
             //Update the screen bounds
             DrawBounds = new Rectangle(0, 0, Width, Height);
+            Camera.Origin = new Vector2(Width / 2, Height / 2);
         }
     }
 }
