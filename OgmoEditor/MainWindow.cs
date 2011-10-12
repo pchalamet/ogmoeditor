@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using OgmoEditor.ProjectEditors;
 using OgmoEditor.LevelEditors;
+using OgmoEditor.XNA;
 
 namespace OgmoEditor
 {
@@ -81,7 +82,6 @@ namespace OgmoEditor
         {
             TabPage t = new TabPage(level.Name);
             t.Controls.Add(new LevelEditor(level));
-            t.BackgroundImage = global::OgmoEditor.Properties.Resources.bg;
             masterTabControl.TabPages.Add(t);
         }
 

@@ -196,6 +196,7 @@
     <Compile Include="Definitions\ValueDefinitions\ValueDefinition.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="Value.cs" />
+    <Compile Include="LevelEditors\Content.cs" />
     <Compile Include="XNA\GraphicsDeviceControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -286,7 +287,11 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Content\bg.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

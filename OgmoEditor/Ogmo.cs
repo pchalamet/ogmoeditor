@@ -8,6 +8,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Diagnostics;
 using System.Xml.Serialization;
 using OgmoEditor.ProjectEditors;
+using OgmoEditor.XNA;
+using System.Reflection;
 
 namespace OgmoEditor
 {
@@ -29,6 +31,7 @@ namespace OgmoEditor
         static public readonly MainWindow MainWindow = new MainWindow();
         static public Project Project { get; private set; }
         static public Level CurrentLevel { get; private set; }
+        static public string ProgramDirectory { get; private set; }
         static public event ProjectCallback OnProjectStart;
         static public event ProjectCallback OnProjectClose;
         static public event LevelCallback OnLevelChanged;
@@ -37,7 +40,7 @@ namespace OgmoEditor
         static void Main(string[] args)
         {
             Application.EnableVisualStyles();
-            InitializeDirectories();
+            initializeDirectories();
 
             Application.Run(MainWindow);
         }
@@ -45,8 +48,10 @@ namespace OgmoEditor
         /*
          *  Create the directory system
          */
-        static public void InitializeDirectories()
+        static private void initializeDirectories()
         {
+            ProgramDirectory = Application.ExecutablePath.Remove(Application.ExecutablePath.IndexOf(Path.GetFileName(Application.ExecutablePath)));
+
             if (!Directory.Exists("Projects"))
                 Directory.CreateDirectory("Projects");
         }

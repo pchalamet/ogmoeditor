@@ -99,6 +99,11 @@ namespace OgmoEditor
             return Regex.IsMatch(color, REGEX32);
         }
 
+        public Microsoft.Xna.Framework.Color toXNA()
+        {
+            return new Microsoft.Xna.Framework.Color(R, G, B);
+        }
+
         /*
          *  Operators
          */
