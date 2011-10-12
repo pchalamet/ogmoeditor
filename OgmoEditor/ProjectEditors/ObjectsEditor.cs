@@ -44,19 +44,30 @@ namespace OgmoEditor.ProjectEditors
             resizableYCheckBox.Enabled = true;
             rotatableCheckBox.Enabled = true;
             valuesEditor.Enabled = true;
+            nodesCheckBox.Enabled = true;
 
+            //Basics
             nameTextBox.Text = def.Name;
             limitTextBox.Text = def.Limit.ToString();
             sizeXTextBox.Text = def.Size.Width.ToString();
             sizeYTextBox.Text = def.Size.Height.ToString();
             originXTextBox.Text = def.Origin.X.ToString();
             originYTextBox.Text = def.Origin.Y.ToString();
+
+            //Resizable/rotation
             resizableXCheckBox.Checked = def.ResizableX;
             resizableYCheckBox.Checked = def.ResizableY;
             rotatableCheckBox.Checked = def.Rotatable;
             rotationIncrementTextBox.Text = def.RotateIncrement.ToString();
-            RotationIncrement = def.Rotatable;
+            RotationFieldsVisible = def.Rotatable;
 
+            //Nodes
+            nodesCheckBox.Checked = def.NodesDefinition.Enabled;
+            nodeLimitTextBox.Text = def.NodesDefinition.Limit.ToString();
+            nodeDrawComboBox.SelectedIndex = (int)def.NodesDefinition.DrawMode;
+            NodesFieldsVisible = def.NodesDefinition.Enabled;
+
+            //Values
             valuesEditor.SetList(def.ValueDefinitions);
         }
 
@@ -75,8 +86,11 @@ namespace OgmoEditor.ProjectEditors
             resizableXCheckBox.Enabled = false;
             resizableYCheckBox.Enabled = false;
             rotatableCheckBox.Enabled = false;
-            RotationIncrement = false;
+            nodesCheckBox.Enabled = false;
             valuesEditor.Enabled = false;
+
+            RotationFieldsVisible = false;
+            NodesFieldsVisible = false;
         }
 
         private ObjectDefinition GetDefault()
@@ -98,12 +112,22 @@ namespace OgmoEditor.ProjectEditors
             return def;
         }
 
-        private bool RotationIncrement
+        private bool RotationFieldsVisible
         {
-            get { return rotationIncrementTextBox.Visible; }
             set
             {
                 rotationIncrementLabel.Visible = rotationIncrementTextBox.Enabled = rotationIncrementTextBox.Visible = value;
+            }
+        }
+
+        private bool NodesFieldsVisible
+        {
+            set
+            {
+                nodeLimitTextBox.Visible = nodeLimitTextBox.Enabled = value;
+                nodeLimitLabel.Visible = value;
+                nodeDrawComboBox.Visible = nodeDrawComboBox.Enabled = value;
+                nodeDrawLabel.Visible = value;
             }
         }
 
@@ -194,12 +218,28 @@ namespace OgmoEditor.ProjectEditors
         private void rotatableCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             objects[listBox.SelectedIndex].Rotatable = rotatableCheckBox.Checked;
-            RotationIncrement = rotatableCheckBox.Checked;
+            RotationFieldsVisible = rotatableCheckBox.Checked;
         }
 
         private void rotationIncrementTextBox_Validated(object sender, EventArgs e)
         {
             ProjParse.Parse(ref objects[listBox.SelectedIndex].RotateIncrement, rotationIncrementTextBox);
+        }
+
+        private void nodesCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            objects[listBox.SelectedIndex].NodesDefinition.Enabled = nodesCheckBox.Checked;
+            NodesFieldsVisible = nodesCheckBox.Checked;
+        }
+
+        private void nodeLimitTextBox_Validated(object sender, EventArgs e)
+        {
+            ProjParse.Parse(ref objects[listBox.SelectedIndex].NodesDefinition.Limit, nodeLimitTextBox);
+        }
+
+        private void nodeDrawComboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            objects[listBox.SelectedIndex].NodesDefinition.DrawMode = (ObjectNodesDefinition.DrawModes)nodeDrawComboBox.SelectedIndex;
         }
 
 

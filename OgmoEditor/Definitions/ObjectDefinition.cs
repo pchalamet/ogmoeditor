@@ -27,6 +27,7 @@ namespace OgmoEditor.Definitions
         public Point Origin;
         public ObjectImageDefinition ImageDefinition;
         public List<ValueDefinition> ValueDefinitions;
+        public ObjectNodesDefinition NodesDefinition;
 
         public ObjectDefinition()
         {
@@ -69,5 +70,18 @@ namespace OgmoEditor.Definitions
         public bool Tiled;
 
         public Rectangle ClipRect;
+    }
+
+    [XmlRoot("Nodes")]
+    public struct ObjectNodesDefinition
+    {
+        public enum DrawModes { None, Path, Circuit, Fan };
+
+        [XmlAttribute]
+        public bool Enabled;
+        [XmlAttribute]
+        public int Limit;
+        [XmlAttribute]
+        public DrawModes DrawMode;
     }
 }

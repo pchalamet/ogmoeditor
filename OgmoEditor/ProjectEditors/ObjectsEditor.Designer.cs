@@ -50,7 +50,16 @@
             this.originXTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.nodesCheckBox = new System.Windows.Forms.CheckBox();
+            this.nodeLimitTextBox = new System.Windows.Forms.TextBox();
+            this.nodeLimitLabel = new System.Windows.Forms.Label();
+            this.nodeDrawLabel = new System.Windows.Forms.Label();
+            this.nodeDrawComboBox = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.valuesEditor = new OgmoEditor.ProjectEditors.ValuesEditor();
+            this.label10 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // listBox
@@ -172,7 +181,7 @@
             // 
             this.resizableXCheckBox.AutoSize = true;
             this.resizableXCheckBox.Enabled = false;
-            this.resizableXCheckBox.Location = new System.Drawing.Point(232, 68);
+            this.resizableXCheckBox.Location = new System.Drawing.Point(215, 73);
             this.resizableXCheckBox.Name = "resizableXCheckBox";
             this.resizableXCheckBox.Size = new System.Drawing.Size(82, 17);
             this.resizableXCheckBox.TabIndex = 59;
@@ -184,7 +193,7 @@
             // 
             this.resizableYCheckBox.AutoSize = true;
             this.resizableYCheckBox.Enabled = false;
-            this.resizableYCheckBox.Location = new System.Drawing.Point(348, 68);
+            this.resizableYCheckBox.Location = new System.Drawing.Point(331, 73);
             this.resizableYCheckBox.Name = "resizableYCheckBox";
             this.resizableYCheckBox.Size = new System.Drawing.Size(82, 17);
             this.resizableYCheckBox.TabIndex = 60;
@@ -196,7 +205,7 @@
             // 
             this.rotatableCheckBox.AutoSize = true;
             this.rotatableCheckBox.Enabled = false;
-            this.rotatableCheckBox.Location = new System.Drawing.Point(232, 91);
+            this.rotatableCheckBox.Location = new System.Drawing.Point(215, 96);
             this.rotatableCheckBox.Name = "rotatableCheckBox";
             this.rotatableCheckBox.Size = new System.Drawing.Size(72, 17);
             this.rotatableCheckBox.TabIndex = 62;
@@ -206,7 +215,7 @@
             // 
             // rotationIncrementTextBox
             // 
-            this.rotationIncrementTextBox.Location = new System.Drawing.Point(445, 89);
+            this.rotationIncrementTextBox.Location = new System.Drawing.Point(428, 94);
             this.rotationIncrementTextBox.Name = "rotationIncrementTextBox";
             this.rotationIncrementTextBox.Size = new System.Drawing.Size(62, 20);
             this.rotationIncrementTextBox.TabIndex = 63;
@@ -216,7 +225,7 @@
             // rotationIncrementLabel
             // 
             this.rotationIncrementLabel.AutoSize = true;
-            this.rotationIncrementLabel.Location = new System.Drawing.Point(342, 92);
+            this.rotationIncrementLabel.Location = new System.Drawing.Point(325, 97);
             this.rotationIncrementLabel.Name = "rotationIncrementLabel";
             this.rotationIncrementLabel.Size = new System.Drawing.Size(97, 13);
             this.rotationIncrementLabel.TabIndex = 64;
@@ -255,9 +264,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(482, 40);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(12, 13);
+            this.label6.Size = new System.Drawing.Size(10, 13);
             this.label6.TabIndex = 68;
-            this.label6.Text = "x";
+            this.label6.Text = ",";
             // 
             // label7
             // 
@@ -268,19 +277,126 @@
             this.label7.TabIndex = 66;
             this.label7.Text = "Origin";
             // 
+            // nodesCheckBox
+            // 
+            this.nodesCheckBox.AutoSize = true;
+            this.nodesCheckBox.Enabled = false;
+            this.nodesCheckBox.Location = new System.Drawing.Point(215, 131);
+            this.nodesCheckBox.Name = "nodesCheckBox";
+            this.nodesCheckBox.Size = new System.Drawing.Size(79, 17);
+            this.nodesCheckBox.TabIndex = 71;
+            this.nodesCheckBox.Text = "Has Nodes";
+            this.nodesCheckBox.UseVisualStyleBackColor = true;
+            this.nodesCheckBox.CheckedChanged += new System.EventHandler(this.nodesCheckBox_CheckedChanged);
+            // 
+            // nodeLimitTextBox
+            // 
+            this.nodeLimitTextBox.Location = new System.Drawing.Point(363, 129);
+            this.nodeLimitTextBox.Name = "nodeLimitTextBox";
+            this.nodeLimitTextBox.Size = new System.Drawing.Size(50, 20);
+            this.nodeLimitTextBox.TabIndex = 72;
+            this.nodeLimitTextBox.Visible = false;
+            this.nodeLimitTextBox.Validated += new System.EventHandler(this.nodeLimitTextBox_Validated);
+            // 
+            // nodeLimitLabel
+            // 
+            this.nodeLimitLabel.AutoSize = true;
+            this.nodeLimitLabel.Location = new System.Drawing.Point(300, 132);
+            this.nodeLimitLabel.Name = "nodeLimitLabel";
+            this.nodeLimitLabel.Size = new System.Drawing.Size(57, 13);
+            this.nodeLimitLabel.TabIndex = 73;
+            this.nodeLimitLabel.Text = "Node Limit";
+            this.nodeLimitLabel.Visible = false;
+            // 
+            // nodeDrawLabel
+            // 
+            this.nodeDrawLabel.AutoSize = true;
+            this.nodeDrawLabel.Location = new System.Drawing.Point(425, 132);
+            this.nodeDrawLabel.Name = "nodeDrawLabel";
+            this.nodeDrawLabel.Size = new System.Drawing.Size(32, 13);
+            this.nodeDrawLabel.TabIndex = 74;
+            this.nodeDrawLabel.Text = "Draw";
+            this.nodeDrawLabel.Visible = false;
+            // 
+            // nodeDrawComboBox
+            // 
+            this.nodeDrawComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.nodeDrawComboBox.Enabled = false;
+            this.nodeDrawComboBox.FormattingEnabled = true;
+            this.nodeDrawComboBox.Items.AddRange(new object[] {
+            "None",
+            "Path",
+            "Circuit",
+            "Fan"});
+            this.nodeDrawComboBox.Location = new System.Drawing.Point(463, 129);
+            this.nodeDrawComboBox.Name = "nodeDrawComboBox";
+            this.nodeDrawComboBox.Size = new System.Drawing.Size(86, 21);
+            this.nodeDrawComboBox.TabIndex = 75;
+            this.nodeDrawComboBox.Visible = false;
+            this.nodeDrawComboBox.SelectionChangeCommitted += new System.EventHandler(this.nodeDrawComboBox_SelectionChangeCommitted);
+            // 
+            // label8
+            // 
+            this.label8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label8.Location = new System.Drawing.Point(205, 64);
+            this.label8.MaximumSize = new System.Drawing.Size(600, 2);
+            this.label8.MinimumSize = new System.Drawing.Size(100, 2);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(348, 2);
+            this.label8.TabIndex = 77;
+            // 
+            // label5
+            // 
+            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label5.Location = new System.Drawing.Point(206, 121);
+            this.label5.MaximumSize = new System.Drawing.Size(600, 2);
+            this.label5.MinimumSize = new System.Drawing.Size(100, 2);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(348, 2);
+            this.label5.TabIndex = 78;
+            // 
+            // label9
+            // 
+            this.label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label9.Location = new System.Drawing.Point(206, 157);
+            this.label9.MaximumSize = new System.Drawing.Size(600, 2);
+            this.label9.MinimumSize = new System.Drawing.Size(100, 2);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(348, 2);
+            this.label9.TabIndex = 79;
+            // 
             // valuesEditor
             // 
             this.valuesEditor.Enabled = false;
-            this.valuesEditor.Location = new System.Drawing.Point(210, 288);
+            this.valuesEditor.Location = new System.Drawing.Point(211, 163);
             this.valuesEditor.Name = "valuesEditor";
             this.valuesEditor.Size = new System.Drawing.Size(343, 193);
             this.valuesEditor.TabIndex = 70;
             this.valuesEditor.Title = "Values";
             // 
+            // label10
+            // 
+            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label10.Location = new System.Drawing.Point(206, 357);
+            this.label10.MaximumSize = new System.Drawing.Size(600, 2);
+            this.label10.MinimumSize = new System.Drawing.Size(100, 2);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(348, 2);
+            this.label10.TabIndex = 80;
+            // 
             // ObjectsEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.nodeDrawComboBox);
+            this.Controls.Add(this.nodeDrawLabel);
+            this.Controls.Add(this.nodeLimitLabel);
+            this.Controls.Add(this.nodeLimitTextBox);
+            this.Controls.Add(this.nodesCheckBox);
             this.Controls.Add(this.valuesEditor);
             this.Controls.Add(this.originYTextBox);
             this.Controls.Add(this.originXTextBox);
@@ -336,5 +452,14 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private ValuesEditor valuesEditor;
+        private System.Windows.Forms.CheckBox nodesCheckBox;
+        private System.Windows.Forms.TextBox nodeLimitTextBox;
+        private System.Windows.Forms.Label nodeLimitLabel;
+        private System.Windows.Forms.Label nodeDrawLabel;
+        private System.Windows.Forms.ComboBox nodeDrawComboBox;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
     }
 }
