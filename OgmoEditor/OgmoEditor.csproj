@@ -98,6 +98,7 @@
     <Compile Include="LevelEditors\LayerEditors\LayerEditor.cs" />
     <Compile Include="LevelEditors\LayerEditors\ObjectLayer.cs" />
     <Compile Include="LevelEditors\LayerEditors\TileLayerEditor.cs" />
+    <Compile Include="LevelEditors\LayerEditors\Tools\Tool.cs" />
     <Compile Include="LevelEditors\LevelEditor.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -309,9 +310,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="LevelEditors\LayerEditors\Tools\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

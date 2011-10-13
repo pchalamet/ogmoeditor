@@ -11,11 +11,13 @@ namespace OgmoEditor.Definitions.LayerDefinitions
     public class GridLayerDefinition : LayerDefinition
     {
         public OgmoColor Color;
+        public bool ExportAsRectangles;
 
         public GridLayerDefinition()
             : base()
         {
             Color = new OgmoColor(0, 0, 0);
+            ExportAsRectangles = false;
         }
 
         public override System.Windows.Forms.UserControl GetEditor()

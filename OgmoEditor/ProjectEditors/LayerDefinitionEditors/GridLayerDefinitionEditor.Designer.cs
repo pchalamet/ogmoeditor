@@ -30,6 +30,7 @@
         {
             this.colorChooser = new OgmoEditor.ColorChooser();
             this.label1 = new System.Windows.Forms.Label();
+            this.exportAsRectanglesCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // colorChooser
@@ -49,13 +50,25 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Color";
             // 
-            // GridLayerEditor
+            // exportAsRectanglesCheckBox
+            // 
+            this.exportAsRectanglesCheckBox.AutoSize = true;
+            this.exportAsRectanglesCheckBox.Location = new System.Drawing.Point(22, 49);
+            this.exportAsRectanglesCheckBox.Name = "exportAsRectanglesCheckBox";
+            this.exportAsRectanglesCheckBox.Size = new System.Drawing.Size(128, 17);
+            this.exportAsRectanglesCheckBox.TabIndex = 2;
+            this.exportAsRectanglesCheckBox.Text = "Export As Rectangles";
+            this.exportAsRectanglesCheckBox.UseVisualStyleBackColor = true;
+            this.exportAsRectanglesCheckBox.CheckedChanged += new System.EventHandler(this.exportAsRectanglesCheckBox_CheckedChanged);
+            // 
+            // GridLayerDefinitionEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.exportAsRectanglesCheckBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.colorChooser);
-            this.Name = "GridLayerEditor";
+            this.Name = "GridLayerDefinitionEditor";
             this.Size = new System.Drawing.Size(353, 358);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -66,5 +79,6 @@
 
         private ColorChooser colorChooser;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox exportAsRectanglesCheckBox;
     }
 }
