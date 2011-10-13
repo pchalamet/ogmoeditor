@@ -15,7 +15,7 @@ namespace OgmoEditor.LevelData
         //Running instance variables
         private Project project;
         public string SavePath;
-        public bool Changed { get; private set; }
+        public bool Changed;
 
         //Actual parameters to be edited/exported
         public Size Size { get; private set; }
@@ -47,7 +47,7 @@ namespace OgmoEditor.LevelData
                 SavePath = "";
             }
 
-            InitializeRunningVars();
+            Changed = false;
         }
 
         public Level(Project project, XmlDocument xml)
@@ -56,23 +56,21 @@ namespace OgmoEditor.LevelData
 
             LoadFromXML(xml);
             SavePath = "";
-
-            InitializeRunningVars();
-        }
-
-        private void InitializeRunningVars()
-        {
-            RemoveChanged();
+            Changed = false;
         }
 
         public string Name
         {
             get
             {
+                string s;
                 if (SavePath == "")
-                    return Ogmo.NEW_LEVEL_NAME;
+                    s = Ogmo.NEW_LEVEL_NAME;
                 else
-                    return Path.GetFileName(SavePath);
+                    s = Path.GetFileName(SavePath);
+                if (Changed)
+                    s += "*";
+                return s;
             }
         }
 
@@ -112,8 +110,6 @@ namespace OgmoEditor.LevelData
             }
 
             writeTo(SavePath);
-
-            RemoveChanged();
         }
 
         public bool SaveAs()
@@ -133,8 +129,6 @@ namespace OgmoEditor.LevelData
             SavePath = dialog.FileName;
             writeTo(dialog.FileName);
 
-            RemoveChanged();
-
             return true;
         }
 
@@ -148,19 +142,6 @@ namespace OgmoEditor.LevelData
         public Level Duplicate()
         {
             return new Level(project, GenerateXML());
-        }
-
-        /*
-         *  Changed system
-         */
-        private void RemoveChanged()
-        {
-            Changed = false;
-        }
-
-        public void SetChanged()
-        {
-            Changed = true;
         }
 
     }

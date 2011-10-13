@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using OgmoEditor.LevelData.Layers;
 
-namespace OgmoEditor.LevelEditors.LayerEditors.Actions.ObjectActions
+namespace OgmoEditor.LevelEditors.Actions.ObjectActions
 {
     public abstract class ObjectAction : OgmoAction
     {

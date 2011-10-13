@@ -7,12 +7,12 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 using System.Diagnostics;
+using OgmoEditor.LevelEditors.Actions;
+using OgmoEditor.LevelEditors.LayerEditors.Tools;  
 
 namespace OgmoEditor.LevelEditors.LayerEditors
 {
     using Point = System.Drawing.Point;
-using OgmoEditor.LevelEditors.LayerEditors.Actions;
-    using OgmoEditor.LevelEditors.LayerEditors.Tools;  
 
     public class LayerEditor
     {

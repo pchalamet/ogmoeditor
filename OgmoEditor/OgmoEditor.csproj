@@ -95,11 +95,11 @@
     <Compile Include="LevelData\Layers\TileLayer.cs" />
     <Compile Include="LevelData\Level.cs" />
     <Compile Include="LevelEditors\Camera.cs" />
-    <Compile Include="LevelEditors\LayerEditors\Actions\LevelActions\LevelAction.cs" />
-    <Compile Include="LevelEditors\LayerEditors\Actions\OgmoAction.cs" />
-    <Compile Include="LevelEditors\LayerEditors\Actions\GridActions\GridAction.cs" />
-    <Compile Include="LevelEditors\LayerEditors\Actions\ObjectActions\ObjectAction.cs" />
-    <Compile Include="LevelEditors\LayerEditors\Actions\TileActions\TileAction.cs" />
+    <Compile Include="LevelEditors\Actions\LevelActions\LevelAction.cs" />
+    <Compile Include="LevelEditors\Actions\OgmoAction.cs" />
+    <Compile Include="LevelEditors\Actions\GridActions\GridAction.cs" />
+    <Compile Include="LevelEditors\Actions\ObjectActions\ObjectAction.cs" />
+    <Compile Include="LevelEditors\Actions\TileActions\TileAction.cs" />
     <Compile Include="LevelEditors\LayerEditors\GridLayerEditor.cs" />
     <Compile Include="LevelEditors\LayerEditors\LayerEditor.cs" />
     <Compile Include="LevelEditors\LayerEditors\ObjectLayer.cs" />

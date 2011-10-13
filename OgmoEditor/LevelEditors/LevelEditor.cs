@@ -16,7 +16,7 @@ using OgmoEditor.LevelEditors.LayerEditors;
 namespace OgmoEditor.LevelEditors
 {
     using Point = System.Drawing.Point;
-using OgmoEditor.LevelEditors.LayerEditors.Actions;
+using OgmoEditor.LevelEditors.Actions;
 
     public class LevelEditor : GraphicsDeviceControl
     {
@@ -122,7 +122,15 @@ using OgmoEditor.LevelEditors.LayerEditors.Actions;
             if (UndoStack.Count == UNDO_LIMIT)
                 UndoStack.RemoveFirst();
 
-            UndoStack.AddLast(action);
+            //If the level is so-far unchanged, change it and store that fact
+            if (!level.Changed)
+            {
+                action.LevelWasChanged = false;
+                level.Changed = true;
+            }
+
+            //Add the action to the undo stack and then do it!
+            UndoStack.AddLast(action);  
             action.Do();
         }
 
@@ -136,6 +144,9 @@ using OgmoEditor.LevelEditors.LayerEditors.Actions;
 
                 //Undo it
                 action.Undo();
+
+                //Roll back level changed flag
+                level.Changed = action.LevelWasChanged;
 
                 //Add it to the redo stack
                 RedoStack.AddLast(action);
@@ -152,6 +163,9 @@ using OgmoEditor.LevelEditors.LayerEditors.Actions;
 
                 //Redo it
                 action.Do();
+
+                //Mark level as changed
+                level.Changed = true;
 
                 //Add it to the undo stack
                 UndoStack.AddLast(action);

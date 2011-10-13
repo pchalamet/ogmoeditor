@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using OgmoEditor.LevelData.Layers;
 
-namespace OgmoEditor.LevelEditors.LayerEditors.Actions.TileActions
+namespace OgmoEditor.LevelEditors.Actions.TileActions
 {
     public abstract class TileAction : OgmoAction
     {
