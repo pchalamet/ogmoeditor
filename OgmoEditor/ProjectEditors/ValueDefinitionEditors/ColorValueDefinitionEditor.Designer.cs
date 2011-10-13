@@ -1,6 +1,6 @@
-﻿namespace OgmoEditor.ProjectEditors.LayerEditors
+﻿namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
 {
-    partial class GridLayerEditor
+    partial class ColorValueDefinitionEditor
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,35 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.colorChooser = new OgmoEditor.ColorChooser();
             this.label1 = new System.Windows.Forms.Label();
+            this.defaultColorChooser = new OgmoEditor.ColorChooser();
             this.SuspendLayout();
-            // 
-            // colorChooser
-            // 
-            this.colorChooser.Location = new System.Drawing.Point(53, 15);
-            this.colorChooser.Name = "colorChooser";
-            this.colorChooser.Size = new System.Drawing.Size(108, 28);
-            this.colorChooser.TabIndex = 0;
-            this.colorChooser.ColorChanged += new OgmoEditor.ColorChooser.ColorCallback(this.colorChooser_ColorChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 22);
+            this.label1.Location = new System.Drawing.Point(4, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Color";
+            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Default";
             // 
-            // GridLayerEditor
+            // defaultColorChooser
+            // 
+            this.defaultColorChooser.Location = new System.Drawing.Point(47, 3);
+            this.defaultColorChooser.Name = "defaultColorChooser";
+            this.defaultColorChooser.Size = new System.Drawing.Size(153, 28);
+            this.defaultColorChooser.TabIndex = 1;
+            this.defaultColorChooser.ColorChanged += new OgmoEditor.ColorChooser.ColorCallback(this.defaultColorChooser_ColorChanged);
+            // 
+            // ColorValueEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.colorChooser);
-            this.Name = "GridLayerEditor";
-            this.Size = new System.Drawing.Size(353, 358);
+            this.Controls.Add(this.defaultColorChooser);
+            this.Name = "ColorValueEditor";
+            this.Size = new System.Drawing.Size(239, 104);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -64,7 +64,7 @@
 
         #endregion
 
-        private ColorChooser colorChooser;
+        private ColorChooser defaultColorChooser;
         private System.Windows.Forms.Label label1;
     }
 }

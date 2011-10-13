@@ -8,13 +8,13 @@ using System.Text;
 using System.Windows.Forms;
 using OgmoEditor.Definitions.ValueDefinitions;
 
-namespace OgmoEditor.ProjectEditors.ValueEditors
+namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
 {
-    public partial class IntValueEditor : UserControl
+    public partial class IntValueDefinitionEditor : UserControl
     {
         private IntValueDefinition def;
 
-        public IntValueEditor(IntValueDefinition def)
+        public IntValueDefinitionEditor(IntValueDefinition def)
         {
             this.def = def;
             InitializeComponent();

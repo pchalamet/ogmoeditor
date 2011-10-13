@@ -8,13 +8,13 @@ using System.Text;
 using System.Windows.Forms;
 using OgmoEditor.Definitions.ValueDefinitions;
 
-namespace OgmoEditor.ProjectEditors.ValueEditors
+namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
 {
-    public partial class BoolValueEditor : UserControl
+    public partial class BoolValueDefinitionEditor : UserControl
     {
         private BoolValueDefinition def;
 
-        public BoolValueEditor(BoolValueDefinition def)
+        public BoolValueDefinitionEditor(BoolValueDefinition def)
         {
             this.def = def;
             InitializeComponent();

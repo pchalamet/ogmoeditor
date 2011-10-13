@@ -1,6 +1,6 @@
-﻿namespace OgmoEditor.ProjectEditors.ValueEditors
+﻿namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
 {
-    partial class StringValueEditor
+    partial class StringValueDefinitionEditor
     {
         /// <summary> 
         /// Required designer variable.

@@ -8,13 +8,13 @@ using System.Text;
 using System.Windows.Forms;
 using OgmoEditor.Definitions.ValueDefinitions;
 
-namespace OgmoEditor.ProjectEditors.ValueEditors
+namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
 {
-    public partial class ColorValueEditor : UserControl
+    public partial class ColorValueDefinitionEditor : UserControl
     {
         private ColorValueDefinition def;
 
-        public ColorValueEditor(ColorValueDefinition def)
+        public ColorValueDefinitionEditor(ColorValueDefinition def)
         {
             this.def = def;
             InitializeComponent();

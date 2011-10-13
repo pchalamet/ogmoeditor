@@ -8,13 +8,13 @@ using System.Text;
 using System.Windows.Forms;
 using OgmoEditor.Definitions.ValueDefinitions;
 
-namespace OgmoEditor.ProjectEditors.ValueEditors
+namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
 {
-    public partial class FloatValueEditor : UserControl
+    public partial class FloatValueDefinitionEditor : UserControl
     {
         private FloatValueDefinition def;
 
-        public FloatValueEditor(FloatValueDefinition def)
+        public FloatValueDefinitionEditor(FloatValueDefinition def)
         {
             this.def = def;
             InitializeComponent();

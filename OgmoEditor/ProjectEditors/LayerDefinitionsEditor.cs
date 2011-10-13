@@ -11,12 +11,12 @@ using System.Diagnostics;
 
 namespace OgmoEditor.ProjectEditors
 {
-    public partial class LayersEditor : UserControl, IProjectChanger
+    public partial class LayerDefinitionsEditor : UserControl, IProjectChanger
     {
         private List<LayerDefinition> layerDefinitions;
         private UserControl layerEditor;
 
-        public LayersEditor()
+        public LayerDefinitionsEditor()
         {
             InitializeComponent();
             layerEditor = null;

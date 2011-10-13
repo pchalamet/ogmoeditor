@@ -36,7 +36,7 @@
             this.tilesetsTabPage = new System.Windows.Forms.TabPage();
             this.tilesetsEditor = new OgmoEditor.ProjectEditors.TilesetsEditor();
             this.layersTabPage = new System.Windows.Forms.TabPage();
-            this.layersEditor = new OgmoEditor.ProjectEditors.LayersEditor();
+            this.layersEditor = new OgmoEditor.ProjectEditors.LayerDefinitionsEditor();
             this.settingsTabPage = new System.Windows.Forms.TabPage();
             this.settingsEditor = new OgmoEditor.ProjectEditors.SettingsEditor();
             this.tabControl = new System.Windows.Forms.TabControl();
@@ -190,7 +190,7 @@
         private System.Windows.Forms.TabPage settingsTabPage;
         private System.Windows.Forms.TabControl tabControl;
         private SettingsEditor settingsEditor;
-        private LayersEditor layersEditor;
+        private LayerDefinitionsEditor layersEditor;
         private ObjectsEditor objectsEditor;
         private TilesetsEditor tilesetsEditor;
     }

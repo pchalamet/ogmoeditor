@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using OgmoEditor.ProjectEditors.LayerEditors;
+using OgmoEditor.ProjectEditors.LayerDefinitionEditors;
 
 namespace OgmoEditor.Definitions.LayerDefinitions
 {
@@ -18,7 +18,7 @@ namespace OgmoEditor.Definitions.LayerDefinitions
 
         public override System.Windows.Forms.UserControl GetEditor()
         {
-            return new TileLayerEditor(this);
+            return new TileLayerDefinitionEditor(this);
         }
 
         public override LayerDefinition Clone()

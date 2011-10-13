@@ -8,13 +8,13 @@ using System.Text;
 using System.Windows.Forms;
 using OgmoEditor.Definitions.ValueDefinitions;
 
-namespace OgmoEditor.ProjectEditors.ValueEditors
+namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
 {
-    public partial class EnumValueEditor : UserControl
+    public partial class EnumValueDefinitionEditor : UserControl
     {
         private EnumValueDefinition def;
 
-        public EnumValueEditor(EnumValueDefinition def)
+        public EnumValueDefinitionEditor(EnumValueDefinition def)
         {
             this.def = def;
             InitializeComponent();

@@ -1,6 +1,6 @@
 ﻿namespace OgmoEditor.ProjectEditors
 {
-    partial class LayersEditor
+    partial class LayerDefinitionsEditor
     {
         /// <summary> 
         /// Required designer variable.

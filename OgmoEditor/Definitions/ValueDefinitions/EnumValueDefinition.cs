@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
-using OgmoEditor.ProjectEditors.ValueEditors;
+using OgmoEditor.ProjectEditors.ValueDefinitionEditors;
 
 namespace OgmoEditor.Definitions.ValueDefinitions
 {
@@ -20,7 +20,7 @@ namespace OgmoEditor.Definitions.ValueDefinitions
 
         public override System.Windows.Forms.UserControl GetEditor()
         {
-            return new EnumValueEditor(this);
+            return new EnumValueDefinitionEditor(this);
         }
 
         public override ValueDefinition Clone()

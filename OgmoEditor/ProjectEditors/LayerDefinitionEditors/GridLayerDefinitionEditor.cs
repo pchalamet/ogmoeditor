@@ -8,13 +8,13 @@ using System.Text;
 using System.Windows.Forms;
 using OgmoEditor.Definitions.LayerDefinitions;
 
-namespace OgmoEditor.ProjectEditors.LayerEditors
+namespace OgmoEditor.ProjectEditors.LayerDefinitionEditors
 {
-    public partial class GridLayerEditor : UserControl
+    public partial class GridLayerDefinitionEditor : UserControl
     {
         private GridLayerDefinition def;
 
-        public GridLayerEditor(GridLayerDefinition def)
+        public GridLayerDefinitionEditor(GridLayerDefinition def)
         {
             this.def = def;
             InitializeComponent();

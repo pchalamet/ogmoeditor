@@ -1,6 +1,6 @@
-﻿namespace OgmoEditor.ProjectEditors.ValueEditors
+﻿namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
 {
-    partial class FloatValueEditor
+    partial class FloatValueDefinitionEditor
     {
         /// <summary> 
         /// Required designer variable.

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
-using OgmoEditor.ProjectEditors.ValueEditors;
+using OgmoEditor.ProjectEditors.ValueDefinitionEditors;
 using System.Windows.Forms;
 
 namespace OgmoEditor.Definitions.ValueDefinitions
@@ -31,7 +31,7 @@ namespace OgmoEditor.Definitions.ValueDefinitions
 
         public override UserControl GetEditor()
         {
-            return new IntValueEditor(this);
+            return new IntValueDefinitionEditor(this);
         }
 
         public override ValueDefinition Clone()

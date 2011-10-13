@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using OgmoEditor.Definitions.ValueDefinitions;
 using System.Diagnostics;
-using OgmoEditor.ProjectEditors.ValueEditors;
+using OgmoEditor.ProjectEditors.ValueDefinitionEditors;
 
 namespace OgmoEditor.ProjectEditors
 {

@@ -9,13 +9,13 @@ using System.Windows.Forms;
 using OgmoEditor.Definitions.LayerDefinitions;
 using System.Diagnostics;
 
-namespace OgmoEditor.ProjectEditors.LayerEditors
+namespace OgmoEditor.ProjectEditors.LayerDefinitionEditors
 {
-    public partial class TileLayerEditor : UserControl
+    public partial class TileLayerDefinitionEditor : UserControl
     {
         private TileLayerDefinition def;
 
-        public TileLayerEditor(TileLayerDefinition def)
+        public TileLayerDefinitionEditor(TileLayerDefinition def)
         {
             this.def = def;
             InitializeComponent();

@@ -1,6 +1,6 @@
-﻿namespace OgmoEditor.ProjectEditors.LayerEditors
+﻿namespace OgmoEditor.ProjectEditors.LayerDefinitionEditors
 {
-    partial class TileLayerEditor
+    partial class GridLayerDefinitionEditor
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,26 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.multipleTilesetsCheckBox = new System.Windows.Forms.CheckBox();
+            this.colorChooser = new OgmoEditor.ColorChooser();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // multipleTilesetsCheckBox
+            // colorChooser
             // 
-            this.multipleTilesetsCheckBox.AutoSize = true;
-            this.multipleTilesetsCheckBox.Location = new System.Drawing.Point(18, 15);
-            this.multipleTilesetsCheckBox.Name = "multipleTilesetsCheckBox";
-            this.multipleTilesetsCheckBox.Size = new System.Drawing.Size(124, 17);
-            this.multipleTilesetsCheckBox.TabIndex = 0;
-            this.multipleTilesetsCheckBox.Text = "Allow multiple tilesets";
-            this.multipleTilesetsCheckBox.UseVisualStyleBackColor = true;
-            this.multipleTilesetsCheckBox.CheckedChanged += new System.EventHandler(this.multipleTilesetsCheckBox_CheckedChanged);
+            this.colorChooser.Location = new System.Drawing.Point(53, 15);
+            this.colorChooser.Name = "colorChooser";
+            this.colorChooser.Size = new System.Drawing.Size(108, 28);
+            this.colorChooser.TabIndex = 0;
+            this.colorChooser.ColorChanged += new OgmoEditor.ColorChooser.ColorCallback(this.colorChooser_ColorChanged);
             // 
-            // TileLayerEditor
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(19, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(31, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Color";
+            // 
+            // GridLayerEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.multipleTilesetsCheckBox);
-            this.Name = "TileLayerEditor";
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.colorChooser);
+            this.Name = "GridLayerEditor";
             this.Size = new System.Drawing.Size(353, 358);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -56,6 +64,7 @@
 
         #endregion
 
-        private System.Windows.Forms.CheckBox multipleTilesetsCheckBox;
+        private ColorChooser colorChooser;
+        private System.Windows.Forms.Label label1;
     }
 }

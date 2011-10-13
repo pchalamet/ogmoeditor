@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
-using OgmoEditor.ProjectEditors.LayerEditors;
+using OgmoEditor.ProjectEditors.LayerDefinitionEditors;
 
 namespace OgmoEditor.Definitions.LayerDefinitions
 {
@@ -19,7 +19,7 @@ namespace OgmoEditor.Definitions.LayerDefinitions
 
         public override System.Windows.Forms.UserControl GetEditor()
         {
-            return new GridLayerEditor(this);
+            return new GridLayerDefinitionEditor(this);
         }
 
         public override LayerDefinition Clone()

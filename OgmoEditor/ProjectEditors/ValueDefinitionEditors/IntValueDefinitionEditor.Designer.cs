@@ -1,6 +1,6 @@
-﻿namespace OgmoEditor.ProjectEditors.ValueEditors
+﻿namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
 {
-    partial class IntValueEditor
+    partial class IntValueDefinitionEditor
     {
         /// <summary> 
         /// Required designer variable.
