@@ -10,12 +10,12 @@ using OgmoEditor.XNA;
 using Microsoft.Xna.Framework.Content;
 using System.Diagnostics;
 using System.Windows.Forms;
+using OgmoEditor.LevelData;
+using OgmoEditor.LevelEditors.LayerEditors;
 
 namespace OgmoEditor.LevelEditors
 {
     using Point = System.Drawing.Point;
-    using OgmoEditor.LevelData;
-using OgmoEditor.LevelEditors.LayerEditors;
 
     public class LevelEditor : GraphicsDeviceControl
     {
@@ -88,6 +88,10 @@ using OgmoEditor.LevelEditors.LayerEditors;
             //Draw the layers
             foreach (var ed in LayerEditors)
                 ed.Draw(spriteBatch);
+
+            //Draw the grid if zoomed at least 100%
+            if (Camera.Zoom >= 1)
+                content.DrawGrid(spriteBatch, LayerEditors[0].Layer.Definition.Grid, level.Size, Color.White);
 
             spriteBatch.End();
         }

@@ -9,6 +9,13 @@ namespace OgmoEditor
 {
     static public class Util
     {
+        public const float UP = (float)(Math.PI * 1.5);
+        public const float DOWN = (float)(Math.PI * .5);
+        public const float RIGHT = 0;
+        public const float LEFT = (float)Math.PI;
+        public const float QUARTER = (float)(Math.PI / 2);
+        public const float EIGHTH = (float)(Math.PI / 4);
+
         static public string GetFilePathRelativeTo(string filePath, string absolutePath)
         {
             string dir = filePath.Remove(filePath.IndexOf(Path.GetFileName(filePath)) - 1);

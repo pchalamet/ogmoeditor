@@ -6,9 +6,13 @@ using Microsoft.Xna.Framework.Graphics;
 using System.IO;
 using System.Windows.Forms;
 using Microsoft.Xna.Framework;
+using System.Drawing;
 
 namespace OgmoEditor.LevelEditors
 {
+    using Color = Microsoft.Xna.Framework.Color;
+    using Rectangle = Microsoft.Xna.Framework.Rectangle;
+
     public class Content
     {
         public Texture2D TexPixel { get; private set; }
@@ -50,6 +54,28 @@ namespace OgmoEditor.LevelEditors
         public void DrawRectangle(SpriteBatch spriteBatch, int x, int y, int width, int height, Color color)
         {
             spriteBatch.Draw(TexPixel, new Rectangle(x, y, width, height), color);
+        }
+
+        public void DrawLine(SpriteBatch spriteBatch, int x1, int y1, int x2, int y2, Color color)
+        {
+            int length = (int)Math.Sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+            float rotation = (float)Math.Atan2(y2 - y1, x2 - x1);
+
+            DrawLineAngle(spriteBatch, x1, y1, length, rotation, color);
+        }
+
+        public void DrawLineAngle(SpriteBatch spriteBatch, int x, int y, int length, float rotation, Color color)
+        {
+            spriteBatch.Draw(TexPixel, new Vector2(x, y), null, color, rotation, Vector2.Zero, new Vector2(length, 1), SpriteEffects.None, 0);
+        }
+
+        public void DrawGrid(SpriteBatch spriteBatch, Size grid, Size size, Color color)
+        {
+            for (int i = grid.Width; i < size.Width; i += grid.Width)
+                DrawLineAngle(spriteBatch, i, 2, size.Height - 4, Util.DOWN, color);
+
+            for (int i = grid.Height; i < size.Height; i += grid.Height)
+                DrawLineAngle(spriteBatch, 2, i, size.Width - 4, Util.RIGHT, color);
         }
 
         /*
