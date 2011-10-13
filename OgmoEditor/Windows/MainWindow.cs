@@ -16,14 +16,19 @@ namespace OgmoEditor.Windows
 {
     public partial class MainWindow : Form
     {
+        public List<LevelEditor> LevelEditors { get; private set; }
+
         public MainWindow()
         {
             InitializeComponent();
+
+            LevelEditors = new List<LevelEditor>();
 
             Ogmo.OnProjectStart += onProjectStart;
             Ogmo.OnProjectClose += onProjectClose;
             Ogmo.OnLevelAdded += onLevelAdded;
             Ogmo.OnLevelClosed += onLevelClosed;
+            Ogmo.OnLevelChanged += onLevelChanged;
         }
 
         public void EnableEditing()
@@ -40,15 +45,10 @@ namespace OgmoEditor.Windows
                 f.Enabled = false;
         }
 
-        public int SelectedLevelIndex
+        private int SelectedLevelIndex
         {
-            get { return masterTabControl.SelectedIndex; }
-            set { masterTabControl.SelectedIndex = value; }
-        }
-
-        public void SetLevel(Level level)
-        {
-            masterTabControl.SelectedIndex = Ogmo.Levels.IndexOf(level);
+            get { return MasterTabControl.SelectedIndex; }
+            set { MasterTabControl.SelectedIndex = value; }
         }
 
         /*
@@ -88,43 +88,46 @@ namespace OgmoEditor.Windows
             Ogmo.LayersWindow.Visible = Ogmo.ToolsWindow.Visible = false;
         }
 
-        private void onLevelAdded(Level level)
+        private void onLevelAdded(Level level, int index)
         {
             TabPage t = new TabPage(level.Name);
-            t.Controls.Add(new LevelEditor(level));
-            masterTabControl.TabPages.Add(t);
-            masterTabControl.SelectedTab = t;
+            LevelEditor e = new LevelEditor(level);
+
+            LevelEditors.Add(e);
+            t.Controls.Add(e);
+
+            MasterTabControl.TabPages.Add(t);
         }
 
-        private void onLevelClosed(Level level)
+        private void onLevelClosed(Level level, int index)
         {
-            masterTabControl.TabPages.RemoveAt(Ogmo.Levels.IndexOf(level));
+            MasterTabControl.TabPages.RemoveAt(index);
+            LevelEditors.RemoveAt(index);
         }
 
-        private void refreshLevelState()
+        private void onLevelChanged(Level level, int index)
         {
+            SelectedLevelIndex = index;
+            
+            //Switch to the editor
+            if (index != -1)
+                LevelEditors[index].SwitchTo();
+
+            //Refresh stuff
             saveLevelToolStripMenuItem.Enabled =
                 saveLevelAsToolStripMenuItem.Enabled =
                 closeLevelToolStripMenuItem.Enabled =
                 duplicateLevelToolStripMenuItem.Enabled =
                 closeOtherLevelsToolStripMenuItem.Enabled =
-                saveAsImageToolStripMenuItem.Enabled = (masterTabControl.SelectedIndex < Ogmo.Levels.Count);
-
-            if (masterTabControl.SelectedTab != null)
-                masterTabControl.SelectedTab.Controls[0].Focus();
+                saveAsImageToolStripMenuItem.Enabled = index != -1;
         }
 
         /*
          *  Tab control events
          */
-        private void masterTabControl_TabIndexChanged(object sender, EventArgs e)
+        private void MasterTabControl_Selecting(object sender, TabControlCancelEventArgs e)
         {
-            refreshLevelState();
-        }
-
-        private void masterTabControl_ControlAdded(object sender, ControlEventArgs e)
-        {
-            refreshLevelState();
+            Ogmo.SetLevel(e.TabPageIndex);
         }
 
         /*

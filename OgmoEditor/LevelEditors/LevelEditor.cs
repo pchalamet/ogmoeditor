@@ -109,6 +109,11 @@ using OgmoEditor.LevelEditors.LayerEditors.Actions;
             spriteBatch.End();
         }
 
+        public void SwitchTo()
+        {
+            Focus();
+        }
+
         /*
          *  ACTIONS API
          */

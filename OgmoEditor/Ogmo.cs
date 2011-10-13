@@ -12,6 +12,7 @@ using OgmoEditor.XNA;
 using System.Reflection;
 using OgmoEditor.LevelData;
 using OgmoEditor.Windows;
+using OgmoEditor.LevelData.Layers;
 
 namespace OgmoEditor
 {
@@ -28,7 +29,8 @@ namespace OgmoEditor
         public const string IMAGE_FILE_FILTER = "PNG image file|*.png|BMP image file|*.bmp";
 
         public delegate void ProjectCallback(Project project);
-        public delegate void LevelCallback(Level level);
+        public delegate void LevelCallback(Level level, int index);
+        public delegate void LayerCallback(Layer layer, int index);
 
         static public readonly MainWindow MainWindow = new MainWindow();
         static public readonly ToolsWindow ToolsWindow = new ToolsWindow();
@@ -37,11 +39,14 @@ namespace OgmoEditor
 
         static public Project Project { get; private set; }
         static public List<Level> Levels { get; private set; }
+        static public int CurrentLevel { get; private set; }
 
         static public event ProjectCallback OnProjectStart;
         static public event ProjectCallback OnProjectClose;
-        static public event Ogmo.LevelCallback OnLevelAdded;
-        static public event Ogmo.LevelCallback OnLevelClosed;
+        static public event LevelCallback OnLevelAdded;
+        static public event LevelCallback OnLevelClosed;
+        static public event LevelCallback OnLevelChanged;
+        static public event LayerCallback OnLayerChanged;
 
         [STAThread]
         static void Main(string[] args)
@@ -62,6 +67,7 @@ namespace OgmoEditor
 
             //The levels holder
             Levels = new List<Level>();
+            CurrentLevel = -1;
 
             //The windows
             LayersWindow.Show(MainWindow);          
@@ -133,6 +139,22 @@ namespace OgmoEditor
         /*
          *  Level Stuff
          */
+        static public void SetLevel(int index)
+        {
+            //Can't set the current level
+            if (index == CurrentLevel)
+                return;
+
+            //Make it current
+            CurrentLevel = index;
+
+            Debug.WriteLine("Now Editing Level #" + index);
+
+            //Call the event
+            if (OnLevelChanged != null)
+                OnLevelChanged(index > -1 ? Levels[index] : null, index);
+        }
+        
         static public Level GetLevelByPath(string path)
         {
             return Levels.Find(e => e.SavePath == path);
@@ -141,6 +163,7 @@ namespace OgmoEditor
         static public void NewLevel()
         {
             AddLevel(new Level(Project, ""));
+            SetLevel(Levels.Count - 1);
         }
 
         static public void OpenLevel()
@@ -158,22 +181,39 @@ namespace OgmoEditor
                 Level level = new Level(Project, f);
                 AddLevel(level);
             }
+
+            //Set it to the current level
+            SetLevel(Levels.Count - 1);
         }
 
         static public void AddLevel(Level level)
         {
+            //Add it
             Levels.Add(level);
 
+            //Call the event
             if (OnLevelAdded != null)
-                OnLevelAdded(level);
+                OnLevelAdded(level, Levels.Count - 1);
         }
 
         static public void CloseLevel(Level level)
         {
-            if (OnLevelClosed != null)
-                OnLevelClosed(level);
-
+            //Remove it
+            int index = Levels.IndexOf(level);
             Levels.Remove(level);
+
+            //Call the event
+            if (OnLevelClosed != null)
+                OnLevelClosed(level, index);
+
+            //Set the current level to another one if that was the current one
+            if (CurrentLevel == index)
+            {
+                if (Levels.Count == 0)
+                    SetLevel(-1);
+                else
+                    SetLevel(Math.Min(index, Levels.Count - 1));
+            }
         }
 
         static public void CloseOtherLevels(Level level)
@@ -195,5 +235,9 @@ namespace OgmoEditor
                     AddLevel(new Level(Project, str));
             }
         }
+
+        /*
+         *  Layer stuff
+         */
     }
 }
