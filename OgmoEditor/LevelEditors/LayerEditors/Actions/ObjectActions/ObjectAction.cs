@@ -6,19 +6,18 @@ using OgmoEditor.LevelData.Layers;
 
 namespace OgmoEditor.LevelEditors.LayerEditors.Actions.ObjectActions
 {
-    public abstract class ObjectAction : Action
+    public abstract class ObjectAction : OgmoAction
     {
-        public new ObjectLayer Layer { get; private set; }
+        public ObjectLayer ObjectLayer { get; private set; }
 
-        public ObjectAction(ObjectLayer layer)
-            : base(layer)
+        public ObjectAction(ObjectLayer objectLayer)
         {
-            Layer = layer;
+            ObjectLayer = objectLayer;
         }
 
         public override string ToString()
         {
-            return base.ToString();
+            return " on " + ObjectLayer.Definition.Name;
         }
     }
 }

@@ -6,19 +6,18 @@ using OgmoEditor.LevelData.Layers;
 
 namespace OgmoEditor.LevelEditors.LayerEditors.Actions.GridActions
 {
-    public abstract class GridAction : Action
+    public abstract class GridAction : OgmoAction
     {
-        public new GridLayer Layer { get; private set; }
+        public GridLayer GridLayer { get; private set; }
 
-        public GridAction(GridLayer layer)
-            : base(layer)
+        public GridAction(GridLayer gridLayer)
         {
-            Layer = layer;
+            GridLayer = gridLayer;
         }
 
         public override string ToString()
         {
-            return base.ToString();
+            return " on " + GridLayer.Definition.Name;
         }
     }
 }
