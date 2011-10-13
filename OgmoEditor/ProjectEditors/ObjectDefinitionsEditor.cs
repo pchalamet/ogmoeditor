@@ -255,22 +255,34 @@ namespace OgmoEditor.ProjectEditors
          */
         private void nameTextBox_Validated(object sender, EventArgs e)
         {
+            if (listBox.SelectedIndex == -1)
+                return;
+
             objects[listBox.SelectedIndex].Name = nameTextBox.Text;
             listBox.Items[listBox.SelectedIndex] = nameTextBox.Text;
         }
 
         private void limitTextBox_Validated(object sender, EventArgs e)
         {
+            if (listBox.SelectedIndex == -1)
+                return;
+
             ProjParse.Parse(ref objects[listBox.SelectedIndex].Limit, limitTextBox);
         }
 
         private void sizeXTextBox_Validated(object sender, EventArgs e)
         {
+            if (listBox.SelectedIndex == -1)
+                return;
+
             ProjParse.Parse(ref objects[listBox.SelectedIndex].Size, sizeXTextBox, sizeYTextBox);
         }
 
         private void originXTextBox_Validated(object sender, EventArgs e)
         {
+            if (listBox.SelectedIndex == -1)
+                return;
+
             ProjParse.Parse(ref objects[listBox.SelectedIndex].Origin, originXTextBox, originYTextBox);
         }
 
@@ -279,22 +291,34 @@ namespace OgmoEditor.ProjectEditors
          */
         private void resizableXCheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            if (listBox.SelectedIndex == -1)
+                return;
+
             objects[listBox.SelectedIndex].ResizableX = resizableXCheckBox.Checked;
         }
 
         private void resizableYCheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            if (listBox.SelectedIndex == -1)
+                return;
+
             objects[listBox.SelectedIndex].ResizableY = resizableYCheckBox.Checked;
         }
 
         private void rotatableCheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            if (listBox.SelectedIndex == -1)
+                return;
+
             objects[listBox.SelectedIndex].Rotatable = rotatableCheckBox.Checked;
             RotationFieldsVisible = rotatableCheckBox.Checked;
         }
 
         private void rotationIncrementTextBox_Validated(object sender, EventArgs e)
         {
+            if (listBox.SelectedIndex == -1)
+                return;
+
             ProjParse.Parse(ref objects[listBox.SelectedIndex].RotateIncrement, rotationIncrementTextBox);
         }
 
@@ -303,17 +327,26 @@ namespace OgmoEditor.ProjectEditors
          */
         private void nodesCheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            if (listBox.SelectedIndex == -1)
+                return;
+
             objects[listBox.SelectedIndex].NodesDefinition.Enabled = nodesCheckBox.Checked;
             NodesFieldsVisible = nodesCheckBox.Checked;
         }
 
         private void nodeLimitTextBox_Validated(object sender, EventArgs e)
         {
+            if (listBox.SelectedIndex == -1)
+                return;
+
             ProjParse.Parse(ref objects[listBox.SelectedIndex].NodesDefinition.Limit, nodeLimitTextBox);
         }
 
         private void nodeDrawComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            if (listBox.SelectedIndex == -1)
+                return;
+
             objects[listBox.SelectedIndex].NodesDefinition.DrawMode = (ObjectNodesDefinition.PathMode)nodeDrawComboBox.SelectedIndex;
         }
 
@@ -322,22 +355,34 @@ namespace OgmoEditor.ProjectEditors
          */
         private void graphicTypeComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            if (listBox.SelectedIndex == -1)
+                return;
+
             objects[listBox.SelectedIndex].ImageDefinition.DrawMode = (ObjectImageDefinition.DrawModes)graphicTypeComboBox.SelectedIndex;
             GraphicFieldsVisibility = graphicTypeComboBox.SelectedIndex;
         }
 
         private void rectangleColorChooser_ColorChanged(OgmoColor color)
         {
+            if (listBox.SelectedIndex == -1)
+                return;
+
             objects[listBox.SelectedIndex].ImageDefinition.RectColor = color;
         }
 
         private void imageFileTiledCheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            if (listBox.SelectedIndex == -1)
+                return;
+
             objects[listBox.SelectedIndex].ImageDefinition.Tiled = imageFileTiledCheckBox.Checked;
         }
 
         private void imageFileClipXTextBox_Validated(object sender, EventArgs e)
         {
+            if (listBox.SelectedIndex == -1)
+                return;
+
             ProjParse.Parse(ref objects[listBox.SelectedIndex].ImageDefinition.ClipRect, imageFileClipXTextBox, imageFileClipYTextBox, imageFileClipWTextBox, imageFileClipHTextBox);
         }
 

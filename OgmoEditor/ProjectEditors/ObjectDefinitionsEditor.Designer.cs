@@ -1,4 +1,5 @@
-﻿namespace OgmoEditor.ProjectEditors
+﻿using OgmoEditor.ProjectEditors.ValueDefinitionEditors;
+namespace OgmoEditor.ProjectEditors
 {
     partial class ObjectDefinitionsEditor
     {
@@ -76,7 +77,7 @@
             this.imageFileTiledCheckBox = new System.Windows.Forms.CheckBox();
             this.imageFilePreviewBox = new System.Windows.Forms.PictureBox();
             this.rectangleColorChooser = new OgmoEditor.ColorChooser();
-            this.valuesEditor = new OgmoEditor.ProjectEditors.ValueDefinitionsEditor();
+            this.valuesEditor = new OgmoEditor.ProjectEditors.ValueDefinitionEditors.ValueDefinitionsEditor();
             this.rectangleGraphicPanel.SuspendLayout();
             this.imageFileGraphicPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageFilePreviewBox)).BeginInit();

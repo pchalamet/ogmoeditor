@@ -200,18 +200,27 @@ namespace OgmoEditor.ProjectEditors
 
         private void nameTextBox_Validated(object sender, EventArgs e)
         {
+            if (listBox.SelectedIndex == -1)
+                return;
+
             tilesets[listBox.SelectedIndex].Name = nameTextBox.Text;
             listBox.Items[listBox.SelectedIndex] = nameTextBox.Text;
         }
 
         private void tileSizeXTextBox_Validated(object sender, EventArgs e)
         {
+            if (listBox.SelectedIndex == -1)
+                return;
+
             ProjParse.Parse(ref tilesets[listBox.SelectedIndex].TileSize, tileSizeXTextBox, tileSizeYTextBox);
             updateTotalTiles();
         }
 
         private void tileSpacingTextBox_Validated(object sender, EventArgs e)
         {
+            if (listBox.SelectedIndex == -1)
+                return;
+
             ProjParse.Parse(ref tilesets[listBox.SelectedIndex].TileSep, tileSpacingTextBox);
             updateTotalTiles();
         }

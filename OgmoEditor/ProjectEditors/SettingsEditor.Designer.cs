@@ -1,4 +1,5 @@
-﻿namespace OgmoEditor.ProjectEditors
+﻿using OgmoEditor.ProjectEditors.ValueDefinitionEditors;
+namespace OgmoEditor.ProjectEditors
 {
     partial class SettingsEditor
     {
@@ -45,7 +46,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.backgroundColorChooser = new OgmoEditor.ColorChooser();
-            this.valuesEditor = new OgmoEditor.ProjectEditors.ValueDefinitionsEditor();
+            this.valuesEditor = new OgmoEditor.ProjectEditors.ValueDefinitionEditors.ValueDefinitionsEditor();
             this.colorChooser1 = new OgmoEditor.ColorChooser();
             this.SuspendLayout();
             // 

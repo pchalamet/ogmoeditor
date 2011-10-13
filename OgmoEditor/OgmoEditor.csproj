@@ -178,10 +178,10 @@
     <Compile Include="ProjectEditors\ValueDefinitionEditors\StringValueDefinitionEditor.Designer.cs">
       <DependentUpon>StringValueDefinitionEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProjectEditors\ValueDefinitionsEditor.cs">
+    <Compile Include="ProjectEditors\ValueDefinitionEditors\ValueDefinitionsEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ProjectEditors\ValueDefinitionsEditor.Designer.cs">
+    <Compile Include="ProjectEditors\ValueDefinitionEditors\ValueDefinitionsEditor.Designer.cs">
       <DependentUpon>ValueDefinitionsEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -251,7 +251,7 @@
     <EmbeddedResource Include="ProjectEditors\ValueDefinitionEditors\StringValueDefinitionEditor.resx">
       <DependentUpon>StringValueDefinitionEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProjectEditors\ValueDefinitionsEditor.resx">
+    <EmbeddedResource Include="ProjectEditors\ValueDefinitionEditors\ValueDefinitionsEditor.resx">
       <DependentUpon>ValueDefinitionsEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

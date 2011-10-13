@@ -10,7 +10,7 @@ using OgmoEditor.Definitions.ValueDefinitions;
 using System.Diagnostics;
 using OgmoEditor.ProjectEditors.ValueDefinitionEditors;
 
-namespace OgmoEditor.ProjectEditors
+namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
 {
     public partial class ValueDefinitionsEditor : UserControl
     {

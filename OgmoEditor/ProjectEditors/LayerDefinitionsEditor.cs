@@ -150,12 +150,18 @@ namespace OgmoEditor.ProjectEditors
 
         private void nameTextBox_Validated(object sender, EventArgs e)
         {
+            if (listBox.SelectedIndex == -1)
+                return;
+
             layerDefinitions[listBox.SelectedIndex].Name = nameTextBox.Text;
             listBox.Items[listBox.SelectedIndex] = (nameTextBox.Text == "" ? "(blank)" : nameTextBox.Text);
         }
 
         private void gridXTextBox_Validated(object sender, EventArgs e)
         {
+            if (listBox.SelectedIndex == -1)
+                return;
+
             ProjParse.Parse(ref layerDefinitions[listBox.SelectedIndex].Grid, gridXTextBox, gridYTextBox);
         }
 
@@ -169,6 +175,9 @@ namespace OgmoEditor.ProjectEditors
 
         private void typeComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            if (listBox.SelectedIndex == -1)
+                return;
+
             LayerDefinition oldDef = layerDefinitions[listBox.SelectedIndex];
             LayerDefinition newDef;
 

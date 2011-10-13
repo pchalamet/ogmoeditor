@@ -1,4 +1,4 @@
-﻿namespace OgmoEditor.ProjectEditors
+﻿namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
 {
     partial class ValueDefinitionsEditor
     {
