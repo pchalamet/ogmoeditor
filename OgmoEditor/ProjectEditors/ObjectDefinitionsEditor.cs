@@ -12,14 +12,14 @@ using System.Diagnostics;
 
 namespace OgmoEditor.ProjectEditors
 {
-    public partial class ObjectsEditor : UserControl, IProjectChanger
+    public partial class ObjectDefinitionsEditor : UserControl, IProjectChanger
     {
         private const string NEW_NAME = "NewObject";
 
         private List<ObjectDefinition> objects;
         private string directory;
 
-        public ObjectsEditor()
+        public ObjectDefinitionsEditor()
         {
             InitializeComponent();
         }

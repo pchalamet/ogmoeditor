@@ -12,14 +12,14 @@ using OgmoEditor.ProjectEditors.ValueDefinitionEditors;
 
 namespace OgmoEditor.ProjectEditors
 {
-    public partial class ValuesEditor : UserControl
+    public partial class ValueDefinitionsEditor : UserControl
     {
         private const string NEW_VALUE = "NewValue";
 
         private List<ValueDefinition> values;
         private UserControl valueEditor;
 
-        public ValuesEditor()
+        public ValueDefinitionsEditor()
         {
             InitializeComponent();
             this.values = new List<ValueDefinition>();

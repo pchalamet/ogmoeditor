@@ -93,6 +93,7 @@ namespace OgmoEditor.LevelEditors
 
             //Draw the level onto the control, positioned and scaled by the camera
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Camera.Matrix);
+            content.DrawRectangle(spriteBatch, 10, 10, level.Size.Width, level.Size.Height, new Color(0, 0, 0, .5f));
             spriteBatch.Draw(levelCanvas, Vector2.Zero, Color.White);
             spriteBatch.End();
         }

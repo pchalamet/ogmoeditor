@@ -1,6 +1,6 @@
 ﻿namespace OgmoEditor.ProjectEditors
 {
-    partial class ObjectsEditor
+    partial class ObjectDefinitionsEditor
     {
         /// <summary> 
         /// Required designer variable.
@@ -76,7 +76,7 @@
             this.imageFileTiledCheckBox = new System.Windows.Forms.CheckBox();
             this.imageFilePreviewBox = new System.Windows.Forms.PictureBox();
             this.rectangleColorChooser = new OgmoEditor.ColorChooser();
-            this.valuesEditor = new OgmoEditor.ProjectEditors.ValuesEditor();
+            this.valuesEditor = new OgmoEditor.ProjectEditors.ValueDefinitionsEditor();
             this.rectangleGraphicPanel.SuspendLayout();
             this.imageFileGraphicPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageFilePreviewBox)).BeginInit();
@@ -649,7 +649,7 @@
         private System.Windows.Forms.TextBox originXTextBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private ValuesEditor valuesEditor;
+        private ValueDefinitionsEditor valuesEditor;
         private System.Windows.Forms.CheckBox nodesCheckBox;
         private System.Windows.Forms.TextBox nodeLimitTextBox;
         private System.Windows.Forms.Label nodeLimitLabel;

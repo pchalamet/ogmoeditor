@@ -117,11 +117,11 @@
     <Compile Include="ProjectEditors\LayerDefinitionsEditor.Designer.cs">
       <DependentUpon>LayerDefinitionsEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProjectEditors\ObjectsEditor.cs">
+    <Compile Include="ProjectEditors\ObjectDefinitionsEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ProjectEditors\ObjectsEditor.Designer.cs">
-      <DependentUpon>ObjectsEditor.cs</DependentUpon>
+    <Compile Include="ProjectEditors\ObjectDefinitionsEditor.Designer.cs">
+      <DependentUpon>ObjectDefinitionsEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="ProjectEditors\ProjectEditor.cs">
       <SubType>Form</SubType>
@@ -178,11 +178,11 @@
     <Compile Include="ProjectEditors\ValueDefinitionEditors\StringValueDefinitionEditor.Designer.cs">
       <DependentUpon>StringValueDefinitionEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProjectEditors\ValuesEditor.cs">
+    <Compile Include="ProjectEditors\ValueDefinitionsEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ProjectEditors\ValuesEditor.Designer.cs">
-      <DependentUpon>ValuesEditor.cs</DependentUpon>
+    <Compile Include="ProjectEditors\ValueDefinitionsEditor.Designer.cs">
+      <DependentUpon>ValueDefinitionsEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -221,8 +221,8 @@
     <EmbeddedResource Include="ProjectEditors\LayerDefinitionsEditor.resx">
       <DependentUpon>LayerDefinitionsEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProjectEditors\ObjectsEditor.resx">
-      <DependentUpon>ObjectsEditor.cs</DependentUpon>
+    <EmbeddedResource Include="ProjectEditors\ObjectDefinitionsEditor.resx">
+      <DependentUpon>ObjectDefinitionsEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProjectEditors\ProjectEditor.resx">
       <DependentUpon>ProjectEditor.cs</DependentUpon>
@@ -251,8 +251,8 @@
     <EmbeddedResource Include="ProjectEditors\ValueDefinitionEditors\StringValueDefinitionEditor.resx">
       <DependentUpon>StringValueDefinitionEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProjectEditors\ValuesEditor.resx">
-      <DependentUpon>ValuesEditor.cs</DependentUpon>
+    <EmbeddedResource Include="ProjectEditors\ValueDefinitionsEditor.resx">
+      <DependentUpon>ValueDefinitionsEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

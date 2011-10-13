@@ -32,7 +32,7 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.applyButton = new System.Windows.Forms.Button();
             this.objectsTabPage = new System.Windows.Forms.TabPage();
-            this.objectsEditor = new OgmoEditor.ProjectEditors.ObjectsEditor();
+            this.objectsEditor = new OgmoEditor.ProjectEditors.ObjectDefinitionsEditor();
             this.tilesetsTabPage = new System.Windows.Forms.TabPage();
             this.tilesetsEditor = new OgmoEditor.ProjectEditors.TilesetsEditor();
             this.layersTabPage = new System.Windows.Forms.TabPage();
@@ -191,7 +191,7 @@
         private System.Windows.Forms.TabControl tabControl;
         private SettingsEditor settingsEditor;
         private LayerDefinitionsEditor layersEditor;
-        private ObjectsEditor objectsEditor;
+        private ObjectDefinitionsEditor objectsEditor;
         private TilesetsEditor tilesetsEditor;
     }
 }

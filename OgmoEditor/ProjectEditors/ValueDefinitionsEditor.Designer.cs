@@ -1,6 +1,6 @@
 ﻿namespace OgmoEditor.ProjectEditors
 {
-    partial class ValuesEditor
+    partial class ValueDefinitionsEditor
     {
         /// <summary> 
         /// Required designer variable.

@@ -45,7 +45,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.backgroundColorChooser = new OgmoEditor.ColorChooser();
-            this.valuesEditor = new OgmoEditor.ProjectEditors.ValuesEditor();
+            this.valuesEditor = new OgmoEditor.ProjectEditors.ValueDefinitionsEditor();
             this.colorChooser1 = new OgmoEditor.ColorChooser();
             this.SuspendLayout();
             // 
@@ -256,7 +256,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private ValuesEditor valuesEditor;
+        private ValueDefinitionsEditor valuesEditor;
         private System.Windows.Forms.Label label9;
         private ColorChooser backgroundColorChooser;
         private ColorChooser colorChooser1;
