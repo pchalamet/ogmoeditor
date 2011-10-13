@@ -8,12 +8,12 @@ namespace OgmoEditor.LevelEditors.LayerEditors.Tools.TileTools
 {
     public abstract class TileTool : Tool
     {
-        public TileLayer TileLayer { get; private set; }
+        public TileLayerEditor TileLayerEditor { get; private set; }
 
-        public TileTool(string name, TileLayer tileLayer)
+        public TileTool(string name, TileLayerEditor tileLayerEditor)
             : base(name)
         {
-            TileLayer = tileLayer;
+            TileLayerEditor = tileLayerEditor;
         }
     }
 }
