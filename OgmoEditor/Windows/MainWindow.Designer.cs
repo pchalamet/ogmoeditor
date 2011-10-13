@@ -1,4 +1,4 @@
-﻿namespace OgmoEditor
+﻿namespace OgmoEditor.Windows
 {
     partial class MainWindow
     {

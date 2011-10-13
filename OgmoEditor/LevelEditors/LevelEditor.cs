@@ -20,7 +20,7 @@ using OgmoEditor.LevelEditors.LayerEditors.Actions;
 
     public class LevelEditor : GraphicsDeviceControl
     {
-        private const int UNDO_LIMIT = 20;
+        private const int UNDO_LIMIT = 30;
 
         private Level level;
         private Content content;
@@ -109,6 +109,9 @@ using OgmoEditor.LevelEditors.LayerEditors.Actions;
             spriteBatch.End();
         }
 
+        /*
+         *  ACTIONS API
+         */
         public void Perform(OgmoAction action)
         {
             if (UndoStack.Count == UNDO_LIMIT)

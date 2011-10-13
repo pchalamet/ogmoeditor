@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using OgmoEditor.Definitions.LayerDefinitions;
 using System.Diagnostics;
+using OgmoEditor.Windows;
 
 namespace OgmoEditor.ProjectEditors
 {

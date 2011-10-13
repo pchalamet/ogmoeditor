@@ -11,6 +11,7 @@ using OgmoEditor.ProjectEditors;
 using OgmoEditor.XNA;
 using System.Reflection;
 using OgmoEditor.LevelData;
+using OgmoEditor.Windows;
 
 namespace OgmoEditor
 {
