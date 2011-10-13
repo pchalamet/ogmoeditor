@@ -5,9 +5,13 @@ using System.Text;
 using OgmoEditor.LevelData.Layers;
 using Microsoft.Xna.Framework.Graphics;
 using System.Windows.Forms;
+using Microsoft.Xna.Framework;
 
 namespace OgmoEditor.LevelEditors.LayerEditors
 {
+    using Point = System.Drawing.Point;
+    using System.Diagnostics;
+
     public class LayerEditor
     {
         public Layer Layer { get; private set; }
@@ -24,22 +28,47 @@ namespace OgmoEditor.LevelEditors.LayerEditors
 
         }
 
-        public virtual void OnKeyDown(KeyEventArgs e)
+        public virtual void OnKeyDown(Keys key)
         {
 
         }
 
-        public virtual void OnMouseDown(MouseEventArgs e)
+        public virtual void OnKeyUp(Keys key)
+        {
+
+        }
+
+        public virtual void OnMouseLeftClick(Point location)
+        {
+ 
+        }
+
+        public virtual void OnMouseLeftDown(Point location)
         {
             
         }
 
-        public virtual void OnMouseUp(MouseEventArgs e)
+        public virtual void OnMouseLeftUp(Point location)
         {
 
         }
 
-        public virtual void OnMouseMove(MouseEventArgs e)
+        public virtual void OnMouseRightClick(Point location)
+        {
+
+        }
+
+        public virtual void OnMouseRightDown(Point location)
+        {
+
+        }
+
+        public virtual void OnMouseRightUp(Point location)
+        {
+
+        }
+
+        public virtual void OnMouseMove(Point location)
         {
 
         }

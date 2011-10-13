@@ -14,7 +14,8 @@ namespace OgmoEditor
     {
         static public readonly OgmoColor Black = new OgmoColor(0, 0, 0);
         static public readonly OgmoColor White = new OgmoColor(255, 255, 255);
-        static public readonly OgmoColor DefaultBackgroundColor = new OgmoColor(180, 225, 255);
+        static public readonly OgmoColor DefaultBackgroundColor = new OgmoColor(125, 160, 255);
+        static public readonly OgmoColor DefaultGridColor = new OgmoColor(255, 240, 90);
 
         private const string HEX = "0123456789ABCDEF";
         private const string REGEX32 = @"^(#|0x|)([0-9a-fA-F]{8})$";
@@ -99,7 +100,7 @@ namespace OgmoEditor
             return Regex.IsMatch(color, REGEX32);
         }
 
-        public Microsoft.Xna.Framework.Color toXNA()
+        public Microsoft.Xna.Framework.Color ToXNA()
         {
             return new Microsoft.Xna.Framework.Color(R, G, B);
         }

@@ -22,12 +22,13 @@ namespace OgmoEditor.LevelEditors
         private Level level;
         private Content content;
         private SpriteBatch spriteBatch;
-        private bool mouseMoveMode;
+        private bool mousePanMode;
         private Point lastMousePoint;
 
         public Camera Camera { get; private set; }
         public List<LayerEditor> LayerEditors { get; private set; }
         public Rectangle DrawBounds { get; private set; }
+        public int CurrentLayer;
 
         public LevelEditor(Level level)
         {
@@ -63,6 +64,8 @@ namespace OgmoEditor.LevelEditors
             this.MouseUp += onMouseUp;
             this.MouseMove += onMouseMove;
             this.MouseWheel += onMouseWheel;
+            this.KeyDown += onKeyDown;
+            this.KeyUp += onKeyUp;
         }
 
         private void centerCamera()
@@ -83,7 +86,7 @@ namespace OgmoEditor.LevelEditors
             //Draw the level onto the control, positioned and scaled by the camera
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Camera.Matrix);
             content.DrawRectangle(spriteBatch, 10, 10, level.Size.Width, level.Size.Height, new Color(0, 0, 0, .5f));
-            content.DrawRectangle(spriteBatch, 0, 0, level.Size.Width, level.Size.Height, Ogmo.Project.BackgroundColor.toXNA());
+            content.DrawRectangle(spriteBatch, 0, 0, level.Size.Width, level.Size.Height, Ogmo.Project.BackgroundColor.ToXNA());
 
             //Draw the layers
             foreach (var ed in LayerEditors)
@@ -91,7 +94,7 @@ namespace OgmoEditor.LevelEditors
 
             //Draw the grid if zoomed at least 100%
             if (Camera.Zoom >= 1)
-                content.DrawGrid(spriteBatch, LayerEditors[0].Layer.Definition.Grid, level.Size, Color.White);
+                content.DrawGrid(spriteBatch, LayerEditors[0].Layer.Definition.Grid, level.Size, Ogmo.Project.GridColor.ToXNA() * .5f);
 
             spriteBatch.End();
         }
@@ -106,36 +109,68 @@ namespace OgmoEditor.LevelEditors
             Camera.Origin = new Vector2(Width / 2, Height / 2);
         }
 
+        private void onKeyDown(object sender, KeyEventArgs e)
+        {
+            //Call the layer event
+            LayerEditors[CurrentLayer].OnKeyDown(e.KeyCode);
+        }
+
+        private void onKeyUp(object sender, KeyEventArgs e)
+        {
+            //Call the layer event
+            LayerEditors[CurrentLayer].OnKeyUp(e.KeyCode);
+        }
+
         private void onMouseClick(object sender, MouseEventArgs e)
         {
-            
+            //Call the layer event
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+                LayerEditors[CurrentLayer].OnMouseLeftClick(Camera.ScreenToEditor(e.Location));
+            else if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                LayerEditors[CurrentLayer].OnMouseRightClick(Camera.ScreenToEditor(e.Location));
         }
 
         private void onMouseDown(object sender, MouseEventArgs e)
         {
-            //Enter mouse move mode
-            if (e.Button == System.Windows.Forms.MouseButtons.Middle)
+            //Call the layer event
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+                LayerEditors[CurrentLayer].OnMouseLeftDown(Camera.ScreenToEditor(e.Location));
+            else if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                LayerEditors[CurrentLayer].OnMouseRightDown(Camera.ScreenToEditor(e.Location));
+            else if (e.Button == System.Windows.Forms.MouseButtons.Middle)
             {
-                mouseMoveMode = true;
+                //Enter mouse move mode
+                mousePanMode = true;
                 lastMousePoint = e.Location;
             }
         }
 
         private void onMouseUp(object sender, MouseEventArgs e)
         {
-            //Exit mouse move mode
-            if (e.Button == System.Windows.Forms.MouseButtons.Middle)
-                mouseMoveMode = false;
+            //Call the layer event
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+                LayerEditors[CurrentLayer].OnMouseLeftUp(Camera.ScreenToEditor(e.Location));
+            else if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                LayerEditors[CurrentLayer].OnMouseRightUp(Camera.ScreenToEditor(e.Location));
+            else if (e.Button == System.Windows.Forms.MouseButtons.Middle)
+            {
+                //Exit mouse move mode
+                mousePanMode = false;
+            }
         }
 
         private void onMouseMove(object sender, MouseEventArgs e)
         {
-            if (mouseMoveMode)
+            //Pan the camera if in move mode
+            if (mousePanMode)
             {
                 Camera.X -= (e.Location.X - lastMousePoint.X) / Camera.Zoom;
                 Camera.Y -= (e.Location.Y - lastMousePoint.Y) / Camera.Zoom;
                 lastMousePoint = e.Location;
             }
+
+            //Call the layer event
+            LayerEditors[CurrentLayer].OnMouseMove(Camera.ScreenToEditor(e.Location));
         }
 
         private void onMouseWheel(object sender, MouseEventArgs e)

@@ -26,6 +26,7 @@ namespace OgmoEditor.ProjectEditors
 
             projectNameTextBox.Text = project.Name;
             backgroundColorChooser.Color = project.BackgroundColor;
+            gridColorChooser.Color = project.GridColor;
             defaultWidthTextBox.Text = project.LevelDefaultSize.Width.ToString();
             defaultHeightTextBox.Text = project.LevelDefaultSize.Height.ToString();
             minWidthTextBox.Text = project.LevelMinimumSize.Width.ToString();
@@ -59,6 +60,11 @@ namespace OgmoEditor.ProjectEditors
         private void maxWidthTextBox_TextChanged(object sender, EventArgs e)
         {
             ProjParse.Parse(ref project.LevelMaximumSize, maxWidthTextBox, maxHeightTextBox);
+        }
+
+        private void gridColorChooser_ColorChanged(OgmoColor color)
+        {
+            project.GridColor = color;
         }
 
     }

@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework;
 
 namespace OgmoEditor.LevelEditors
 {
+    using Point = System.Drawing.Point;
+
     public class Camera
     {
         static private readonly float[] ZOOMS = new float[] { .25f, .33f, .5f, .66f, 1, 1.5f, 2 };
@@ -39,18 +41,19 @@ namespace OgmoEditor.LevelEditors
             changed = false;
         }
 
-        public Vector2 screenToEditor(Vector2 screenPos)
+        public Vector2 ScreenToEditor(Vector2 screenPos)
         {
             if (changed)
                 updateMatrices();
-            return Vector2.Transform(screenPos, matrix);
+            return Vector2.Transform(screenPos, inverse);
         }
 
-        public Vector2 editorToScreen(Vector2 editorPos)
+        public Point ScreenToEditor(Point screenPos)
         {
             if (changed)
                 updateMatrices();
-            return Vector2.Transform(editorPos, inverse);
+            Vector2 vec = Vector2.Transform(new Vector2(screenPos.X, screenPos.Y), inverse);
+            return new Point((int)vec.X, (int)vec.Y);
         }
 
         public Matrix Matrix
