@@ -45,5 +45,10 @@ namespace OgmoEditor.Definitions.LayerDefinitions
         {
             throw new Exception("LayerDefinition subclasses must override virtual method Clone!");
         }
+
+        public Point ConvertToGrid(Point p)
+        {
+            return new Point(p.X / Grid.Width, p.Y / Grid.Height);
+        }
     }
 }

@@ -74,6 +74,11 @@ namespace OgmoEditor.LevelData
             }
         }
 
+        public bool WithinBounds(Point p)
+        {
+            return p.X >= 0 && p.Y >= 0 && p.X < Size.Width && p.Y < Size.Height;
+        }
+
         /*
          *  XML
          */

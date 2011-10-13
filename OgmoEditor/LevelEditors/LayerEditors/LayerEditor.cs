@@ -18,7 +18,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
     {
         public Layer Layer { get; private set; }
         public LevelEditor LevelEditor { get; private set; }
-        public Tool Tool { get; private set; }
+        public Tool Tool { get; protected set; }
 
         public LayerEditor(LevelEditor levelEditor, Layer layer)
         {

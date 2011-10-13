@@ -83,6 +83,9 @@
     <Compile Include="Definitions\ValueDefinitions\FloatValueDefinition.cs" />
     <Compile Include="Definitions\ValueDefinitions\IntValueDefinition.cs" />
     <Compile Include="Definitions\ValueDefinitions\StringValueDefinition.cs" />
+    <Compile Include="LevelEditors\Actions\GridActions\GridDrawAction.cs" />
+    <Compile Include="LevelEditors\Actions\GridActions\GridEraseAction.cs" />
+    <Compile Include="LevelEditors\LayerEditors\Tools\GridTools\GridPencilTool.cs" />
     <Compile Include="Windows\LayersWindow.cs">
       <SubType>Form</SubType>
     </Compile>

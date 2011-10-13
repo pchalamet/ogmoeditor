@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Xml;
 using OgmoEditor.LevelEditors.LayerEditors;
 using OgmoEditor.LevelEditors;
+using System.Drawing;
 
 namespace OgmoEditor.LevelData.Layers
 {

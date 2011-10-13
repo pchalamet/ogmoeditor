@@ -22,12 +22,12 @@ using OgmoEditor.LevelEditors.Actions;
     {
         private const int UNDO_LIMIT = 30;
 
-        private Level level;
-        private Content content;
         private SpriteBatch spriteBatch;
         private bool mousePanMode;
         private Point lastMousePoint;
 
+        public Level Level { get; private set; }
+        public Content Content { get; private set; }
         public Camera Camera { get; private set; }
         public List<LayerEditor> LayerEditors { get; private set; }
         public Rectangle DrawBounds { get; private set; }
@@ -38,7 +38,7 @@ using OgmoEditor.LevelEditors.Actions;
 
         public LevelEditor(Level level)
         {
-            this.level = level;
+            Level = level;
             this.Size = level.Size;
             Dock = System.Windows.Forms.DockStyle.Fill;
 
@@ -61,7 +61,7 @@ using OgmoEditor.LevelEditors.Actions;
             DrawBounds = new Rectangle(0, 0, Width, Height);
 
             //Load the content
-            content = new Content(GraphicsDevice);
+            Content = new Content(GraphicsDevice);
 
             //Create the spritebatch
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -80,8 +80,8 @@ using OgmoEditor.LevelEditors.Actions;
 
         private void centerCamera()
         {
-            Camera.X = level.Size.Width / 2;
-            Camera.Y = level.Size.Height / 2;
+            Camera.X = Level.Size.Width / 2;
+            Camera.Y = Level.Size.Height / 2;
         }
 
         protected override void Draw()
@@ -89,14 +89,14 @@ using OgmoEditor.LevelEditors.Actions;
             //Draw the background and logo
             GraphicsDevice.SetRenderTarget(null);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone);
-            content.DrawTextureFill(spriteBatch, content.TexBG, DrawBounds);
-            spriteBatch.Draw(content.TexLogo, new Vector2(DrawBounds.Width / 2, DrawBounds.Height / 2), null, Color.White, 0, new Vector2(content.TexLogo.Width/2, content.TexLogo.Height/2), 3, SpriteEffects.None, 0);
+            Content.DrawTextureFill(spriteBatch, Content.TexBG, DrawBounds);
+            spriteBatch.Draw(Content.TexLogo, new Vector2(DrawBounds.Width / 2, DrawBounds.Height / 2), null, Color.White, 0, new Vector2(Content.TexLogo.Width/2, Content.TexLogo.Height/2), 3, SpriteEffects.None, 0);
             spriteBatch.End();
 
             //Draw the level onto the control, positioned and scaled by the camera
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Camera.Matrix);
-            content.DrawRectangle(spriteBatch, 10, 10, level.Size.Width, level.Size.Height, new Color(0, 0, 0, .5f));
-            content.DrawRectangle(spriteBatch, 0, 0, level.Size.Width, level.Size.Height, Ogmo.Project.BackgroundColor.ToXNA());
+            Content.DrawRectangle(spriteBatch, 10, 10, Level.Size.Width, Level.Size.Height, new Color(0, 0, 0, .5f));
+            Content.DrawRectangle(spriteBatch, 0, 0, Level.Size.Width, Level.Size.Height, Ogmo.Project.BackgroundColor.ToXNA());
 
             //Draw the layers
             foreach (var ed in LayerEditors)
@@ -104,7 +104,7 @@ using OgmoEditor.LevelEditors.Actions;
 
             //Draw the grid if zoomed at least 100%
             if (Camera.Zoom >= 1)
-                content.DrawGrid(spriteBatch, LayerEditors[0].Layer.Definition.Grid, level.Size, Ogmo.Project.GridColor.ToXNA() * .5f);
+                Content.DrawGrid(spriteBatch, LayerEditors[0].Layer.Definition.Grid, Level.Size, Ogmo.Project.GridColor.ToXNA() * .5f);
 
             spriteBatch.End();
         }
@@ -123,15 +123,18 @@ using OgmoEditor.LevelEditors.Actions;
                 UndoStack.RemoveFirst();
 
             //If the level is so-far unchanged, change it and store that fact
-            if (!level.Changed)
+            if (!Level.Changed)
             {
                 action.LevelWasChanged = false;
-                level.Changed = true;
+                Level.Changed = true;
             }
 
             //Add the action to the undo stack and then do it!
             UndoStack.AddLast(action);  
             action.Do();
+
+            //Clear the redo stack
+            RedoStack.Clear();
         }
 
         public void Undo()
@@ -146,7 +149,7 @@ using OgmoEditor.LevelEditors.Actions;
                 action.Undo();
 
                 //Roll back level changed flag
-                level.Changed = action.LevelWasChanged;
+                Level.Changed = action.LevelWasChanged;
 
                 //Add it to the redo stack
                 RedoStack.AddLast(action);
@@ -165,11 +168,21 @@ using OgmoEditor.LevelEditors.Actions;
                 action.Do();
 
                 //Mark level as changed
-                level.Changed = true;
+                Level.Changed = true;
 
                 //Add it to the undo stack
                 UndoStack.AddLast(action);
             }
+        }
+
+        public bool CanUndo
+        {
+            get { return UndoStack.Count > 0; }
+        }
+
+        public bool CanRedo
+        {
+            get { return RedoStack.Count > 0; }
         }
 
         /*

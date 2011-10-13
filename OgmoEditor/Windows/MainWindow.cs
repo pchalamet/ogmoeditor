@@ -114,7 +114,8 @@ namespace OgmoEditor.Windows
                 LevelEditors[index].SwitchTo();
 
             //Refresh stuff
-            saveLevelToolStripMenuItem.Enabled =
+            editToolStripMenuItem.Enabled =
+                saveLevelToolStripMenuItem.Enabled =
                 saveLevelAsToolStripMenuItem.Enabled =
                 closeLevelToolStripMenuItem.Enabled =
                 duplicateLevelToolStripMenuItem.Enabled =
@@ -220,6 +221,22 @@ namespace OgmoEditor.Windows
         {
             Ogmo.ToolsWindow.Visible = !Ogmo.ToolsWindow.Visible;
             Focus();
+        }
+
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LevelEditors[Ogmo.CurrentLevelIndex].Undo();
+        }
+
+        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LevelEditors[Ogmo.CurrentLevelIndex].Redo();
+        }
+
+        private void editToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            undoToolStripMenuItem.Enabled = LevelEditors[Ogmo.CurrentLevelIndex].CanUndo;
+            redoToolStripMenuItem.Enabled = LevelEditors[Ogmo.CurrentLevelIndex].CanRedo;
         }
 
     }

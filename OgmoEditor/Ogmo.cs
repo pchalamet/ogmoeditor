@@ -39,7 +39,7 @@ namespace OgmoEditor
 
         static public Project Project { get; private set; }
         static public List<Level> Levels { get; private set; }
-        static public int CurrentLevel { get; private set; }
+        static public int CurrentLevelIndex { get; private set; }
 
         static public event ProjectCallback OnProjectStart;
         static public event ProjectCallback OnProjectClose;
@@ -67,7 +67,7 @@ namespace OgmoEditor
 
             //The levels holder
             Levels = new List<Level>();
-            CurrentLevel = -1;
+            CurrentLevelIndex = -1;
 
             //The windows
             LayersWindow.Show(MainWindow);          
@@ -139,14 +139,25 @@ namespace OgmoEditor
         /*
          *  Level Stuff
          */
+        static public Level CurrentLevel
+        {
+            get
+            {
+                if (CurrentLevelIndex == -1)
+                    return null;
+                else
+                    return Levels[CurrentLevelIndex];
+            }
+        }
+
         static public void SetLevel(int index)
         {
             //Can't set the current level
-            if (index == CurrentLevel)
+            if (index == CurrentLevelIndex)
                 return;
 
             //Make it current
-            CurrentLevel = index;
+            CurrentLevelIndex = index;
 
             Debug.WriteLine("Now Editing Level #" + index);
 
@@ -207,7 +218,7 @@ namespace OgmoEditor
                 OnLevelClosed(level, index);
 
             //Set the current level to another one if that was the current one
-            if (CurrentLevel == index)
+            if (CurrentLevelIndex == index)
             {
                 if (Levels.Count == 0)
                     SetLevel(-1);
