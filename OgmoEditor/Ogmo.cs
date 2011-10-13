@@ -13,6 +13,7 @@ using System.Reflection;
 using OgmoEditor.LevelData;
 using OgmoEditor.Windows;
 using OgmoEditor.LevelData.Layers;
+using OgmoEditor.Definitions.LayerDefinitions;
 
 namespace OgmoEditor
 {
@@ -29,8 +30,8 @@ namespace OgmoEditor
         public const string IMAGE_FILE_FILTER = "PNG image file|*.png|BMP image file|*.bmp";
 
         public delegate void ProjectCallback(Project project);
-        public delegate void LevelCallback(Level level, int index);
-        public delegate void LayerCallback(Layer layer, int index);
+        public delegate void LevelCallback(int index);
+        public delegate void LayerCallback(LayerDefinition layerDefinition, int index);
 
         static public readonly MainWindow MainWindow = new MainWindow();
         static public readonly ToolsWindow ToolsWindow = new ToolsWindow();
@@ -40,6 +41,7 @@ namespace OgmoEditor
         static public Project Project { get; private set; }
         static public List<Level> Levels { get; private set; }
         static public int CurrentLevelIndex { get; private set; }
+        static public int CurrentLayerIndex { get; private set; }
 
         static public event ProjectCallback OnProjectStart;
         static public event ProjectCallback OnProjectClose;
@@ -68,6 +70,7 @@ namespace OgmoEditor
             //The levels holder
             Levels = new List<Level>();
             CurrentLevelIndex = -1;
+            CurrentLayerIndex = 0;
 
             //The windows
             LayersWindow.Show(MainWindow);          
@@ -152,18 +155,17 @@ namespace OgmoEditor
 
         static public void SetLevel(int index)
         {
-            //Can't set the current level
+            //Can't set to what is already the current level
             if (index == CurrentLevelIndex)
                 return;
 
             //Make it current
             CurrentLevelIndex = index;
-
             Debug.WriteLine("Now Editing Level #" + index);
 
             //Call the event
             if (OnLevelChanged != null)
-                OnLevelChanged(index > -1 ? Levels[index] : null, index);
+                OnLevelChanged(index);
         }
         
         static public Level GetLevelByPath(string path)
@@ -204,7 +206,7 @@ namespace OgmoEditor
 
             //Call the event
             if (OnLevelAdded != null)
-                OnLevelAdded(level, Levels.Count - 1);
+                OnLevelAdded(Levels.Count - 1);
         }
 
         static public void CloseLevel(Level level)
@@ -215,7 +217,7 @@ namespace OgmoEditor
 
             //Call the event
             if (OnLevelClosed != null)
-                OnLevelClosed(level, index);
+                OnLevelClosed(index);
 
             //Set the current level to another one if that was the current one
             if (CurrentLevelIndex == index)
@@ -250,5 +252,30 @@ namespace OgmoEditor
         /*
          *  Layer stuff
          */
+        static public Layer CurrentLayer
+        {
+            get
+            {
+                if (CurrentLevel == null)
+                    return null;
+                else
+                    return CurrentLevel.Layers[CurrentLayerIndex];
+            }
+        }
+
+        static public void SetLayer(int index)
+        {
+            //Can't set to what is already the current layer
+            if (index == CurrentLayerIndex)
+                return;
+
+            //Make it current
+            CurrentLayerIndex = index;
+            Debug.WriteLine("Now Editing Layer #" + index);
+
+            //Call the event
+            if (OnLayerChanged != null)
+                OnLayerChanged(Project.LayerDefinitions[index], index);
+        }
     }
 }

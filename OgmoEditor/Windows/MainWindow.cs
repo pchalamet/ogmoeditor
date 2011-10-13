@@ -88,10 +88,10 @@ namespace OgmoEditor.Windows
             Ogmo.LayersWindow.Visible = Ogmo.ToolsWindow.Visible = false;
         }
 
-        private void onLevelAdded(Level level, int index)
+        private void onLevelAdded(int index)
         {
-            TabPage t = new TabPage(level.Name);
-            LevelEditor e = new LevelEditor(level);
+            TabPage t = new TabPage(Ogmo.Levels[index].Name);
+            LevelEditor e = new LevelEditor(Ogmo.Levels[index]);
 
             LevelEditors.Add(e);
             t.Controls.Add(e);
@@ -99,13 +99,13 @@ namespace OgmoEditor.Windows
             MasterTabControl.TabPages.Add(t);
         }
 
-        private void onLevelClosed(Level level, int index)
+        private void onLevelClosed(int index)
         {
             MasterTabControl.TabPages.RemoveAt(index);
             LevelEditors.RemoveAt(index);
         }
 
-        private void onLevelChanged(Level level, int index)
+        private void onLevelChanged(int index)
         {
             SelectedLevelIndex = index;
             
