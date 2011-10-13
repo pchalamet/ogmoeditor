@@ -89,6 +89,8 @@
     <Compile Include="LevelData\Layers\TileLayer.cs" />
     <Compile Include="LevelData\Level.cs" />
     <Compile Include="LevelEditors\Camera.cs" />
+    <Compile Include="LevelEditors\LayerEditors\Actions\Action.cs" />
+    <Compile Include="LevelEditors\LayerEditors\Actions\GridActions\GridAction.cs" />
     <Compile Include="LevelEditors\LayerEditors\GridLayerEditor.cs" />
     <Compile Include="LevelEditors\LayerEditors\LayerEditor.cs" />
     <Compile Include="LevelEditors\LayerEditors\ObjectLayer.cs" />
