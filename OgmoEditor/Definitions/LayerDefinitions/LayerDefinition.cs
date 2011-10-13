@@ -5,6 +5,7 @@ using System.Text;
 using System.Drawing;
 using System.Xml.Serialization;
 using System.Windows.Forms;
+using OgmoEditor.LevelData.Layers;
 
 namespace OgmoEditor.Definitions.LayerDefinitions
 {
@@ -32,7 +33,12 @@ namespace OgmoEditor.Definitions.LayerDefinitions
 
         public virtual UserControl GetEditor()
         {
-            return null;
+            throw new NotImplementedException();
+        }
+
+        public virtual Layer GetInstance()
+        {
+            throw new NotImplementedException();
         }
 
         public virtual LayerDefinition Clone()

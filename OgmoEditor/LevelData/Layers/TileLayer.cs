@@ -3,27 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OgmoEditor.Definitions.LayerDefinitions;
-using Microsoft.Xna.Framework.Graphics;
 using System.Xml;
 
 namespace OgmoEditor.LevelData.Layers
 {
-    public class Layer
+    public class TileLayer : Layer
     {
-        public LayerDefinition Definition { get; private set; }
+        public new TileLayerDefinition Definition { get; private set; }
 
-        public Layer(LayerDefinition definition)
+        public TileLayer(TileLayerDefinition definition)
+            : base(definition)
         {
             Definition = definition;
         }
 
-        public Layer(LayerDefinition definition, XmlElement xml)
+        public TileLayer(TileLayerDefinition definition, XmlElement xml)
             : this(definition)
         {
-            
+            throw new NotImplementedException();
         }
 
-        public virtual XmlElement GetXML(XmlDocument doc)
+        public override XmlElement GetXML(XmlDocument doc)
         {
             throw new NotImplementedException();
         }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using OgmoEditor.ProjectEditors.LayerDefinitionEditors;
+using OgmoEditor.LevelData.Layers;
 
 namespace OgmoEditor.Definitions.LayerDefinitions
 {
@@ -20,6 +21,11 @@ namespace OgmoEditor.Definitions.LayerDefinitions
         public override System.Windows.Forms.UserControl GetEditor()
         {
             return new GridLayerDefinitionEditor(this);
+        }
+
+        public override LevelData.Layers.Layer GetInstance()
+        {
+            return new GridLayer(this);
         }
 
         public override LayerDefinition Clone()

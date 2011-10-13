@@ -83,7 +83,10 @@
     <Compile Include="Definitions\ValueDefinitions\FloatValueDefinition.cs" />
     <Compile Include="Definitions\ValueDefinitions\IntValueDefinition.cs" />
     <Compile Include="Definitions\ValueDefinitions\StringValueDefinition.cs" />
+    <Compile Include="LevelData\Layers\GridLayer.cs" />
     <Compile Include="LevelData\Layers\Layer.cs" />
+    <Compile Include="LevelData\Layers\ObjectLayer.cs" />
+    <Compile Include="LevelData\Layers\TileLayer.cs" />
     <Compile Include="LevelData\Level.cs" />
     <Compile Include="LevelEditors\Camera.cs" />
     <Compile Include="LevelEditors\LevelEditor.cs">
