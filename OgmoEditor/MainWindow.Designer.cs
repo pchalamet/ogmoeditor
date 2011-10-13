@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.MainStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -59,6 +60,7 @@
             this.saveAsImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.masterTabControl = new System.Windows.Forms.TabControl();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.StatusStrip.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -318,6 +320,11 @@
             this.masterTabControl.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.masterTabControl_ControlAdded);
             this.masterTabControl.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.masterTabControl_ControlAdded);
             // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(61, 4);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -372,5 +379,6 @@
         private System.Windows.Forms.ToolStripMenuItem openAllLevelsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem;
         private System.Windows.Forms.TabControl masterTabControl;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
     }
 }

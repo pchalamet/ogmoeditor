@@ -7,7 +7,7 @@ using System.Xml;
 using System.IO;
 using System.Drawing;
 
-namespace OgmoEditor
+namespace OgmoEditor.LevelData
 {
     public class Level
     {

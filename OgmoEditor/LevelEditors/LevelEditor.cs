@@ -14,6 +14,7 @@ using System.Windows.Forms;
 namespace OgmoEditor.LevelEditors
 {
     using Point = System.Drawing.Point;
+    using OgmoEditor.LevelData;
 
     public class LevelEditor : GraphicsDeviceControl
     {

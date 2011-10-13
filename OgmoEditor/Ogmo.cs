@@ -10,6 +10,7 @@ using System.Xml.Serialization;
 using OgmoEditor.ProjectEditors;
 using OgmoEditor.XNA;
 using System.Reflection;
+using OgmoEditor.LevelData;
 
 namespace OgmoEditor
 {

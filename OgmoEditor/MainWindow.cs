@@ -10,6 +10,7 @@ using OgmoEditor.ProjectEditors;
 using OgmoEditor.LevelEditors;
 using OgmoEditor.XNA;
 using System.Diagnostics;
+using OgmoEditor.LevelData;
 
 namespace OgmoEditor
 {
