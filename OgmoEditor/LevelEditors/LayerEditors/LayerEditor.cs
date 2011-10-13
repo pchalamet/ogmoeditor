@@ -11,13 +11,15 @@ using System.Diagnostics;
 namespace OgmoEditor.LevelEditors.LayerEditors
 {
     using Point = System.Drawing.Point;
-using OgmoEditor.LevelEditors.LayerEditors.Actions;  
+using OgmoEditor.LevelEditors.LayerEditors.Actions;
+    using OgmoEditor.LevelEditors.LayerEditors.Tools;  
 
     public class LayerEditor
     {
         public Layer Layer { get; private set; }
         public LevelEditor LevelEditor { get; private set; }
         public List<OgmoAction> ActionStack { get; private set; }
+        public Tool Tool { get; private set; }
 
         public LayerEditor(LevelEditor levelEditor, Layer layer)
         {
@@ -32,49 +34,58 @@ using OgmoEditor.LevelEditors.LayerEditors.Actions;
 
         }
 
-        public virtual void OnKeyDown(Keys key)
+        public void OnKeyDown(Keys key)
         {
-
+            if (Tool != null)
+                Tool.OnKeyDown(key);
         }
 
-        public virtual void OnKeyUp(Keys key)
+        public void OnKeyUp(Keys key)
         {
-
+            if (Tool != null)
+                Tool.OnKeyUp(key);
         }
 
-        public virtual void OnMouseLeftClick(Point location)
+        public void OnMouseLeftClick(Point location)
         {
- 
+            if (Tool != null)
+                Tool.OnMouseLeftClick(location);
         }
 
-        public virtual void OnMouseLeftDown(Point location)
+        public void OnMouseLeftDown(Point location)
         {
-            
+            if (Tool != null)
+                Tool.OnMouseLeftDown(location);
         }
 
-        public virtual void OnMouseLeftUp(Point location)
+        public void OnMouseLeftUp(Point location)
         {
-
+            if (Tool != null)
+                Tool.OnMouseLeftUp(location);
         }
 
-        public virtual void OnMouseRightClick(Point location)
+        public void OnMouseRightClick(Point location)
         {
-
+            if (Tool != null)
+                Tool.OnMouseRightClick(location);
         }
 
-        public virtual void OnMouseRightDown(Point location)
+        public void OnMouseRightDown(Point location)
         {
-
+            if (Tool != null)
+                Tool.OnMouseRightDown(location);
         }
 
-        public virtual void OnMouseRightUp(Point location)
+        public void OnMouseRightUp(Point location)
         {
-
+            if (Tool != null)
+                Tool.OnMouseRightUp(location);
         }
 
-        public virtual void OnMouseMove(Point location)
+        public void OnMouseMove(Point location)
         {
-
+            if (Tool != null)
+                Tool.OnMouseMove(location);
         }
     }
 }
