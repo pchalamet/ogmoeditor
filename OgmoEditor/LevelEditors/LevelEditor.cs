@@ -223,8 +223,12 @@ using OgmoEditor.LevelEditors.LayerEditors.Actions;
                 lastMousePoint = e.Location;
             }
 
+            //Update the mouse coord display
+            Point coords = Camera.ScreenToEditor(e.Location);
+            Ogmo.MainWindow.MouseCoordinatesLabel.Text = "( " + coords.X.ToString() + ", " + coords.Y.ToString() + " )";
+
             //Call the layer event
-            LayerEditors[CurrentLayer].OnMouseMove(Camera.ScreenToEditor(e.Location));
+            LayerEditors[CurrentLayer].OnMouseMove(Camera.ScreenToEditor(coords));
         }
 
         private void onMouseWheel(object sender, MouseEventArgs e)

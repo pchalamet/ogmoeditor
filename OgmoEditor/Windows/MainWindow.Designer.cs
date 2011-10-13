@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.MainStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.mouseCoordinatesLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.MouseCoordinatesLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.visitWebsiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,10 +59,10 @@
             this.duplicateLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.masterTabControl = new System.Windows.Forms.TabControl();
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.layersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.masterTabControl = new System.Windows.Forms.TabControl();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.StatusStrip.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -71,7 +71,7 @@
             // 
             this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MainStatusLabel,
-            this.mouseCoordinatesLabel});
+            this.MouseCoordinatesLabel});
             this.StatusStrip.Location = new System.Drawing.Point(0, 540);
             this.StatusStrip.Name = "StatusStrip";
             this.StatusStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -84,12 +84,11 @@
             this.MainStatusLabel.Name = "MainStatusLabel";
             this.MainStatusLabel.Size = new System.Drawing.Size(0, 17);
             // 
-            // mouseCoordinatesLabel
+            // MouseCoordinatesLabel
             // 
-            this.mouseCoordinatesLabel.Name = "mouseCoordinatesLabel";
-            this.mouseCoordinatesLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.mouseCoordinatesLabel.Size = new System.Drawing.Size(33, 17);
-            this.mouseCoordinatesLabel.Text = "(0, 0)";
+            this.MouseCoordinatesLabel.Name = "MouseCoordinatesLabel";
+            this.MouseCoordinatesLabel.Size = new System.Drawing.Size(33, 17);
+            this.MouseCoordinatesLabel.Text = "(0, 0)";
             // 
             // MenuStrip
             // 
@@ -311,6 +310,22 @@
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
             // 
+            // layersToolStripMenuItem
+            // 
+            this.layersToolStripMenuItem.Name = "layersToolStripMenuItem";
+            this.layersToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.layersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.layersToolStripMenuItem.Text = "Layers";
+            this.layersToolStripMenuItem.Click += new System.EventHandler(this.layersToolStripMenuItem_Click);
+            // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            this.toolsToolStripMenuItem.Click += new System.EventHandler(this.toolsToolStripMenuItem_Click);
+            // 
             // masterTabControl
             // 
             this.masterTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -328,22 +343,6 @@
             // 
             this.contextMenuStrip.Name = "contextMenuStrip";
             this.contextMenuStrip.Size = new System.Drawing.Size(61, 4);
-            // 
-            // layersToolStripMenuItem
-            // 
-            this.layersToolStripMenuItem.Name = "layersToolStripMenuItem";
-            this.layersToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.layersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.layersToolStripMenuItem.Text = "Layers";
-            this.layersToolStripMenuItem.Click += new System.EventHandler(this.layersToolStripMenuItem_Click);
-            // 
-            // toolsToolStripMenuItem
-            // 
-            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.toolsToolStripMenuItem.Text = "Tools";
-            this.toolsToolStripMenuItem.Click += new System.EventHandler(this.toolsToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -394,7 +393,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel MainStatusLabel;
-        private System.Windows.Forms.ToolStripStatusLabel mouseCoordinatesLabel;
         private System.Windows.Forms.ToolStripMenuItem editProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openAllLevelsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem;
@@ -402,5 +400,6 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem layersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        public System.Windows.Forms.ToolStripStatusLabel MouseCoordinatesLabel;
     }
 }
