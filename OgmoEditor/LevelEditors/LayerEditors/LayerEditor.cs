@@ -18,15 +18,12 @@ using OgmoEditor.LevelEditors.LayerEditors.Actions;
     {
         public Layer Layer { get; private set; }
         public LevelEditor LevelEditor { get; private set; }
-        public List<OgmoAction> ActionStack { get; private set; }
         public Tool Tool { get; private set; }
 
         public LayerEditor(LevelEditor levelEditor, Layer layer)
         {
             LevelEditor = levelEditor;
             Layer = layer;
-
-            ActionStack = new List<OgmoAction>();
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)

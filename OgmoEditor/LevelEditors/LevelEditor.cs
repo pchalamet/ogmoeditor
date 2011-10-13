@@ -16,9 +16,12 @@ using OgmoEditor.LevelEditors.LayerEditors;
 namespace OgmoEditor.LevelEditors
 {
     using Point = System.Drawing.Point;
+using OgmoEditor.LevelEditors.LayerEditors.Actions;
 
     public class LevelEditor : GraphicsDeviceControl
     {
+        private const int UNDO_LIMIT = 20;
+
         private Level level;
         private Content content;
         private SpriteBatch spriteBatch;
@@ -30,11 +33,18 @@ namespace OgmoEditor.LevelEditors
         public Rectangle DrawBounds { get; private set; }
         public int CurrentLayer;
 
+        public LinkedList<OgmoAction> UndoStack { get; private set; }
+        public LinkedList<OgmoAction> RedoStack { get; private set; }
+
         public LevelEditor(Level level)
         {
             this.level = level;
             this.Size = level.Size;
             Dock = System.Windows.Forms.DockStyle.Fill;
+
+            //Create the undo/redo stacks
+            UndoStack = new LinkedList<OgmoAction>();
+            RedoStack = new LinkedList<OgmoAction>();
 
             //Create the layer editors
             LayerEditors = new List<LayerEditor>();
@@ -97,6 +107,47 @@ namespace OgmoEditor.LevelEditors
                 content.DrawGrid(spriteBatch, LayerEditors[0].Layer.Definition.Grid, level.Size, Ogmo.Project.GridColor.ToXNA() * .5f);
 
             spriteBatch.End();
+        }
+
+        public void Perform(OgmoAction action)
+        {
+            if (UndoStack.Count == UNDO_LIMIT)
+                UndoStack.RemoveFirst();
+
+            UndoStack.AddLast(action);
+            action.Do();
+        }
+
+        public void Undo()
+        {
+            if (UndoStack.Count > 0)
+            {
+                //Remove it
+                OgmoAction action = UndoStack.Last.Value;
+                UndoStack.RemoveLast();
+
+                //Undo it
+                action.Undo();
+
+                //Add it to the redo stack
+                RedoStack.AddLast(action);
+            }
+        }
+
+        public void Redo()
+        {
+            if (RedoStack.Count > 0)
+            {
+                //Remove it
+                OgmoAction action = RedoStack.Last.Value;
+                RedoStack.RemoveLast();
+
+                //Redo it
+                action.Do();
+
+                //Add it to the undo stack
+                UndoStack.AddLast(action);
+            }
         }
 
         /*
