@@ -13,12 +13,16 @@ using System.Windows.Forms;
 
 namespace OgmoEditor.LevelEditors
 {
+    using Point = System.Drawing.Point;
+
     public class LevelEditor : GraphicsDeviceControl
     {
         private Level level;
         private Content content;
         private SpriteBatch spriteBatch;
         private RenderTarget2D levelCanvas;
+        private bool mouseMoveMode;
+        private Point lastMousePoint;
 
         public Camera Camera { get; private set; }
         public Rectangle DrawBounds { get; private set; }
@@ -51,6 +55,8 @@ namespace OgmoEditor.LevelEditors
             Application.Idle += delegate { Invalidate(); };
             this.Resize += onResize;
             this.MouseClick += onMouseClick;
+            this.MouseDown += onMouseDown;
+            this.MouseUp += onMouseUp;
             this.MouseMove += onMouseMove;
             this.MouseWheel += onMouseWheel;
         }
@@ -105,9 +111,31 @@ namespace OgmoEditor.LevelEditors
             
         }
 
+        private void onMouseDown(object sender, MouseEventArgs e)
+        {
+            //Enter mouse move mode
+            if (e.Button == System.Windows.Forms.MouseButtons.Middle)
+            {
+                mouseMoveMode = true;
+                lastMousePoint = e.Location;
+            }
+        }
+
+        private void onMouseUp(object sender, MouseEventArgs e)
+        {
+            //Exit mouse move mode
+            if (e.Button == System.Windows.Forms.MouseButtons.Middle)
+                mouseMoveMode = false;
+        }
+
         private void onMouseMove(object sender, MouseEventArgs e)
         {
-
+            if (mouseMoveMode)
+            {
+                Camera.X -= (e.Location.X - lastMousePoint.X) / Camera.Zoom;
+                Camera.Y -= (e.Location.Y - lastMousePoint.Y) / Camera.Zoom;
+                lastMousePoint = e.Location;
+            }
         }
 
         private void onMouseWheel(object sender, MouseEventArgs e)

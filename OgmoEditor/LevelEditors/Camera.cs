@@ -8,7 +8,7 @@ namespace OgmoEditor.LevelEditors
 {
     public class Camera
     {
-        static private readonly float[] ZOOMS = new float[] { .25f, .33f, .5f, .66f, 1, 1.5f, 2, 3 };
+        static private readonly float[] ZOOMS = new float[] { .25f, .33f, .5f, .66f, 1, 1.5f, 2 };
 
         private Matrix matrix;
         private Matrix inverse;
