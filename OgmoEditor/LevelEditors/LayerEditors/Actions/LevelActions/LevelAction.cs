@@ -7,11 +7,11 @@ namespace OgmoEditor.LevelEditors.LayerEditors.Actions.LevelActions
 {
     public abstract class LevelAction : OgmoAction
     {
-        public new LevelEditor Level { get; private set; }
+        public LevelEditor LevelEditor { get; private set; }
 
-        public LevelAction(LevelEditor level)
+        public LevelAction(LevelEditor levelEditor)
         {
-            Level = level;
+            LevelEditor = levelEditor;
         }
     }
 }

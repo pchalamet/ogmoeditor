@@ -63,9 +63,12 @@ namespace OgmoEditor.Windows
             editProjectToolStripMenuItem.Enabled = true;
             saveProjectToolStripMenuItem.Enabled = true;
             saveProjectAsToolStripMenuItem.Enabled = true;
-            newLevelToolStripMenuItem.Enabled = true;
-            openLevelToolStripMenuItem.Enabled = true;
-            openAllLevelsToolStripMenuItem.Enabled = true;
+
+            levelToolStripMenuItem.Enabled = true;
+            viewToolStripMenuItem.Enabled = true;
+
+            //Enable windows
+            Ogmo.LayersWindow.Visible = Ogmo.ToolsWindow.Visible = true;
         }
 
         private void onProjectClose(Project project)
@@ -78,15 +81,11 @@ namespace OgmoEditor.Windows
             saveProjectToolStripMenuItem.Enabled = false;
             saveProjectAsToolStripMenuItem.Enabled = false;
 
-            newLevelToolStripMenuItem.Enabled = false;
-            openLevelToolStripMenuItem.Enabled = false;
-            openAllLevelsToolStripMenuItem.Enabled = false;
-            saveLevelToolStripMenuItem.Enabled = false;
-            saveLevelAsToolStripMenuItem.Enabled = false;
-            closeLevelToolStripMenuItem.Enabled = false;
-            duplicateLevelToolStripMenuItem.Enabled = false;
-            closeOtherLevelsToolStripMenuItem.Enabled = false;
-            saveAsImageToolStripMenuItem.Enabled = false;
+            levelToolStripMenuItem.Enabled = false;
+            viewToolStripMenuItem.Enabled = false;
+
+            //Disable windows
+            Ogmo.LayersWindow.Visible = Ogmo.ToolsWindow.Visible = false;
         }
 
         private void onLevelAdded(Level level)
@@ -206,6 +205,18 @@ namespace OgmoEditor.Windows
         private void openAllLevelsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Ogmo.OpenAllLevels();
+        }
+
+        private void layersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ogmo.LayersWindow.Visible = !Ogmo.LayersWindow.Visible;
+            Focus();
+        }
+
+        private void toolsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ogmo.ToolsWindow.Visible = !Ogmo.ToolsWindow.Visible;
+            Focus();
         }
 
     }

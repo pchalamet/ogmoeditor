@@ -61,6 +61,8 @@
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.masterTabControl = new System.Windows.Forms.TabControl();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.layersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StatusStrip.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -216,13 +218,13 @@
             this.closeOtherLevelsToolStripMenuItem,
             this.duplicateLevelToolStripMenuItem,
             this.saveAsImageToolStripMenuItem});
+            this.levelToolStripMenuItem.Enabled = false;
             this.levelToolStripMenuItem.Name = "levelToolStripMenuItem";
             this.levelToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.levelToolStripMenuItem.Text = "Level";
             // 
             // newLevelToolStripMenuItem
             // 
-            this.newLevelToolStripMenuItem.Enabled = false;
             this.newLevelToolStripMenuItem.Name = "newLevelToolStripMenuItem";
             this.newLevelToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.newLevelToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
@@ -231,7 +233,6 @@
             // 
             // openLevelToolStripMenuItem
             // 
-            this.openLevelToolStripMenuItem.Enabled = false;
             this.openLevelToolStripMenuItem.Name = "openLevelToolStripMenuItem";
             this.openLevelToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.openLevelToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
@@ -273,7 +274,6 @@
             // 
             // openAllLevelsToolStripMenuItem
             // 
-            this.openAllLevelsToolStripMenuItem.Enabled = false;
             this.openAllLevelsToolStripMenuItem.Name = "openAllLevelsToolStripMenuItem";
             this.openAllLevelsToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.openAllLevelsToolStripMenuItem.Text = "Open All Levels";
@@ -303,6 +303,10 @@
             // 
             // viewToolStripMenuItem
             // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.layersToolStripMenuItem,
+            this.toolsToolStripMenuItem});
+            this.viewToolStripMenuItem.Enabled = false;
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
@@ -324,6 +328,22 @@
             // 
             this.contextMenuStrip.Name = "contextMenuStrip";
             this.contextMenuStrip.Size = new System.Drawing.Size(61, 4);
+            // 
+            // layersToolStripMenuItem
+            // 
+            this.layersToolStripMenuItem.Name = "layersToolStripMenuItem";
+            this.layersToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.layersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.layersToolStripMenuItem.Text = "Layers";
+            this.layersToolStripMenuItem.Click += new System.EventHandler(this.layersToolStripMenuItem_Click);
+            // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            this.toolsToolStripMenuItem.Click += new System.EventHandler(this.toolsToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -380,5 +400,7 @@
         private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem;
         private System.Windows.Forms.TabControl masterTabControl;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem layersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
     }
 }

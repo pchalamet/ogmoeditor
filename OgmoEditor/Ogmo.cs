@@ -31,6 +31,8 @@ namespace OgmoEditor
         public delegate void LevelCallback(Level level);
 
         static public readonly MainWindow MainWindow = new MainWindow();
+        static public readonly ToolsWindow ToolsWindow = new ToolsWindow();
+        static public readonly LayersWindow LayersWindow = new LayersWindow();
         static public string ProgramDirectory { get; private set; }
 
         static public Project Project { get; private set; }
@@ -60,6 +62,11 @@ namespace OgmoEditor
 
             //The levels holder
             Levels = new List<Level>();
+
+            //The windows
+            LayersWindow.Show(MainWindow);          
+            ToolsWindow.Show(MainWindow);
+            LayersWindow.Visible = ToolsWindow.Visible = false;
         }
 
         /*
