@@ -60,5 +60,10 @@ namespace OgmoEditor.LevelEditors.LayerEditors.Tools
         {
 
         }
+
+        public LevelEditor LevelEditor
+        {
+            get { return Ogmo.MainWindow.LevelEditors[Ogmo.CurrentLevelIndex]; }
+        }
     }
 }

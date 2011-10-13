@@ -8,12 +8,15 @@ namespace OgmoEditor.LevelEditors.LayerEditors.Tools.GridTools
 {
     public abstract class GridTool : Tool
     {
-        public GridLayerEditor GridLayerEditor { get; private set; }
-
-        public GridTool(string name, GridLayerEditor gridLayerEditor)
+        public GridTool(string name)
             : base(name)
         {
-            GridLayerEditor = gridLayerEditor;
+
+        }
+
+        public GridLayerEditor LayerEditor
+        {
+            get { return (GridLayerEditor)LevelEditor.LayerEditors[Ogmo.CurrentLayerIndex]; }
         }
     }
 }

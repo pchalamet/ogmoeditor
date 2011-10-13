@@ -14,6 +14,7 @@ using OgmoEditor.LevelData;
 using OgmoEditor.Windows;
 using OgmoEditor.LevelData.Layers;
 using OgmoEditor.Definitions.LayerDefinitions;
+using OgmoEditor.LevelEditors.LayerEditors.Tools;
 
 namespace OgmoEditor
 {
@@ -42,6 +43,7 @@ namespace OgmoEditor
         static public List<Level> Levels { get; private set; }
         static public int CurrentLevelIndex { get; private set; }
         static public int CurrentLayerIndex { get; private set; }
+        static public Tool CurrentTool { get; private set; }
 
         static public event ProjectCallback OnProjectStart;
         static public event ProjectCallback OnProjectClose;
@@ -130,6 +132,10 @@ namespace OgmoEditor
 
             //Remove it!
             Project = null;
+
+            //Tool and layer selection can be cleared now
+            CurrentLayerIndex = -1;
+            CurrentTool = null;
         }
 
         static public void EditProject(bool newProject = false)
@@ -276,6 +282,27 @@ namespace OgmoEditor
             //Call the event
             if (OnLayerChanged != null)
                 OnLayerChanged(Project.LayerDefinitions[index], index);
+        }
+
+        /*
+         *  Tool stuff
+         */
+        static public Type CurrentToolType
+        {
+            get 
+            {
+                if (CurrentTool == null)
+                    return null;
+                else
+                    return CurrentTool.GetType(); 
+            }
+        }
+
+        static public void SetTool(Type toolType)
+        {
+            //If the current tool is already of that type, don't bother
+            if (CurrentToolType == toolType)
+                return;
         }
     }
 }

@@ -18,7 +18,6 @@ namespace OgmoEditor.LevelEditors.LayerEditors
     {
         public Layer Layer { get; private set; }
         public LevelEditor LevelEditor { get; private set; }
-        public Tool Tool { get; protected set; }
 
         public LayerEditor(LevelEditor levelEditor, Layer layer)
         {
@@ -33,56 +32,56 @@ namespace OgmoEditor.LevelEditors.LayerEditors
 
         public void OnKeyDown(Keys key)
         {
-            if (Tool != null)
-                Tool.OnKeyDown(key);
+            if (Ogmo.CurrentTool != null)
+                Ogmo.CurrentTool.OnKeyDown(key);
         }
 
         public void OnKeyUp(Keys key)
         {
-            if (Tool != null)
-                Tool.OnKeyUp(key);
+            if (Ogmo.CurrentTool != null)
+                Ogmo.CurrentTool.OnKeyUp(key);
         }
 
         public void OnMouseLeftClick(Point location)
         {
-            if (Tool != null)
-                Tool.OnMouseLeftClick(location);
+            if (Ogmo.CurrentTool != null)
+                Ogmo.CurrentTool.OnMouseLeftClick(location);
         }
 
         public void OnMouseLeftDown(Point location)
         {
-            if (Tool != null)
-                Tool.OnMouseLeftDown(location);
+            if (Ogmo.CurrentTool != null)
+                Ogmo.CurrentTool.OnMouseLeftDown(location);
         }
 
         public void OnMouseLeftUp(Point location)
         {
-            if (Tool != null)
-                Tool.OnMouseLeftUp(location);
+            if (Ogmo.CurrentTool != null)
+                Ogmo.CurrentTool.OnMouseLeftUp(location);
         }
 
         public void OnMouseRightClick(Point location)
         {
-            if (Tool != null)
-                Tool.OnMouseRightClick(location);
+            if (Ogmo.CurrentTool != null)
+                Ogmo.CurrentTool.OnMouseRightClick(location);
         }
 
         public void OnMouseRightDown(Point location)
         {
-            if (Tool != null)
-                Tool.OnMouseRightDown(location);
+            if (Ogmo.CurrentTool != null)
+                Ogmo.CurrentTool.OnMouseRightDown(location);
         }
 
         public void OnMouseRightUp(Point location)
         {
-            if (Tool != null)
-                Tool.OnMouseRightUp(location);
+            if (Ogmo.CurrentTool != null)
+                Ogmo.CurrentTool.OnMouseRightUp(location);
         }
 
         public void OnMouseMove(Point location)
         {
-            if (Tool != null)
-                Tool.OnMouseMove(location);
+            if (Ogmo.CurrentTool != null)
+                Ogmo.CurrentTool.OnMouseMove(location);
         }
     }
 }

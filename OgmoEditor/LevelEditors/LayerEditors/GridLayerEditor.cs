@@ -15,8 +15,6 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             : base(levelEditor, layer)
         {
             Layer = layer;
-
-            Tool = new GridPencilTool(this);
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)

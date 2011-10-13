@@ -221,6 +221,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Definitions\ValueDefinitions\ValueDefinition.cs" />
+    <Compile Include="Windows\ToolButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Windows\ToolButton.Designer.cs">
+      <DependentUpon>ToolButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ToolsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -293,6 +299,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Windows\ToolButton.resx">
+      <DependentUpon>ToolButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\ToolsWindow.resx">
       <DependentUpon>ToolsWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -331,6 +340,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\tools\pencil.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

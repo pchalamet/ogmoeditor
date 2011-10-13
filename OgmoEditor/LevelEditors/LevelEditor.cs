@@ -31,7 +31,6 @@ using OgmoEditor.LevelEditors.Actions;
         public Camera Camera { get; private set; }
         public List<LayerEditor> LayerEditors { get; private set; }
         public Rectangle DrawBounds { get; private set; }
-        public int CurrentLayer;
 
         public LinkedList<OgmoAction> UndoStack { get; private set; }
         public LinkedList<OgmoAction> RedoStack { get; private set; }
@@ -198,31 +197,31 @@ using OgmoEditor.LevelEditors.Actions;
         private void onKeyDown(object sender, KeyEventArgs e)
         {
             //Call the layer event
-            LayerEditors[CurrentLayer].OnKeyDown(e.KeyCode);
+            LayerEditors[Ogmo.CurrentLayerIndex].OnKeyDown(e.KeyCode);
         }
 
         private void onKeyUp(object sender, KeyEventArgs e)
         {
             //Call the layer event
-            LayerEditors[CurrentLayer].OnKeyUp(e.KeyCode);
+            LayerEditors[Ogmo.CurrentLayerIndex].OnKeyUp(e.KeyCode);
         }
 
         private void onMouseClick(object sender, MouseEventArgs e)
         {
             //Call the layer event
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
-                LayerEditors[CurrentLayer].OnMouseLeftClick(Camera.ScreenToEditor(e.Location));
+                LayerEditors[Ogmo.CurrentLayerIndex].OnMouseLeftClick(Camera.ScreenToEditor(e.Location));
             else if (e.Button == System.Windows.Forms.MouseButtons.Right)
-                LayerEditors[CurrentLayer].OnMouseRightClick(Camera.ScreenToEditor(e.Location));
+                LayerEditors[Ogmo.CurrentLayerIndex].OnMouseRightClick(Camera.ScreenToEditor(e.Location));
         }
 
         private void onMouseDown(object sender, MouseEventArgs e)
         {
             //Call the layer event
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
-                LayerEditors[CurrentLayer].OnMouseLeftDown(Camera.ScreenToEditor(e.Location));
+                LayerEditors[Ogmo.CurrentLayerIndex].OnMouseLeftDown(Camera.ScreenToEditor(e.Location));
             else if (e.Button == System.Windows.Forms.MouseButtons.Right)
-                LayerEditors[CurrentLayer].OnMouseRightDown(Camera.ScreenToEditor(e.Location));
+                LayerEditors[Ogmo.CurrentLayerIndex].OnMouseRightDown(Camera.ScreenToEditor(e.Location));
             else if (e.Button == System.Windows.Forms.MouseButtons.Middle)
             {
                 //Enter mouse move mode
@@ -235,9 +234,9 @@ using OgmoEditor.LevelEditors.Actions;
         {
             //Call the layer event
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
-                LayerEditors[CurrentLayer].OnMouseLeftUp(Camera.ScreenToEditor(e.Location));
+                LayerEditors[Ogmo.CurrentLayerIndex].OnMouseLeftUp(Camera.ScreenToEditor(e.Location));
             else if (e.Button == System.Windows.Forms.MouseButtons.Right)
-                LayerEditors[CurrentLayer].OnMouseRightUp(Camera.ScreenToEditor(e.Location));
+                LayerEditors[Ogmo.CurrentLayerIndex].OnMouseRightUp(Camera.ScreenToEditor(e.Location));
             else if (e.Button == System.Windows.Forms.MouseButtons.Middle)
             {
                 //Exit mouse move mode
@@ -260,7 +259,7 @@ using OgmoEditor.LevelEditors.Actions;
             Ogmo.MainWindow.MouseCoordinatesLabel.Text = "( " + coords.X.ToString() + ", " + coords.Y.ToString() + " )";
 
             //Call the layer event
-            LayerEditors[CurrentLayer].OnMouseMove(Camera.ScreenToEditor(coords));
+            LayerEditors[Ogmo.CurrentLayerIndex].OnMouseMove(Camera.ScreenToEditor(coords));
         }
 
         private void onMouseWheel(object sender, MouseEventArgs e)

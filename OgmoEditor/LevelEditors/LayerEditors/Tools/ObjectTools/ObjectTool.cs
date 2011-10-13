@@ -8,12 +8,15 @@ namespace OgmoEditor.LevelEditors.LayerEditors.Tools.ObjectTools
 {
     public abstract class ObjectTool : Tool
     {
-        public ObjectLayerEditor ObjectLayerEditor { get; private set; }
-
-        public ObjectTool(string name, ObjectLayerEditor objectLayerEditor)
+        public ObjectTool(string name)
             : base(name)
         {
-            ObjectLayerEditor = objectLayerEditor;
+
+        }
+
+        public ObjectLayerEditor LayerEditor
+        {
+            get { return (ObjectLayerEditor)LevelEditor.LayerEditors[Ogmo.CurrentLayerIndex]; }
         }
     }
 }
