@@ -18,13 +18,12 @@ namespace OgmoEditor.LevelData.Layers
             Definition = definition;
         }
 
-        public GridLayer(GridLayerDefinition definition, XmlElement xml)
-            : this(definition)
+        public override XmlElement GetXML(XmlDocument doc)
         {
             throw new NotImplementedException();
         }
 
-        public override XmlElement GetXML(XmlDocument doc)
+        public override void SetXML(XmlElement xml)
         {
             throw new NotImplementedException();
         }

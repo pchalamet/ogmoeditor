@@ -15,6 +15,7 @@ namespace OgmoEditor.LevelEditors
 {
     using Point = System.Drawing.Point;
     using OgmoEditor.LevelData;
+using OgmoEditor.LevelEditors.LayerEditors;
 
     public class LevelEditor : GraphicsDeviceControl
     {
@@ -25,15 +26,19 @@ namespace OgmoEditor.LevelEditors
         private Point lastMousePoint;
 
         public Camera Camera { get; private set; }
+        public List<LayerEditor> LayerEditors { get; private set; }
         public Rectangle DrawBounds { get; private set; }
 
         public LevelEditor(Level level)
         {
             this.level = level;
             this.Size = level.Size;
-
-            //Setup
             Dock = System.Windows.Forms.DockStyle.Fill;
+
+            //Create the layer editors
+            LayerEditors = new List<LayerEditor>();
+            foreach (var l in level.Layers)
+                LayerEditors.Add(l.GetEditor(this));
         }
 
         protected override void Initialize()
@@ -79,6 +84,11 @@ namespace OgmoEditor.LevelEditors
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Camera.Matrix);
             content.DrawRectangle(spriteBatch, 10, 10, level.Size.Width, level.Size.Height, new Color(0, 0, 0, .5f));
             content.DrawRectangle(spriteBatch, 0, 0, level.Size.Width, level.Size.Height, Ogmo.Project.BackgroundColor.toXNA());
+
+            //Draw the layers
+            foreach (var ed in LayerEditors)
+                ed.Draw(spriteBatch);
+
             spriteBatch.End();
         }
 

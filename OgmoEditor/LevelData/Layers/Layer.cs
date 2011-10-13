@@ -19,13 +19,12 @@ namespace OgmoEditor.LevelData.Layers
             Definition = definition;
         }
 
-        public Layer(LayerDefinition definition, XmlElement xml)
-            : this(definition)
+        public virtual XmlElement GetXML(XmlDocument doc)
         {
-            
+            throw new NotImplementedException();
         }
 
-        public virtual XmlElement GetXML(XmlDocument doc)
+        public virtual void SetXML(XmlElement xml)
         {
             throw new NotImplementedException();
         }

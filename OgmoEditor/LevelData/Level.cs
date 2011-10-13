@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.IO;
 using System.Drawing;
+using OgmoEditor.LevelData.Layers;
 
 namespace OgmoEditor.LevelData
 {
@@ -18,10 +19,16 @@ namespace OgmoEditor.LevelData
 
         //Actual parameters to be edited/exported
         public Size Size { get; private set; }
+        public List<Layer> Layers { get; private set; }
 
         public Level(Project project, string filename)
         {
             this.project = project;
+
+            //Initialize layers
+            Layers = new List<Layer>();
+            foreach (var def in project.LayerDefinitions)
+                Layers.Add(def.GetInstance());
 
             if (File.Exists(filename))
             {
