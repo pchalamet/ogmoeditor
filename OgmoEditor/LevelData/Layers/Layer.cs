@@ -5,6 +5,8 @@ using System.Text;
 using OgmoEditor.Definitions.LayerDefinitions;
 using Microsoft.Xna.Framework.Graphics;
 using System.Xml;
+using OgmoEditor.LevelEditors.LayerEditors;
+using OgmoEditor.LevelEditors;
 
 namespace OgmoEditor.LevelData.Layers
 {
@@ -24,6 +26,11 @@ namespace OgmoEditor.LevelData.Layers
         }
 
         public virtual XmlElement GetXML(XmlDocument doc)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual LayerEditor GetEditor(LevelEditor editor)
         {
             throw new NotImplementedException();
         }

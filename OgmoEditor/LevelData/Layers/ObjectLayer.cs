@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using OgmoEditor.Definitions.LayerDefinitions;
 using System.Xml;
+using OgmoEditor.LevelEditors.LayerEditors;
 
 namespace OgmoEditor.LevelData.Layers
 {
@@ -26,6 +27,11 @@ namespace OgmoEditor.LevelData.Layers
         public override XmlElement GetXML(XmlDocument doc)
         {
             throw new NotImplementedException();
+        }
+
+        public override LayerEditor GetEditor(LevelEditors.LevelEditor editor)
+        {
+            return new ObjectLayerEditor(editor, this);
         }
     }
 }

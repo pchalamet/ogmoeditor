@@ -89,6 +89,10 @@
     <Compile Include="LevelData\Layers\TileLayer.cs" />
     <Compile Include="LevelData\Level.cs" />
     <Compile Include="LevelEditors\Camera.cs" />
+    <Compile Include="LevelEditors\LayerEditors\GridLayerEditor.cs" />
+    <Compile Include="LevelEditors\LayerEditors\LayerEditor.cs" />
+    <Compile Include="LevelEditors\LayerEditors\ObjectLayer.cs" />
+    <Compile Include="LevelEditors\LayerEditors\TileLayerEditor.cs" />
     <Compile Include="LevelEditors\LevelEditor.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -300,9 +304,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="LevelEditors\LayerEditors\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
