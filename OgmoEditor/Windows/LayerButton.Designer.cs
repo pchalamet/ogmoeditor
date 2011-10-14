@@ -46,11 +46,15 @@
             // 
             this.layerNameLabel.BackColor = System.Drawing.SystemColors.Control;
             this.layerNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layerNameLabel.Location = new System.Drawing.Point(30, 6);
+            this.layerNameLabel.Location = new System.Drawing.Point(28, 2);
             this.layerNameLabel.Name = "layerNameLabel";
-            this.layerNameLabel.Size = new System.Drawing.Size(68, 14);
+            this.layerNameLabel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
+            this.layerNameLabel.Size = new System.Drawing.Size(72, 20);
             this.layerNameLabel.TabIndex = 1;
             this.layerNameLabel.Text = "Name";
+            this.layerNameLabel.Click += new System.EventHandler(this.layerNameLabel_Click);
+            this.layerNameLabel.MouseEnter += new System.EventHandler(this.layerNameLabel_MouseEnter);
+            this.layerNameLabel.MouseLeave += new System.EventHandler(this.layerNameLabel_MouseLeave);
             // 
             // visibleCheckBox
             // 

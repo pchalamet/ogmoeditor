@@ -30,6 +30,8 @@ namespace OgmoEditor
         public const string NEW_LAYER_NAME = "NewLayer";
         public const string IMAGE_FILE_FILTER = "PNG image file|*.png|BMP image file|*.bmp";
 
+        public enum FinishProjectEditAction { None, CloseProject, SaveProject };
+
         public delegate void ProjectCallback(Project project);
         public delegate void LevelCallback(int index);
         public delegate void LayerCallback(LayerDefinition layerDefinition, int index);
@@ -48,6 +50,7 @@ namespace OgmoEditor
 
         static public event ProjectCallback OnProjectStart;
         static public event ProjectCallback OnProjectClose;
+        static public event ProjectCallback OnProjectEdited;
         static public event LevelCallback OnLevelAdded;
         static public event LevelCallback OnLevelClosed;
         static public event LevelCallback OnLevelChanged;
@@ -74,7 +77,7 @@ namespace OgmoEditor
             //The levels holder
             Levels = new List<Level>();
             CurrentLevelIndex = -1;
-            CurrentLayerIndex = 0;
+            CurrentLayerIndex = -1;
 
             //The windows
             LayersWindow.Show(MainWindow);          
@@ -120,11 +123,12 @@ namespace OgmoEditor
         static public void StartProject(Project project)
         {
             Project = project;
-            CurrentLayerIndex = 0;
 
             //Call the added event
             if (OnProjectStart != null)
                 OnProjectStart(project);
+
+            SetLayer(0);
         }
 
         static public void CloseProject()
@@ -141,11 +145,34 @@ namespace OgmoEditor
             CurrentTool = null;
         }
 
-        static public void EditProject(bool newProject = false)
+        static public void EditProject(bool newProject)
         {
-            MainWindow.Enabled = false;
+            //Disable the main window
+            MainWindow.DisableEditing();
+
+            //Show the project editor
             ProjectEditor editor = new ProjectEditor(Ogmo.Project, newProject);
             editor.Show(MainWindow);
+        }
+
+        static public void FinishProjectEdit(FinishProjectEditAction action = FinishProjectEditAction.None)
+        {
+            //Re-activate the main window
+            MainWindow.EnableEditing();
+
+            if (action == FinishProjectEditAction.CloseProject)
+                CloseProject();
+            else
+            {
+                //Call the event
+                if (OnProjectEdited != null)
+                    OnProjectEdited(Project);
+
+                if (action == FinishProjectEditAction.SaveProject)
+                    Project.Save();
+                else
+                    Project.Changed = true;
+            }
         }
 
         /*
@@ -280,7 +307,6 @@ namespace OgmoEditor
 
             //Make it current
             CurrentLayerIndex = index;
-            Debug.WriteLine("Now Editing Layer #" + index);
 
             //Call the event
             if (OnLayerChanged != null)

@@ -16,6 +16,7 @@ namespace OgmoEditor.Windows
             InitializeComponent();
 
             Ogmo.OnProjectStart += onProjectStart;
+            Ogmo.OnProjectEdited += onProjectEdited;
         }
 
         private void LayersWindow_FormClosing(object sender, FormClosingEventArgs e)
@@ -30,7 +31,17 @@ namespace OgmoEditor.Windows
 
         private void onProjectStart(Project project)
         {
-            ClientSize = new Size(120, project.LayerDefinitions.Count * 24); 
+            initFromProject(project);
+        }
+
+        private void onProjectEdited(Project project)
+        {
+            initFromProject(project);
+        }
+
+        private void initFromProject(Project project)
+        {
+            ClientSize = new Size(120, project.LayerDefinitions.Count * 24);
 
             Controls.Clear();
             for (int i = 0; i < project.LayerDefinitions.Count; i++)

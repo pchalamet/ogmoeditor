@@ -16,8 +16,10 @@ namespace OgmoEditor.Windows
     {
         static private readonly OgmoColor NotSelected = new OgmoColor(220, 220, 220);
         static private readonly OgmoColor Selected = new OgmoColor(255, 125, 50);
+        static private readonly OgmoColor Hover = new OgmoColor(255, 220, 130);
 
         public LayerDefinition LayerDefinition { get; private set; }
+        private bool selected;
 
         public LayerButton(LayerDefinition definition, int y)
         {
@@ -28,7 +30,8 @@ namespace OgmoEditor.Windows
             layerNameLabel.Text = definition.Name;
 
             //Init state
-            layerNameLabel.BackColor = Ogmo.Project.LayerDefinitions[Ogmo.CurrentLayerIndex] == LayerDefinition ? Selected : NotSelected;
+            selected = Ogmo.CurrentLayerIndex != -1 && Ogmo.Project.LayerDefinitions[Ogmo.CurrentLayerIndex] == LayerDefinition;
+            layerNameLabel.BackColor = selected ? Selected : NotSelected;
             visibleCheckBox.Checked = LayerDefinition.Visible;
 
             //Add events
@@ -41,14 +44,15 @@ namespace OgmoEditor.Windows
             if (Parent == null)
             {
                 //Clean up events
+                Debug.WriteLine("cleanup!");
                 Ogmo.OnLayerChanged -= onLayerChanged;
             }
         }
 
         private void onLayerChanged(LayerDefinition layer, int index)
         {
-            Debug.WriteLine("cleanup!");
-            layerNameLabel.BackColor = layer == LayerDefinition ? Selected : NotSelected;
+            selected = layer == LayerDefinition;
+            layerNameLabel.BackColor = selected ? Selected : NotSelected;
         }
 
         private void visibleCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -56,5 +60,21 @@ namespace OgmoEditor.Windows
             LayerDefinition.Visible = visibleCheckBox.Checked;
         }
 
+        private void layerNameLabel_MouseEnter(object sender, EventArgs e)
+        {
+            if (!selected)
+                layerNameLabel.BackColor = Hover;
+        }
+
+        private void layerNameLabel_MouseLeave(object sender, EventArgs e)
+        {
+            if (!selected)
+                layerNameLabel.BackColor = NotSelected;
+        }
+
+        private void layerNameLabel_Click(object sender, EventArgs e)
+        {
+            Ogmo.SetLayer(Ogmo.Project.LayerDefinitions.IndexOf(LayerDefinition));
+        }
     }
 }

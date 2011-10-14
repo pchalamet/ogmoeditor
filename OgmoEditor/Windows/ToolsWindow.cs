@@ -42,33 +42,36 @@ namespace OgmoEditor.Windows
 
         private void onProjectStart(Project project)
         {
-            onLayerChanged(project.LayerDefinitions[0], 0);
+            onLayerChanged(null, -1);
         }
 
         private void onLayerChanged(LayerDefinition def, int index)
         {
             Controls.Clear();
 
-            foreach (var key in toolsForLayerTypes.Keys)
+            if (def != null)
             {
-                if (key == def.GetType())
+                foreach (var key in toolsForLayerTypes.Keys)
                 {
-                    Tool[] tools = toolsForLayerTypes[key];
-                    hotkeys = new Dictionary<Keys,Tool>();
-
-                    for (int i = 0; i < tools.Length; i++)
+                    if (key == def.GetType())
                     {
-                        Controls.Add(new ToolButton(tools[i], (i % 2) * 24, (i / 2) * 24));
-                        hotkeys.Add(tools[i].Hotkey, tools[i]);
-                    }
+                        Tool[] tools = toolsForLayerTypes[key];
+                        hotkeys = new Dictionary<Keys, Tool>();
 
-                    if (tools.Length > 0)
-                        Ogmo.SetTool(tools[0]);
-                    else
-                        Ogmo.SetTool(null);
-                    break;
+                        for (int i = 0; i < tools.Length; i++)
+                        {
+                            Controls.Add(new ToolButton(tools[i], (i % 2) * 24, (i / 2) * 24));
+                            hotkeys.Add(tools[i].Hotkey, tools[i]);
+                        }
+
+                        if (tools.Length > 0)
+                            Ogmo.SetTool(tools[0]);
+                        else
+                            Ogmo.SetTool(null);
+                        break;
+                    }
                 }
-            }            
+            }
         }
 
         private void ToolsWindow_FormClosing(object sender, FormClosingEventArgs e)

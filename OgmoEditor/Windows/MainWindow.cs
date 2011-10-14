@@ -152,7 +152,7 @@ namespace OgmoEditor.Windows
         private void editProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DisableEditing();
-            Ogmo.EditProject();
+            Ogmo.EditProject(false);
         }
 
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)

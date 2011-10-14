@@ -17,6 +17,7 @@ namespace OgmoEditor.ProjectEditors
         private Project oldProject;
         private Project newProject;
         private bool autoSave;
+        private Ogmo.FinishProjectEditAction finishAction;
 
         public ProjectEditor(Project project, bool autoSave = false)
         {
@@ -26,6 +27,11 @@ namespace OgmoEditor.ProjectEditors
 
             newProject = new Project();
             newProject.CloneFrom(oldProject);
+
+            if (autoSave)
+                finishAction = Ogmo.FinishProjectEditAction.CloseProject;
+            else
+                finishAction = Ogmo.FinishProjectEditAction.None;
 
             //Load the contents of the editors
             settingsEditor.LoadFromProject(newProject);
@@ -39,9 +45,7 @@ namespace OgmoEditor.ProjectEditors
 
         private void onClose(object sender, FormClosedEventArgs e)
         {
-            if (autoSave)
-                Ogmo.CloseProject();
-            (Owner as MainWindow).EnableEditing();
+            Ogmo.FinishProjectEdit(finishAction);
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -64,12 +68,7 @@ namespace OgmoEditor.ProjectEditors
 
             //Save it if in auto-save mode. Otherwise, just mark it as changed
             if (autoSave)
-            {
-                autoSave = false;
-                oldProject.Save();
-            }
-            else
-                oldProject.Changed = true;
+                finishAction = Ogmo.FinishProjectEditAction.SaveProject;
 
             //Close the project editor
             Close();
