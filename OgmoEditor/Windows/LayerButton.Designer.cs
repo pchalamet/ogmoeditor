@@ -44,6 +44,7 @@
             // 
             // layerNameLabel
             // 
+            this.layerNameLabel.AutoEllipsis = true;
             this.layerNameLabel.BackColor = System.Drawing.SystemColors.Control;
             this.layerNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.layerNameLabel.Location = new System.Drawing.Point(28, 2);

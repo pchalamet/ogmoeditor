@@ -36,6 +36,7 @@
             // button
             // 
             this.button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button.FlatAppearance.BorderSize = 0;
             this.button.Location = new System.Drawing.Point(0, 0);
             this.button.Name = "button";
             this.button.Size = new System.Drawing.Size(24, 24);
