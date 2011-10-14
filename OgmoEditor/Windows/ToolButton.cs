@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using OgmoEditor.LevelEditors.LayerEditors.Tools;
+using System.Diagnostics;
 
 namespace OgmoEditor.Windows
 {
@@ -22,6 +23,7 @@ namespace OgmoEditor.Windows
 
             InitializeComponent();
             button.BackgroundImage = Image.FromFile(Path.Combine(Ogmo.ProgramDirectory, @"Content\tools", Tool.Image));
+            toolTip.SetToolTip(button, Tool.Name + " (" + Tool.Hotkey.ToString() + ")");
 
             Ogmo.OnToolChanged += onToolChanged;
         }

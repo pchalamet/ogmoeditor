@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button = new System.Windows.Forms.Button();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // button
@@ -40,6 +42,10 @@
             this.button.TabIndex = 0;
             this.button.UseVisualStyleBackColor = true;
             this.button.Click += new System.EventHandler(this.button_Click);
+            // 
+            // toolTip
+            // 
+            this.toolTip.ShowAlways = true;
             // 
             // ToolButton
             // 
@@ -55,5 +61,6 @@
         #endregion
 
         private System.Windows.Forms.Button button;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }
