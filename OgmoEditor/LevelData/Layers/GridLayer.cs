@@ -93,7 +93,7 @@ namespace OgmoEditor.LevelData.Layers
                     }
 
                     //Push the rectangle
-                    rects.Add(new Rectangle(p.X, p.Y, w, h));
+                    rects.Add(gridToLevel(new Rectangle(p.X, p.Y, w, h)));
 
                     p = getFirstCell(copy);
                 }
@@ -127,6 +127,46 @@ namespace OgmoEditor.LevelData.Layers
             return xml;
         }
 
+        public override void SetXML(XmlElement xml)
+        {
+            Grid.Initialize();
+            if (Definition.ExportMode == GridLayerDefinition.ExportModes.Bitstring)
+            {
+                //Bitstring import
+                string s = xml.InnerText;
+                int x = 0;
+                int y = 0;
+                for (int i = 0; i < s.Length; i++)
+                {
+                    if (s[i] == '1')
+                        Grid[x, y] = true;
+
+                    if (s[i] == '\n')
+                    {
+                        x = 0;
+                        y++;
+                    }
+                    else
+                        x++;
+                }
+            }
+            else if (Definition.ExportMode == GridLayerDefinition.ExportModes.Rectangles)
+            {
+                //Rectangles import
+                foreach (XmlElement r in xml.GetElementsByTagName("rect"))
+                {
+                    Rectangle rect = new Rectangle(Convert.ToInt32(r.Attributes["x"]), Convert.ToInt32(r.Attributes["y"]), Convert.ToInt32(r.Attributes["w"]), Convert.ToInt32(r.Attributes["h"]));
+                    rect = levelToGrid(rect);
+                    for (int i = 0; i < rect.Width; i++)
+                        for (int j = 0; j < rect.Height; j++)
+                            Grid[rect.X + i, rect.Y + j] = true;
+                }
+            }
+        }
+
+        /*
+         *  Helpers
+         */
         private Point getFirstCell(bool[,] from)
         {
             for (int i = 0; i < from.GetLength(0); i++)
@@ -137,9 +177,14 @@ namespace OgmoEditor.LevelData.Layers
             return new Point(-1, -1);
         }
 
-        public override void SetXML(XmlElement xml)
+        private Rectangle gridToLevel(Rectangle r)
         {
-            
+            return new Rectangle(r.X * Definition.Grid.Width, r.Y * Definition.Grid.Height, r.Width * Definition.Grid.Width, r.Height * Definition.Grid.Height);
+        }
+
+        private Rectangle levelToGrid(Rectangle r)
+        {
+            return new Rectangle(r.X * Definition.Grid.Width, r.Y / Definition.Grid.Height, r.Width / Definition.Grid.Width, r.Height / Definition.Grid.Height); 
         }
 
         public override LayerEditor GetEditor(LevelEditors.LevelEditor editor)
