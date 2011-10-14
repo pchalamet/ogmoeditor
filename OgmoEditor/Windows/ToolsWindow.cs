@@ -19,6 +19,7 @@ namespace OgmoEditor.Windows
         private Dictionary<Keys, Tool> hotkeys;
 
         public ToolsWindow()
+            : base(HorizontalSnap.Right, VerticalSnap.Top)
         {
             InitializeComponent();
             ClientSize = new Size(48, 144);

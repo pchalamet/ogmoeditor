@@ -16,6 +16,8 @@ namespace OgmoEditor
 {
     public partial class MainWindow : Form
     {
+        private const int EDIT_BOUNDS_PADDING = 10;
+
         public List<LevelEditor> LevelEditors { get; private set; }
 
         public MainWindow()
@@ -58,13 +60,20 @@ namespace OgmoEditor
                 if (WindowState == FormWindowState.Maximized)
                 {
                     int titleBar = Size.Height - ClientSize.Height;
-                    return new Rectangle(Location.X + 8 + MasterTabControl.Location.X, Location.Y + titleBar + MasterTabControl.Location.Y + 10, MasterTabControl.Width, MasterTabControl.Height - 20);
+                    return new Rectangle(Location.X + 8 + MasterTabControl.Location.X + EDIT_BOUNDS_PADDING,
+                        Location.Y + titleBar + MasterTabControl.Location.Y + 10 + EDIT_BOUNDS_PADDING, 
+                        MasterTabControl.Width - (EDIT_BOUNDS_PADDING * 2),
+                        MasterTabControl.Height - 20 - (EDIT_BOUNDS_PADDING * 2));
                 }
                 else
                 {
                     int border = (Size.Width - ClientSize.Width) / 2;
                     int titleBar = Size.Height - ClientSize.Height - border;
-                    return new Rectangle(Location.X + border + MasterTabControl.Location.X, Location.Y + 20 + titleBar + MasterTabControl.Location.Y, MasterTabControl.Width, MasterTabControl.Height - 20);
+                    return new Rectangle(
+                        Location.X + border + MasterTabControl.Location.X + EDIT_BOUNDS_PADDING,
+                        Location.Y + 20 + titleBar + MasterTabControl.Location.Y + EDIT_BOUNDS_PADDING,
+                        MasterTabControl.Width - (EDIT_BOUNDS_PADDING * 2),
+                        MasterTabControl.Height - 20 - (EDIT_BOUNDS_PADDING * 2));
                 }
             }
         }

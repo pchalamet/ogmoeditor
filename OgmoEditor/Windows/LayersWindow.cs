@@ -12,6 +12,7 @@ namespace OgmoEditor.Windows
     public partial class LayersWindow : OgmoWindow
     {
         public LayersWindow()
+            : base(HorizontalSnap.Left, VerticalSnap.Top)
         {
             InitializeComponent();
 

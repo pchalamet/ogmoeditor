@@ -79,8 +79,8 @@ namespace OgmoEditor
             CurrentLevelIndex = -1;
             CurrentLayerIndex = -1;
 
-            //The windows
-            LayersWindow.Show(MainWindow);          
+            //The window
+            LayersWindow.Show(MainWindow);
             ToolsWindow.Show(MainWindow);
             LayersWindow.Visible = ToolsWindow.Visible = false;
         }
