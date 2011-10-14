@@ -133,7 +133,11 @@ namespace OgmoEditor
 
         static public void CloseProject()
         {
-            //Call removed event
+            //Close all the open levels
+            while (Levels.Count > 0)
+                CloseLevel(Levels[0]);
+
+            //Call closed event
             if (OnProjectClose != null)
                 OnProjectClose(Project);
 
@@ -197,7 +201,6 @@ namespace OgmoEditor
 
             //Make it current
             CurrentLevelIndex = index;
-            Debug.WriteLine("Now Editing Level #" + index);
 
             //Call the event
             if (OnLevelChanged != null)
