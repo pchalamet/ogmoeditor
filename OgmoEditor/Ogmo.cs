@@ -33,6 +33,7 @@ namespace OgmoEditor
         public delegate void ProjectCallback(Project project);
         public delegate void LevelCallback(int index);
         public delegate void LayerCallback(LayerDefinition layerDefinition, int index);
+        public delegate void ToolCallback(Tool tool);
 
         static public readonly MainWindow MainWindow = new MainWindow();
         static public readonly ToolsWindow ToolsWindow = new ToolsWindow();
@@ -51,6 +52,7 @@ namespace OgmoEditor
         static public event LevelCallback OnLevelClosed;
         static public event LevelCallback OnLevelChanged;
         static public event LayerCallback OnLayerChanged;
+        static public event ToolCallback OnToolChanged;
 
         [STAThread]
         static void Main(string[] args)
@@ -118,6 +120,7 @@ namespace OgmoEditor
         static public void StartProject(Project project)
         {
             Project = project;
+            CurrentLayerIndex = 0;
 
             //Call the added event
             if (OnProjectStart != null)
@@ -287,22 +290,19 @@ namespace OgmoEditor
         /*
          *  Tool stuff
          */
-        static public Type CurrentToolType
-        {
-            get 
-            {
-                if (CurrentTool == null)
-                    return null;
-                else
-                    return CurrentTool.GetType(); 
-            }
-        }
-
-        static public void SetTool(Type toolType)
+        static public void SetTool(Tool tool)
         {
             //If the current tool is already of that type, don't bother
-            if (CurrentToolType == toolType)
+            if (CurrentTool == tool)
                 return;
+
+            //Set it!
+            CurrentTool = tool;
+            tool.SwitchTo();
+
+            //Call the event
+            if (OnToolChanged != null)
+                OnToolChanged(tool);
         }
     }
 }

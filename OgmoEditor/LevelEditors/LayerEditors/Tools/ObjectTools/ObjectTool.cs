@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OgmoEditor.LevelData.Layers;
+using System.Windows.Forms;
 
 namespace OgmoEditor.LevelEditors.LayerEditors.Tools.ObjectTools
 {
     public abstract class ObjectTool : Tool
     {
-        public ObjectTool(string name)
-            : base(name)
+        public ObjectTool(string name, string image, Keys hotkey)
+            : base(name, image, hotkey)
         {
 
         }

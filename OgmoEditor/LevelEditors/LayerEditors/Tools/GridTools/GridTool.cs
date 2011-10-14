@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OgmoEditor.LevelData.Layers;
+using System.Windows.Forms;
 
 namespace OgmoEditor.LevelEditors.LayerEditors.Tools.GridTools
 {
     public abstract class GridTool : Tool
     {
-        public GridTool(string name)
-            : base(name)
+        public GridTool(string name, string image, Keys hotkey)
+            : base(name, image, hotkey)
         {
 
         }

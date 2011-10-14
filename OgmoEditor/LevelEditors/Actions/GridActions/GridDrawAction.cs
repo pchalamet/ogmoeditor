@@ -10,27 +10,27 @@ namespace OgmoEditor.LevelEditors.Actions.GridActions
     {
         public int CellX { get; private set; }
         public int CellY { get; private set; }
+        public bool SetTo { get; private set; }
 
-        public GridDrawAction(GridLayer gridLayer, int cellX, int cellY)
+        private bool was;
+
+        public GridDrawAction(GridLayer gridLayer, int cellX, int cellY, bool setTo)
             : base(gridLayer)
         {
             CellX = cellX;
             CellY = cellY;
-        }
-
-        public override string ToString()
-        {
-            return "Draw" + base.ToString();
+            SetTo = setTo;
         }
 
         public override void Do()
         {
-            GridLayer.Grid[CellX, CellY] = true;
+            was = GridLayer.Grid[CellX, CellY];
+            GridLayer.Grid[CellX, CellY] = SetTo;
         }
 
         public override void Undo()
         {
-            GridLayer.Grid[CellX, CellY] = false;
+            GridLayer.Grid[CellX, CellY] = was;
         }
     }
 }

@@ -14,10 +14,5 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
         {
             TileLayer = tileLayer;
         }
-
-        public override string ToString()
-        {
-            return " on " + TileLayer.Definition.Name;
-        }
     }
 }

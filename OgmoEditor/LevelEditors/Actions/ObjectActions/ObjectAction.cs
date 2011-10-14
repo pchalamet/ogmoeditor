@@ -14,10 +14,5 @@ namespace OgmoEditor.LevelEditors.Actions.ObjectActions
         {
             ObjectLayer = objectLayer;
         }
-
-        public override string ToString()
-        {
-            return " on " + ObjectLayer.Definition.Name;
-        }
     }
 }

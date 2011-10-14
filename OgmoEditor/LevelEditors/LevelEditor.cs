@@ -12,15 +12,16 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using OgmoEditor.LevelData;
 using OgmoEditor.LevelEditors.LayerEditors;
+using OgmoEditor.LevelEditors.Actions;
+using OgmoEditor.LevelEditors.LayerEditors.Tools;
 
 namespace OgmoEditor.LevelEditors
 {
     using Point = System.Drawing.Point;
-using OgmoEditor.LevelEditors.Actions;
 
     public class LevelEditor : GraphicsDeviceControl
     {
-        private const int UNDO_LIMIT = 30;
+        private const int UNDO_LIMIT = 50;
 
         private SpriteBatch spriteBatch;
         private bool mousePanMode;
@@ -34,6 +35,9 @@ using OgmoEditor.LevelEditors.Actions;
 
         public LinkedList<OgmoAction> UndoStack { get; private set; }
         public LinkedList<OgmoAction> RedoStack { get; private set; }
+
+        private Tool batcher;
+        private ActionBatch batch;
 
         public LevelEditor(Level level)
         {
@@ -118,6 +122,10 @@ using OgmoEditor.LevelEditors.Actions;
          */
         public void Perform(OgmoAction action)
         {
+            //If a batch is in progress, stop it!
+            BatchEnd();
+
+            //If you're over the undo limit, chop off an action
             if (UndoStack.Count == UNDO_LIMIT)
                 UndoStack.RemoveFirst();
 
@@ -134,6 +142,43 @@ using OgmoEditor.LevelEditors.Actions;
 
             //Clear the redo stack
             RedoStack.Clear();
+        }
+
+        public void BatchPerform(Tool tool, OgmoAction action)
+        {
+            //Start the batch if it isn't in progress
+            if (batcher != tool)
+            {
+                batcher = tool;
+                batch = new ActionBatch();
+
+                //If you're over the undo limit, chop off an action
+                if (UndoStack.Count == UNDO_LIMIT)
+                    UndoStack.RemoveFirst();
+
+                //If the level is so-far unchanged, change it and store that fact
+                if (!Level.Changed)
+                {
+                    action.LevelWasChanged = false;
+                    Level.Changed = true;
+                }
+
+                //Add the batch action to the undo stack
+                UndoStack.AddLast(batch);
+
+                //Clear the redo stack
+                RedoStack.Clear();
+            }
+
+            //Add the new action to the batch and do it!
+            batch.Add(action);
+            action.Do();
+        }
+
+        public void BatchEnd()
+        {
+            batcher = null;
+            batch = null;
         }
 
         public void Undo()
@@ -259,7 +304,7 @@ using OgmoEditor.LevelEditors.Actions;
             Ogmo.MainWindow.MouseCoordinatesLabel.Text = "( " + coords.X.ToString() + ", " + coords.Y.ToString() + " )";
 
             //Call the layer event
-            LayerEditors[Ogmo.CurrentLayerIndex].OnMouseMove(Camera.ScreenToEditor(coords));
+            LayerEditors[Ogmo.CurrentLayerIndex].OnMouseMove(coords);
         }
 
         private void onMouseWheel(object sender, MouseEventArgs e)

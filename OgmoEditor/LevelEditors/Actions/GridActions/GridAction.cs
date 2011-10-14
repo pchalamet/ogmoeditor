@@ -14,10 +14,5 @@ namespace OgmoEditor.LevelEditors.Actions.GridActions
         {
             GridLayer = gridLayer;
         }
-
-        public override string ToString()
-        {
-            return " on " + GridLayer.Definition.Name;
-        }
     }
 }

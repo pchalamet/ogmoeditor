@@ -34,10 +34,9 @@
             // button
             // 
             this.button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button.Location = new System.Drawing.Point(0, 0);
             this.button.Name = "button";
-            this.button.Size = new System.Drawing.Size(30, 30);
+            this.button.Size = new System.Drawing.Size(24, 24);
             this.button.TabIndex = 0;
             this.button.UseVisualStyleBackColor = true;
             this.button.Click += new System.EventHandler(this.button_Click);
@@ -48,7 +47,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.button);
             this.Name = "ToolButton";
-            this.Size = new System.Drawing.Size(30, 30);
+            this.Size = new System.Drawing.Size(24, 24);
             this.ResumeLayout(false);
 
         }

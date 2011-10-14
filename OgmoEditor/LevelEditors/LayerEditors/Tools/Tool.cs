@@ -10,10 +10,19 @@ namespace OgmoEditor.LevelEditors.LayerEditors.Tools
     public abstract class Tool
     {
         public string Name { get; private set; }
+        public string Image { get; private set; }
+        public Keys Hotkey { get; private set; }
 
-        public Tool(string name)
+        public Tool(string name, string image, Keys hotkey)
         {
             Name = name;
+            Image = image;
+            Hotkey = hotkey;
+        }
+
+        public virtual void SwitchTo()
+        {
+
         }
 
         public virtual void OnKeyDown(Keys key)

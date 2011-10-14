@@ -83,8 +83,10 @@
     <Compile Include="Definitions\ValueDefinitions\FloatValueDefinition.cs" />
     <Compile Include="Definitions\ValueDefinitions\IntValueDefinition.cs" />
     <Compile Include="Definitions\ValueDefinitions\StringValueDefinition.cs" />
+    <Compile Include="LevelEditors\Actions\ActionBatch.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridDrawAction.cs" />
-    <Compile Include="LevelEditors\Actions\GridActions\GridEraseAction.cs" />
+    <Compile Include="LevelEditors\Actions\GridActions\GridFloodAction.cs" />
+    <Compile Include="LevelEditors\LayerEditors\Tools\GridTools\GridFloodTool.cs" />
     <Compile Include="LevelEditors\LayerEditors\Tools\GridTools\GridPencilTool.cs" />
     <Compile Include="Windows\LayersWindow.cs">
       <SubType>Form</SubType>
@@ -340,6 +342,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\tools\flood.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\tools\pencil.png">
