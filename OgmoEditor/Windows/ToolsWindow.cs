@@ -15,21 +15,28 @@ namespace OgmoEditor.Windows
 {
     public partial class ToolsWindow : Form
     {
-        private Dictionary<Type, Tool[]> ToolsForLayerTypes;
+        private Dictionary<Type, Tool[]> toolsForLayerTypes;
+        private Dictionary<Keys, Tool> hotkeys;
 
         public ToolsWindow()
         {
             InitializeComponent();
 
             //Initialize the tool lists
-            ToolsForLayerTypes = new Dictionary<Type, Tool[]>();
-            ToolsForLayerTypes.Add(typeof(GridLayerDefinition), new Tool[] { new GridPencilTool(), new GridFloodTool() });
-            ToolsForLayerTypes.Add(typeof(TileLayerDefinition), new Tool[] { });
-            ToolsForLayerTypes.Add(typeof(ObjectLayerDefinition), new Tool[] { });
+            toolsForLayerTypes = new Dictionary<Type, Tool[]>();
+            toolsForLayerTypes.Add(typeof(GridLayerDefinition), new Tool[] { new GridPencilTool(), new GridFloodTool() });
+            toolsForLayerTypes.Add(typeof(TileLayerDefinition), new Tool[] { });
+            toolsForLayerTypes.Add(typeof(ObjectLayerDefinition), new Tool[] { });
 
             //Init events
             Ogmo.OnLayerChanged += onLayerChanged;
             Ogmo.OnProjectStart += onProjectStart;
+        }
+
+        public void KeyPress(Keys key)
+        {
+            if (hotkeys.ContainsKey(key))
+                Ogmo.SetTool(hotkeys[key]);
         }
 
         private void onProjectStart(Project project)
@@ -41,14 +48,18 @@ namespace OgmoEditor.Windows
         {
             Controls.Clear();
 
-            foreach (var key in ToolsForLayerTypes.Keys)
+            foreach (var key in toolsForLayerTypes.Keys)
             {
                 if (key == def.GetType())
                 {
-                    Tool[] tools = ToolsForLayerTypes[key];
+                    Tool[] tools = toolsForLayerTypes[key];
+                    hotkeys = new Dictionary<Keys,Tool>();
 
                     for (int i = 0; i < tools.Length; i++)
+                    {
                         Controls.Add(new ToolButton(tools[i], (i % 3) * 24, (i / 3) * 24));
+                        hotkeys.Add(tools[i].Hotkey, tools[i]);
+                    }
 
                     if (tools.Length > 0)
                         Ogmo.SetTool(tools[0]);
