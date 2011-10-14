@@ -104,7 +104,7 @@ namespace OgmoEditor.Windows
             LevelEditors.RemoveAt(index);
 
             //If there's no more levels open, disable the windows
-            if (Ogmo.Levels.Count > 0)
+            if (Ogmo.Levels.Count == 0)
                 Ogmo.LayersWindow.Visible = Ogmo.ToolsWindow.Visible = false;
         }
 

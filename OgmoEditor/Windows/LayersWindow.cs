@@ -43,6 +43,8 @@ namespace OgmoEditor.Windows
         {
             ClientSize = new Size(120, project.LayerDefinitions.Count * 24);
 
+            foreach (LayerButton b in Controls)
+                b.OnRemove();
             Controls.Clear();
             for (int i = 0; i < project.LayerDefinitions.Count; i++)
                 Controls.Add(new LayerButton(project.LayerDefinitions[i], i * 24));

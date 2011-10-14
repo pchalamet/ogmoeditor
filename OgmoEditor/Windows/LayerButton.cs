@@ -35,18 +35,14 @@ namespace OgmoEditor.Windows
             visibleCheckBox.Checked = LayerDefinition.Visible;
 
             //Add events
-            ParentChanged += onParentChanged;
-            Ogmo.OnLayerChanged += onLayerChanged;
+            Ogmo.OnLayerChanged += onLayerChanged;          
         }
 
-        private void onParentChanged(object sender, EventArgs e)
+        public void OnRemove()
         {
-            if (Parent == null)
-            {
-                //Clean up events
-                Debug.WriteLine("cleanup!");
-                Ogmo.OnLayerChanged -= onLayerChanged;
-            }
+            //Clean up events
+            Debug.WriteLine("cleanup!");
+            Ogmo.OnLayerChanged -= onLayerChanged;
         }
 
         private void onLayerChanged(LayerDefinition layer, int index)
