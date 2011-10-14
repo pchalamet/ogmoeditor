@@ -94,6 +94,10 @@ namespace OgmoEditor.LevelData
             XmlElement level = doc.CreateElement("level");
             doc.AppendChild(level);
 
+            //Export the layers
+            for (int i = 0; i < Layers.Count; i++)
+                level.AppendChild(Layers[i].GetXML(doc));
+
             return doc;
         }
 

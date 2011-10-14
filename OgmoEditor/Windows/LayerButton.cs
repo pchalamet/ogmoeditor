@@ -41,7 +41,6 @@ namespace OgmoEditor.Windows
         public void OnRemove()
         {
             //Clean up events
-            Debug.WriteLine("cleanup!");
             Ogmo.OnLayerChanged -= onLayerChanged;
         }
 
