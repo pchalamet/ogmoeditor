@@ -66,9 +66,6 @@ namespace OgmoEditor.Windows
 
             levelToolStripMenuItem.Enabled = true;
             viewToolStripMenuItem.Enabled = true;
-
-            //Enable windows
-            Ogmo.LayersWindow.Visible = Ogmo.ToolsWindow.Visible = true;
         }
 
         private void onProjectClose(Project project)
@@ -92,17 +89,23 @@ namespace OgmoEditor.Windows
         {
             TabPage t = new TabPage(Ogmo.Levels[index].Name);
             LevelEditor e = new LevelEditor(Ogmo.Levels[index]);
-
             LevelEditors.Add(e);
             t.Controls.Add(e);
-
             MasterTabControl.TabPages.Add(t);
+
+            //Make the windows visible if this is the first level
+            if (Ogmo.Levels.Count > 0)
+                Ogmo.LayersWindow.Visible = Ogmo.ToolsWindow.Visible = true;
         }
 
         private void onLevelClosed(int index)
         {
             MasterTabControl.TabPages.RemoveAt(index);
             LevelEditors.RemoveAt(index);
+
+            //If there's no more levels open, disable the windows
+            if (Ogmo.Levels.Count > 0)
+                Ogmo.LayersWindow.Visible = Ogmo.ToolsWindow.Visible = false;
         }
 
         private void onLevelChanged(int index)

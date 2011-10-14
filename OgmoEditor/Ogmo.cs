@@ -128,7 +128,9 @@ namespace OgmoEditor
             if (OnProjectStart != null)
                 OnProjectStart(project);
 
-            SetLayer(0);
+            //Start the first layer if the project has any
+            if (project.LayerDefinitions.Count > 0)
+                SetLayer(0);
         }
 
         static public void CloseProject()
@@ -176,6 +178,9 @@ namespace OgmoEditor
                     Project.Save();
                 else
                     Project.Changed = true;
+
+                //Start the first layer
+                SetLayer(0);
             }
         }
 
@@ -313,7 +318,7 @@ namespace OgmoEditor
 
             //Call the event
             if (OnLayerChanged != null)
-                OnLayerChanged(Project.LayerDefinitions[index], index);
+                OnLayerChanged(index == -1 ? null : Project.LayerDefinitions[index], index);
         }
 
         /*
