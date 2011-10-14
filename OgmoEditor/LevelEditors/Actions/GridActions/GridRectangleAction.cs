@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OgmoEditor.LevelData.Layers;
+using System.Drawing;
 
 namespace OgmoEditor.LevelEditors.Actions.GridActions
 {
@@ -24,6 +25,12 @@ namespace OgmoEditor.LevelEditors.Actions.GridActions
             Width = width;
             Height = height;
             SetTo = setTo;
+        }
+
+        public GridRectangleAction(GridLayer gridLayer, Rectangle rect, bool setTo)
+            : this(gridLayer, rect.X, rect.Y, rect.Width, rect.Height, setTo)
+        {
+
         }
 
         public override void Do()

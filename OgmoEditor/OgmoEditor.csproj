@@ -86,8 +86,10 @@
     <Compile Include="LevelEditors\Actions\ActionBatch.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridDrawAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridFloodAction.cs" />
+    <Compile Include="LevelEditors\Actions\GridActions\GridRectangleAction.cs" />
     <Compile Include="LevelEditors\Tools\GridTools\GridFloodTool.cs" />
     <Compile Include="LevelEditors\Tools\GridTools\GridPencilTool.cs" />
+    <Compile Include="LevelEditors\Tools\GridTools\GridRectangleTool.cs" />
     <Compile Include="Windows\LayersWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -347,7 +349,16 @@
     <Content Include="Content\tools\flood.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\tools\move.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\tools\pencil.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\tools\rectangle.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\tools\selection.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

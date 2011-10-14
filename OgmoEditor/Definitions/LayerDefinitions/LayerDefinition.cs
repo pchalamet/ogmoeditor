@@ -50,5 +50,15 @@ namespace OgmoEditor.Definitions.LayerDefinitions
         {
             return new Point(p.X / Grid.Width, p.Y / Grid.Height);
         }
+
+        public Rectangle ConvertToGrid(Rectangle r)
+        {
+            return new Rectangle(r.X / Grid.Width, r.Y / Grid.Height, r.Width / Grid.Width, r.Height / Grid.Height);
+        }
+
+        public Point SnapToGrid(Point p)
+        {
+            return new Point((p.X / Grid.Width) * Grid.Width, (p.Y / Grid.Height) * Grid.Height);
+        }
     }
 }

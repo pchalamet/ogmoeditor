@@ -27,7 +27,8 @@ namespace OgmoEditor.LevelEditors.LayerEditors
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-
+            if (Ogmo.CurrentTool != null)
+                Ogmo.CurrentTool.Draw(spriteBatch);
         }
 
         public void OnKeyDown(Keys key)

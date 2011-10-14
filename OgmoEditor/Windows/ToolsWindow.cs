@@ -25,7 +25,7 @@ namespace OgmoEditor.Windows
 
             //Initialize the tool lists
             toolsForLayerTypes = new Dictionary<Type, Tool[]>();
-            toolsForLayerTypes.Add(typeof(GridLayerDefinition), new Tool[] { new GridPencilTool(), new GridFloodTool() });
+            toolsForLayerTypes.Add(typeof(GridLayerDefinition), new Tool[] { new GridPencilTool(), new GridFloodTool(), new GridRectangleTool() });
             toolsForLayerTypes.Add(typeof(TileLayerDefinition), new Tool[] { });
             toolsForLayerTypes.Add(typeof(ObjectLayerDefinition), new Tool[] { });
 
