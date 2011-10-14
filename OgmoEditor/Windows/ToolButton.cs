@@ -35,7 +35,8 @@ namespace OgmoEditor.Windows
 
         private void onToolChanged(Tool tool)
         {
-            button.Enabled = (Tool != tool);
+            if (Tool == tool)
+                button.Select();
         }
     }
 }
