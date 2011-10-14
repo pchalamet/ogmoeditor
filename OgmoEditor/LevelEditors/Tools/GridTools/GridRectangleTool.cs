@@ -83,14 +83,8 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
             //Get the rectangle
             r.X = Math.Min(drawStart.X, drawTo.X);
             r.Y = Math.Min(drawStart.Y, drawTo.Y);
-            r.Width = Math.Abs(drawTo.X - drawStart.X);
-            r.Height = Math.Abs(drawTo.Y - drawStart.Y);
-
-            //Resize a bit to match up with the cursor in some cases
-            if (drawTo.X >= drawStart.X)
-                r.Width += LayerEditor.Layer.Definition.Grid.Width;
-            if (drawTo.Y >= drawStart.Y)
-                r.Height += LayerEditor.Layer.Definition.Grid.Height;
+            r.Width = Math.Abs(drawTo.X - drawStart.X) + LayerEditor.Layer.Definition.Grid.Width;
+            r.Height = Math.Abs(drawTo.Y - drawStart.Y) + LayerEditor.Layer.Definition.Grid.Height;
 
             //Enforce Bounds
             if (r.X < 0)
