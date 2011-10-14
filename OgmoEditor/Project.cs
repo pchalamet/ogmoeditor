@@ -37,9 +37,6 @@ namespace OgmoEditor
         public List<Tileset> Tilesets;
         public List<ObjectDefinition> ObjectDefinitions;
 
-        //Non-serialzed instance vars
-        private bool changed;
-
         //Events
         public event Ogmo.ProjectCallback OnPathChanged;
 
@@ -57,9 +54,6 @@ namespace OgmoEditor
             LayerDefinitions = new List<LayerDefinition>();
             Tilesets = new List<Tileset>();
             ObjectDefinitions = new List<ObjectDefinition>(); 
-
-            //Init running vars
-            InitializeRunningVars();
         }
 
         public void CloneFrom(Project copy)
@@ -86,11 +80,6 @@ namespace OgmoEditor
             ObjectDefinitions = new List<ObjectDefinition>();
             foreach (var d in copy.ObjectDefinitions)
                 ObjectDefinitions.Add(d.Clone());
-        }
-
-        private void InitializeRunningVars()
-        {
-            changed = false;
         }
 
         public string ErrorCheck()
@@ -155,16 +144,6 @@ namespace OgmoEditor
         }
 
         [XmlIgnore]
-        public bool Changed
-        {
-            get { return changed; }
-            set
-            {
-                changed = value;
-            }
-        }
-
-        [XmlIgnore]
         public string SavedDirectory
         {
             get
@@ -196,7 +175,6 @@ namespace OgmoEditor
             }
 
             writeTo(LastFilename);
-            Changed = false;
         }
 
         public bool SaveAs()

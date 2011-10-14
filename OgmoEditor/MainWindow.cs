@@ -88,8 +88,6 @@ namespace OgmoEditor
             openProjectToolStripMenuItem.Enabled = false;
             closeProjectToolStripMenuItem.Enabled = true;
             editProjectToolStripMenuItem.Enabled = true;
-            saveProjectToolStripMenuItem.Enabled = true;
-            saveProjectAsToolStripMenuItem.Enabled = true;
 
             levelToolStripMenuItem.Enabled = true;
             viewToolStripMenuItem.Enabled = true;
@@ -102,8 +100,6 @@ namespace OgmoEditor
             openProjectToolStripMenuItem.Enabled = true;
             closeProjectToolStripMenuItem.Enabled = false;
             editProjectToolStripMenuItem.Enabled = false;
-            saveProjectToolStripMenuItem.Enabled = false;
-            saveProjectAsToolStripMenuItem.Enabled = false;
 
             levelToolStripMenuItem.Enabled = false;
             viewToolStripMenuItem.Enabled = false;
@@ -183,17 +179,6 @@ namespace OgmoEditor
         {
             DisableEditing();
             Ogmo.EditProject(false);
-        }
-
-        private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Ogmo.Project.Save();
-        }
-
-        private void saveProjectAsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (Ogmo.Project.SaveAs())
-                Ogmo.Project.Save();
         }
 
         private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)

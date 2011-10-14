@@ -16,19 +16,19 @@ namespace OgmoEditor.ProjectEditors
     {
         private Project oldProject;
         private Project newProject;
-        private bool autoSave;
+        private bool autoClose;
         private Ogmo.FinishProjectEditAction finishAction;
 
-        public ProjectEditor(Project project, bool autoSave = false)
+        public ProjectEditor(Project project, bool autoClose = false)
         {
             this.oldProject = project;
-            this.autoSave = autoSave;
+            this.autoClose = autoClose;
             InitializeComponent();
 
             newProject = new Project();
             newProject.CloneFrom(oldProject);
 
-            if (autoSave)
+            if (autoClose)
                 finishAction = Ogmo.FinishProjectEditAction.CloseProject;
             else
                 finishAction = Ogmo.FinishProjectEditAction.None;
@@ -66,9 +66,8 @@ namespace OgmoEditor.ProjectEditors
             //Copy the edited project onto the old one
             oldProject.CloneFrom(newProject);
 
-            //Save it if in auto-save mode. Otherwise, just mark it as changed
-            if (autoSave)
-                finishAction = Ogmo.FinishProjectEditAction.SaveProject;
+            //Save the project if changes were made
+            finishAction = Ogmo.FinishProjectEditAction.SaveProject;
 
             //Close the project editor
             Close();

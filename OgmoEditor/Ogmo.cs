@@ -176,8 +176,6 @@ namespace OgmoEditor
 
                 if (action == FinishProjectEditAction.SaveProject)
                     Project.Save();
-                else
-                    Project.Changed = true;
 
                 //Start the first layer
                 SetLayer(0);
