@@ -118,6 +118,10 @@ namespace OgmoEditor
 
             //Start the project
             StartProject(project);
+
+            //Start a blank level and start at the first layer
+            SetLayer(0);
+            NewLevel();
         }
 
         static public void StartProject(Project project)
@@ -127,10 +131,6 @@ namespace OgmoEditor
             //Call the added event
             if (OnProjectStart != null)
                 OnProjectStart(project);
-
-            //Start the first layer if the project has any
-            if (project.LayerDefinitions.Count > 0)
-                SetLayer(0);
         }
 
         static public void CloseProject()
@@ -179,8 +179,9 @@ namespace OgmoEditor
                 //Close all the levels
                 CloseAllLevels();
 
-                //Start the first layer
+                //Start a blank level and start at the first layer
                 SetLayer(0);
+                NewLevel();
             }
         }
 
@@ -266,10 +267,7 @@ namespace OgmoEditor
             //Set the current level to another one if that was the current one
             if (CurrentLevelIndex == index)
             {
-                if (Levels.Count == 0)
-                    SetLevel(-1);
-                else
-                    SetLevel(Math.Min(index, Levels.Count - 1));
+                SetLevel(Math.Min(index, Levels.Count - 1));
             }
         }
 
