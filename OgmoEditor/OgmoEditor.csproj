@@ -124,10 +124,10 @@
     <Compile Include="LevelEditors\LevelEditor.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Windows\MainWindow.cs">
+    <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\MainWindow.Designer.cs">
+    <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Ogmo.cs" />
@@ -262,7 +262,7 @@
     <EmbeddedResource Include="Windows\LayersWindow.resx">
       <DependentUpon>LayersWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\MainWindow.resx">
+    <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProjectEditors\LayerDefinitionEditors\GridLayerDefinitionEditor.resx">

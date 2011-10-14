@@ -12,7 +12,7 @@ using OgmoEditor.XNA;
 using System.Diagnostics;
 using OgmoEditor.LevelData;
 
-namespace OgmoEditor.Windows
+namespace OgmoEditor
 {
     public partial class MainWindow : Form
     {
