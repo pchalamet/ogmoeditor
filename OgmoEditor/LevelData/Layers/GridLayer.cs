@@ -122,7 +122,7 @@ namespace OgmoEditor.LevelData.Layers
         private Point getFirstCell(bool[,] from)
         {
             for (int i = 0; i < from.GetLength(0); i++)
-                for (int j = 0; j < from.GetLength(0); j++)
+                for (int j = 0; j < from.GetLength(1); j++)
                     if (from[i, j])
                         return new Point(i, j);
 

@@ -41,6 +41,8 @@ namespace OgmoEditor.Definitions.LayerDefinitions
             def.Name = Name;
             def.Grid = Grid;
             def.Color = Color;
+            def.ExportMode = ExportMode;
+            def.TrimZeroes = TrimZeroes;
             return def;
         }
     }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using OgmoEditor.Definitions.LayerDefinitions;
+using System.Diagnostics;
 
 namespace OgmoEditor.ProjectEditors.LayerDefinitionEditors
 {
@@ -23,6 +24,8 @@ namespace OgmoEditor.ProjectEditors.LayerDefinitionEditors
             colorChooser.Color = def.Color;
             exportModeComboBox.SelectedIndex = (int)def.ExportMode;
             trimZeroesCheckBox.Checked = def.TrimZeroes;
+
+            trimZeroesCheckBox.Enabled = (def.ExportMode == GridLayerDefinition.ExportModes.Bitstring);
         }
 
         private void colorChooser_ColorChanged(OgmoColor color)
