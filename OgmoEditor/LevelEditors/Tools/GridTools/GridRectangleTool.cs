@@ -22,11 +22,11 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
         {
-            if (drawing && (LevelEditor.Level.WithinBounds(drawStart) || LevelEditor.Level.WithinBounds(drawTo)))
+            if (drawing)
             {
                 Rectangle draw = getRect();
-
-                LevelEditor.Content.DrawRectangle(spriteBatch, draw.X, draw.Y, draw.Width, draw.Height, (drawMode ? LayerEditor.Layer.Definition.Color.ToXNA() : LayerEditor.Layer.Definition.Color.Invert().ToXNA()) * .5f);
+                if (LevelEditor.Level.Bounds.IntersectsWith(draw))
+                    LevelEditor.Content.DrawRectangle(spriteBatch, draw.X, draw.Y, draw.Width, draw.Height, (drawMode ? LayerEditor.Layer.Definition.Color.ToXNA() : LayerEditor.Layer.Definition.Color.Invert().ToXNA()) * .5f);
             }
         }
 
@@ -68,9 +68,10 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
         private void drawRect()
         {
             drawing = false;
-            if (LevelEditor.Level.WithinBounds(drawStart) || LevelEditor.Level.WithinBounds(drawTo))
+            Rectangle draw = getRect();
+            if (LevelEditor.Level.Bounds.IntersectsWith(draw))
             {
-                Rectangle draw = LayerEditor.Layer.Definition.ConvertToGrid(getRect());
+                draw = LayerEditor.Layer.Definition.ConvertToGrid(draw);
                 LevelEditor.Perform(new GridRectangleAction(LayerEditor.Layer, draw, drawMode));
             }
         }
@@ -84,6 +85,12 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
             r.Y = Math.Min(drawStart.Y, drawTo.Y);
             r.Width = Math.Abs(drawTo.X - drawStart.X);
             r.Height = Math.Abs(drawTo.Y - drawStart.Y);
+
+            //Resize a bit to match up with the cursor in some cases
+            if (drawTo.X >= drawStart.X)
+                r.Width += LayerEditor.Layer.Definition.Grid.Width;
+            if (drawTo.Y >= drawStart.Y)
+                r.Height += LayerEditor.Layer.Definition.Grid.Height;
 
             //Enforce Bounds
             if (r.X < 0)

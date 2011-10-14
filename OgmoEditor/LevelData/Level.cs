@@ -74,9 +74,9 @@ namespace OgmoEditor.LevelData
             }
         }
 
-        public bool WithinBounds(Point p)
+        public Rectangle Bounds
         {
-            return p.X >= 0 && p.Y >= 0 && p.X < Size.Width && p.Y < Size.Height;
+            get { return new Rectangle(0, 0, Size.Width, Size.Height); }
         }
 
         /*

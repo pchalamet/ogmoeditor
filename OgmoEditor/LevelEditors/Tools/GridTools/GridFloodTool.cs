@@ -16,7 +16,7 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
 
         public override void OnMouseLeftClick(System.Drawing.Point location)
         {
-            if (!LevelEditor.Level.WithinBounds(location))
+            if (!LevelEditor.Level.Bounds.Contains(location))
                 return;
 
             location = LayerEditor.Layer.Definition.ConvertToGrid(location);
@@ -25,7 +25,7 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
 
         public override void OnMouseRightClick(System.Drawing.Point location)
         {
-            if (!LevelEditor.Level.WithinBounds(location))
+            if (!LevelEditor.Level.Bounds.Contains(location))
                 return;
 
             location = LayerEditor.Layer.Definition.ConvertToGrid(location);
