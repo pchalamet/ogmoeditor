@@ -83,6 +83,17 @@ namespace OgmoEditor
             LayersWindow.Show(MainWindow);
             ToolsWindow.Show(MainWindow);
             LayersWindow.Visible = ToolsWindow.Visible = false;
+
+            //Load the config file
+            Config.Load();
+
+            //Add the exit event
+            Application.ApplicationExit += onApplicationExit;
+        }
+
+        static void onApplicationExit(object sender, EventArgs e)
+        {
+            Config.Save();
         }
 
         /*
@@ -152,6 +163,13 @@ namespace OgmoEditor
 
         static public void EditProject(bool newProject)
         {
+            //Warn!
+            if (Config.ConfigFile.WarnForEditProject && Ogmo.Levels.Count > 0 && Ogmo.Levels.Find(e => e.Changed || e.Saved) != null)
+            {
+                if (MessageBox.Show(MainWindow, "Warning: All levels must be closed if any changes to the project are made. Still edit the project? (You will be prompted to save levels with unsaved changes)", "Warning!", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                    return;
+            }
+
             //Disable the main window
             MainWindow.DisableEditing();
 

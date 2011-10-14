@@ -71,6 +71,7 @@
     <Compile Include="ColorChooser.Designer.cs">
       <DependentUpon>ColorChooser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Config.cs" />
     <Compile Include="Definitions\LayerDefinitions\GridLayerDefinition.cs" />
     <Compile Include="Definitions\LayerDefinitions\LayerDefinition.cs" />
     <Compile Include="Definitions\LayerDefinitions\ObjectLayerDefinition.cs" />

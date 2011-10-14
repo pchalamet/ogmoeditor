@@ -177,7 +177,6 @@ namespace OgmoEditor
 
         private void editProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DisableEditing();
             Ogmo.EditProject(false);
         }
 

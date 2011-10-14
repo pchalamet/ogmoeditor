@@ -74,6 +74,11 @@ namespace OgmoEditor.LevelData
             }
         }
 
+        public bool Saved
+        {
+            get { return SavePath != ""; }
+        }
+
         public Rectangle Bounds
         {
             get { return new Rectangle(0, 0, Size.Width, Size.Height); }
