@@ -136,8 +136,7 @@ namespace OgmoEditor
         static public void CloseProject()
         {
             //Close all the open levels
-            while (Levels.Count > 0)
-                CloseLevel(Levels[0]);
+            CloseAllLevels();
 
             //Call closed event
             if (OnProjectClose != null)
@@ -168,14 +167,17 @@ namespace OgmoEditor
 
             if (action == FinishProjectEditAction.CloseProject)
                 CloseProject();
-            else
+            else if (action == FinishProjectEditAction.SaveProject)
             {
                 //Call the event
                 if (OnProjectEdited != null)
                     OnProjectEdited(Project);
 
-                if (action == FinishProjectEditAction.SaveProject)
-                    Project.Save();
+                //Save the project
+                Project.Save();
+
+                //Close all the levels
+                CloseAllLevels();
 
                 //Start the first layer
                 SetLayer(0);
@@ -269,6 +271,12 @@ namespace OgmoEditor
                 else
                     SetLevel(Math.Min(index, Levels.Count - 1));
             }
+        }
+
+        static public void CloseAllLevels()
+        {
+            while (Levels.Count > 0)
+                CloseLevel(Levels[0]);
         }
 
         static public void CloseOtherLevels(Level level)
