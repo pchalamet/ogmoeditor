@@ -30,12 +30,14 @@
         {
             this.colorChooser = new OgmoEditor.ColorChooser();
             this.label1 = new System.Windows.Forms.Label();
-            this.exportAsRectanglesCheckBox = new System.Windows.Forms.CheckBox();
+            this.exportModeComboBox = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.trimZeroesCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // colorChooser
             // 
-            this.colorChooser.Location = new System.Drawing.Point(53, 15);
+            this.colorChooser.Location = new System.Drawing.Point(87, 12);
             this.colorChooser.Name = "colorChooser";
             this.colorChooser.Size = new System.Drawing.Size(108, 28);
             this.colorChooser.TabIndex = 0;
@@ -44,28 +46,52 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 22);
+            this.label1.Location = new System.Drawing.Point(55, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(31, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Color";
             // 
-            // exportAsRectanglesCheckBox
+            // exportModeComboBox
             // 
-            this.exportAsRectanglesCheckBox.AutoSize = true;
-            this.exportAsRectanglesCheckBox.Location = new System.Drawing.Point(22, 49);
-            this.exportAsRectanglesCheckBox.Name = "exportAsRectanglesCheckBox";
-            this.exportAsRectanglesCheckBox.Size = new System.Drawing.Size(128, 17);
-            this.exportAsRectanglesCheckBox.TabIndex = 2;
-            this.exportAsRectanglesCheckBox.Text = "Export As Rectangles";
-            this.exportAsRectanglesCheckBox.UseVisualStyleBackColor = true;
-            this.exportAsRectanglesCheckBox.CheckedChanged += new System.EventHandler(this.exportAsRectanglesCheckBox_CheckedChanged);
+            this.exportModeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.exportModeComboBox.FormattingEnabled = true;
+            this.exportModeComboBox.Items.AddRange(new object[] {
+            "Bitstring",
+            "Rectangles"});
+            this.exportModeComboBox.Location = new System.Drawing.Point(92, 46);
+            this.exportModeComboBox.Name = "exportModeComboBox";
+            this.exportModeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.exportModeComboBox.TabIndex = 2;
+            this.exportModeComboBox.SelectionChangeCommitted += new System.EventHandler(this.exportModeComboBox_SelectionChangeCommitted);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(19, 49);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(67, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Export Mode";
+            // 
+            // trimZeroesCheckBox
+            // 
+            this.trimZeroesCheckBox.AutoSize = true;
+            this.trimZeroesCheckBox.Location = new System.Drawing.Point(92, 73);
+            this.trimZeroesCheckBox.Name = "trimZeroesCheckBox";
+            this.trimZeroesCheckBox.Size = new System.Drawing.Size(82, 17);
+            this.trimZeroesCheckBox.TabIndex = 4;
+            this.trimZeroesCheckBox.Text = "Trim Zeroes";
+            this.trimZeroesCheckBox.UseVisualStyleBackColor = true;
+            this.trimZeroesCheckBox.CheckedChanged += new System.EventHandler(this.trimZeroesCheckBox_CheckedChanged);
             // 
             // GridLayerDefinitionEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.exportAsRectanglesCheckBox);
+            this.Controls.Add(this.trimZeroesCheckBox);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.exportModeComboBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.colorChooser);
             this.Name = "GridLayerDefinitionEditor";
@@ -79,6 +105,8 @@
 
         private ColorChooser colorChooser;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox exportAsRectanglesCheckBox;
+        private System.Windows.Forms.ComboBox exportModeComboBox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox trimZeroesCheckBox;
     }
 }

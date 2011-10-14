@@ -10,15 +10,19 @@ namespace OgmoEditor.Definitions.LayerDefinitions
 {
     public class GridLayerDefinition : LayerDefinition
     {
+        public enum ExportModes { Bitstring, Rectangles };
+
         public OgmoColor Color;
-        public bool ExportAsRectangles;
+        public ExportModes ExportMode;
+        public bool TrimZeroes;
 
         public GridLayerDefinition()
             : base()
         {
             Image = "grid.png";
             Color = new OgmoColor(0, 0, 0);
-            ExportAsRectangles = false;
+            ExportMode = ExportModes.Bitstring;
+            TrimZeroes = false;
         }
 
         public override System.Windows.Forms.UserControl GetEditor()

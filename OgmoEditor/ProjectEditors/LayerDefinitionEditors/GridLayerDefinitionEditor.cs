@@ -21,7 +21,8 @@ namespace OgmoEditor.ProjectEditors.LayerDefinitionEditors
             Location = new Point(206, 117);
 
             colorChooser.Color = def.Color;
-            exportAsRectanglesCheckBox.Checked = def.ExportAsRectangles;
+            exportModeComboBox.SelectedIndex = (int)def.ExportMode;
+            trimZeroesCheckBox.Checked = def.TrimZeroes;
         }
 
         private void colorChooser_ColorChanged(OgmoColor color)
@@ -29,9 +30,15 @@ namespace OgmoEditor.ProjectEditors.LayerDefinitionEditors
             def.Color = color;
         }
 
-        private void exportAsRectanglesCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void exportModeComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            def.ExportAsRectangles = exportAsRectanglesCheckBox.Checked;
+            def.ExportMode = (GridLayerDefinition.ExportModes)exportModeComboBox.SelectedIndex;
+            trimZeroesCheckBox.Enabled = exportModeComboBox.SelectedIndex == 0;
+        }
+
+        private void trimZeroesCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            def.TrimZeroes = trimZeroesCheckBox.Checked;
         }
     }
 }
