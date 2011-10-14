@@ -75,9 +75,17 @@ namespace OgmoEditor.LevelData.Layers
                     //Extend it downward
                     while (p.Y + h < copy.GetLength(1))
                     {
+                        bool done = false;
                         for (int i = p.X; i < p.X + w; i++)
+                        {
                             if (!copy[i, p.Y + h])
+                            {
+                                done = true;
                                 break;
+                            }
+                        }
+                        if (done)
+                            break;
 
                         for (int i = p.X; i < p.X + w; i++)
                             copy[i, p.Y + h] = false;
