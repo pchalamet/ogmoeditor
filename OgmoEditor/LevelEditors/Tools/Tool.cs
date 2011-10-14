@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace OgmoEditor.LevelEditors.LayerEditors.Tools
+namespace OgmoEditor.LevelEditors.Tools
 {
     public abstract class Tool
     {

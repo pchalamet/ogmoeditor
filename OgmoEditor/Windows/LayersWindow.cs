@@ -22,6 +22,7 @@ namespace OgmoEditor.Windows
             {
                 e.Cancel = true;
                 Visible = false;
+                Ogmo.MainWindow.Focus();
             }
         }
     }

@@ -5,7 +5,7 @@ using System.Text;
 using OgmoEditor.LevelEditors.Actions.GridActions;
 using System.Diagnostics;
 
-namespace OgmoEditor.LevelEditors.LayerEditors.Tools.GridTools
+namespace OgmoEditor.LevelEditors.Tools.GridTools
 {
     public class GridPencilTool : GridTool
     {

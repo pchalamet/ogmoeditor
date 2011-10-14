@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
-using OgmoEditor.LevelEditors.LayerEditors.Tools;
+using OgmoEditor.LevelEditors.Tools;
 using System.Diagnostics;
 
 namespace OgmoEditor.Windows

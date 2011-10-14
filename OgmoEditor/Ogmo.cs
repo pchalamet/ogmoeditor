@@ -14,7 +14,7 @@ using OgmoEditor.LevelData;
 using OgmoEditor.Windows;
 using OgmoEditor.LevelData.Layers;
 using OgmoEditor.Definitions.LayerDefinitions;
-using OgmoEditor.LevelEditors.LayerEditors.Tools;
+using OgmoEditor.LevelEditors.Tools;
 
 namespace OgmoEditor
 {

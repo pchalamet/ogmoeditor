@@ -6,9 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using OgmoEditor.LevelEditors.LayerEditors.Tools;
+using OgmoEditor.LevelEditors.Tools;
 using OgmoEditor.Definitions.LayerDefinitions;
-using OgmoEditor.LevelEditors.LayerEditors.Tools.GridTools;
+using OgmoEditor.LevelEditors.Tools.GridTools;
 using System.Diagnostics;
 
 namespace OgmoEditor.Windows
@@ -21,6 +21,7 @@ namespace OgmoEditor.Windows
         public ToolsWindow()
         {
             InitializeComponent();
+            ClientSize = new Size(48, 144);
 
             //Initialize the tool lists
             toolsForLayerTypes = new Dictionary<Type, Tool[]>();
@@ -33,7 +34,7 @@ namespace OgmoEditor.Windows
             Ogmo.OnProjectStart += onProjectStart;
         }
 
-        public void KeyPress(Keys key)
+        public void EvaluateKeyPress(Keys key)
         {
             if (hotkeys.ContainsKey(key))
                 Ogmo.SetTool(hotkeys[key]);
@@ -57,7 +58,7 @@ namespace OgmoEditor.Windows
 
                     for (int i = 0; i < tools.Length; i++)
                     {
-                        Controls.Add(new ToolButton(tools[i], (i % 3) * 24, (i / 3) * 24));
+                        Controls.Add(new ToolButton(tools[i], (i % 2) * 24, (i / 2) * 24));
                         hotkeys.Add(tools[i].Hotkey, tools[i]);
                     }
 
@@ -76,6 +77,7 @@ namespace OgmoEditor.Windows
             {
                 e.Cancel = true;
                 Visible = false;
+                Ogmo.MainWindow.Focus();
             }
         }
     }

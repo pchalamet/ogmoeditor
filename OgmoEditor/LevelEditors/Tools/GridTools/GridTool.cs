@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using OgmoEditor.LevelData.Layers;
 using System.Windows.Forms;
+using OgmoEditor.LevelEditors.LayerEditors;
 
-namespace OgmoEditor.LevelEditors.LayerEditors.Tools.GridTools
+namespace OgmoEditor.LevelEditors.Tools.GridTools
 {
     public abstract class GridTool : Tool
     {

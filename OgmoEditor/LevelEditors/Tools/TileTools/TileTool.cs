@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using OgmoEditor.LevelData.Layers;
 using System.Windows.Forms;
+using OgmoEditor.LevelEditors.LayerEditors;
 
-namespace OgmoEditor.LevelEditors.LayerEditors.Tools.TileTools
+namespace OgmoEditor.LevelEditors.Tools.TileTools
 {
     public abstract class TileTool : Tool
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using OgmoEditor.LevelEditors.Actions.GridActions;
 
-namespace OgmoEditor.LevelEditors.LayerEditors.Tools.GridTools
+namespace OgmoEditor.LevelEditors.Tools.GridTools
 {
     public class GridFloodTool : GridTool
     {

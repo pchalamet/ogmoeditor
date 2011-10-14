@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 using System.Diagnostics;
 using OgmoEditor.LevelEditors.Actions;
-using OgmoEditor.LevelEditors.LayerEditors.Tools;  
+using OgmoEditor.LevelEditors.Tools;  
 
 namespace OgmoEditor.LevelEditors.LayerEditors
 {

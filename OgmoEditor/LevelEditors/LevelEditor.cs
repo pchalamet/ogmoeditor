@@ -13,7 +13,7 @@ using System.Windows.Forms;
 using OgmoEditor.LevelData;
 using OgmoEditor.LevelEditors.LayerEditors;
 using OgmoEditor.LevelEditors.Actions;
-using OgmoEditor.LevelEditors.LayerEditors.Tools;
+using OgmoEditor.LevelEditors.Tools;
 
 namespace OgmoEditor.LevelEditors
 {
@@ -242,7 +242,7 @@ namespace OgmoEditor.LevelEditors
         private void onKeyDown(object sender, KeyEventArgs e)
         {
             //Call the tool window keypress checker
-            Ogmo.ToolsWindow.KeyPress(e.KeyCode);
+            Ogmo.ToolsWindow.EvaluateKeyPress(e.KeyCode);
 
             //Call the layer event
             LayerEditors[Ogmo.CurrentLayerIndex].OnKeyDown(e.KeyCode);

@@ -86,8 +86,8 @@
     <Compile Include="LevelEditors\Actions\ActionBatch.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridDrawAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridFloodAction.cs" />
-    <Compile Include="LevelEditors\LayerEditors\Tools\GridTools\GridFloodTool.cs" />
-    <Compile Include="LevelEditors\LayerEditors\Tools\GridTools\GridPencilTool.cs" />
+    <Compile Include="LevelEditors\Tools\GridTools\GridFloodTool.cs" />
+    <Compile Include="LevelEditors\Tools\GridTools\GridPencilTool.cs" />
     <Compile Include="Windows\LayersWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,10 +109,10 @@
     <Compile Include="LevelEditors\LayerEditors\LayerEditor.cs" />
     <Compile Include="LevelEditors\LayerEditors\ObjectLayer.cs" />
     <Compile Include="LevelEditors\LayerEditors\TileLayerEditor.cs" />
-    <Compile Include="LevelEditors\LayerEditors\Tools\GridTools\GridTool.cs" />
-    <Compile Include="LevelEditors\LayerEditors\Tools\ObjectTools\ObjectTool.cs" />
-    <Compile Include="LevelEditors\LayerEditors\Tools\TileTools\TileTool.cs" />
-    <Compile Include="LevelEditors\LayerEditors\Tools\Tool.cs" />
+    <Compile Include="LevelEditors\Tools\GridTools\GridTool.cs" />
+    <Compile Include="LevelEditors\Tools\ObjectTools\ObjectTool.cs" />
+    <Compile Include="LevelEditors\Tools\TileTools\TileTool.cs" />
+    <Compile Include="LevelEditors\Tools\Tool.cs" />
     <Compile Include="LevelEditors\LevelEditor.cs">
       <SubType>Component</SubType>
     </Compile>
