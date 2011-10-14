@@ -13,7 +13,7 @@ using System.Diagnostics;
 
 namespace OgmoEditor.Windows
 {
-    public partial class ToolsWindow : Form
+    public partial class ToolsWindow : OgmoWindow
     {
         private Dictionary<Type, Tool[]> toolsForLayerTypes;
         private Dictionary<Keys, Tool> hotkeys;
@@ -71,16 +71,6 @@ namespace OgmoEditor.Windows
                         break;
                     }
                 }
-            }
-        }
-
-        private void ToolsWindow_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                e.Cancel = true;
-                Visible = false;
-                Ogmo.MainWindow.Focus();
             }
         }
     }

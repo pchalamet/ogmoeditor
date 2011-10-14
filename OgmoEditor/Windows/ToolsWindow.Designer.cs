@@ -40,7 +40,6 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Tools";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ToolsWindow_FormClosing);
             this.ResumeLayout(false);
 
         }

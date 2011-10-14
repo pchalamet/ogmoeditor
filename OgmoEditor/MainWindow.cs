@@ -51,6 +51,24 @@ namespace OgmoEditor
             set { MasterTabControl.SelectedIndex = value; }
         }
 
+        public Rectangle EditBounds
+        {
+            get
+            {
+                if (WindowState == FormWindowState.Maximized)
+                {
+                    int titleBar = Size.Height - ClientSize.Height;
+                    return new Rectangle(Location.X + 8 + MasterTabControl.Location.X, Location.Y + titleBar + MasterTabControl.Location.Y + 10, MasterTabControl.Width, MasterTabControl.Height - 20);
+                }
+                else
+                {
+                    int border = (Size.Width - ClientSize.Width) / 2;
+                    int titleBar = Size.Height - ClientSize.Height - border;
+                    return new Rectangle(Location.X + border + MasterTabControl.Location.X, Location.Y + 20 + titleBar + MasterTabControl.Location.Y, MasterTabControl.Width, MasterTabControl.Height - 20);
+                }
+            }
+        }
+
         /*
          *  Ogmo event Callbacks
          */

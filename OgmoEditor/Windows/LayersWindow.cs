@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace OgmoEditor.Windows
 {
-    public partial class LayersWindow : Form
+    public partial class LayersWindow : OgmoWindow
     {
         public LayersWindow()
         {
@@ -17,16 +17,6 @@ namespace OgmoEditor.Windows
 
             Ogmo.OnProjectStart += onProjectStart;
             Ogmo.OnProjectEdited += onProjectEdited;
-        }
-
-        private void LayersWindow_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                e.Cancel = true;
-                Visible = false;
-                Ogmo.MainWindow.Focus();
-            }
         }
 
         private void onProjectStart(Project project)
