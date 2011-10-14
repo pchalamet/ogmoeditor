@@ -9,9 +9,9 @@ namespace OgmoEditor.Definitions.LayerDefinitions
     public class ObjectLayerDefinition : LayerDefinition
     {
         public ObjectLayerDefinition()
-            : base("object.png")
+            : base()
         {
-
+            Image = "object.png";
         }
 
         public override System.Windows.Forms.UserControl GetEditor()

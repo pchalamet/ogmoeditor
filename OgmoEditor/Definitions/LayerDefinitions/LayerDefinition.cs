@@ -18,14 +18,19 @@ namespace OgmoEditor.Definitions.LayerDefinitions
         static public readonly List<Type> LAYER_TYPES = new List<Type>(new Type[] { typeof(GridLayerDefinition), typeof(TileLayerDefinition), typeof(ObjectLayerDefinition) });
         static public readonly List<string> LAYER_NAMES = new List<string>(new string[] { "Grid", "Tiles", "Objects" });
 
-        public string Image { get; private set; }
+        [XmlIgnore]
+        public string Image { get; protected set; }
+        [XmlIgnore]
+        public bool Visible;
+
         public string Name;
         public Size Grid;
 
-        public LayerDefinition(string image)
+        public LayerDefinition()
         {
-            Image = image;
+            Image = "";
             Name = "";
+            Visible = true;
         }
 
         public override string ToString()

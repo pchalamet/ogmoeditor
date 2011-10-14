@@ -14,6 +14,8 @@ namespace OgmoEditor.Windows
         public LayersWindow()
         {
             InitializeComponent();
+
+            Ogmo.OnProjectStart += onProjectStart;
         }
 
         private void LayersWindow_FormClosing(object sender, FormClosingEventArgs e)
@@ -24,6 +26,15 @@ namespace OgmoEditor.Windows
                 Visible = false;
                 Ogmo.MainWindow.Focus();
             }
+        }
+
+        private void onProjectStart(Project project)
+        {
+            ClientSize = new Size(120, project.LayerDefinitions.Count * 24); 
+
+            Controls.Clear();
+            for (int i = 0; i < project.LayerDefinitions.Count; i++)
+                Controls.Add(new LayerButton(project.LayerDefinitions[i], i * 24));
         }
     }
 }

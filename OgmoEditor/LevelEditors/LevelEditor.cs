@@ -104,10 +104,17 @@ namespace OgmoEditor.LevelEditors
 
             //Draw the layers
             int i;
-            for (i = 0; i <= Ogmo.CurrentLayerIndex; i++)
-                LayerEditors[i].Draw(spriteBatch, 1);
+            for (i = 0; i < Ogmo.CurrentLayerIndex; i++)
+            {
+                if (Ogmo.Project.LayerDefinitions[i].Visible)
+                    LayerEditors[i].Draw(spriteBatch, 1);
+            }
+            LayerEditors[Ogmo.CurrentLayerIndex].Draw(spriteBatch, 1);
             for (; i < LayerEditors.Count; i++)
-                LayerEditors[i].Draw(spriteBatch, LAYER_ABOVE_ALPHA);
+            {
+                if (Ogmo.Project.LayerDefinitions[i].Visible)
+                    LayerEditors[i].Draw(spriteBatch, LAYER_ABOVE_ALPHA);
+            }
 
             //Draw the grid if zoomed at least 100%
             if (Camera.Zoom >= 1)

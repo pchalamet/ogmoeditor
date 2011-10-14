@@ -90,6 +90,12 @@
     <Compile Include="LevelEditors\Tools\GridTools\GridFloodTool.cs" />
     <Compile Include="LevelEditors\Tools\GridTools\GridPencilTool.cs" />
     <Compile Include="LevelEditors\Tools\GridTools\GridRectangleTool.cs" />
+    <Compile Include="Windows\LayerButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Windows\LayerButton.Designer.cs">
+      <DependentUpon>LayerButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\LayersWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -250,6 +256,9 @@
     <EmbeddedResource Include="ColorChooser.resx">
       <DependentUpon>ColorChooser.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Windows\LayerButton.resx">
+      <DependentUpon>LayerButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\LayersWindow.resx">
       <DependentUpon>LayersWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -341,6 +350,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bg.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\layers\grid.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\layers\object.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\layers\tile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\logo.png">
