@@ -9,7 +9,7 @@ namespace OgmoEditor.Definitions.LayerDefinitions
     public class ObjectLayerDefinition : LayerDefinition
     {
         public ObjectLayerDefinition()
-            : base()
+            : base("object.png")
         {
 
         }

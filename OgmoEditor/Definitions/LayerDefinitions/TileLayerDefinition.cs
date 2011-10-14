@@ -12,7 +12,7 @@ namespace OgmoEditor.Definitions.LayerDefinitions
         public bool MultipleTilesets;
 
         public TileLayerDefinition()
-            : base()
+            : base("tile.png")
         {
             MultipleTilesets = false;
         }

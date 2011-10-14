@@ -14,7 +14,7 @@ namespace OgmoEditor.Definitions.LayerDefinitions
         public bool ExportAsRectangles;
 
         public GridLayerDefinition()
-            : base()
+            : base("grid.png")
         {
             Color = new OgmoColor(0, 0, 0);
             ExportAsRectangles = false;
