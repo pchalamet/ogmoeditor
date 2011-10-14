@@ -22,6 +22,7 @@ namespace OgmoEditor.LevelEditors
     public class LevelEditor : GraphicsDeviceControl
     {
         private const int UNDO_LIMIT = 50;
+        private const float LAYER_ABOVE_ALPHA = .5f;
 
         private SpriteBatch spriteBatch;
         private bool mousePanMode;
@@ -102,8 +103,11 @@ namespace OgmoEditor.LevelEditors
             Content.DrawRectangle(spriteBatch, 0, 0, Level.Size.Width, Level.Size.Height, Ogmo.Project.BackgroundColor.ToXNA());
 
             //Draw the layers
-            foreach (var ed in LayerEditors)
-                ed.Draw(spriteBatch);
+            int i;
+            for (i = 0; i <= Ogmo.CurrentLayerIndex; i++)
+                LayerEditors[i].Draw(spriteBatch, 1);
+            for (; i < LayerEditors.Count; i++)
+                LayerEditors[i].Draw(spriteBatch, LAYER_ABOVE_ALPHA);
 
             //Draw the grid if zoomed at least 100%
             if (Camera.Zoom >= 1)

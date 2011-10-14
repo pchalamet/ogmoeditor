@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using OgmoEditor.LevelData.Layers;
 using OgmoEditor.LevelEditors.Tools.GridTools;
+using System.Drawing;
 
 namespace OgmoEditor.LevelEditors.LayerEditors
 {
@@ -17,18 +18,18 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             Layer = layer;
         }
 
-        public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
+        public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch, float alpha)
         {
             for (int i = 0; i < Layer.Grid.GetLength(0); i++)
             {
                 for (int j = 0; j < Layer.Grid.GetLength(1); j++)
                 {
                     if (Layer.Grid[i, j])
-                        LevelEditor.Content.DrawRectangle(spriteBatch, i * Layer.Definition.Grid.Width, j * Layer.Definition.Grid.Height, Layer.Definition.Grid.Width, Layer.Definition.Grid.Height, Layer.Definition.Color.ToXNA());
+                        LevelEditor.Content.DrawRectangle(spriteBatch, i * Layer.Definition.Grid.Width, j * Layer.Definition.Grid.Height, Layer.Definition.Grid.Width, Layer.Definition.Grid.Height, Layer.Definition.Color.ToXNA() * alpha);
                 }
             }
 
-            base.Draw(spriteBatch);
+            base.Draw(spriteBatch, alpha);
         }
     }
 }

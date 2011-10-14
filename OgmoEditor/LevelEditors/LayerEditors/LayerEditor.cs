@@ -25,7 +25,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             Layer = layer;
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch, float alpha)
         {
             if (Ogmo.CurrentTool != null)
                 Ogmo.CurrentTool.Draw(spriteBatch);
