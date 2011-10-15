@@ -63,14 +63,19 @@ namespace OgmoEditor
                     float scale = Math.Min(ClientSize.Width / (float)clipRect.Width, ClientSize.Height / (float)clipRect.Height);
                     int destWidth = (int)(clipRect.Width * scale);
                     int destHeight = (int)(clipRect.Height * scale);
-                    g.DrawImage(image, 
-                        new Rectangle(pictureBox.ClientSize.Width / 2 - destWidth / 2, pictureBox.ClientSize.Height / 2 - destHeight / 2, destWidth, destHeight), 
+                    g.DrawImage(image,
+                        new Rectangle(pictureBox.ClientSize.Width / 2 - destWidth / 2, pictureBox.ClientSize.Height / 2 - destHeight / 2, destWidth, destHeight),
                         clipRect, GraphicsUnit.Pixel);
                 }
                 else
-                    g.DrawImage(image, 
-                        pictureBox.ClientSize.Width / 2 - clipRect.Width / 2 - 7, pictureBox.ClientSize.Height / 2 - clipRect.Height / 2 - 7, 
+                    g.DrawImage(image,
+                        pictureBox.ClientSize.Width / 2 - clipRect.Width / 2 - 7, pictureBox.ClientSize.Height / 2 - clipRect.Height / 2 - 7,
                         clipRect, GraphicsUnit.Pixel);
+            }
+            else
+            {
+                g.DrawImage(pictureBox.ErrorImage,
+                    new Point(pictureBox.ClientSize.Width / 2 - pictureBox.ErrorImage.Width / 2, pictureBox.ClientSize.Height / 2 - pictureBox.ErrorImage.Height / 2));
             }
         }
 
