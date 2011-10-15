@@ -155,7 +155,7 @@ namespace OgmoEditor.LevelData.Layers
                 //Rectangles import
                 foreach (XmlElement r in xml.GetElementsByTagName("rect"))
                 {
-                    Rectangle rect = new Rectangle(Convert.ToInt32(r.Attributes["x"]), Convert.ToInt32(r.Attributes["y"]), Convert.ToInt32(r.Attributes["w"]), Convert.ToInt32(r.Attributes["h"]));
+                    Rectangle rect = new Rectangle(Convert.ToInt32(r.Attributes["x"].InnerText), Convert.ToInt32(r.Attributes["y"].InnerText), Convert.ToInt32(r.Attributes["w"].InnerText), Convert.ToInt32(r.Attributes["h"].InnerText));
                     rect = levelToGrid(rect);
                     for (int i = 0; i < rect.Width; i++)
                         for (int j = 0; j < rect.Height; j++)
@@ -184,7 +184,7 @@ namespace OgmoEditor.LevelData.Layers
 
         private Rectangle levelToGrid(Rectangle r)
         {
-            return new Rectangle(r.X * Definition.Grid.Width, r.Y / Definition.Grid.Height, r.Width / Definition.Grid.Width, r.Height / Definition.Grid.Height); 
+            return new Rectangle(r.X / Definition.Grid.Width, r.Y / Definition.Grid.Height, r.Width / Definition.Grid.Width, r.Height / Definition.Grid.Height); 
         }
 
         public override LayerEditor GetEditor(LevelEditors.LevelEditor editor)

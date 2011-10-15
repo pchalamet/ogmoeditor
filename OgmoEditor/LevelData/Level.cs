@@ -94,6 +94,21 @@ namespace OgmoEditor.LevelData
             XmlElement level = doc.CreateElement("level");
             doc.AppendChild(level);
 
+            //Export the size
+            XmlAttribute a;
+            if (Ogmo.Project.ExportWidth)
+            {
+                a = doc.CreateAttribute("width");
+                a.InnerText = Size.Width.ToString();
+                level.Attributes.Append(a);
+            }
+            if (Ogmo.Project.ExportHeight)
+            {
+                a = doc.CreateAttribute("height");
+                a.InnerText = Size.Height.ToString();
+                level.Attributes.Append(a);
+            }
+
             //Export the layers
             for (int i = 0; i < Layers.Count; i++)
                 level.AppendChild(Layers[i].GetXML(doc));
@@ -103,7 +118,26 @@ namespace OgmoEditor.LevelData
 
         public void LoadFromXML(XmlDocument xml)
         {
+            XmlElement level = (XmlElement)xml.GetElementsByTagName("level")[0];
 
+            //Import the size
+            Size size = new Size();
+            if (Ogmo.Project.ExportWidth)
+                size.Width = Convert.ToInt32(level.Attributes["width"].InnerText);
+            else
+                size.Width = Ogmo.Project.LevelDefaultSize.Width;
+            if (Ogmo.Project.ExportHeight)
+                size.Height = Convert.ToInt32(level.Attributes["height"].InnerText);
+            else
+                size.Height = Ogmo.Project.LevelDefaultSize.Height;
+            Size = size;
+
+            //Import the layers
+            foreach (XmlElement e in level.ChildNodes)
+            {
+                int index = Ogmo.Project.LayerDefinitions.FindIndex(d => d.Name == e.Name);
+                Layers[index].SetXML(e);
+            }
         }
 
         public void LoadDefault()
