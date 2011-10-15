@@ -15,6 +15,7 @@ using OgmoEditor.Windows;
 using OgmoEditor.LevelData.Layers;
 using OgmoEditor.Definitions.LayerDefinitions;
 using OgmoEditor.LevelEditors.Tools;
+using OgmoEditor.Definitions;
 
 namespace OgmoEditor
 {
@@ -36,6 +37,7 @@ namespace OgmoEditor
         public delegate void LevelCallback(int index);
         public delegate void LayerCallback(LayerDefinition layerDefinition, int index);
         public delegate void ToolCallback(Tool tool);
+        public delegate void ObjectCallback(ObjectDefinition objectDefinition);
 
         static public MainWindow MainWindow { get; private set; }
         static public ToolsWindow ToolsWindow { get; private set; }
