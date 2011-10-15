@@ -22,7 +22,13 @@ namespace OgmoEditor.Windows
         private HorizontalSnap hSnap;
         private VerticalSnap vSnap;
 
-        public OgmoWindow(HorizontalSnap startHSnap = HorizontalSnap.None, VerticalSnap startVSnap = VerticalSnap.None)
+        public OgmoWindow()
+            : this(HorizontalSnap.None, VerticalSnap.None)
+        {
+
+        }
+
+        public OgmoWindow(HorizontalSnap startHSnap, VerticalSnap startVSnap)
         {
             this.startHSnap = startHSnap;
             this.startVSnap = startVSnap;

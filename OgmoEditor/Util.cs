@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace OgmoEditor
 {
@@ -68,6 +69,21 @@ namespace OgmoEditor
         {
             string d = Path.DirectorySeparatorChar + Path.GetFileName(filePath);
             return filePath.Remove(filePath.LastIndexOf(d));
+        }
+
+        static public Image CropImage(Image image, Rectangle clipRect)
+        {
+            Bitmap src = image as Bitmap;
+            Bitmap target = new Bitmap(clipRect.Width, clipRect.Height);
+
+            using(Graphics g = Graphics.FromImage(target))
+            {
+               g.DrawImage(src, new Rectangle(0, 0, target.Width, target.Height), 
+                                clipRect,                        
+                                GraphicsUnit.Pixel);
+            }
+
+            return (Image)target;
         }
 
     }

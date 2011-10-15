@@ -61,8 +61,6 @@ namespace OgmoEditor
             {
                 color = removePrefix(color);
 
-                Debug.WriteLine(hexToByte(color[0]));
-
                 A = 255;
                 R = (byte)(hexToByte(color[0]) * 16 + hexToByte(color[1]));
                 G = (byte)(hexToByte(color[2]) * 16 + hexToByte(color[3]));

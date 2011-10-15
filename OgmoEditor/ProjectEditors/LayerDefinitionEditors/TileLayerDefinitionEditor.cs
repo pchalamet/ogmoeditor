@@ -21,7 +21,6 @@ namespace OgmoEditor.ProjectEditors.LayerDefinitionEditors
             InitializeComponent();
             Location = new Point(206, 117);
 
-            Debug.WriteLine(def.MultipleTilesets);
             multipleTilesetsCheckBox.Checked = def.MultipleTilesets;
         }
 
