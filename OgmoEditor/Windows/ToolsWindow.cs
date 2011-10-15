@@ -55,7 +55,7 @@ namespace OgmoEditor.Windows
 
         protected override void handleKeyDown(KeyEventArgs e)
         {
-            if (hotkeys.ContainsKey(e.KeyCode))
+            if (hotkeys != null && hotkeys.ContainsKey(e.KeyCode))
                 SetTool(hotkeys[e.KeyCode]);
         }
 

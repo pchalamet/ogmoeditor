@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using OgmoEditor.LevelData.Layers;
+using System.Diagnostics;
 
 namespace OgmoEditor.Windows
 {
@@ -24,6 +25,16 @@ namespace OgmoEditor.Windows
             Ogmo.OnProjectEdited += onProjectEdited;
 
             CurrentLayerIndex = -1;
+        }
+
+        protected override void handleKeyDown(KeyEventArgs e)
+        {
+            if (e.KeyCode >= Keys.D1 && e.KeyCode <= Keys.D9)
+            {
+                int i = (int)e.KeyCode - (int)Keys.D1;
+                if (i < Ogmo.Project.LayerDefinitions.Count)
+                    SetLayer(i);
+            }
         }
 
         public Layer CurrentLayer
