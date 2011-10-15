@@ -53,10 +53,10 @@ namespace OgmoEditor.Windows
                 OnToolChanged(tool);
         }
 
-        public void EvaluateKeyPress(Keys key)
+        protected override void handleKeyDown(KeyEventArgs e)
         {
-            if (hotkeys.ContainsKey(key))
-                SetTool(hotkeys[key]);
+            if (hotkeys.ContainsKey(e.KeyCode))
+                SetTool(hotkeys[e.KeyCode]);
         }
 
         private void onProjectStart(Project project)

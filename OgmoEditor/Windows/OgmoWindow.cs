@@ -38,7 +38,19 @@ namespace OgmoEditor.Windows
             Resize += enforceSnap;
             Move += checkSnap;
             Ogmo.MainWindow.Resize += enforceSnap;
-            Ogmo.MainWindow.LocationChanged += enforceSnap;     
+            Ogmo.MainWindow.LocationChanged += enforceSnap;
+            Ogmo.MainWindow.KeyDown += onKeyDown;
+            KeyDown += onKeyDown;
+        }
+
+        private void onKeyDown(object sender, KeyEventArgs e)
+        {
+            handleKeyDown(e);
+        }
+
+        protected virtual void handleKeyDown(KeyEventArgs e)
+        {
+
         }
 
         private void onShown(object sender, EventArgs e)

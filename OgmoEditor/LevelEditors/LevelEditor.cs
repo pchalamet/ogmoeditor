@@ -252,9 +252,6 @@ namespace OgmoEditor.LevelEditors
 
         private void onKeyDown(object sender, KeyEventArgs e)
         {
-            //Call the tool window keypress checker
-            Ogmo.ToolsWindow.EvaluateKeyPress(e.KeyCode);
-
             //Call the layer event
             LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnKeyDown(e.KeyCode);
         }
