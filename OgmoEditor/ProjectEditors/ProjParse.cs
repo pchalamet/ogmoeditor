@@ -101,20 +101,20 @@ namespace OgmoEditor.ProjectEditors
 
             try
             {
-                to.Width = Convert.ToInt32(x.Text);
+                to.Width = Convert.ToInt32(w.Text);
             }
             catch
             {
-                x.Text = to.Width.ToString();
+                w.Text = to.Width.ToString();
             }
 
             try
             {
-                to.Height = Convert.ToInt32(y.Text);
+                to.Height = Convert.ToInt32(h.Text);
             }
             catch
             {
-                y.Text = to.Height.ToString();
+                h.Text = to.Height.ToString();
             }
         }
 

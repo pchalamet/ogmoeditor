@@ -87,7 +87,7 @@ namespace OgmoEditor.ProjectEditors
             imageFileClipHTextBox.Text = def.ImageDefinition.ClipRect.Height.ToString();
             imageFileTiledCheckBox.Checked = def.ImageDefinition.Tiled;
             imageFileWarningLabel.Visible = !checkImageFile();
-            loadImageFilePreview();
+            loadImageFilePreview(def.ImageDefinition.ClipRect);
         }
 
         private void disableControls()
@@ -167,11 +167,11 @@ namespace OgmoEditor.ProjectEditors
             return File.Exists(Path.Combine(directory, imageFileTextBox.Text));
         }
 
-        private void loadImageFilePreview(bool setClipRect = false)
+        private void loadImageFilePreview(Rectangle? clip = null)
         {
-            if (imagePreviewer.LoadImage(Path.Combine(directory, imageFileTextBox.Text)))
+            if (imagePreviewer.LoadImage(Path.Combine(directory, imageFileTextBox.Text), clip))
             {
-                if (setClipRect)
+                if (!clip.HasValue)
                 {
                     objects[listBox.SelectedIndex].ImageDefinition.ClipRect = new Rectangle(0, 0, imagePreviewer.ImageWidth, imagePreviewer.ImageHeight);
                     imageFileClipXTextBox.Text = 0.ToString();
@@ -378,6 +378,7 @@ namespace OgmoEditor.ProjectEditors
                 return;
 
             ProjParse.Parse(ref objects[listBox.SelectedIndex].ImageDefinition.ClipRect, imageFileClipXTextBox, imageFileClipYTextBox, imageFileClipWTextBox, imageFileClipHTextBox);
+            imagePreviewer.SetClip(objects[listBox.SelectedIndex].ImageDefinition.ClipRect);
         }
 
         private void imageFileButton_Click(object sender, EventArgs e)
@@ -396,7 +397,7 @@ namespace OgmoEditor.ProjectEditors
 
             imageFileTextBox.Text = Util.RelativePath(directory, dialog.FileName);
             imageFileWarningLabel.Visible = !checkImageFile();
-            loadImageFilePreview(true);
+            loadImageFilePreview();
 
             objects[listBox.SelectedIndex].ImageDefinition.ImagePath = imageFileTextBox.Text;
         }
