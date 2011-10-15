@@ -40,11 +40,9 @@ namespace OgmoEditor
         /*
          *  The actual config file
          */
-        public bool WarnForEditProject;
-
         private Config()
         {
-            WarnForEditProject = true;
+            
         }
     }
 }

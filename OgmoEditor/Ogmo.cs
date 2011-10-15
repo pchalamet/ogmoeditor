@@ -164,9 +164,9 @@ namespace OgmoEditor
         static public void EditProject(bool newProject)
         {
             //Warn!
-            if (Config.ConfigFile.WarnForEditProject && Ogmo.Levels.Count > 0 && Ogmo.Levels.Find(e => e.Changed || e.Saved) != null)
+            if (Ogmo.Levels.Count > 0 && Ogmo.Levels.Find(e => e.Changed) != null)
             {
-                if (MessageBox.Show(MainWindow, "Warning: All levels must be closed if any changes to the project are made. Still edit the project? (You will be prompted to save levels with unsaved changes)", "Warning!", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                if (MessageBox.Show(MainWindow, "Warning: All levels must be closed if any changes to the project are made. You have unsaved changes in some open levels which will be lost. Still edit the project?", "Warning!", MessageBoxButtons.OKCancel) != DialogResult.OK)
                     return;
             }
 
@@ -272,8 +272,18 @@ namespace OgmoEditor
                 OnLevelAdded(Levels.Count - 1);
         }
 
-        static public void CloseLevel(Level level)
+        static public bool CloseLevel(Level level, bool askToSave)
         {
+            //If it's changed, ask to save it
+            if (askToSave && level.Changed)
+            {
+                DialogResult result = MessageBox.Show(MainWindow, "Save changes to \"" + level.SaveName + "\" before closing it?", "Unsaved Changes!", MessageBoxButtons.YesNoCancel);
+                if (result == DialogResult.Cancel)
+                    return false;
+                else if (result == DialogResult.Yes)
+                    return level.Save();
+            }
+
             //Remove it
             int index = Levels.IndexOf(level);
             Levels.Remove(level);
@@ -284,15 +294,15 @@ namespace OgmoEditor
 
             //Set the current level to another one if that was the current one
             if (CurrentLevelIndex == index)
-            {
                 SetLevel(Math.Min(index, Levels.Count - 1));
-            }
+
+            return true;
         }
 
         static public void CloseAllLevels()
         {
             while (Levels.Count > 0)
-                CloseLevel(Levels[0]);
+                CloseLevel(Levels[0], false);
         }
 
         static public void CloseOtherLevels(Level level)
@@ -301,7 +311,10 @@ namespace OgmoEditor
             foreach (Level lev in temp)
             {
                 if (lev != level)
-                    CloseLevel(lev);
+                {
+                    if (!CloseLevel(lev, true))
+                        return;
+                }
             }
         }
 

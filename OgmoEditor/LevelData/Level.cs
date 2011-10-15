@@ -74,6 +74,19 @@ namespace OgmoEditor.LevelData
             }
         }
 
+        public string SaveName
+        {
+            get
+            {
+                string s;
+                if (SavePath == "")
+                    s = Ogmo.NEW_LEVEL_NAME;
+                else
+                    s = Path.GetFileName(SavePath);
+                return s;
+            }
+        }
+
         public bool Saved
         {
             get { return SavePath != ""; }
@@ -148,16 +161,14 @@ namespace OgmoEditor.LevelData
         /*
          *  Saving
          */
-        public void Save()
+        public bool Save()
         {
             //If it hasn't been saved before, do SaveAs instead
             if (SavePath == "")
-            {
-                SaveAs();
-                return;
-            }
+                return SaveAs();
 
             writeTo(SavePath);
+            return true;
         }
 
         public bool SaveAs()
@@ -165,7 +176,7 @@ namespace OgmoEditor.LevelData
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.InitialDirectory = project.SavedDirectory;
             dialog.RestoreDirectory = true;
-            dialog.FileName = Name;
+            dialog.FileName = SaveName;
             dialog.DefaultExt = Ogmo.LEVEL_EXT;
             dialog.OverwritePrompt = true;
             dialog.Filter = Ogmo.LEVEL_FILTER;

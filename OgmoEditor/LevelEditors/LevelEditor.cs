@@ -133,6 +133,8 @@ namespace OgmoEditor.LevelEditors
          */
         public void Perform(OgmoAction action)
         {
+            Debug.WriteLine(Level.Changed);
+
             //If a batch is in progress, stop it!
             BatchEnd();
 
@@ -170,7 +172,7 @@ namespace OgmoEditor.LevelEditors
                 //If the level is so-far unchanged, change it and store that fact
                 if (!Level.Changed)
                 {
-                    action.LevelWasChanged = false;
+                    batch.LevelWasChanged = false;
                     Level.Changed = true;
                 }
 
