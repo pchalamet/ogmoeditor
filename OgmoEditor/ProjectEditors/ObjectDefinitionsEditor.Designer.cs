@@ -63,6 +63,7 @@ namespace OgmoEditor.ProjectEditors
             this.label11 = new System.Windows.Forms.Label();
             this.graphicTypeComboBox = new System.Windows.Forms.ComboBox();
             this.rectangleGraphicPanel = new System.Windows.Forms.Panel();
+            this.rectangleColorChooser = new OgmoEditor.ColorChooser();
             this.label12 = new System.Windows.Forms.Label();
             this.imageFileGraphicPanel = new System.Windows.Forms.Panel();
             this.imageFileClipHTextBox = new System.Windows.Forms.TextBox();
@@ -75,12 +76,10 @@ namespace OgmoEditor.ProjectEditors
             this.label13 = new System.Windows.Forms.Label();
             this.imageFileTextBox = new System.Windows.Forms.TextBox();
             this.imageFileTiledCheckBox = new System.Windows.Forms.CheckBox();
-            this.imageFilePreviewBox = new System.Windows.Forms.PictureBox();
-            this.rectangleColorChooser = new OgmoEditor.ColorChooser();
             this.valuesEditor = new OgmoEditor.ProjectEditors.ValueDefinitionEditors.ValueDefinitionsEditor();
+            this.imagePreviewer = new OgmoEditor.ImagePreviewer();
             this.rectangleGraphicPanel.SuspendLayout();
             this.imageFileGraphicPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imageFilePreviewBox)).BeginInit();
             this.SuspendLayout();
             // 
             // listBox
@@ -428,6 +427,14 @@ namespace OgmoEditor.ProjectEditors
             this.rectangleGraphicPanel.Size = new System.Drawing.Size(343, 88);
             this.rectangleGraphicPanel.TabIndex = 83;
             // 
+            // rectangleColorChooser
+            // 
+            this.rectangleColorChooser.Location = new System.Drawing.Point(51, 5);
+            this.rectangleColorChooser.Name = "rectangleColorChooser";
+            this.rectangleColorChooser.Size = new System.Drawing.Size(108, 28);
+            this.rectangleColorChooser.TabIndex = 1;
+            this.rectangleColorChooser.ColorChanged += new OgmoEditor.ColorChooser.ColorCallback(this.rectangleColorChooser_ColorChanged);
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -439,6 +446,7 @@ namespace OgmoEditor.ProjectEditors
             // 
             // imageFileGraphicPanel
             // 
+            this.imageFileGraphicPanel.Controls.Add(this.imagePreviewer);
             this.imageFileGraphicPanel.Controls.Add(this.imageFileClipHTextBox);
             this.imageFileGraphicPanel.Controls.Add(this.imageFileClipWTextBox);
             this.imageFileGraphicPanel.Controls.Add(this.imageFileClipYTextBox);
@@ -449,7 +457,6 @@ namespace OgmoEditor.ProjectEditors
             this.imageFileGraphicPanel.Controls.Add(this.label13);
             this.imageFileGraphicPanel.Controls.Add(this.imageFileTextBox);
             this.imageFileGraphicPanel.Controls.Add(this.imageFileTiledCheckBox);
-            this.imageFileGraphicPanel.Controls.Add(this.imageFilePreviewBox);
             this.imageFileGraphicPanel.Enabled = false;
             this.imageFileGraphicPanel.Location = new System.Drawing.Point(211, 393);
             this.imageFileGraphicPanel.Name = "imageFileGraphicPanel";
@@ -547,24 +554,6 @@ namespace OgmoEditor.ProjectEditors
             this.imageFileTiledCheckBox.UseVisualStyleBackColor = true;
             this.imageFileTiledCheckBox.CheckedChanged += new System.EventHandler(this.imageFileTiledCheckBox_CheckedChanged);
             // 
-            // imageFilePreviewBox
-            // 
-            this.imageFilePreviewBox.BackgroundImage = global::OgmoEditor.Properties.Resources.bg;
-            this.imageFilePreviewBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.imageFilePreviewBox.Location = new System.Drawing.Point(4, 4);
-            this.imageFilePreviewBox.Name = "imageFilePreviewBox";
-            this.imageFilePreviewBox.Size = new System.Drawing.Size(82, 81);
-            this.imageFilePreviewBox.TabIndex = 0;
-            this.imageFilePreviewBox.TabStop = false;
-            // 
-            // rectangleColorChooser
-            // 
-            this.rectangleColorChooser.Location = new System.Drawing.Point(51, 5);
-            this.rectangleColorChooser.Name = "rectangleColorChooser";
-            this.rectangleColorChooser.Size = new System.Drawing.Size(108, 28);
-            this.rectangleColorChooser.TabIndex = 1;
-            this.rectangleColorChooser.ColorChanged += new OgmoEditor.ColorChooser.ColorCallback(this.rectangleColorChooser_ColorChanged);
-            // 
             // valuesEditor
             // 
             this.valuesEditor.Enabled = false;
@@ -574,7 +563,14 @@ namespace OgmoEditor.ProjectEditors
             this.valuesEditor.TabIndex = 70;
             this.valuesEditor.Title = "Values";
             // 
-            // ObjectsEditor
+            // imagePreviewer
+            // 
+            this.imagePreviewer.Location = new System.Drawing.Point(4, 4);
+            this.imagePreviewer.Name = "imagePreviewer";
+            this.imagePreviewer.Size = new System.Drawing.Size(85, 81);
+            this.imagePreviewer.TabIndex = 88;
+            // 
+            // ObjectDefinitionsEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -614,13 +610,12 @@ namespace OgmoEditor.ProjectEditors
             this.Controls.Add(this.moveUpButton);
             this.Controls.Add(this.removeButton);
             this.Controls.Add(this.addButton);
-            this.Name = "ObjectsEditor";
+            this.Name = "ObjectDefinitionsEditor";
             this.Size = new System.Drawing.Size(573, 490);
             this.rectangleGraphicPanel.ResumeLayout(false);
             this.rectangleGraphicPanel.PerformLayout();
             this.imageFileGraphicPanel.ResumeLayout(false);
             this.imageFileGraphicPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imageFilePreviewBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -676,6 +671,6 @@ namespace OgmoEditor.ProjectEditors
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox imageFileTextBox;
         private System.Windows.Forms.CheckBox imageFileTiledCheckBox;
-        private System.Windows.Forms.PictureBox imageFilePreviewBox;
+        private ImagePreviewer imagePreviewer;
     }
 }

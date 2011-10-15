@@ -39,7 +39,7 @@ namespace OgmoEditor.ProjectEditors
             moveUpButton.Enabled = listBox.SelectedIndex > 0;
             moveDownButton.Enabled = listBox.SelectedIndex < listBox.Items.Count - 1;
 
-            previewBox.Enabled = true;
+            imagePreviewer.Enabled = true;
             nameTextBox.Enabled = true;
             imageFileTextBox.Enabled = true;
             imageFileButton.Enabled = true;
@@ -64,7 +64,7 @@ namespace OgmoEditor.ProjectEditors
             moveUpButton.Enabled = false;
             moveDownButton.Enabled = false;
 
-            previewBox.Enabled = false;
+            imagePreviewer.Enabled = false;
             nameTextBox.Enabled = false;
             imageFileTextBox.Enabled = false;
             imageFileButton.Enabled = false;
@@ -99,28 +99,23 @@ namespace OgmoEditor.ProjectEditors
 
         private void loadPreview()
         {
-            previewBox.ImageLocation = Path.Combine(directory, imageFileTextBox.Text);
-            if (previewBox.Image == null)
+            if (imagePreviewer.LoadImage(Path.Combine(directory, imageFileTextBox.Text)))
             {
-                previewBox.Padding = new Padding(0, 0, 0, 0);
-                imageSizeLabel.Visible = false;
-                totalTilesLabel.Visible = false;
+                imageSizeLabel.Visible = true;
+                imageSizeLabel.Text = "Image Size: " + imagePreviewer.ImageWidth + " x " + imagePreviewer.ImageHeight;
+                totalTilesLabel.Visible = true;
+                updateTotalTiles();               
             }
             else
             {
-                previewBox.Padding = new Padding(
-                    previewBox.Width / 2 - previewBox.Image.Width / 2,
-                    previewBox.Height / 2 - previewBox.Image.Height / 2, 0, 0);
-                imageSizeLabel.Visible = true;
-                imageSizeLabel.Text = "Image Size: " + previewBox.Image.Width + " x " + previewBox.Image.Height;
-                totalTilesLabel.Visible = true;
-                updateTotalTiles();
+                imageSizeLabel.Visible = false;
+                totalTilesLabel.Visible = false;
             }
         }
 
         private void clearPreview()
         {
-            previewBox.Image = null;
+            imagePreviewer.ClearImage();
             imageSizeLabel.Visible = false;
             totalTilesLabel.Visible = false;
         }
@@ -132,11 +127,11 @@ namespace OgmoEditor.ProjectEditors
             int sep = tilesets[listBox.SelectedIndex].TileSep;
 
             int across = 0;
-            for (int i = 0; i + tw <= previewBox.Image.Width; i += tw + sep)
+            for (int i = 0; i + tw <= imagePreviewer.ImageWidth; i += tw + sep)
                 across++;
 
             int down = 0;
-            for (int i = 0; i + th <= previewBox.Image.Height; i += th + sep)
+            for (int i = 0; i + th <= imagePreviewer.ImageHeight; i += th + sep)
                 down++;
 
             int total = across * down;

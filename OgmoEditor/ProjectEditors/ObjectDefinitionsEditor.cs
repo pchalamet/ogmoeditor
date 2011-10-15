@@ -169,32 +169,26 @@ namespace OgmoEditor.ProjectEditors
 
         private void loadImageFilePreview(bool setClipRect = false)
         {
-            imageFilePreviewBox.ImageLocation = Path.Combine(directory, imageFileTextBox.Text);
-            if (imageFilePreviewBox.Image == null)
+            if (imagePreviewer.LoadImage(Path.Combine(directory, imageFileTextBox.Text)))
             {
-                imageFilePreviewBox.Padding = new Padding(0, 0, 0, 0);
+                if (setClipRect)
+                {
+                    objects[listBox.SelectedIndex].ImageDefinition.ClipRect = new Rectangle(0, 0, imagePreviewer.ImageWidth, imagePreviewer.ImageHeight);
+                    imageFileClipXTextBox.Text = 0.ToString();
+                    imageFileClipYTextBox.Text = 0.ToString();
+                    imageFileClipWTextBox.Text = imagePreviewer.ImageWidth.ToString();
+                    imageFileClipHTextBox.Text = imagePreviewer.ImageHeight.ToString();
+                }
             }
             else
             {
-                imageFilePreviewBox.Padding = new Padding(
-                    imageFilePreviewBox.Width / 2 - imageFilePreviewBox.Image.Width / 2,
-                    imageFilePreviewBox.Height / 2 - imageFilePreviewBox.Image.Height / 2, 0, 0);
-
-                if (setClipRect)
-                {
-                    Debug.WriteLine("yo");
-                    objects[listBox.SelectedIndex].ImageDefinition.ClipRect = new Rectangle(0, 0, imageFilePreviewBox.Image.Width, imageFilePreviewBox.Image.Height);
-                    imageFileClipXTextBox.Text = 0.ToString();
-                    imageFileClipYTextBox.Text = 0.ToString();
-                    imageFileClipWTextBox.Text = imageFilePreviewBox.Image.Width.ToString();
-                    imageFileClipHTextBox.Text = imageFilePreviewBox.Image.Height.ToString();
-                }
+                
             }
         }
 
         private void clearImageFilePreview()
         {
-            imageFilePreviewBox.Image = null;
+            imagePreviewer.ClearImage();
         }
 
         /*

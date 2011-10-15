@@ -33,7 +33,6 @@
             this.moveUpButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
-            this.previewBox = new System.Windows.Forms.PictureBox();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.imageFileTextBox = new System.Windows.Forms.TextBox();
@@ -48,7 +47,7 @@
             this.tileSpacingTextBox = new System.Windows.Forms.TextBox();
             this.imageSizeLabel = new System.Windows.Forms.Label();
             this.totalTilesLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.previewBox)).BeginInit();
+            this.imagePreviewer = new OgmoEditor.ImagePreviewer();
             this.SuspendLayout();
             // 
             // listBox
@@ -102,16 +101,6 @@
             this.addButton.Text = "Create";
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
-            // 
-            // previewBox
-            // 
-            this.previewBox.BackgroundImage = global::OgmoEditor.Properties.Resources.bg;
-            this.previewBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.previewBox.Location = new System.Drawing.Point(193, 3);
-            this.previewBox.Name = "previewBox";
-            this.previewBox.Size = new System.Drawing.Size(377, 258);
-            this.previewBox.TabIndex = 44;
-            this.previewBox.TabStop = false;
             // 
             // nameTextBox
             // 
@@ -245,10 +234,18 @@
             this.totalTilesLabel.Text = "Total Tiles:";
             this.totalTilesLabel.Visible = false;
             // 
+            // imagePreviewer
+            // 
+            this.imagePreviewer.Location = new System.Drawing.Point(195, 4);
+            this.imagePreviewer.Name = "imagePreviewer";
+            this.imagePreviewer.Size = new System.Drawing.Size(375, 257);
+            this.imagePreviewer.TabIndex = 59;
+            // 
             // TilesetsEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.imagePreviewer);
             this.Controls.Add(this.totalTilesLabel);
             this.Controls.Add(this.imageSizeLabel);
             this.Controls.Add(this.tileSpacingTextBox);
@@ -263,7 +260,6 @@
             this.Controls.Add(this.imageFileTextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nameTextBox);
-            this.Controls.Add(this.previewBox);
             this.Controls.Add(this.listBox);
             this.Controls.Add(this.moveDownButton);
             this.Controls.Add(this.moveUpButton);
@@ -271,7 +267,6 @@
             this.Controls.Add(this.addButton);
             this.Name = "TilesetsEditor";
             this.Size = new System.Drawing.Size(573, 490);
-            ((System.ComponentModel.ISupportInitialize)(this.previewBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -284,7 +279,6 @@
         private System.Windows.Forms.Button moveUpButton;
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.Button addButton;
-        private System.Windows.Forms.PictureBox previewBox;
         private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox imageFileTextBox;
@@ -299,5 +293,6 @@
         private System.Windows.Forms.TextBox tileSpacingTextBox;
         private System.Windows.Forms.Label imageSizeLabel;
         private System.Windows.Forms.Label totalTilesLabel;
+        private ImagePreviewer imagePreviewer;
     }
 }
