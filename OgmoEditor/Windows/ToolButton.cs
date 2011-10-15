@@ -27,14 +27,14 @@ namespace OgmoEditor.Windows
             InitializeComponent();
             button.BackgroundImage = Image.FromFile(Path.Combine(Ogmo.ProgramDirectory, @"Content\tools", Tool.Image));
             toolTip.SetToolTip(button, Tool.Name + " (" + Tool.Hotkey.ToString() + ")");
-            button.BackColor = (tool == Ogmo.CurrentTool) ? Selected : NotSelected;
+            button.BackColor = (tool == Ogmo.ToolsWindow.CurrentTool) ? Selected : NotSelected;
 
-            Ogmo.OnToolChanged += onToolChanged;
+            Ogmo.ToolsWindow.OnToolChanged += onToolChanged;
         }
 
         private void button_Click(object sender, EventArgs e)
         {
-            Ogmo.SetTool(Tool);
+            Ogmo.ToolsWindow.SetTool(Tool);
         }
 
         private void onToolChanged(Tool tool)

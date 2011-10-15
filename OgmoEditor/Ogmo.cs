@@ -45,7 +45,6 @@ namespace OgmoEditor
         static public Project Project { get; private set; }
         static public List<Level> Levels { get; private set; }
         static public int CurrentLevelIndex { get; private set; }
-        static public Tool CurrentTool { get; private set; }
 
         static public event ProjectCallback OnProjectStart;
         static public event ProjectCallback OnProjectClose;
@@ -53,7 +52,7 @@ namespace OgmoEditor
         static public event LevelCallback OnLevelAdded;
         static public event LevelCallback OnLevelClosed;
         static public event LevelCallback OnLevelChanged;
-        static public event ToolCallback OnToolChanged;
+        
 
         [STAThread]
         static void Main(string[] args)
@@ -158,7 +157,7 @@ namespace OgmoEditor
 
             //Tool and layer selection can be cleared now
             LayersWindow.SetLayer(-1);
-            CurrentTool = null;
+            ToolsWindow.SetTool(null);
         }
 
         static public void EditProject(bool newProject)
@@ -328,22 +327,5 @@ namespace OgmoEditor
             }
         }
 
-        /*
-         *  Tool stuff
-         */
-        static public void SetTool(Tool tool)
-        {
-            //If the current tool is already of that type, don't bother
-            if (CurrentTool == tool)
-                return;
-
-            //Set it!
-            CurrentTool = tool;
-            tool.SwitchTo();
-
-            //Call the event
-            if (OnToolChanged != null)
-                OnToolChanged(tool);
-        }
     }
 }

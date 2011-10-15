@@ -15,6 +15,9 @@ namespace OgmoEditor.Windows
 {
     public partial class ToolsWindow : OgmoWindow
     {
+        public Tool CurrentTool { get; private set; }
+        public event Ogmo.ToolCallback OnToolChanged;
+
         private Dictionary<Type, Tool[]> toolsForLayerTypes;
         private Dictionary<Keys, Tool> hotkeys;
 
@@ -35,10 +38,25 @@ namespace OgmoEditor.Windows
             Ogmo.OnProjectStart += onProjectStart;
         }
 
+        public void SetTool(Tool tool)
+        {
+            //If the current tool is already of that type, don't bother
+            if (CurrentTool == tool)
+                return;
+
+            //Set it!
+            CurrentTool = tool;
+            tool.SwitchTo();
+
+            //Call the event
+            if (OnToolChanged != null)
+                OnToolChanged(tool);
+        }
+
         public void EvaluateKeyPress(Keys key)
         {
             if (hotkeys.ContainsKey(key))
-                Ogmo.SetTool(hotkeys[key]);
+                SetTool(hotkeys[key]);
         }
 
         private void onProjectStart(Project project)
@@ -66,9 +84,9 @@ namespace OgmoEditor.Windows
                         }
 
                         if (tools.Length > 0)
-                            Ogmo.SetTool(tools[0]);
+                            SetTool(tools[0]);
                         else
-                            Ogmo.SetTool(null);
+                            SetTool(null);
                         break;
                     }
                 }

@@ -27,62 +27,62 @@ namespace OgmoEditor.LevelEditors.LayerEditors
 
         public virtual void Draw(SpriteBatch spriteBatch, float alpha)
         {
-            if (Ogmo.CurrentTool != null)
-                Ogmo.CurrentTool.Draw(spriteBatch);
+            if (Ogmo.ToolsWindow.CurrentTool != null)
+                Ogmo.ToolsWindow.CurrentTool.Draw(spriteBatch);
         }
 
         public void OnKeyDown(Keys key)
         {
-            if (Ogmo.CurrentTool != null)
-                Ogmo.CurrentTool.OnKeyDown(key);
+            if (Ogmo.ToolsWindow.CurrentTool != null)
+                Ogmo.ToolsWindow.CurrentTool.OnKeyDown(key);
         }
 
         public void OnKeyUp(Keys key)
         {
-            if (Ogmo.CurrentTool != null)
-                Ogmo.CurrentTool.OnKeyUp(key);
+            if (Ogmo.ToolsWindow.CurrentTool != null)
+                Ogmo.ToolsWindow.CurrentTool.OnKeyUp(key);
         }
 
         public void OnMouseLeftClick(Point location)
         {
-            if (Ogmo.CurrentTool != null)
-                Ogmo.CurrentTool.OnMouseLeftClick(location);
+            if (Ogmo.ToolsWindow.CurrentTool != null)
+                Ogmo.ToolsWindow.CurrentTool.OnMouseLeftClick(location);
         }
 
         public void OnMouseLeftDown(Point location)
         {
-            if (Ogmo.CurrentTool != null)
-                Ogmo.CurrentTool.OnMouseLeftDown(location);
+            if (Ogmo.ToolsWindow.CurrentTool != null)
+                Ogmo.ToolsWindow.CurrentTool.OnMouseLeftDown(location);
         }
 
         public void OnMouseLeftUp(Point location)
         {
-            if (Ogmo.CurrentTool != null)
-                Ogmo.CurrentTool.OnMouseLeftUp(location);
+            if (Ogmo.ToolsWindow.CurrentTool != null)
+                Ogmo.ToolsWindow.CurrentTool.OnMouseLeftUp(location);
         }
 
         public void OnMouseRightClick(Point location)
         {
-            if (Ogmo.CurrentTool != null)
-                Ogmo.CurrentTool.OnMouseRightClick(location);
+            if (Ogmo.ToolsWindow.CurrentTool != null)
+                Ogmo.ToolsWindow.CurrentTool.OnMouseRightClick(location);
         }
 
         public void OnMouseRightDown(Point location)
         {
-            if (Ogmo.CurrentTool != null)
-                Ogmo.CurrentTool.OnMouseRightDown(location);
+            if (Ogmo.ToolsWindow.CurrentTool != null)
+                Ogmo.ToolsWindow.CurrentTool.OnMouseRightDown(location);
         }
 
         public void OnMouseRightUp(Point location)
         {
-            if (Ogmo.CurrentTool != null)
-                Ogmo.CurrentTool.OnMouseRightUp(location);
+            if (Ogmo.ToolsWindow.CurrentTool != null)
+                Ogmo.ToolsWindow.CurrentTool.OnMouseRightUp(location);
         }
 
         public void OnMouseMove(Point location)
         {
-            if (Ogmo.CurrentTool != null)
-                Ogmo.CurrentTool.OnMouseMove(location);
+            if (Ogmo.ToolsWindow.CurrentTool != null)
+                Ogmo.ToolsWindow.CurrentTool.OnMouseMove(location);
         }
     }
 }
