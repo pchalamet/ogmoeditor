@@ -15,13 +15,12 @@ namespace OgmoEditor.Windows
         public enum HorizontalSnap { None, Left, Right };
         public enum VerticalSnap { None, Top, Bottom };
 
-        private const int SNAP_RANGE = 20;
+        private const int SNAP_RANGE = 18;
 
         private HorizontalSnap startHSnap;
         private VerticalSnap startVSnap;
         private HorizontalSnap hSnap;
         private VerticalSnap vSnap;
-        private bool snapChange;
 
         public OgmoWindow(HorizontalSnap startHSnap = HorizontalSnap.None, VerticalSnap startVSnap = VerticalSnap.None)
         {
@@ -31,8 +30,9 @@ namespace OgmoEditor.Windows
 
             Shown += onShown;
             Resize += enforceSnap;
+            Move += checkSnap;
             Ogmo.MainWindow.Resize += enforceSnap;
-            Ogmo.MainWindow.LocationChanged += enforceSnap;       
+            Ogmo.MainWindow.LocationChanged += enforceSnap;     
         }
 
         private void onShown(object sender, EventArgs e)
@@ -52,14 +52,8 @@ namespace OgmoEditor.Windows
             }
         }
 
-        private void OgmoWindow_LocationChanged(object sender, EventArgs e)
+        private void checkSnap(object sender = null, EventArgs e = null)
         {
-            if (snapChange)
-            {
-                snapChange = false;
-                return;
-            }
-
             Rectangle r = Ogmo.MainWindow.EditBounds;
             Point p = Location;
 
@@ -111,7 +105,6 @@ namespace OgmoEditor.Windows
             else if (vSnap == VerticalSnap.Bottom)
                 p.Y = r.Y + r.Height - Height;
 
-            snapChange = true;
             Location = p;
         }
     }

@@ -39,7 +39,6 @@
             this.Name = "OgmoWindow";
             this.Text = "OgmoWindow";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OgmoWindow_FormClosing);
-            this.LocationChanged += new System.EventHandler(this.OgmoWindow_LocationChanged);
             this.ResumeLayout(false);
 
         }
