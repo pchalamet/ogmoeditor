@@ -228,7 +228,7 @@ namespace OgmoEditor.ProjectEditors
 
         static public string CheckPath(string relPath, string absPath, string name)
         {
-            if (!File.Exists(Util.GetPathAbsolute(relPath, absPath)))
+            if (!File.Exists(Path.Combine(absPath, relPath)))
                 return Error(name + " does not exist");
             else
                 return "";

@@ -84,6 +84,12 @@
     <Compile Include="Definitions\ValueDefinitions\FloatValueDefinition.cs" />
     <Compile Include="Definitions\ValueDefinitions\IntValueDefinition.cs" />
     <Compile Include="Definitions\ValueDefinitions\StringValueDefinition.cs" />
+    <Compile Include="ImagePreviewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ImagePreviewer.Designer.cs">
+      <DependentUpon>ImagePreviewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="LevelEditors\Actions\ActionBatch.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridDrawAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridFloodAction.cs" />
@@ -268,6 +274,9 @@
   <ItemGroup>
     <EmbeddedResource Include="ColorChooser.resx">
       <DependentUpon>ColorChooser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImagePreviewer.resx">
+      <DependentUpon>ImagePreviewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\LayerButton.resx">
       <DependentUpon>LayerButton.cs</DependentUpon>

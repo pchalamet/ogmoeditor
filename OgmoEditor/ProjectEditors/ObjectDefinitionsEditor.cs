@@ -164,12 +164,12 @@ namespace OgmoEditor.ProjectEditors
 
         private bool checkImageFile()
         {
-            return File.Exists(Util.GetPathAbsolute(imageFileTextBox.Text, directory));
+            return File.Exists(Path.Combine(directory, imageFileTextBox.Text));
         }
 
         private void loadImageFilePreview(bool setClipRect = false)
         {
-            imageFilePreviewBox.ImageLocation = Util.GetPathAbsolute(imageFileTextBox.Text, directory);
+            imageFilePreviewBox.ImageLocation = Path.Combine(directory, imageFileTextBox.Text);
             if (imageFilePreviewBox.Image == null)
             {
                 imageFilePreviewBox.Padding = new Padding(0, 0, 0, 0);
@@ -393,14 +393,14 @@ namespace OgmoEditor.ProjectEditors
             dialog.CheckFileExists = true;
 
             if (checkImageFile())
-                dialog.InitialDirectory = Path.GetFullPath(Util.GetPathAbsolute(imageFileTextBox.Text, directory));
+                dialog.InitialDirectory = Util.DirectoryPath(Path.Combine(directory, imageFileTextBox.Text));
             else
                 dialog.InitialDirectory = directory;
 
             if (dialog.ShowDialog() == DialogResult.Cancel)
                 return;
 
-            imageFileTextBox.Text = Util.GetFilePathRelativeTo(dialog.FileName, directory);
+            imageFileTextBox.Text = Util.RelativePath(directory, dialog.FileName);
             imageFileWarningLabel.Visible = !checkImageFile();
             loadImageFilePreview(true);
 
