@@ -30,18 +30,18 @@ namespace OgmoEditor.Windows
             layerNameLabel.Text = definition.Name;
 
             //Init state
-            selected = Ogmo.CurrentLayerIndex != -1 && Ogmo.Project.LayerDefinitions[Ogmo.CurrentLayerIndex] == LayerDefinition;
+            selected = Ogmo.LayersWindow.CurrentLayerIndex != -1 && Ogmo.Project.LayerDefinitions[Ogmo.LayersWindow.CurrentLayerIndex] == LayerDefinition;
             layerNameLabel.BackColor = selected ? Selected : NotSelected;
             visibleCheckBox.Checked = LayerDefinition.Visible;
 
             //Add events
-            Ogmo.OnLayerChanged += onLayerChanged;          
+            Ogmo.LayersWindow.OnLayerChanged += onLayerChanged;          
         }
 
         public void OnRemove()
         {
             //Clean up events
-            Ogmo.OnLayerChanged -= onLayerChanged;
+            Ogmo.LayersWindow.OnLayerChanged -= onLayerChanged;
         }
 
         private void onLayerChanged(LayerDefinition layer, int index)
@@ -69,7 +69,7 @@ namespace OgmoEditor.Windows
 
         private void layerNameLabel_Click(object sender, EventArgs e)
         {
-            Ogmo.SetLayer(Ogmo.Project.LayerDefinitions.IndexOf(LayerDefinition));
+            Ogmo.LayersWindow.SetLayer(Ogmo.Project.LayerDefinitions.IndexOf(LayerDefinition));
         }
     }
 }

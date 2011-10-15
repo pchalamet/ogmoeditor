@@ -18,7 +18,7 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
 
         public GridLayerEditor LayerEditor
         {
-            get { return (GridLayerEditor)LevelEditor.LayerEditors[Ogmo.CurrentLayerIndex]; }
+            get { return (GridLayerEditor)LevelEditor.LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex]; }
         }
     }
 }

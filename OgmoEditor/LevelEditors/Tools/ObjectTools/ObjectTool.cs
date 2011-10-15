@@ -18,7 +18,7 @@ namespace OgmoEditor.LevelEditors.Tools.ObjectTools
 
         public ObjectLayerEditor LayerEditor
         {
-            get { return (ObjectLayerEditor)LevelEditor.LayerEditors[Ogmo.CurrentLayerIndex]; }
+            get { return (ObjectLayerEditor)LevelEditor.LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex]; }
         }
     }
 }

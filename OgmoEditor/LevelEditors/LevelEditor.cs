@@ -104,12 +104,12 @@ namespace OgmoEditor.LevelEditors
 
             //Draw the layers
             int i;
-            for (i = 0; i < Ogmo.CurrentLayerIndex; i++)
+            for (i = 0; i < Ogmo.LayersWindow.CurrentLayerIndex; i++)
             {
                 if (Ogmo.Project.LayerDefinitions[i].Visible)
                     LayerEditors[i].Draw(spriteBatch, 1);
             }
-            LayerEditors[Ogmo.CurrentLayerIndex].Draw(spriteBatch, 1);
+            LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Draw(spriteBatch, 1);
             for (; i < LayerEditors.Count; i++)
             {
                 if (Ogmo.Project.LayerDefinitions[i].Visible)
@@ -258,31 +258,31 @@ namespace OgmoEditor.LevelEditors
             Ogmo.ToolsWindow.EvaluateKeyPress(e.KeyCode);
 
             //Call the layer event
-            LayerEditors[Ogmo.CurrentLayerIndex].OnKeyDown(e.KeyCode);
+            LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnKeyDown(e.KeyCode);
         }
 
         private void onKeyUp(object sender, KeyEventArgs e)
         {
             //Call the layer event
-            LayerEditors[Ogmo.CurrentLayerIndex].OnKeyUp(e.KeyCode);
+            LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnKeyUp(e.KeyCode);
         }
 
         private void onMouseClick(object sender, MouseEventArgs e)
         {
             //Call the layer event
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
-                LayerEditors[Ogmo.CurrentLayerIndex].OnMouseLeftClick(Camera.ScreenToEditor(e.Location));
+                LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnMouseLeftClick(Camera.ScreenToEditor(e.Location));
             else if (e.Button == System.Windows.Forms.MouseButtons.Right)
-                LayerEditors[Ogmo.CurrentLayerIndex].OnMouseRightClick(Camera.ScreenToEditor(e.Location));
+                LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnMouseRightClick(Camera.ScreenToEditor(e.Location));
         }
 
         private void onMouseDown(object sender, MouseEventArgs e)
         {
             //Call the layer event
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
-                LayerEditors[Ogmo.CurrentLayerIndex].OnMouseLeftDown(Camera.ScreenToEditor(e.Location));
+                LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnMouseLeftDown(Camera.ScreenToEditor(e.Location));
             else if (e.Button == System.Windows.Forms.MouseButtons.Right)
-                LayerEditors[Ogmo.CurrentLayerIndex].OnMouseRightDown(Camera.ScreenToEditor(e.Location));
+                LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnMouseRightDown(Camera.ScreenToEditor(e.Location));
             else if (e.Button == System.Windows.Forms.MouseButtons.Middle)
             {
                 //Enter mouse move mode
@@ -295,9 +295,9 @@ namespace OgmoEditor.LevelEditors
         {
             //Call the layer event
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
-                LayerEditors[Ogmo.CurrentLayerIndex].OnMouseLeftUp(Camera.ScreenToEditor(e.Location));
+                LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnMouseLeftUp(Camera.ScreenToEditor(e.Location));
             else if (e.Button == System.Windows.Forms.MouseButtons.Right)
-                LayerEditors[Ogmo.CurrentLayerIndex].OnMouseRightUp(Camera.ScreenToEditor(e.Location));
+                LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnMouseRightUp(Camera.ScreenToEditor(e.Location));
             else if (e.Button == System.Windows.Forms.MouseButtons.Middle)
             {
                 //Exit mouse move mode
@@ -320,7 +320,7 @@ namespace OgmoEditor.LevelEditors
             Ogmo.MainWindow.MouseCoordinatesLabel.Text = "( " + coords.X.ToString() + ", " + coords.Y.ToString() + " )";
 
             //Call the layer event
-            LayerEditors[Ogmo.CurrentLayerIndex].OnMouseMove(coords);
+            LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnMouseMove(coords);
         }
 
         private void onMouseWheel(object sender, MouseEventArgs e)

@@ -18,7 +18,7 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
 
         public TileLayerEditor LayerEditor
         {
-            get { return (TileLayerEditor)LevelEditor.LayerEditors[Ogmo.CurrentLayerIndex]; }
+            get { return (TileLayerEditor)LevelEditor.LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex]; }
         }
     }
 }

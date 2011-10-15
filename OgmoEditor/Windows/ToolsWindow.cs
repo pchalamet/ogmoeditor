@@ -31,7 +31,7 @@ namespace OgmoEditor.Windows
             toolsForLayerTypes.Add(typeof(ObjectLayerDefinition), new Tool[] { });
 
             //Init events
-            Ogmo.OnLayerChanged += onLayerChanged;
+            Ogmo.LayersWindow.OnLayerChanged += onLayerChanged;
             Ogmo.OnProjectStart += onProjectStart;
         }
 

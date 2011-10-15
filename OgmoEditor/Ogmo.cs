@@ -37,15 +37,14 @@ namespace OgmoEditor
         public delegate void LayerCallback(LayerDefinition layerDefinition, int index);
         public delegate void ToolCallback(Tool tool);
 
-        static public readonly MainWindow MainWindow = new MainWindow();
-        static public readonly ToolsWindow ToolsWindow = new ToolsWindow();
-        static public readonly LayersWindow LayersWindow = new LayersWindow();
+        static public MainWindow MainWindow { get; private set; }
+        static public ToolsWindow ToolsWindow { get; private set; }
+        static public LayersWindow LayersWindow { get; private set; }
         static public string ProgramDirectory { get; private set; }
 
         static public Project Project { get; private set; }
         static public List<Level> Levels { get; private set; }
         static public int CurrentLevelIndex { get; private set; }
-        static public int CurrentLayerIndex { get; private set; }
         static public Tool CurrentTool { get; private set; }
 
         static public event ProjectCallback OnProjectStart;
@@ -54,7 +53,6 @@ namespace OgmoEditor
         static public event LevelCallback OnLevelAdded;
         static public event LevelCallback OnLevelClosed;
         static public event LevelCallback OnLevelChanged;
-        static public event LayerCallback OnLayerChanged;
         static public event ToolCallback OnToolChanged;
 
         [STAThread]
@@ -77,9 +75,11 @@ namespace OgmoEditor
             //The levels holder
             Levels = new List<Level>();
             CurrentLevelIndex = -1;
-            CurrentLayerIndex = -1;
 
-            //The window
+            //The windows
+            MainWindow = new MainWindow();
+            LayersWindow = new LayersWindow();
+            ToolsWindow = new ToolsWindow();
             LayersWindow.Show(MainWindow);
             ToolsWindow.Show(MainWindow);
             LayersWindow.Visible = ToolsWindow.Visible = false;
@@ -131,7 +131,7 @@ namespace OgmoEditor
             StartProject(project);
 
             //Start a blank level and start at the first layer
-            SetLayer(0);
+            LayersWindow.SetLayer(0);
             NewLevel();
         }
 
@@ -157,7 +157,7 @@ namespace OgmoEditor
             Project = null;
 
             //Tool and layer selection can be cleared now
-            CurrentLayerIndex = -1;
+            LayersWindow.SetLayer(-1);
             CurrentTool = null;
         }
 
@@ -198,7 +198,7 @@ namespace OgmoEditor
                 CloseAllLevels();
 
                 //Start a blank level and start at the first layer
-                SetLayer(0);
+                LayersWindow.SetLayer(0);
                 NewLevel();
             }
         }
@@ -326,34 +326,6 @@ namespace OgmoEditor
                 if (GetLevelByPath(str) == null)
                     AddLevel(new Level(Project, str));
             }
-        }
-
-        /*
-         *  Layer stuff
-         */
-        static public Layer CurrentLayer
-        {
-            get
-            {
-                if (CurrentLevel == null)
-                    return null;
-                else
-                    return CurrentLevel.Layers[CurrentLayerIndex];
-            }
-        }
-
-        static public void SetLayer(int index)
-        {
-            //Can't set to what is already the current layer
-            if (index == CurrentLayerIndex)
-                return;
-
-            //Make it current
-            CurrentLayerIndex = index;
-
-            //Call the event
-            if (OnLayerChanged != null)
-                OnLayerChanged(index == -1 ? null : Project.LayerDefinitions[index], index);
         }
 
         /*
