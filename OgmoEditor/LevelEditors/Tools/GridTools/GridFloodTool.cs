@@ -20,7 +20,8 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
                 return;
 
             location = LayerEditor.Layer.Definition.ConvertToGrid(location);
-            LevelEditor.Perform(new GridFloodAction(LayerEditor.Layer, location.X, location.Y, true)); 
+            if (!LayerEditor.Layer.Grid[location.X, location.Y])
+                LevelEditor.Perform(new GridFloodAction(LayerEditor.Layer, location.X, location.Y, true)); 
         }
 
         public override void OnMouseRightClick(System.Drawing.Point location)
@@ -29,7 +30,8 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
                 return;
 
             location = LayerEditor.Layer.Definition.ConvertToGrid(location);
-            LevelEditor.Perform(new GridFloodAction(LayerEditor.Layer, location.X, location.Y, false));
+            if (LayerEditor.Layer.Grid[location.X, location.Y])
+                LevelEditor.Perform(new GridFloodAction(LayerEditor.Layer, location.X, location.Y, false));
         }
     }
 }
