@@ -118,7 +118,7 @@ namespace OgmoEditor.LevelEditors
             }
 
             //Draw the grid if zoomed at least 100%
-            if (Camera.Zoom >= 1)
+            if (Ogmo.MainWindow.EditingGridVisible && Camera.Zoom >= 1)
                 Content.DrawGrid(spriteBatch, LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Layer.Definition.Grid, Level.Size, Ogmo.Project.GridColor.ToXNA() * .5f);
 
             spriteBatch.End();

@@ -18,12 +18,14 @@ namespace OgmoEditor
     {
         private const int EDIT_BOUNDS_PADDING = 10;
 
+        public bool EditingGridVisible { get; private set; }
         public List<LevelEditor> LevelEditors { get; private set; }
 
         public MainWindow()
         {
             InitializeComponent();
 
+            EditingGridVisible = true;
             LevelEditors = new List<LevelEditor>();
 
             Ogmo.OnProjectStart += onProjectStart;
@@ -235,6 +237,8 @@ namespace OgmoEditor
          */
         private void viewToolStripMenuItem_DropDownOpened(object sender, EventArgs e)
         {
+            editingGridToolStripMenuItem.Checked = EditingGridVisible;
+
             layersToolStripMenuItem.Enabled = Ogmo.LayersWindow.EditorVisible;
             layersToolStripMenuItem.Checked = Ogmo.LayersWindow.UserVisible;
 
@@ -270,6 +274,11 @@ namespace OgmoEditor
                 Ogmo.ObjectsWindow.UserVisible = !Ogmo.ObjectsWindow.UserVisible;
                 Focus();
             }
+        }
+
+        private void editingGridToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EditingGridVisible = !EditingGridVisible;
         }
 
     }
