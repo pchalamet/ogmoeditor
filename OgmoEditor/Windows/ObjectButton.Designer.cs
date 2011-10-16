@@ -39,6 +39,7 @@
             this.button.Size = new System.Drawing.Size(32, 32);
             this.button.TabIndex = 0;
             this.button.UseVisualStyleBackColor = true;
+            this.button.Click += new System.EventHandler(this.button_Click);
             // 
             // ObjectButton
             // 

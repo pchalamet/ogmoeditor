@@ -44,7 +44,6 @@ namespace OgmoEditor.Windows
 
         public void SetTool(Tool tool)
         {
-            //If the current tool is already of that type, don't bother
             if (CurrentTool == tool)
                 return;
 

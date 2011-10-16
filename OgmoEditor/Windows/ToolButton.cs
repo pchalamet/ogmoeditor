@@ -14,8 +14,8 @@ namespace OgmoEditor.Windows
 {
     public partial class ToolButton : UserControl
     {
-        static public readonly OgmoColor Selected = new OgmoColor(150, 220, 255);
-        static public readonly OgmoColor NotSelected = new OgmoColor(255, 255, 255);
+        static private readonly OgmoColor Selected = new OgmoColor(150, 220, 255);
+        static private readonly OgmoColor NotSelected = new OgmoColor(255, 255, 255);
 
         public Tool Tool { get; private set; }
 
@@ -29,9 +29,13 @@ namespace OgmoEditor.Windows
             toolTip.SetToolTip(button, Tool.Name + " (" + Tool.Hotkey.ToString() + ")");
             button.BackColor = (tool == Ogmo.ToolsWindow.CurrentTool) ? Selected : NotSelected;
 
+            //Events
             Ogmo.ToolsWindow.OnToolChanged += onToolChanged;
         }
 
+        /*
+         *  Events
+         */
         private void button_Click(object sender, EventArgs e)
         {
             Ogmo.ToolsWindow.SetTool(Tool);
