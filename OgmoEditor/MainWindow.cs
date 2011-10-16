@@ -247,20 +247,29 @@ namespace OgmoEditor
 
         private void layersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.LayersWindow.UserVisible = !Ogmo.LayersWindow.UserVisible;
-            Focus();
+            if (Ogmo.LayersWindow.EditorVisible)
+            {
+                Ogmo.LayersWindow.UserVisible = !Ogmo.LayersWindow.UserVisible;
+                Focus();
+            }
         }
 
         private void toolsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.ToolsWindow.UserVisible = !Ogmo.ToolsWindow.UserVisible;
-            Focus();
+            if (Ogmo.ToolsWindow.EditorVisible)
+            {
+                Ogmo.ToolsWindow.UserVisible = !Ogmo.ToolsWindow.UserVisible;
+                Focus();
+            }
         }
 
         private void objectsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.ObjectsWindow.UserVisible = !Ogmo.ObjectsWindow.UserVisible;
-            Focus();
+            if (Ogmo.ObjectsWindow.EditorVisible)
+            {
+                Ogmo.ObjectsWindow.UserVisible = !Ogmo.ObjectsWindow.UserVisible;
+                Focus();
+            }
         }
 
     }
