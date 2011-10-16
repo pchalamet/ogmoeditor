@@ -46,7 +46,8 @@ namespace OgmoEditor.Windows
 
             //Set it!
             CurrentTool = tool;
-            tool.SwitchTo();
+            if (tool != null)
+                tool.SwitchTo();
 
             //Call the event
             if (OnToolChanged != null)
