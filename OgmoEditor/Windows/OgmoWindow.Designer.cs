@@ -39,6 +39,8 @@
             this.KeyPreview = true;
             this.Name = "OgmoWindow";
             this.Text = "OgmoWindow";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OgmoWindow_FormClosing);
             this.ResumeLayout(false);
 

@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml.Serialization;
 using System.Drawing;
 using OgmoEditor.Definitions.ValueDefinitions;
+using System.IO;
 
 namespace OgmoEditor.Definitions
 {
@@ -60,6 +61,34 @@ namespace OgmoEditor.Definitions
             foreach (var d in ValueDefinitions)
                 def.ValueDefinitions.Add(d.Clone());
             return def;
+        }
+
+        public Image GenerateButtonImage()
+        {
+            if (ImageDefinition.DrawMode == ObjectImageDefinition.DrawModes.Rectangle)
+            {
+                //Draw a rectangle
+                Bitmap b = new Bitmap(Size.Width, Size.Height);
+                using (Graphics g = Graphics.FromImage(b))
+                {
+                    g.DrawRectangle(new Pen(ImageDefinition.RectColor, 1), new Rectangle(0, 0, Size.Width, Size.Height));
+                }
+                return (Image)b;
+            }
+            else if (ImageDefinition.DrawMode == ObjectImageDefinition.DrawModes.Image)
+            {
+                //Draw the image
+                if (!File.Exists(Path.Combine(Ogmo.Project.SavedDirectory, ImageDefinition.ImagePath)))
+                    return null;
+                else
+                {
+                    Image image = Image.FromFile(Path.Combine(Ogmo.Project.SavedDirectory, ImageDefinition.ImagePath));
+                    image = Util.CropImage(image, ImageDefinition.ClipRect);
+                    return image;
+                }
+            }
+
+            return null;
         }
 
     }

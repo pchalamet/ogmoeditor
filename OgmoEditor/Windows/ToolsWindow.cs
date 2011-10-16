@@ -13,7 +13,7 @@ using System.Diagnostics;
 
 namespace OgmoEditor.Windows
 {
-    public partial class ToolsWindow : OgmoWindow
+    public class ToolsWindow : OgmoWindow
     {
         public Tool CurrentTool { get; private set; }
         public event Ogmo.ToolCallback OnToolChanged;
@@ -24,8 +24,11 @@ namespace OgmoEditor.Windows
         public ToolsWindow()
             : base(HorizontalSnap.Right, VerticalSnap.Top)
         {
-            InitializeComponent();
+            Name = "ToolsWindow";
+            Text = "Tools";
             ClientSize = new Size(48, 144);
+
+            CurrentTool = null;
 
             //Initialize the tool lists
             toolsForLayerTypes = new Dictionary<Type, Tool[]>();

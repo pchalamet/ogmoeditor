@@ -10,15 +10,18 @@ using OgmoEditor.Definitions;
 
 namespace OgmoEditor.Windows
 {
-    public partial class ObjectPaletteWindow : OgmoWindow
+    public partial class ObjectsWindow : OgmoWindow
     {
         public ObjectDefinition CurrentObject { get; private set; }
         public event Ogmo.ObjectCallback OnObjectChanged;
 
-        public ObjectPaletteWindow()
+        public ObjectsWindow()
             : base(HorizontalSnap.Right, VerticalSnap.Bottom)
         {
-            InitializeComponent();
+            Name = "ObjectsWindow";
+            Text = "Objects";
+
+            CurrentObject = null;
         }
     }
 }

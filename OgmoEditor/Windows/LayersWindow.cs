@@ -19,7 +19,8 @@ namespace OgmoEditor.Windows
         public LayersWindow()
             : base(HorizontalSnap.Left, VerticalSnap.Top)
         {
-            InitializeComponent();
+            Name = "LayersWindow";
+            Text = "Layers";
 
             Ogmo.OnProjectStart += onProjectStart;
             Ogmo.OnProjectEdited += onProjectEdited;

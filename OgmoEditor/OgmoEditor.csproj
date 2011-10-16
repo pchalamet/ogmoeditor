@@ -103,12 +103,6 @@
     <Compile Include="Windows\LayerButton.Designer.cs">
       <DependentUpon>LayerButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\LayersWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Windows\LayersWindow.Designer.cs">
-      <DependentUpon>LayersWindow.cs</DependentUpon>
-    </Compile>
     <Compile Include="LevelData\Layers\GridLayer.cs" />
     <Compile Include="LevelData\Layers\Layer.cs" />
     <Compile Include="LevelData\Layers\ObjectLayer.cs" />
@@ -238,11 +232,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Definitions\ValueDefinitions\ValueDefinition.cs" />
-    <Compile Include="Windows\ObjectPaletteWindow.cs">
+    <Compile Include="Windows\LayersWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\ObjectPaletteWindow.Designer.cs">
-      <DependentUpon>ObjectPaletteWindow.cs</DependentUpon>
+    <Compile Include="Windows\ObjectButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Windows\ObjectButton.Designer.cs">
+      <DependentUpon>ObjectButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ObjectsWindow.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Windows\OgmoWindow.cs">
       <SubType>Form</SubType>
@@ -256,15 +256,12 @@
     <Compile Include="Windows\ToolButton.Designer.cs">
       <DependentUpon>ToolButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\ToolsWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Windows\ToolsWindow.Designer.cs">
-      <DependentUpon>ToolsWindow.cs</DependentUpon>
-    </Compile>
     <Compile Include="Util.cs" />
     <Compile Include="Value.cs" />
     <Compile Include="LevelEditors\Content.cs" />
+    <Compile Include="Windows\ToolsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="XNA\GraphicsDeviceControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -280,9 +277,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\LayerButton.resx">
       <DependentUpon>LayerButton.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Windows\LayersWindow.resx">
-      <DependentUpon>LayersWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
@@ -334,14 +328,14 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Windows\ObjectButton.resx">
+      <DependentUpon>ObjectButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\OgmoWindow.resx">
       <DependentUpon>OgmoWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\ToolButton.resx">
       <DependentUpon>ToolButton.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Windows\ToolsWindow.resx">
-      <DependentUpon>ToolsWindow.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
