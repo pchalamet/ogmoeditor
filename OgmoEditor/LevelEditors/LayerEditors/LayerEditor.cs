@@ -18,6 +18,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
     {
         public Layer Layer { get; private set; }
         public LevelEditor LevelEditor { get; private set; }
+        public Point MouseSnapPosition { get; private set; }
 
         public LayerEditor(LevelEditor levelEditor, Layer layer)
         {
@@ -81,6 +82,8 @@ namespace OgmoEditor.LevelEditors.LayerEditors
 
         public void OnMouseMove(Point location)
         {
+            MouseSnapPosition = Layer.Definition.SnapToGrid(LevelEditor.MousePosition);
+
             if (Ogmo.ToolsWindow.CurrentTool != null)
                 Ogmo.ToolsWindow.CurrentTool.OnMouseMove(location);
         }

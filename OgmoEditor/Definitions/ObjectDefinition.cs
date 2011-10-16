@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 using System.Drawing;
 using OgmoEditor.Definitions.ValueDefinitions;
 using System.IO;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace OgmoEditor.Definitions
 {
@@ -89,6 +90,27 @@ namespace OgmoEditor.Definitions
             }
 
             return null;
+        }
+
+        public Texture2D GenerateTexture(GraphicsDevice graphics)
+        {
+            if (ImageDefinition.DrawMode == ObjectImageDefinition.DrawModes.Image)
+            {
+                FileStream stream = new FileStream(Path.Combine(Ogmo.Project.SavedDirectory, ImageDefinition.ImagePath), FileMode.Open);
+                Texture2D tex = Texture2D.FromStream(graphics, stream);                
+                stream.Close();
+
+                if (ImageDefinition.ClipRect.Width != tex.Width || ImageDefinition.ClipRect.Height != tex.Height || ImageDefinition.ClipRect.X != 0 || ImageDefinition.ClipRect.Y != 0)
+                {
+                    Texture2D texB = Util.CropTexture(tex, ImageDefinition.ClipRect);
+                    tex.Dispose();
+                    return texB;
+                }
+                else
+                    return tex;
+            }
+            else
+                return null;
         }
 
     }

@@ -33,6 +33,7 @@ namespace OgmoEditor.LevelEditors
         public Camera Camera { get; private set; }
         public List<LayerEditor> LayerEditors { get; private set; }
         public Rectangle DrawBounds { get; private set; }
+        public new Point MousePosition { get; private set; }
 
         public LinkedList<OgmoAction> UndoStack { get; private set; }
         public LinkedList<OgmoAction> RedoStack { get; private set; }
@@ -93,7 +94,7 @@ namespace OgmoEditor.LevelEditors
             //Draw the background and logo
             GraphicsDevice.SetRenderTarget(null);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone);
-            Content.DrawTextureFill(spriteBatch, Content.TexBG, DrawBounds);
+            Content.DrawTextureFillFast(spriteBatch, Content.TexBG, DrawBounds);
             spriteBatch.Draw(Content.TexLogo, new Vector2(DrawBounds.Width / 2, DrawBounds.Height / 2), null, Color.White, 0, new Vector2(Content.TexLogo.Width/2, Content.TexLogo.Height/2), 3, SpriteEffects.None, 0);
             spriteBatch.End();
 
@@ -118,7 +119,7 @@ namespace OgmoEditor.LevelEditors
 
             //Draw the grid if zoomed at least 100%
             if (Camera.Zoom >= 1)
-                Content.DrawGrid(spriteBatch, LayerEditors[0].Layer.Definition.Grid, Level.Size, Ogmo.Project.GridColor.ToXNA() * .5f);
+                Content.DrawGrid(spriteBatch, LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Layer.Definition.Grid, Level.Size, Ogmo.Project.GridColor.ToXNA() * .5f);
 
             spriteBatch.End();
         }
@@ -311,11 +312,11 @@ namespace OgmoEditor.LevelEditors
             }
 
             //Update the mouse coord display
-            Point coords = Camera.ScreenToEditor(e.Location);
-            Ogmo.MainWindow.MouseCoordinatesLabel.Text = "( " + coords.X.ToString() + ", " + coords.Y.ToString() + " )";
+            MousePosition = Camera.ScreenToEditor(e.Location);
+            Ogmo.MainWindow.MouseCoordinatesLabel.Text = "( " + MousePosition.X.ToString() + ", " + MousePosition.Y.ToString() + " )";
 
             //Call the layer event
-            LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnMouseMove(coords);
+            LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnMouseMove(MousePosition);
         }
 
         private void onMouseWheel(object sender, MouseEventArgs e)

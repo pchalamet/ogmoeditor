@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using System.Diagnostics;
 using System.Drawing;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace OgmoEditor
 {
@@ -84,6 +85,32 @@ namespace OgmoEditor
             }
 
             return (Image)target;
+        }
+
+        static public Texture2D CropTexture(Texture2D texture, Rectangle clipRect)
+        {
+            Texture2D tex = new Texture2D(texture.GraphicsDevice, clipRect.Width, clipRect.Height);
+
+            Color[] data = new Color[texture.Width * texture.Height];
+            texture.GetData<Color>(data);
+            Color[] outData = new Color[clipRect.Width * clipRect.Height];
+
+            for (int i = 0; i < clipRect.Width; i++)
+                for (int j = 0; j < clipRect.Height; j++)
+                    outData[i + (j * clipRect.Width)] = data[i + clipRect.X + ((j + clipRect.Y) * texture.Width)];
+
+            tex.SetData<Color>(outData);
+            return tex;
+        }
+
+        static public System.Drawing.Rectangle XNAToSystem(Microsoft.Xna.Framework.Rectangle rect)
+        {
+            return new System.Drawing.Rectangle(rect.X, rect.Y, rect.Width, rect.Height);
+        }
+
+        static public Microsoft.Xna.Framework.Rectangle SystemToXNA(System.Drawing.Rectangle rect)
+        {
+            return new Microsoft.Xna.Framework.Rectangle(rect.X, rect.Y, rect.Width, rect.Height);
         }
 
     }

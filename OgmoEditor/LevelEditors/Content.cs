@@ -12,12 +12,14 @@ namespace OgmoEditor.LevelEditors
 {
     using Color = Microsoft.Xna.Framework.Color;
     using Rectangle = Microsoft.Xna.Framework.Rectangle;
+    using OgmoEditor.Definitions;
 
     public class Content
     {
         public Texture2D TexPixel { get; private set; }
         public Texture2D TexBG { get; private set; }
         public Texture2D TexLogo { get; private set; }
+        public Dictionary<ObjectDefinition, Texture2D> ObjectTextures { get; private set; }
 
         private GraphicsDevice device;
 
@@ -25,30 +27,88 @@ namespace OgmoEditor.LevelEditors
         {
             this.device = device;
 
-            TexPixel = CreateRect(device, Color.White, 1, 1);
+            //Get all the standard textures set up
+            TexPixel = CreateRect(Color.White, 1, 1);
             TexBG = Read("bg.png");
             TexLogo = Read("logo.png");
-        }
 
-        private Texture2D Read(string filename)
-        {
-            FileStream s = new FileStream(Path.Combine(Ogmo.ProgramDirectory, "Content", filename), FileMode.Open);
-            Texture2D tex = Texture2D.FromStream(device, s);
-            s.Close();
-
-            return tex;
+            //Generate all the object textures
+            ObjectTextures = new Dictionary<ObjectDefinition, Texture2D>();
+            foreach (ObjectDefinition def in Ogmo.Project.ObjectDefinitions)
+            {
+                Texture2D tex = def.GenerateTexture(device);
+                if (tex != null)
+                    ObjectTextures.Add(def, tex);
+            }
         }
 
         /*
          *  Drawing helpers
          */
-        public void DrawTextureFill(SpriteBatch spriteBatch, Texture2D texture, Rectangle fillRect)
+        public void DrawObject(SpriteBatch spriteBatch, ObjectDefinition def, Rectangle drawRect, float alpha = 1)
+        {
+            if (def.ImageDefinition.DrawMode == ObjectImageDefinition.DrawModes.Rectangle)
+            {
+                DrawRectangle(spriteBatch, drawRect, def.ImageDefinition.RectColor.ToXNA() * alpha);
+            }
+            else if (def.ImageDefinition.DrawMode == ObjectImageDefinition.DrawModes.Image)
+            {
+                if (def.ImageDefinition.Tiled)
+                    DrawTextureFill(spriteBatch, ObjectTextures[def], drawRect, alpha);
+                else
+                    spriteBatch.Draw(ObjectTextures[def], drawRect, Color.White * alpha);
+            }
+        }
+
+        public void DrawTextureFill(SpriteBatch spriteBatch, Texture2D texture, Rectangle fillRect, float alpha = 1)
         {
             Rectangle r = new Rectangle(fillRect.X, fillRect.Y, texture.Width, texture.Height);
 
             for (r.X = fillRect.X; r.X < fillRect.X + fillRect.Width; r.X += texture.Width)
+            {
+                bool shortenX = false;
+                if (r.X + r.Width > fillRect.X + fillRect.Width)
+                {
+                    shortenX = true;
+                    r.Width = fillRect.X + fillRect.Width - r.X;
+                }
+
                 for (r.Y = fillRect.Y; r.Y < fillRect.Y + fillRect.Height; r.Y += texture.Height)
-                    spriteBatch.Draw(texture, r, Color.White);
+                {
+                    bool shortenY = false;
+                    if (r.Y + r.Height > fillRect.Y + fillRect.Height)
+                    {
+                        shortenY = true;
+                        r.Height = fillRect.Y + fillRect.Height - r.Y;
+                    }
+
+                    spriteBatch.Draw(texture, r, Color.White * alpha);
+
+                    if (shortenY)
+                        r.Height = texture.Height;
+                }
+
+                if (shortenX)
+                    r.Width = texture.Width;
+            }
+        }
+
+        public void DrawTextureFillFast(SpriteBatch spriteBatch, Texture2D texture, Rectangle fillRect, float alpha = 1)
+        {
+            Rectangle r = new Rectangle(fillRect.X, fillRect.Y, texture.Width, texture.Height);
+
+            for (r.X = fillRect.X; r.X < fillRect.X + fillRect.Width; r.X += texture.Width)
+            {
+                for (r.Y = fillRect.Y; r.Y < fillRect.Y + fillRect.Height; r.Y += texture.Height)
+                {
+                    spriteBatch.Draw(texture, r, Color.White * alpha);
+                }
+            }
+        }
+
+        public void DrawRectangle(SpriteBatch spriteBatch, Rectangle rect, Color color)
+        {
+            DrawRectangle(spriteBatch, rect.X, rect.Y, rect.Width, rect.Height, color);
         }
 
         public void DrawRectangle(SpriteBatch spriteBatch, int x, int y, int width, int height, Color color)
@@ -81,7 +141,16 @@ namespace OgmoEditor.LevelEditors
         /*
          *  Helpers
          */
-        static public Texture2D CreateRect(GraphicsDevice device, Color color, int width, int height)
+        private Texture2D Read(string filename)
+        {
+            FileStream s = new FileStream(Path.Combine(Ogmo.ProgramDirectory, "Content", filename), FileMode.Open);
+            Texture2D tex = Texture2D.FromStream(device, s);
+            s.Close();
+
+            return tex;
+        }
+
+        public Texture2D CreateRect(Color color, int width, int height)
         {
             Texture2D texture = new Texture2D(device, width, height, false, SurfaceFormat.Color);
 
