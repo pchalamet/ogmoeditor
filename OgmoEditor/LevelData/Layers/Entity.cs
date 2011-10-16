@@ -38,6 +38,15 @@ namespace OgmoEditor.LevelData.Layers
         public XmlElement GetXML(XmlDocument doc)
         {
             XmlElement xml = doc.CreateElement(Definition.Name);
+            XmlAttribute a;
+
+            //Position
+            a = doc.CreateAttribute("x");
+            a.InnerText = Position.X.ToString();
+            xml.Attributes.Append(a);
+            a = doc.CreateAttribute("y");
+            a.InnerText = Position.Y.ToString();
+            xml.Attributes.Append(a);
 
             return xml;
         }

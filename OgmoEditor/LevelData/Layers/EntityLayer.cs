@@ -25,14 +25,16 @@ namespace OgmoEditor.LevelData.Layers
         {
             XmlElement xml = doc.CreateElement(Definition.Name);
 
-
+            foreach (Entity e in Entities)
+                xml.AppendChild(e.GetXML(doc));
 
             return xml;
         }
 
         public override void SetXML(XmlElement xml)
         {
-            throw new NotImplementedException();
+            foreach (XmlElement e in xml.ChildNodes)
+                Entities.Add(new Entity(e));
         }
 
         public override LayerEditor GetEditor(LevelEditors.LevelEditor editor)
