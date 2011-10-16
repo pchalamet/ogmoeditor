@@ -56,5 +56,10 @@ namespace OgmoEditor.LevelData.Layers
             content.DrawEntity(Definition, new Microsoft.Xna.Framework.Rectangle(Position.X, Position.Y, Size.Width, Size.Height), alpha);
         }
 
+        public Rectangle Bounds
+        {
+            get { return new Rectangle(Position.X - Definition.Origin.X, Position.Y - Definition.Origin.Y, Size.Width, Size.Height); }
+        }
+
     }
 }
