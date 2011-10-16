@@ -8,6 +8,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
 {
     using Rectangle = Microsoft.Xna.Framework.Rectangle;
     using OgmoEditor.LevelData.Layers;
+    using OgmoEditor.LevelEditors.Actions.EntityActions;
 
     public class EntityPlacementTool : EntityTool
     {
@@ -44,14 +45,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                     Ogmo.ObjectsWindow.CurrentEntity.Size.Height);
 
                 if (LevelEditor.Level.Bounds.Contains(obj))
-                {
-                    //Enforce entity limit defined by the entity definition
-                    if (Ogmo.ObjectsWindow.CurrentEntity.Limit > 0 && LayerEditor.Layer.Entities.Count(e => e.Definition == Ogmo.ObjectsWindow.CurrentEntity) == Ogmo.ObjectsWindow.CurrentEntity.Limit)
-                        LayerEditor.Layer.Entities.Remove(LayerEditor.Layer.Entities.Find(e => e.Definition == Ogmo.ObjectsWindow.CurrentEntity));
-
-                    //Place the object
-                    LayerEditor.Layer.Entities.Add(new Entity(Ogmo.ObjectsWindow.CurrentEntity, LayerEditor.MouseSnapPosition));
-                }
+                    LevelEditor.Perform(new EntityAddAction(LayerEditor.Layer, new Entity(Ogmo.ObjectsWindow.CurrentEntity, LayerEditor.MouseSnapPosition)));
             }
         }
     }
