@@ -90,6 +90,7 @@
     <Compile Include="ImagePreviewer.Designer.cs">
       <DependentUpon>ImagePreviewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="LevelData\Layers\Entity.cs" />
     <Compile Include="LevelEditors\Actions\ActionBatch.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridDrawAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridFloodAction.cs" />

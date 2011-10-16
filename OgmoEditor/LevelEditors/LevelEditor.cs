@@ -24,7 +24,6 @@ namespace OgmoEditor.LevelEditors
         private const int UNDO_LIMIT = 50;
         private const float LAYER_ABOVE_ALPHA = .5f;
 
-        private SpriteBatch spriteBatch;
         private bool mousePanMode;
         private Point lastMousePoint;
 
@@ -68,9 +67,6 @@ namespace OgmoEditor.LevelEditors
             //Load the content
             Content = new Content(GraphicsDevice);
 
-            //Create the spritebatch
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
             //Events
             Application.Idle += delegate { Invalidate(); };
             this.Resize += onResize;
@@ -93,35 +89,35 @@ namespace OgmoEditor.LevelEditors
         {
             //Draw the background and logo
             GraphicsDevice.SetRenderTarget(null);
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone);
-            Content.DrawTextureFillFast(spriteBatch, Content.TexBG, DrawBounds);
-            spriteBatch.Draw(Content.TexLogo, new Vector2(DrawBounds.Width / 2, DrawBounds.Height / 2), null, Color.White, 0, new Vector2(Content.TexLogo.Width/2, Content.TexLogo.Height/2), 3, SpriteEffects.None, 0);
-            spriteBatch.End();
+            Content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone);
+            Content.DrawTextureFillFast(Content.TexBG, DrawBounds);
+            Content.SpriteBatch.Draw(Content.TexLogo, new Vector2(DrawBounds.Width / 2, DrawBounds.Height / 2), null, Color.White, 0, new Vector2(Content.TexLogo.Width / 2, Content.TexLogo.Height / 2), 3, SpriteEffects.None, 0);
+            Content.SpriteBatch.End();
 
             //Draw the level onto the control, positioned and scaled by the camera
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Camera.Matrix);
-            Content.DrawRectangle(spriteBatch, 10, 10, Level.Size.Width, Level.Size.Height, new Color(0, 0, 0, .5f));
-            Content.DrawRectangle(spriteBatch, 0, 0, Level.Size.Width, Level.Size.Height, Ogmo.Project.BackgroundColor.ToXNA());
+            Content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Camera.Matrix);
+            Content.DrawRectangle(10, 10, Level.Size.Width, Level.Size.Height, new Color(0, 0, 0, .5f));
+            Content.DrawRectangle(0, 0, Level.Size.Width, Level.Size.Height, Ogmo.Project.BackgroundColor.ToXNA());
 
             //Draw the layers
             int i;
             for (i = 0; i < Ogmo.LayersWindow.CurrentLayerIndex; i++)
             {
                 if (Ogmo.Project.LayerDefinitions[i].Visible)
-                    LayerEditors[i].Draw(spriteBatch, 1);
+                    LayerEditors[i].Draw(Content, 1);
             }
-            LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Draw(spriteBatch, 1);
+            LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Draw(Content, 1);
             for (; i < LayerEditors.Count; i++)
             {
                 if (Ogmo.Project.LayerDefinitions[i].Visible)
-                    LayerEditors[i].Draw(spriteBatch, LAYER_ABOVE_ALPHA);
+                    LayerEditors[i].Draw(Content, LAYER_ABOVE_ALPHA);
             }
 
-            //Draw the grid if zoomed at least 100%
+            //Draw the grid if turned on and editor is zoomed at least 100%
             if (Ogmo.MainWindow.EditingGridVisible && Camera.Zoom >= 1)
-                Content.DrawGrid(spriteBatch, LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Layer.Definition.Grid, Level.Size, Ogmo.Project.GridColor.ToXNA() * .5f);
+                Content.DrawGrid(LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Layer.Definition.Grid, Level.Size, Ogmo.Project.GridColor.ToXNA() * .5f);
 
-            spriteBatch.End();
+            Content.SpriteBatch.End();
         }
 
         public void SwitchTo()

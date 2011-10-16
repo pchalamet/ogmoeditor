@@ -16,7 +16,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
 
         }
 
-        public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
+        public override void Draw(Content content)
         {
             if (Ogmo.ObjectsWindow.CurrentEntity != null)
             {
@@ -27,7 +27,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                     Ogmo.ObjectsWindow.CurrentEntity.Size.Height);
 
                 if (LevelEditor.Level.Bounds.Contains(Util.XNAToSystem(obj)))
-                    LevelEditor.Content.DrawEntity(spriteBatch, Ogmo.ObjectsWindow.CurrentEntity, obj, 1);
+                    content.DrawEntity(Ogmo.ObjectsWindow.CurrentEntity, obj, .5f);
             }
         }
     }

@@ -22,10 +22,12 @@ namespace OgmoEditor.LevelEditors
         public Dictionary<EntityDefinition, Texture2D> ObjectTextures { get; private set; }
 
         private GraphicsDevice device;
+        public SpriteBatch SpriteBatch { get; private set; }
 
         public Content(GraphicsDevice device)
         {
             this.device = device;
+            SpriteBatch = new SpriteBatch(device);
 
             //Get all the standard textures set up
             TexPixel = CreateRect(Color.White, 1, 1);
@@ -45,22 +47,22 @@ namespace OgmoEditor.LevelEditors
         /*
          *  Drawing helpers
          */
-        public void DrawEntity(SpriteBatch spriteBatch, EntityDefinition def, Rectangle drawRect, float alpha = 1)
+        public void DrawEntity(EntityDefinition def, Rectangle drawRect, float alpha = 1)
         {
             if (def.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Rectangle)
             {
-                DrawRectangle(spriteBatch, drawRect, def.ImageDefinition.RectColor.ToXNA() * alpha);
+                DrawRectangle(drawRect, def.ImageDefinition.RectColor.ToXNA() * alpha);
             }
             else if (def.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
             {
                 if (def.ImageDefinition.Tiled)
-                    DrawTextureFill(spriteBatch, ObjectTextures[def], drawRect, alpha);
+                    DrawTextureFill(ObjectTextures[def], drawRect, alpha);
                 else
-                    spriteBatch.Draw(ObjectTextures[def], drawRect, Color.White * alpha);
+                    SpriteBatch.Draw(ObjectTextures[def], drawRect, Color.White * alpha);
             }
         }
 
-        public void DrawTextureFill(SpriteBatch spriteBatch, Texture2D texture, Rectangle fillRect, float alpha = 1)
+        public void DrawTextureFill(Texture2D texture, Rectangle fillRect, float alpha = 1)
         {
             Rectangle r = new Rectangle(fillRect.X, fillRect.Y, texture.Width, texture.Height);
 
@@ -82,7 +84,7 @@ namespace OgmoEditor.LevelEditors
                         r.Height = fillRect.Y + fillRect.Height - r.Y;
                     }
 
-                    spriteBatch.Draw(texture, r, Color.White * alpha);
+                    SpriteBatch.Draw(texture, r, Color.White * alpha);
 
                     if (shortenY)
                         r.Height = texture.Height;
@@ -93,7 +95,7 @@ namespace OgmoEditor.LevelEditors
             }
         }
 
-        public void DrawTextureFillFast(SpriteBatch spriteBatch, Texture2D texture, Rectangle fillRect, float alpha = 1)
+        public void DrawTextureFillFast(Texture2D texture, Rectangle fillRect, float alpha = 1)
         {
             Rectangle r = new Rectangle(fillRect.X, fillRect.Y, texture.Width, texture.Height);
 
@@ -101,41 +103,41 @@ namespace OgmoEditor.LevelEditors
             {
                 for (r.Y = fillRect.Y; r.Y < fillRect.Y + fillRect.Height; r.Y += texture.Height)
                 {
-                    spriteBatch.Draw(texture, r, Color.White * alpha);
+                    SpriteBatch.Draw(texture, r, Color.White * alpha);
                 }
             }
         }
 
-        public void DrawRectangle(SpriteBatch spriteBatch, Rectangle rect, Color color)
+        public void DrawRectangle(Rectangle rect, Color color)
         {
-            DrawRectangle(spriteBatch, rect.X, rect.Y, rect.Width, rect.Height, color);
+            DrawRectangle(rect.X, rect.Y, rect.Width, rect.Height, color);
         }
 
-        public void DrawRectangle(SpriteBatch spriteBatch, int x, int y, int width, int height, Color color)
+        public void DrawRectangle(int x, int y, int width, int height, Color color)
         {
-            spriteBatch.Draw(TexPixel, new Rectangle(x, y, width, height), color);
+            SpriteBatch.Draw(TexPixel, new Rectangle(x, y, width, height), color);
         }
 
-        public void DrawLine(SpriteBatch spriteBatch, int x1, int y1, int x2, int y2, Color color)
+        public void DrawLine(int x1, int y1, int x2, int y2, Color color)
         {
             int length = (int)Math.Sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
             float rotation = (float)Math.Atan2(y2 - y1, x2 - x1);
 
-            DrawLineAngle(spriteBatch, x1, y1, length, rotation, color);
+            DrawLineAngle(x1, y1, length, rotation, color);
         }
 
-        public void DrawLineAngle(SpriteBatch spriteBatch, int x, int y, int length, float rotation, Color color)
+        public void DrawLineAngle(int x, int y, int length, float rotation, Color color)
         {
-            spriteBatch.Draw(TexPixel, new Vector2(x, y), null, color, rotation, Vector2.Zero, new Vector2(length, 1), SpriteEffects.None, 0);
+            SpriteBatch.Draw(TexPixel, new Vector2(x, y), null, color, rotation, Vector2.Zero, new Vector2(length, 1), SpriteEffects.None, 0);
         }
 
-        public void DrawGrid(SpriteBatch spriteBatch, Size grid, Size size, Color color)
+        public void DrawGrid(Size grid, Size size, Color color)
         {
             for (int i = grid.Width; i < size.Width; i += grid.Width)
-                DrawLineAngle(spriteBatch, i, 2, size.Height - 4, Util.DOWN, color);
+                DrawLineAngle(i, 2, size.Height - 4, Util.DOWN, color);
 
             for (int i = grid.Height; i < size.Height; i += grid.Height)
-                DrawLineAngle(spriteBatch, 2, i, size.Width - 4, Util.RIGHT, color);
+                DrawLineAngle(2, i, size.Width - 4, Util.RIGHT, color);
         }
 
         /*

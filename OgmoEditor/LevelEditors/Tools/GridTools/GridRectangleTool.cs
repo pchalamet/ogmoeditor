@@ -20,13 +20,13 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
             drawing = false;
         }
 
-        public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
+        public override void Draw(Content content)
         {
             if (drawing)
             {
                 Rectangle draw = getRect();
                 if (LevelEditor.Level.Bounds.IntersectsWith(draw))
-                    LevelEditor.Content.DrawRectangle(spriteBatch, draw.X, draw.Y, draw.Width, draw.Height, (drawMode ? LayerEditor.Layer.Definition.Color.ToXNA() : LayerEditor.Layer.Definition.Color.Invert().ToXNA()) * .5f);
+                    content.DrawRectangle(draw.X, draw.Y, draw.Width, draw.Height, (drawMode ? LayerEditor.Layer.Definition.Color.ToXNA() : LayerEditor.Layer.Definition.Color.Invert().ToXNA()) * .5f);
             }
         }
 

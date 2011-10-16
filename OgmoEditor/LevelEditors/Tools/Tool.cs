@@ -26,7 +26,7 @@ namespace OgmoEditor.LevelEditors.Tools
 
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(Content content)
         {
 
         }

@@ -26,10 +26,10 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             Layer = layer;
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch, float alpha)
+        public virtual void Draw(Content content, float alpha)
         {
             if (Ogmo.ToolsWindow.CurrentTool != null)
-                Ogmo.ToolsWindow.CurrentTool.Draw(spriteBatch);
+                Ogmo.ToolsWindow.CurrentTool.Draw(content);
         }
 
         public void OnKeyDown(Keys key)
