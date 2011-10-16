@@ -6,12 +6,12 @@ using OgmoEditor.LevelData.Layers;
 
 namespace OgmoEditor.Definitions.LayerDefinitions
 {
-    public class ObjectLayerDefinition : LayerDefinition
+    public class EntityLayerDefinition : LayerDefinition
     {
-        public ObjectLayerDefinition()
+        public EntityLayerDefinition()
             : base()
         {
-            Image = "object.png";
+            Image = "entity.png";
         }
 
         public override System.Windows.Forms.UserControl GetEditor()
@@ -21,12 +21,12 @@ namespace OgmoEditor.Definitions.LayerDefinitions
 
         public override LevelData.Layers.Layer GetInstance()
         {
-            return new ObjectLayer(this);
+            return new EntityLayer(this);
         }
 
         public override LayerDefinition Clone()
         {
-            ObjectLayerDefinition def = new ObjectLayerDefinition();
+            EntityLayerDefinition def = new EntityLayerDefinition();
             def.Name = Name;
             def.Grid = Grid;
             return def;

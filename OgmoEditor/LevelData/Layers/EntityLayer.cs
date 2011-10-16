@@ -8,11 +8,11 @@ using OgmoEditor.LevelEditors.LayerEditors;
 
 namespace OgmoEditor.LevelData.Layers
 {
-    public class ObjectLayer : Layer
+    public class EntityLayer : Layer
     {
-        public new ObjectLayerDefinition Definition { get; private set; }
+        public new EntityLayerDefinition Definition { get; private set; }
 
-        public ObjectLayer(ObjectLayerDefinition definition)
+        public EntityLayer(EntityLayerDefinition definition)
             : base(definition)
         {
             Definition = definition;
@@ -30,7 +30,7 @@ namespace OgmoEditor.LevelData.Layers
 
         public override LayerEditor GetEditor(LevelEditors.LevelEditor editor)
         {
-            return new ObjectLayerEditor(editor, this);
+            return new EntityLayerEditor(editor, this);
         }
     }
 }

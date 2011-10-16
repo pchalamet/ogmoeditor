@@ -8,9 +8,9 @@ namespace OgmoEditor.LevelEditors.Actions.ObjectActions
 {
     public abstract class ObjectAction : OgmoAction
     {
-        public ObjectLayer ObjectLayer { get; private set; }
+        public EntityLayer ObjectLayer { get; private set; }
 
-        public ObjectAction(ObjectLayer objectLayer)
+        public ObjectAction(EntityLayer objectLayer)
         {
             ObjectLayer = objectLayer;
         }

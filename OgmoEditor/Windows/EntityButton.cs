@@ -10,23 +10,23 @@ using OgmoEditor.Definitions;
 
 namespace OgmoEditor.Windows
 {
-    public partial class ObjectButton : UserControl
+    public partial class EntityButton : UserControl
     {
         static private readonly OgmoColor Selected = new OgmoColor(150, 220, 255);
         static private readonly OgmoColor NotSelected = new OgmoColor(255, 255, 255);
 
-        public ObjectDefinition Definition { get; private set; }
+        public EntityDefinition Definition { get; private set; }
 
-        public ObjectButton(ObjectDefinition definition, int x, int y)
+        public EntityButton(EntityDefinition definition, int x, int y)
         {
             Definition = definition;
             InitializeComponent();
 
             button.BackgroundImage = Definition.GenerateButtonImage();
-            button.BackColor = (definition == Ogmo.ObjectsWindow.CurrentObject) ? Selected : NotSelected;
+            button.BackColor = (definition == Ogmo.ObjectsWindow.CurrentEntity) ? Selected : NotSelected;
 
             //Events
-            Ogmo.ObjectsWindow.OnObjectChanged += onObjectChanged;
+            Ogmo.ObjectsWindow.OnEntityChanged += onObjectChanged;
         }
 
         public void OnRemove()
@@ -42,7 +42,7 @@ namespace OgmoEditor.Windows
             Ogmo.ObjectsWindow.SetObject(Definition);
         }
 
-        private void onObjectChanged(ObjectDefinition definition)
+        private void onObjectChanged(EntityDefinition definition)
         {
             if (definition == Definition)
             {

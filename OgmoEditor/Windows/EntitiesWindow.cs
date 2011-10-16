@@ -11,17 +11,17 @@ using OgmoEditor.Definitions.LayerDefinitions;
 
 namespace OgmoEditor.Windows
 {
-    public partial class ObjectsWindow : OgmoWindow
+    public partial class EntitiesWindow : OgmoWindow
     {
-        public ObjectDefinition CurrentObject { get; private set; }
-        public event Ogmo.ObjectCallback OnObjectChanged;
+        public EntityDefinition CurrentEntity { get; private set; }
+        public event Ogmo.EntityCallback OnEntityChanged;
 
-        public ObjectsWindow()
+        public EntitiesWindow()
             : base(HorizontalSnap.Right, VerticalSnap.Bottom)
         {
-            Name = "ObjectsWindow";
-            Text = "Objects";
-            CurrentObject = null;
+            Name = "EntitiesWindow";
+            Text = "Entities";
+            CurrentEntity = null;
 
             //Events
             Ogmo.OnProjectStart += onProjectStart;
@@ -29,27 +29,27 @@ namespace OgmoEditor.Windows
             Ogmo.LayersWindow.OnLayerChanged += onLayerChanged;
         }
 
-        public void SetObject(ObjectDefinition def)
+        public void SetObject(EntityDefinition def)
         {
-            if (CurrentObject == def)
+            if (CurrentEntity == def)
                 return;
 
-            CurrentObject = def;
+            CurrentEntity = def;
 
             //Call the event
-            if (OnObjectChanged != null)
-                OnObjectChanged(def);
+            if (OnEntityChanged != null)
+                OnEntityChanged(def);
         }
 
         private void initFromProject(Project project)
         {
-            ClientSize = new Size(96, (1 + project.ObjectDefinitions.Count / 3) * 32);
+            ClientSize = new Size(96, (1 + project.EntityDefinitions.Count / 3) * 32);
 
-            foreach (ObjectButton b in Controls)
+            foreach (EntityButton b in Controls)
                 b.OnRemove();
             Controls.Clear();
-            for (int i = 0; i < project.ObjectDefinitions.Count; i++)
-                Controls.Add(new ObjectButton(project.ObjectDefinitions[i], (i % 3) * 32, (i / 3) * 32));
+            for (int i = 0; i < project.EntityDefinitions.Count; i++)
+                Controls.Add(new EntityButton(project.EntityDefinitions[i], (i % 3) * 32, (i / 3) * 32));
         }
 
         /*
@@ -67,7 +67,7 @@ namespace OgmoEditor.Windows
 
         private void onLayerChanged(LayerDefinition def, int index)
         {
-            EditorVisible = def is ObjectLayerDefinition;
+            EditorVisible = def is EntityLayerDefinition;
         }
     }
 }

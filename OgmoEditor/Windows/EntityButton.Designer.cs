@@ -1,6 +1,6 @@
 ﻿namespace OgmoEditor.Windows
 {
-    partial class ObjectButton
+    partial class EntityButton
     {
         /// <summary> 
         /// Required designer variable.

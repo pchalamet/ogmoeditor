@@ -19,7 +19,7 @@ namespace OgmoEditor.LevelEditors
         public Texture2D TexPixel { get; private set; }
         public Texture2D TexBG { get; private set; }
         public Texture2D TexLogo { get; private set; }
-        public Dictionary<ObjectDefinition, Texture2D> ObjectTextures { get; private set; }
+        public Dictionary<EntityDefinition, Texture2D> ObjectTextures { get; private set; }
 
         private GraphicsDevice device;
 
@@ -33,8 +33,8 @@ namespace OgmoEditor.LevelEditors
             TexLogo = Read("logo.png");
 
             //Generate all the object textures
-            ObjectTextures = new Dictionary<ObjectDefinition, Texture2D>();
-            foreach (ObjectDefinition def in Ogmo.Project.ObjectDefinitions)
+            ObjectTextures = new Dictionary<EntityDefinition, Texture2D>();
+            foreach (EntityDefinition def in Ogmo.Project.EntityDefinitions)
             {
                 Texture2D tex = def.GenerateTexture(device);
                 if (tex != null)
@@ -45,13 +45,13 @@ namespace OgmoEditor.LevelEditors
         /*
          *  Drawing helpers
          */
-        public void DrawObject(SpriteBatch spriteBatch, ObjectDefinition def, Rectangle drawRect, float alpha = 1)
+        public void DrawEntity(SpriteBatch spriteBatch, EntityDefinition def, Rectangle drawRect, float alpha = 1)
         {
-            if (def.ImageDefinition.DrawMode == ObjectImageDefinition.DrawModes.Rectangle)
+            if (def.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Rectangle)
             {
                 DrawRectangle(spriteBatch, drawRect, def.ImageDefinition.RectColor.ToXNA() * alpha);
             }
-            else if (def.ImageDefinition.DrawMode == ObjectImageDefinition.DrawModes.Image)
+            else if (def.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
             {
                 if (def.ImageDefinition.Tiled)
                     DrawTextureFill(spriteBatch, ObjectTextures[def], drawRect, alpha);

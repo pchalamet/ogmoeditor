@@ -74,9 +74,9 @@
     <Compile Include="Config.cs" />
     <Compile Include="Definitions\LayerDefinitions\GridLayerDefinition.cs" />
     <Compile Include="Definitions\LayerDefinitions\LayerDefinition.cs" />
-    <Compile Include="Definitions\LayerDefinitions\ObjectLayerDefinition.cs" />
+    <Compile Include="Definitions\LayerDefinitions\EntityLayerDefinition.cs" />
     <Compile Include="Definitions\LayerDefinitions\TileLayerDefinition.cs" />
-    <Compile Include="Definitions\ObjectDefinition.cs" />
+    <Compile Include="Definitions\EntityDefinition.cs" />
     <Compile Include="Definitions\Tileset.cs" />
     <Compile Include="Definitions\ValueDefinitions\BoolValueDefinition.cs" />
     <Compile Include="Definitions\ValueDefinitions\ColorValueDefinition.cs" />
@@ -97,7 +97,7 @@
     <Compile Include="LevelEditors\Tools\GridTools\GridFloodTool.cs" />
     <Compile Include="LevelEditors\Tools\GridTools\GridPencilTool.cs" />
     <Compile Include="LevelEditors\Tools\GridTools\GridRectangleTool.cs" />
-    <Compile Include="LevelEditors\Tools\ObjectTools\ObjectPlacementTool.cs" />
+    <Compile Include="LevelEditors\Tools\EntityTools\EntityPlacementTool.cs" />
     <Compile Include="Windows\LayerButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -106,7 +106,7 @@
     </Compile>
     <Compile Include="LevelData\Layers\GridLayer.cs" />
     <Compile Include="LevelData\Layers\Layer.cs" />
-    <Compile Include="LevelData\Layers\ObjectLayer.cs" />
+    <Compile Include="LevelData\Layers\EntityLayer.cs" />
     <Compile Include="LevelData\Layers\TileLayer.cs" />
     <Compile Include="LevelData\Level.cs" />
     <Compile Include="LevelEditors\Camera.cs" />
@@ -117,10 +117,10 @@
     <Compile Include="LevelEditors\Actions\TileActions\TileAction.cs" />
     <Compile Include="LevelEditors\LayerEditors\GridLayerEditor.cs" />
     <Compile Include="LevelEditors\LayerEditors\LayerEditor.cs" />
-    <Compile Include="LevelEditors\LayerEditors\ObjectLayer.cs" />
+    <Compile Include="LevelEditors\LayerEditors\EntityLayerEditor.cs" />
     <Compile Include="LevelEditors\LayerEditors\TileLayerEditor.cs" />
     <Compile Include="LevelEditors\Tools\GridTools\GridTool.cs" />
-    <Compile Include="LevelEditors\Tools\ObjectTools\ObjectTool.cs" />
+    <Compile Include="LevelEditors\Tools\EntityTools\EntityTool.cs" />
     <Compile Include="LevelEditors\Tools\TileTools\TileTool.cs" />
     <Compile Include="LevelEditors\Tools\Tool.cs" />
     <Compile Include="LevelEditors\LevelEditor.cs">
@@ -154,11 +154,11 @@
     <Compile Include="ProjectEditors\LayerDefinitionsEditor.Designer.cs">
       <DependentUpon>LayerDefinitionsEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProjectEditors\ObjectDefinitionsEditor.cs">
+    <Compile Include="ProjectEditors\EntityDefinitionsEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ProjectEditors\ObjectDefinitionsEditor.Designer.cs">
-      <DependentUpon>ObjectDefinitionsEditor.cs</DependentUpon>
+    <Compile Include="ProjectEditors\EntityDefinitionsEditor.Designer.cs">
+      <DependentUpon>EntityDefinitionsEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="ProjectEditors\ProjectEditor.cs">
       <SubType>Form</SubType>
@@ -236,13 +236,13 @@
     <Compile Include="Windows\LayersWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\ObjectButton.cs">
+    <Compile Include="Windows\EntityButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Windows\ObjectButton.Designer.cs">
-      <DependentUpon>ObjectButton.cs</DependentUpon>
+    <Compile Include="Windows\EntityButton.Designer.cs">
+      <DependentUpon>EntityButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\ObjectsWindow.cs">
+    <Compile Include="Windows\EntitiesWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Windows\OgmoWindow.cs">
@@ -291,8 +291,8 @@
     <EmbeddedResource Include="ProjectEditors\LayerDefinitionsEditor.resx">
       <DependentUpon>LayerDefinitionsEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProjectEditors\ObjectDefinitionsEditor.resx">
-      <DependentUpon>ObjectDefinitionsEditor.cs</DependentUpon>
+    <EmbeddedResource Include="ProjectEditors\EntityDefinitionsEditor.resx">
+      <DependentUpon>EntityDefinitionsEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProjectEditors\ProjectEditor.resx">
       <DependentUpon>ProjectEditor.cs</DependentUpon>
@@ -329,8 +329,8 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\ObjectButton.resx">
-      <DependentUpon>ObjectButton.cs</DependentUpon>
+    <EmbeddedResource Include="Windows\EntityButton.resx">
+      <DependentUpon>EntityButton.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\OgmoWindow.resx">
       <DependentUpon>OgmoWindow.cs</DependentUpon>
@@ -375,7 +375,7 @@
     <Content Include="Content\layers\grid.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\layers\object.png">
+    <Content Include="Content\layers\entity.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\layers\tile.png">

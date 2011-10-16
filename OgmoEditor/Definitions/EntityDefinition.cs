@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace OgmoEditor.Definitions
 {
-    public class ObjectDefinition
+    public class EntityDefinition
     {
         [XmlAttribute]
         public string Name;
@@ -27,11 +27,11 @@ namespace OgmoEditor.Definitions
 
         public Size Size;
         public Point Origin;
-        public ObjectImageDefinition ImageDefinition;
+        public EntityImageDefinition ImageDefinition;
         public List<ValueDefinition> ValueDefinitions;
-        public ObjectNodesDefinition NodesDefinition;
+        public EntityNodesDefinition NodesDefinition;
 
-        public ObjectDefinition()
+        public EntityDefinition()
         {
             Limit = -1;
             Size = new Size(16, 16);
@@ -46,9 +46,9 @@ namespace OgmoEditor.Definitions
             NodesDefinition.Limit = -1;
         }
 
-        public ObjectDefinition Clone()
+        public EntityDefinition Clone()
         {
-            ObjectDefinition def = new ObjectDefinition();
+            EntityDefinition def = new EntityDefinition();
             def.Name = Name;
             def.Limit = Limit;
             def.ResizableX = ResizableX;
@@ -66,7 +66,7 @@ namespace OgmoEditor.Definitions
 
         public Image GenerateButtonImage()
         {
-            if (ImageDefinition.DrawMode == ObjectImageDefinition.DrawModes.Rectangle)
+            if (ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Rectangle)
             {
                 //Draw a rectangle
                 Bitmap b = new Bitmap(Size.Width, Size.Height);
@@ -76,7 +76,7 @@ namespace OgmoEditor.Definitions
                 }
                 return (Image)b;
             }
-            else if (ImageDefinition.DrawMode == ObjectImageDefinition.DrawModes.Image)
+            else if (ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
             {
                 //Draw the image
                 if (!File.Exists(Path.Combine(Ogmo.Project.SavedDirectory, ImageDefinition.ImagePath)))
@@ -94,7 +94,7 @@ namespace OgmoEditor.Definitions
 
         public Texture2D GenerateTexture(GraphicsDevice graphics)
         {
-            if (ImageDefinition.DrawMode == ObjectImageDefinition.DrawModes.Image)
+            if (ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
             {
                 FileStream stream = new FileStream(Path.Combine(Ogmo.Project.SavedDirectory, ImageDefinition.ImagePath), FileMode.Open);
                 Texture2D tex = Texture2D.FromStream(graphics, stream);                
@@ -116,7 +116,7 @@ namespace OgmoEditor.Definitions
     }
 
     [XmlRoot("Image")]
-    public struct ObjectImageDefinition
+    public struct EntityImageDefinition
     {
         public enum DrawModes { Rectangle, Image };
 
@@ -132,7 +132,7 @@ namespace OgmoEditor.Definitions
     }
 
     [XmlRoot("Nodes")]
-    public struct ObjectNodesDefinition
+    public struct EntityNodesDefinition
     {
         public enum PathMode { None, Path, Circuit, Fan };
 

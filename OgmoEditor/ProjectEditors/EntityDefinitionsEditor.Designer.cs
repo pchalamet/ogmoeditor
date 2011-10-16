@@ -1,7 +1,7 @@
 ﻿using OgmoEditor.ProjectEditors.ValueDefinitionEditors;
 namespace OgmoEditor.ProjectEditors
 {
-    partial class ObjectDefinitionsEditor
+    partial class EntityDefinitionsEditor
     {
         /// <summary> 
         /// Required designer variable.

@@ -12,28 +12,28 @@ using System.Diagnostics;
 
 namespace OgmoEditor.ProjectEditors
 {
-    public partial class ObjectDefinitionsEditor : UserControl, IProjectChanger
+    public partial class EntityDefinitionsEditor : UserControl, IProjectChanger
     {
         private const string NEW_NAME = "NewObject";
 
-        private List<ObjectDefinition> objects;
+        private List<EntityDefinition> objects;
         private string directory;
 
-        public ObjectDefinitionsEditor()
+        public EntityDefinitionsEditor()
         {
             InitializeComponent();
         }
 
         public void LoadFromProject(Project project)
         {
-            objects = project.ObjectDefinitions;
+            objects = project.EntityDefinitions;
             foreach (var o in objects)
                 listBox.Items.Add(o.Name);
 
             directory = project.SavedDirectory;
         }
 
-        private void setControlsFromObject(ObjectDefinition def)
+        private void setControlsFromObject(EntityDefinition def)
         {
             removeButton.Enabled = true;
             moveUpButton.Enabled = listBox.SelectedIndex > 0;
@@ -115,9 +115,9 @@ namespace OgmoEditor.ProjectEditors
             clearImageFilePreview();
         }
 
-        private ObjectDefinition GetDefault()
+        private EntityDefinition GetDefault()
         {
-            ObjectDefinition def = new ObjectDefinition();
+            EntityDefinition def = new EntityDefinition();
 
             int i = 0;
             string name;
@@ -204,7 +204,7 @@ namespace OgmoEditor.ProjectEditors
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            ObjectDefinition def = GetDefault();
+            EntityDefinition def = GetDefault();
             objects.Add(def);
             listBox.SelectedIndex = listBox.Items.Add(def.Name);
         }
@@ -222,7 +222,7 @@ namespace OgmoEditor.ProjectEditors
         {
             int index = listBox.SelectedIndex;
 
-            ObjectDefinition temp = objects[index];
+            EntityDefinition temp = objects[index];
             objects[index] = objects[index - 1];
             objects[index - 1] = temp;
 
@@ -235,7 +235,7 @@ namespace OgmoEditor.ProjectEditors
         {
             int index = listBox.SelectedIndex;
 
-            ObjectDefinition temp = objects[index];
+            EntityDefinition temp = objects[index];
             objects[index] = objects[index + 1];
             objects[index + 1] = temp;
 
@@ -341,7 +341,7 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            objects[listBox.SelectedIndex].NodesDefinition.DrawMode = (ObjectNodesDefinition.PathMode)nodeDrawComboBox.SelectedIndex;
+            objects[listBox.SelectedIndex].NodesDefinition.DrawMode = (EntityNodesDefinition.PathMode)nodeDrawComboBox.SelectedIndex;
         }
 
         /*
@@ -352,7 +352,7 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            objects[listBox.SelectedIndex].ImageDefinition.DrawMode = (ObjectImageDefinition.DrawModes)graphicTypeComboBox.SelectedIndex;
+            objects[listBox.SelectedIndex].ImageDefinition.DrawMode = (EntityImageDefinition.DrawModes)graphicTypeComboBox.SelectedIndex;
             GraphicFieldsVisibility = graphicTypeComboBox.SelectedIndex;
         }
 

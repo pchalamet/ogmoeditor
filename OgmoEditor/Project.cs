@@ -35,7 +35,7 @@ namespace OgmoEditor
         public List<ValueDefinition> LevelValueDefinitions;
         public List<LayerDefinition> LayerDefinitions;
         public List<Tileset> Tilesets;
-        public List<ObjectDefinition> ObjectDefinitions;
+        public List<EntityDefinition> EntityDefinitions;
 
         //Events
         public event Ogmo.ProjectCallback OnPathChanged;
@@ -53,7 +53,7 @@ namespace OgmoEditor
             LevelValueDefinitions = new List<ValueDefinition>();
             LayerDefinitions = new List<LayerDefinition>();
             Tilesets = new List<Tileset>();
-            ObjectDefinitions = new List<ObjectDefinition>(); 
+            EntityDefinitions = new List<EntityDefinition>(); 
         }
 
         public void CloneFrom(Project copy)
@@ -77,9 +77,9 @@ namespace OgmoEditor
             foreach (var d in copy.Tilesets)
                 Tilesets.Add(d.Clone());
 
-            ObjectDefinitions = new List<ObjectDefinition>();
-            foreach (var d in copy.ObjectDefinitions)
-                ObjectDefinitions.Add(d.Clone());
+            EntityDefinitions = new List<EntityDefinition>();
+            foreach (var d in copy.EntityDefinitions)
+                EntityDefinitions.Add(d.Clone());
         }
 
         public string ErrorCheck()
@@ -112,7 +112,7 @@ namespace OgmoEditor
                 s += ProjParse.Error("Tile layer(s) are defined, but no tilesets are defined");
 
             //Must have an object if you have an object layer
-            if (LayerDefinitions.Find(l => l is ObjectLayerDefinition) != null && ObjectDefinitions.Count == 0)
+            if (LayerDefinitions.Find(l => l is EntityLayerDefinition) != null && EntityDefinitions.Count == 0)
                 s += ProjParse.Error("Object layer(s) are defined, but no objects are defined");
 
             /*
@@ -132,11 +132,11 @@ namespace OgmoEditor
              */
 
             //Check for duplicates and blanks
-            s += ProjParse.CheckDefinitionList(ObjectDefinitions);
-            foreach (var o in ObjectDefinitions)
+            s += ProjParse.CheckDefinitionList(EntityDefinitions);
+            foreach (var o in EntityDefinitions)
             {
                 //Image file must exist if it is using an image file to draw
-                if (o.ImageDefinition.DrawMode == ObjectImageDefinition.DrawModes.Image)
+                if (o.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
                     s += ProjParse.CheckPath(o.ImageDefinition.ImagePath, SavedDirectory, "Object \"" + o.Name + "\" image file");
             }
 

@@ -10,7 +10,7 @@ using OgmoEditor.LevelEditors.Tools;
 using OgmoEditor.Definitions.LayerDefinitions;
 using OgmoEditor.LevelEditors.Tools.GridTools;
 using System.Diagnostics;
-using OgmoEditor.LevelEditors.Tools.ObjectTools;
+using OgmoEditor.LevelEditors.Tools.EntityTools;
 
 namespace OgmoEditor.Windows
 {
@@ -35,7 +35,7 @@ namespace OgmoEditor.Windows
             toolsForLayerTypes = new Dictionary<Type, Tool[]>();
             toolsForLayerTypes.Add(typeof(GridLayerDefinition), new Tool[] { new GridPencilTool(), new GridFloodTool(), new GridRectangleTool() });
             toolsForLayerTypes.Add(typeof(TileLayerDefinition), new Tool[] { });
-            toolsForLayerTypes.Add(typeof(ObjectLayerDefinition), new Tool[] { new ObjectPlacementTool() });
+            toolsForLayerTypes.Add(typeof(EntityLayerDefinition), new Tool[] { new EntityPlacementTool() });
 
             //Events
             Ogmo.LayersWindow.OnLayerChanged += onLayerChanged;

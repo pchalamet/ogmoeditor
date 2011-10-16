@@ -37,12 +37,12 @@ namespace OgmoEditor
         public delegate void LevelCallback(int index);
         public delegate void LayerCallback(LayerDefinition layerDefinition, int index);
         public delegate void ToolCallback(Tool tool);
-        public delegate void ObjectCallback(ObjectDefinition objectDefinition);
+        public delegate void EntityCallback(EntityDefinition objectDefinition);
 
         static public MainWindow MainWindow { get; private set; }
         static public ToolsWindow ToolsWindow { get; private set; }
         static public LayersWindow LayersWindow { get; private set; }
-        static public ObjectsWindow ObjectsWindow { get; private set; }
+        static public EntitiesWindow ObjectsWindow { get; private set; }
         static public string ProgramDirectory { get; private set; }
 
         static public Project Project { get; private set; }
@@ -81,7 +81,7 @@ namespace OgmoEditor
             MainWindow = new MainWindow();
             LayersWindow = new LayersWindow();
             ToolsWindow = new ToolsWindow();
-            ObjectsWindow = new ObjectsWindow();
+            ObjectsWindow = new EntitiesWindow();
 
             LayersWindow.Show(MainWindow);
             ToolsWindow.Show(MainWindow);

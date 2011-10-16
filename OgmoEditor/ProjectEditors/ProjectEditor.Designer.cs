@@ -31,8 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProjectEditor));
             this.cancelButton = new System.Windows.Forms.Button();
             this.applyButton = new System.Windows.Forms.Button();
-            this.objectsTabPage = new System.Windows.Forms.TabPage();
-            this.objectsEditor = new OgmoEditor.ProjectEditors.ObjectDefinitionsEditor();
+            this.entitiesTabPage = new System.Windows.Forms.TabPage();
+            this.objectsEditor = new OgmoEditor.ProjectEditors.EntityDefinitionsEditor();
             this.tilesetsTabPage = new System.Windows.Forms.TabPage();
             this.tilesetsEditor = new OgmoEditor.ProjectEditors.TilesetsEditor();
             this.layersTabPage = new System.Windows.Forms.TabPage();
@@ -40,7 +40,7 @@
             this.settingsTabPage = new System.Windows.Forms.TabPage();
             this.settingsEditor = new OgmoEditor.ProjectEditors.SettingsEditor();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.objectsTabPage.SuspendLayout();
+            this.entitiesTabPage.SuspendLayout();
             this.tilesetsTabPage.SuspendLayout();
             this.layersTabPage.SuspendLayout();
             this.settingsTabPage.SuspendLayout();
@@ -68,16 +68,16 @@
             this.applyButton.UseVisualStyleBackColor = true;
             this.applyButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
-            // objectsTabPage
+            // entitiesTabPage
             // 
-            this.objectsTabPage.Controls.Add(this.objectsEditor);
-            this.objectsTabPage.Location = new System.Drawing.Point(4, 22);
-            this.objectsTabPage.Name = "objectsTabPage";
-            this.objectsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.objectsTabPage.Size = new System.Drawing.Size(573, 490);
-            this.objectsTabPage.TabIndex = 3;
-            this.objectsTabPage.Text = "Objects";
-            this.objectsTabPage.UseVisualStyleBackColor = true;
+            this.entitiesTabPage.Controls.Add(this.objectsEditor);
+            this.entitiesTabPage.Location = new System.Drawing.Point(4, 22);
+            this.entitiesTabPage.Name = "entitiesTabPage";
+            this.entitiesTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.entitiesTabPage.Size = new System.Drawing.Size(573, 490);
+            this.entitiesTabPage.TabIndex = 3;
+            this.entitiesTabPage.Text = "Entities";
+            this.entitiesTabPage.UseVisualStyleBackColor = true;
             // 
             // objectsEditor
             // 
@@ -148,7 +148,7 @@
             this.tabControl.Controls.Add(this.settingsTabPage);
             this.tabControl.Controls.Add(this.layersTabPage);
             this.tabControl.Controls.Add(this.tilesetsTabPage);
-            this.tabControl.Controls.Add(this.objectsTabPage);
+            this.tabControl.Controls.Add(this.entitiesTabPage);
             this.tabControl.Location = new System.Drawing.Point(2, 3);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -171,7 +171,7 @@
             this.MinimumSize = new System.Drawing.Size(600, 600);
             this.Name = "ProjectEditor";
             this.Text = "Project Editor";
-            this.objectsTabPage.ResumeLayout(false);
+            this.entitiesTabPage.ResumeLayout(false);
             this.tilesetsTabPage.ResumeLayout(false);
             this.layersTabPage.ResumeLayout(false);
             this.settingsTabPage.ResumeLayout(false);
@@ -184,14 +184,14 @@
 
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button applyButton;
-        private System.Windows.Forms.TabPage objectsTabPage;
+        private System.Windows.Forms.TabPage entitiesTabPage;
         private System.Windows.Forms.TabPage tilesetsTabPage;
         private System.Windows.Forms.TabPage layersTabPage;
         private System.Windows.Forms.TabPage settingsTabPage;
         private System.Windows.Forms.TabControl tabControl;
         private SettingsEditor settingsEditor;
         private LayerDefinitionsEditor layersEditor;
-        private ObjectDefinitionsEditor objectsEditor;
+        private EntityDefinitionsEditor objectsEditor;
         private TilesetsEditor tilesetsEditor;
     }
 }

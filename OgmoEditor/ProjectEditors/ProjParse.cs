@@ -204,13 +204,13 @@ namespace OgmoEditor.ProjectEditors
             return s;
         }
 
-        static public string CheckDefinitionList(List<ObjectDefinition> defs)
+        static public string CheckDefinitionList(List<EntityDefinition> defs)
         {
             string s = "";
 
             //Check for duplicate value names
             List<string> found = new List<string>();
-            foreach (ObjectDefinition v in defs)
+            foreach (EntityDefinition v in defs)
             {
                 if (v.Name != "" && !found.Contains(v.Name) && defs.FindAll(e => e.Name == v.Name).Count > 1)
                 {

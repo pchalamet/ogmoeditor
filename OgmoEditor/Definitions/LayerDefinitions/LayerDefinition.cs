@@ -11,12 +11,12 @@ namespace OgmoEditor.Definitions.LayerDefinitions
 {
     [XmlInclude(typeof(GridLayerDefinition))]
     [XmlInclude(typeof(TileLayerDefinition))]
-    [XmlInclude(typeof(ObjectLayerDefinition))]
+    [XmlInclude(typeof(EntityLayerDefinition))]
 
     public class LayerDefinition
     {
-        static public readonly List<Type> LAYER_TYPES = new List<Type>(new Type[] { typeof(GridLayerDefinition), typeof(TileLayerDefinition), typeof(ObjectLayerDefinition) });
-        static public readonly List<string> LAYER_NAMES = new List<string>(new string[] { "Grid", "Tiles", "Objects" });
+        static public readonly List<Type> LAYER_TYPES = new List<Type>(new Type[] { typeof(GridLayerDefinition), typeof(TileLayerDefinition), typeof(EntityLayerDefinition) });
+        static public readonly List<string> LAYER_NAMES = new List<string>(new string[] { "Grid", "Tiles", "Entities" });
 
         [XmlIgnore]
         public string Image { get; protected set; }
