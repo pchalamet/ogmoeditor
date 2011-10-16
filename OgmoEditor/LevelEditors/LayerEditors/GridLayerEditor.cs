@@ -28,6 +28,8 @@ namespace OgmoEditor.LevelEditors.LayerEditors
                         content.DrawRectangle(i * Layer.Definition.Grid.Width, j * Layer.Definition.Grid.Height, Layer.Definition.Grid.Width, Layer.Definition.Grid.Height, Layer.Definition.Color.ToXNA() * alpha);
                 }
             }
+
+            base.Draw(content, alpha);
         }
     }
 }

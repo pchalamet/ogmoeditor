@@ -15,5 +15,13 @@ namespace OgmoEditor.LevelEditors.LayerEditors
         {
             Layer = layer;
         }
+
+        public override void Draw(Content content, float alpha)
+        {
+            foreach (Entity e in Layer.Entities)
+                e.Draw(content, alpha);
+
+            base.Draw(content, alpha);
+        }
     }
 }

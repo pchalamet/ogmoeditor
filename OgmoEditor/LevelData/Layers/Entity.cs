@@ -35,6 +35,13 @@ namespace OgmoEditor.LevelData.Layers
 
         }
 
+        public XmlElement GetXML(XmlDocument doc)
+        {
+            XmlElement xml = doc.CreateElement(Definition.Name);
+
+            return xml;
+        }
+
         public void Draw(Content content, float alpha)
         {
             content.DrawEntity(Definition, new Microsoft.Xna.Framework.Rectangle(Position.X, Position.Y, Size.Width, Size.Height), alpha);
