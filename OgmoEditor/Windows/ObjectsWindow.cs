@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using OgmoEditor.Definitions;
+using OgmoEditor.Definitions.LayerDefinitions;
 
 namespace OgmoEditor.Windows
 {
@@ -20,8 +21,18 @@ namespace OgmoEditor.Windows
         {
             Name = "ObjectsWindow";
             Text = "Objects";
-
             CurrentObject = null;
+
+            //Events
+            Ogmo.LayersWindow.OnLayerChanged += onLayerChanged;
+        }
+
+        /*
+         *  Events
+         */
+        private void onLayerChanged(LayerDefinition def, int index)
+        {
+            EditorVisible = def is ObjectLayerDefinition;
         }
     }
 }

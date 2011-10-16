@@ -86,7 +86,7 @@ namespace OgmoEditor
             LayersWindow.Show(MainWindow);
             ToolsWindow.Show(MainWindow);
             ObjectsWindow.Show(MainWindow);
-            LayersWindow.Visible = ToolsWindow.Visible = ObjectsWindow.Visible = false;
+            LayersWindow.EditorVisible = ToolsWindow.EditorVisible = ObjectsWindow.EditorVisible = false;
 
             //Load the config file
             Config.Load();
@@ -163,9 +163,6 @@ namespace OgmoEditor
             //Tool and layer selection can be cleared now
             LayersWindow.SetLayer(-1);
             ToolsWindow.SetTool(null);
-
-            //Disable all windows
-            LayersWindow.Visible = ToolsWindow.Visible = ObjectsWindow.Visible = false;
         }
 
         static public void EditProject(bool newProject)
@@ -277,10 +274,6 @@ namespace OgmoEditor
             //Call the event
             if (OnLevelAdded != null)
                 OnLevelAdded(Levels.Count - 1);
-
-            //Make the windows visible if this is the first level
-            if (Levels.Count > 0)
-                LayersWindow.Visible = ToolsWindow.Visible = ObjectsWindow.Visible = true;
         }
 
         static public bool CloseLevel(Level level, bool askToSave)
@@ -298,10 +291,6 @@ namespace OgmoEditor
             //Remove it
             int index = Levels.IndexOf(level);
             Levels.Remove(level);
-
-            //If there's no more levels open, disable the windows
-            if (Levels.Count == 0)
-                LayersWindow.Visible = ToolsWindow.Visible = ObjectsWindow.Visible = false;
 
             //Call the event
             if (OnLevelClosed != null)

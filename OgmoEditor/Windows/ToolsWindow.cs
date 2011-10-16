@@ -36,9 +36,10 @@ namespace OgmoEditor.Windows
             toolsForLayerTypes.Add(typeof(TileLayerDefinition), new Tool[] { });
             toolsForLayerTypes.Add(typeof(ObjectLayerDefinition), new Tool[] { });
 
-            //Init events
+            //Events
             Ogmo.LayersWindow.OnLayerChanged += onLayerChanged;
             Ogmo.OnProjectStart += onProjectStart;
+            Ogmo.OnLevelAdded += onLevelAdded;
         }
 
         public void SetTool(Tool tool)
@@ -61,6 +62,14 @@ namespace OgmoEditor.Windows
         {
             if (hotkeys != null && hotkeys.ContainsKey(e.KeyCode))
                 SetTool(hotkeys[e.KeyCode]);
+        }
+
+        /*
+         *  Events
+         */
+        private void onLevelAdded(int index)
+        {
+            EditorVisible = true;
         }
 
         private void onProjectStart(Project project)

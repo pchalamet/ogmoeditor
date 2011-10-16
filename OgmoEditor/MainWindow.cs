@@ -214,18 +214,6 @@ namespace OgmoEditor
             Ogmo.OpenAllLevels();
         }
 
-        private void layersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Ogmo.LayersWindow.Visible = !Ogmo.LayersWindow.Visible;
-            Focus();
-        }
-
-        private void toolsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Ogmo.ToolsWindow.Visible = !Ogmo.ToolsWindow.Visible;
-            Focus();
-        }
-
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LevelEditors[Ogmo.CurrentLevelIndex].Undo();
@@ -240,6 +228,39 @@ namespace OgmoEditor
         {
             undoToolStripMenuItem.Enabled = LevelEditors[Ogmo.CurrentLevelIndex].CanUndo;
             redoToolStripMenuItem.Enabled = LevelEditors[Ogmo.CurrentLevelIndex].CanRedo;
+        }
+
+        /*
+         *  View-Related Menu Items
+         */
+        private void viewToolStripMenuItem_DropDownOpened(object sender, EventArgs e)
+        {
+            layersToolStripMenuItem.Enabled = Ogmo.LayersWindow.EditorVisible;
+            layersToolStripMenuItem.Checked = Ogmo.LayersWindow.UserVisible;
+
+            toolsToolStripMenuItem.Enabled = Ogmo.ToolsWindow.EditorVisible;
+            toolsToolStripMenuItem.Checked = Ogmo.ToolsWindow.UserVisible;
+
+            objectsToolStripMenuItem.Enabled = Ogmo.ObjectsWindow.EditorVisible;
+            objectsToolStripMenuItem.Checked = Ogmo.ObjectsWindow.UserVisible;
+        }
+
+        private void layersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ogmo.LayersWindow.UserVisible = !Ogmo.LayersWindow.UserVisible;
+            Focus();
+        }
+
+        private void toolsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ogmo.ToolsWindow.UserVisible = !Ogmo.ToolsWindow.UserVisible;
+            Focus();
+        }
+
+        private void objectsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ogmo.ObjectsWindow.UserVisible = !Ogmo.ObjectsWindow.UserVisible;
+            Focus();
         }
 
     }

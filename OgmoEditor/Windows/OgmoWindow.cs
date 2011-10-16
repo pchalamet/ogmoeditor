@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
+using OgmoEditor.LevelData;
 
 namespace OgmoEditor.Windows
 {
@@ -22,6 +23,10 @@ namespace OgmoEditor.Windows
         private HorizontalSnap hSnap;
         private VerticalSnap vSnap;
 
+        //The window will only be visible if both of the following are true:
+        private bool userVisible;       // Whether the user has specified that this window should be visible
+        private bool editorVisible;     // Whether the current editor state allows this window to be visible
+
         public OgmoWindow()
             : this(HorizontalSnap.None, VerticalSnap.None)
         {
@@ -34,6 +39,10 @@ namespace OgmoEditor.Windows
             this.startVSnap = startVSnap;
             InitializeComponent();
 
+            userVisible = true;
+            editorVisible = false;
+
+            //Events
             Shown += onShown;
             Resize += enforceSnap;
             Move += checkSnap;
@@ -41,35 +50,41 @@ namespace OgmoEditor.Windows
             Ogmo.MainWindow.LocationChanged += enforceSnap;
             Ogmo.MainWindow.KeyDown += onKeyDown;
             KeyDown += onKeyDown;
-        }
-
-        private void onKeyDown(object sender, KeyEventArgs e)
-        {
-            handleKeyDown(e);
+            Ogmo.OnProjectClose += onProjectClose;
+            Ogmo.OnLevelClosed += onLevelClose;
         }
 
         protected virtual void handleKeyDown(KeyEventArgs e)
         {
-
+            //Override me!
         }
 
-        private void onShown(object sender, EventArgs e)
+        /*
+         *  Visibility helpers
+         */
+        public bool UserVisible
         {
-            hSnap = startHSnap;
-            vSnap = startVSnap;
-            enforceSnap();
-        }
-
-        private void OgmoWindow_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.UserClosing)
+            get { return userVisible; }
+            set
             {
-                e.Cancel = true;
-                Visible = false;
-                Ogmo.MainWindow.Focus();
+                userVisible = value;
+                Visible = userVisible && editorVisible;
             }
         }
 
+        public bool EditorVisible
+        {
+            get { return editorVisible; }
+            set
+            {
+                editorVisible = value;
+                Visible = userVisible && editorVisible;
+            }
+        }
+
+        /*
+         *  Snapping to edges helpers
+         */
         private void checkSnap(object sender = null, EventArgs e = null)
         {
             Rectangle r = Ogmo.MainWindow.EditBounds;
@@ -124,6 +139,42 @@ namespace OgmoEditor.Windows
                 p.Y = r.Y + r.Height - Height;
 
             Location = p;
+        }
+
+        /*
+         *  Events
+         */
+        private void onLevelClose(int index)
+        {
+            if (Ogmo.Levels.Count == 0)
+                EditorVisible = false;
+        }
+
+        private void onProjectClose(Project project)
+        {
+            EditorVisible = false;
+        }
+
+        private void onKeyDown(object sender, KeyEventArgs e)
+        {
+            handleKeyDown(e);
+        }
+
+        private void onShown(object sender, EventArgs e)
+        {
+            hSnap = startHSnap;
+            vSnap = startVSnap;
+            enforceSnap();
+        }
+
+        private void OgmoWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                UserVisible = false;
+                Ogmo.MainWindow.Focus();
+            }
         }
     }
 }

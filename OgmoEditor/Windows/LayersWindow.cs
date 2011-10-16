@@ -21,11 +21,12 @@ namespace OgmoEditor.Windows
         {
             Name = "LayersWindow";
             Text = "Layers";
+            CurrentLayerIndex = -1;
 
+            //Events
             Ogmo.OnProjectStart += onProjectStart;
             Ogmo.OnProjectEdited += onProjectEdited;
-
-            CurrentLayerIndex = -1;
+            Ogmo.OnLevelAdded += onLevelAdded;
         }
 
         protected override void handleKeyDown(KeyEventArgs e)
@@ -63,16 +64,6 @@ namespace OgmoEditor.Windows
                 OnLayerChanged(index == -1 ? null : Ogmo.Project.LayerDefinitions[index], index);
         }
 
-        private void onProjectStart(Project project)
-        {
-            initFromProject(project);
-        }
-
-        private void onProjectEdited(Project project)
-        {
-            initFromProject(project);
-        }
-
         private void initFromProject(Project project)
         {
             ClientSize = new Size(120, project.LayerDefinitions.Count * 24);
@@ -82,6 +73,25 @@ namespace OgmoEditor.Windows
             Controls.Clear();
             for (int i = 0; i < project.LayerDefinitions.Count; i++)
                 Controls.Add(new LayerButton(project.LayerDefinitions[i], i * 24));
+        }
+
+        /*
+         *  Events
+         */
+        private void onLevelAdded(int index)
+        {
+            if (Ogmo.Project.LayerDefinitions.Count > 1)
+                EditorVisible = true;
+        }
+
+        private void onProjectStart(Project project)
+        {
+            initFromProject(project);
+        }
+
+        private void onProjectEdited(Project project)
+        {
+            initFromProject(project);
         }
     }
 }
