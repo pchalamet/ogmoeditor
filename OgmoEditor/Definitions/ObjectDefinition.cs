@@ -71,7 +71,7 @@ namespace OgmoEditor.Definitions
                 Bitmap b = new Bitmap(Size.Width, Size.Height);
                 using (Graphics g = Graphics.FromImage(b))
                 {
-                    g.DrawRectangle(new Pen(ImageDefinition.RectColor, 1), new Rectangle(0, 0, Size.Width, Size.Height));
+                    g.FillRectangle(new SolidBrush(ImageDefinition.RectColor), new Rectangle(0, 0, Size.Width, Size.Height));
                 }
                 return (Image)b;
             }
