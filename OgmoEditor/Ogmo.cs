@@ -42,9 +42,10 @@ namespace OgmoEditor
         static public MainWindow MainWindow { get; private set; }
         static public ToolsWindow ToolsWindow { get; private set; }
         static public LayersWindow LayersWindow { get; private set; }
-        static public EntitiesWindow ObjectsWindow { get; private set; }
-        static public string ProgramDirectory { get; private set; }
+        static public EntitiesWindow EntitiesWindow { get; private set; }
+        static public EntitySelectionWindow EntitySelectionWindow { get; private set; }
 
+        static public string ProgramDirectory { get; private set; }
         static public Project Project { get; private set; }
         static public List<Level> Levels { get; private set; }
         static public int CurrentLevelIndex { get; private set; }
@@ -81,12 +82,14 @@ namespace OgmoEditor
             MainWindow = new MainWindow();
             LayersWindow = new LayersWindow();
             ToolsWindow = new ToolsWindow();
-            ObjectsWindow = new EntitiesWindow();
+            EntitiesWindow = new EntitiesWindow();
+            EntitySelectionWindow = new EntitySelectionWindow();
 
             LayersWindow.Show(MainWindow);
             ToolsWindow.Show(MainWindow);
-            ObjectsWindow.Show(MainWindow);
-            LayersWindow.EditorVisible = ToolsWindow.EditorVisible = ObjectsWindow.EditorVisible = false;
+            EntitiesWindow.Show(MainWindow);
+            EntitySelectionWindow.Show(MainWindow);
+            LayersWindow.EditorVisible = ToolsWindow.EditorVisible = EntitiesWindow.EditorVisible = EntitySelectionWindow.EditorVisible = false;
 
             //Load the config file
             Config.Load();

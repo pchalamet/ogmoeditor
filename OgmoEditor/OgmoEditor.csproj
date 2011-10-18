@@ -102,6 +102,9 @@
     <Compile Include="LevelEditors\Tools\GridTools\GridPencilTool.cs" />
     <Compile Include="LevelEditors\Tools\GridTools\GridRectangleTool.cs" />
     <Compile Include="LevelEditors\Tools\EntityTools\EntityPlacementTool.cs" />
+    <Compile Include="Windows\EntitySelectionWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Windows\LayerButton.cs">
       <SubType>UserControl</SubType>
     </Compile>

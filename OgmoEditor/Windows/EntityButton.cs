@@ -23,10 +23,10 @@ namespace OgmoEditor.Windows
             InitializeComponent();
 
             button.BackgroundImage = Definition.GenerateButtonImage();
-            button.BackColor = (definition == Ogmo.ObjectsWindow.CurrentEntity) ? Selected : NotSelected;
+            button.BackColor = (definition == Ogmo.EntitiesWindow.CurrentEntity) ? Selected : NotSelected;
 
             //Events
-            Ogmo.ObjectsWindow.OnEntityChanged += onObjectChanged;
+            Ogmo.EntitiesWindow.OnEntityChanged += onObjectChanged;
         }
 
         public void OnRemove()
@@ -39,7 +39,7 @@ namespace OgmoEditor.Windows
          */
         private void button_Click(object sender, EventArgs e)
         {
-            Ogmo.ObjectsWindow.SetObject(Definition);
+            Ogmo.EntitiesWindow.SetObject(Definition);
         }
 
         private void onObjectChanged(EntityDefinition definition)

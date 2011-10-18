@@ -245,8 +245,8 @@ namespace OgmoEditor
             toolsToolStripMenuItem.Enabled = Ogmo.ToolsWindow.EditorVisible;
             toolsToolStripMenuItem.Checked = Ogmo.ToolsWindow.UserVisible;
 
-            objectsToolStripMenuItem.Enabled = Ogmo.ObjectsWindow.EditorVisible;
-            objectsToolStripMenuItem.Checked = Ogmo.ObjectsWindow.UserVisible;
+            objectsToolStripMenuItem.Enabled = Ogmo.EntitiesWindow.EditorVisible;
+            objectsToolStripMenuItem.Checked = Ogmo.EntitiesWindow.UserVisible;
         }
 
         private void layersToolStripMenuItem_Click(object sender, EventArgs e)
@@ -267,11 +267,20 @@ namespace OgmoEditor
             }
         }
 
-        private void objectsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void entitiesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Ogmo.ObjectsWindow.EditorVisible)
+            if (Ogmo.EntitiesWindow.EditorVisible)
             {
-                Ogmo.ObjectsWindow.UserVisible = !Ogmo.ObjectsWindow.UserVisible;
+                Ogmo.EntitiesWindow.UserVisible = !Ogmo.EntitiesWindow.UserVisible;
+                Focus();
+            }
+        }
+
+        private void entitySelectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Ogmo.EntitySelectionWindow.EditorVisible)
+            {
+                Ogmo.EntitySelectionWindow.UserVisible = !Ogmo.EntitySelectionWindow.UserVisible;
                 Focus();
             }
         }

@@ -17,7 +17,7 @@ namespace OgmoEditor.Windows
         public event Ogmo.EntityCallback OnEntityChanged;
 
         public EntitiesWindow()
-            : base(HorizontalSnap.Right, VerticalSnap.Bottom)
+            : base(HorizontalSnap.Left, VerticalSnap.Bottom)
         {
             Name = "EntitiesWindow";
             Text = "Entities";
