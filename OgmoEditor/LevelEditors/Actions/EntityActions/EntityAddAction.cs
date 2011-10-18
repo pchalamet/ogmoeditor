@@ -23,6 +23,9 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
             if (Ogmo.EntitiesWindow.CurrentEntity.Limit > 0 && EntityLayer.Entities.Count(e => e.Definition == Ogmo.EntitiesWindow.CurrentEntity) == Ogmo.EntitiesWindow.CurrentEntity.Limit)
                 EntityLayer.Entities.Remove(removed = EntityLayer.Entities.Find(e => e.Definition == Ogmo.EntitiesWindow.CurrentEntity));
 
+            //Add it to the selection
+            Ogmo.EntitySelectionWindow.AddToSelection(added);
+
             //Place the entity
             EntityLayer.Entities.Add(added);
         }
@@ -31,6 +34,10 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
         {
             //Remove the entity
             EntityLayer.Entities.Remove(added);
+
+            //Remove it from the selection
+            if (Ogmo.EntitySelectionWindow.IsSelected(added))
+                Ogmo.EntitySelectionWindow.RemoveFromSelection(added);
 
             //Re-add the one removed due to an entity limit
             if (removed != null)
