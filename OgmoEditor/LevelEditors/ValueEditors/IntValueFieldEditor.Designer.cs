@@ -38,7 +38,8 @@
             this.valueTextBox.Name = "valueTextBox";
             this.valueTextBox.Size = new System.Drawing.Size(64, 20);
             this.valueTextBox.TabIndex = 0;
-            this.valueTextBox.Validated += new System.EventHandler(this.valueTextBox_Validated);
+            this.valueTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.valueTextBox_KeyDown);
+            this.valueTextBox.Leave += new System.EventHandler(this.valueTextBox_Leave);
             // 
             // nameLabel
             // 

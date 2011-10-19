@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using OgmoEditor.LevelData.Layers;
 using OgmoEditor.ProjectEditors;
 using OgmoEditor.Definitions.ValueDefinitions;
+using System.Diagnostics;
 
 namespace OgmoEditor.LevelEditors.ValueEditors
 {
@@ -16,8 +17,8 @@ namespace OgmoEditor.LevelEditors.ValueEditors
     {
         public IntValueDefinition Definition { get; private set; }
 
-        public IntValueFieldEditor(Value value)
-            : base(value)
+        public IntValueFieldEditor(Value value, int x, int y)
+            : base(value, x, y)
         {
             Definition = (IntValueDefinition)value.Definition;
             InitializeComponent();
@@ -26,9 +27,26 @@ namespace OgmoEditor.LevelEditors.ValueEditors
             valueTextBox.Text = value.Content.ToString();
         }
 
-        private void valueTextBox_Validated(object sender, EventArgs e)
+        private void handleInput()
         {
-            OgmoParse.ParseIntToString(ref Value.Content, Definition.Min, Definition.Max, valueTextBox);
+            OgmoParse.ParseIntToString(ref Value.Content, Definition.Min, Definition.Max, valueTextBox);         
+        }
+
+        /*
+         *  Events
+         */
+        private void valueTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                handleInput();
+                Ogmo.MainWindow.FocusEditor();
+            }
+        }
+
+        private void valueTextBox_Leave(object sender, EventArgs e)
+        {
+            handleInput();
         }
     }
 }

@@ -35,6 +35,14 @@ namespace OgmoEditor
             Ogmo.OnLevelChanged += onLevelChanged;
         }
 
+        public void FocusEditor()
+        {
+            if (LevelEditors.Count > 0)
+                LevelEditors[Ogmo.CurrentLevelIndex].Focus();
+            else
+                Focus();
+        }
+
         public void EnableEditing()
         {
             Enabled = true;

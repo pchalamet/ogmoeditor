@@ -19,9 +19,10 @@ namespace OgmoEditor.LevelEditors.ValueEditors
             //Never call this!
         }
 
-        public ValueEditor(Value value)
+        public ValueEditor(Value value, int x, int y)
         {
             Value = value;
+            Location = new Point(x, y);
         }
     }
 }

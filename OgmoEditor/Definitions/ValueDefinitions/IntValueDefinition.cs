@@ -36,9 +36,9 @@ namespace OgmoEditor.Definitions.ValueDefinitions
             return new IntValueDefinitionEditor(this);
         }
 
-        public override ValueEditor GetInstanceEditor(Value instance)
+        public override ValueEditor GetInstanceEditor(Value instance, int x, int y)
         {
-            return new IntValueFieldEditor(instance);
+            return new IntValueFieldEditor(instance, x, y);
         }
 
         public override ValueDefinition Clone()

@@ -36,7 +36,7 @@ namespace OgmoEditor.Definitions.ValueDefinitions
             throw new NotImplementedException();
         }
 
-        public virtual ValueEditor GetInstanceEditor(Value instance)
+        public virtual ValueEditor GetInstanceEditor(Value instance, int x, int y)
         {
             throw new NotImplementedException();
         }

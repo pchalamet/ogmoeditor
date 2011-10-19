@@ -7,6 +7,7 @@ using System.Drawing;
 using OgmoEditor.LevelData.Layers;
 using System.Windows.Forms;
 using System.Diagnostics;
+using OgmoEditor.LevelEditors.ValueEditors;
 
 namespace OgmoEditor.Windows
 {
@@ -118,8 +119,6 @@ namespace OgmoEditor.Windows
             }
             else if (selection.Count == 1)
             {
-                ClientSize = new Size(WIDTH, 108);
-
                 //Name label
                 Label name = new Label();
                 name.Font = new Font(name.Font, FontStyle.Bold);
@@ -154,6 +153,17 @@ namespace OgmoEditor.Windows
                 if (selection[0].Definition.Limit > 0)
                     count.Text += " / " + selection[0].Definition.Limit.ToString();
                 Controls.Add(count);
+
+                //Value editors
+                int yy = 108;
+                foreach (var v in selection[0].Values)
+                {
+                    ValueEditor ed = v.Definition.GetInstanceEditor(v, 0, yy);
+                    Controls.Add(ed);
+                    yy += ed.Height;
+                }
+
+                ClientSize = new Size(WIDTH, yy);
             }
             else
             {
@@ -166,7 +176,7 @@ namespace OgmoEditor.Windows
                 }
             }
 
-            Ogmo.MainWindow.Focus();
+            Ogmo.MainWindow.FocusEditor();
         }
 
         private void onLayerChanged(LayerDefinition def, int index)
