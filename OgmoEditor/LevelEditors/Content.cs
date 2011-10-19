@@ -129,7 +129,7 @@ namespace OgmoEditor.LevelEditors
         public void DrawFillRect(int x, int y, int width, int height, Color color)
         {
             DrawHollowRect(x, y, width, height, color);
-            DrawRectangle(x, y + 1, width - 1, height - 1, color * .1f);
+            DrawRectangle(x, y + 1, width - 1, height - 1, color * .3f);
         }
 
         public void DrawLine(int x1, int y1, int x2, int y2, Color color)
