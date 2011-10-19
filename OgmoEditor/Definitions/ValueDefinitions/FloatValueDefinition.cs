@@ -47,5 +47,10 @@ namespace OgmoEditor.Definitions.ValueDefinitions
             def.UIType = UIType;
             return def;
         }
+
+        public override string GetDefault()
+        {
+            return Default.ToString();
+        }
     }
 }

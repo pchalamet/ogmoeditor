@@ -39,5 +39,10 @@ namespace OgmoEditor.Definitions.ValueDefinitions
             def.MultiLine = MultiLine;
             return def;
         }
+
+        public override string GetDefault()
+        {
+            return Default;
+        }
     }
 }

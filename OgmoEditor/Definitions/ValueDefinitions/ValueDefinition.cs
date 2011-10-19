@@ -38,5 +38,10 @@ namespace OgmoEditor.Definitions.ValueDefinitions
         {
             throw new Exception("ValueDefinition subclasses must override virtual method Clone!");
         }
+
+        public virtual string GetDefault()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

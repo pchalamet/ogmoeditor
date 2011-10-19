@@ -30,5 +30,10 @@ namespace OgmoEditor.Definitions.ValueDefinitions
             def.Elements = (string[])Elements.Clone();
             return def;
         }
+
+        public override string GetDefault()
+        {
+            return Elements[0];
+        }
     }
 }

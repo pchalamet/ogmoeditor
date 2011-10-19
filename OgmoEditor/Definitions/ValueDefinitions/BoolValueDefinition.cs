@@ -30,5 +30,10 @@ namespace OgmoEditor.Definitions.ValueDefinitions
             def.Default = Default;           
             return def;
         }
+
+        public override string GetDefault()
+        {
+            return Default.ToString();
+        }
     }
 }
