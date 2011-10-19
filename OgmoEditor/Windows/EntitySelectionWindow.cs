@@ -103,15 +103,18 @@ namespace OgmoEditor.Windows
             }
             else if (selection.Count == 1)
             {
+                ClientSize = new Size(96, 108);
+
                 //Name label
                 Label name = new Label();
+                name.Font = new Font(name.Font, FontStyle.Bold);
                 name.TextAlign = ContentAlignment.MiddleCenter;
                 name.Bounds = new Rectangle(0, 0, 96, 24);
                 name.Text = selection[0].Definition.Name;             
                 Controls.Add(name);
 
                 //Add the image
-                EntitySelectionImage sel = new EntitySelectionImage(selection[0], 32, 24);
+                EntitySelectionImage sel = new EntitySelectionImage(selection[0], 32, 24, false);
                 Controls.Add(sel);
 
                 //Entity position

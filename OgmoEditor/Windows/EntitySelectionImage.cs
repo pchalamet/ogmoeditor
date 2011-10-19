@@ -15,7 +15,7 @@ namespace OgmoEditor.Windows
         private Entity entity;
         private Image image;
 
-        public EntitySelectionImage(Entity entity, int x, int y)
+        public EntitySelectionImage(Entity entity, int x, int y, bool clickable)
         {
             Location = new Point(x, y);
             InitializeComponent();
