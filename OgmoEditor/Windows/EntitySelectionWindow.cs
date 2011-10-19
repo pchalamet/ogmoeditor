@@ -128,7 +128,7 @@ namespace OgmoEditor.Windows
                 Controls.Add(name);
 
                 //Add the image
-                EntitySelectionImage sel = new EntitySelectionImage(selection[0], WIDTH/2 - 16, 24, false);
+                EntitySelectionImage sel = new EntitySelectionImage(selection[0], WIDTH/2 - 16, 24);
                 Controls.Add(sel);
 
                 //Entity position
@@ -175,7 +175,7 @@ namespace OgmoEditor.Windows
 
                 for (int i = 0; i < selection.Count; i++)
                 {
-                    EntitySelectionImage e = new EntitySelectionImage(selection[i], (i % 4) * 32, (i / 4) * 32, true);
+                    EntitySelectionImage e = new EntitySelectionImage(selection[i], (i % 4) * 32, (i / 4) * 32);
                     Controls.Add(e);
                 }
             }

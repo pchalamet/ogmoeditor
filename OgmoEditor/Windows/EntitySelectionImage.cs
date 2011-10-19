@@ -15,17 +15,14 @@ namespace OgmoEditor.Windows
         private Entity entity;
         private Image image;
 
-        public EntitySelectionImage(Entity entity, int x, int y, bool clickable)
+        public EntitySelectionImage(Entity entity, int x, int y)
         {
             this.entity = entity;
             Location = new Point(x, y);
             InitializeComponent();
             image = entity.Definition.Image;
 
-            if (clickable)
-            {
-                toolTip.SetToolTip(pictureBox, entity.Definition.Name);
-            }
+            toolTip.SetToolTip(pictureBox, entity.Definition.Name);
         }
 
         /*
@@ -44,9 +41,16 @@ namespace OgmoEditor.Windows
 
         private void pictureBox_MouseClick(object sender, MouseEventArgs e)
         {
+            //click : select only that instance
+            //right-click : deselect that instance
+            //CTRL + click : select all of instance's type
+
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
-                Ogmo.EntitySelectionWindow.SetSelection(entity);
+                if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
+                    Ogmo.EntitySelectionWindow.SetSelection(((EntityLayer)Ogmo.CurrentLevel.Layers[Ogmo.LayersWindow.CurrentLayerIndex]).Entities.FindAll(en => en.Definition == entity.Definition));
+                else
+                    Ogmo.EntitySelectionWindow.SetSelection(entity);
             }
             else if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {

@@ -479,6 +479,12 @@
     <Content Include="Content\tools\rectangle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\tools\resize.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\tools\rotate.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\tools\selection.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
