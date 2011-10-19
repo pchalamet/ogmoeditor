@@ -158,6 +158,7 @@ namespace OgmoEditor.Windows
                 int yy = 108;
                 if (selection[0].Values != null)
                 {
+                    yy += 8;
                     foreach (var v in selection[0].Values)
                     {
                         ValueEditor ed = v.Definition.GetInstanceEditor(v, 0, yy);

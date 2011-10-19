@@ -110,6 +110,12 @@
     <Compile Include="LevelEditors\ValueEditors\BoolValueEditor.Designer.cs">
       <DependentUpon>BoolValueEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="LevelEditors\ValueEditors\ColorValueEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LevelEditors\ValueEditors\ColorValueEditor.Designer.cs">
+      <DependentUpon>ColorValueEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="LevelEditors\ValueEditors\EnumValueEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -322,6 +328,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LevelEditors\ValueEditors\BoolValueEditor.resx">
       <DependentUpon>BoolValueEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LevelEditors\ValueEditors\ColorValueEditor.resx">
+      <DependentUpon>ColorValueEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LevelEditors\ValueEditors\EnumValueEditor.resx">
       <DependentUpon>EnumValueEditor.cs</DependentUpon>

@@ -39,7 +39,7 @@
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.Size = new System.Drawing.Size(52, 20);
             this.nameLabel.TabIndex = 2;
-            this.nameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.nameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // valueComboBox
             // 
