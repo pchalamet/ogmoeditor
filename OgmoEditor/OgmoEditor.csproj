@@ -104,6 +104,18 @@
     <Compile Include="LevelEditors\Tools\GridTools\GridPencilTool.cs" />
     <Compile Include="LevelEditors\Tools\GridTools\GridRectangleTool.cs" />
     <Compile Include="LevelEditors\Tools\EntityTools\EntityPlacementTool.cs" />
+    <Compile Include="LevelEditors\ValueEditors\EnumValueEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LevelEditors\ValueEditors\EnumValueEditor.Designer.cs">
+      <DependentUpon>EnumValueEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LevelEditors\ValueEditors\FloatValueEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LevelEditors\ValueEditors\FloatValueEditor.Designer.cs">
+      <DependentUpon>FloatValueEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="LevelEditors\ValueEditors\IntValueEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -301,6 +313,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ImagePreviewer.resx">
       <DependentUpon>ImagePreviewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LevelEditors\ValueEditors\EnumValueEditor.resx">
+      <DependentUpon>EnumValueEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LevelEditors\ValueEditors\FloatValueEditor.resx">
+      <DependentUpon>FloatValueEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LevelEditors\ValueEditors\IntValueEditor.resx">
       <DependentUpon>IntValueEditor.cs</DependentUpon>

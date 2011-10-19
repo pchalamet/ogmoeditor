@@ -36,7 +36,6 @@
             this.defaultTextBox = new System.Windows.Forms.TextBox();
             this.roundTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.sliderCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label5
@@ -107,22 +106,10 @@
             this.label1.TabIndex = 25;
             this.label1.Text = "Round";
             // 
-            // sliderCheckBox
-            // 
-            this.sliderCheckBox.AutoSize = true;
-            this.sliderCheckBox.Location = new System.Drawing.Point(35, 68);
-            this.sliderCheckBox.Name = "sliderCheckBox";
-            this.sliderCheckBox.Size = new System.Drawing.Size(82, 17);
-            this.sliderCheckBox.TabIndex = 26;
-            this.sliderCheckBox.Text = "Show Slider";
-            this.sliderCheckBox.UseVisualStyleBackColor = true;
-            this.sliderCheckBox.CheckedChanged += new System.EventHandler(this.sliderCheckBox_CheckedChanged);
-            // 
             // FloatValueDefinitionEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.sliderCheckBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.roundTextBox);
             this.Controls.Add(this.label5);
@@ -148,6 +135,5 @@
         private System.Windows.Forms.TextBox defaultTextBox;
         private System.Windows.Forms.TextBox roundTextBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox sliderCheckBox;
     }
 }

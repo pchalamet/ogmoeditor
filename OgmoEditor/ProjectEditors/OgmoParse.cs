@@ -25,21 +25,6 @@ namespace OgmoEditor.ProjectEditors
             }
         }
 
-        static public void ParseIntToString(ref string to, int min, int max, TextBox box)
-        {
-            try
-            {
-                int i = Convert.ToInt32(box.Text);
-                if (i < min || i > max)
-                    throw new Exception();
-                to = i.ToString();
-            }
-            catch
-            {
-                box.Text = to;
-            }
-        }
-
         static public void Parse(ref float to, TextBox box)
         {
             try
@@ -142,6 +127,37 @@ namespace OgmoEditor.ProjectEditors
             catch
             {
                 box.Text = to.ToString();
+            }
+        }
+
+        static public void ParseIntToString(ref string to, int min, int max, TextBox box)
+        {
+            try
+            {
+                int i = Convert.ToInt32(box.Text);
+                i = Math.Max(min, i);
+                i = Math.Min(max, i);
+                box.Text = to = i.ToString();
+            }
+            catch
+            {
+                box.Text = to;
+            }
+        }
+
+        static public void ParseFloatToString(ref string to, float min, float max, float inc, TextBox box)
+        {
+            try
+            {
+                float i = Convert.ToSingle(box.Text);
+                i = Math.Max(min, i);
+                i = Math.Min(max, i);
+                i = (float)Math.Round((decimal)(i / inc), MidpointRounding.AwayFromZero) * inc;
+                box.Text = to = i.ToString();
+            }
+            catch
+            {
+                box.Text = to;
             }
         }
 

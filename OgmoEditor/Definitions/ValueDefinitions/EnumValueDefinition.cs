@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using OgmoEditor.ProjectEditors.ValueDefinitionEditors;
+using OgmoEditor.LevelData.Layers;
+using OgmoEditor.LevelEditors.ValueEditors;
 
 namespace OgmoEditor.Definitions.ValueDefinitions
 {
     public class EnumValueDefinition : ValueDefinition
     {
-        [XmlAttribute]
         public string[] Elements;
 
         public EnumValueDefinition()
@@ -21,6 +22,11 @@ namespace OgmoEditor.Definitions.ValueDefinitions
         public override System.Windows.Forms.UserControl GetEditor()
         {
             return new EnumValueDefinitionEditor(this);
+        }
+
+        public override LevelEditors.ValueEditors.ValueEditor GetInstanceEditor(Value instance, int x, int y)
+        {
+            return new EnumValueEditor(instance, x, y);
         }
 
         public override ValueDefinition Clone()

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using OgmoEditor.ProjectEditors.ValueDefinitionEditors;
+using OgmoEditor.LevelEditors.ValueEditors;
+using OgmoEditor.LevelData.Layers;
 
 namespace OgmoEditor.Definitions.ValueDefinitions
 {
@@ -18,8 +20,6 @@ namespace OgmoEditor.Definitions.ValueDefinitions
         public float Max;
         [XmlAttribute]
         public float Round;
-        [XmlAttribute]
-        public bool ShowSlider;
 
         public FloatValueDefinition()
             : base()
@@ -28,12 +28,16 @@ namespace OgmoEditor.Definitions.ValueDefinitions
             Min = float.MinValue;
             Max = float.MaxValue;
             Round = .1f;
-            ShowSlider = false;
         }
 
         public override System.Windows.Forms.UserControl GetEditor()
         {
             return new FloatValueDefinitionEditor(this);
+        }
+
+        public override LevelEditors.ValueEditors.ValueEditor GetInstanceEditor(Value instance, int x, int y)
+        {
+            return new FloatValueEditor(instance, x, y);
         }
 
         public override ValueDefinition Clone()
@@ -44,7 +48,6 @@ namespace OgmoEditor.Definitions.ValueDefinitions
             def.Min = Min;
             def.Max = Max;
             def.Round = Round;
-            def.ShowSlider = ShowSlider;
             return def;
         }
 

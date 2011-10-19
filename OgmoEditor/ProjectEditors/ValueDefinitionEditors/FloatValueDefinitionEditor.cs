@@ -24,7 +24,6 @@ namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
             roundTextBox.Text = def.Round.ToString();
             minTextBox.Text = def.Min.ToString();
             maxTextBox.Text = def.Max.ToString();
-            sliderCheckBox.Checked = def.ShowSlider;
         }
 
         private void defaultTextBox_Validated(object sender, EventArgs e)
@@ -45,11 +44,6 @@ namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
         private void maxTextBox_Validated(object sender, EventArgs e)
         {
             OgmoParse.Parse(ref def.Max, defaultTextBox);
-        }
-
-        private void sliderCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            def.ShowSlider = sliderCheckBox.Checked;
         }
     }
 }

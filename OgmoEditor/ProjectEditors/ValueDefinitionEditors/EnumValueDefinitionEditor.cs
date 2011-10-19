@@ -20,12 +20,14 @@ namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
             InitializeComponent();
             Location = new Point(99, 53);
 
-            elementsTextBox.Text = string.Join("\n", def.Elements, 0, def.Elements.Length);
+            elementsTextBox.Text = string.Join("\r\n", def.Elements, 0, def.Elements.Length);
         }
 
         private void elementsTextBox_Validated(object sender, EventArgs e)
         {
-            def.Elements = elementsTextBox.Text.Split('\n');
+            def.Elements = elementsTextBox.Text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < def.Elements.Length; i++)
+                def.Elements[i] = def.Elements[i].TrimEnd('\n');              
         }
 
 
