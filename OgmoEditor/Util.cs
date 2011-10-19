@@ -17,6 +17,8 @@ namespace OgmoEditor
         public const float LEFT = (float)Math.PI;
         public const float QUARTER = (float)(Math.PI / 2);
         public const float EIGHTH = (float)(Math.PI / 4);
+        public const float DEGTORAD = (float)(Math.PI / 180.0);
+        public const float RADTODEG = (float)(180.0 / Math.PI);
 
         static public string RelativePath(string absPath, string relTo)
         {

@@ -63,6 +63,8 @@ namespace OgmoEditor
             Application.EnableVisualStyles();
             initialize();
 
+            Debug.WriteLine(Util.RADTODEG * Util.LEFT);
+
             Application.Run(MainWindow);
         }
 

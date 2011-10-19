@@ -33,6 +33,7 @@ namespace OgmoEditor.ProjectEditors
             minHeightTextBox.Text = project.LevelMinimumSize.Height.ToString();
             maxWidthTextBox.Text = project.LevelMaximumSize.Width.ToString();
             maxHeightTextBox.Text = project.LevelMaximumSize.Height.ToString();
+            angleModeComboBox.SelectedIndex = (int)project.AngleMode;
 
             valuesEditor.SetList(project.LevelValueDefinitions);
         }
@@ -65,6 +66,11 @@ namespace OgmoEditor.ProjectEditors
         private void gridColorChooser_ColorChanged(OgmoColor color)
         {
             project.GridColor = color;
+        }
+
+        private void angleModeComboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            project.AngleMode = (Project.AngleExportMode)angleModeComboBox.SelectedIndex;
         }
 
     }

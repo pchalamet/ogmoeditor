@@ -50,11 +50,13 @@ namespace OgmoEditor.ProjectEditors
             this.colorChooser1 = new OgmoEditor.ColorChooser();
             this.label10 = new System.Windows.Forms.Label();
             this.gridColorChooser = new OgmoEditor.ColorChooser();
+            this.label11 = new System.Windows.Forms.Label();
+            this.angleModeComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // maxHeightTextBox
             // 
-            this.maxHeightTextBox.Location = new System.Drawing.Point(207, 207);
+            this.maxHeightTextBox.Location = new System.Drawing.Point(207, 217);
             this.maxHeightTextBox.Name = "maxHeightTextBox";
             this.maxHeightTextBox.Size = new System.Drawing.Size(62, 20);
             this.maxHeightTextBox.TabIndex = 26;
@@ -62,7 +64,7 @@ namespace OgmoEditor.ProjectEditors
             // 
             // maxWidthTextBox
             // 
-            this.maxWidthTextBox.Location = new System.Drawing.Point(121, 207);
+            this.maxWidthTextBox.Location = new System.Drawing.Point(121, 217);
             this.maxWidthTextBox.Name = "maxWidthTextBox";
             this.maxWidthTextBox.Size = new System.Drawing.Size(62, 20);
             this.maxWidthTextBox.TabIndex = 25;
@@ -70,7 +72,7 @@ namespace OgmoEditor.ProjectEditors
             // 
             // minHeightTextBox
             // 
-            this.minHeightTextBox.Location = new System.Drawing.Point(207, 181);
+            this.minHeightTextBox.Location = new System.Drawing.Point(207, 191);
             this.minHeightTextBox.Name = "minHeightTextBox";
             this.minHeightTextBox.Size = new System.Drawing.Size(62, 20);
             this.minHeightTextBox.TabIndex = 24;
@@ -78,7 +80,7 @@ namespace OgmoEditor.ProjectEditors
             // 
             // minWidthTextBox
             // 
-            this.minWidthTextBox.Location = new System.Drawing.Point(121, 181);
+            this.minWidthTextBox.Location = new System.Drawing.Point(121, 191);
             this.minWidthTextBox.Name = "minWidthTextBox";
             this.minWidthTextBox.Size = new System.Drawing.Size(62, 20);
             this.minWidthTextBox.TabIndex = 23;
@@ -86,7 +88,7 @@ namespace OgmoEditor.ProjectEditors
             // 
             // defaultHeightTextBox
             // 
-            this.defaultHeightTextBox.Location = new System.Drawing.Point(207, 155);
+            this.defaultHeightTextBox.Location = new System.Drawing.Point(207, 165);
             this.defaultHeightTextBox.Name = "defaultHeightTextBox";
             this.defaultHeightTextBox.Size = new System.Drawing.Size(62, 20);
             this.defaultHeightTextBox.TabIndex = 22;
@@ -94,7 +96,7 @@ namespace OgmoEditor.ProjectEditors
             // 
             // defaultWidthTextBox
             // 
-            this.defaultWidthTextBox.Location = new System.Drawing.Point(121, 155);
+            this.defaultWidthTextBox.Location = new System.Drawing.Point(121, 165);
             this.defaultWidthTextBox.Name = "defaultWidthTextBox";
             this.defaultWidthTextBox.Size = new System.Drawing.Size(62, 20);
             this.defaultWidthTextBox.TabIndex = 21;
@@ -102,7 +104,7 @@ namespace OgmoEditor.ProjectEditors
             // 
             // projectNameTextBox
             // 
-            this.projectNameTextBox.Location = new System.Drawing.Point(131, 31);
+            this.projectNameTextBox.Location = new System.Drawing.Point(131, 13);
             this.projectNameTextBox.Name = "projectNameTextBox";
             this.projectNameTextBox.Size = new System.Drawing.Size(197, 20);
             this.projectNameTextBox.TabIndex = 19;
@@ -111,7 +113,7 @@ namespace OgmoEditor.ProjectEditors
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(64, 210);
+            this.label8.Location = new System.Drawing.Point(64, 220);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(51, 13);
             this.label8.TabIndex = 33;
@@ -120,7 +122,7 @@ namespace OgmoEditor.ProjectEditors
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(67, 184);
+            this.label7.Location = new System.Drawing.Point(67, 194);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(48, 13);
             this.label7.TabIndex = 32;
@@ -129,7 +131,7 @@ namespace OgmoEditor.ProjectEditors
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(74, 158);
+            this.label6.Location = new System.Drawing.Point(74, 168);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(41, 13);
             this.label6.TabIndex = 31;
@@ -139,7 +141,7 @@ namespace OgmoEditor.ProjectEditors
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(59, 134);
+            this.label5.Location = new System.Drawing.Point(59, 144);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(66, 13);
             this.label5.TabIndex = 30;
@@ -148,7 +150,7 @@ namespace OgmoEditor.ProjectEditors
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(189, 210);
+            this.label4.Location = new System.Drawing.Point(189, 220);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(12, 13);
             this.label4.TabIndex = 29;
@@ -157,7 +159,7 @@ namespace OgmoEditor.ProjectEditors
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(189, 184);
+            this.label3.Location = new System.Drawing.Point(189, 194);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(12, 13);
             this.label3.TabIndex = 28;
@@ -166,7 +168,7 @@ namespace OgmoEditor.ProjectEditors
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(189, 158);
+            this.label2.Location = new System.Drawing.Point(189, 168);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(12, 13);
             this.label2.TabIndex = 27;
@@ -175,7 +177,7 @@ namespace OgmoEditor.ProjectEditors
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(54, 34);
+            this.label1.Location = new System.Drawing.Point(54, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 13);
             this.label1.TabIndex = 20;
@@ -184,7 +186,7 @@ namespace OgmoEditor.ProjectEditors
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(33, 64);
+            this.label9.Location = new System.Drawing.Point(33, 46);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(92, 13);
             this.label9.TabIndex = 35;
@@ -192,7 +194,7 @@ namespace OgmoEditor.ProjectEditors
             // 
             // backgroundColorChooser
             // 
-            this.backgroundColorChooser.Location = new System.Drawing.Point(127, 57);
+            this.backgroundColorChooser.Location = new System.Drawing.Point(127, 39);
             this.backgroundColorChooser.Name = "backgroundColorChooser";
             this.backgroundColorChooser.Size = new System.Drawing.Size(108, 28);
             this.backgroundColorChooser.TabIndex = 36;
@@ -200,7 +202,7 @@ namespace OgmoEditor.ProjectEditors
             // 
             // valuesEditor
             // 
-            this.valuesEditor.Location = new System.Drawing.Point(57, 250);
+            this.valuesEditor.Location = new System.Drawing.Point(57, 260);
             this.valuesEditor.Name = "valuesEditor";
             this.valuesEditor.Size = new System.Drawing.Size(341, 191);
             this.valuesEditor.TabIndex = 34;
@@ -216,7 +218,7 @@ namespace OgmoEditor.ProjectEditors
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(72, 92);
+            this.label10.Location = new System.Drawing.Point(72, 74);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(53, 13);
             this.label10.TabIndex = 37;
@@ -224,16 +226,40 @@ namespace OgmoEditor.ProjectEditors
             // 
             // gridColorChooser
             // 
-            this.gridColorChooser.Location = new System.Drawing.Point(127, 86);
+            this.gridColorChooser.Location = new System.Drawing.Point(127, 68);
             this.gridColorChooser.Name = "gridColorChooser";
             this.gridColorChooser.Size = new System.Drawing.Size(108, 28);
             this.gridColorChooser.TabIndex = 38;
             this.gridColorChooser.ColorChanged += new OgmoEditor.ColorChooser.ColorCallback(this.gridColorChooser_ColorChanged);
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(59, 106);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(64, 13);
+            this.label11.TabIndex = 39;
+            this.label11.Text = "Angle Mode";
+            // 
+            // angleModeComboBox
+            // 
+            this.angleModeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.angleModeComboBox.FormattingEnabled = true;
+            this.angleModeComboBox.Items.AddRange(new object[] {
+            "Radians",
+            "Degrees"});
+            this.angleModeComboBox.Location = new System.Drawing.Point(131, 103);
+            this.angleModeComboBox.Name = "angleModeComboBox";
+            this.angleModeComboBox.Size = new System.Drawing.Size(80, 21);
+            this.angleModeComboBox.TabIndex = 40;
+            this.angleModeComboBox.SelectionChangeCommitted += new System.EventHandler(this.angleModeComboBox_SelectionChangeCommitted);
+            // 
             // SettingsEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.angleModeComboBox);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.gridColorChooser);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.backgroundColorChooser);
@@ -284,5 +310,7 @@ namespace OgmoEditor.ProjectEditors
         private ColorChooser colorChooser1;
         private System.Windows.Forms.Label label10;
         private ColorChooser gridColorChooser;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox angleModeComboBox;
     }
 }

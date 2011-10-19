@@ -22,6 +22,8 @@ namespace OgmoEditor
     [XmlRoot("project")]
     public class Project
     {
+        public enum AngleExportMode { Radians, Degrees };
+
         //Serialized project properties
         public string Name;
         public OgmoColor BackgroundColor;
@@ -30,6 +32,7 @@ namespace OgmoEditor
         public Size LevelMinimumSize;
         public Size LevelMaximumSize;
         public string LastFilename;
+        public AngleExportMode AngleMode;
 
         //Definitions
         public List<ValueDefinition> LevelValueDefinitions;
@@ -64,6 +67,7 @@ namespace OgmoEditor
             LevelDefaultSize = copy.LevelDefaultSize;
             LevelMinimumSize = copy.LevelMinimumSize;
             LevelMaximumSize = copy.LevelMaximumSize;
+            AngleMode = copy.AngleMode;
 
             LevelValueDefinitions = new List<ValueDefinition>();
             foreach (var d in copy.LevelValueDefinitions)
