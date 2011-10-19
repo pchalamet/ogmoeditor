@@ -45,13 +45,13 @@ namespace OgmoEditor.ProjectEditors
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.angleModeComboBox = new System.Windows.Forms.ComboBox();
+            this.gridColorChooser = new OgmoEditor.ColorChooser();
             this.backgroundColorChooser = new OgmoEditor.ColorChooser();
             this.valuesEditor = new OgmoEditor.ProjectEditors.ValueDefinitionEditors.ValueDefinitionsEditor();
             this.colorChooser1 = new OgmoEditor.ColorChooser();
-            this.label10 = new System.Windows.Forms.Label();
-            this.gridColorChooser = new OgmoEditor.ColorChooser();
-            this.label11 = new System.Windows.Forms.Label();
-            this.angleModeComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // maxHeightTextBox
@@ -192,6 +192,45 @@ namespace OgmoEditor.ProjectEditors
             this.label9.TabIndex = 35;
             this.label9.Text = "Background Color";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(72, 74);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(53, 13);
+            this.label10.TabIndex = 37;
+            this.label10.Text = "Grid Color";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(59, 106);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(67, 13);
+            this.label11.TabIndex = 39;
+            this.label11.Text = "Angle Export";
+            // 
+            // angleModeComboBox
+            // 
+            this.angleModeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.angleModeComboBox.FormattingEnabled = true;
+            this.angleModeComboBox.Items.AddRange(new object[] {
+            "Radians",
+            "Degrees"});
+            this.angleModeComboBox.Location = new System.Drawing.Point(131, 103);
+            this.angleModeComboBox.Name = "angleModeComboBox";
+            this.angleModeComboBox.Size = new System.Drawing.Size(80, 21);
+            this.angleModeComboBox.TabIndex = 40;
+            this.angleModeComboBox.SelectionChangeCommitted += new System.EventHandler(this.angleModeComboBox_SelectionChangeCommitted);
+            // 
+            // gridColorChooser
+            // 
+            this.gridColorChooser.Location = new System.Drawing.Point(127, 68);
+            this.gridColorChooser.Name = "gridColorChooser";
+            this.gridColorChooser.Size = new System.Drawing.Size(108, 28);
+            this.gridColorChooser.TabIndex = 38;
+            this.gridColorChooser.ColorChanged += new OgmoEditor.ColorChooser.ColorCallback(this.gridColorChooser_ColorChanged);
+            // 
             // backgroundColorChooser
             // 
             this.backgroundColorChooser.Location = new System.Drawing.Point(127, 39);
@@ -214,45 +253,6 @@ namespace OgmoEditor.ProjectEditors
             this.colorChooser1.Name = "colorChooser1";
             this.colorChooser1.Size = new System.Drawing.Size(108, 28);
             this.colorChooser1.TabIndex = 36;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(72, 74);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(53, 13);
-            this.label10.TabIndex = 37;
-            this.label10.Text = "Grid Color";
-            // 
-            // gridColorChooser
-            // 
-            this.gridColorChooser.Location = new System.Drawing.Point(127, 68);
-            this.gridColorChooser.Name = "gridColorChooser";
-            this.gridColorChooser.Size = new System.Drawing.Size(108, 28);
-            this.gridColorChooser.TabIndex = 38;
-            this.gridColorChooser.ColorChanged += new OgmoEditor.ColorChooser.ColorCallback(this.gridColorChooser_ColorChanged);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(59, 106);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(64, 13);
-            this.label11.TabIndex = 39;
-            this.label11.Text = "Angle Mode";
-            // 
-            // angleModeComboBox
-            // 
-            this.angleModeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.angleModeComboBox.FormattingEnabled = true;
-            this.angleModeComboBox.Items.AddRange(new object[] {
-            "Radians",
-            "Degrees"});
-            this.angleModeComboBox.Location = new System.Drawing.Point(131, 103);
-            this.angleModeComboBox.Name = "angleModeComboBox";
-            this.angleModeComboBox.Size = new System.Drawing.Size(80, 21);
-            this.angleModeComboBox.TabIndex = 40;
-            this.angleModeComboBox.SelectionChangeCommitted += new System.EventHandler(this.angleModeComboBox_SelectionChangeCommitted);
             // 
             // SettingsEditor
             // 
