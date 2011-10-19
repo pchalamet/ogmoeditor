@@ -28,6 +28,9 @@ namespace OgmoEditor.Windows
             }
         }
 
+        /*
+         *  Events
+         */
         private void pictureBox_Paint(object sender, PaintEventArgs e)
         {
             float scale = Math.Min(ClientSize.Width / (float)image.Width, ClientSize.Height / (float)image.Height);
@@ -37,6 +40,18 @@ namespace OgmoEditor.Windows
             g.DrawImage(image,
                 new Rectangle(pictureBox.ClientSize.Width / 2 - destWidth / 2, pictureBox.ClientSize.Height / 2 - destHeight / 2, destWidth, destHeight),
                 new Rectangle(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
+        }
+
+        private void pictureBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                Ogmo.EntitySelectionWindow.SetSelection(entity);
+            }
+            else if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                Ogmo.EntitySelectionWindow.RemoveFromSelection(entity);
+            }
         }
     }
 }

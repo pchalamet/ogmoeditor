@@ -74,8 +74,8 @@ namespace OgmoEditor.LevelData.Layers
         {
             content.DrawEntity(Definition, new Microsoft.Xna.Framework.Rectangle(Position.X - Definition.Origin.X, Position.Y - Definition.Origin.Y, Size.Width, Size.Height), alpha);
 
-            if (current && Ogmo.EntitySelectionWindow.IsSelected(this))
-                content.DrawHollowRect(Position.X - Definition.Origin.X, Position.Y - Definition.Origin.Y - 1, Size.Width + 1, Size.Height + 1, Microsoft.Xna.Framework.Color.Lime);
+            if (current)
+                content.DrawHollowRect(Position.X - Definition.Origin.X, Position.Y - Definition.Origin.Y - 1, Size.Width + 1, Size.Height + 1, Ogmo.EntitySelectionWindow.IsSelected(this) ? Microsoft.Xna.Framework.Color.Lime : Microsoft.Xna.Framework.Color.Yellow);
         }
 
         public Rectangle Bounds
