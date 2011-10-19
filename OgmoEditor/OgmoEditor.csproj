@@ -134,6 +134,12 @@
     <Compile Include="LevelEditors\ValueEditors\IntValueEditor.Designer.cs">
       <DependentUpon>IntValueEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="LevelEditors\ValueEditors\StringValueEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LevelEditors\ValueEditors\StringValueEditor.Designer.cs">
+      <DependentUpon>StringValueEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="LevelEditors\ValueEditors\ValueEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -340,6 +346,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LevelEditors\ValueEditors\IntValueEditor.resx">
       <DependentUpon>IntValueEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LevelEditors\ValueEditors\StringValueEditor.resx">
+      <DependentUpon>StringValueEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\EntitySelectionImage.resx">
       <DependentUpon>EntitySelectionImage.cs</DependentUpon>

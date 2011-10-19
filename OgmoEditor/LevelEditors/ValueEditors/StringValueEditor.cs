@@ -12,23 +12,31 @@ using OgmoEditor.ProjectEditors;
 
 namespace OgmoEditor.LevelEditors.ValueEditors
 {
-    public partial class FloatValueEditor : ValueEditor
+    public partial class StringValueEditor : ValueEditor
     {
-        public FloatValueDefinition Definition { get; private set; }
+        public StringValueDefinition Definition { get; private set; }
 
-        public FloatValueEditor(Value value, int x, int y)
+        public StringValueEditor(Value value, int x, int y)
             : base(value, x, y)
         {
-            Definition = (FloatValueDefinition)value.Definition;
+            Definition = (StringValueDefinition)value.Definition;
             InitializeComponent();
 
+            //Init the textbox
+            if (Definition.MultiLine)
+            {
+                valueTextBox.Multiline = true;
+                valueTextBox.Size = new Size(valueTextBox.Width, valueTextBox.Height * 3);
+                Size = new Size(128, 96);
+            }
             nameLabel.Text = Definition.Name;
+
             valueTextBox.Text = Value.Content;
         }
 
         private void handleTextBox()
         {
-            OgmoParse.ParseFloatToString(ref Value.Content, Definition.Min, Definition.Max, Definition.Round, valueTextBox);
+            OgmoParse.ParseString(ref Value.Content, Definition.MaxChars, valueTextBox);
         }
 
         /*
@@ -44,5 +52,7 @@ namespace OgmoEditor.LevelEditors.ValueEditors
         {
             handleTextBox();
         }
+
+
     }
 }

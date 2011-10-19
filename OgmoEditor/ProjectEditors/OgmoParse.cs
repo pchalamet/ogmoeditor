@@ -161,6 +161,15 @@ namespace OgmoEditor.ProjectEditors
             }
         }
 
+        static public void ParseString(ref string to, int maxChars, TextBox box)
+        {
+            if (maxChars > 0)
+                to = box.Text.Substring(0, maxChars);
+            else
+                to = box.Text;
+            box.Text = to;
+        }
+
         /*
          *  Error checking
          */

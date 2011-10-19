@@ -37,6 +37,7 @@ namespace OgmoEditor.LevelEditors.ValueEditors
             else
             {
                 Controls.Remove(valueTrackBar);
+                valueTrackBar = null;
                 Size = new Size(128, 24);
             }
         }
@@ -44,7 +45,8 @@ namespace OgmoEditor.LevelEditors.ValueEditors
         private void handleTextBox()
         {
             OgmoParse.ParseIntToString(ref Value.Content, Definition.Min, Definition.Max, valueTextBox);
-            valueTrackBar.Value = Convert.ToInt32(Value.Content);
+            if (valueTrackBar != null)
+                valueTrackBar.Value = Convert.ToInt32(Value.Content);
         }
 
         /*
@@ -53,10 +55,7 @@ namespace OgmoEditor.LevelEditors.ValueEditors
         private void valueTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-            {
                 handleTextBox();
-                Ogmo.MainWindow.FocusEditor();
-            }
         }
 
         private void valueTextBox_Leave(object sender, EventArgs e)
