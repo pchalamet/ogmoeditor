@@ -49,7 +49,7 @@ namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
 
         private void maxCharsTextBox_Validated(object sender, EventArgs e)
         {
-            ProjParse.Parse(ref def.MaxChars, maxCharsTextBox);
+            OgmoParse.Parse(ref def.MaxChars, maxCharsTextBox);
             enforceMaxChars();
         }
 

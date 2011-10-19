@@ -49,17 +49,17 @@ namespace OgmoEditor.ProjectEditors
 
         private void defaultWidthTextBox_Validated(object sender, EventArgs e)
         {
-            ProjParse.Parse(ref project.LevelDefaultSize, defaultWidthTextBox, defaultHeightTextBox);
+            OgmoParse.Parse(ref project.LevelDefaultSize, defaultWidthTextBox, defaultHeightTextBox);
         }
 
         private void minWidthTextBox_Validated(object sender, EventArgs e)
         {
-            ProjParse.Parse(ref project.LevelMinimumSize, minWidthTextBox, minHeightTextBox);
+            OgmoParse.Parse(ref project.LevelMinimumSize, minWidthTextBox, minHeightTextBox);
         }
 
         private void maxWidthTextBox_TextChanged(object sender, EventArgs e)
         {
-            ProjParse.Parse(ref project.LevelMaximumSize, maxWidthTextBox, maxHeightTextBox);
+            OgmoParse.Parse(ref project.LevelMaximumSize, maxWidthTextBox, maxHeightTextBox);
         }
 
         private void gridColorChooser_ColorChanged(OgmoColor color)

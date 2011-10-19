@@ -11,7 +11,7 @@ using System.IO;
 
 namespace OgmoEditor.ProjectEditors
 {
-    static class ProjParse
+    static class OgmoParse
     {
         static public void Parse(ref int to, TextBox box)
         {
@@ -22,6 +22,21 @@ namespace OgmoEditor.ProjectEditors
             catch
             {
                 box.Text = to.ToString();
+            }
+        }
+
+        static public void ParseIntToString(ref string to, int min, int max, TextBox box)
+        {
+            try
+            {
+                int i = Convert.ToInt32(box.Text);
+                if (i < min || i > max)
+                    throw new Exception();
+                to = i.ToString();
+            }
+            catch
+            {
+                box.Text = to;
             }
         }
 
@@ -148,14 +163,14 @@ namespace OgmoEditor.ProjectEditors
             {
                 if (v.Name != "" && !found.Contains(v.Name) && defs.FindAll(e => e.Name == v.Name).Count > 1)
                 {
-                    s += ProjParse.Error(container + " contains multiple values with the name \"" + v.Name + "\"");
+                    s += OgmoParse.Error(container + " contains multiple values with the name \"" + v.Name + "\"");
                     found.Add(v.Name);
                 }
             }
 
             //Check for blank value names
             if (defs.Find(e => e.Name == "") != null)
-                s += ProjParse.Error(container + " contains value(s) with blank name");
+                s += OgmoParse.Error(container + " contains value(s) with blank name");
 
             return s;
         }
@@ -170,14 +185,14 @@ namespace OgmoEditor.ProjectEditors
             {
                 if (v.Name != "" && !found.Contains(v.Name) && defs.FindAll(e => e.Name == v.Name).Count > 1)
                 {
-                    s += ProjParse.Error("There are multiple layers with the name \"" + v.Name + "\"");
+                    s += OgmoParse.Error("There are multiple layers with the name \"" + v.Name + "\"");
                     found.Add(v.Name);
                 }
             }
 
             //Check for blank value names
             if (defs.Find(e => e.Name == "") != null)
-                s += ProjParse.Error("There are layer(s) with blank name");
+                s += OgmoParse.Error("There are layer(s) with blank name");
 
             return s;
         }
@@ -192,14 +207,14 @@ namespace OgmoEditor.ProjectEditors
             {
                 if (v.Name != "" && !found.Contains(v.Name) && defs.FindAll(e => e.Name == v.Name).Count > 1)
                 {
-                    s += ProjParse.Error("There are multiple tilesets with the name \"" + v.Name + "\"");
+                    s += OgmoParse.Error("There are multiple tilesets with the name \"" + v.Name + "\"");
                     found.Add(v.Name);
                 }
             }
 
             //Check for blank value names
             if (defs.Find(e => e.Name == "") != null)
-                s += ProjParse.Error("There are tileset(s) with blank name");
+                s += OgmoParse.Error("There are tileset(s) with blank name");
 
             return s;
         }
@@ -214,14 +229,14 @@ namespace OgmoEditor.ProjectEditors
             {
                 if (v.Name != "" && !found.Contains(v.Name) && defs.FindAll(e => e.Name == v.Name).Count > 1)
                 {
-                    s += ProjParse.Error("There are multiple objects with the name \"" + v.Name + "\"");
+                    s += OgmoParse.Error("There are multiple objects with the name \"" + v.Name + "\"");
                     found.Add(v.Name);
                 }
             }
 
             //Check for blank value names
             if (defs.Find(e => e.Name == "") != null)
-                s += ProjParse.Error("There are object(s) with blank name");
+                s += OgmoParse.Error("There are object(s) with blank name");
 
             return s;
         }

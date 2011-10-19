@@ -90,11 +90,11 @@ namespace OgmoEditor
              *  PROJECT SETTINGS
              */
 
-            s += ProjParse.CheckNonblankString(Name, "Project Name");
-            s += ProjParse.CheckPosSize(LevelDefaultSize, "Default Level");
-            s += ProjParse.CheckPosSize(LevelMinimumSize, "Minimum Level");
-            s += ProjParse.CheckPosSize(LevelMaximumSize, "Maximum Level");
-            s += ProjParse.CheckDefinitionList(LevelValueDefinitions, "Level");
+            s += OgmoParse.CheckNonblankString(Name, "Project Name");
+            s += OgmoParse.CheckPosSize(LevelDefaultSize, "Default Level");
+            s += OgmoParse.CheckPosSize(LevelMinimumSize, "Minimum Level");
+            s += OgmoParse.CheckPosSize(LevelMaximumSize, "Maximum Level");
+            s += OgmoParse.CheckDefinitionList(LevelValueDefinitions, "Level");
 
             /*
              *  LAYER DEFINITIONS
@@ -102,29 +102,29 @@ namespace OgmoEditor
 
             //Must have at least 1 layer
             if (LayerDefinitions.Count == 0)
-                s += ProjParse.Error("No layers are defined");
+                s += OgmoParse.Error("No layers are defined");
 
             //Check for duplicates and blanks
-            s += ProjParse.CheckDefinitionList(LayerDefinitions);
+            s += OgmoParse.CheckDefinitionList(LayerDefinitions);
 
             //Must have a tileset if you have a tile layer
             if (LayerDefinitions.Find(l => l is TileLayerDefinition) != null && Tilesets.Count == 0)
-                s += ProjParse.Error("Tile layer(s) are defined, but no tilesets are defined");
+                s += OgmoParse.Error("Tile layer(s) are defined, but no tilesets are defined");
 
             //Must have an object if you have an object layer
             if (LayerDefinitions.Find(l => l is EntityLayerDefinition) != null && EntityDefinitions.Count == 0)
-                s += ProjParse.Error("Object layer(s) are defined, but no objects are defined");
+                s += OgmoParse.Error("Object layer(s) are defined, but no objects are defined");
 
             /*
              *  TILESETS
              */
 
             //Check for duplicates and blanks
-            s += ProjParse.CheckDefinitionList(Tilesets);
+            s += OgmoParse.CheckDefinitionList(Tilesets);
             foreach (var t in Tilesets)
             {
                 //File must exist
-                s += ProjParse.CheckPath(t.Path, SavedDirectory, "Tileset \"" + t.Name + "\" image file");
+                s += OgmoParse.CheckPath(t.Path, SavedDirectory, "Tileset \"" + t.Name + "\" image file");
             }
 
             /*
@@ -132,12 +132,12 @@ namespace OgmoEditor
              */
 
             //Check for duplicates and blanks
-            s += ProjParse.CheckDefinitionList(EntityDefinitions);
+            s += OgmoParse.CheckDefinitionList(EntityDefinitions);
             foreach (var o in EntityDefinitions)
             {
                 //Image file must exist if it is using an image file to draw
                 if (o.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
-                    s += ProjParse.CheckPath(o.ImageDefinition.ImagePath, SavedDirectory, "Object \"" + o.Name + "\" image file");
+                    s += OgmoParse.CheckPath(o.ImageDefinition.ImagePath, SavedDirectory, "Object \"" + o.Name + "\" image file");
             }
 
             return s;

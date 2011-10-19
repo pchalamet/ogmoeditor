@@ -193,7 +193,7 @@
     <Compile Include="ProjectEditors\ProjectEditor.Designer.cs">
       <DependentUpon>ProjectEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProjectEditors\ProjParse.cs" />
+    <Compile Include="ProjectEditors\OgmoParse.cs" />
     <Compile Include="ProjectEditors\SettingsEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -285,7 +285,6 @@
       <DependentUpon>ToolButton.cs</DependentUpon>
     </Compile>
     <Compile Include="Util.cs" />
-    <Compile Include="Value.cs" />
     <Compile Include="LevelEditors\Content.cs" />
     <Compile Include="Windows\ToolsWindow.cs">
       <SubType>Form</SubType>

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using System.Windows.Forms;
+using OgmoEditor.LevelEditors.ValueEditors;
+using OgmoEditor.LevelData.Layers;
 
 namespace OgmoEditor.Definitions.ValueDefinitions
 {
@@ -34,7 +36,7 @@ namespace OgmoEditor.Definitions.ValueDefinitions
             throw new NotImplementedException();
         }
 
-        public virtual UserControl GetInstanceEditor(Value instance)
+        public virtual ValueEditor GetInstanceEditor(Value instance)
         {
             throw new NotImplementedException();
         }

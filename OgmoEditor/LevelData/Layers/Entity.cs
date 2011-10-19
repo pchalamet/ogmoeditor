@@ -46,7 +46,7 @@ namespace OgmoEditor.LevelData.Layers
             {
                 Value v = Values.Find(val => val.Definition.Name == a.Name);
                 if (v != null)
-                    v.content = a.InnerText;
+                    v.Content = a.InnerText;
             }
         }
 

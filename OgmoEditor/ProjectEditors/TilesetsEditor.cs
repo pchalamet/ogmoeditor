@@ -207,7 +207,7 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            ProjParse.Parse(ref tilesets[listBox.SelectedIndex].TileSize, tileSizeXTextBox, tileSizeYTextBox);
+            OgmoParse.Parse(ref tilesets[listBox.SelectedIndex].TileSize, tileSizeXTextBox, tileSizeYTextBox);
             updateTotalTiles();
         }
 
@@ -216,7 +216,7 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            ProjParse.Parse(ref tilesets[listBox.SelectedIndex].TileSep, tileSpacingTextBox);
+            OgmoParse.Parse(ref tilesets[listBox.SelectedIndex].TileSep, tileSpacingTextBox);
             updateTotalTiles();
         }
 

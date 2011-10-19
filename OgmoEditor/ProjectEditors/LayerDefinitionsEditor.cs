@@ -162,7 +162,7 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            ProjParse.Parse(ref layerDefinitions[listBox.SelectedIndex].Grid, gridXTextBox, gridYTextBox);
+            OgmoParse.Parse(ref layerDefinitions[listBox.SelectedIndex].Grid, gridXTextBox, gridYTextBox);
         }
 
         private void listBox_SelectedIndexChanged(object sender, EventArgs e)

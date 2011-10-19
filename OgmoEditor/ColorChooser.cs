@@ -60,7 +60,7 @@ namespace OgmoEditor
         private void hexTextBox_Validated(object sender, EventArgs e)
         {
             OgmoColor col = color;
-            ProjParse.Parse(ref col, hexTextBox);
+            OgmoParse.Parse(ref col, hexTextBox);
             Color = col;
         }
 

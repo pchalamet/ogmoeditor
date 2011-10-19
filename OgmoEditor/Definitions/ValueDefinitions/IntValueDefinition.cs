@@ -5,6 +5,8 @@ using System.Text;
 using System.Xml.Serialization;
 using OgmoEditor.ProjectEditors.ValueDefinitionEditors;
 using System.Windows.Forms;
+using OgmoEditor.LevelData.Layers;
+using OgmoEditor.LevelEditors.ValueEditors;
 
 namespace OgmoEditor.Definitions.ValueDefinitions
 {
@@ -32,6 +34,11 @@ namespace OgmoEditor.Definitions.ValueDefinitions
         public override UserControl GetEditor()
         {
             return new IntValueDefinitionEditor(this);
+        }
+
+        public override ValueEditor GetInstanceEditor(Value instance)
+        {
+            return new IntValueFieldEditor(instance);
         }
 
         public override ValueDefinition Clone()

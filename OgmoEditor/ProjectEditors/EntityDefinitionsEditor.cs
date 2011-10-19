@@ -261,7 +261,7 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            ProjParse.Parse(ref objects[listBox.SelectedIndex].Limit, limitTextBox);
+            OgmoParse.Parse(ref objects[listBox.SelectedIndex].Limit, limitTextBox);
         }
 
         private void sizeXTextBox_Validated(object sender, EventArgs e)
@@ -269,7 +269,7 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            ProjParse.Parse(ref objects[listBox.SelectedIndex].Size, sizeXTextBox, sizeYTextBox);
+            OgmoParse.Parse(ref objects[listBox.SelectedIndex].Size, sizeXTextBox, sizeYTextBox);
         }
 
         private void originXTextBox_Validated(object sender, EventArgs e)
@@ -277,7 +277,7 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            ProjParse.Parse(ref objects[listBox.SelectedIndex].Origin, originXTextBox, originYTextBox);
+            OgmoParse.Parse(ref objects[listBox.SelectedIndex].Origin, originXTextBox, originYTextBox);
         }
 
         /*
@@ -313,7 +313,7 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            ProjParse.Parse(ref objects[listBox.SelectedIndex].RotateIncrement, rotationIncrementTextBox);
+            OgmoParse.Parse(ref objects[listBox.SelectedIndex].RotateIncrement, rotationIncrementTextBox);
         }
 
         /*
@@ -333,7 +333,7 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            ProjParse.Parse(ref objects[listBox.SelectedIndex].NodesDefinition.Limit, nodeLimitTextBox);
+            OgmoParse.Parse(ref objects[listBox.SelectedIndex].NodesDefinition.Limit, nodeLimitTextBox);
         }
 
         private void nodeDrawComboBox_SelectionChangeCommitted(object sender, EventArgs e)
@@ -377,7 +377,7 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            ProjParse.Parse(ref objects[listBox.SelectedIndex].ImageDefinition.ClipRect, imageFileClipXTextBox, imageFileClipYTextBox, imageFileClipWTextBox, imageFileClipHTextBox);
+            OgmoParse.Parse(ref objects[listBox.SelectedIndex].ImageDefinition.ClipRect, imageFileClipXTextBox, imageFileClipYTextBox, imageFileClipWTextBox, imageFileClipHTextBox);
             imagePreviewer.SetClip(objects[listBox.SelectedIndex].ImageDefinition.ClipRect);
         }
 
