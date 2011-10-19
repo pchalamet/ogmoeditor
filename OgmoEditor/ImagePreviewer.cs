@@ -82,7 +82,7 @@ namespace OgmoEditor
             else
             {
                 g.DrawImage(pictureBox.ErrorImage,
-                    new Point(pictureBox.ClientSize.Width / 2 - pictureBox.ErrorImage.Width / 2, pictureBox.ClientSize.Height / 2 - pictureBox.ErrorImage.Height / 2));
+                    new Point(pictureBox.ClientSize.Width / 2 - pictureBox.ErrorImage.Width / 2 - 7, pictureBox.ClientSize.Height / 2 - pictureBox.ErrorImage.Height / 2 - 7));
             }
         }
 

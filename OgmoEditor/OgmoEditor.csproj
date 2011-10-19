@@ -103,6 +103,12 @@
     <Compile Include="LevelEditors\Tools\GridTools\GridPencilTool.cs" />
     <Compile Include="LevelEditors\Tools\GridTools\GridRectangleTool.cs" />
     <Compile Include="LevelEditors\Tools\EntityTools\EntityPlacementTool.cs" />
+    <Compile Include="Windows\EntitySelectionImage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Windows\EntitySelectionImage.Designer.cs">
+      <DependentUpon>EntitySelectionImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\EntitySelectionWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -283,6 +289,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ImagePreviewer.resx">
       <DependentUpon>ImagePreviewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\EntitySelectionImage.resx">
+      <DependentUpon>EntitySelectionImage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\LayerButton.resx">
       <DependentUpon>LayerButton.cs</DependentUpon>
