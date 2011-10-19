@@ -104,6 +104,18 @@
     <Compile Include="LevelEditors\Tools\GridTools\GridPencilTool.cs" />
     <Compile Include="LevelEditors\Tools\GridTools\GridRectangleTool.cs" />
     <Compile Include="LevelEditors\Tools\EntityTools\EntityPlacementTool.cs" />
+    <Compile Include="LevelEditors\ValueEditors\IntValueFieldEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LevelEditors\ValueEditors\IntValueFieldEditor.Designer.cs">
+      <DependentUpon>IntValueFieldEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LevelEditors\ValueEditors\ValueEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LevelEditors\ValueEditors\ValueEditor.Designer.cs">
+      <DependentUpon>ValueEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\EntitySelectionImage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -290,6 +302,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ImagePreviewer.resx">
       <DependentUpon>ImagePreviewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LevelEditors\ValueEditors\IntValueFieldEditor.resx">
+      <DependentUpon>IntValueFieldEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\EntitySelectionImage.resx">
       <DependentUpon>EntitySelectionImage.cs</DependentUpon>

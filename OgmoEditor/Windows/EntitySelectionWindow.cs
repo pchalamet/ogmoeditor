@@ -12,6 +12,8 @@ namespace OgmoEditor.Windows
 {
     public class EntitySelectionWindow : OgmoWindow
     {
+        private const int WIDTH = 128;
+
         private List<Entity> selection;
 
         public EntitySelectionWindow()
@@ -19,7 +21,7 @@ namespace OgmoEditor.Windows
         {
             Name = "EntitySelectionWindow";
             Text = "Selection";
-            ClientSize = new Size(96, 128);
+            ClientSize = new Size(WIDTH, 128);
             selection = new List<Entity>();
             onSelectionChanged();
 
@@ -105,49 +107,49 @@ namespace OgmoEditor.Windows
 
             if (selection.Count == 0)
             {
-                ClientSize = new Size(96, 108);
+                ClientSize = new Size(WIDTH, 108);
 
                 //No selection label
                 Label lbl = new Label();
                 lbl.TextAlign = ContentAlignment.MiddleCenter;
-                lbl.Bounds = new Rectangle(0, 0, 96, 108);
+                lbl.Bounds = new Rectangle(0, 0, WIDTH, 108);
                 lbl.Text = "No\nSelection";
                 Controls.Add(lbl);
             }
             else if (selection.Count == 1)
             {
-                ClientSize = new Size(96, 108);
+                ClientSize = new Size(WIDTH, 108);
 
                 //Name label
                 Label name = new Label();
                 name.Font = new Font(name.Font, FontStyle.Bold);
                 name.TextAlign = ContentAlignment.MiddleCenter;
-                name.Bounds = new Rectangle(0, 0, 96, 24);
+                name.Bounds = new Rectangle(0, 0, WIDTH, 24);
                 name.Text = selection[0].Definition.Name;             
                 Controls.Add(name);
 
                 //Add the image
-                EntitySelectionImage sel = new EntitySelectionImage(selection[0], 32, 24, false);
+                EntitySelectionImage sel = new EntitySelectionImage(selection[0], WIDTH/2 - 16, 24, false);
                 Controls.Add(sel);
 
                 //Entity position
                 Label pos = new Label();
                 pos.TextAlign = ContentAlignment.MiddleCenter;
-                pos.Bounds = new Rectangle(0, 58, 96, 16);
+                pos.Bounds = new Rectangle(0, 58, WIDTH, 16);
                 pos.Text = "( " + selection[0].Position.X.ToString() + ", " + selection[0].Position.Y.ToString() + " )";
                 Controls.Add(pos);
 
                 //Entity size
                 Label size = new Label();
                 size.TextAlign = ContentAlignment.MiddleCenter;
-                size.Bounds = new Rectangle(0, 74, 96, 16);
+                size.Bounds = new Rectangle(0, 74, WIDTH, 16);
                 size.Text = selection[0].Size.Width.ToString() + " x " + selection[0].Size.Height.ToString();
                 Controls.Add(size);
 
                 //Entity count
                 Label count = new Label();
                 count.TextAlign = ContentAlignment.MiddleCenter;
-                count.Bounds = new Rectangle(0, 90, 96, 16);
+                count.Bounds = new Rectangle(0, 90, WIDTH, 16);
                 count.Text = "Count: " + ((EntityLayer)Ogmo.LayersWindow.CurrentLayer).Entities.Count(e => e.Definition == selection[0].Definition).ToString();
                 if (selection[0].Definition.Limit > 0)
                     count.Text += " / " + selection[0].Definition.Limit.ToString();
@@ -155,11 +157,11 @@ namespace OgmoEditor.Windows
             }
             else
             {
-                ClientSize = new Size(96, ((selection.Count - 1) / 3) * 32 + 32);
+                ClientSize = new Size(WIDTH, ((selection.Count - 1) / 4) * 32 + 32);
 
                 for (int i = 0; i < selection.Count; i++)
                 {
-                    EntitySelectionImage e = new EntitySelectionImage(selection[i], (i % 3) * 32, (i / 3) * 32, true);
+                    EntitySelectionImage e = new EntitySelectionImage(selection[i], (i % 4) * 32, (i / 4) * 32, true);
                     Controls.Add(e);
                 }
             }
