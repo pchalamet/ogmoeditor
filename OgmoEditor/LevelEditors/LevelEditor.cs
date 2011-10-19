@@ -99,6 +99,10 @@ namespace OgmoEditor.LevelEditors
             Content.DrawRectangle(10, 10, Level.Size.Width, Level.Size.Height, new Color(0, 0, 0, .5f));
             Content.DrawRectangle(0, 0, Level.Size.Width, Level.Size.Height, Ogmo.Project.BackgroundColor.ToXNA());
 
+            //Draw the grid if turned on and editor is zoomed at least 100%
+            if (Ogmo.MainWindow.EditingGridVisible && Camera.Zoom >= 1)
+                Content.DrawGrid(LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Layer.Definition.Grid, Level.Size, Ogmo.Project.GridColor.ToXNA() * .5f);
+
             //Draw the layers
             int i;
             for (i = 0; i < Ogmo.LayersWindow.CurrentLayerIndex; i++)
@@ -112,10 +116,6 @@ namespace OgmoEditor.LevelEditors
                 if (Ogmo.Project.LayerDefinitions[i].Visible)
                     LayerEditors[i].Draw(Content, false,  LAYER_ABOVE_ALPHA);
             }
-
-            //Draw the grid if turned on and editor is zoomed at least 100%
-            if (Ogmo.MainWindow.EditingGridVisible && Camera.Zoom >= 1)
-                Content.DrawGrid(LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Layer.Definition.Grid, Level.Size, Ogmo.Project.GridColor.ToXNA() * .5f);
 
             Content.SpriteBatch.End();
         }

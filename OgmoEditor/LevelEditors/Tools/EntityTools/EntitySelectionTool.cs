@@ -27,11 +27,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                 int w = Math.Max(mouseStart.X, LevelEditor.MousePosition.X) - x;
                 int h = Math.Max(mouseStart.Y, LevelEditor.MousePosition.Y) - y;
 
-                content.DrawRectangle(x, y, w, h, Microsoft.Xna.Framework.Color.Yellow * .1f);
-                content.DrawLineAngle(x, y, w, Util.RIGHT, Microsoft.Xna.Framework.Color.Yellow);
-                content.DrawLineAngle(x, y, h + 1, Util.DOWN, Microsoft.Xna.Framework.Color.Yellow);
-                content.DrawLineAngle(x, y + h, w, Util.RIGHT, Microsoft.Xna.Framework.Color.Yellow);
-                content.DrawLineAngle(x + w, y, h, Util.DOWN, Microsoft.Xna.Framework.Color.Yellow);
+                content.DrawFillRect(x, y, w, h, Microsoft.Xna.Framework.Color.Yellow);
             }
         }
 

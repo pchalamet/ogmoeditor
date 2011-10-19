@@ -19,7 +19,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
         public override void Draw(Content content, bool current, float alpha)
         {
             foreach (Entity e in Layer.Entities)
-                e.Draw(content, alpha);
+                e.Draw(content, current, alpha);
 
             base.Draw(content, current, alpha);
         }

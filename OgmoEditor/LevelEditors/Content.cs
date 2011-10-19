@@ -118,6 +118,20 @@ namespace OgmoEditor.LevelEditors
             SpriteBatch.Draw(TexPixel, new Rectangle(x, y, width, height), color);
         }
 
+        public void DrawHollowRect(int x, int y, int width, int height, Color color)
+        {
+            DrawLineAngle(x, y, width, Util.RIGHT, color);
+            DrawLineAngle(x, y, height + 1, Util.DOWN, color);
+            DrawLineAngle(x, y + height, width, Util.RIGHT, color);
+            DrawLineAngle(x + width, y, height, Util.DOWN, color);
+        }
+
+        public void DrawFillRect(int x, int y, int width, int height, Color color)
+        {
+            DrawHollowRect(x, y, width, height, color);
+            DrawRectangle(x, y + 1, width - 1, height - 1, color * .1f);
+        }
+
         public void DrawLine(int x1, int y1, int x2, int y2, Color color)
         {
             int length = (int)Math.Sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));

@@ -26,7 +26,7 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
             {
                 Rectangle draw = getRect();
                 if (LevelEditor.Level.Bounds.IntersectsWith(draw))
-                    content.DrawRectangle(draw.X, draw.Y, draw.Width, draw.Height, (drawMode ? LayerEditor.Layer.Definition.Color.ToXNA() : LayerEditor.Layer.Definition.Color.Invert().ToXNA()) * .5f);
+                    content.DrawFillRect(draw.X, draw.Y, draw.Width, draw.Height, (drawMode ? LayerEditor.Layer.Definition.Color.ToXNA() : LayerEditor.Layer.Definition.Color.Invert().ToXNA()) * .5f);
             }
         }
 
