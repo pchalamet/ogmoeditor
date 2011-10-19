@@ -31,7 +31,7 @@ namespace OgmoEditor.Windows
 
         public void OnRemove()
         {
-
+            Ogmo.EntitiesWindow.OnEntityChanged -= onObjectChanged;
         }
 
         /*

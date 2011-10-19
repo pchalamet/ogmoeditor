@@ -18,7 +18,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             Layer = layer;
         }
 
-        public override void Draw(Content content, float alpha)
+        public override void Draw(Content content, bool current, float alpha)
         {
             for (int i = 0; i < Layer.Grid.GetLength(0); i++)
             {
@@ -29,7 +29,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
                 }
             }
 
-            base.Draw(content, alpha);
+            base.Draw(content, current, alpha);
         }
     }
 }

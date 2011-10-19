@@ -16,12 +16,12 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             Layer = layer;
         }
 
-        public override void Draw(Content content, float alpha)
+        public override void Draw(Content content, bool current, float alpha)
         {
             foreach (Entity e in Layer.Entities)
                 e.Draw(content, alpha);
 
-            base.Draw(content, alpha);
+            base.Draw(content, current, alpha);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             Layer = layer;
         }
 
-        public virtual void Draw(Content content, float alpha)
+        public virtual void Draw(Content content, bool current, float alpha)
         {
             if (Ogmo.ToolsWindow.CurrentTool != null)
                 Ogmo.ToolsWindow.CurrentTool.Draw(content);

@@ -104,13 +104,13 @@ namespace OgmoEditor.LevelEditors
             for (i = 0; i < Ogmo.LayersWindow.CurrentLayerIndex; i++)
             {
                 if (Ogmo.Project.LayerDefinitions[i].Visible)
-                    LayerEditors[i].Draw(Content, 1);
+                    LayerEditors[i].Draw(Content, false, 1);
             }
-            LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Draw(Content, 1);
+            LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Draw(Content, true, 1);
             for (; i < LayerEditors.Count; i++)
             {
                 if (Ogmo.Project.LayerDefinitions[i].Visible)
-                    LayerEditors[i].Draw(Content, LAYER_ABOVE_ALPHA);
+                    LayerEditors[i].Draw(Content, false,  LAYER_ABOVE_ALPHA);
             }
 
             //Draw the grid if turned on and editor is zoomed at least 100%
