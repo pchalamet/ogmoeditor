@@ -74,7 +74,7 @@ namespace OgmoEditor.Windows
             for (int i = 0; i < project.LayerDefinitions.Count; i++)
                 Controls.Add(new LayerButton(project.LayerDefinitions[i], i * 24));
 
-            SetLayer(-1);
+            CurrentLayerIndex = -1;
             SetLayer(0);
         }
 

@@ -40,7 +40,6 @@ namespace OgmoEditor.Windows
 
             //Events
             Ogmo.LayersWindow.OnLayerChanged += onLayerChanged;
-            Ogmo.OnProjectStart += onProjectStart;
             Ogmo.OnLevelAdded += onLevelAdded;
         }
 
@@ -94,11 +93,6 @@ namespace OgmoEditor.Windows
             EditorVisible = true;
         }
 
-        private void onProjectStart(Project project)
-        {
-            onLayerChanged(null, -1);
-        }
-
         private void onLayerChanged(LayerDefinition def, int index)
         {
             Controls.Clear();
@@ -115,7 +109,7 @@ namespace OgmoEditor.Windows
                 }
 
                 if (tools.Length > 0)
-                    SetTool(tools[0]);
+                    SetTool(tools[0]); 
                 else
                     ClearTool();
             }
