@@ -14,7 +14,7 @@ namespace OgmoEditor.LevelEditors.ValueEditors
     {
         public Value Value { get; private set; }
 
-        public ValueEditor()
+        private ValueEditor()
         {
             //Never call this!
         }

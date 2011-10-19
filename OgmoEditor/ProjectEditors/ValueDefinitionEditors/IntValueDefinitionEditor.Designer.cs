@@ -28,37 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label6 = new System.Windows.Forms.Label();
-            this.uiComboBox = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.maxTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.minTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.defaultTextBox = new System.Windows.Forms.TextBox();
+            this.sliderCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(23, 71);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(18, 13);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "UI";
-            // 
-            // uiComboBox
-            // 
-            this.uiComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.uiComboBox.FormattingEnabled = true;
-            this.uiComboBox.Items.AddRange(new object[] {
-            "Field",
-            "Slider"});
-            this.uiComboBox.Location = new System.Drawing.Point(47, 68);
-            this.uiComboBox.Name = "uiComboBox";
-            this.uiComboBox.Size = new System.Drawing.Size(77, 21);
-            this.uiComboBox.TabIndex = 14;
-            this.uiComboBox.SelectedIndexChanged += new System.EventHandler(this.uiComboBox_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -111,19 +88,29 @@
             this.defaultTextBox.TabIndex = 8;
             this.defaultTextBox.Validated += new System.EventHandler(this.defaultTextBox_Validated);
             // 
-            // IntValueEditor
+            // sliderCheckBox
+            // 
+            this.sliderCheckBox.AutoSize = true;
+            this.sliderCheckBox.Location = new System.Drawing.Point(33, 67);
+            this.sliderCheckBox.Name = "sliderCheckBox";
+            this.sliderCheckBox.Size = new System.Drawing.Size(82, 17);
+            this.sliderCheckBox.TabIndex = 14;
+            this.sliderCheckBox.Text = "Show Slider";
+            this.sliderCheckBox.UseVisualStyleBackColor = true;
+            this.sliderCheckBox.CheckedChanged += new System.EventHandler(this.sliderCheckBox_CheckedChanged);
+            // 
+            // IntValueDefinitionEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.uiComboBox);
+            this.Controls.Add(this.sliderCheckBox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.maxTextBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.minTextBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.defaultTextBox);
-            this.Name = "IntValueEditor";
+            this.Name = "IntValueDefinitionEditor";
             this.Size = new System.Drawing.Size(239, 104);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -132,13 +119,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox uiComboBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox maxTextBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox minTextBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox defaultTextBox;
+        private System.Windows.Forms.CheckBox sliderCheckBox;
     }
 }

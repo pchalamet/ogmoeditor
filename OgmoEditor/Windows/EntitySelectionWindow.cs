@@ -156,14 +156,17 @@ namespace OgmoEditor.Windows
 
                 //Value editors
                 int yy = 108;
-                foreach (var v in selection[0].Values)
+                if (selection[0].Values != null)
                 {
-                    ValueEditor ed = v.Definition.GetInstanceEditor(v, 0, yy);
-                    Controls.Add(ed);
-                    yy += ed.Height;
+                    foreach (var v in selection[0].Values)
+                    {
+                        ValueEditor ed = v.Definition.GetInstanceEditor(v, 0, yy);
+                        Controls.Add(ed);
+                        yy += ed.Height;
+                    }
                 }
 
-                ClientSize = new Size(WIDTH, yy);
+                ClientSize = new Size(WIDTH, yy + 4);
             }
             else
             {

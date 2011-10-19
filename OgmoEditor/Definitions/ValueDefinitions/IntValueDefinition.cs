@@ -20,7 +20,7 @@ namespace OgmoEditor.Definitions.ValueDefinitions
         [XmlAttribute]
         public int Max;
         [XmlAttribute]
-        public NumberUITypes UIType;
+        public bool ShowSlider;
 
         public IntValueDefinition()
             : base()
@@ -28,7 +28,7 @@ namespace OgmoEditor.Definitions.ValueDefinitions
             Default = 0;
             Min = int.MinValue;
             Max = int.MaxValue;
-            UIType = NumberUITypes.Field;
+            ShowSlider = false;
         }
 
         public override UserControl GetEditor()
@@ -38,7 +38,7 @@ namespace OgmoEditor.Definitions.ValueDefinitions
 
         public override ValueEditor GetInstanceEditor(Value instance, int x, int y)
         {
-            return new IntValueFieldEditor(instance, x, y);
+            return new IntValueEditor(instance, x, y);
         }
 
         public override ValueDefinition Clone()
@@ -48,7 +48,7 @@ namespace OgmoEditor.Definitions.ValueDefinitions
             def.Default = Default;
             def.Min = Min;
             def.Max = Max;
-            def.UIType = UIType;
+            def.ShowSlider = ShowSlider;
             return def;
         }
 

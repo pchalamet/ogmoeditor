@@ -19,7 +19,7 @@ namespace OgmoEditor.Definitions.ValueDefinitions
         [XmlAttribute]
         public float Round;
         [XmlAttribute]
-        public NumberUITypes UIType;
+        public bool ShowSlider;
 
         public FloatValueDefinition()
             : base()
@@ -28,7 +28,7 @@ namespace OgmoEditor.Definitions.ValueDefinitions
             Min = float.MinValue;
             Max = float.MaxValue;
             Round = .1f;
-            UIType = NumberUITypes.Field;
+            ShowSlider = false;
         }
 
         public override System.Windows.Forms.UserControl GetEditor()
@@ -44,7 +44,7 @@ namespace OgmoEditor.Definitions.ValueDefinitions
             def.Min = Min;
             def.Max = Max;
             def.Round = Round;
-            def.UIType = UIType;
+            def.ShowSlider = ShowSlider;
             return def;
         }
 

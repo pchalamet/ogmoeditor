@@ -23,7 +23,7 @@ namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
             defaultTextBox.Text = def.Default.ToString();
             minTextBox.Text = def.Min.ToString();
             maxTextBox.Text = def.Max.ToString();
-            uiComboBox.SelectedIndex = (int)def.UIType;
+            sliderCheckBox.Checked = def.ShowSlider;
         }
 
         private void defaultTextBox_Validated(object sender, EventArgs e)
@@ -41,9 +41,9 @@ namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
             OgmoParse.Parse(ref def.Max, maxTextBox);
         }
 
-        private void uiComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void sliderCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            def.UIType = (ValueDefinition.NumberUITypes)uiComboBox.SelectedIndex;
+            def.ShowSlider = sliderCheckBox.Checked;
         }
     }
 }
