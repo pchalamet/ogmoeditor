@@ -86,9 +86,14 @@ namespace OgmoEditor.Windows
             return selection.Contains(e);
         }
 
-        public int AmountSelected()
+        public int AmountSelected
         {
-            return selection.Count;
+            get { return selection.Count; }
+        }
+
+        public List<Entity> Selected
+        {
+            get { return new List<Entity>(selection); }
         }
 
         /*

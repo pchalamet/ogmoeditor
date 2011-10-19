@@ -19,13 +19,9 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
         public override void Do()
         {
             foreach (var e in toRemove)
-            {
                 EntityLayer.Entities.Remove(e);
 
-                //Remove it from selection
-                if (Ogmo.EntitySelectionWindow.IsSelected(e))
-                    Ogmo.EntitySelectionWindow.RemoveFromSelection(e);
-            }
+            Ogmo.EntitySelectionWindow.RemoveFromSelection(toRemove);
         }
 
         public override void Undo()

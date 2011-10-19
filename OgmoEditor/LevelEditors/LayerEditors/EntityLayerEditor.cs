@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OgmoEditor.LevelData.Layers;
+using OgmoEditor.LevelEditors.Actions.EntityActions;
 
 namespace OgmoEditor.LevelEditors.LayerEditors
 {
@@ -22,6 +23,17 @@ namespace OgmoEditor.LevelEditors.LayerEditors
                 e.Draw(content, current, alpha);
 
             base.Draw(content, current, alpha);
+        }
+
+        public override void OnKeyDown(System.Windows.Forms.Keys key)
+        {
+            base.OnKeyDown(key);
+
+            if (key == System.Windows.Forms.Keys.Delete)
+            {
+                if (Ogmo.EntitySelectionWindow.AmountSelected > 0)
+                    LevelEditor.Perform(new EntityRemoveAction(Layer, Ogmo.EntitySelectionWindow.Selected));
+            }
         }
     }
 }

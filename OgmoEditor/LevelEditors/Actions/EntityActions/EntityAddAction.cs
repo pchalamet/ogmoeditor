@@ -27,7 +27,7 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
             EntityLayer.Entities.Add(added);
 
             //Add it to the selection
-            Ogmo.EntitySelectionWindow.SetSelection(added);
+            Ogmo.EntitySelectionWindow.AddToSelection(added);
         }
 
         public override void Undo()

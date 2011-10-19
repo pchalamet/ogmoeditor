@@ -32,7 +32,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
                 Ogmo.ToolsWindow.CurrentTool.Draw(content);
         }
 
-        public void OnKeyDown(Keys key)
+        public virtual void OnKeyDown(Keys key)
         {
             if (Ogmo.ToolsWindow.CurrentTool != null)
                 Ogmo.ToolsWindow.CurrentTool.OnKeyDown(key);
