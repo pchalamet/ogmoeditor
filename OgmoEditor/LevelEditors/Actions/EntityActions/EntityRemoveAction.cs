@@ -22,6 +22,7 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
             {
                 EntityLayer.Entities.Remove(e);
 
+                //Remove it from selection
                 if (Ogmo.EntitySelectionWindow.IsSelected(e))
                     Ogmo.EntitySelectionWindow.RemoveFromSelection(e);
             }

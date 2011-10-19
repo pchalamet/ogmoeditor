@@ -37,6 +37,13 @@ namespace OgmoEditor
             }
         }
 
+        public void LoadImage(Image img, Rectangle? clip = null)
+        {
+            image = img;
+            clipRect = clip ?? new Rectangle(0, 0, image.Width, image.Height);
+            pictureBox.Refresh();
+        }
+
         public void SetClip(Rectangle r)
         {
             clipRect = r;
@@ -69,7 +76,7 @@ namespace OgmoEditor
                 }
                 else
                     g.DrawImage(image,
-                        pictureBox.ClientSize.Width / 2 - clipRect.Width / 2 - 7, pictureBox.ClientSize.Height / 2 - clipRect.Height / 2 - 7,
+                        pictureBox.ClientSize.Width / 2 - clipRect.Width / 2, pictureBox.ClientSize.Height / 2 - clipRect.Height / 2,
                         clipRect, GraphicsUnit.Pixel);
             }
             else
