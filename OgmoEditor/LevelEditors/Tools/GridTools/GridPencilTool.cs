@@ -13,7 +13,7 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
         private bool drawMode;
 
         public GridPencilTool()
-            : base("Grid Pencil", "pencil.png", System.Windows.Forms.Keys.P)
+            : base("Pencil", "pencil.png", System.Windows.Forms.Keys.P)
         {
             drawing = false;
         }

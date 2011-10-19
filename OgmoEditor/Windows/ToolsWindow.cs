@@ -36,7 +36,7 @@ namespace OgmoEditor.Windows
             toolsForLayerTypes = new Dictionary<Type, Tool[]>();
             toolsForLayerTypes.Add(typeof(GridLayerDefinition), new Tool[] { new GridPencilTool(), new GridFloodTool(), new GridRectangleTool() });
             toolsForLayerTypes.Add(typeof(TileLayerDefinition), new Tool[] { });
-            toolsForLayerTypes.Add(typeof(EntityLayerDefinition), new Tool[] { new EntityPlacementTool(), new EntitySelectionTool(), new EntityEraseTool() });
+            toolsForLayerTypes.Add(typeof(EntityLayerDefinition), new Tool[] { new EntityPlacementTool(), new EntitySelectionTool(), new EntityMoveTool(), new EntityResizeTool(), new EntityRotateTool(), new EntityEraseTool() });
 
             //Events
             Ogmo.LayersWindow.OnLayerChanged += onLayerChanged;
