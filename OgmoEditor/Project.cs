@@ -184,6 +184,14 @@ namespace OgmoEditor
             }
         }
 
+        public string ExportAngle(float angle)
+        {
+            if (AngleMode == AngleExportMode.Radians)
+                return angle.ToString();
+            else
+                return (angle * Util.RADTODEG).ToString();
+        }
+
         /*
          *  Saving the project file
          */
