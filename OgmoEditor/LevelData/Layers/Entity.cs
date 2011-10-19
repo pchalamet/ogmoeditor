@@ -53,7 +53,7 @@ namespace OgmoEditor.LevelData.Layers
 
         public void Draw(Content content, bool current, float alpha)
         {
-            content.DrawEntity(Definition, new Microsoft.Xna.Framework.Rectangle(Position.X, Position.Y, Size.Width, Size.Height), alpha);
+            content.DrawEntity(Definition, new Microsoft.Xna.Framework.Rectangle(Position.X - Definition.Origin.X, Position.Y - Definition.Origin.Y, Size.Width, Size.Height), alpha);
 
             if (current && Ogmo.EntitySelectionWindow.IsSelected(this))
                 content.DrawHollowRect(Position.X - Definition.Origin.X, Position.Y - Definition.Origin.Y - 1, Size.Width + 1, Size.Height + 1, Microsoft.Xna.Framework.Color.Lime);

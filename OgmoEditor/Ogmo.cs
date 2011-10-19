@@ -165,7 +165,7 @@ namespace OgmoEditor
 
             //Tool and layer selection can be cleared now
             LayersWindow.SetLayer(-1);
-            ToolsWindow.SetTool(null);
+            ToolsWindow.ClearTool();
         }
 
         static public void EditProject(bool newProject)

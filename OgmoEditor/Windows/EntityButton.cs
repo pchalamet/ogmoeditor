@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using OgmoEditor.Definitions;
+using OgmoEditor.LevelEditors.Tools.EntityTools;
 
 namespace OgmoEditor.Windows
 {
@@ -21,6 +22,7 @@ namespace OgmoEditor.Windows
         {
             Definition = definition;
             InitializeComponent();
+            Location = new Point(x, y);
             toolTip.SetToolTip(button, definition.Name);
             button.BackgroundImage = Definition.GenerateButtonImage();
             button.BackColor = (definition == Ogmo.EntitiesWindow.CurrentEntity) ? Selected : NotSelected;
@@ -40,6 +42,7 @@ namespace OgmoEditor.Windows
         private void button_Click(object sender, EventArgs e)
         {
             Ogmo.EntitiesWindow.SetObject(Definition);
+            Ogmo.ToolsWindow.SetTool(typeof(EntityPlacementTool));
         }
 
         private void onObjectChanged(EntityDefinition definition)

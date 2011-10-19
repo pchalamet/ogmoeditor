@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using OgmoEditor.Definitions;
 using OgmoEditor.Definitions.LayerDefinitions;
+using System.Diagnostics;
 
 namespace OgmoEditor.Windows
 {
@@ -43,13 +44,15 @@ namespace OgmoEditor.Windows
 
         private void initFromProject(Project project)
         {
-            ClientSize = new Size(96, (1 + project.EntityDefinitions.Count / 3) * 32);
+            ClientSize = new Size(96, ((project.EntityDefinitions.Count - 1) / 3) * 32 + 32);
 
             foreach (EntityButton b in Controls)
                 b.OnRemove();
             Controls.Clear();
             for (int i = 0; i < project.EntityDefinitions.Count; i++)
+            {
                 Controls.Add(new EntityButton(project.EntityDefinitions[i], (i % 3) * 32, (i / 3) * 32));
+            }
         }
 
         /*

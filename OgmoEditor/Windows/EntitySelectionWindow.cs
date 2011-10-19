@@ -21,6 +21,7 @@ namespace OgmoEditor.Windows
             Text = "Selection";
             ClientSize = new Size(96, 128);
             selection = new List<Entity>();
+            onSelectionChanged();
 
             //Events
             Ogmo.LayersWindow.OnLayerChanged += onLayerChanged;
@@ -99,7 +100,14 @@ namespace OgmoEditor.Windows
 
             if (selection.Count == 0)
             {
-                
+                ClientSize = new Size(96, 108);
+
+                //No selection label
+                Label lbl = new Label();
+                lbl.TextAlign = ContentAlignment.MiddleCenter;
+                lbl.Bounds = new Rectangle(0, 0, 96, 108);
+                lbl.Text = "No\nSelection";
+                Controls.Add(lbl);
             }
             else if (selection.Count == 1)
             {
@@ -142,8 +150,16 @@ namespace OgmoEditor.Windows
             }
             else
             {
+                ClientSize = new Size(96, ((selection.Count - 1) / 3) * 32 + 32);
 
+                for (int i = 0; i < selection.Count; i++)
+                {
+                    EntitySelectionImage e = new EntitySelectionImage(selection[i], (i % 3) * 32, (i / 3) * 32, true);
+                    Controls.Add(e);
+                }
             }
+
+            Ogmo.MainWindow.Focus();
         }
 
         private void onLayerChanged(LayerDefinition def, int index)

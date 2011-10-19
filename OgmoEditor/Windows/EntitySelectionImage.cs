@@ -17,9 +17,15 @@ namespace OgmoEditor.Windows
 
         public EntitySelectionImage(Entity entity, int x, int y, bool clickable)
         {
+            this.entity = entity;
             Location = new Point(x, y);
             InitializeComponent();
             image = entity.Definition.GenerateButtonImage();
+
+            if (clickable)
+            {
+                toolTip.SetToolTip(pictureBox, entity.Definition.Name);
+            }
         }
 
         private void pictureBox_Paint(object sender, PaintEventArgs e)

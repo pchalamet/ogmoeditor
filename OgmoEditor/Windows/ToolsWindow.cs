@@ -21,6 +21,7 @@ namespace OgmoEditor.Windows
 
         private Dictionary<Type, Tool[]> toolsForLayerTypes;
         private Dictionary<Keys, Tool> hotkeys;
+        private Tool[] tools;
 
         public ToolsWindow()
             : base(HorizontalSnap.Right, VerticalSnap.Top)
@@ -58,6 +59,27 @@ namespace OgmoEditor.Windows
                 OnToolChanged(tool);
         }
 
+        public void SetTool(Type toolType)
+        {
+            if (tools != null)
+            {
+                for (int i = 0; i < tools.Length; i++)
+                {
+                    if (tools[i].GetType() == toolType)
+                    {
+                        SetTool(tools[i]);
+                        return;
+                    }
+                }
+            }
+        }
+
+        public void ClearTool()
+        {
+            tools = null;
+            SetTool((Tool)null);
+        }
+
         protected override void handleKeyDown(KeyEventArgs e)
         {
             if (hotkeys != null && hotkeys.ContainsKey(e.KeyCode))
@@ -83,26 +105,19 @@ namespace OgmoEditor.Windows
 
             if (def != null)
             {
-                foreach (var key in toolsForLayerTypes.Keys)
+                tools = toolsForLayerTypes[def.GetType()];
+                hotkeys = new Dictionary<Keys, Tool>();
+
+                for (int i = 0; i < tools.Length; i++)
                 {
-                    if (key == def.GetType())
-                    {
-                        Tool[] tools = toolsForLayerTypes[key];
-                        hotkeys = new Dictionary<Keys, Tool>();
-
-                        for (int i = 0; i < tools.Length; i++)
-                        {
-                            Controls.Add(new ToolButton(tools[i], (i % 2) * 24, (i / 2) * 24));
-                            hotkeys.Add(tools[i].Hotkey, tools[i]);
-                        }
-
-                        if (tools.Length > 0)
-                            SetTool(tools[0]);
-                        else
-                            SetTool(null);
-                        break;
-                    }
+                    Controls.Add(new ToolButton(tools[i], (i % 2) * 24, (i / 2) * 24));
+                    hotkeys.Add(tools[i].Hotkey, tools[i]);
                 }
+
+                if (tools.Length > 0)
+                    SetTool(tools[0]);
+                else
+                    ClearTool();
             }
         }
     }
