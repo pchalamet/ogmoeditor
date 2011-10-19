@@ -42,7 +42,6 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "OgmoWindow";
-            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OgmoWindow_FormClosing);
             this.ResumeLayout(false);
 

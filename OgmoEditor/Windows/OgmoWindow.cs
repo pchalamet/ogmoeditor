@@ -59,6 +59,11 @@ namespace OgmoEditor.Windows
             //Override me!
         }
 
+        protected override bool ShowWithoutActivation
+        {
+            get { return true; }
+        }
+
         /*
          *  Visibility helpers
          */
