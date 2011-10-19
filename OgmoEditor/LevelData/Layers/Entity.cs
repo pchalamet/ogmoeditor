@@ -16,6 +16,7 @@ namespace OgmoEditor.LevelData.Layers
         public Point Position;
         public Size Size;
         public float Angle;
+        public List<Value> Values { get; private set; }
 
         public Entity(EntityDefinition def, Point position)
         {
@@ -24,6 +25,14 @@ namespace OgmoEditor.LevelData.Layers
 
             Size = def.Size;
             Angle = 0;
+
+            //Init values
+            if (def.ValueDefinitions.Count > 0)
+            {
+                Values = new List<Value>(def.ValueDefinitions.Count);
+                foreach (var d in def.ValueDefinitions)
+                    Values.Add(new Value(d));
+            }
         }
 
         public Entity(XmlElement xml)
@@ -32,7 +41,13 @@ namespace OgmoEditor.LevelData.Layers
                 new Point(Convert.ToInt32(xml.Attributes["x"].InnerText),
                 Convert.ToInt32(xml.Attributes["y"].InnerText)))
         {
-
+            //Set values
+            foreach (XmlAttribute a in xml.Attributes)
+            {
+                Value v = Values.Find(val => val.Definition.Name == a.Name);
+                if (v != null)
+                    v.content = a.InnerText;
+            }
         }
 
         public XmlElement GetXML(XmlDocument doc)
@@ -47,6 +62,10 @@ namespace OgmoEditor.LevelData.Layers
             a = doc.CreateAttribute("y");
             a.InnerText = Position.Y.ToString();
             xml.Attributes.Append(a);
+
+            //Get values
+            foreach (var v in Values)
+                xml.Attributes.Append(v.GetXML(doc));
 
             return xml;
         }

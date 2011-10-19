@@ -31,12 +31,17 @@ namespace OgmoEditor.Definitions.ValueDefinitions
 
         public virtual UserControl GetEditor()
         {
-            return null;
+            throw new NotImplementedException();
+        }
+
+        public virtual UserControl GetInstanceEditor(Value instance)
+        {
+            throw new NotImplementedException();
         }
 
         public virtual ValueDefinition Clone()
         {
-            throw new Exception("ValueDefinition subclasses must override virtual method Clone!");
+            throw new NotImplementedException();
         }
 
         public virtual string GetDefault()

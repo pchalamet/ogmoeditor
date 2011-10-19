@@ -24,7 +24,7 @@ namespace OgmoEditor.Windows
             InitializeComponent();
             Location = new Point(x, y);
             toolTip.SetToolTip(button, definition.Name);
-            button.BackgroundImage = Definition.GenerateButtonImage();
+            button.BackgroundImage = Definition.Image;
             button.BackColor = (definition == Ogmo.EntitiesWindow.CurrentEntity) ? Selected : NotSelected;
 
             //Events

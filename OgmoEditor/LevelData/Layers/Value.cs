@@ -10,24 +10,24 @@ namespace OgmoEditor.LevelData.Layers
     public class Value
     {
         public ValueDefinition Definition { get; private set; }
-        public string val;
+        public string content;
 
         public Value(ValueDefinition definition)
         {
             Definition = definition;
-            val = definition.GetDefault();
+            content = definition.GetDefault();
         }
 
         public XmlAttribute GetXML(XmlDocument doc)
         {
             XmlAttribute xml = doc.CreateAttribute(Definition.Name);
-            xml.InnerText = val;
+            xml.InnerText = content;
             return xml;
         }
 
         public void SetXML(XmlAttribute xml)
         {
-            val = xml.InnerText;
+            content = xml.InnerText;
         }
     }
 }

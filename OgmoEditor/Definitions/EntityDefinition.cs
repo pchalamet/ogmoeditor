@@ -31,6 +31,8 @@ namespace OgmoEditor.Definitions
         public List<ValueDefinition> ValueDefinitions;
         public EntityNodesDefinition NodesDefinition;
 
+        private Image image;
+
         public EntityDefinition()
         {
             Limit = -1;
@@ -64,7 +66,17 @@ namespace OgmoEditor.Definitions
             return def;
         }
 
-        public Image GenerateButtonImage()
+        public Image Image
+        {
+            get
+            {
+                if (image == null)
+                    image = generateButtonImage();
+                return image;
+            }
+        }
+
+        private Image generateButtonImage()
         {
             if (ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Rectangle)
             {

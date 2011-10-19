@@ -20,7 +20,7 @@ namespace OgmoEditor.Windows
             this.entity = entity;
             Location = new Point(x, y);
             InitializeComponent();
-            image = entity.Definition.GenerateButtonImage();
+            image = entity.Definition.Image;
 
             if (clickable)
             {
