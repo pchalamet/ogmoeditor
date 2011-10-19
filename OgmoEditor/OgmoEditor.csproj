@@ -389,6 +389,9 @@
     <Content Include="Content\bg.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\delete.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\layers\grid.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

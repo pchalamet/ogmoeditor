@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button = new System.Windows.Forms.Button();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // button
@@ -41,12 +43,16 @@
             this.button.UseVisualStyleBackColor = true;
             this.button.Click += new System.EventHandler(this.button_Click);
             // 
-            // ObjectButton
+            // toolTip
+            // 
+            this.toolTip.ShowAlways = true;
+            // 
+            // EntityButton
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.button);
-            this.Name = "ObjectButton";
+            this.Name = "EntityButton";
             this.Size = new System.Drawing.Size(32, 32);
             this.ResumeLayout(false);
 
@@ -55,5 +61,6 @@
         #endregion
 
         private System.Windows.Forms.Button button;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }
