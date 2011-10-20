@@ -83,6 +83,7 @@ namespace OgmoEditor.LevelEditors
 
         public void OnRemove()
         {
+            //Remove external events
             Application.Idle -= Repaint;
         }
 
