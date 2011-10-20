@@ -127,6 +127,7 @@ namespace OgmoEditor
         private void onLevelClosed(int index)
         {
             MasterTabControl.TabPages.RemoveAt(index);
+            LevelEditors[index].OnRemove();
             LevelEditors.RemoveAt(index);
         }
 

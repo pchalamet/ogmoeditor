@@ -37,6 +37,7 @@ namespace OgmoEditor.LevelEditors
         public LinkedList<OgmoAction> UndoStack { get; private set; }
         public LinkedList<OgmoAction> RedoStack { get; private set; }
 
+        private EventHandler Repaint;
         private Tool previousTool;
         private ActionBatch batch;
 
@@ -68,7 +69,8 @@ namespace OgmoEditor.LevelEditors
             Content = new Content(GraphicsDevice);
 
             //Events
-            Application.Idle += delegate { Invalidate(); };
+            Repaint = delegate { Invalidate(); };
+            Application.Idle += Repaint;
             this.Resize += onResize;
             this.MouseClick += onMouseClick;
             this.MouseDown += onMouseDown;
@@ -77,6 +79,11 @@ namespace OgmoEditor.LevelEditors
             this.MouseWheel += onMouseWheel;
             this.KeyDown += onKeyDown;
             this.KeyUp += onKeyUp;
+        }
+
+        public void OnRemove()
+        {
+            Application.Idle -= Repaint;
         }
 
         private void centerCamera()
