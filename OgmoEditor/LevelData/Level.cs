@@ -233,6 +233,7 @@ namespace OgmoEditor.LevelData
             //Generate the XML and write it!            
             XmlDocument doc = GenerateXML();
             doc.Save(filename);
+            Changed = false;
         }
 
     }
