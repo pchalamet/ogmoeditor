@@ -9,7 +9,7 @@ using OgmoEditor.Definitions.LayerDefinitions;
 using OgmoEditor.Definitions;
 using System.IO;
 
-namespace OgmoEditor.ProjectEditors
+namespace OgmoEditor
 {
     static class OgmoParse
     {

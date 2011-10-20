@@ -100,6 +100,12 @@
     <Compile Include="LevelEditors\Actions\GridActions\GridFloodAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridRectangleAction.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntityAddAction.cs" />
+    <Compile Include="LevelEditors\LevelProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LevelEditors\LevelProperties.Designer.cs">
+      <DependentUpon>LevelProperties.cs</DependentUpon>
+    </Compile>
     <Compile Include="LevelEditors\Tools\EntityTools\EntityEraseTool.cs" />
     <Compile Include="LevelEditors\Tools\EntityTools\EntityMoveTool.cs" />
     <Compile Include="LevelEditors\Tools\EntityTools\EntityResizeTool.cs" />
@@ -228,7 +234,7 @@
     <Compile Include="ProjectEditors\ProjectEditor.Designer.cs">
       <DependentUpon>ProjectEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProjectEditors\OgmoParse.cs" />
+    <Compile Include="OgmoParse.cs" />
     <Compile Include="ProjectEditors\SettingsEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -336,6 +342,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ImagePreviewer.resx">
       <DependentUpon>ImagePreviewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LevelEditors\LevelProperties.resx">
+      <DependentUpon>LevelProperties.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LevelEditors\ValueEditors\BoolValueEditor.resx">
       <DependentUpon>BoolValueEditor.cs</DependentUpon>
