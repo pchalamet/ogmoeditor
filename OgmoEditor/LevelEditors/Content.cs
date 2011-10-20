@@ -13,6 +13,7 @@ namespace OgmoEditor.LevelEditors
     using Color = Microsoft.Xna.Framework.Color;
     using Rectangle = Microsoft.Xna.Framework.Rectangle;
     using OgmoEditor.Definitions;
+using OgmoEditor.LevelData.Layers;
 
     public class Content
     {
@@ -30,7 +31,7 @@ namespace OgmoEditor.LevelEditors
             SpriteBatch = new SpriteBatch(device);
 
             //Get all the standard textures set up
-            TexPixel = CreateRect(Color.White, 1, 1);
+            TexPixel = CreateRect(device, Color.White, 1, 1);
             TexBG = Read("bg.png");
             TexLogo = Read("logo.png");
 
@@ -47,19 +48,20 @@ namespace OgmoEditor.LevelEditors
         /*
          *  Drawing helpers
          */
-        public void DrawEntity(EntityDefinition def, Rectangle drawRect, float alpha = 1)
+        public void DrawEntity(EntityDefinition definition, System.Drawing.Point position, float alpha = 1)
         {
-            if (def.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Rectangle)
-            {
-                DrawRectangle(drawRect, def.ImageDefinition.RectColor.ToXNA() * alpha);
-            }
-            else if (def.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
-            {
-                if (def.ImageDefinition.Tiled)
-                    DrawTextureFill(ObjectTextures[def], drawRect, alpha);
-                else
-                    SpriteBatch.Draw(ObjectTextures[def], drawRect, Color.White * alpha);
-            }
+            if (definition.ImageDefinition.Tiled)
+                DrawTextureFill(ObjectTextures[definition], new Rectangle(position.X - definition.Origin.X, position.Y - definition.Origin.Y, definition.Size.Width, definition.Size.Height), alpha);
+            else
+                SpriteBatch.Draw(ObjectTextures[definition], new Rectangle(position.X - definition.Origin.X, position.Y - definition.Origin.Y, definition.Size.Width, definition.Size.Height), Color.White * alpha);
+        }
+
+        public void DrawEntity(Entity entity, float alpha = 1)
+        {
+            if (entity.Definition.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image && entity.Definition.ImageDefinition.Tiled)
+                DrawTextureFill(ObjectTextures[entity.Definition], entity.XNABounds, alpha);
+            else
+                SpriteBatch.Draw(ObjectTextures[entity.Definition], entity.XNABounds, Color.White * alpha);
         }
 
         public void DrawTextureFill(Texture2D texture, Rectangle fillRect, float alpha = 1)
@@ -171,7 +173,7 @@ namespace OgmoEditor.LevelEditors
             return tex;
         }
 
-        public Texture2D CreateRect(Color color, int width, int height)
+        static public Texture2D CreateRect(GraphicsDevice device, Color color, int width, int height)
         {
             Texture2D texture = new Texture2D(device, width, height, false, SurfaceFormat.Color);
 

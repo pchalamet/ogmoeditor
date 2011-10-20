@@ -116,7 +116,7 @@ namespace OgmoEditor.LevelData.Layers
 
         public void Draw(Content content, bool current, float alpha)
         {
-            content.DrawEntity(Definition, new Microsoft.Xna.Framework.Rectangle(Position.X - Definition.Origin.X, Position.Y - Definition.Origin.Y, Size.Width, Size.Height), alpha);
+            content.DrawEntity(this, alpha);
 
             if (current)
                 content.DrawHollowRect(Position.X - Definition.Origin.X, Position.Y - Definition.Origin.Y - 1, Size.Width + 1, Size.Height + 1, Ogmo.EntitySelectionWindow.IsSelected(this) ? Microsoft.Xna.Framework.Color.Lime : Microsoft.Xna.Framework.Color.Yellow);
@@ -125,6 +125,11 @@ namespace OgmoEditor.LevelData.Layers
         public Rectangle Bounds
         {
             get { return new Rectangle(Position.X - Definition.Origin.X, Position.Y - Definition.Origin.Y, Size.Width, Size.Height); }
+        }
+
+        public Microsoft.Xna.Framework.Rectangle XNABounds
+        {
+            get { return new Microsoft.Xna.Framework.Rectangle(Position.X - Definition.Origin.X, Position.Y - Definition.Origin.Y, Size.Width, Size.Height); }
         }
 
         public Entity Clone()

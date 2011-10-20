@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using OgmoEditor.LevelData.Layers;
+using OgmoEditor.LevelEditors.Actions.EntityActions;
 
 namespace OgmoEditor.LevelEditors.Tools.EntityTools
 {
-    using Rectangle = Microsoft.Xna.Framework.Rectangle;
-    using OgmoEditor.LevelData.Layers;
-    using OgmoEditor.LevelEditors.Actions.EntityActions;
+    using Rectangle = Microsoft.Xna.Framework.Rectangle;  
 
     public class EntityPlacementTool : EntityTool
     {
@@ -28,7 +28,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                     Ogmo.EntitiesWindow.CurrentEntity.Size.Width,
                     Ogmo.EntitiesWindow.CurrentEntity.Size.Height);
 
-                content.DrawEntity(Ogmo.EntitiesWindow.CurrentEntity, obj, .5f);
+                content.DrawEntity(Ogmo.EntitiesWindow.CurrentEntity, LayerEditor.MouseSnapPosition, .5f);
             }
         }
 

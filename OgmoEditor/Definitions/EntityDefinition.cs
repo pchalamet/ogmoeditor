@@ -7,6 +7,7 @@ using System.Drawing;
 using OgmoEditor.Definitions.ValueDefinitions;
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
+using OgmoEditor.LevelEditors;
 
 namespace OgmoEditor.Definitions
 {
@@ -106,7 +107,9 @@ namespace OgmoEditor.Definitions
 
         public Texture2D GenerateTexture(GraphicsDevice graphics)
         {
-            if (ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
+            if (ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Rectangle)
+                return Content.CreateRect(graphics, ImageDefinition.RectColor.ToXNA(), Size.Width, Size.Height);
+            else if (ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
             {
                 FileStream stream = new FileStream(Path.Combine(Ogmo.Project.SavedDirectory, ImageDefinition.ImagePath), FileMode.Open);
                 Texture2D tex = Texture2D.FromStream(graphics, stream);                
@@ -121,8 +124,8 @@ namespace OgmoEditor.Definitions
                 else
                     return tex;
             }
-            else
-                return null;
+
+            return null;
         }
 
     }
