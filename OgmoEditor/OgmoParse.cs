@@ -8,6 +8,8 @@ using OgmoEditor.Definitions.ValueDefinitions;
 using OgmoEditor.Definitions.LayerDefinitions;
 using OgmoEditor.Definitions;
 using System.IO;
+using OgmoEditor.LevelData.Layers;
+using System.Xml;
 
 namespace OgmoEditor
 {
@@ -168,6 +170,19 @@ namespace OgmoEditor
             else
                 to = box.Text;
             box.Text = to;
+        }
+
+        /*
+         *  XML reading/writing
+         */
+        static public void ImportValues(List<Value> values, XmlElement xml)
+        {
+            foreach (XmlAttribute a in xml.Attributes)
+            {
+                Value v = values.Find(val => val.Definition.Name == a.Name);
+                if (v != null)
+                    v.Content = a.InnerText;
+            }
         }
 
         /*
