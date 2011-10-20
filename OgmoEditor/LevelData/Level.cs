@@ -16,7 +16,7 @@ namespace OgmoEditor.LevelData
         //Running instance variables
         public Project Project { get; private set; }
         public string SavePath;
-        public bool Changed;
+        private bool changed;
 
         //Actual parameters to be edited/exported
         public Size Size { get; private set; }
@@ -45,7 +45,7 @@ namespace OgmoEditor.LevelData
                 SavePath = "";
             }
 
-            Changed = false;
+            changed = false;
         }
 
         public Level(Project project, XmlDocument xml)
@@ -55,7 +55,7 @@ namespace OgmoEditor.LevelData
 
             LoadFromXML(xml);
             SavePath = "";
-            Changed = false;
+            changed = false;
         }
 
         public Level(Level level)
@@ -77,6 +77,16 @@ namespace OgmoEditor.LevelData
                 Values = new List<Value>();
                 foreach (var def in Project.LevelValueDefinitions)
                     Values.Add(new Value(def));
+            }
+        }
+
+        public bool Changed
+        {
+            get { return changed; }
+            set
+            {
+                changed = value;
+                Ogmo.MainWindow.MasterTabControl.TabPages[Ogmo.Levels.FindIndex(l => l == this)].Text = Name;
             }
         }
 
@@ -233,6 +243,7 @@ namespace OgmoEditor.LevelData
             //Generate the XML and write it!            
             XmlDocument doc = GenerateXML();
             doc.Save(filename);
+
             Changed = false;
         }
 
