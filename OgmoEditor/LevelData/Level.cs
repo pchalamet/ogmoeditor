@@ -20,6 +20,7 @@ namespace OgmoEditor.LevelData
         //Actual parameters to be edited/exported
         public Size Size { get; private set; }
         public List<Layer> Layers { get; private set; }
+        public List<Value> Values { get; private set; }
 
         public Level(Project project, string filename)
         {
@@ -29,6 +30,14 @@ namespace OgmoEditor.LevelData
             Layers = new List<Layer>();
             foreach (var def in project.LayerDefinitions)
                 Layers.Add(def.GetInstance());
+
+            //Initialize values
+            if (project.LevelValueDefinitions.Count > 0)
+            {
+                Values = new List<Value>();
+                foreach (var def in project.LevelValueDefinitions)
+                    Values.Add(new Value(def));
+            }
 
             if (File.Exists(filename))
             {

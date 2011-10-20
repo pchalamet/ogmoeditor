@@ -141,6 +141,7 @@ namespace OgmoEditor
 
             //Refresh stuff
             editToolStripMenuItem.Enabled =
+                levelPropertiesToolStripMenuItem.Enabled =
                 saveLevelToolStripMenuItem.Enabled =
                 saveLevelAsToolStripMenuItem.Enabled =
                 closeLevelToolStripMenuItem.Enabled =
@@ -183,6 +184,11 @@ namespace OgmoEditor
         private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Ogmo.LoadProject();
+        }
+
+        private void levelPropertiesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void newLevelToolStripMenuItem_Click(object sender, EventArgs e)
