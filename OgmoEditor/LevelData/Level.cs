@@ -64,6 +64,11 @@ namespace OgmoEditor.LevelData
 
         }
 
+        public void CloneFrom(Level level)
+        {
+            LoadFromXML(level.GenerateXML());
+        }
+
         private void initialize()
         {
             //Initialize layers
