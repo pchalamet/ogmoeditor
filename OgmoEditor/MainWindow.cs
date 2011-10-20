@@ -218,7 +218,7 @@ namespace OgmoEditor
 
         private void duplicateLevelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.AddLevel(Ogmo.Levels[SelectedLevelIndex].Duplicate());
+            Ogmo.AddLevel(new Level(Ogmo.Levels[SelectedLevelIndex]));
         }
 
         private void closeOtherLevelsToolStripMenuItem_Click(object sender, EventArgs e)

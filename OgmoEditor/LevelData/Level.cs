@@ -14,7 +14,7 @@ namespace OgmoEditor.LevelData
     public class Level
     {
         //Running instance variables
-        private Project project;
+        public Project Project { get; private set; }
         public string SavePath;
         public bool Changed;
 
@@ -25,20 +25,8 @@ namespace OgmoEditor.LevelData
 
         public Level(Project project, string filename)
         {
-            this.project = project;
-
-            //Initialize layers
-            Layers = new List<Layer>();
-            foreach (var def in project.LayerDefinitions)
-                Layers.Add(def.GetInstance());
-
-            //Initialize values
-            if (project.LevelValueDefinitions.Count > 0)
-            {
-                Values = new List<Value>();
-                foreach (var def in project.LevelValueDefinitions)
-                    Values.Add(new Value(def));
-            }
+            this.Project = project;
+            initialize();
 
             if (File.Exists(filename))
             {
@@ -62,11 +50,34 @@ namespace OgmoEditor.LevelData
 
         public Level(Project project, XmlDocument xml)
         {
-            this.project = project;
+            this.Project = project;
+            initialize();
 
             LoadFromXML(xml);
             SavePath = "";
             Changed = false;
+        }
+
+        public Level(Level level)
+            : this(level.Project, level.GenerateXML())
+        {
+
+        }
+
+        private void initialize()
+        {
+            //Initialize layers
+            Layers = new List<Layer>();
+            foreach (var def in Project.LayerDefinitions)
+                Layers.Add(def.GetInstance());
+
+            //Initialize values
+            if (Project.LevelValueDefinitions.Count > 0)
+            {
+                Values = new List<Value>();
+                foreach (var def in Project.LevelValueDefinitions)
+                    Values.Add(new Value(def));
+            }
         }
 
         public string Name
@@ -174,7 +185,7 @@ namespace OgmoEditor.LevelData
 
         public void LoadDefault()
         {
-            Size = project.LevelDefaultSize;
+            Size = Project.LevelDefaultSize;
         }
 
         public void EditProperties()
@@ -200,7 +211,7 @@ namespace OgmoEditor.LevelData
         public bool SaveAs()
         {
             SaveFileDialog dialog = new SaveFileDialog();
-            dialog.InitialDirectory = project.SavedDirectory;
+            dialog.InitialDirectory = Project.SavedDirectory;
             dialog.RestoreDirectory = true;
             dialog.FileName = SaveName;
             dialog.DefaultExt = Ogmo.LEVEL_EXT;
@@ -222,11 +233,6 @@ namespace OgmoEditor.LevelData
             //Generate the XML and write it!            
             XmlDocument doc = GenerateXML();
             doc.Save(filename);
-        }
-
-        public Level Duplicate()
-        {
-            return new Level(project, GenerateXML());
         }
 
     }
