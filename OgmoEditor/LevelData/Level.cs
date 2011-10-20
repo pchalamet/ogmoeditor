@@ -132,8 +132,9 @@ namespace OgmoEditor.LevelData
             }
 
             //Export the level values
-            foreach (var v in Values)
-                level.Attributes.Append(v.GetXML(doc));
+            if (Values != null)
+                foreach (var v in Values)
+                    level.Attributes.Append(v.GetXML(doc));
 
             //Export the layers
             for (int i = 0; i < Layers.Count; i++)
@@ -159,7 +160,8 @@ namespace OgmoEditor.LevelData
             Size = size;
 
             //Import the level values
-            OgmoParse.ImportValues(Values, level);
+            if (Values != null)
+                OgmoParse.ImportValues(Values, level);
 
             //Import the layers
             foreach (XmlElement e in level.ChildNodes)
