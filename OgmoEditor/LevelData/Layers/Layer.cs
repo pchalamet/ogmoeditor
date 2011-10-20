@@ -8,10 +8,11 @@ using System.Xml;
 using OgmoEditor.LevelEditors.LayerEditors;
 using OgmoEditor.LevelEditors;
 using System.Drawing;
+using OgmoEditor.LevelData.Resizers;
 
 namespace OgmoEditor.LevelData.Layers
 {
-    public class Layer
+    public abstract class Layer
     {
         public LayerDefinition Definition { get; private set; }
 
@@ -20,19 +21,9 @@ namespace OgmoEditor.LevelData.Layers
             Definition = definition;
         }
 
-        public virtual XmlElement GetXML(XmlDocument doc)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual void SetXML(XmlElement xml)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual LayerEditor GetEditor(LevelEditor editor)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract XmlElement GetXML(XmlDocument doc);
+        public abstract void SetXML(XmlElement xml);
+        public abstract LayerEditor GetEditor(LevelEditor editor);
+        public abstract Resizer GetResizer();
     }
 }

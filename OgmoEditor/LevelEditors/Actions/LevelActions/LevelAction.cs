@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using OgmoEditor.LevelData;
 
 namespace OgmoEditor.LevelEditors.Actions.LevelActions
 {
     public abstract class LevelAction : OgmoAction
     {
-        public LevelEditor LevelEditor { get; private set; }
+        public Level Level { get; private set; }
 
-        public LevelAction(LevelEditor levelEditor)
+        public LevelAction(Level level)
         {
-            LevelEditor = levelEditor;
+            Level = level;
         }
     }
 }

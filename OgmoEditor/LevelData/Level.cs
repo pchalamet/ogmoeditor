@@ -19,7 +19,7 @@ namespace OgmoEditor.LevelData
         private bool changed;
 
         //Actual parameters to be edited/exported
-        public Size Size { get; private set; }
+        public Size Size;
         public List<Layer> Layers { get; private set; }
         public List<Value> Values { get; private set; }
 

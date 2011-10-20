@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using OgmoEditor.LevelData;
 using OgmoEditor.LevelData.Layers;
 using OgmoEditor.LevelEditors.ValueEditors;
+using OgmoEditor.LevelEditors.Actions.LevelActions;
 
 namespace OgmoEditor.LevelEditors
 {
@@ -73,6 +74,10 @@ namespace OgmoEditor.LevelEditors
         private void applyButton_Click(object sender, EventArgs e)
         {
             //Resize the level?
+            Size s = level.Size;
+            OgmoParse.Parse(ref s, sizeXTextBox, sizeYTextBox);
+            if (s != level.Size)
+                Ogmo.MainWindow.LevelEditors[Ogmo.CurrentLevelIndex].Perform(new LevelResizeAction(level, s));
 
             Close();
         }

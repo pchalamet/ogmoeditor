@@ -92,6 +92,8 @@
     </Compile>
     <Compile Include="LevelData\Layers\Entity.cs" />
     <Compile Include="LevelData\Layers\Value.cs" />
+    <Compile Include="LevelData\Resizers\GridResizer.cs" />
+    <Compile Include="LevelData\Resizers\Resizer.cs" />
     <Compile Include="LevelEditors\Actions\ActionBatch.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntityMoveAction.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntityRemoveAction.cs" />
@@ -100,6 +102,7 @@
     <Compile Include="LevelEditors\Actions\GridActions\GridFloodAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridRectangleAction.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntityAddAction.cs" />
+    <Compile Include="LevelEditors\Actions\LevelActions\LevelResizeAction.cs" />
     <Compile Include="LevelEditors\LevelProperties.cs">
       <SubType>Form</SubType>
     </Compile>
