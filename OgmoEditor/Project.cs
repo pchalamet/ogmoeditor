@@ -45,7 +45,7 @@ namespace OgmoEditor
 
         public Project()
         {
-            //Init default project properties
+            //Default project properties
             Name = Ogmo.NEW_PROJECT_NAME;
             BackgroundColor = OgmoColor.DefaultBackgroundColor;
             GridColor = OgmoColor.DefaultGridColor;
@@ -61,6 +61,7 @@ namespace OgmoEditor
 
         public void CloneFrom(Project copy)
         {
+            //Default project properties
             Name = copy.Name;
             BackgroundColor = copy.BackgroundColor;
             LastFilename = copy.LastFilename;
@@ -69,6 +70,7 @@ namespace OgmoEditor
             LevelMaximumSize = copy.LevelMaximumSize;
             AngleMode = copy.AngleMode;
 
+            //Definitions
             LevelValueDefinitions = new List<ValueDefinition>();
             foreach (var d in copy.LevelValueDefinitions)
                 LevelValueDefinitions.Add(d.Clone());
