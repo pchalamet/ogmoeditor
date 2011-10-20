@@ -135,6 +135,7 @@ namespace OgmoEditor
             Stream s = dialog.OpenFile();
             Project project = (Project)xs.Deserialize(s);
             s.Close();
+            project.LastFilename = dialog.FileName;
 
             //Start the project
             StartProject(project);
