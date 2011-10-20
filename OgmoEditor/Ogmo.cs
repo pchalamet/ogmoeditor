@@ -168,6 +168,9 @@ namespace OgmoEditor
             //Tool and layer selection can be cleared now
             LayersWindow.SetLayer(-1);
             ToolsWindow.ClearTool();
+
+            //Force a garbage collection
+            System.GC.Collect();
         }
 
         static public void EditProject(bool newProject)
@@ -304,6 +307,9 @@ namespace OgmoEditor
             //Set the current level to another one if that was the current one
             if (CurrentLevelIndex == index)
                 SetLevel(Math.Min(index, Levels.Count - 1));
+
+            //Force a garbage collection
+            System.GC.Collect();
 
             return true;
         }

@@ -7,6 +7,7 @@ using System.Xml;
 using System.IO;
 using System.Drawing;
 using OgmoEditor.LevelData.Layers;
+using OgmoEditor.LevelEditors;
 
 namespace OgmoEditor.LevelData
 {
@@ -174,6 +175,13 @@ namespace OgmoEditor.LevelData
         public void LoadDefault()
         {
             Size = project.LevelDefaultSize;
+        }
+
+        public void EditProperties()
+        {
+            Ogmo.MainWindow.DisableEditing();
+            LevelProperties lp = new LevelProperties(this);
+            lp.Show(Ogmo.MainWindow);
         }
 
         /*

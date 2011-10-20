@@ -188,7 +188,7 @@ namespace OgmoEditor
 
         private void levelPropertiesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Ogmo.CurrentLevel.EditProperties();
         }
 
         private void newLevelToolStripMenuItem_Click(object sender, EventArgs e)

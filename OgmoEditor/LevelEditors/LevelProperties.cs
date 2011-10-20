@@ -6,13 +6,17 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using OgmoEditor.LevelData;
 
 namespace OgmoEditor.LevelEditors
 {
     public partial class LevelProperties : Form
     {
-        public LevelProperties()
+        private Level level;
+
+        public LevelProperties(Level level)
         {
+            this.level = level;
             InitializeComponent();
         }
     }

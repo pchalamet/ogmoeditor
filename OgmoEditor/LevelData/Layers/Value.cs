@@ -18,6 +18,12 @@ namespace OgmoEditor.LevelData.Layers
             Content = definition.GetDefault();
         }
 
+        public Value(Value value)
+        {
+            Definition = value.Definition;
+            Content = value.Content;
+        }
+
         public XmlAttribute GetXML(XmlDocument doc)
         {
             XmlAttribute xml = doc.CreateAttribute(Definition.Name);

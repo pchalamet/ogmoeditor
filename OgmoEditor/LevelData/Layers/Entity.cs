@@ -21,12 +21,12 @@ namespace OgmoEditor.LevelData.Layers
         public Entity(EntityDefinition def, Point position)
         {
             Definition = def;
-            Position = position;
 
+            Position = position;
             Size = def.Size;
             Angle = 0;
 
-            //Init values
+            //Values
             if (def.ValueDefinitions.Count > 0)
             {
                 Values = new List<Value>(def.ValueDefinitions.Count);
@@ -36,25 +36,39 @@ namespace OgmoEditor.LevelData.Layers
         }
 
         public Entity(XmlElement xml)
-            : this(
-                Ogmo.Project.EntityDefinitions.Find(d => d.Name == xml.Name),
-                new Point(Convert.ToInt32(xml.Attributes["x"].InnerText),
-                Convert.ToInt32(xml.Attributes["y"].InnerText)))
         {
-            //Size
-            XmlAttribute a;
+            Definition = Ogmo.Project.EntityDefinitions.Find(d => d.Name == xml.Name);
+
+            Position = new Point(Convert.ToInt32(xml.Attributes["x"].InnerText), Convert.ToInt32(xml.Attributes["y"].InnerText));
+
             if (Definition.ResizableX)
                 Size.Width = Convert.ToInt32(xml.Attributes["width"].InnerText);
             if (Definition.ResizableY)
                 Size.Height = Convert.ToInt32(xml.Attributes["height"].InnerText);                
 
-            //Rotation
             if (Definition.Rotatable)
                 Angle = Ogmo.Project.ImportAngle(xml.Attributes["angle"].InnerText);
 
-            //Set values
+            //Values
             if (Values != null)
                 OgmoParse.ImportValues(Values, xml);
+        }
+
+        public Entity(Entity e)
+        {
+            Definition = e.Definition;
+
+            Position = e.Position;
+            Size = e.Size;
+            Angle = e.Angle;
+
+            //Values
+            if (e.Values.Count > 0)
+            {
+                Values = new List<Value>(e.Values.Count);
+                foreach (var v in e.Values)
+                    Values.Add(new Value(v));
+            }
         }
 
         public XmlElement GetXML(XmlDocument doc)
@@ -111,6 +125,11 @@ namespace OgmoEditor.LevelData.Layers
         public Rectangle Bounds
         {
             get { return new Rectangle(Position.X - Definition.Origin.X, Position.Y - Definition.Origin.Y, Size.Width, Size.Height); }
+        }
+
+        public Entity Clone()
+        {
+            return new Entity(this);
         }
 
     }
