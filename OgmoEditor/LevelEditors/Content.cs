@@ -118,6 +118,11 @@ namespace OgmoEditor.LevelEditors
             SpriteBatch.Draw(TexPixel, new Rectangle(x, y, width, height), color);
         }
 
+        public void DrawRectangle(Rectangle rect, Color color, Vector2 origin, float angle)
+        {
+            SpriteBatch.Draw(TexPixel, rect, null, color, angle, origin, SpriteEffects.None, 0);
+        }
+
         public void DrawHollowRect(int x, int y, int width, int height, Color color)
         {
             DrawLineAngle(x, y, width, Util.RIGHT, color);
