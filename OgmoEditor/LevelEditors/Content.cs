@@ -31,7 +31,7 @@ using OgmoEditor.LevelData.Layers;
             SpriteBatch = new SpriteBatch(device);
 
             //Get all the standard textures set up
-            TexPixel = CreateRect(device, Color.White, 1, 1);
+            TexPixel = Util.CreateRect(device, Color.White, 1, 1);
             TexBG = Read("bg.png");
             TexLogo = Read("logo.png");
 
@@ -171,19 +171,6 @@ using OgmoEditor.LevelData.Layers;
             s.Close();
 
             return tex;
-        }
-
-        static public Texture2D CreateRect(GraphicsDevice device, Color color, int width, int height)
-        {
-            Texture2D texture = new Texture2D(device, width, height, false, SurfaceFormat.Color);
-
-            Color[] data = new Color[width * height];
-            for (int i = 0; i < data.Length; i++)
-                data[i] = color;
-
-            texture.SetData<Color>(data);
-
-            return texture;
         }
     }
 }

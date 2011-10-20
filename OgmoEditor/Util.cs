@@ -115,5 +115,18 @@ namespace OgmoEditor
             return new Microsoft.Xna.Framework.Rectangle(rect.X, rect.Y, rect.Width, rect.Height);
         }
 
+        static public Texture2D CreateRect(GraphicsDevice device, Microsoft.Xna.Framework.Color color, int width, int height)
+        {
+            Texture2D texture = new Texture2D(device, width, height, false, SurfaceFormat.Color);
+
+            Microsoft.Xna.Framework.Color[] data = new Microsoft.Xna.Framework.Color[width * height];
+            for (int i = 0; i < data.Length; i++)
+                data[i] = color;
+
+            texture.SetData<Microsoft.Xna.Framework.Color>(data);
+
+            return texture;
+        }
+
     }
 }

@@ -108,7 +108,7 @@ namespace OgmoEditor.Definitions
         public Texture2D GenerateTexture(GraphicsDevice graphics)
         {
             if (ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Rectangle)
-                return Content.CreateRect(graphics, ImageDefinition.RectColor.ToXNA(), Size.Width, Size.Height);
+                return Util.CreateRect(graphics, ImageDefinition.RectColor.ToXNA(), Size.Width, Size.Height);
             else if (ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
             {
                 FileStream stream = new FileStream(Path.Combine(Ogmo.Project.SavedDirectory, ImageDefinition.ImagePath), FileMode.Open);
