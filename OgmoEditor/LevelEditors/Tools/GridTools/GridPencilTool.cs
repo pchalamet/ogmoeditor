@@ -37,7 +37,7 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
             if (drawing && drawMode)
             {
                 drawing = false;
-                LevelEditor.BatchEnd();
+                LevelEditor.EndBatch();
             }
         }
 
@@ -46,7 +46,7 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
             if (drawing && !drawMode)
             {
                 drawing = false;
-                LevelEditor.BatchEnd();
+                LevelEditor.EndBatch();
             }
         }
 

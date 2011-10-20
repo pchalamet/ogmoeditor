@@ -37,7 +37,7 @@ namespace OgmoEditor.LevelEditors
         public LinkedList<OgmoAction> UndoStack { get; private set; }
         public LinkedList<OgmoAction> RedoStack { get; private set; }
 
-        private Tool batcher;
+        private Tool previousTool;
         private ActionBatch batch;
 
         public LevelEditor(Level level)
@@ -131,7 +131,7 @@ namespace OgmoEditor.LevelEditors
         public void Perform(OgmoAction action)
         {
             //If a batch is in progress, stop it!
-            BatchEnd();
+            EndBatch();
 
             //If you're over the undo limit, chop off an action
             if (UndoStack.Count == UNDO_LIMIT)
@@ -155,9 +155,9 @@ namespace OgmoEditor.LevelEditors
         public void BatchPerform(Tool tool, OgmoAction action)
         {
             //Start the batch if it isn't in progress
-            if (batcher != tool)
+            if (previousTool != tool)
             {
-                batcher = tool;
+                previousTool = tool;
                 batch = new ActionBatch();
 
                 //If you're over the undo limit, chop off an action
@@ -183,9 +183,9 @@ namespace OgmoEditor.LevelEditors
             action.Do();
         }
 
-        public void BatchEnd()
+        public void EndBatch()
         {
-            batcher = null;
+            previousTool = null;
             batch = null;
         }
 
