@@ -13,6 +13,8 @@ namespace OgmoEditor.ProjectEditors
 {
     public partial class LayerDefinitionsEditor : UserControl, IProjectChanger
     {
+        private const string NEW_LAYER_NAME = "NewLayer";
+
         private List<LayerDefinition> layerDefinitions;
         private UserControl layerEditor;
 
@@ -85,7 +87,7 @@ namespace OgmoEditor.ProjectEditors
 
             do
             {
-                name = Ogmo.NEW_LAYER_NAME + i.ToString();
+                name = NEW_LAYER_NAME + i.ToString();
                 i++;
             }
             while (layerNameTaken(name));

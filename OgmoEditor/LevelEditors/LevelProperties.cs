@@ -29,6 +29,7 @@ namespace OgmoEditor.LevelEditors
             maxSizeLabel.Text = "Maximum Size: " + level.Project.LevelMaximumSize.Width + " x " + level.Project.LevelMaximumSize.Height;
 
             //Values
+            int yy = 100;
             if (level.Values != null)
             {
                 //Store the old values
@@ -37,8 +38,7 @@ namespace OgmoEditor.LevelEditors
                     oldValues.Add(v.Content);
 
                 //Create the editors
-                ValueEditor ed;
-                int yy = 100;
+                ValueEditor ed;              
                 foreach (var v in level.Values)
                 {
                     ed = v.Definition.GetInstanceEditor(v, ClientSize.Width / 2 - 64, yy);
@@ -46,6 +46,11 @@ namespace OgmoEditor.LevelEditors
                     yy += ed.Height;
                 }
             }
+
+            //Resize the form
+            ClientSize = new Size(ClientSize.Width, yy + 42);
+            applyButton.Location = new Point(applyButton.Location.X, ClientSize.Height - 40);
+            cancelButton.Location = new Point(cancelButton.Location.X, ClientSize.Height - 40);
         }
 
         private void LevelProperties_FormClosed(object sender, FormClosedEventArgs e)

@@ -28,7 +28,6 @@ namespace OgmoEditor
         public const string LEVEL_FILTER = "Ogmo Editor Level File|*" + LEVEL_EXT;
         public const string NEW_PROJECT_NAME = "New Project";
         public const string NEW_LEVEL_NAME = "Unsaved Level";
-        public const string NEW_LAYER_NAME = "NewLayer";
         public const string IMAGE_FILE_FILTER = "PNG image file|*.png|BMP image file|*.bmp";
 
         public enum FinishProjectEditAction { None, CloseProject, SaveProject };
