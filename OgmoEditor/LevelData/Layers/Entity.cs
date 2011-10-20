@@ -41,6 +41,17 @@ namespace OgmoEditor.LevelData.Layers
                 new Point(Convert.ToInt32(xml.Attributes["x"].InnerText),
                 Convert.ToInt32(xml.Attributes["y"].InnerText)))
         {
+            //Size
+            XmlAttribute a;
+            if (Definition.ResizableX)
+                Size.Width = Convert.ToInt32(xml.Attributes["width"].InnerText);
+            if (Definition.ResizableY)
+                Size.Height = Convert.ToInt32(xml.Attributes["height"].InnerText);                
+
+            //Rotation
+            if (Definition.Rotatable)
+                Angle = Ogmo.Project.ImportAngle(xml.Attributes["angle"].InnerText);
+
             //Set values
             foreach (XmlAttribute a in xml.Attributes)
             {
@@ -62,6 +73,28 @@ namespace OgmoEditor.LevelData.Layers
             a = doc.CreateAttribute("y");
             a.InnerText = Position.Y.ToString();
             xml.Attributes.Append(a);
+
+            //Size
+            if (Definition.ResizableX)
+            {
+                a = doc.CreateAttribute("width");
+                a.InnerText = Size.Width.ToString();
+                xml.Attributes.Append(a);
+            }
+            if (Definition.ResizableY)
+            {
+                a = doc.CreateAttribute("height");
+                a.InnerText = Size.Height.ToString();
+                xml.Attributes.Append(a);
+            }
+
+            //Rotation
+            if (Definition.Rotatable)
+            {
+                a = doc.CreateAttribute("angle");
+                a.InnerText = Ogmo.Project.ExportAngle(Angle);
+                xml.Attributes.Append(a);
+            }
 
             //Get values
             foreach (var v in Values)

@@ -192,6 +192,14 @@ namespace OgmoEditor
                 return (angle * Util.RADTODEG).ToString();
         }
 
+        public float ImportAngle(string angle)
+        {
+            if (AngleMode == AngleExportMode.Radians)
+                return Convert.ToSingle(angle);
+            else
+                return Convert.ToSingle(angle) * Util.DEGTORAD;
+        }
+
         /*
          *  Saving the project file
          */
