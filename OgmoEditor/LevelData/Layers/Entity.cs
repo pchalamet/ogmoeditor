@@ -53,7 +53,8 @@ namespace OgmoEditor.LevelData.Layers
                 Angle = Ogmo.Project.ImportAngle(xml.Attributes["angle"].InnerText);
 
             //Set values
-            OgmoParse.ImportValues(Values, xml);
+            if (Values != null)
+                OgmoParse.ImportValues(Values, xml);
         }
 
         public XmlElement GetXML(XmlDocument doc)
@@ -92,8 +93,9 @@ namespace OgmoEditor.LevelData.Layers
             }
 
             //Get values
-            foreach (var v in Values)
-                xml.Attributes.Append(v.GetXML(doc));
+            if (Values != null)
+                foreach (var v in Values)
+                    xml.Attributes.Append(v.GetXML(doc));
 
             return xml;
         }
