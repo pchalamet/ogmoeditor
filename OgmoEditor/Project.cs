@@ -56,7 +56,11 @@ namespace OgmoEditor
             LevelValueDefinitions = new List<ValueDefinition>();
             LayerDefinitions = new List<LayerDefinition>();
             Tilesets = new List<Tileset>();
-            EntityDefinitions = new List<EntityDefinition>(); 
+            EntityDefinitions = new List<EntityDefinition>();
+
+            GridLayerDefinition def = new GridLayerDefinition();
+            def.Name = "NewLayer0";
+            LayerDefinitions.Add(def);
         }
 
         public void CloneFrom(Project copy)
