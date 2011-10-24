@@ -57,9 +57,14 @@ namespace OgmoEditor
             LayerDefinitions = new List<LayerDefinition>();
             Tilesets = new List<Tileset>();
             EntityDefinitions = new List<EntityDefinition>();
+        }
 
+        public void InitDefault()
+        {
+            //The default layer
             GridLayerDefinition def = new GridLayerDefinition();
             def.Name = "NewLayer0";
+            def.Grid = new Size(16, 16);
             LayerDefinitions.Add(def);
         }
 

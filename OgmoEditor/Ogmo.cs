@@ -110,6 +110,7 @@ namespace OgmoEditor
         static public void NewProject()
         {
             Project project = new Project();
+            project.InitDefault();
             if (project.SaveAs())
             {
                 StartProject(project);

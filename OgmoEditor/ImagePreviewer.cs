@@ -25,7 +25,9 @@ namespace OgmoEditor
         {
             if (File.Exists(path))
             {
-                image = Image.FromFile(path);
+                FileStream s = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+                image = Image.FromStream(s);
+                s.Close();
                 clipRect = clip ?? new Rectangle(0, 0, image.Width, image.Height);
                 pictureBox.Refresh();
                 return true;

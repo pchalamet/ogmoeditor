@@ -96,7 +96,9 @@ namespace OgmoEditor.Definitions
                     return null;
                 else
                 {
-                    Image image = Image.FromFile(Path.Combine(Ogmo.Project.SavedDirectory, ImageDefinition.ImagePath));
+                    FileStream s = new FileStream(Path.Combine(Ogmo.Project.SavedDirectory, ImageDefinition.ImagePath), FileMode.Open, FileAccess.Read, FileShare.Read);
+                    Image image = Image.FromStream(s);
+                    s.Close();
                     image = Util.CropImage(image, ImageDefinition.ClipRect);
                     return image;
                 }
@@ -111,7 +113,7 @@ namespace OgmoEditor.Definitions
                 return Util.CreateRect(graphics, ImageDefinition.RectColor.ToXNA(), Size.Width, Size.Height);
             else if (ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
             {
-                FileStream stream = new FileStream(Path.Combine(Ogmo.Project.SavedDirectory, ImageDefinition.ImagePath), FileMode.Open);
+                FileStream stream = new FileStream(Path.Combine(Ogmo.Project.SavedDirectory, ImageDefinition.ImagePath), FileMode.Open, FileAccess.Read, FileShare.Read);
                 Texture2D tex = Texture2D.FromStream(graphics, stream);                
                 stream.Close();
 
