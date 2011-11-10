@@ -99,6 +99,11 @@ namespace OgmoEditor.Windows
             get { return new List<Entity>(selection); }
         }
 
+        public void RefreshContents()
+        {
+            onSelectionChanged();
+        }
+
         /*
          *  Events
          */

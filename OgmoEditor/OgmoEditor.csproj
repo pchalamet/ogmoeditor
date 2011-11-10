@@ -98,6 +98,7 @@
     <Compile Include="LevelEditors\Actions\EntityActions\EntityMoveAction.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntityRemoveAction.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntityResizeAction.cs" />
+    <Compile Include="LevelEditors\Actions\EntityActions\EntitySetValueAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridDrawAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridFloodAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridRectangleAction.cs" />

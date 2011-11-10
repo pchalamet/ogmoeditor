@@ -49,7 +49,7 @@
             this.valueComboBox.Name = "valueComboBox";
             this.valueComboBox.Size = new System.Drawing.Size(66, 21);
             this.valueComboBox.TabIndex = 3;
-            this.valueComboBox.SelectedIndexChanged += new System.EventHandler(this.valueComboBox_SelectedIndexChanged);
+            this.valueComboBox.SelectionChangeCommitted += new System.EventHandler(this.valueComboBox_SelectionChangeCommitted);
             // 
             // EnumValueEditor
             // 

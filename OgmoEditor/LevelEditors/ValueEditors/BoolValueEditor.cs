@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using OgmoEditor.Definitions.ValueDefinitions;
 using OgmoEditor.LevelData.Layers;
+using OgmoEditor.LevelEditors.Actions.EntityActions;
 
 namespace OgmoEditor.LevelEditors.ValueEditors
 {
@@ -29,9 +30,11 @@ namespace OgmoEditor.LevelEditors.ValueEditors
         /*
          *  Events
          */
-        private void valueCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void valueCheckBox_Click(object sender, EventArgs e)
         {
-            Value.Content = valueCheckBox.Checked.ToString();
+            Ogmo.MainWindow.LevelEditors[Ogmo.CurrentLevelIndex].Perform(
+                    new EntitySetValueAction(null, Value, valueCheckBox.Checked.ToString())
+                );
         }
     }
 }

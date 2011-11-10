@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using OgmoEditor.Definitions.ValueDefinitions;
 using OgmoEditor.LevelData.Layers;
+using OgmoEditor.LevelEditors.Actions.EntityActions;
 
 namespace OgmoEditor.LevelEditors.ValueEditors
 {
@@ -30,7 +31,10 @@ namespace OgmoEditor.LevelEditors.ValueEditors
          */
         private void colorChooser_ColorChanged(OgmoColor color)
         {
-            Value.Content = colorChooser.Color.ToString();
+            if (colorChooser.Color.ToString() != Value.Content)
+                Ogmo.MainWindow.LevelEditors[Ogmo.CurrentLevelIndex].Perform(
+                        new EntitySetValueAction(null, Value, colorChooser.Color.ToString())
+                    );
         }
     }
 }

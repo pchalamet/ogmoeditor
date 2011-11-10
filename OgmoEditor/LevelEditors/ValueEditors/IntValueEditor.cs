@@ -10,6 +10,7 @@ using OgmoEditor.LevelData.Layers;
 using OgmoEditor.ProjectEditors;
 using OgmoEditor.Definitions.ValueDefinitions;
 using System.Diagnostics;
+using OgmoEditor.LevelEditors.Actions.EntityActions;
 
 namespace OgmoEditor.LevelEditors.ValueEditors
 {
@@ -29,9 +30,9 @@ namespace OgmoEditor.LevelEditors.ValueEditors
             //Deal with the slider
             if (Definition.ShowSlider)
             {
-                valueTrackBar.Value = Convert.ToInt32(Value.Content);
                 valueTrackBar.Minimum = Definition.Min;
                 valueTrackBar.Maximum = Definition.Max;
+                valueTrackBar.Value = Convert.ToInt32(Value.Content); 
                 valueTrackBar.TickFrequency = (Definition.Max - Definition.Min) / 10;
             }
             else
@@ -44,9 +45,16 @@ namespace OgmoEditor.LevelEditors.ValueEditors
 
         private void handleTextBox()
         {
-            OgmoParse.ParseIntToString(ref Value.Content, Definition.Min, Definition.Max, valueTextBox);
-            if (valueTrackBar != null)
-                valueTrackBar.Value = Convert.ToInt32(Value.Content);
+            string temp = Value.Content;
+            OgmoParse.ParseIntToString(ref temp, Definition.Min, Definition.Max, valueTextBox);
+            if (temp != Value.Content)
+            {
+                if (valueTrackBar != null)
+                    valueTrackBar.Value = Convert.ToInt32(temp);
+                Ogmo.MainWindow.LevelEditors[Ogmo.CurrentLevelIndex].Perform(
+                        new EntitySetValueAction(null, Value, temp)
+                    );
+            }
         }
 
         /*
@@ -65,7 +73,13 @@ namespace OgmoEditor.LevelEditors.ValueEditors
 
         private void valueTrackBar_Scroll(object sender, EventArgs e)
         {
-            Value.Content = valueTextBox.Text = valueTrackBar.Value.ToString();
+            if (valueTrackBar.Value.ToString() != Value.Content)
+            {
+                valueTextBox.Text = valueTrackBar.Value.ToString();
+                Ogmo.MainWindow.LevelEditors[Ogmo.CurrentLevelIndex].Perform(
+                        new EntitySetValueAction(null, Value, valueTrackBar.Value.ToString())
+                    );
+            }
         }
     }
 }

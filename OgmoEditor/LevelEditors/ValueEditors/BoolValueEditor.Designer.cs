@@ -39,7 +39,7 @@
             this.valueCheckBox.Size = new System.Drawing.Size(15, 14);
             this.valueCheckBox.TabIndex = 0;
             this.valueCheckBox.UseVisualStyleBackColor = true;
-            this.valueCheckBox.CheckedChanged += new System.EventHandler(this.valueCheckBox_CheckedChanged);
+            this.valueCheckBox.Click += new System.EventHandler(this.valueCheckBox_Click);
             // 
             // BoolValueEditor
             // 

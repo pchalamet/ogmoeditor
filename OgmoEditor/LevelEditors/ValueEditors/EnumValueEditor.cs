@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using OgmoEditor.Definitions.ValueDefinitions;
 using OgmoEditor.LevelData.Layers;
+using OgmoEditor.LevelEditors.Actions.EntityActions;
 
 namespace OgmoEditor.LevelEditors.ValueEditors
 {
@@ -35,9 +36,12 @@ namespace OgmoEditor.LevelEditors.ValueEditors
         /*
          *  Events
          */
-        private void valueComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void valueComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            Value.Content = Definition.Elements[valueComboBox.SelectedIndex];
+            if (Definition.Elements[valueComboBox.SelectedIndex] != Value.Content)
+                Ogmo.MainWindow.LevelEditors[Ogmo.CurrentLevelIndex].Perform(
+                        new EntitySetValueAction(null, Value, Definition.Elements[valueComboBox.SelectedIndex])
+                    );
         }
     }
 }

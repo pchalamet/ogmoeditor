@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using OgmoEditor.Definitions.ValueDefinitions;
 using OgmoEditor.LevelData.Layers;
 using OgmoEditor.ProjectEditors;
+using OgmoEditor.LevelEditors.Actions.EntityActions;
 
 namespace OgmoEditor.LevelEditors.ValueEditors
 {
@@ -36,7 +37,12 @@ namespace OgmoEditor.LevelEditors.ValueEditors
 
         private void handleTextBox()
         {
-            OgmoParse.ParseString(ref Value.Content, Definition.MaxChars, valueTextBox);
+            string temp = Value.Content;
+            OgmoParse.ParseString(ref temp, Definition.MaxChars, valueTextBox);
+            if (temp != Value.Content)
+                Ogmo.MainWindow.LevelEditors[Ogmo.CurrentLevelIndex].Perform(
+                        new EntitySetValueAction(null, Value, temp)
+                    );
         }
 
         /*
