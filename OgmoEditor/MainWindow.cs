@@ -269,7 +269,7 @@ namespace OgmoEditor
             if (Ogmo.LayersWindow.EditorVisible)
             {
                 Ogmo.LayersWindow.UserVisible = !Ogmo.LayersWindow.UserVisible;
-                Focus();
+                FocusEditor();
             }
         }
 
@@ -278,7 +278,7 @@ namespace OgmoEditor
             if (Ogmo.ToolsWindow.EditorVisible)
             {
                 Ogmo.ToolsWindow.UserVisible = !Ogmo.ToolsWindow.UserVisible;
-                Focus();
+                FocusEditor();
             }
         }
 
@@ -287,7 +287,7 @@ namespace OgmoEditor
             if (Ogmo.EntitiesWindow.EditorVisible)
             {
                 Ogmo.EntitiesWindow.UserVisible = !Ogmo.EntitiesWindow.UserVisible;
-                Focus();
+                FocusEditor();
             }
         }
 
@@ -296,7 +296,7 @@ namespace OgmoEditor
             if (Ogmo.EntitySelectionWindow.EditorVisible)
             {
                 Ogmo.EntitySelectionWindow.UserVisible = !Ogmo.EntitySelectionWindow.UserVisible;
-                Focus();
+                FocusEditor();
             }
         }
 

@@ -56,6 +56,8 @@ namespace OgmoEditor.Windows
             //Call the event
             if (OnToolChanged != null)
                 OnToolChanged(tool);
+
+            Ogmo.MainWindow.FocusEditor();
         }
 
         public void SetTool(Type toolType)
