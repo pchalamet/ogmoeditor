@@ -141,6 +141,9 @@ namespace OgmoEditor
             //Start a blank level and start at the first layer
             LayersWindow.SetLayer(0);
             NewLevel();
+
+            //Set the status message
+            Ogmo.MainWindow.StatusText = "Opened project " + Ogmo.Project.Name;
         }
 
         static public void StartProject(Project project)
@@ -156,6 +159,9 @@ namespace OgmoEditor
         {
             //Close all the open levels
             CloseAllLevels();
+
+            //Set the status message
+            Ogmo.MainWindow.StatusText = "Closed project " + Ogmo.Project.Name;
 
             //Call closed event
             if (OnProjectClose != null)
@@ -211,6 +217,9 @@ namespace OgmoEditor
                 //Start a blank level and start at the first layer
                 LayersWindow.SetLayer(0);
                 NewLevel();
+
+                //Set the status message
+                Ogmo.MainWindow.StatusText = "Edited project " + Ogmo.Project.Name + ", all levels closed";
             }
         }
 
@@ -271,6 +280,12 @@ namespace OgmoEditor
 
             //Set it to the current level
             SetLevel(Levels.Count - 1);
+
+            //Set the status message
+            string[] files = new string[dialog.FileNames.Length];
+            for (int i = 0; i < dialog.FileNames.Length; i++)
+                files[i] = Path.GetFileName(dialog.FileNames[i]);
+            Ogmo.MainWindow.StatusText = "Opened level(s) " + String.Join(", ", files);
         }
 
         static public void AddLevel(Level level)
@@ -310,6 +325,9 @@ namespace OgmoEditor
             //Force a garbage collection
             System.GC.Collect();
 
+            //Set the status text
+            Ogmo.MainWindow.StatusText = "Closed level " + level.SaveName;
+
             return true;
         }
 
@@ -317,6 +335,8 @@ namespace OgmoEditor
         {
             while (Levels.Count > 0)
                 CloseLevel(Levels[0], false);
+
+            Ogmo.MainWindow.StatusText = "Closed all levels";
         }
 
         static public void CloseOtherLevels(Level level)

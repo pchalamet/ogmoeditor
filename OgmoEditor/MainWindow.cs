@@ -88,6 +88,14 @@ namespace OgmoEditor
             }
         }
 
+        public string StatusText
+        {
+            set
+            {
+                editorStatusLabel.Text = value;
+            }
+        }
+
         /*
          *  Ogmo event Callbacks
          */
