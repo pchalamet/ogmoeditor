@@ -16,6 +16,7 @@ using System.Collections;
 using OgmoEditor.Definitions.ValueDefinitions;
 using OgmoEditor.Definitions;
 using OgmoEditor.ProjectEditors;
+using OgmoEditor.LevelEditors;
 
 namespace OgmoEditor
 {
@@ -23,6 +24,10 @@ namespace OgmoEditor
     public class Project
     {
         public enum AngleExportMode { Radians, Degrees };
+
+        //Properties
+        [XmlIgnore]
+        public Content Content { get; private set; }
 
         //Serialized project properties
         public string Name;
@@ -95,6 +100,11 @@ namespace OgmoEditor
             EntityDefinitions = new List<EntityDefinition>();
             foreach (var d in copy.EntityDefinitions)
                 EntityDefinitions.Add(d.Clone());
+        }
+
+        public void LoadContent()
+        {
+            Content = new Content(this, Util.GraphicsDevice);
         }
 
         public string ErrorCheck()

@@ -22,12 +22,14 @@ namespace OgmoEditor.LevelEditors
         public Texture2D TexLogo { get; private set; }
         public Dictionary<EntityDefinition, Texture2D> ObjectTextures { get; private set; }
 
-        private GraphicsDevice device;
+        public GraphicsDevice GraphicsDevice { get; private set; }
         public SpriteBatch SpriteBatch { get; private set; }
+        public Project Project { get; private set; }
 
-        public Content(GraphicsDevice device)
+        public Content(Project project, GraphicsDevice device)
         {
-            this.device = device;
+            Project = project;
+            GraphicsDevice = device;
             SpriteBatch = new SpriteBatch(device);
 
             //Get all the standard textures set up
@@ -38,7 +40,7 @@ namespace OgmoEditor.LevelEditors
             //Generate all the object textures
             ObjectTextures = new Dictionary<EntityDefinition, Texture2D>();
 
-            foreach (EntityDefinition def in Ogmo.Project.EntityDefinitions)
+            foreach (EntityDefinition def in Project.EntityDefinitions)
             {
                 Texture2D tex = def.GenerateTexture(device);
                 if (tex != null)
@@ -59,7 +61,13 @@ namespace OgmoEditor.LevelEditors
 
         public void DrawEntity(Entity entity, float alpha = 1)
         {
-            DrawEntity(entity.Definition, entity.Position, alpha);
+            EntityDefinition definition = entity.Definition;
+            System.Drawing.Point position = entity.Position;
+
+            if (definition.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image && definition.ImageDefinition.Tiled)
+                SpriteBatch.Draw(ObjectTextures[definition], new Rectangle(position.X - definition.Origin.X, position.Y - definition.Origin.Y, entity.Size.Width, entity.Size.Height), new Rectangle(0, 0, entity.Size.Width, entity.Size.Height), Color.White * alpha);
+            else
+                SpriteBatch.Draw(ObjectTextures[definition], new Rectangle(position.X - definition.Origin.X, position.Y - definition.Origin.Y, entity.Size.Width, entity.Size.Height), Color.White * alpha);
         }
 
         public void DrawRectangle(Rectangle rect, Color color)
@@ -119,7 +127,7 @@ namespace OgmoEditor.LevelEditors
         private Texture2D Read(string filename)
         {
             FileStream s = new FileStream(Path.Combine(Ogmo.ProgramDirectory, "Content", filename), FileMode.Open);
-            Texture2D tex = Texture2D.FromStream(device, s);
+            Texture2D tex = Texture2D.FromStream(GraphicsDevice, s);
             s.Close();
 
             return tex;

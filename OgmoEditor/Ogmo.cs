@@ -144,6 +144,10 @@ namespace OgmoEditor
 
             //Set the status message
             Ogmo.MainWindow.StatusText = "Opened project " + Ogmo.Project.Name;
+
+            //Load content and GC
+            Ogmo.Project.LoadContent();
+            GC.Collect();
         }
 
         static public void StartProject(Project project)
@@ -220,6 +224,9 @@ namespace OgmoEditor
 
                 //Set the status message
                 Ogmo.MainWindow.StatusText = "Edited project " + Ogmo.Project.Name + ", all levels closed";
+
+                //Load content and garbage collect all the things
+                Ogmo.Project.LoadContent();
                 GC.Collect();
             }
         }

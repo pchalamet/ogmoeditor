@@ -11,6 +11,7 @@
 using System;
 using System.Threading;
 using Microsoft.Xna.Framework.Graphics;
+using OgmoEditor.LevelEditors;
 #endregion
 
 // The IGraphicsDeviceService interface requires a DeviceCreated event, but we
@@ -64,6 +65,8 @@ namespace OgmoEditor.XNA
             graphicsDevice = new GraphicsDevice(GraphicsAdapter.DefaultAdapter,
                                                 GraphicsProfile.HiDef,
                                                 parameters);
+
+            Util.GraphicsDevice = graphicsDevice;
         }
 
 

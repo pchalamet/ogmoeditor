@@ -20,6 +20,8 @@ namespace OgmoEditor
         public const float DEGTORAD = (float)(Math.PI / 180.0);
         public const float RADTODEG = (float)(180.0 / Math.PI);
 
+        static public GraphicsDevice GraphicsDevice;
+
         static public string RelativePath(string absPath, string relTo)
         {
             string[] absDirs = absPath.Split(Path.DirectorySeparatorChar);

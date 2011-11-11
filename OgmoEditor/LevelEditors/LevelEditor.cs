@@ -28,7 +28,6 @@ namespace OgmoEditor.LevelEditors
         private Point lastMousePoint;
 
         public Level Level { get; private set; }
-        public Content Content { get; private set; }
         public Camera Camera { get; private set; }
         public List<LayerEditor> LayerEditors { get; private set; }
         public Rectangle DrawBounds { get; private set; }
@@ -68,9 +67,6 @@ namespace OgmoEditor.LevelEditors
             centerCamera();
             DrawBounds = new Rectangle(0, 0, Width, Height);
 
-            //Load the content
-            Content = new Content(GraphicsDevice);
-
             //Events
             Repaint = delegate { Invalidate(); };
             Application.Idle += Repaint;
@@ -98,37 +94,39 @@ namespace OgmoEditor.LevelEditors
 
         protected override void Draw()
         {
+            Content content = Ogmo.Project.Content;
+
             //Draw the background and logo
             GraphicsDevice.SetRenderTarget(null);
-            Content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone);
-            Content.SpriteBatch.Draw(Content.TexBG, DrawBounds, new Rectangle(0, 0, DrawBounds.Width, DrawBounds.Height), Color.White);
-            Content.SpriteBatch.Draw(Content.TexLogo, new Vector2(DrawBounds.Width / 2, DrawBounds.Height / 2), null, Color.White, 0, new Vector2(Content.TexLogo.Width / 2, Content.TexLogo.Height / 2), 3, SpriteEffects.None, 0);
-            Content.SpriteBatch.End();
+            content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone);
+            content.SpriteBatch.Draw(content.TexBG, DrawBounds, new Rectangle(0, 0, DrawBounds.Width, DrawBounds.Height), Color.White);
+            content.SpriteBatch.Draw(content.TexLogo, new Vector2(DrawBounds.Width / 2, DrawBounds.Height / 2), null, Color.White, 0, new Vector2(content.TexLogo.Width / 2, content.TexLogo.Height / 2), 3, SpriteEffects.None, 0);
+            content.SpriteBatch.End();
 
             //Draw the level onto the control, positioned and scaled by the camera
-            Content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, Camera.Matrix);
-            Content.DrawRectangle(10, 10, Level.Size.Width, Level.Size.Height, new Color(0, 0, 0, .5f));
-            Content.DrawRectangle(0, 0, Level.Size.Width, Level.Size.Height, Ogmo.Project.BackgroundColor.ToXNA());
+            content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, Camera.Matrix);
+            content.DrawRectangle(10, 10, Level.Size.Width, Level.Size.Height, new Color(0, 0, 0, .5f));
+            content.DrawRectangle(0, 0, Level.Size.Width, Level.Size.Height, Ogmo.Project.BackgroundColor.ToXNA());
 
             //Draw the grid if turned on and editor is zoomed at least 100%
             if (Ogmo.MainWindow.EditingGridVisible && Camera.Zoom >= 1)
-                Content.DrawGrid(LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Layer.Definition.Grid, Level.Size, Ogmo.Project.GridColor.ToXNA() * .5f);
+                content.DrawGrid(LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Layer.Definition.Grid, Level.Size, Ogmo.Project.GridColor.ToXNA() * .5f);
 
             //Draw the layers
             int i;
             for (i = 0; i < Ogmo.LayersWindow.CurrentLayerIndex; i++)
             {
                 if (Ogmo.Project.LayerDefinitions[i].Visible)
-                    LayerEditors[i].Draw(Content, false, 1);
+                    LayerEditors[i].Draw(content, false, 1);
             }
-            LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Draw(Content, true, 1);
+            LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Draw(content, true, 1);
             for (; i < LayerEditors.Count; i++)
             {
                 if (Ogmo.Project.LayerDefinitions[i].Visible)
-                    LayerEditors[i].Draw(Content, false,  LAYER_ABOVE_ALPHA);
+                    LayerEditors[i].Draw(content, false,  LAYER_ABOVE_ALPHA);
             }
 
-            Content.SpriteBatch.End();
+            content.SpriteBatch.End();
         }
 
         public void SwitchTo()
