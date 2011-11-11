@@ -7,13 +7,13 @@ using System.IO;
 using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 using System.Drawing;
+using OgmoEditor.Definitions;
+using OgmoEditor.LevelData.Layers;
 
 namespace OgmoEditor.LevelEditors
 {
     using Color = Microsoft.Xna.Framework.Color;
-    using Rectangle = Microsoft.Xna.Framework.Rectangle;
-    using OgmoEditor.Definitions;
-using OgmoEditor.LevelData.Layers;
+    using Rectangle = Microsoft.Xna.Framework.Rectangle; 
 
     public class Content
     {
@@ -37,6 +37,7 @@ using OgmoEditor.LevelData.Layers;
 
             //Generate all the object textures
             ObjectTextures = new Dictionary<EntityDefinition, Texture2D>();
+
             foreach (EntityDefinition def in Ogmo.Project.EntityDefinitions)
             {
                 Texture2D tex = def.GenerateTexture(device);
@@ -50,64 +51,15 @@ using OgmoEditor.LevelData.Layers;
          */
         public void DrawEntity(EntityDefinition definition, System.Drawing.Point position, float alpha = 1)
         {
-            if (definition.ImageDefinition.Tiled)
-                DrawTextureFill(ObjectTextures[definition], new Rectangle(position.X - definition.Origin.X, position.Y - definition.Origin.Y, definition.Size.Width, definition.Size.Height), alpha);
+            if (definition.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image && definition.ImageDefinition.Tiled)
+                SpriteBatch.Draw(ObjectTextures[definition], new Rectangle(position.X - definition.Origin.X, position.Y - definition.Origin.Y, definition.Size.Width, definition.Size.Height), new Rectangle(0, 0, definition.Size.Width, definition.Size.Height), Color.White * alpha);
             else
                 SpriteBatch.Draw(ObjectTextures[definition], new Rectangle(position.X - definition.Origin.X, position.Y - definition.Origin.Y, definition.Size.Width, definition.Size.Height), Color.White * alpha);
         }
 
         public void DrawEntity(Entity entity, float alpha = 1)
         {
-            if (entity.Definition.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image && entity.Definition.ImageDefinition.Tiled)
-                DrawTextureFill(ObjectTextures[entity.Definition], entity.XNABounds, alpha);
-            else
-                SpriteBatch.Draw(ObjectTextures[entity.Definition], entity.XNABounds, Color.White * alpha);
-        }
-
-        public void DrawTextureFill(Texture2D texture, Rectangle fillRect, float alpha = 1)
-        {
-            Rectangle r = new Rectangle(fillRect.X, fillRect.Y, texture.Width, texture.Height);
-
-            for (r.X = fillRect.X; r.X < fillRect.X + fillRect.Width; r.X += texture.Width)
-            {
-                bool shortenX = false;
-                if (r.X + r.Width > fillRect.X + fillRect.Width)
-                {
-                    shortenX = true;
-                    r.Width = fillRect.X + fillRect.Width - r.X;
-                }
-
-                for (r.Y = fillRect.Y; r.Y < fillRect.Y + fillRect.Height; r.Y += texture.Height)
-                {
-                    bool shortenY = false;
-                    if (r.Y + r.Height > fillRect.Y + fillRect.Height)
-                    {
-                        shortenY = true;
-                        r.Height = fillRect.Y + fillRect.Height - r.Y;
-                    }
-
-                    SpriteBatch.Draw(texture, r, Color.White * alpha);
-
-                    if (shortenY)
-                        r.Height = texture.Height;
-                }
-
-                if (shortenX)
-                    r.Width = texture.Width;
-            }
-        }
-
-        public void DrawTextureFillFast(Texture2D texture, Rectangle fillRect, float alpha = 1)
-        {
-            Rectangle r = new Rectangle(fillRect.X, fillRect.Y, texture.Width, texture.Height);
-
-            for (r.X = fillRect.X; r.X < fillRect.X + fillRect.Width; r.X += texture.Width)
-            {
-                for (r.Y = fillRect.Y; r.Y < fillRect.Y + fillRect.Height; r.Y += texture.Height)
-                {
-                    SpriteBatch.Draw(texture, r, Color.White * alpha);
-                }
-            }
+            DrawEntity(entity.Definition, entity.Position, alpha);
         }
 
         public void DrawRectangle(Rectangle rect, Color color)

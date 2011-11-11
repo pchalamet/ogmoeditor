@@ -66,18 +66,13 @@ namespace OgmoEditor.ProjectEditors
             this.rectangleColorChooser = new OgmoEditor.ColorChooser();
             this.label12 = new System.Windows.Forms.Label();
             this.imageFileGraphicPanel = new System.Windows.Forms.Panel();
-            this.imageFileClipHTextBox = new System.Windows.Forms.TextBox();
-            this.imageFileClipWTextBox = new System.Windows.Forms.TextBox();
-            this.imageFileClipYTextBox = new System.Windows.Forms.TextBox();
-            this.imageFileClipXTextBox = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
+            this.imagePreviewer = new OgmoEditor.ImagePreviewer();
             this.imageFileWarningLabel = new System.Windows.Forms.Label();
             this.imageFileButton = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.imageFileTextBox = new System.Windows.Forms.TextBox();
             this.imageFileTiledCheckBox = new System.Windows.Forms.CheckBox();
             this.valuesEditor = new OgmoEditor.ProjectEditors.ValueDefinitionEditors.ValueDefinitionsEditor();
-            this.imagePreviewer = new OgmoEditor.ImagePreviewer();
             this.rectangleGraphicPanel.SuspendLayout();
             this.imageFileGraphicPanel.SuspendLayout();
             this.SuspendLayout();
@@ -447,11 +442,6 @@ namespace OgmoEditor.ProjectEditors
             // imageFileGraphicPanel
             // 
             this.imageFileGraphicPanel.Controls.Add(this.imagePreviewer);
-            this.imageFileGraphicPanel.Controls.Add(this.imageFileClipHTextBox);
-            this.imageFileGraphicPanel.Controls.Add(this.imageFileClipWTextBox);
-            this.imageFileGraphicPanel.Controls.Add(this.imageFileClipYTextBox);
-            this.imageFileGraphicPanel.Controls.Add(this.imageFileClipXTextBox);
-            this.imageFileGraphicPanel.Controls.Add(this.label14);
             this.imageFileGraphicPanel.Controls.Add(this.imageFileWarningLabel);
             this.imageFileGraphicPanel.Controls.Add(this.imageFileButton);
             this.imageFileGraphicPanel.Controls.Add(this.label13);
@@ -464,46 +454,12 @@ namespace OgmoEditor.ProjectEditors
             this.imageFileGraphicPanel.TabIndex = 85;
             this.imageFileGraphicPanel.Visible = false;
             // 
-            // imageFileClipHTextBox
+            // imagePreviewer
             // 
-            this.imageFileClipHTextBox.Location = new System.Drawing.Point(265, 37);
-            this.imageFileClipHTextBox.Name = "imageFileClipHTextBox";
-            this.imageFileClipHTextBox.Size = new System.Drawing.Size(42, 20);
-            this.imageFileClipHTextBox.TabIndex = 87;
-            this.imageFileClipHTextBox.Validated += new System.EventHandler(this.imageFileClipXTextBox_Validated);
-            // 
-            // imageFileClipWTextBox
-            // 
-            this.imageFileClipWTextBox.Location = new System.Drawing.Point(217, 37);
-            this.imageFileClipWTextBox.Name = "imageFileClipWTextBox";
-            this.imageFileClipWTextBox.Size = new System.Drawing.Size(42, 20);
-            this.imageFileClipWTextBox.TabIndex = 86;
-            this.imageFileClipWTextBox.Validated += new System.EventHandler(this.imageFileClipXTextBox_Validated);
-            // 
-            // imageFileClipYTextBox
-            // 
-            this.imageFileClipYTextBox.Location = new System.Drawing.Point(169, 37);
-            this.imageFileClipYTextBox.Name = "imageFileClipYTextBox";
-            this.imageFileClipYTextBox.Size = new System.Drawing.Size(42, 20);
-            this.imageFileClipYTextBox.TabIndex = 85;
-            this.imageFileClipYTextBox.Validated += new System.EventHandler(this.imageFileClipXTextBox_Validated);
-            // 
-            // imageFileClipXTextBox
-            // 
-            this.imageFileClipXTextBox.Location = new System.Drawing.Point(120, 37);
-            this.imageFileClipXTextBox.Name = "imageFileClipXTextBox";
-            this.imageFileClipXTextBox.Size = new System.Drawing.Size(42, 20);
-            this.imageFileClipXTextBox.TabIndex = 84;
-            this.imageFileClipXTextBox.Validated += new System.EventHandler(this.imageFileClipXTextBox_Validated);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(92, 40);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(24, 13);
-            this.label14.TabIndex = 55;
-            this.label14.Text = "Clip";
+            this.imagePreviewer.Location = new System.Drawing.Point(4, 4);
+            this.imagePreviewer.Name = "imagePreviewer";
+            this.imagePreviewer.Size = new System.Drawing.Size(85, 81);
+            this.imagePreviewer.TabIndex = 88;
             // 
             // imageFileWarningLabel
             // 
@@ -546,7 +502,7 @@ namespace OgmoEditor.ProjectEditors
             // imageFileTiledCheckBox
             // 
             this.imageFileTiledCheckBox.AutoSize = true;
-            this.imageFileTiledCheckBox.Location = new System.Drawing.Point(95, 63);
+            this.imageFileTiledCheckBox.Location = new System.Drawing.Point(102, 39);
             this.imageFileTiledCheckBox.Name = "imageFileTiledCheckBox";
             this.imageFileTiledCheckBox.Size = new System.Drawing.Size(75, 17);
             this.imageFileTiledCheckBox.TabIndex = 1;
@@ -563,14 +519,7 @@ namespace OgmoEditor.ProjectEditors
             this.valuesEditor.TabIndex = 70;
             this.valuesEditor.Title = "Values";
             // 
-            // imagePreviewer
-            // 
-            this.imagePreviewer.Location = new System.Drawing.Point(4, 4);
-            this.imagePreviewer.Name = "imagePreviewer";
-            this.imagePreviewer.Size = new System.Drawing.Size(85, 81);
-            this.imagePreviewer.TabIndex = 88;
-            // 
-            // ObjectDefinitionsEditor
+            // EntityDefinitionsEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -610,7 +559,7 @@ namespace OgmoEditor.ProjectEditors
             this.Controls.Add(this.moveUpButton);
             this.Controls.Add(this.removeButton);
             this.Controls.Add(this.addButton);
-            this.Name = "ObjectDefinitionsEditor";
+            this.Name = "EntityDefinitionsEditor";
             this.Size = new System.Drawing.Size(573, 490);
             this.rectangleGraphicPanel.ResumeLayout(false);
             this.rectangleGraphicPanel.PerformLayout();
@@ -661,11 +610,6 @@ namespace OgmoEditor.ProjectEditors
         private ColorChooser rectangleColorChooser;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Panel imageFileGraphicPanel;
-        private System.Windows.Forms.TextBox imageFileClipHTextBox;
-        private System.Windows.Forms.TextBox imageFileClipWTextBox;
-        private System.Windows.Forms.TextBox imageFileClipYTextBox;
-        private System.Windows.Forms.TextBox imageFileClipXTextBox;
-        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label imageFileWarningLabel;
         private System.Windows.Forms.Button imageFileButton;
         private System.Windows.Forms.Label label13;

@@ -42,7 +42,10 @@ namespace OgmoEditor.LevelEditors
         private ActionBatch batch;
 
         public LevelEditor(Level level)
+            : base()
         {
+            this.
+
             Level = level;
             this.Size = level.Size;
             Dock = System.Windows.Forms.DockStyle.Fill;
@@ -97,13 +100,13 @@ namespace OgmoEditor.LevelEditors
         {
             //Draw the background and logo
             GraphicsDevice.SetRenderTarget(null);
-            Content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone);
-            Content.DrawTextureFillFast(Content.TexBG, DrawBounds);
+            Content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone);
+            Content.SpriteBatch.Draw(Content.TexBG, DrawBounds, new Rectangle(0, 0, DrawBounds.Width, DrawBounds.Height), Color.White);
             Content.SpriteBatch.Draw(Content.TexLogo, new Vector2(DrawBounds.Width / 2, DrawBounds.Height / 2), null, Color.White, 0, new Vector2(Content.TexLogo.Width / 2, Content.TexLogo.Height / 2), 3, SpriteEffects.None, 0);
             Content.SpriteBatch.End();
 
             //Draw the level onto the control, positioned and scaled by the camera
-            Content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Camera.Matrix);
+            Content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, Camera.Matrix);
             Content.DrawRectangle(10, 10, Level.Size.Width, Level.Size.Height, new Color(0, 0, 0, .5f));
             Content.DrawRectangle(0, 0, Level.Size.Width, Level.Size.Height, Ogmo.Project.BackgroundColor.ToXNA());
 

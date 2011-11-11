@@ -44,7 +44,6 @@ namespace OgmoEditor.Definitions
 
             ImageDefinition.ImagePath = "";
             ImageDefinition.RectColor = new OgmoColor(255, 0, 0);
-            ImageDefinition.ClipRect = new Rectangle(0, 0, 16, 16);
 
             NodesDefinition.Limit = -1;
         }
@@ -99,7 +98,6 @@ namespace OgmoEditor.Definitions
                     FileStream s = new FileStream(Path.Combine(Ogmo.Project.SavedDirectory, ImageDefinition.ImagePath), FileMode.Open, FileAccess.Read, FileShare.Read);
                     Image image = Image.FromStream(s);
                     s.Close();
-                    image = Util.CropImage(image, ImageDefinition.ClipRect);
                     return image;
                 }
             }
@@ -116,15 +114,7 @@ namespace OgmoEditor.Definitions
                 FileStream stream = new FileStream(Path.Combine(Ogmo.Project.SavedDirectory, ImageDefinition.ImagePath), FileMode.Open, FileAccess.Read, FileShare.Read);
                 Texture2D tex = Texture2D.FromStream(graphics, stream);                
                 stream.Close();
-
-                if (ImageDefinition.ClipRect.Width != tex.Width || ImageDefinition.ClipRect.Height != tex.Height || ImageDefinition.ClipRect.X != 0 || ImageDefinition.ClipRect.Y != 0)
-                {
-                    Texture2D texB = Util.CropTexture(tex, ImageDefinition.ClipRect);
-                    tex.Dispose();
-                    return texB;
-                }
-                else
-                    return tex;
+                return tex;
             }
 
             return null;
@@ -145,7 +135,6 @@ namespace OgmoEditor.Definitions
         public bool Tiled;
 
         public OgmoColor RectColor;
-        public Rectangle ClipRect;
     }
 
     [XmlRoot("Nodes")]

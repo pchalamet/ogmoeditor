@@ -81,13 +81,9 @@ namespace OgmoEditor.ProjectEditors
             GraphicFieldsVisibility = (int)def.ImageDefinition.DrawMode;
             rectangleColorChooser.Color = def.ImageDefinition.RectColor;
             imageFileTextBox.Text = def.ImageDefinition.ImagePath;
-            imageFileClipXTextBox.Text = def.ImageDefinition.ClipRect.X.ToString();
-            imageFileClipYTextBox.Text = def.ImageDefinition.ClipRect.Y.ToString();
-            imageFileClipWTextBox.Text = def.ImageDefinition.ClipRect.Width.ToString();
-            imageFileClipHTextBox.Text = def.ImageDefinition.ClipRect.Height.ToString();
             imageFileTiledCheckBox.Checked = def.ImageDefinition.Tiled;
             imageFileWarningLabel.Visible = !checkImageFile();
-            loadImageFilePreview(def.ImageDefinition.ClipRect);
+            loadImageFilePreview();
         }
 
         private void disableControls()
@@ -167,23 +163,9 @@ namespace OgmoEditor.ProjectEditors
             return File.Exists(Path.Combine(directory, imageFileTextBox.Text));
         }
 
-        private void loadImageFilePreview(Rectangle? clip = null)
+        private void loadImageFilePreview()
         {
-            if (imagePreviewer.LoadImage(Path.Combine(directory, imageFileTextBox.Text), clip))
-            {
-                if (!clip.HasValue)
-                {
-                    objects[listBox.SelectedIndex].ImageDefinition.ClipRect = new Rectangle(0, 0, imagePreviewer.ImageWidth, imagePreviewer.ImageHeight);
-                    imageFileClipXTextBox.Text = 0.ToString();
-                    imageFileClipYTextBox.Text = 0.ToString();
-                    imageFileClipWTextBox.Text = imagePreviewer.ImageWidth.ToString();
-                    imageFileClipHTextBox.Text = imagePreviewer.ImageHeight.ToString();
-                }
-            }
-            else
-            {
-                
-            }
+            imagePreviewer.LoadImage(Path.Combine(directory, imageFileTextBox.Text));
         }
 
         private void clearImageFilePreview()
@@ -370,15 +352,6 @@ namespace OgmoEditor.ProjectEditors
                 return;
 
             objects[listBox.SelectedIndex].ImageDefinition.Tiled = imageFileTiledCheckBox.Checked;
-        }
-
-        private void imageFileClipXTextBox_Validated(object sender, EventArgs e)
-        {
-            if (listBox.SelectedIndex == -1)
-                return;
-
-            OgmoParse.Parse(ref objects[listBox.SelectedIndex].ImageDefinition.ClipRect, imageFileClipXTextBox, imageFileClipYTextBox, imageFileClipWTextBox, imageFileClipHTextBox);
-            imagePreviewer.SetClip(objects[listBox.SelectedIndex].ImageDefinition.ClipRect);
         }
 
         private void imageFileButton_Click(object sender, EventArgs e)

@@ -204,6 +204,9 @@ namespace OgmoEditor
                 CloseProject();
             else if (action == FinishProjectEditAction.SaveProject)
             {
+                //Close all the levels
+                CloseAllLevels();
+
                 //Call the event
                 if (OnProjectEdited != null)
                     OnProjectEdited(Project);
@@ -211,15 +214,13 @@ namespace OgmoEditor
                 //Save the project
                 Project.Save();
 
-                //Close all the levels
-                CloseAllLevels();
-
                 //Start a blank level and start at the first layer
                 LayersWindow.SetLayer(0);
                 NewLevel();
 
                 //Set the status message
                 Ogmo.MainWindow.StatusText = "Edited project " + Ogmo.Project.Name + ", all levels closed";
+                GC.Collect();
             }
         }
 
