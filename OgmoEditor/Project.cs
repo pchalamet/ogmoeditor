@@ -25,10 +25,6 @@ namespace OgmoEditor
     {
         public enum AngleExportMode { Radians, Degrees };
 
-        //Properties
-        [XmlIgnore]
-        public Content Content { get; private set; }
-
         //Serialized project properties
         public string Name;
         public OgmoColor BackgroundColor;
@@ -100,11 +96,6 @@ namespace OgmoEditor
             EntityDefinitions = new List<EntityDefinition>();
             foreach (var d in copy.EntityDefinitions)
                 EntityDefinitions.Add(d.Clone());
-        }
-
-        public void LoadContent()
-        {
-            Content = new Content(this, Util.GraphicsDevice);
         }
 
         public string ErrorCheck()

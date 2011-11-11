@@ -6,6 +6,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Drawing;
 using Microsoft.Xna.Framework.Graphics;
+using OgmoEditor.LevelEditors;
 
 namespace OgmoEditor
 {
@@ -19,8 +20,6 @@ namespace OgmoEditor
         public const float EIGHTH = (float)(Math.PI / 4);
         public const float DEGTORAD = (float)(Math.PI / 180.0);
         public const float RADTODEG = (float)(180.0 / Math.PI);
-
-        static public GraphicsDevice GraphicsDevice;
 
         static public string RelativePath(string absPath, string relTo)
         {

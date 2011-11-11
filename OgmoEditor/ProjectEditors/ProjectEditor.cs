@@ -66,7 +66,7 @@ namespace OgmoEditor.ProjectEditors
             //Copy the edited project onto the old one
             oldProject.CloneFrom(newProject);
 
-            //Save the project if changes were made
+            //Save the project after closing the form
             finishAction = Ogmo.FinishProjectEditAction.SaveProject;
 
             //Close the project editor

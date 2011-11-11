@@ -20,15 +20,13 @@ namespace OgmoEditor.LevelEditors
         public Texture2D TexPixel { get; private set; }
         public Texture2D TexBG { get; private set; }
         public Texture2D TexLogo { get; private set; }
-        public Dictionary<EntityDefinition, Texture2D> ObjectTextures { get; private set; }
+        public Dictionary<EntityDefinition, Texture2D> EntityTextures { get; private set; }
 
         public GraphicsDevice GraphicsDevice { get; private set; }
         public SpriteBatch SpriteBatch { get; private set; }
-        public Project Project { get; private set; }
 
-        public Content(Project project, GraphicsDevice device)
+        public Content(GraphicsDevice device)
         {
-            Project = project;
             GraphicsDevice = device;
             SpriteBatch = new SpriteBatch(device);
 
@@ -37,14 +35,21 @@ namespace OgmoEditor.LevelEditors
             TexBG = Read("bg.png");
             TexLogo = Read("logo.png");
 
-            //Generate all the object textures
-            ObjectTextures = new Dictionary<EntityDefinition, Texture2D>();
+            EntityTextures = new Dictionary<EntityDefinition, Texture2D>();
+        }
 
-            foreach (EntityDefinition def in Project.EntityDefinitions)
+        public void LoadEntityTextures(Project project)
+        {
+            foreach (var kv in EntityTextures)
+                kv.Value.Dispose();
+
+            EntityTextures.Clear();
+
+            foreach (EntityDefinition def in project.EntityDefinitions)
             {
-                Texture2D tex = def.GenerateTexture(device);
+                Texture2D tex = def.GenerateTexture(GraphicsDevice);
                 if (tex != null)
-                    ObjectTextures.Add(def, tex);
+                    EntityTextures.Add(def, tex);
             }
         }
 
@@ -53,21 +58,27 @@ namespace OgmoEditor.LevelEditors
          */
         public void DrawEntity(EntityDefinition definition, System.Drawing.Point position, float alpha = 1)
         {
-            if (definition.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image && definition.ImageDefinition.Tiled)
-                SpriteBatch.Draw(ObjectTextures[definition], new Rectangle(position.X - definition.Origin.X, position.Y - definition.Origin.Y, definition.Size.Width, definition.Size.Height), new Rectangle(0, 0, definition.Size.Width, definition.Size.Height), Color.White * alpha);
-            else
-                SpriteBatch.Draw(ObjectTextures[definition], new Rectangle(position.X - definition.Origin.X, position.Y - definition.Origin.Y, definition.Size.Width, definition.Size.Height), Color.White * alpha);
+            if (EntityTextures.ContainsKey(definition))
+            {
+                if (definition.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image && definition.ImageDefinition.Tiled)
+                    SpriteBatch.Draw(EntityTextures[definition], new Rectangle(position.X - definition.Origin.X, position.Y - definition.Origin.Y, definition.Size.Width, definition.Size.Height), new Rectangle(0, 0, definition.Size.Width, definition.Size.Height), Color.White * alpha);
+                else
+                    SpriteBatch.Draw(EntityTextures[definition], new Rectangle(position.X - definition.Origin.X, position.Y - definition.Origin.Y, definition.Size.Width, definition.Size.Height), Color.White * alpha);
+            }
         }
 
         public void DrawEntity(Entity entity, float alpha = 1)
         {
-            EntityDefinition definition = entity.Definition;
-            System.Drawing.Point position = entity.Position;
+            if (EntityTextures.ContainsKey(entity.Definition))
+            {
+                EntityDefinition definition = entity.Definition;
+                System.Drawing.Point position = entity.Position;
 
-            if (definition.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image && definition.ImageDefinition.Tiled)
-                SpriteBatch.Draw(ObjectTextures[definition], new Rectangle(position.X - definition.Origin.X, position.Y - definition.Origin.Y, entity.Size.Width, entity.Size.Height), new Rectangle(0, 0, entity.Size.Width, entity.Size.Height), Color.White * alpha);
-            else
-                SpriteBatch.Draw(ObjectTextures[definition], new Rectangle(position.X - definition.Origin.X, position.Y - definition.Origin.Y, entity.Size.Width, entity.Size.Height), Color.White * alpha);
+                if (definition.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image && definition.ImageDefinition.Tiled)
+                    SpriteBatch.Draw(EntityTextures[definition], new Rectangle(position.X - definition.Origin.X, position.Y - definition.Origin.Y, entity.Size.Width, entity.Size.Height), new Rectangle(0, 0, entity.Size.Width, entity.Size.Height), Color.White * alpha);
+                else
+                    SpriteBatch.Draw(EntityTextures[definition], new Rectangle(position.X - definition.Origin.X, position.Y - definition.Origin.Y, entity.Size.Width, entity.Size.Height), Color.White * alpha);
+            }
         }
 
         public void DrawRectangle(Rectangle rect, Color color)

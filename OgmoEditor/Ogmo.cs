@@ -16,6 +16,8 @@ using OgmoEditor.LevelData.Layers;
 using OgmoEditor.Definitions.LayerDefinitions;
 using OgmoEditor.LevelEditors.Tools;
 using OgmoEditor.Definitions;
+using OgmoEditor.LevelEditors;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace OgmoEditor
 {
@@ -37,6 +39,10 @@ namespace OgmoEditor
         public delegate void LayerCallback(LayerDefinition layerDefinition, int index);
         public delegate void ToolCallback(Tool tool);
         public delegate void EntityCallback(EntityDefinition objectDefinition);
+
+        static public PresentationParameters Parameters;
+        static public GraphicsDevice GraphicsDevice { get; private set; }
+        static public Content Content { get; private set; }
 
         static public MainWindow MainWindow { get; private set; }
         static public ToolsWindow ToolsWindow { get; private set; }
@@ -67,6 +73,7 @@ namespace OgmoEditor
 
         static private void initialize()
         {
+            //Figure out the program directory
             ProgramDirectory = Application.ExecutablePath.Remove(Application.ExecutablePath.IndexOf(Path.GetFileName(Application.ExecutablePath)));
 
             //Initialize directory system
@@ -89,6 +96,18 @@ namespace OgmoEditor
             EntitiesWindow.Show(MainWindow);
             EntitySelectionWindow.Show(MainWindow);
             LayersWindow.EditorVisible = ToolsWindow.EditorVisible = EntitiesWindow.EditorVisible = EntitySelectionWindow.EditorVisible = false;
+
+            //Set up graphics stuff
+            Parameters = new PresentationParameters();
+            Parameters.BackBufferWidth = Math.Max(Ogmo.MainWindow.ClientSize.Width, 1);
+            Parameters.BackBufferHeight = Math.Max(Ogmo.MainWindow.ClientSize.Height, 1);
+            Parameters.BackBufferFormat = SurfaceFormat.Color;
+            Parameters.DepthStencilFormat = DepthFormat.Depth24;
+            Parameters.DeviceWindowHandle = Ogmo.MainWindow.Handle;
+            Parameters.PresentationInterval = PresentInterval.Immediate;
+            Parameters.IsFullScreen = false;
+            GraphicsDevice = new GraphicsDevice(GraphicsAdapter.DefaultAdapter, GraphicsProfile.HiDef, Parameters);
+            Content = new Content(GraphicsDevice);
 
             //Load the config file
             Config.Load();
@@ -137,6 +156,7 @@ namespace OgmoEditor
 
             //Start the project
             StartProject(project);
+            Content.LoadEntityTextures(Project);
 
             //Start a blank level and start at the first layer
             LayersWindow.SetLayer(0);
@@ -146,7 +166,6 @@ namespace OgmoEditor
             Ogmo.MainWindow.StatusText = "Opened project " + Ogmo.Project.Name;
 
             //Load content and GC
-            Ogmo.Project.LoadContent();
             GC.Collect();
         }
 
@@ -217,6 +236,7 @@ namespace OgmoEditor
 
                 //Save the project
                 Project.Save();
+                Content.LoadEntityTextures(Project);
 
                 //Start a blank level and start at the first layer
                 LayersWindow.SetLayer(0);
@@ -226,7 +246,6 @@ namespace OgmoEditor
                 Ogmo.MainWindow.StatusText = "Edited project " + Ogmo.Project.Name + ", all levels closed";
 
                 //Load content and garbage collect all the things
-                Ogmo.Project.LoadContent();
                 GC.Collect();
             }
         }

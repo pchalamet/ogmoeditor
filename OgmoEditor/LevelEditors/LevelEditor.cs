@@ -43,8 +43,6 @@ namespace OgmoEditor.LevelEditors
         public LevelEditor(Level level)
             : base()
         {
-            this.
-
             Level = level;
             this.Size = level.Size;
             Dock = System.Windows.Forms.DockStyle.Fill;
@@ -94,7 +92,7 @@ namespace OgmoEditor.LevelEditors
 
         protected override void Draw()
         {
-            Content content = Ogmo.Project.Content;
+            Content content = Ogmo.Content;
 
             //Draw the background and logo
             GraphicsDevice.SetRenderTarget(null);
