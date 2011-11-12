@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using OgmoEditor.LevelEditors.Tools;
 using OgmoEditor.Definitions.LayerDefinitions;
 using OgmoEditor.LevelEditors.Tools.GridTools;
-using System.Diagnostics;
 using OgmoEditor.LevelEditors.Tools.EntityTools;
 
 namespace OgmoEditor.Windows

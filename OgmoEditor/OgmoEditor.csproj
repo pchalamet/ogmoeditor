@@ -329,6 +329,9 @@
     <Compile Include="Windows\StartPage.Designer.cs">
       <DependentUpon>StartPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\TilePaletteWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Windows\ToolButton.cs">
       <SubType>UserControl</SubType>
     </Compile>

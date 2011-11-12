@@ -52,6 +52,12 @@ namespace OgmoEditor.Windows
             KeyDown += onKeyDown;
             Ogmo.OnProjectClose += onProjectClose;
             Ogmo.OnLevelClosed += onLevelClose;
+            Ogmo.OnLevelChanged += new Ogmo.LevelCallback(Ogmo_OnLevelChanged);
+        }
+
+        void Ogmo_OnLevelChanged(int index)
+        {
+            EditorVisible = ShouldBeVisible();
         }
 
         protected virtual void handleKeyDown(KeyEventArgs e)
@@ -62,6 +68,11 @@ namespace OgmoEditor.Windows
         protected override bool ShowWithoutActivation
         {
             get { return true; }
+        }
+
+        public virtual bool ShouldBeVisible()
+        {
+            return true;
         }
 
         /*

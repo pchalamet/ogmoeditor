@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using OgmoEditor.Definitions;
 using OgmoEditor.Definitions.LayerDefinitions;
 using System.Diagnostics;
+using OgmoEditor.LevelData.Layers;
 
 namespace OgmoEditor.Windows
 {
@@ -28,6 +29,11 @@ namespace OgmoEditor.Windows
             Ogmo.OnProjectStart += onProjectStart;
             Ogmo.OnProjectEdited += onProjectEdited;
             Ogmo.LayersWindow.OnLayerChanged += onLayerChanged;
+        }
+
+        public override bool ShouldBeVisible()
+        {
+            return Ogmo.LayersWindow.CurrentLayer is EntityLayer;
         }
 
         public void SetObject(EntityDefinition def)

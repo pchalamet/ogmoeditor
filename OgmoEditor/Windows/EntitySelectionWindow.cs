@@ -30,6 +30,11 @@ namespace OgmoEditor.Windows
             Ogmo.LayersWindow.OnLayerChanged += onLayerChanged;
         }
 
+        public override bool ShouldBeVisible()
+        {
+            return Ogmo.LayersWindow.CurrentLayer is EntityLayer;
+        }
+
         /*
          *  Selection API
          */

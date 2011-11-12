@@ -26,7 +26,11 @@ namespace OgmoEditor.Windows
             //Events
             Ogmo.OnProjectStart += onProjectStart;
             Ogmo.OnProjectEdited += onProjectEdited;
-            Ogmo.OnLevelAdded += onLevelAdded;
+        }
+
+        public override bool ShouldBeVisible()
+        {
+            return Ogmo.Project.LayerDefinitions.Count > 1;
         }
 
         protected override void handleKeyDown(KeyEventArgs e)
@@ -81,12 +85,6 @@ namespace OgmoEditor.Windows
         /*
          *  Events
          */
-        private void onLevelAdded(int index)
-        {
-            if (Ogmo.Project.LayerDefinitions.Count > 1)
-                EditorVisible = true;
-        }
-
         private void onProjectStart(Project project)
         {
             initFromProject(project);

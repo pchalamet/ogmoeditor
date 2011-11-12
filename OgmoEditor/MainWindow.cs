@@ -40,7 +40,7 @@ namespace OgmoEditor
 
         public void AddStartPage()
         {
-            TabPage start = new TabPage("Start Page");
+            TabPage start = new TabPage("Ogmo Editor!");
             start.Name = "startPage";
             start.Controls.Add(new StartPage());
             MasterTabControl.TabPages.Add(start);
