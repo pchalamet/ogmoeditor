@@ -9,13 +9,14 @@ namespace OgmoEditor.Definitions.LayerDefinitions
 {
     public class TileLayerDefinition : LayerDefinition
     {
-        public bool MultipleTilesets;
+        public enum TileExportMode { CSV, XML };
+        public TileExportMode ExportMode;
 
         public TileLayerDefinition()
             : base()
         {
             Image = "tile.png";
-            MultipleTilesets = false;
+            ExportMode = TileExportMode.CSV;
         }
 
         public override System.Windows.Forms.UserControl GetEditor()
@@ -33,7 +34,7 @@ namespace OgmoEditor.Definitions.LayerDefinitions
             TileLayerDefinition def = new TileLayerDefinition();
             def.Name = Name;
             def.Grid = Grid;
-            def.MultipleTilesets = MultipleTilesets;
+            def.ExportMode = ExportMode;
             return def;
         }
     }

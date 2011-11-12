@@ -21,12 +21,12 @@ namespace OgmoEditor.ProjectEditors.LayerDefinitionEditors
             InitializeComponent();
             Location = new Point(206, 117);
 
-            multipleTilesetsCheckBox.Checked = def.MultipleTilesets;
+            exportModeComboBox.SelectedIndex = (int)def.ExportMode;
         }
 
-        private void multipleTilesetsCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void exportModeComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            def.MultipleTilesets = multipleTilesetsCheckBox.Checked;
+            def.ExportMode = (TileLayerDefinition.TileExportMode)exportModeComboBox.SelectedIndex;
         }
     }
 }

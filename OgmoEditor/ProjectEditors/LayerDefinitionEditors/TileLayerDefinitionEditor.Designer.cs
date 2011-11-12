@@ -28,26 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.multipleTilesetsCheckBox = new System.Windows.Forms.CheckBox();
+            this.exportModeComboBox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // multipleTilesetsCheckBox
+            // exportModeComboBox
             // 
-            this.multipleTilesetsCheckBox.AutoSize = true;
-            this.multipleTilesetsCheckBox.Location = new System.Drawing.Point(18, 15);
-            this.multipleTilesetsCheckBox.Name = "multipleTilesetsCheckBox";
-            this.multipleTilesetsCheckBox.Size = new System.Drawing.Size(124, 17);
-            this.multipleTilesetsCheckBox.TabIndex = 0;
-            this.multipleTilesetsCheckBox.Text = "Allow multiple tilesets";
-            this.multipleTilesetsCheckBox.UseVisualStyleBackColor = true;
-            this.multipleTilesetsCheckBox.CheckedChanged += new System.EventHandler(this.multipleTilesetsCheckBox_CheckedChanged);
+            this.exportModeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.exportModeComboBox.FormattingEnabled = true;
+            this.exportModeComboBox.Items.AddRange(new object[] {
+            "CSV",
+            "XML"});
+            this.exportModeComboBox.Location = new System.Drawing.Point(89, 12);
+            this.exportModeComboBox.Name = "exportModeComboBox";
+            this.exportModeComboBox.Size = new System.Drawing.Size(81, 21);
+            this.exportModeComboBox.TabIndex = 0;
+            this.exportModeComboBox.SelectionChangeCommitted += new System.EventHandler(this.exportModeComboBox_SelectionChangeCommitted);
             // 
-            // TileLayerEditor
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(16, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Export Mode";
+            // 
+            // TileLayerDefinitionEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.multipleTilesetsCheckBox);
-            this.Name = "TileLayerEditor";
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.exportModeComboBox);
+            this.Name = "TileLayerDefinitionEditor";
             this.Size = new System.Drawing.Size(353, 358);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -56,6 +69,8 @@
 
         #endregion
 
-        private System.Windows.Forms.CheckBox multipleTilesetsCheckBox;
+        private System.Windows.Forms.ComboBox exportModeComboBox;
+        private System.Windows.Forms.Label label1;
+
     }
 }

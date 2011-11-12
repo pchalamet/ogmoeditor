@@ -15,7 +15,7 @@ namespace OgmoEditor.Windows
         {
             Name = "TilePaletteWindow";
             Text = "Tile Palette";
-            ClientSize = new Size(64, 144);
+            ClientSize = new Size(160, 192);
 
             Ogmo.LayersWindow.OnLayerChanged += new Ogmo.LayerCallback(onLayerChanged);
         }
