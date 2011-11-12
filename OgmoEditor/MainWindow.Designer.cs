@@ -66,7 +66,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.layersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.objectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tilePaletteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.entitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entitySelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MasterTabControl = new System.Windows.Forms.TabControl();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -341,7 +342,8 @@
             this.toolStripSeparator1,
             this.layersToolStripMenuItem,
             this.toolsToolStripMenuItem,
-            this.objectsToolStripMenuItem,
+            this.tilePaletteToolStripMenuItem,
+            this.entitiesToolStripMenuItem,
             this.entitySelectionToolStripMenuItem});
             this.viewToolStripMenuItem.Enabled = false;
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
@@ -378,18 +380,26 @@
             this.toolsToolStripMenuItem.Text = "Tools";
             this.toolsToolStripMenuItem.Click += new System.EventHandler(this.toolsToolStripMenuItem_Click);
             // 
-            // objectsToolStripMenuItem
+            // tilePaletteToolStripMenuItem
             // 
-            this.objectsToolStripMenuItem.Name = "objectsToolStripMenuItem";
-            this.objectsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.objectsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.objectsToolStripMenuItem.Text = "Entities";
-            this.objectsToolStripMenuItem.Click += new System.EventHandler(this.entitiesToolStripMenuItem_Click);
+            this.tilePaletteToolStripMenuItem.Name = "tilePaletteToolStripMenuItem";
+            this.tilePaletteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
+            this.tilePaletteToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.tilePaletteToolStripMenuItem.Text = "Tile Palette";
+            this.tilePaletteToolStripMenuItem.Click += new System.EventHandler(this.tilePaletteToolStripMenuItem_Click);
+            // 
+            // entitiesToolStripMenuItem
+            // 
+            this.entitiesToolStripMenuItem.Name = "entitiesToolStripMenuItem";
+            this.entitiesToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F4;
+            this.entitiesToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.entitiesToolStripMenuItem.Text = "Entities";
+            this.entitiesToolStripMenuItem.Click += new System.EventHandler(this.entitiesToolStripMenuItem_Click);
             // 
             // entitySelectionToolStripMenuItem
             // 
             this.entitySelectionToolStripMenuItem.Name = "entitySelectionToolStripMenuItem";
-            this.entitySelectionToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F4;
+            this.entitySelectionToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
             this.entitySelectionToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.entitySelectionToolStripMenuItem.Text = "Entity Selection";
             this.entitySelectionToolStripMenuItem.Click += new System.EventHandler(this.entitySelectionToolStripMenuItem_Click);
@@ -467,12 +477,13 @@
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem redoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem objectsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem entitiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editingGridToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem entitySelectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem levelPropertiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripStatusLabel editorStatusLabel;
+        private System.Windows.Forms.ToolStripMenuItem tilePaletteToolStripMenuItem;
     }
 }

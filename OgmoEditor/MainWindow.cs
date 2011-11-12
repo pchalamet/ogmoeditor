@@ -291,8 +291,14 @@ namespace OgmoEditor
             toolsToolStripMenuItem.Enabled = Ogmo.ToolsWindow.EditorVisible;
             toolsToolStripMenuItem.Checked = Ogmo.ToolsWindow.UserVisible;
 
-            objectsToolStripMenuItem.Enabled = Ogmo.EntitiesWindow.EditorVisible;
-            objectsToolStripMenuItem.Checked = Ogmo.EntitiesWindow.UserVisible;
+            entitiesToolStripMenuItem.Enabled = Ogmo.EntitiesWindow.EditorVisible;
+            entitiesToolStripMenuItem.Checked = Ogmo.EntitiesWindow.UserVisible;
+
+            entitySelectionToolStripMenuItem.Enabled = Ogmo.EntitySelectionWindow.EditorVisible;
+            entitySelectionToolStripMenuItem.Checked = Ogmo.EntitySelectionWindow.UserVisible;
+
+            tilePaletteToolStripMenuItem.Enabled = Ogmo.TilePaletteWindow.EditorVisible;
+            tilePaletteToolStripMenuItem.Checked = Ogmo.TilePaletteWindow.UserVisible;
         }
 
         private void layersToolStripMenuItem_Click(object sender, EventArgs e)
@@ -309,6 +315,15 @@ namespace OgmoEditor
             if (Ogmo.ToolsWindow.EditorVisible)
             {
                 Ogmo.ToolsWindow.UserVisible = !Ogmo.ToolsWindow.UserVisible;
+                FocusEditor();
+            }
+        }
+
+        private void tilePaletteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Ogmo.TilePaletteWindow.EditorVisible)
+            {
+                Ogmo.TilePaletteWindow.UserVisible = !Ogmo.TilePaletteWindow.UserVisible;
                 FocusEditor();
             }
         }
@@ -335,6 +350,5 @@ namespace OgmoEditor
         {
             EditingGridVisible = !EditingGridVisible;
         }
-
     }
 }
