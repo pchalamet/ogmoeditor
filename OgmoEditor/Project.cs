@@ -32,7 +32,7 @@ namespace OgmoEditor
         public Size LevelDefaultSize;
         public Size LevelMinimumSize;
         public Size LevelMaximumSize;
-        public string LastFilename;
+        public string Filename;
         public AngleExportMode AngleMode;
 
         //Definitions
@@ -50,7 +50,7 @@ namespace OgmoEditor
             Name = Ogmo.NEW_PROJECT_NAME;
             BackgroundColor = OgmoColor.DefaultBackgroundColor;
             GridColor = OgmoColor.DefaultGridColor;
-            LastFilename = "";
+            Filename = "";
             LevelDefaultSize = LevelMinimumSize = LevelMaximumSize = new Size(640, 480);
 
             //Definitions
@@ -74,7 +74,7 @@ namespace OgmoEditor
             //Default project properties
             Name = copy.Name;
             BackgroundColor = copy.BackgroundColor;
-            LastFilename = copy.LastFilename;
+            Filename = copy.Filename;
             LevelDefaultSize = copy.LevelDefaultSize;
             LevelMinimumSize = copy.LevelMinimumSize;
             LevelMaximumSize = copy.LevelMaximumSize;
@@ -164,7 +164,7 @@ namespace OgmoEditor
         {
             get
             {
-                string dir = LastFilename;
+                string dir = Filename;
                 if (dir == "")
                     return "";
 
@@ -218,19 +218,19 @@ namespace OgmoEditor
         public void Save()
         {
             //If it hasn't been saved yet, go to SaveAs
-            if (LastFilename == "")
+            if (Filename == "")
             {
                 if (!SaveAs())
                     return;
             }
 
-            writeTo(LastFilename);
+            writeTo(Filename);
         }
 
         public bool SaveAs()
         {
             SaveFileDialog dialog = new SaveFileDialog();
-            if (LastFilename == "")
+            if (Filename == "")
                 dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             else
                 dialog.InitialDirectory = SavedDirectory;
@@ -244,7 +244,7 @@ namespace OgmoEditor
             if (dialog.ShowDialog() == DialogResult.Cancel)
                 return false;
 
-            LastFilename = dialog.FileName;
+            Filename = dialog.FileName;
             if (OnPathChanged != null)
                 OnPathChanged(this);
 

@@ -80,6 +80,9 @@ namespace OgmoEditor
             if (!Directory.Exists("Projects"))
                 Directory.CreateDirectory("Projects");
 
+            //Load the config file
+            Config.Load();
+
             //The levels holder
             Levels = new List<Level>();
             CurrentLevelIndex = -1;
@@ -108,9 +111,6 @@ namespace OgmoEditor
             Parameters.IsFullScreen = false;
             GraphicsDevice = new GraphicsDevice(GraphicsAdapter.DefaultAdapter, GraphicsProfile.HiDef, Parameters);
             Content = new Content(GraphicsDevice);
-
-            //Load the config file
-            Config.Load();
 
             //Add the exit event
             Application.ApplicationExit += onApplicationExit;
@@ -143,16 +143,21 @@ namespace OgmoEditor
             if (dialog.ShowDialog() == DialogResult.Cancel)
                 return;
 
+            LoadProject(dialog.FileName);
+        }
+
+        static public void LoadProject(string filename)
+        {
             //Close the current project before loading the new one
             if (Project != null)
                 CloseProject();
 
             //Load it
             XmlSerializer xs = new XmlSerializer(typeof(Project));
-            Stream s = dialog.OpenFile();
+            Stream s = new FileStream(filename, FileMode.Open);
             Project project = (Project)xs.Deserialize(s);
             s.Close();
-            project.LastFilename = dialog.FileName;
+            project.Filename = filename;
 
             //Start the project
             StartProject(project);
@@ -162,10 +167,8 @@ namespace OgmoEditor
             LayersWindow.SetLayer(0);
             NewLevel();
 
-            //Set the status message
             Ogmo.MainWindow.StatusText = "Opened project " + Ogmo.Project.Name;
-
-            //Load content and GC
+            Config.ConfigFile.UpdateRecentProjects(Project);
             GC.Collect();
         }
 
@@ -247,8 +250,7 @@ namespace OgmoEditor
 
                 //Set the status message
                 Ogmo.MainWindow.StatusText = "Edited project " + Ogmo.Project.Name + ", all levels closed";
-
-                //Load content and garbage collect all the things
+                Config.ConfigFile.UpdateRecentProjects(Project);
                 GC.Collect();
             }
         }

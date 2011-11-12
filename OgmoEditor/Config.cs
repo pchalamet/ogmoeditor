@@ -11,6 +11,7 @@ namespace OgmoEditor
     public class Config
     {
         private const string CONFIG_NAME = "config.xml";
+        private const int RECENT_PROJECT_LIMIT = 10;
 
         static public Config ConfigFile;
 
@@ -40,9 +41,56 @@ namespace OgmoEditor
         /*
          *  The actual config file
          */
+        public List<RecentProject> RecentProjects;
+
         private Config()
         {
-            
+            RecentProjects = new List<RecentProject>();
+        }
+
+        public void ClearRecentProjects()
+        {
+            RecentProjects.Clear();
+        }
+
+        public void CheckRecentProjects()
+        {
+            for (int i = 0; i < RecentProjects.Count; i++)
+            {
+                if (!File.Exists(RecentProjects[i].Path))
+                {
+                    RecentProjects.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+
+        public void UpdateRecentProjects(Project project)
+        {
+            for (int i = 0; i < RecentProjects.Count; i++)
+            {
+                if (RecentProjects[i].Path == project.Filename)
+                {
+                    RecentProjects.RemoveAt(i);
+                    break;
+                }
+            }
+
+            RecentProjects.Insert(0, new RecentProject(project.Name, project.Filename));
+            if (RecentProjects.Count > RECENT_PROJECT_LIMIT)
+                RecentProjects.RemoveAt(RECENT_PROJECT_LIMIT);
+        }
+
+        public struct RecentProject
+        {
+            public string Name;
+            public string Path;
+
+            public RecentProject(string name, string path)
+            {
+                Name = name;
+                Path = path;
+            }
         }
     }
 }
