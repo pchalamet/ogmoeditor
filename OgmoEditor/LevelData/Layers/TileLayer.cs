@@ -22,7 +22,7 @@ namespace OgmoEditor.LevelData.Layers
 
         public override XmlElement GetXML(XmlDocument doc)
         {
-            throw new NotImplementedException();
+            return doc.CreateElement(Definition.Name);
         }
 
         public override void SetXML(XmlElement xml)

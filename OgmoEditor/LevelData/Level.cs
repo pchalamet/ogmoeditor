@@ -32,7 +32,9 @@ namespace OgmoEditor.LevelData
             {
                 //Load the level from XML
                 XmlDocument doc = new XmlDocument();
-                doc.Load(new FileStream(filename, FileMode.Open));
+                FileStream stream = new FileStream(filename, FileMode.Open);
+                doc.Load(stream);
+                stream.Close();
                 LoadFromXML(doc);
 
                 SavePath = filename;
