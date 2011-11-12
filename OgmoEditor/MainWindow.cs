@@ -11,6 +11,7 @@ using OgmoEditor.LevelEditors;
 using OgmoEditor.XNA;
 using System.Diagnostics;
 using OgmoEditor.LevelData;
+using OgmoEditor.Windows;
 
 namespace OgmoEditor
 {
@@ -28,11 +29,33 @@ namespace OgmoEditor
             EditingGridVisible = true;
             LevelEditors = new List<LevelEditor>();
 
+            AddStartPage();
+
             Ogmo.OnProjectStart += onProjectStart;
             Ogmo.OnProjectClose += onProjectClose;
             Ogmo.OnLevelAdded += onLevelAdded;
             Ogmo.OnLevelClosed += onLevelClosed;
             Ogmo.OnLevelChanged += onLevelChanged;
+        }
+
+        public void AddStartPage()
+        {
+            TabPage start = new TabPage("Start Page");
+            start.Name = "startPage";
+            start.Controls.Add(new StartPage());
+            MasterTabControl.TabPages.Add(start);
+        }
+
+        public void RemoveStartPage()
+        {
+            foreach (TabPage p in MasterTabControl.TabPages)
+            {
+                if (p.Name == "startPage")
+                {
+                    MasterTabControl.TabPages.Remove(p);
+                    return;
+                }
+            }
         }
 
         public void FocusEditor()

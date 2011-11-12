@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.MouseCoordinatesLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.editorStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.visitWebsiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,7 +70,6 @@
             this.entitySelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MasterTabControl = new System.Windows.Forms.TabControl();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.editorStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusStrip.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -92,6 +92,11 @@
             this.MouseCoordinatesLabel.Name = "MouseCoordinatesLabel";
             this.MouseCoordinatesLabel.Size = new System.Drawing.Size(39, 17);
             this.MouseCoordinatesLabel.Text = "( 0, 0 )";
+            // 
+            // editorStatusLabel
+            // 
+            this.editorStatusLabel.Name = "editorStatusLabel";
+            this.editorStatusLabel.Size = new System.Drawing.Size(0, 17);
             // 
             // MenuStrip
             // 
@@ -403,11 +408,6 @@
             // 
             this.contextMenuStrip.Name = "contextMenuStrip";
             this.contextMenuStrip.Size = new System.Drawing.Size(61, 4);
-            // 
-            // toolStripStatusLabel
-            // 
-            this.editorStatusLabel.Name = "toolStripStatusLabel";
-            this.editorStatusLabel.Size = new System.Drawing.Size(0, 17);
             // 
             // MainWindow
             // 

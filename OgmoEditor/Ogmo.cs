@@ -171,6 +171,8 @@ namespace OgmoEditor
 
         static public void StartProject(Project project)
         {
+            Ogmo.MainWindow.RemoveStartPage();
+
             Project = project;
 
             //Call the added event
@@ -198,6 +200,7 @@ namespace OgmoEditor
             ToolsWindow.ClearTool();
 
             //Force a garbage collection
+            Ogmo.MainWindow.AddStartPage();
             System.GC.Collect();
         }
 
