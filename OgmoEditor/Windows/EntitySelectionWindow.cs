@@ -149,23 +149,39 @@ namespace OgmoEditor.Windows
                 Controls.Add(pos);
 
                 //Entity size
-                Label size = new Label();
-                size.TextAlign = ContentAlignment.MiddleCenter;
-                size.Bounds = new Rectangle(0, 74, WIDTH, 16);
-                size.Text = selection[0].Size.Width.ToString() + " x " + selection[0].Size.Height.ToString();
-                Controls.Add(size);
+                int yy = 74;
+                if (selection[0].Definition.ResizableX || selection[0].Definition.ResizableY)
+                {
+                    Label size = new Label();
+                    size.TextAlign = ContentAlignment.MiddleCenter;
+                    size.Bounds = new Rectangle(0, yy, WIDTH, 16);
+                    size.Text = selection[0].Size.Width.ToString() + " x " + selection[0].Size.Height.ToString();
+                    Controls.Add(size);
+                    yy += 16;
+                }
+
+                //Entity angle
+                if (selection[0].Definition.Rotatable)
+                {
+                    Label angle = new Label();
+                    angle.TextAlign = ContentAlignment.MiddleCenter;
+                    angle.Bounds = new Rectangle(0, yy, WIDTH, 16);
+                    angle.Text = "Angle: " + (selection[0].Angle * Util.RADTODEG).ToString();
+                    Controls.Add(angle);
+                    yy += 16;
+                }
 
                 //Entity count
                 Label count = new Label();
                 count.TextAlign = ContentAlignment.MiddleCenter;
-                count.Bounds = new Rectangle(0, 90, WIDTH, 16);
+                count.Bounds = new Rectangle(0, yy, WIDTH, 16);
                 count.Text = "Count: " + ((EntityLayer)Ogmo.LayersWindow.CurrentLayer).Entities.Count(e => e.Definition == selection[0].Definition).ToString();
                 if (selection[0].Definition.Limit > 0)
                     count.Text += " / " + selection[0].Definition.Limit.ToString();
                 Controls.Add(count);
+                yy += 18;
 
                 //Value editors
-                int yy = 108;
                 if (selection[0].Values != null)
                 {
                     yy += 8;

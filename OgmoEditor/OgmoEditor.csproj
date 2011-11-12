@@ -95,9 +95,11 @@
     <Compile Include="LevelData\Resizers\GridResizer.cs" />
     <Compile Include="LevelData\Resizers\Resizer.cs" />
     <Compile Include="LevelEditors\Actions\ActionBatch.cs" />
+    <Compile Include="LevelEditors\Actions\EntityActions\EntityAngleSnapAction.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntityMoveAction.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntityRemoveAction.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntityResizeAction.cs" />
+    <Compile Include="LevelEditors\Actions\EntityActions\EntityRotateAction.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntitySetValueAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridDrawAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridFloodAction.cs" />
@@ -519,9 +521,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="StartPage\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

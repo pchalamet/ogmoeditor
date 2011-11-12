@@ -39,6 +39,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                 {
                     LevelEditor.BatchPerform(this, new EntityResizeAction(LayerEditor.Layer, Ogmo.EntitySelectionWindow.Selected, new Size(move.X, move.Y)));
                     moved = new Point(move.X + moved.X, move.Y + moved.Y);
+                    Ogmo.EntitySelectionWindow.RefreshContents();
                 }
             }
         }
