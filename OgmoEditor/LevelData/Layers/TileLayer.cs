@@ -27,7 +27,7 @@ namespace OgmoEditor.LevelData.Layers
 
         public override void SetXML(XmlElement xml)
         {
-            throw new NotImplementedException();
+            
         }
 
         public override LayerEditor GetEditor(LevelEditors.LevelEditor editor)
