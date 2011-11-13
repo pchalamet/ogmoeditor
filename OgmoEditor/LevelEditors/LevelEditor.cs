@@ -316,7 +316,9 @@ namespace OgmoEditor.LevelEditors
 
             //Update the mouse coord display
             MousePosition = Camera.ScreenToEditor(e.Location);
-            Ogmo.MainWindow.MouseCoordinatesLabel.Text = "( " + MousePosition.X.ToString() + ", " + MousePosition.Y.ToString() + " )";
+            Point gridPos = Ogmo.Project.LayerDefinitions[Ogmo.LayersWindow.CurrentLayerIndex].ConvertToGrid(MousePosition);
+            Ogmo.MainWindow.MouseCoordinatesLabel.Text = "Mouse: ( " + MousePosition.X.ToString() + ", " + MousePosition.Y.ToString() + " )";
+            Ogmo.MainWindow.GridCoordinatesLabel.Text = "Grid: ( " + gridPos.X.ToString() + ", " + gridPos.Y.ToString() + " )";
 
             //Call the layer event
             LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnMouseMove(MousePosition);

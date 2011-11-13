@@ -144,6 +144,9 @@ namespace OgmoEditor
 
             levelToolStripMenuItem.Enabled = false;
             viewToolStripMenuItem.Enabled = false;
+
+            //Clear mouse/grid readouts
+            MouseCoordinatesLabel.Text = GridCoordinatesLabel.Text = "";
         }
 
         private void onLevelAdded(int index)
@@ -160,6 +163,10 @@ namespace OgmoEditor
             MasterTabControl.TabPages.RemoveAt(index);
             LevelEditors[index].OnRemove();
             LevelEditors.RemoveAt(index);
+
+            //Clear mouse/grid readouts
+            if (Ogmo.Levels.Count == 0)
+                MouseCoordinatesLabel.Text = GridCoordinatesLabel.Text = "";
         }
 
         private void onLevelChanged(int index)

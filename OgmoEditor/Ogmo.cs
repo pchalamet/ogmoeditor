@@ -356,6 +356,8 @@ namespace OgmoEditor
             //Set the current level to another one if that was the current one
             if (CurrentLevelIndex == index)
                 SetLevel(Math.Min(index, Levels.Count - 1));
+            else if (CurrentLevelIndex > index)
+                CurrentLevelIndex--;
 
             //Force a garbage collection
             System.GC.Collect();

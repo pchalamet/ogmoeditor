@@ -71,6 +71,7 @@
             this.entitySelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MasterTabControl = new System.Windows.Forms.TabControl();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.GridCoordinatesLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusStrip.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -79,6 +80,7 @@
             // 
             this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MouseCoordinatesLabel,
+            this.GridCoordinatesLabel,
             this.editorStatusLabel});
             this.StatusStrip.Location = new System.Drawing.Point(0, 540);
             this.StatusStrip.Name = "StatusStrip";
@@ -89,15 +91,17 @@
             // 
             // MouseCoordinatesLabel
             // 
+            this.MouseCoordinatesLabel.AutoSize = false;
             this.MouseCoordinatesLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.MouseCoordinatesLabel.Name = "MouseCoordinatesLabel";
-            this.MouseCoordinatesLabel.Size = new System.Drawing.Size(39, 17);
-            this.MouseCoordinatesLabel.Text = "( 0, 0 )";
+            this.MouseCoordinatesLabel.Size = new System.Drawing.Size(120, 17);
+            this.MouseCoordinatesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // editorStatusLabel
             // 
             this.editorStatusLabel.Name = "editorStatusLabel";
             this.editorStatusLabel.Size = new System.Drawing.Size(0, 17);
+            this.editorStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // MenuStrip
             // 
@@ -419,6 +423,13 @@
             this.contextMenuStrip.Name = "contextMenuStrip";
             this.contextMenuStrip.Size = new System.Drawing.Size(61, 4);
             // 
+            // GridCoordinatesLabel
+            // 
+            this.GridCoordinatesLabel.AutoSize = false;
+            this.GridCoordinatesLabel.Name = "GridCoordinatesLabel";
+            this.GridCoordinatesLabel.Size = new System.Drawing.Size(120, 17);
+            this.GridCoordinatesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -485,5 +496,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripStatusLabel editorStatusLabel;
         private System.Windows.Forms.ToolStripMenuItem tilePaletteToolStripMenuItem;
+        public System.Windows.Forms.ToolStripStatusLabel GridCoordinatesLabel;
     }
 }
