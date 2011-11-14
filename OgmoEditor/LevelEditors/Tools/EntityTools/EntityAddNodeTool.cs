@@ -21,7 +21,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
             Point node = LayerEditor.Layer.Definition.SnapToGrid(location);
             foreach (var e in Ogmo.EntitySelectionWindow.Selected)
             {
-                if (e.Definition.NodesDefinition.Enabled && !e.Nodes.Contains(node))
+                if (e.Definition.NodesDefinition.Enabled && e.Nodes.Count != e.Definition.NodesDefinition.Limit && !e.Nodes.Contains(node))
                     LevelEditor.BatchPerform(this, new EntityAddNodeAction(LayerEditor.Layer, e, node));
             }
             LevelEditor.EndBatch();

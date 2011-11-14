@@ -21,7 +21,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
             Point node = LayerEditor.Layer.Definition.SnapToGrid(location);
             foreach (var e in Ogmo.EntitySelectionWindow.Selected)
             {
-                if (e.Definition.NodesDefinition.Enabled && !e.Nodes.Contains(node))
+                if (e.Definition.NodesDefinition.Enabled && e.Nodes.Count != e.Definition.NodesDefinition.Limit && !e.Nodes.Contains(node))
                     LevelEditor.BatchPerform(this, new EntityInsertNodeAction(LayerEditor.Layer, e, node, GetIndex(e, node)));
             }
             LevelEditor.EndBatch();
@@ -44,6 +44,21 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
 
         private int GetIndex(Entity entity, Point insert)
         {
+            //If the entity has no nodes, insert at 0
+            if (entity.Nodes.Count == 0)
+                return 0;
+
+            //If the entity has just one node, figure out whether to insert or add
+            if (entity.Nodes.Count == 1)
+            {
+                double angleDiff = Util.AngleDifference(Util.Angle(entity.Nodes[0], insert), Util.Angle(entity.Nodes[0], entity.Position));
+                if (Math.Abs(angleDiff) < Math.PI / 2)
+                    return 0;
+                else
+                    return 1;
+            }
+
+            //Find which node is closest to the insertion point
             int closest = -1;
             int dist = Util.DistanceSquared(entity.Position, insert);
             for (int i = 0; i < entity.Nodes.Count; i++)
@@ -56,7 +71,37 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                 }
             }
 
-            return closest + 1;
+            //If the closest is the entity's position, insert it as the first point
+            if (closest == -1)
+            {
+                return 0;
+            }
+
+            //If the closest is the final node, figure out whether to insert or add
+            if (closest == entity.Nodes.Count - 1)
+            {
+                double angleDiff = Util.AngleDifference(Util.Angle(entity.Nodes[closest], insert), Util.Angle(entity.Nodes[closest], entity.Nodes[closest - 1]));
+                if (Math.Abs(angleDiff) < Math.PI / 2)
+                    return closest;
+                else
+                    return closest + 1;
+            }
+
+            //Closest is a middle node, with nodes before and after it. Figure out which side to insert on by getting which angle is closer
+            Point back = (closest == 0) ? entity.Position : entity.Nodes[closest - 1];
+            return closest + GetDirection(entity.Nodes[closest], insert, back, entity.Nodes[closest + 1]);
+        }
+
+        private int GetDirection(Point at, Point insert, Point back, Point forward)
+        {
+            double i = Util.Angle(at, insert);
+            double b = Util.Angle(at, back);
+            double f = Util.Angle(at, forward);
+
+            if (Math.Abs(Util.AngleDifference(i, b)) < Math.Abs(Util.AngleDifference(i, f)))
+                return 0;
+            else
+                return 1;
         }
 
 

@@ -133,5 +133,20 @@ namespace OgmoEditor
         {
             return (b.X - a.X) * (b.X - a.X) + (b.Y - a.Y) * (b.Y - a.Y);
         }
+
+        static public double Angle(Point a, Point b)
+        {
+            return Math.Atan2(b.Y - a.Y, b.X - a.X);
+        }
+
+        static public double AngleDifference(double a, double b)
+        {
+            double diff = b - a;
+            while (diff > Math.PI)
+                diff -= Math.PI * 2;
+            while (diff < -Math.PI)
+                diff += Math.PI * 2;
+            return diff;
+        }
     }
 }

@@ -12,7 +12,6 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
         private Entity entity;
         private Point node;
         private int index;
-        private Point? removed;
 
         public EntityInsertNodeAction(EntityLayer entityLayer, Entity entity, Point node, int index)
             : base(entityLayer)
@@ -25,22 +24,11 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
         public override void Do()
         {
             entity.Nodes.Insert(index, node);
-
-            if (entity.Nodes.Count == entity.Definition.NodesDefinition.Limit + 1)
-            {
-                removed = entity.Nodes[0];
-                entity.Nodes.RemoveAt(0);
-            }
-            else
-                removed = null;
         }
 
         public override void Undo()
         {
             entity.Nodes.RemoveAt(index);
-
-            if (removed.HasValue)
-                entity.Nodes.Insert(0, removed.Value);
         }
     }
 }
