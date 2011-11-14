@@ -22,6 +22,8 @@ namespace OgmoEditor.Windows
             Text = "Tile Palette";
             ClientSize = new Size(160, 192);
 
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+
             tilesetsComboBox = new ComboBox();
             tilesetsComboBox.Location = new Point(48, 4);
             tilesetsComboBox.Width = 104;
@@ -31,16 +33,25 @@ namespace OgmoEditor.Windows
 
             Label tilesetsLabel = new Label();
             tilesetsLabel.Text = "Tileset:";
-            tilesetsLabel.Location = new Point(4, 7);           
+            tilesetsLabel.Location = new Point(4, 7);
+            tilesetsLabel.Size = new Size(44, 20);
             Controls.Add(tilesetsLabel);
 
             tileSelector = new TileSelector();
-            tileSelector.Location = new Point(4, 30);
-            tileSelector.Size = new Size(ClientSize.Width - 8, ClientSize.Height - 34);
+            tileSelector.Location = new Point(4, 27);
+            tileSelector.Size = new Size(ClientSize.Width - 8, ClientSize.Height - 31);
+            tileSelector.Dock = DockStyle.Bottom;
             Controls.Add(tileSelector);
+
+            Resize += new EventHandler(TilePaletteWindow_ResizeEnd);
 
             Ogmo.LayersWindow.OnLayerChanged += new Ogmo.LayerCallback(onLayerChanged);
             Ogmo.OnProjectStart += initFromProject;
+        }
+
+        void TilePaletteWindow_ResizeEnd(object sender, EventArgs e)
+        {
+            tileSelector.Size = new Size(ClientSize.Width - 8, ClientSize.Height - 34);
         }
 
         public override bool ShouldBeVisible()
