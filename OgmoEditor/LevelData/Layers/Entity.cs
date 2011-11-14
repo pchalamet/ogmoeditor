@@ -172,9 +172,56 @@ namespace OgmoEditor.LevelData.Layers
 
             if (Nodes != null)
             {
-                foreach (var p in Nodes)
-                    content.DrawRectangle(p.X, p.Y, 3, 3, Microsoft.Xna.Framework.Color.Red);
+                if (Definition.NodesDefinition.DrawMode == EntityNodesDefinition.PathMode.None)
+                {
+                    foreach (var p in Nodes)
+                        DrawNode(content, p);
+                }
+                else if (Definition.NodesDefinition.DrawMode == EntityNodesDefinition.PathMode.Path)
+                {
+                    if (Nodes.Count > 0)
+                    {
+                        content.DrawLine(Position, Nodes[0], Microsoft.Xna.Framework.Color.Red * .6f);
+                        DrawNode(content, Nodes[0]);
+                    }
+
+                    for (int i = 1; i < Nodes.Count; i++)
+                    {
+                        content.DrawLine(Nodes[i - 1], Nodes[i], Microsoft.Xna.Framework.Color.Red * .6f);
+                        DrawNode(content, Nodes[i]);
+                    }
+                }
+                else if (Definition.NodesDefinition.DrawMode == EntityNodesDefinition.PathMode.Circuit)
+                {
+                    if (Nodes.Count > 0)
+                    {
+                        content.DrawLine(Position, Nodes[0], Microsoft.Xna.Framework.Color.Red * .6f);
+                        DrawNode(content, Nodes[0]);
+                    }
+
+                    for (int i = 1; i < Nodes.Count; i++)
+                    {
+                        content.DrawLine(Nodes[i - 1], Nodes[i], Microsoft.Xna.Framework.Color.Red * .6f);
+                        DrawNode(content, Nodes[i]);
+                    }
+
+                    if (Nodes.Count > 1)
+                        content.DrawLine(Nodes[Nodes.Count - 1], Position, Microsoft.Xna.Framework.Color.Red * .6f);
+                }
+                else if (Definition.NodesDefinition.DrawMode == EntityNodesDefinition.PathMode.Fan)
+                {
+                    foreach (var p in Nodes)
+                    {
+                        content.DrawLine(Position, p, Microsoft.Xna.Framework.Color.Red * .6f);
+                        DrawNode(content, p);
+                    }
+                }
             }
+        }
+
+        private void DrawNode(Content content, Point node)
+        {
+            content.DrawRectangle(node.X, node.Y, 3, 3, Microsoft.Xna.Framework.Color.Red);
         }
 
         public Rectangle Bounds

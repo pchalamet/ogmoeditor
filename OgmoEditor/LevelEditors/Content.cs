@@ -128,6 +128,11 @@ namespace OgmoEditor.LevelEditors
             DrawLineAngle(x1, y1, length, rotation, color);
         }
 
+        public void DrawLine(System.Drawing.Point p1, System.Drawing.Point p2, Color color)
+        {
+            DrawLine(p1.X, p1.Y, p2.X, p2.Y, color);
+        }
+
         public void DrawLineAngle(int x, int y, int length, float rotation, Color color)
         {
             SpriteBatch.Draw(TexPixel, new Vector2(x, y), null, color, rotation, Vector2.Zero, new Vector2(length, 1), SpriteEffects.None, 0);
