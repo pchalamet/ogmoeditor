@@ -7,17 +7,20 @@ using System.Xml;
 using OgmoEditor.LevelEditors.LayerEditors;
 using OgmoEditor.LevelData.Resizers;
 using System.Drawing;
+using OgmoEditor.Definitions;
 
 namespace OgmoEditor.LevelData.Layers
 {
     public class TileLayer : Layer
     {
         public new TileLayerDefinition Definition { get; private set; }
+        public Tileset Tileset;
 
         public TileLayer(TileLayerDefinition definition)
             : base(definition)
         {
             Definition = definition;
+            Tileset = Ogmo.Project.Tilesets[0];
         }
 
         public override XmlElement GetXML(XmlDocument doc)

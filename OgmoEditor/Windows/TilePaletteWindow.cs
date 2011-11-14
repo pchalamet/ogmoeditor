@@ -44,14 +44,9 @@ namespace OgmoEditor.Windows
             Controls.Add(tileSelector);
 
             Resize += new EventHandler(TilePaletteWindow_ResizeEnd);
-
             Ogmo.LayersWindow.OnLayerChanged += new Ogmo.LayerCallback(onLayerChanged);
             Ogmo.OnProjectStart += initFromProject;
-        }
-
-        void TilePaletteWindow_ResizeEnd(object sender, EventArgs e)
-        {
-            tileSelector.Size = new Size(ClientSize.Width - 8, ClientSize.Height - 34);
+            Ogmo.LayersWindow.OnLayerChanged += new Ogmo.LayerCallback(LayersWindow_OnLayerChanged);
         }
 
         public override bool ShouldBeVisible()
@@ -74,6 +69,19 @@ namespace OgmoEditor.Windows
         private void onLayerChanged(LayerDefinition layerDefinition, int index)
         {
             EditorVisible = layerDefinition is TileLayerDefinition;
+        }
+
+        private void LayersWindow_OnLayerChanged(LayerDefinition layerDefinition, int index)
+        {
+            if (layerDefinition is TileLayerDefinition)
+            {
+                tilesetsComboBox.SelectedIndex = Ogmo.Project.Tilesets.IndexOf((Ogmo.CurrentLevel.Layers[index] as TileLayer).Tileset);
+            }
+        }
+
+        private void TilePaletteWindow_ResizeEnd(object sender, EventArgs e)
+        {
+            tileSelector.Size = new Size(ClientSize.Width - 8, ClientSize.Height - 34);
         }
     }
 }
