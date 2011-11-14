@@ -21,7 +21,7 @@ namespace OgmoEditor.LevelEditors
 
     public class LevelEditor : GraphicsDeviceControl
     {
-        private const int UNDO_LIMIT = 50;
+        private const int UNDO_LIMIT = 60;
         private const float LAYER_ABOVE_ALPHA = .5f;
 
         private bool mousePanMode;
