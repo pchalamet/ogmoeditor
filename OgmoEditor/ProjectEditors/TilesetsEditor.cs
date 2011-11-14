@@ -49,7 +49,7 @@ namespace OgmoEditor.ProjectEditors
             tileSpacingTextBox.Enabled = true;
 
             nameTextBox.Text = t.Name;
-            imageFileTextBox.Text = t.Path;
+            imageFileTextBox.Text = t.FilePath;
             tileSizeXTextBox.Text = t.TileSize.Width.ToString();
             tileSizeYTextBox.Text = t.TileSize.Height.ToString();
             tileSpacingTextBox.Text = t.TileSep.ToString();
@@ -99,17 +99,18 @@ namespace OgmoEditor.ProjectEditors
 
         private void loadPreview()
         {
-            if (imagePreviewer.LoadImage(Path.Combine(directory, imageFileTextBox.Text)))
-            {
-                imageSizeLabel.Visible = true;
-                imageSizeLabel.Text = "Image Size: " + imagePreviewer.ImageWidth + " x " + imagePreviewer.ImageHeight;
-                totalTilesLabel.Visible = true;
-                updateTotalTiles();               
-            }
-            else
+            if (tilesets[listBox.SelectedIndex].Image == null)
             {
                 imageSizeLabel.Visible = false;
                 totalTilesLabel.Visible = false;
+            }
+            else
+            {
+                imagePreviewer.LoadImage(tilesets[listBox.SelectedIndex].Image);
+                imageSizeLabel.Visible = true;
+                imageSizeLabel.Text = "Image Size: " + tilesets[listBox.SelectedIndex].Size.Width + " x " + tilesets[listBox.SelectedIndex].Size.Height;
+                totalTilesLabel.Visible = true;
+                updateTotalTiles();               
             }
         }
 
@@ -122,21 +123,7 @@ namespace OgmoEditor.ProjectEditors
 
         private void updateTotalTiles()
         {
-            int tw = tilesets[listBox.SelectedIndex].TileSize.Width;
-            int th = tilesets[listBox.SelectedIndex].TileSize.Height;
-            int sep = tilesets[listBox.SelectedIndex].TileSep;
-
-            int across = 0;
-            for (int i = 0; i + tw <= imagePreviewer.ImageWidth; i += tw + sep)
-                across++;
-
-            int down = 0;
-            for (int i = 0; i + th <= imagePreviewer.ImageHeight; i += th + sep)
-                down++;
-
-            int total = across * down;
-
-            totalTilesLabel.Text = "Tiles: " + across.ToString() + " x " + down.ToString() + " (" + (across * down).ToString() + " total)";
+            totalTilesLabel.Text = "Tiles: " + tilesets[listBox.SelectedIndex].TilesAcross.ToString() + " x " + tilesets[listBox.SelectedIndex].TilesDown.ToString() + " (" + tilesets[listBox.SelectedIndex].TilesTotal.ToString() + " total)";
         }
 
         /*
@@ -235,10 +222,10 @@ namespace OgmoEditor.ProjectEditors
                 return;
 
             imageFileTextBox.Text = Util.RelativePath(directory, dialog.FileName);
-            imageFileWarningLabel.Visible = !checkImageFile();
-            loadPreview();
+            tilesets[listBox.SelectedIndex].SetFilePath(imageFileTextBox.Text);
 
-            tilesets[listBox.SelectedIndex].Path = imageFileTextBox.Text;
+            loadPreview();
+            imageFileWarningLabel.Visible = tilesets[listBox.SelectedIndex].Image == null;          
         }
     }
 }

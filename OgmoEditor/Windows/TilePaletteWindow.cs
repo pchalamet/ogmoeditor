@@ -13,6 +13,7 @@ namespace OgmoEditor.Windows
     public class TilePaletteWindow : OgmoWindow
     {
         private ComboBox tilesetsComboBox;
+        private TileSelector tileSelector;
 
         public TilePaletteWindow()
             : base(HorizontalSnap.Left, VerticalSnap.Bottom)
@@ -32,6 +33,11 @@ namespace OgmoEditor.Windows
             tilesetsLabel.Text = "Tileset:";
             tilesetsLabel.Location = new Point(4, 7);           
             Controls.Add(tilesetsLabel);
+
+            tileSelector = new TileSelector();
+            tileSelector.Location = new Point(4, 30);
+            tileSelector.Size = new Size(ClientSize.Width - 8, ClientSize.Height - 34);
+            Controls.Add(tileSelector);
 
             Ogmo.LayersWindow.OnLayerChanged += new Ogmo.LayerCallback(onLayerChanged);
             Ogmo.OnProjectStart += initFromProject;

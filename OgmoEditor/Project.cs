@@ -140,7 +140,7 @@ namespace OgmoEditor
             foreach (var t in Tilesets)
             {
                 //File must exist
-                s += OgmoParse.CheckPath(t.Path, SavedDirectory, "Tileset \"" + t.Name + "\" image file");
+                s += OgmoParse.CheckPath(t.FilePath, SavedDirectory, "Tileset \"" + t.Name + "\" image file");
             }
 
             /*
