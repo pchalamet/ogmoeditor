@@ -129,5 +129,9 @@ namespace OgmoEditor
             return texture;
         }
 
+        static public int DistanceSquared(Point a, Point b)
+        {
+            return (b.X - a.X) * (b.X - a.X) + (b.Y - a.Y) * (b.Y - a.Y);
+        }
     }
 }
