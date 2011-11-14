@@ -20,6 +20,7 @@ namespace OgmoEditor.Definitions
         public Tileset()
         {
             TileSize = new Size(16, 16);
+            FilePath = "";
             TileSep = 0;
         }
 
