@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
+            this.ZoomLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.MouseCoordinatesLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.GridCoordinatesLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.editorStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -72,7 +73,6 @@
             this.entitySelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MasterTabControl = new System.Windows.Forms.TabControl();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ZoomLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusStrip.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -91,6 +91,12 @@
             this.StatusStrip.TabIndex = 0;
             this.StatusStrip.Text = "statusStrip1";
             // 
+            // ZoomLabel
+            // 
+            this.ZoomLabel.AutoSize = false;
+            this.ZoomLabel.Name = "ZoomLabel";
+            this.ZoomLabel.Size = new System.Drawing.Size(40, 17);
+            // 
             // MouseCoordinatesLabel
             // 
             this.MouseCoordinatesLabel.AutoSize = false;
@@ -103,7 +109,7 @@
             // 
             this.GridCoordinatesLabel.AutoSize = false;
             this.GridCoordinatesLabel.Name = "GridCoordinatesLabel";
-            this.GridCoordinatesLabel.Size = new System.Drawing.Size(120, 17);
+            this.GridCoordinatesLabel.Size = new System.Drawing.Size(100, 17);
             this.GridCoordinatesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // editorStatusLabel
@@ -431,12 +437,6 @@
             // 
             this.contextMenuStrip.Name = "contextMenuStrip";
             this.contextMenuStrip.Size = new System.Drawing.Size(61, 4);
-            // 
-            // ZoomLabel
-            // 
-            this.ZoomLabel.AutoSize = false;
-            this.ZoomLabel.Name = "ZoomLabel";
-            this.ZoomLabel.Size = new System.Drawing.Size(40, 17);
             // 
             // MainWindow
             // 
