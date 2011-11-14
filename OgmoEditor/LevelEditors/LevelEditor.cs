@@ -130,6 +130,7 @@ namespace OgmoEditor.LevelEditors
         public void SwitchTo()
         {
             Focus();
+            Ogmo.MainWindow.ZoomLabel.Text = Camera.ZoomString;
         }
 
         /*
@@ -330,6 +331,7 @@ namespace OgmoEditor.LevelEditors
                 Camera.ZoomIn();
             else
                 Camera.ZoomOut();
+            Ogmo.MainWindow.ZoomLabel.Text = Camera.ZoomString;
         }
     }
 }

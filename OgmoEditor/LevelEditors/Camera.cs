@@ -10,7 +10,7 @@ namespace OgmoEditor.LevelEditors
 
     public class Camera
     {
-        static private readonly float[] ZOOMS = new float[] { .25f, .33f, .5f, .66f, 1, 1.25f, 1.5f, 2, 3 };
+        static private readonly float[] ZOOMS = new float[] { .25f, .33f, .5f, .66f, 1, 1.25f, 1.5f, 2, 2.5f, 3 };
 
         private Matrix matrix;
         private Matrix inverse;
@@ -124,6 +124,14 @@ namespace OgmoEditor.LevelEditors
             {
                 changed = true;
                 zoom = value;
+            }
+        }
+
+        public string ZoomString
+        {
+            get
+            {
+                return ((int)(zoom * 100)).ToString() + "%";
             }
         }
 
