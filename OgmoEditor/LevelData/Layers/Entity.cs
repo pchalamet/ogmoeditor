@@ -17,6 +17,7 @@ namespace OgmoEditor.LevelData.Layers
         public Size Size;
         public float Angle;
         public List<Value> Values { get; private set; }
+        public List<Point> Nodes;
 
         public Entity(EntityDefinition def, Point position)
         {
@@ -25,6 +26,10 @@ namespace OgmoEditor.LevelData.Layers
             Position = position;
             Size = def.Size;
             Angle = 0;
+
+            //Nodes
+            if (def.NodesDefinition.Enabled)
+                Nodes = new List<Point>();
 
             //Values
             if (def.ValueDefinitions.Count > 0)
@@ -39,8 +44,10 @@ namespace OgmoEditor.LevelData.Layers
         {
             Definition = Ogmo.Project.EntityDefinitions.Find(d => d.Name == xml.Name);
 
+            //Position
             Position = new Point(Convert.ToInt32(xml.Attributes["x"].InnerText), Convert.ToInt32(xml.Attributes["y"].InnerText));
 
+            //Size
             if (Definition.ResizableX)
                 Size.Width = Convert.ToInt32(xml.Attributes["width"].InnerText);
             else
@@ -50,12 +57,26 @@ namespace OgmoEditor.LevelData.Layers
             else
                 Size.Height = Definition.Size.Height;
 
+            //Rotation
             if (Definition.Rotatable)
                 Angle = Ogmo.Project.ImportAngle(xml.Attributes["angle"].InnerText);
 
+            //Nodes
+            if (Definition.NodesDefinition.Enabled)
+            {
+                Nodes = new List<Point>();
+                foreach (XmlElement node in xml.GetElementsByTagName("node"))
+                    Nodes.Add(new Point(Convert.ToInt32(node.Attributes["x"].InnerText), Convert.ToInt32(node.Attributes["y"].InnerText)));
+            }
+
             //Values
-            if (Values != null)
+            if (Definition.ValueDefinitions.Count > 0)
+            {
+                Values = new List<Value>(Definition.ValueDefinitions.Count);
+                foreach (var d in Definition.ValueDefinitions)
+                    Values.Add(new Value(d));
                 OgmoParse.ImportValues(Values, xml);
+            } 
         }
 
         public Entity(Entity e)
@@ -66,8 +87,16 @@ namespace OgmoEditor.LevelData.Layers
             Size = e.Size;
             Angle = e.Angle;
 
+            //Nodes
+            if (Definition.NodesDefinition.Enabled)
+            {
+                Nodes = new List<Point>();
+                foreach (var p in e.Nodes)
+                    Nodes.Add(p);
+            }
+
             //Values
-            if (e.Values.Count > 0)
+            if (Definition.ValueDefinitions.Count > 0)
             {
                 Values = new List<Value>(e.Values.Count);
                 foreach (var v in e.Values)
@@ -110,7 +139,23 @@ namespace OgmoEditor.LevelData.Layers
                 xml.Attributes.Append(a);
             }
 
-            //Get values
+            //Nodes
+            if (Nodes != null)
+            {
+                foreach (var p in Nodes)
+                {
+                    XmlElement node = doc.CreateElement("node");
+                    a = doc.CreateAttribute("x");
+                    a.InnerText = p.X.ToString();
+                    node.Attributes.Append(a);
+                    a = doc.CreateAttribute("y");
+                    a.InnerText = p.Y.ToString();
+                    node.Attributes.Append(a);
+                    xml.AppendChild(node);
+                }
+            }
+
+            //Values
             if (Values != null)
                 foreach (var v in Values)
                     xml.Attributes.Append(v.GetXML(doc));

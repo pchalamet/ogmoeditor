@@ -29,5 +29,13 @@ namespace OgmoEditor.Windows
                 Selection = 0;
             }
         }
+
+        /*
+         *  Events
+         */
+        private void pictureBox_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
