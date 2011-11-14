@@ -26,5 +26,20 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
             }
             LevelEditor.EndBatch();
         }
+
+        public override void OnMouseRightClick(Point location)
+        {
+            Point node = LayerEditor.Layer.Definition.SnapToGrid(location);
+            foreach (var e in Ogmo.EntitySelectionWindow.Selected)
+            {
+                if (e.Definition.NodesDefinition.Enabled)
+                {
+                    int index = e.Nodes.IndexOf(node);
+                    if (index != -1)
+                        LevelEditor.BatchPerform(this, new EntityRemoveNodeAction(LayerEditor.Layer, e, index));
+                }
+            }
+            LevelEditor.EndBatch();
+        }
     }
 }

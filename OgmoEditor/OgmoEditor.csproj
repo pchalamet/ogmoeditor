@@ -97,8 +97,10 @@
     <Compile Include="LevelEditors\Actions\ActionBatch.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntityAddNodeAction.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntityAngleSnapAction.cs" />
+    <Compile Include="LevelEditors\Actions\EntityActions\EntityInsertNodeAction.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntityMoveAction.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntityRemoveAction.cs" />
+    <Compile Include="LevelEditors\Actions\EntityActions\EntityRemoveNodeAction.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntityResizeAction.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntityRotateAction.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntitySetValueAction.cs" />
