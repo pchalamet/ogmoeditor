@@ -91,6 +91,11 @@ namespace OgmoEditor.LevelEditors
             }
         }
 
+        public void DrawNode(System.Drawing.Point node)
+        {
+            DrawRectangle(node.X, node.Y, 3, 3, Color.Red);
+        }
+
         public void DrawRectangle(Rectangle rect, Color color)
         {
             DrawRectangle(rect.X, rect.Y, rect.Width, rect.Height, color);

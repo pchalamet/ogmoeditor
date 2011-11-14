@@ -10,10 +10,17 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
 {
     public class EntityAddNodeTool : EntityTool
     {
+        private Point mouse;
+
         public EntityAddNodeTool()
             : base("Add Node", "addNode.png", System.Windows.Forms.Keys.N)
         {
 
+        }
+
+        public override void OnMouseMove(Point location)
+        {
+            mouse = LayerEditor.Layer.Definition.SnapToGrid(location);
         }
 
         public override void OnMouseLeftClick(Point location)
@@ -40,6 +47,21 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                 }
             }
             LevelEditor.EndBatch();
+        }
+
+        public override void Draw(Content content)
+        {
+            foreach (var e in Ogmo.EntitySelectionWindow.Selected)
+            {
+                if (e.Definition.NodesDefinition.Enabled && e.Nodes.Count != e.Definition.NodesDefinition.Limit && !e.Nodes.Contains(mouse))
+                {
+                    if (e.Nodes.Count == 0)
+                        content.DrawLine(e.Position, mouse, Microsoft.Xna.Framework.Color.Yellow * .5f);
+                    else
+                        content.DrawLine(e.Nodes[e.Nodes.Count - 1], mouse, Microsoft.Xna.Framework.Color.Yellow * .5f);
+                    content.DrawNode(mouse);
+                }
+            }
         }
     }
 }
