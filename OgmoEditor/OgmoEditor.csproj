@@ -95,6 +95,7 @@
     <Compile Include="LevelData\Resizers\GridResizer.cs" />
     <Compile Include="LevelData\Resizers\Resizer.cs" />
     <Compile Include="LevelEditors\Actions\ActionBatch.cs" />
+    <Compile Include="LevelEditors\Actions\EntityActions\EntityAddNodeAction.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntityAngleSnapAction.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntityMoveAction.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntityRemoveAction.cs" />
@@ -112,7 +113,9 @@
     <Compile Include="LevelEditors\LevelProperties.Designer.cs">
       <DependentUpon>LevelProperties.cs</DependentUpon>
     </Compile>
+    <Compile Include="LevelEditors\Tools\EntityTools\EntityAddNodeTool.cs" />
     <Compile Include="LevelEditors\Tools\EntityTools\EntityEraseTool.cs" />
+    <Compile Include="LevelEditors\Tools\EntityTools\EntityInsertNodeTool.cs" />
     <Compile Include="LevelEditors\Tools\EntityTools\EntityMoveTool.cs" />
     <Compile Include="LevelEditors\Tools\EntityTools\EntityResizeTool.cs" />
     <Compile Include="LevelEditors\Tools\EntityTools\EntityRotateTool.cs" />
@@ -505,10 +508,16 @@
     <Content Include="Content\logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\tools\addNode.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\tools\eraser.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\tools\flood.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\tools\insertNode.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\tools\move.png">

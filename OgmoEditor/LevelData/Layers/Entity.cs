@@ -169,6 +169,12 @@ namespace OgmoEditor.LevelData.Layers
 
             if (current)
                 content.DrawHollowRect(Position.X - Definition.Origin.X, Position.Y - Definition.Origin.Y - 1, Size.Width + 1, Size.Height + 1, Ogmo.EntitySelectionWindow.IsSelected(this) ? Microsoft.Xna.Framework.Color.Lime : Microsoft.Xna.Framework.Color.Yellow);
+
+            if (Nodes != null)
+            {
+                foreach (var p in Nodes)
+                    content.DrawRectangle(p.X, p.Y, 3, 3, Microsoft.Xna.Framework.Color.Red);
+            }
         }
 
         public Rectangle Bounds

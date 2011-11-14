@@ -61,6 +61,7 @@ namespace OgmoEditor.Definitions
             def.Origin = Origin;
             def.ImageDefinition = ImageDefinition;
             def.ValueDefinitions = new List<ValueDefinition>();
+            def.NodesDefinition = NodesDefinition;
             foreach (var d in ValueDefinitions)
                 def.ValueDefinitions.Add(d.Clone());
             return def;
