@@ -59,7 +59,7 @@ namespace OgmoEditor.Windows
             tilesetsComboBox.Items.Clear();
             foreach (Tileset t in Ogmo.Project.Tilesets)
                 tilesetsComboBox.Items.Add(t.Name);
-            tilesetsComboBox.SelectedIndex = 0;
+            tilesetsComboBox.SelectedIndex = (Ogmo.Project.Tilesets.Count > 0) ? 0 : -1;
             tilesetsComboBox.Enabled = (Ogmo.Project.Tilesets.Count > 1);
         }
 
