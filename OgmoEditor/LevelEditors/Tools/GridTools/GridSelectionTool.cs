@@ -7,15 +7,16 @@ using OgmoEditor.LevelEditors.Actions.GridActions;
 
 namespace OgmoEditor.LevelEditors.Tools.GridTools
 {
-    public class GridRectangleTool : GridTool
+    public class GridSelectionTool : GridTool
     {
+        static private readonly OgmoColor DrawColor = new OgmoColor(System.Drawing.Color.Red);
+
         private bool drawing;
-        private bool drawMode;
         private Point drawStart;
         private Point drawTo;
 
-        public GridRectangleTool()
-            : base("Rectangle", "rectangle.png", System.Windows.Forms.Keys.R)
+        public GridSelectionTool()
+            : base("Select", "selection.png", System.Windows.Forms.Keys.S)
         {
             drawing = false;
         }
@@ -26,54 +27,41 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
             {
                 Rectangle draw = getRect();
                 if (LevelEditor.Level.Bounds.IntersectsWith(draw))
-                    content.DrawFillRect(draw, (drawMode ? LayerEditor.Layer.Definition.Color.ToXNA() : LayerEditor.Layer.Definition.Color.Invert().ToXNA()) * .5f);
+                    content.DrawFillRect(draw, DrawColor.ToXNA() * .5f);
             }
         }
 
-        public override void OnMouseLeftDown(System.Drawing.Point location)
+        public override void OnMouseLeftDown(Point location)
         {
-            drawTo = drawStart = LayerEditor.MouseSnapPosition;
             drawing = true;
-            drawMode = true;
+            drawStart = drawTo = LayerEditor.MouseSnapPosition;
         }
 
         public override void OnMouseLeftUp(Point location)
         {
-            if (drawing && drawMode)
-                drawRect();
-        }
+            if (drawing)
+            {
+                drawing = false;
+                drawTo = LayerEditor.MouseSnapPosition;
+                Rectangle select = getRect();
 
-        public override void OnMouseRightDown(Point location)
-        {
-            drawTo = drawStart = LayerEditor.MouseSnapPosition;
-            drawing = true;
-            drawMode = false;
-        }
+                if (LevelEditor.Level.Bounds.IntersectsWith(select))
+                {
+                    select = new Rectangle(select.X / LayerEditor.Layer.Definition.Grid.Width, select.Y / LayerEditor.Layer.Definition.Grid.Height, select.Width / LayerEditor.Layer.Definition.Grid.Width, select.Height / LayerEditor.Layer.Definition.Grid.Height);
 
-        public override void OnMouseRightUp(Point location)
-        {
-            if (drawing && !drawMode)
-                drawRect();
+                    LevelEditor.StartBatch();
+                    if (LayerEditor.Layer.Selection != null)
+                        LevelEditor.BatchPerform(new GridClearSelectionAction(LayerEditor.Layer));
+                    LevelEditor.BatchPerform(new GridSelectAction(LayerEditor.Layer, select));
+                    LevelEditor.EndBatch();
+                }
+            }
         }
 
         public override void OnMouseMove(Point location)
         {
             if (drawing)
                 drawTo = LayerEditor.MouseSnapPosition;
-        }
-        
-        /*
-         *  Helpers
-         */
-        private void drawRect()
-        {
-            drawing = false;
-            Rectangle draw = getRect();
-            if (LevelEditor.Level.Bounds.IntersectsWith(draw))
-            {
-                draw = LayerEditor.Layer.Definition.ConvertToGrid(draw);
-                LevelEditor.Perform(new GridRectangleAction(LayerEditor.Layer, draw, drawMode));
-            }
         }
 
         private Rectangle getRect()

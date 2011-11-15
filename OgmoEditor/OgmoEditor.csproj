@@ -93,6 +93,7 @@
       <DependentUpon>ImagePreviewer.cs</DependentUpon>
     </Compile>
     <Compile Include="LevelData\Layers\Entity.cs" />
+    <Compile Include="LevelData\Layers\GridSelection.cs" />
     <Compile Include="LevelData\Layers\Value.cs" />
     <Compile Include="LevelData\Resizers\GridResizer.cs" />
     <Compile Include="LevelData\Resizers\Resizer.cs" />
@@ -106,10 +107,12 @@
     <Compile Include="LevelEditors\Actions\EntityActions\EntityResizeAction.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntityRotateAction.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntitySetValueAction.cs" />
+    <Compile Include="LevelEditors\Actions\GridActions\GridClearSelectionAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridDrawAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridFloodAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridRectangleAction.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntityAddAction.cs" />
+    <Compile Include="LevelEditors\Actions\GridActions\GridSelectAction.cs" />
     <Compile Include="LevelEditors\Actions\LevelActions\LevelResizeAction.cs" />
     <Compile Include="LevelEditors\LevelProperties.cs">
       <SubType>Form</SubType>
@@ -129,6 +132,7 @@
     <Compile Include="LevelEditors\Tools\GridTools\GridPencilTool.cs" />
     <Compile Include="LevelEditors\Tools\GridTools\GridRectangleTool.cs" />
     <Compile Include="LevelEditors\Tools\EntityTools\EntityPlacementTool.cs" />
+    <Compile Include="LevelEditors\Tools\GridTools\GridSelectionTool.cs" />
     <Compile Include="LevelEditors\ValueEditors\BoolValueEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>

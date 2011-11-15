@@ -119,6 +119,16 @@ namespace OgmoEditor.LevelEditors
             DrawLineAngle(x + width, y, height, Util.DOWN, color);
         }
 
+        public void DrawFillRect(System.Drawing.Rectangle rect, Color color)
+        {
+            DrawFillRect(rect.X, rect.Y, rect.Width, rect.Height, color);
+        }
+
+        public void DrawFillRect(Rectangle rect, Color color)
+        {
+            DrawFillRect(rect.X, rect.Y, rect.Width, rect.Height, color);
+        }
+
         public void DrawFillRect(int x, int y, int width, int height, Color color)
         {
             DrawHollowRect(x, y, width, height, color);

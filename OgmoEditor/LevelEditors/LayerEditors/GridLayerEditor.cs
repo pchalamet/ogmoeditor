@@ -5,6 +5,8 @@ using System.Text;
 using OgmoEditor.LevelData.Layers;
 using OgmoEditor.LevelEditors.Tools.GridTools;
 using System.Drawing;
+using OgmoEditor.LevelEditors.Actions.GridActions;
+using System.Diagnostics;
 
 namespace OgmoEditor.LevelEditors.LayerEditors
 {
@@ -45,6 +47,14 @@ namespace OgmoEditor.LevelEditors.LayerEditors
         public override void Cut()
         {
             throw new NotImplementedException();
+        }
+
+        public override void OnKeyDown(System.Windows.Forms.Keys key)
+        {
+            base.OnKeyDown(key);
+
+            if (key == System.Windows.Forms.Keys.Space && Layer.Selection != null)
+                LevelEditor.Perform(new GridClearSelectionAction(Layer));
         }
     }
 }

@@ -15,6 +15,7 @@ namespace OgmoEditor.LevelData.Layers
     {
         public new GridLayerDefinition Definition { get; private set; }
         public bool[,] Grid;
+        public GridSelection Selection;
 
         public GridLayer(GridLayerDefinition definition)
             : base(definition)
