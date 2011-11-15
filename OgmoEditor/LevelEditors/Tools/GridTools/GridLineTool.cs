@@ -104,10 +104,19 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
 
             for (int x = aX; x <= bX; x++)
             {
-                if (steep)
-                    points.Add(new Point(y, x));
-                else
-                    points.Add(new Point(x, y));
+                if (x >= 0 && y >= 0)
+                {
+                    if (steep)
+                    {
+                        if (y < LayerEditor.Layer.Grid.GetLength(0) && x < LayerEditor.Layer.Grid.GetLength(1))
+                            points.Add(new Point(y, x));
+                    }
+                    else
+                    {
+                        if (x < LayerEditor.Layer.Grid.GetLength(0) && y < LayerEditor.Layer.Grid.GetLength(1))
+                            points.Add(new Point(x, y));
+                    }
+                }
 
                 error += deltaErr;
                 if (error >= .5f)
