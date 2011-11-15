@@ -243,13 +243,12 @@ namespace OgmoEditor
                 Project.Save();
                 Content.LoadEntityTextures(Project);
 
-                //Start a blank level and start at the first layer
-                LayersWindow.SetLayer(0);
-                NewLevel();
-
                 //Call the event
                 if (OnProjectEdited != null)
                     OnProjectEdited(Project);
+
+                //Start a blank level
+                NewLevel();
 
                 //Set the status message
                 Ogmo.MainWindow.StatusText = "Edited project " + Ogmo.Project.Name + ", all levels closed";
