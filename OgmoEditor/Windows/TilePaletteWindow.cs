@@ -15,6 +15,8 @@ namespace OgmoEditor.Windows
         private ComboBox tilesetsComboBox;
         private TileSelector tileSelector;
 
+        public int TileID { get; private set; }
+
         public TilePaletteWindow()
             : base(HorizontalSnap.Left, VerticalSnap.Bottom)
         {
@@ -44,9 +46,8 @@ namespace OgmoEditor.Windows
             Controls.Add(tileSelector);
 
             Resize += new EventHandler(TilePaletteWindow_ResizeEnd);
-            Ogmo.LayersWindow.OnLayerChanged += new Ogmo.LayerCallback(onLayerChanged);
+            Ogmo.LayersWindow.OnLayerChanged += onLayerChanged;
             Ogmo.OnProjectStart += initFromProject;
-            Ogmo.LayersWindow.OnLayerChanged += new Ogmo.LayerCallback(LayersWindow_OnLayerChanged);
         }
 
         public override bool ShouldBeVisible()
@@ -61,6 +62,7 @@ namespace OgmoEditor.Windows
                 tilesetsComboBox.Items.Add(t.Name);
             tilesetsComboBox.SelectedIndex = (Ogmo.Project.Tilesets.Count > 0) ? 0 : -1;
             tilesetsComboBox.Enabled = (Ogmo.Project.Tilesets.Count > 1);
+            TileID = 0;
         }
 
         /*
@@ -69,13 +71,10 @@ namespace OgmoEditor.Windows
         private void onLayerChanged(LayerDefinition layerDefinition, int index)
         {
             EditorVisible = layerDefinition is TileLayerDefinition;
-        }
-
-        private void LayersWindow_OnLayerChanged(LayerDefinition layerDefinition, int index)
-        {
-            if (layerDefinition is TileLayerDefinition)
+            if (EditorVisible)
             {
-                tilesetsComboBox.SelectedIndex = Ogmo.Project.Tilesets.IndexOf((Ogmo.CurrentLevel.Layers[index] as TileLayer).Tileset);
+                tilesetsComboBox.SelectedIndex = Ogmo.Project.Tilesets.IndexOf((Ogmo.LayersWindow.CurrentLayer as TileLayer).Tileset);
+                TileID = 0;
             }
         }
 

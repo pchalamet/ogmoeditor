@@ -42,7 +42,10 @@ namespace OgmoEditor.Definitions
 
         public Rectangle GetRectFromID(int id)
         {
-            return Rectangle.Empty;
+            int y = id / TilesAcross;
+            int x = id % TilesAcross;
+
+            return new Rectangle(x * (TileSize.Width + TileSep), y * (TileSize.Height + TileSep), TileSize.Width, TileSize.Height);
         }
 
         public int TilesAcross
