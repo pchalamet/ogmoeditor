@@ -9,7 +9,7 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
 {
     public class GridSelectionTool : GridTool
     {
-        static private readonly OgmoColor DrawColor = new OgmoColor(System.Drawing.Color.Red);
+        static private readonly OgmoColor DrawColor = new OgmoColor(System.Drawing.Color.Yellow);
 
         private bool drawing;
         private Point drawStart;
