@@ -37,7 +37,6 @@ namespace OgmoEditor.LevelEditors
         public LinkedList<OgmoAction> RedoStack { get; private set; }
 
         private EventHandler Repaint;
-        private Tool previousTool;
         private ActionBatch batch;
 
         public LevelEditor(Level level)
@@ -160,40 +159,33 @@ namespace OgmoEditor.LevelEditors
             RedoStack.Clear();
         }
 
-        public void BatchPerform(Tool tool, OgmoAction action)
+        /*
+         *  Action batching so undo/redo affect a group of actions. Call StartBatch, BatchPerform..., and end with EndBatch
+         */
+        public void StartBatch()
         {
-            //Start the batch if it isn't in progress
-            if (previousTool != tool)
+            batch = new ActionBatch();
+
+            if (!Level.Changed)
             {
-                previousTool = tool;
-                batch = new ActionBatch();
-
-                //If you're over the undo limit, chop off an action
-                if (UndoStack.Count == UNDO_LIMIT)
-                    UndoStack.RemoveFirst();
-
-                //If the level is so-far unchanged, change it and store that fact
-                if (!Level.Changed)
-                {
-                    batch.LevelWasChanged = false;
-                    Level.Changed = true;
-                }
-
-                //Add the batch action to the undo stack
-                UndoStack.AddLast(batch);
-
-                //Clear the redo stack
-                RedoStack.Clear();
+                batch.LevelWasChanged = false;
+                Level.Changed = true;
             }
 
-            //Add the new action to the batch and do it!
+            if (UndoStack.Count == UNDO_LIMIT)
+                UndoStack.RemoveFirst();
+            UndoStack.AddLast(batch);
+            RedoStack.Clear();
+        }
+
+        public void BatchPerform(OgmoAction action)
+        {
             batch.Add(action);
             action.Do();
         }
 
         public void EndBatch()
         {
-            previousTool = null;
             batch = null;
         }
 

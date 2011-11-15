@@ -28,6 +28,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                 moving = true;
                 mouseStart = location.X;
                 moved = 0;
+                LevelEditor.StartBatch();
             }
         }
 
@@ -39,7 +40,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                 move -= moved;
                 if (move != 0)
                 {
-                    LevelEditor.BatchPerform(this, new EntityRotateAction(LayerEditor.Layer, Ogmo.EntitySelectionWindow.Selected, (float)move * MOVE_FACTOR));
+                    LevelEditor.BatchPerform(new EntityRotateAction(LayerEditor.Layer, Ogmo.EntitySelectionWindow.Selected, (float)move * MOVE_FACTOR));
                     moved = move + moved;
                     Ogmo.EntitySelectionWindow.RefreshContents();
                 }
@@ -50,7 +51,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
         {
             if (moving)
             {
-                LevelEditor.BatchPerform(this, new EntityAngleSnapAction(LayerEditor.Layer, Ogmo.EntitySelectionWindow.Selected));
+                LevelEditor.BatchPerform(new EntityAngleSnapAction(LayerEditor.Layer, Ogmo.EntitySelectionWindow.Selected));
                 LevelEditor.EndBatch();
                 moving = false;
             }

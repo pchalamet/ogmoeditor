@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using OgmoEditor.LevelData.Layers;
 using OgmoEditor.LevelEditors.Actions.EntityActions;
+using OgmoEditor.Clipboard;
 
 namespace OgmoEditor.LevelEditors.LayerEditors
 {
@@ -34,6 +35,22 @@ namespace OgmoEditor.LevelEditors.LayerEditors
                 if (Ogmo.EntitySelectionWindow.AmountSelected > 0)
                     LevelEditor.Perform(new EntityRemoveAction(Layer, Ogmo.EntitySelectionWindow.Selected));
             }
+        }
+
+        public override bool CanCopyOrCut()
+        {
+            return Ogmo.EntitySelectionWindow.Selected.Count > 0;
+        }
+
+        public override void Copy()
+        {
+            Ogmo.Clipboard = new EntityClipboardItem(Ogmo.EntitySelectionWindow.Selected);
+        }
+
+        public override void Cut()
+        {
+            Ogmo.Clipboard = new EntityClipboardItem(Ogmo.EntitySelectionWindow.Selected);
+            LevelEditor.Perform(new EntityRemoveAction(Layer, Ogmo.EntitySelectionWindow.Selected));
         }
     }
 }

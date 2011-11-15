@@ -26,6 +26,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                 moving = true;
                 mouseStart = location;
                 moved = Point.Empty;
+                LevelEditor.StartBatch();
             }
         }
 
@@ -37,7 +38,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                 move = new Point(move.X - moved.X, move.Y - moved.Y);
                 if (move.X != 0 || move.Y != 0)
                 {
-                    LevelEditor.BatchPerform(this, new EntityResizeAction(LayerEditor.Layer, Ogmo.EntitySelectionWindow.Selected, new Size(move.X, move.Y)));
+                    LevelEditor.BatchPerform(new EntityResizeAction(LayerEditor.Layer, Ogmo.EntitySelectionWindow.Selected, new Size(move.X, move.Y)));
                     moved = new Point(move.X + moved.X, move.Y + moved.Y);
                     Ogmo.EntitySelectionWindow.RefreshContents();
                 }

@@ -65,6 +65,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clipboard\ClipboardItem.cs" />
+    <Compile Include="Clipboard\EntityClipboardItem.cs" />
     <Compile Include="ColorChooser.cs">
       <SubType>UserControl</SubType>
     </Compile>

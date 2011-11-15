@@ -26,10 +26,12 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
         public override void OnMouseLeftClick(Point location)
         {
             Point node = LayerEditor.Layer.Definition.SnapToGrid(location);
+
+            LevelEditor.StartBatch();
             foreach (var e in Ogmo.EntitySelectionWindow.Selected)
             {
                 if (e.Definition.NodesDefinition.Enabled && e.Nodes.Count != e.Definition.NodesDefinition.Limit && !e.Nodes.Contains(node))
-                    LevelEditor.BatchPerform(this, new EntityAddNodeAction(LayerEditor.Layer, e, node));
+                    LevelEditor.BatchPerform(new EntityAddNodeAction(LayerEditor.Layer, e, node));
             }
             LevelEditor.EndBatch();
         }
@@ -37,13 +39,15 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
         public override void OnMouseRightClick(Point location)
         {
             Point node = LayerEditor.Layer.Definition.SnapToGrid(location);
+
+            LevelEditor.StartBatch();
             foreach (var e in Ogmo.EntitySelectionWindow.Selected)
             {
                 if (e.Definition.NodesDefinition.Enabled)
                 {
                     int index = e.Nodes.IndexOf(node);
                     if (index != -1)
-                        LevelEditor.BatchPerform(this, new EntityRemoveNodeAction(LayerEditor.Layer, e, index));
+                        LevelEditor.BatchPerform(new EntityRemoveNodeAction(LayerEditor.Layer, e, index));
                 }
             }
             LevelEditor.EndBatch();

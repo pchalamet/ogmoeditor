@@ -14,7 +14,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
 {
     using Point = System.Drawing.Point;
 
-    public class LayerEditor
+    public abstract class LayerEditor
     {
         public Layer Layer { get; private set; }
         public LevelEditor LevelEditor { get; private set; }
@@ -87,5 +87,9 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             if (Ogmo.ToolsWindow.CurrentTool != null)
                 Ogmo.ToolsWindow.CurrentTool.OnMouseMove(location);
         }
+
+        public abstract bool CanCopyOrCut();
+        public abstract void Copy();
+        public abstract void Cut();
     }
 }

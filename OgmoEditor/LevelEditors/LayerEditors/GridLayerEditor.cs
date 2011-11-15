@@ -31,5 +31,20 @@ namespace OgmoEditor.LevelEditors.LayerEditors
 
             base.Draw(content, current, alpha);
         }
+
+        public override bool CanCopyOrCut()
+        {
+            return false;
+        }
+
+        public override void Copy()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Cut()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

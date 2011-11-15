@@ -18,6 +18,7 @@ using OgmoEditor.LevelEditors.Tools;
 using OgmoEditor.Definitions;
 using OgmoEditor.LevelEditors;
 using Microsoft.Xna.Framework.Graphics;
+using OgmoEditor.Clipboard;
 
 namespace OgmoEditor
 {
@@ -55,6 +56,7 @@ namespace OgmoEditor
         static public Project Project { get; private set; }
         static public List<Level> Levels { get; private set; }
         static public int CurrentLevelIndex { get; private set; }
+        static public ClipboardItem Clipboard;
 
         static public event ProjectCallback OnProjectStart;
         static public event ProjectCallback OnProjectClose;

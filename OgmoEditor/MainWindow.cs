@@ -269,6 +269,21 @@ namespace OgmoEditor
             Ogmo.OpenAllLevels();
         }
 
+        /*
+         *  Edit Menu Items
+         */
+        private void editToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            undoToolStripMenuItem.Enabled = LevelEditors[Ogmo.CurrentLevelIndex].CanUndo;
+            redoToolStripMenuItem.Enabled = LevelEditors[Ogmo.CurrentLevelIndex].CanRedo;
+
+            cutToolStripMenuItem.Enabled = copyToolStripMenuItem.Enabled = LevelEditors[Ogmo.CurrentLevelIndex].LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].CanCopyOrCut();
+            if (Ogmo.Clipboard == null)
+                pasteToolStripMenuItem.Enabled = false;
+            else
+                pasteToolStripMenuItem.Enabled = Ogmo.Clipboard.CanPaste(Ogmo.LayersWindow.CurrentLayer);
+        }
+
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LevelEditors[Ogmo.CurrentLevelIndex].Undo();
@@ -279,14 +294,26 @@ namespace OgmoEditor
             LevelEditors[Ogmo.CurrentLevelIndex].Redo();
         }
 
-        private void editToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        private void cutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            undoToolStripMenuItem.Enabled = LevelEditors[Ogmo.CurrentLevelIndex].CanUndo;
-            redoToolStripMenuItem.Enabled = LevelEditors[Ogmo.CurrentLevelIndex].CanRedo;
+            if (LevelEditors[Ogmo.CurrentLevelIndex].LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].CanCopyOrCut())
+                LevelEditors[Ogmo.CurrentLevelIndex].LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Cut();
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (LevelEditors[Ogmo.CurrentLevelIndex].LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].CanCopyOrCut())
+                LevelEditors[Ogmo.CurrentLevelIndex].LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Copy();
+        }
+
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Ogmo.Clipboard != null && Ogmo.Clipboard.CanPaste(Ogmo.LayersWindow.CurrentLayer))
+                Ogmo.Clipboard.Paste(LevelEditors[Ogmo.CurrentLevelIndex], Ogmo.LayersWindow.CurrentLayer);
         }
 
         /*
-         *  View-Related Menu Items
+         *  View Menu Items
          */
         private void viewToolStripMenuItem_DropDownOpened(object sender, EventArgs e)
         {

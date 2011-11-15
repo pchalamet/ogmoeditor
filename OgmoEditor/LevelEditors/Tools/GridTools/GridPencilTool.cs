@@ -20,16 +20,24 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
 
         public override void OnMouseLeftDown(System.Drawing.Point location)
         {
-            drawing = true;
-            drawMode = true;
-            setCell(location, true);
+            if (!drawing)
+            {
+                drawing = true;
+                drawMode = true;
+                LevelEditor.StartBatch();
+                setCell(location, true);
+            }
         }
 
         public override void OnMouseRightDown(System.Drawing.Point location)
         {
-            drawing = true;
-            drawMode = false;
-            setCell(location, false);
+            if (!drawing)
+            {
+                drawing = true;
+                drawMode = false;
+                LevelEditor.StartBatch();
+                setCell(location, false);
+            }
         }
 
         public override void OnMouseLeftUp(System.Drawing.Point location)
@@ -62,7 +70,7 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
                 return;
 
             location = LayerEditor.Layer.Definition.ConvertToGrid(location);
-            LevelEditor.BatchPerform(this, new GridDrawAction(LayerEditor.Layer, location.X, location.Y, drawMode));
+            LevelEditor.BatchPerform(new GridDrawAction(LayerEditor.Layer, location.X, location.Y, drawMode));
         }
     }
 }
