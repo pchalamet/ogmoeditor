@@ -123,6 +123,7 @@
     <Compile Include="LevelEditors\Tools\EntityTools\EntityRotateTool.cs" />
     <Compile Include="LevelEditors\Tools\EntityTools\EntitySelectionTool.cs" />
     <Compile Include="LevelEditors\Tools\GridTools\GridFloodTool.cs" />
+    <Compile Include="LevelEditors\Tools\GridTools\GridLineTool.cs" />
     <Compile Include="LevelEditors\Tools\GridTools\GridPencilTool.cs" />
     <Compile Include="LevelEditors\Tools\GridTools\GridRectangleTool.cs" />
     <Compile Include="LevelEditors\Tools\EntityTools\EntityPlacementTool.cs" />
@@ -520,6 +521,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\tools\insertNode.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\tools\line.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\tools\move.png">

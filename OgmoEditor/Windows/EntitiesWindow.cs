@@ -59,6 +59,8 @@ namespace OgmoEditor.Windows
             {
                 Controls.Add(new EntityButton(project.EntityDefinitions[i], (i % 3) * 32, (i / 3) * 32));
             }
+
+            SetObject(null);
         }
 
         /*
