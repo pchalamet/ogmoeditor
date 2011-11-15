@@ -37,6 +37,14 @@ namespace OgmoEditor.LevelData.Layers
                     Layer.Grid[i + Position.X, j + Position.Y] = Grid[i, j];
         }
 
+        public Rectangle Bounds
+        {
+            get
+            {
+                return new Rectangle(Position.X, Position.Y, Width, Height);
+            }
+        }
+
         public int Width
         {
             get

@@ -111,6 +111,11 @@ namespace OgmoEditor.LevelEditors
             SpriteBatch.Draw(TexPixel, rect, null, color, angle, origin, SpriteEffects.None, 0);
         }
 
+        public void DrawHollowRect(System.Drawing.Rectangle rect, Color color)
+        {
+            DrawHollowRect(rect.X, rect.Y, rect.Width, rect.Height, color);
+        }
+
         public void DrawHollowRect(int x, int y, int width, int height, Color color)
         {
             DrawLineAngle(x, y, width, Util.RIGHT, color);

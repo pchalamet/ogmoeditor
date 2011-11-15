@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Clipboard\ClipboardItem.cs" />
     <Compile Include="Clipboard\EntityClipboardItem.cs" />
+    <Compile Include="Clipboard\GridClipboardItem.cs" />
     <Compile Include="ColorChooser.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -113,6 +114,7 @@
     <Compile Include="LevelEditors\Actions\GridActions\GridRectangleAction.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntityAddAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridSelectAction.cs" />
+    <Compile Include="LevelEditors\Actions\GridActions\GridSetSelectionAction.cs" />
     <Compile Include="LevelEditors\Actions\LevelActions\LevelResizeAction.cs" />
     <Compile Include="LevelEditors\LevelProperties.cs">
       <SubType>Form</SubType>
