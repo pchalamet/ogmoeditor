@@ -10,22 +10,15 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
 {
     public class EntityInsertNodeTool : EntityTool
     {
-        private Point mouse;
-
         public EntityInsertNodeTool()
             : base("Insert Node", "insertNode.png", System.Windows.Forms.Keys.I)
         {
 
         }
 
-        public override void OnMouseMove(Point location)
-        {
-            mouse = LayerEditor.Layer.Definition.SnapToGrid(location);
-        }
-
         public override void OnMouseLeftClick(Point location)
         {
-            Point node = LayerEditor.Layer.Definition.SnapToGrid(location);
+            Point node = LayerEditor.MouseSnapPosition;
 
             LevelEditor.StartBatch();
             foreach (var e in Ogmo.EntitySelectionWindow.Selected)
@@ -38,7 +31,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
 
         public override void OnMouseRightClick(Point location)
         {
-            Point node = LayerEditor.Layer.Definition.SnapToGrid(location);
+            Point node = LayerEditor.MouseSnapPosition;
 
             LevelEditor.StartBatch();
             foreach (var e in Ogmo.EntitySelectionWindow.Selected)
@@ -55,6 +48,8 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
 
         public override void Draw(Content content)
         {
+            Point mouse = LayerEditor.MouseSnapPosition;
+
             foreach (var e in Ogmo.EntitySelectionWindow.Selected)
             {
                 if (e.Definition.NodesDefinition.Enabled && e.Nodes.Count != e.Definition.NodesDefinition.Limit && !e.Nodes.Contains(mouse))

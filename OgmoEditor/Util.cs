@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Drawing;
 using Microsoft.Xna.Framework.Graphics;
 using OgmoEditor.LevelEditors;
+using System.Windows.Forms;
 
 namespace OgmoEditor
 {
@@ -154,6 +155,30 @@ namespace OgmoEditor
             int temp = a;
             a = b;
             b = temp;
+        }
+
+        static public bool Ctrl
+        {
+            get
+            {
+                return (Control.ModifierKeys & Keys.Control) == Keys.Control;
+            }
+        }
+
+        static public bool Shift
+        {
+            get
+            {
+                return (Control.ModifierKeys & Keys.Shift) == Keys.Shift;
+            }
+        }
+
+        static public bool Alt
+        {
+            get
+            {
+                return (Control.ModifierKeys & Keys.Alt) == Keys.Alt;
+            }
         }
     }
 }

@@ -34,7 +34,11 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
         {
             if (moving)
             {
-                Point move = LayerEditor.Layer.Definition.SnapToGrid(new Point(location.X - mouseStart.X, location.Y - mouseStart.Y));
+                Point move = new Point(location.X - mouseStart.X, location.Y - mouseStart.Y);
+                if (!Util.Ctrl)
+                    move = LayerEditor.Layer.Definition.SnapToGrid(move);
+
+
                 move = new Point(move.X - moved.X, move.Y - moved.Y);
                 if (move.X != 0 || move.Y != 0)
                 {
