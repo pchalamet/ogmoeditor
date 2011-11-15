@@ -120,7 +120,7 @@ namespace OgmoEditor.LevelEditors
             LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Draw(content, true, 1);
             for (; i < LayerEditors.Count; i++)
             {
-                if (Ogmo.Project.LayerDefinitions[i].Visible)
+                if (i < Ogmo.Project.LayerDefinitions.Count && Ogmo.Project.LayerDefinitions[i].Visible)
                     LayerEditors[i].Draw(content, false,  LAYER_ABOVE_ALPHA);
             }
 
