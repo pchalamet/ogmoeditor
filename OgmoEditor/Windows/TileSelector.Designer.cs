@@ -43,6 +43,7 @@
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
             this.pictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_Paint);
+            this.pictureBox.Resize += new System.EventHandler(this.pictureBox_Resize);
             // 
             // TileSelector
             // 

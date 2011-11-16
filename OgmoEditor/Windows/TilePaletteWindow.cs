@@ -15,8 +15,6 @@ namespace OgmoEditor.Windows
         private ComboBox tilesetsComboBox;
         private TileSelector tileSelector;
 
-        public int TileID { get; private set; }
-
         public TilePaletteWindow()
             : base(HorizontalSnap.Left, VerticalSnap.Bottom)
         {
@@ -62,7 +60,6 @@ namespace OgmoEditor.Windows
                 tilesetsComboBox.Items.Add(t.Name);
             tilesetsComboBox.SelectedIndex = (Ogmo.Project.Tilesets.Count > 0) ? 0 : -1;
             tilesetsComboBox.Enabled = (Ogmo.Project.Tilesets.Count > 1);
-            TileID = 0;
         }
 
         /*
@@ -74,7 +71,7 @@ namespace OgmoEditor.Windows
             if (EditorVisible)
             {
                 tilesetsComboBox.SelectedIndex = Ogmo.Project.Tilesets.IndexOf((Ogmo.LayersWindow.CurrentLayer as TileLayer).Tileset);
-                TileID = 0;
+                tileSelector.Tileset = (Ogmo.LayersWindow.CurrentLayer as TileLayer).Tileset;
             }
         }
 

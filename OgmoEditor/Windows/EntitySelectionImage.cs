@@ -34,6 +34,8 @@ namespace OgmoEditor.Windows
             int destWidth = (int)(image.Width * scale);
             int destHeight = (int)(image.Height * scale);
             Graphics g = e.Graphics;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             g.DrawImage(image,
                 new Rectangle(pictureBox.ClientSize.Width / 2 - destWidth / 2, pictureBox.ClientSize.Height / 2 - destHeight / 2, destWidth, destHeight),
                 new Rectangle(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
