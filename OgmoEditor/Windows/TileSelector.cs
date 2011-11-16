@@ -13,7 +13,7 @@ namespace OgmoEditor.Windows
 {
     public partial class TileSelector : UserControl
     {
-        private const int BUFFER = 4;
+        private const int BUFFER = 6;
 
         private Tileset tileset;
         public int Selection { get; private set; }
@@ -33,13 +33,13 @@ namespace OgmoEditor.Windows
                 Selection = 0;
                 if (Tileset != null)
                     calculateScale();
-                Invalidate();
+                pictureBox.Refresh();
             }
         }
 
         private void calculateScale()
         {
-            scale = Math.Min((pictureBox.Width - BUFFER) / Tileset.Image.Width, (pictureBox.Height - BUFFER) / Tileset.Image.Height);
+            scale = Math.Min((pictureBox.Width - BUFFER) / tileset.Image.Width, (pictureBox.Height - BUFFER) / tileset.Image.Height);
         }
 
         /*
@@ -50,9 +50,16 @@ namespace OgmoEditor.Windows
             if (Tileset != null)
             { 
                 Graphics g = e.Graphics;
+
+                float x = pictureBox.Width / 2 - tileset.Image.Width / 2 * scale;
+                float y = pictureBox.Height / 2 - tileset.Image.Height / 2 * scale;
+
                 g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-                g.DrawImage(Tileset.Image, pictureBox.Width / 2 - Tileset.Image.Width / 2 * scale, pictureBox.Height / 2 - Tileset.Image.Height / 2 * scale, Tileset.Image.Width * scale, Tileset.Image.Height * scale);
+                g.DrawImage(tileset.Image, x, y, tileset.Image.Width * scale, tileset.Image.Height * scale);
+
+                Rectangle r = tileset.GetRectFromID(Selection);
+                g.DrawRectangle(new Pen(Color.Lime), x + r.X * scale, y + r.Y * scale, r.Width * scale, r.Height * scale);
             }
         }
 
@@ -60,6 +67,27 @@ namespace OgmoEditor.Windows
         {
             if (Tileset != null)
                 calculateScale();
+        }
+
+        private void pictureBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (tileset != null)
+            {
+                Point p = e.Location;
+                p.X -= (int)(pictureBox.Width / 2 - tileset.Image.Width / 2 * scale);
+                p.Y -= (int)(pictureBox.Height / 2 - tileset.Image.Height / 2 * scale);
+                p = new Point((int)(p.X / scale), (int)(p.Y / scale));
+
+                for (int i = 0; i < tileset.TilesTotal; i++)
+                {
+                    if (tileset.GetRectFromID(i).Contains(p))
+                    {
+                        Selection = i;
+                        pictureBox.Refresh();
+                        return;
+                    }
+                }
+            }
         }
     }
 }
