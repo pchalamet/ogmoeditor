@@ -12,6 +12,7 @@ using OgmoEditor.XNA;
 using System.Diagnostics;
 using OgmoEditor.LevelData;
 using OgmoEditor.Windows;
+using System.IO;
 
 namespace OgmoEditor
 {
@@ -22,12 +23,19 @@ namespace OgmoEditor
         public bool EditingGridVisible { get; private set; }
         public List<LevelEditor> LevelEditors { get; private set; }
 
+        private ImageList imageList;
+
         public MainWindow()
         {
             InitializeComponent();
 
             EditingGridVisible = true;
             LevelEditors = new List<LevelEditor>();
+
+            imageList = new ImageList();
+            imageList.Images.Add(Image.FromFile(Path.Combine(Ogmo.ProgramDirectory, @"Content\icons", "icon32.png")));
+            imageList.Images.Add(Image.FromFile(Path.Combine(Ogmo.ProgramDirectory, @"Content\icons", "lvl32.png")));
+            MasterTabControl.ImageList = imageList;
 
             AddStartPage();
 
@@ -43,6 +51,7 @@ namespace OgmoEditor
             TabPage start = new TabPage("Ogmo Editor!");
             start.Name = "startPage";
             start.Controls.Add(new StartPage());
+            start.ImageIndex = 0;
             MasterTabControl.TabPages.Add(start);
         }
 
@@ -152,6 +161,7 @@ namespace OgmoEditor
         private void onLevelAdded(int index)
         {
             TabPage t = new TabPage(Ogmo.Levels[index].Name);
+            t.ImageIndex = 1;
             LevelEditor e = new LevelEditor(Ogmo.Levels[index]);
             LevelEditors.Add(e);
             t.Controls.Add(e);
