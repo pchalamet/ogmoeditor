@@ -30,5 +30,19 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
             foreach (Entity e in entities)
                 e.Position = new Point(e.Position.X - move.X, e.Position.Y - move.Y);
         }
+
+        public override bool Appendable
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public override void Append(OgmoAction action)
+        {
+            EntityMoveAction a = action as EntityMoveAction;
+            move = new Point(move.X + a.move.X, move.Y + a.move.Y);
+        }
     }
 }

@@ -25,6 +25,7 @@ namespace OgmoEditor.Windows
             ClientSize = new Size(WIDTH, 128);
             selection = new List<Entity>();
             onSelectionChanged();
+            DoubleBuffered = true;
 
             //Events
             Ogmo.LayersWindow.OnLayerChanged += onLayerChanged;
