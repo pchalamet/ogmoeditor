@@ -9,11 +9,12 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
 {
     public class EntityRotateTool : EntityTool
     {
-        private const float MOVE_FACTOR = Util.DEGTORAD;
+        private const float MOVE_FACTOR = Util.DEGTORAD * .5f;
 
         private bool moving;
         private int mouseStart;
         private int moved;
+        private EntityRotateAction rotateAction;
 
         public EntityRotateTool()
             : base("Rotate", "rotate.png", System.Windows.Forms.Keys.O)
@@ -40,7 +41,10 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                 move -= moved;
                 if (move != 0)
                 {
-                    LevelEditor.BatchPerform(new EntityRotateAction(LayerEditor.Layer, Ogmo.EntitySelectionWindow.Selected, (float)move * MOVE_FACTOR));
+                    if (rotateAction == null)
+                        LevelEditor.BatchPerform(rotateAction = new EntityRotateAction(LayerEditor.Layer, Ogmo.EntitySelectionWindow.Selected, (float)move * MOVE_FACTOR));
+                    else
+                        rotateAction.DoAgain(move);
                     moved = move + moved;
                     Ogmo.EntitySelectionWindow.RefreshContents();
                 }
@@ -51,6 +55,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
         {
             if (moving)
             {
+                rotateAction = null;
                 LevelEditor.BatchPerform(new EntityAngleSnapAction(LayerEditor.Layer, Ogmo.EntitySelectionWindow.Selected));
                 LevelEditor.EndBatch();
                 moving = false;

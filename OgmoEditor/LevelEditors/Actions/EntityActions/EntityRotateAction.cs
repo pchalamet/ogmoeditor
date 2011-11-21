@@ -41,5 +41,14 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
             for (int i = 0; i < entities.Count; i++)
                 entities[i].Angle = was[i];
         }
+
+        public void DoAgain(float add)
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                if (entities[i].Definition.Rotatable)
+                    entities[i].Angle = (entities[i].Angle + add) % ((float)Math.PI * 2);
+            }
+        }
     }
 }
