@@ -68,5 +68,18 @@ namespace OgmoEditor.LevelEditors.LayerEditors
         {
             Ogmo.EntitySelectionWindow.SetSelection(Layer.Entities);
         }
+
+        public override bool CanDeselect
+        {
+            get
+            {
+                return Layer.Entities.Count > 0;
+            }
+        }
+
+        public override void Deselect()
+        {
+            Ogmo.EntitySelectionWindow.ClearSelection();
+        }
     }
 }

@@ -94,5 +94,8 @@ namespace OgmoEditor.LevelEditors.LayerEditors
 
         public virtual bool CanSelectAll { get { return false; } }
         public virtual void SelectAll() { }
+
+        public virtual bool CanDeselect { get { return false; } }
+        public virtual void Deselect() { }
     }
 }
