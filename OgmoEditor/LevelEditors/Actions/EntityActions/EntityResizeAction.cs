@@ -44,5 +44,18 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
             for (int i = 0; i < entities.Count; i++)
                 entities[i].Size = was[i];
         }
+
+        public void DoAgain(Size add)
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                if (entities[i].Definition.ResizableX)
+                    entities[i].Size.Width = Math.Max(entities[i].Definition.Size.Width, entities[i].Size.Width + add.Width);
+                if (entities[i].Definition.ResizableY)
+                    entities[i].Size.Height = Math.Max(entities[i].Definition.Size.Height, entities[i].Size.Height + add.Height);
+            }
+
+            resize += add;
+        }
     }
 }

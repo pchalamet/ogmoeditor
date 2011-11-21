@@ -27,6 +27,14 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
                 e.Position = new Point(e.Position.X + move.X, e.Position.Y + move.Y);
         }
 
+        public override void Undo()
+        {
+            base.Undo();
+
+            foreach (Entity e in entities)
+                e.Position = new Point(e.Position.X - move.X, e.Position.Y - move.Y);
+        }
+
         /*
          *  To prevent a million EntityMoveAction instances sitting in the undo stack, the EntityMoveTool
          *  just tells one action to add a bit to its target position as the user continues to move the
@@ -37,14 +45,6 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
             foreach (Entity e in entities)
                 e.Position = new Point(e.Position.X + add.X, e.Position.Y + add.Y);
             move = new Point(move.X + add.X, move.Y + add.Y);
-        }
-
-        public override void Undo()
-        {
-            base.Undo();
-
-            foreach (Entity e in entities)
-                e.Position = new Point(e.Position.X - move.X, e.Position.Y - move.Y);
         }
     }
 }

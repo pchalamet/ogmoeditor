@@ -10,6 +10,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
     public class EntityResizeTool : EntityTool
     {
         private bool moving;
+        private EntityResizeAction resizeAction;
         private Point mouseStart;
         private Point moved;
 
@@ -26,7 +27,6 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                 moving = true;
                 mouseStart = location;
                 moved = Point.Empty;
-                LevelEditor.StartBatch();
             }
         }
 
@@ -38,11 +38,14 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                 if (!Util.Ctrl)
                     move = LayerEditor.Layer.Definition.SnapToGrid(move);
 
-
                 move = new Point(move.X - moved.X, move.Y - moved.Y);
                 if (move.X != 0 || move.Y != 0)
                 {
-                    LevelEditor.BatchPerform(new EntityResizeAction(LayerEditor.Layer, Ogmo.EntitySelectionWindow.Selected, new Size(move.X, move.Y)));
+                    if (resizeAction == null)
+                        LevelEditor.Perform(resizeAction = new EntityResizeAction(LayerEditor.Layer, Ogmo.EntitySelectionWindow.Selected, new Size(move.X, move.Y)));
+                    else
+                        resizeAction.DoAgain(new Size(move.X, move.Y));
+
                     moved = new Point(move.X + moved.X, move.Y + moved.Y);
                     Ogmo.EntitySelectionWindow.RefreshContents();
                 }
@@ -53,7 +56,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
         {
             if (moving)
             {
-                LevelEditor.EndBatch();
+                resizeAction = null;
                 moving = false;
             }
         }
