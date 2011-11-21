@@ -32,14 +32,14 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.applyButton = new System.Windows.Forms.Button();
             this.entitiesTabPage = new System.Windows.Forms.TabPage();
-            this.objectsEditor = new OgmoEditor.ProjectEditors.EntityDefinitionsEditor();
             this.tilesetsTabPage = new System.Windows.Forms.TabPage();
-            this.tilesetsEditor = new OgmoEditor.ProjectEditors.TilesetsEditor();
             this.layersTabPage = new System.Windows.Forms.TabPage();
-            this.layersEditor = new OgmoEditor.ProjectEditors.LayerDefinitionsEditor();
             this.settingsTabPage = new System.Windows.Forms.TabPage();
-            this.settingsEditor = new OgmoEditor.ProjectEditors.SettingsEditor();
             this.tabControl = new System.Windows.Forms.TabControl();
+            this.settingsEditor = new OgmoEditor.ProjectEditors.SettingsEditor();
+            this.layersEditor = new OgmoEditor.ProjectEditors.LayerDefinitionsEditor();
+            this.tilesetsEditor = new OgmoEditor.ProjectEditors.TilesetsEditor();
+            this.objectsEditor = new OgmoEditor.ProjectEditors.EntityDefinitionsEditor();
             this.entitiesTabPage.SuspendLayout();
             this.tilesetsTabPage.SuspendLayout();
             this.layersTabPage.SuspendLayout();
@@ -50,7 +50,7 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(504, 521);
+            this.cancelButton.Location = new System.Drawing.Point(504, 525);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 38);
             this.cancelButton.TabIndex = 2;
@@ -60,7 +60,7 @@
             // 
             // applyButton
             // 
-            this.applyButton.Location = new System.Drawing.Point(344, 521);
+            this.applyButton.Location = new System.Drawing.Point(344, 525);
             this.applyButton.Name = "applyButton";
             this.applyButton.Size = new System.Drawing.Size(154, 38);
             this.applyButton.TabIndex = 3;
@@ -73,72 +73,44 @@
             this.entitiesTabPage.Controls.Add(this.objectsEditor);
             this.entitiesTabPage.Location = new System.Drawing.Point(4, 22);
             this.entitiesTabPage.Name = "entitiesTabPage";
-            this.entitiesTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.entitiesTabPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.entitiesTabPage.Size = new System.Drawing.Size(573, 490);
             this.entitiesTabPage.TabIndex = 3;
             this.entitiesTabPage.Text = "Entities";
             this.entitiesTabPage.UseVisualStyleBackColor = true;
-            // 
-            // objectsEditor
-            // 
-            this.objectsEditor.Location = new System.Drawing.Point(-4, 0);
-            this.objectsEditor.Name = "objectsEditor";
-            this.objectsEditor.Size = new System.Drawing.Size(573, 490);
-            this.objectsEditor.TabIndex = 0;
             // 
             // tilesetsTabPage
             // 
             this.tilesetsTabPage.Controls.Add(this.tilesetsEditor);
             this.tilesetsTabPage.Location = new System.Drawing.Point(4, 22);
             this.tilesetsTabPage.Name = "tilesetsTabPage";
-            this.tilesetsTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.tilesetsTabPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tilesetsTabPage.Size = new System.Drawing.Size(573, 490);
             this.tilesetsTabPage.TabIndex = 2;
             this.tilesetsTabPage.Text = "Tilesets";
             this.tilesetsTabPage.UseVisualStyleBackColor = true;
-            // 
-            // tilesetsEditor
-            // 
-            this.tilesetsEditor.Location = new System.Drawing.Point(-4, 0);
-            this.tilesetsEditor.Name = "tilesetsEditor";
-            this.tilesetsEditor.Size = new System.Drawing.Size(573, 490);
-            this.tilesetsEditor.TabIndex = 0;
             // 
             // layersTabPage
             // 
             this.layersTabPage.Controls.Add(this.layersEditor);
             this.layersTabPage.Location = new System.Drawing.Point(4, 22);
             this.layersTabPage.Name = "layersTabPage";
-            this.layersTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.layersTabPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.layersTabPage.Size = new System.Drawing.Size(573, 490);
             this.layersTabPage.TabIndex = 1;
             this.layersTabPage.Text = "Layers";
             this.layersTabPage.UseVisualStyleBackColor = true;
-            // 
-            // layersEditor
-            // 
-            this.layersEditor.Location = new System.Drawing.Point(0, 0);
-            this.layersEditor.Name = "layersEditor";
-            this.layersEditor.Size = new System.Drawing.Size(573, 490);
-            this.layersEditor.TabIndex = 0;
             // 
             // settingsTabPage
             // 
             this.settingsTabPage.Controls.Add(this.settingsEditor);
             this.settingsTabPage.Location = new System.Drawing.Point(4, 22);
             this.settingsTabPage.Name = "settingsTabPage";
-            this.settingsTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.settingsTabPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.settingsTabPage.Size = new System.Drawing.Size(573, 490);
             this.settingsTabPage.TabIndex = 0;
             this.settingsTabPage.Text = "Settings";
             this.settingsTabPage.UseVisualStyleBackColor = true;
-            // 
-            // settingsEditor
-            // 
-            this.settingsEditor.Location = new System.Drawing.Point(0, 0);
-            this.settingsEditor.Name = "settingsEditor";
-            this.settingsEditor.Size = new System.Drawing.Size(573, 490);
-            this.settingsEditor.TabIndex = 0;
             // 
             // tabControl
             // 
@@ -155,22 +127,55 @@
             this.tabControl.Size = new System.Drawing.Size(581, 516);
             this.tabControl.TabIndex = 1;
             // 
+            // settingsEditor
+            // 
+            this.settingsEditor.Location = new System.Drawing.Point(0, 0);
+            this.settingsEditor.Margin = new System.Windows.Forms.Padding(4);
+            this.settingsEditor.Name = "settingsEditor";
+            this.settingsEditor.Size = new System.Drawing.Size(573, 490);
+            this.settingsEditor.TabIndex = 0;
+            // 
+            // layersEditor
+            // 
+            this.layersEditor.Location = new System.Drawing.Point(0, 0);
+            this.layersEditor.Margin = new System.Windows.Forms.Padding(4);
+            this.layersEditor.Name = "layersEditor";
+            this.layersEditor.Size = new System.Drawing.Size(573, 490);
+            this.layersEditor.TabIndex = 0;
+            // 
+            // tilesetsEditor
+            // 
+            this.tilesetsEditor.Location = new System.Drawing.Point(-4, 0);
+            this.tilesetsEditor.Margin = new System.Windows.Forms.Padding(4);
+            this.tilesetsEditor.Name = "tilesetsEditor";
+            this.tilesetsEditor.Size = new System.Drawing.Size(573, 490);
+            this.tilesetsEditor.TabIndex = 0;
+            // 
+            // objectsEditor
+            // 
+            this.objectsEditor.Location = new System.Drawing.Point(-4, 0);
+            this.objectsEditor.Margin = new System.Windows.Forms.Padding(4);
+            this.objectsEditor.Name = "objectsEditor";
+            this.objectsEditor.Size = new System.Drawing.Size(573, 490);
+            this.objectsEditor.TabIndex = 0;
+            // 
             // ProjectEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(584, 562);
+            this.ClientSize = new System.Drawing.Size(591, 569);
             this.Controls.Add(this.applyButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.tabControl);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(600, 600);
+            this.MaximumSize = new System.Drawing.Size(597, 597);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(600, 600);
+            this.MinimumSize = new System.Drawing.Size(597, 597);
             this.Name = "ProjectEditor";
-            this.Text = "Project Editor";
+            this.Text = " ";
             this.entitiesTabPage.ResumeLayout(false);
             this.tilesetsTabPage.ResumeLayout(false);
             this.layersTabPage.ResumeLayout(false);

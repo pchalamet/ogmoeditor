@@ -34,20 +34,5 @@ namespace OgmoEditor.LevelEditors.LayerEditors
 
             base.Draw(content, current, alpha);
         }
-
-        public override bool CanCopyOrCut()
-        {
-            return false;
-        }
-
-        public override void Copy()
-        {
-            
-        }
-
-        public override void Cut()
-        {
-           
-        }
     }
 }

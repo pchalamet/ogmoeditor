@@ -15,20 +15,5 @@ namespace OgmoEditor.LevelEditors.LayerEditors
         {
             Layer = layer;
         }
-
-        public override bool CanCopyOrCut()
-        {
-            return false;
-        }
-
-        public override void Copy()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Cut()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -37,9 +37,12 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             }
         }
 
-        public override bool CanCopyOrCut()
+        public override bool CanCopyOrCut
         {
-            return Ogmo.EntitySelectionWindow.Selected.Count > 0;
+            get
+            {
+                return Ogmo.EntitySelectionWindow.Selected.Count > 0;
+            }
         }
 
         public override void Copy()
@@ -51,6 +54,19 @@ namespace OgmoEditor.LevelEditors.LayerEditors
         {
             Ogmo.Clipboard = new EntityClipboardItem(Ogmo.EntitySelectionWindow.Selected);
             LevelEditor.Perform(new EntityRemoveAction(Layer, Ogmo.EntitySelectionWindow.Selected));
+        }
+
+        public override bool CanSelectAll
+        {
+            get
+            {
+                return Layer.Entities.Count > 0;
+            }
+        }
+
+        public override void SelectAll()
+        {
+            Ogmo.EntitySelectionWindow.SetSelection(Layer.Entities);
         }
     }
 }

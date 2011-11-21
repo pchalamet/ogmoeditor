@@ -88,8 +88,11 @@ namespace OgmoEditor.LevelEditors.LayerEditors
                 Ogmo.ToolsWindow.CurrentTool.OnMouseMove(location);
         }
 
-        public abstract bool CanCopyOrCut();
-        public abstract void Copy();
-        public abstract void Cut();
+        public virtual bool CanCopyOrCut { get { return false; } }
+        public virtual void Copy() { }
+        public virtual void Cut() { }
+
+        public virtual bool CanSelectAll { get { return false; } }
+        public virtual void SelectAll() { }
     }
 }
