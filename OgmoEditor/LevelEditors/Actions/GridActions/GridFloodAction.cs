@@ -25,6 +25,8 @@ namespace OgmoEditor.LevelEditors.Actions.GridActions
 
         public override void Do()
         {
+            base.Do();
+
             changes = new List<Point>();
             flood(CellX, CellY);
         }
@@ -45,6 +47,8 @@ namespace OgmoEditor.LevelEditors.Actions.GridActions
 
         public override void Undo()
         {
+            base.Undo();
+
             foreach (Point p in changes)
                 GridLayer.Grid[p.X, p.Y] = !SetTo;
         }

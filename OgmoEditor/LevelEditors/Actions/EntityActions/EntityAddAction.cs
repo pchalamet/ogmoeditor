@@ -19,6 +19,8 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
 
         public override void Do()
         {
+            base.Do();
+
             //Enforce entity limit defined by the entity definition
             if (Ogmo.EntitiesWindow.CurrentEntity.Limit > 0 && EntityLayer.Entities.Count(e => e.Definition == Ogmo.EntitiesWindow.CurrentEntity) == Ogmo.EntitiesWindow.CurrentEntity.Limit)
                 EntityLayer.Entities.Remove(removed = EntityLayer.Entities.Find(e => e.Definition == Ogmo.EntitiesWindow.CurrentEntity));
@@ -32,6 +34,8 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
 
         public override void Undo()
         {
+            base.Undo();
+
             //Remove the entity
             EntityLayer.Entities.Remove(added);
 

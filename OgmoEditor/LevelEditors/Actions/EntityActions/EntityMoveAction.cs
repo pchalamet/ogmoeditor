@@ -21,28 +21,25 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
 
         public override void Do()
         {
+            base.Do();
+
             foreach (Entity e in entities)
                 e.Position = new Point(e.Position.X + move.X, e.Position.Y + move.Y);
         }
 
-        public override void Undo()
+        public void DoAgain(Point add)
         {
             foreach (Entity e in entities)
+                e.Position = new Point(e.Position.X + add.X, e.Position.Y + add.Y);
+            move = new Point(move.X + add.X, move.Y + add.Y);
+        }
+
+        public override void Undo()
+        {
+            base.Undo();
+
+            foreach (Entity e in entities)
                 e.Position = new Point(e.Position.X - move.X, e.Position.Y - move.Y);
-        }
-
-        public override bool Appendable
-        {
-            get
-            {
-                return true;
-            }
-        }
-
-        public override void Append(OgmoAction action)
-        {
-            EntityMoveAction a = action as EntityMoveAction;
-            move = new Point(move.X + a.move.X, move.Y + a.move.Y);
         }
     }
 }

@@ -23,11 +23,15 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
 
         public override void Do()
         {
+            base.Do();
+
             entity.Nodes.Insert(index, node);
         }
 
         public override void Undo()
         {
+            base.Undo();
+
             entity.Nodes.RemoveAt(index);
         }
     }

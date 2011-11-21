@@ -18,6 +18,8 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
 
         public override void Do()
         {
+            base.Do();
+
             foreach (var e in toRemove)
                 EntityLayer.Entities.Remove(e);
 
@@ -26,6 +28,8 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
 
         public override void Undo()
         {
+            base.Undo();
+
             foreach (var e in toRemove)
                 EntityLayer.Entities.Add(e);
         }

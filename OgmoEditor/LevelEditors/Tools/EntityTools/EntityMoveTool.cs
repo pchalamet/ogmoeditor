@@ -10,6 +10,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
     public class EntityMoveTool : EntityTool
     {
         private bool moving;
+        private EntityMoveAction moveAction;
         private Point mouseStart;
         private Point moved;
 
@@ -17,6 +18,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
             : base("Move", "move.png", System.Windows.Forms.Keys.M)
         {
             moving = false;
+            moveAction = null;
         }
 
         public override void OnMouseLeftDown(Point location)
@@ -26,7 +28,6 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                 moving = true;
                 mouseStart = location;
                 moved = Point.Empty;
-                LevelEditor.StartBatch();
             }
         }
 
@@ -41,7 +42,10 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                 move = new Point(move.X - moved.X, move.Y - moved.Y);
                 if (move.X != 0 || move.Y != 0)
                 {
-                    LevelEditor.BatchPerform(new EntityMoveAction(LayerEditor.Layer, Ogmo.EntitySelectionWindow.Selected, move));
+                    if (moveAction != null)
+                        moveAction.DoAgain(move);
+                    else
+                        LevelEditor.Perform(moveAction = new EntityMoveAction(LayerEditor.Layer, Ogmo.EntitySelectionWindow.Selected, move));
                     moved = new Point(move.X + moved.X, move.Y + moved.Y);
                     Ogmo.EntitySelectionWindow.RefreshContents();
                 }
@@ -52,8 +56,8 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
         {
             if (moving)
             {
-                LevelEditor.EndBatch();
                 moving = false;
+                moveAction = null;
             }
         }
     }

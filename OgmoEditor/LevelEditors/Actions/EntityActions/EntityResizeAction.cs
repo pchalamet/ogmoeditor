@@ -25,6 +25,8 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
 
         public override void Do()
         {
+            base.Do();
+
             for (int i = 0; i < entities.Count; i++)
             {
                 was[i] = entities[i].Size;
@@ -37,6 +39,8 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
 
         public override void Undo()
         {
+            base.Undo();
+
             for (int i = 0; i < entities.Count; i++)
                 entities[i].Size = was[i];
         }

@@ -24,12 +24,16 @@ namespace OgmoEditor.LevelEditors.Actions.GridActions
 
         public override void Do()
         {
+            base.Do();
+
             was = GridLayer.Grid[CellX, CellY];
             GridLayer.Grid[CellX, CellY] = SetTo;
         }
 
         public override void Undo()
         {
+            base.Undo();
+
             GridLayer.Grid[CellX, CellY] = was;
         }
     }

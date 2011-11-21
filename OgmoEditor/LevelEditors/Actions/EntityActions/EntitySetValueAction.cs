@@ -21,6 +21,8 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
 
         public override void Do()
         {
+            base.Do();
+
             was = value.Content;
             value.Content = setTo;
             Ogmo.EntitySelectionWindow.RefreshContents();
@@ -28,6 +30,8 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
 
         public override void Undo()
         {
+            base.Undo();
+
             value.Content = was;
             Ogmo.EntitySelectionWindow.RefreshContents();
         }

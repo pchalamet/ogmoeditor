@@ -180,19 +180,8 @@ namespace OgmoEditor.LevelEditors
 
         public void BatchPerform(OgmoAction action)
         {
-            if (UndoStack.Last.Value.Appendable && UndoStack.Last.Value.GetType() == action.GetType())
-            {
-                //Append the action
-                OgmoAction last = UndoStack.Last.Value;
-                action.Undo();
-                last.Append(action);                
-                action.Do();
-            }
-            else
-            {
-                batch.Add(action);
-                action.Do();
-            }
+            batch.Add(action);
+            action.Do();
         }
 
         public void EndBatch()

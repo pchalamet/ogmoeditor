@@ -35,6 +35,8 @@ namespace OgmoEditor.LevelEditors.Actions.GridActions
 
         public override void Do()
         {
+            base.Do();
+
             was = new bool[Width, Height];
             for (int i = 0; i < Width; i++)
             {
@@ -48,6 +50,8 @@ namespace OgmoEditor.LevelEditors.Actions.GridActions
 
         public override void Undo()
         {
+            base.Undo();
+
             for (int i = 0; i < Width; i++)
             {
                 for (int j = 0; j < Height; j++)

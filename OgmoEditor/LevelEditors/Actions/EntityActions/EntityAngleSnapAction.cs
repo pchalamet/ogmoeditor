@@ -22,6 +22,8 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
 
         public override void Do()
         {
+            base.Do();
+
             for (int i = 0; i < entities.Count; i++)
             {
                 if (entities[i].Definition.Rotatable)
@@ -35,6 +37,8 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
 
         public override void Undo()
         {
+            base.Undo();
+
             for (int i = 0; i < entities.Count; i++)
                 entities[i].Angle = was[i];
         }
