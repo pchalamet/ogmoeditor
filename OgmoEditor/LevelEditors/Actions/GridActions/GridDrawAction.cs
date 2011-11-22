@@ -3,38 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OgmoEditor.LevelData.Layers;
+using System.Drawing;
 
 namespace OgmoEditor.LevelEditors.Actions.GridActions
 {
     public class GridDrawAction : GridAction
     {
-        public int CellX { get; private set; }
-        public int CellY { get; private set; }
-        public bool SetTo { get; private set; }
+        private bool setTo;
+        private List<Point> draw;
 
-        private bool was;
-
-        public GridDrawAction(GridLayer gridLayer, int cellX, int cellY, bool setTo)
+        public GridDrawAction(GridLayer gridLayer, Point at, bool setTo)
             : base(gridLayer)
         {
-            CellX = cellX;
-            CellY = cellY;
-            SetTo = setTo;
+            draw = new List<Point>();
+            draw.Add(at);
+            this.setTo = setTo;
         }
 
         public override void Do()
         {
             base.Do();
 
-            was = GridLayer.Grid[CellX, CellY];
-            GridLayer.Grid[CellX, CellY] = SetTo;
+            foreach (Point p in draw)
+                GridLayer.Grid[p.X, p.Y] = setTo;
         }
 
         public override void Undo()
         {
             base.Undo();
 
-            GridLayer.Grid[CellX, CellY] = was;
+            foreach (Point p in draw)
+                GridLayer.Grid[p.X, p.Y] = !setTo;
+        }
+
+        public void DoAgain(Point add)
+        {
+            GridLayer.Grid[add.X, add.Y] = setTo;
+            draw.Add(add);
         }
     }
 }

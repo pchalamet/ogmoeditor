@@ -11,6 +11,7 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
     {
         private bool drawing;
         private bool drawMode;
+        private GridDrawAction drawAction;
 
         public GridPencilTool()
             : base("Pencil", "pencil.png", System.Windows.Forms.Keys.P)
@@ -24,7 +25,6 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
             {
                 drawing = true;
                 drawMode = true;
-                LevelEditor.StartBatch();
                 setCell(location, true);
             }
         }
@@ -35,7 +35,6 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
             {
                 drawing = true;
                 drawMode = false;
-                LevelEditor.StartBatch();
                 setCell(location, false);
             }
         }
@@ -45,7 +44,7 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
             if (drawing && drawMode)
             {
                 drawing = false;
-                LevelEditor.EndBatch();
+                drawAction = null;
             }
         }
 
@@ -54,7 +53,7 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
             if (drawing && !drawMode)
             {
                 drawing = false;
-                LevelEditor.EndBatch();
+                drawAction = null;
             }
         }
 
@@ -70,7 +69,13 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
                 return;
 
             location = LayerEditor.Layer.Definition.ConvertToGrid(location);
-            LevelEditor.BatchPerform(new GridDrawAction(LayerEditor.Layer, location.X, location.Y, drawMode));
+            if (LayerEditor.Layer.Grid[location.X, location.Y] == drawMode)
+                return;
+
+            if (drawAction == null)
+                LevelEditor.Perform(drawAction = new GridDrawAction(LayerEditor.Layer, location, drawMode));
+            else
+                drawAction.DoAgain(location);
         }
     }
 }

@@ -139,6 +139,26 @@ namespace OgmoEditor.LevelData.Layers
             Ogmo.GraphicsDevice.SetRenderTarget(null);
         }
 
+        /*
+        public void RefreshTiles(params Point[] refresh)
+        {
+            Ogmo.GraphicsDevice.SetRenderTarget((RenderTarget2D)Texture);
+
+            Texture2D tiles = Ogmo.Content.TilesetTextures[Tileset];
+            Ogmo.Content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Opaque);
+            foreach (Point at in refresh)
+            {
+                if (Tiles[at.X, at.Y] == -1)
+                    Ogmo.Content.DrawRectangle(at.X * Definition.Grid.Width, at.Y * Definition.Grid.Height, Definition.Grid.Width, Definition.Grid.Height, Microsoft.Xna.Framework.Color.Transparent);
+                else
+                    Ogmo.Content.SpriteBatch.Draw(tiles, new Microsoft.Xna.Framework.Vector2(at.X * Definition.Grid.Width, at.Y * Definition.Grid.Height), Tileset.GetXNARectFromID(Tiles[at.X, at.Y]), Microsoft.Xna.Framework.Color.White);
+            }
+            Ogmo.Content.SpriteBatch.End();
+
+            Ogmo.GraphicsDevice.SetRenderTarget(null);
+        }
+         */
+
         public override LayerEditor GetEditor(LevelEditors.LevelEditor editor)
         {
             return new TileLayerEditor(editor, this);
