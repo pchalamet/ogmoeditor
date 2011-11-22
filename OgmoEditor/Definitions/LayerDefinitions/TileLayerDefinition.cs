@@ -11,12 +11,14 @@ namespace OgmoEditor.Definitions.LayerDefinitions
     {
         public enum TileExportMode { CSV, XML };
         public TileExportMode ExportMode;
+        public bool TrimEmpty;
 
         public TileLayerDefinition()
             : base()
         {
             Image = "tile.png";
             ExportMode = TileExportMode.CSV;
+            TrimEmpty = false;
         }
 
         public override System.Windows.Forms.UserControl GetEditor()
@@ -35,6 +37,7 @@ namespace OgmoEditor.Definitions.LayerDefinitions
             def.Name = Name;
             def.Grid = Grid;
             def.ExportMode = ExportMode;
+            def.TrimEmpty = TrimEmpty;
             return def;
         }
     }

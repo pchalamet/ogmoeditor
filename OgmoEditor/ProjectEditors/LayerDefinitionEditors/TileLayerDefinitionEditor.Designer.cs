@@ -30,6 +30,7 @@
         {
             this.exportModeComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.trimEmptyCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // exportModeComboBox
@@ -54,10 +55,22 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Export Mode";
             // 
+            // trimEmptyCheckBox
+            // 
+            this.trimEmptyCheckBox.AutoSize = true;
+            this.trimEmptyCheckBox.Location = new System.Drawing.Point(89, 39);
+            this.trimEmptyCheckBox.Name = "trimEmptyCheckBox";
+            this.trimEmptyCheckBox.Size = new System.Drawing.Size(78, 17);
+            this.trimEmptyCheckBox.TabIndex = 2;
+            this.trimEmptyCheckBox.Text = "Trim Empty";
+            this.trimEmptyCheckBox.UseVisualStyleBackColor = true;
+            this.trimEmptyCheckBox.CheckedChanged += new System.EventHandler(this.trimEmptyCheckBox_CheckedChanged);
+            // 
             // TileLayerDefinitionEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.trimEmptyCheckBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.exportModeComboBox);
             this.Name = "TileLayerDefinitionEditor";
@@ -71,6 +84,7 @@
 
         private System.Windows.Forms.ComboBox exportModeComboBox;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox trimEmptyCheckBox;
 
     }
 }
