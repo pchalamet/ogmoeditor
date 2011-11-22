@@ -48,6 +48,38 @@ namespace OgmoEditor.Windows
             pictureBox.Refresh();
         }
 
+        public void MoveSelectionLeft()
+        {
+            if (Selection % Tileset.TilesAcross == 0)
+                Selection += Tileset.TilesAcross;
+            Selection--;
+            pictureBox.Refresh();
+        }
+
+        public void MoveSelectionRight()
+        {
+            Selection++;
+            if (Selection % Tileset.TilesAcross == 0)
+                Selection -= Tileset.TilesAcross;
+            pictureBox.Refresh();
+        }
+
+        public void MoveSelectionUp()
+        {
+            Selection -= Tileset.TilesAcross;
+            if (Selection < 0)
+                Selection += Tileset.TilesTotal;
+            pictureBox.Refresh();
+        }
+
+        public void MoveSelectionDown()
+        {
+            Selection += Tileset.TilesAcross;
+            if (Selection >= Tileset.TilesTotal)
+                Selection -= Tileset.TilesTotal;
+            pictureBox.Refresh();
+        }
+
         /*
          *  Events
          */

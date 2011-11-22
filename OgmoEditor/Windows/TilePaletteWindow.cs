@@ -7,6 +7,7 @@ using OgmoEditor.Definitions.LayerDefinitions;
 using OgmoEditor.LevelData.Layers;
 using System.Windows.Forms;
 using OgmoEditor.Definitions;
+using System.Diagnostics;
 
 namespace OgmoEditor.Windows
 {
@@ -71,6 +72,21 @@ namespace OgmoEditor.Windows
         /*
          *  Events
          */
+        protected override void handleKeyDown(KeyEventArgs e)
+        {
+            if (EditorVisible && tileSelector.Selection != -1)
+            {
+                if (e.KeyCode == Keys.A)
+                    tileSelector.MoveSelectionLeft();
+                else if (e.KeyCode == Keys.D)
+                    tileSelector.MoveSelectionRight();
+                else if (e.KeyCode == Keys.W)
+                    tileSelector.MoveSelectionUp();
+                else if (e.KeyCode == Keys.S)
+                    tileSelector.MoveSelectionDown();
+            }
+        }
+
         private void onLayerChanged(LayerDefinition layerDefinition, int index)
         {
             EditorVisible = layerDefinition is TileLayerDefinition;
