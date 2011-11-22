@@ -15,9 +15,11 @@ namespace OgmoEditor.LevelData.Layers
     public abstract class Layer
     {
         public LayerDefinition Definition { get; private set; }
+        public Level Level { get; private set; }
 
-        public Layer(LayerDefinition definition)
+        public Layer(Level level, LayerDefinition definition)
         {
+            Level = level;
             Definition = definition;
         }
 

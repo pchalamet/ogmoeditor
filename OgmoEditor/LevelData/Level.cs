@@ -41,9 +41,6 @@ namespace OgmoEditor.LevelData
             }
             else
             {
-                //Load the default parameters
-                LoadDefault();
-
                 SavePath = "";
             }
 
@@ -73,10 +70,13 @@ namespace OgmoEditor.LevelData
 
         private void initialize()
         {
+            //Initialize size
+            Size = Project.LevelDefaultSize;
+
             //Initialize layers
             Layers = new List<Layer>();
             foreach (var def in Project.LayerDefinitions)
-                Layers.Add(def.GetInstance());
+                Layers.Add(def.GetInstance(this));
 
             //Initialize values
             if (Project.LevelValueDefinitions.Count > 0)
@@ -198,11 +198,6 @@ namespace OgmoEditor.LevelData
                 int index = Ogmo.Project.LayerDefinitions.FindIndex(d => d.Name == e.Name);
                 Layers[index].SetXML(e);
             }
-        }
-
-        public void LoadDefault()
-        {
-            Size = Project.LevelDefaultSize;
         }
 
         public void EditProperties()

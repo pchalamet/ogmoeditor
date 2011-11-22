@@ -18,10 +18,10 @@ namespace OgmoEditor.LevelData.Resizers
             Layer = gridLayer;
         }
 
-        public override void Resize(System.Drawing.Size to)
+        public override void Resize()
         {
             oldGrid = Layer.Grid;
-            Layer.Grid = new bool[to.Width / Layer.Definition.Grid.Width, to.Height / Layer.Definition.Grid.Height];
+            Layer.Grid = new bool[Layer.Level.Size.Width / Layer.Definition.Grid.Width, Layer.Level.Size.Height / Layer.Definition.Grid.Height];
 
             for (int i = 0; i < Layer.Grid.GetLength(0) && i < oldGrid.GetLength(0); i++)
                 for (int j = 0; j < Layer.Grid.GetLength(1) && j < oldGrid.GetLength(1); j++)

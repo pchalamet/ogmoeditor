@@ -14,8 +14,8 @@ namespace OgmoEditor.LevelData.Layers
         public new EntityLayerDefinition Definition { get; private set; }
         public List<Entity> Entities { get; private set; }
 
-        public EntityLayer(EntityLayerDefinition definition)
-            : base(definition)
+        public EntityLayer(Level level, EntityLayerDefinition definition)
+            : base(level, definition)
         {
             Definition = definition;
 

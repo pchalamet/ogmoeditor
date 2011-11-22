@@ -21,6 +21,7 @@ namespace OgmoEditor.LevelEditors
         public Texture2D TexBG { get; private set; }
         public Texture2D TexLogo { get; private set; }
         public Dictionary<EntityDefinition, Texture2D> EntityTextures { get; private set; }
+        public Dictionary<Tileset, Texture2D> TilesetTextures { get; private set; }
 
         public GraphicsDevice GraphicsDevice { get; private set; }
         public SpriteBatch SpriteBatch { get; private set; }
@@ -36,20 +37,28 @@ namespace OgmoEditor.LevelEditors
             TexLogo = Read("logo.png");
 
             EntityTextures = new Dictionary<EntityDefinition, Texture2D>();
+            TilesetTextures = new Dictionary<Tileset, Texture2D>();
         }
 
-        public void LoadEntityTextures(Project project)
+        public void LoadProjectTextures(Project project)
         {
             foreach (var kv in EntityTextures)
                 kv.Value.Dispose();
 
             EntityTextures.Clear();
+            TilesetTextures.Clear();
 
             foreach (EntityDefinition def in project.EntityDefinitions)
             {
                 Texture2D tex = def.GenerateTexture(GraphicsDevice);
                 if (tex != null)
                     EntityTextures.Add(def, tex);
+            }
+
+            foreach (Tileset def in project.Tilesets)
+            {
+                Texture2D tex = def.GenerateTexture(GraphicsDevice);
+                TilesetTextures.Add(def, tex);
             }
         }
 

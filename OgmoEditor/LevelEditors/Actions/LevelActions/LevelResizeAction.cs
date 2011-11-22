@@ -36,7 +36,7 @@ namespace OgmoEditor.LevelEditors.Actions.LevelActions
 
             Level.Size = newSize;
             foreach (var r in resizers)
-                r.Resize(newSize);
+                r.Resize();
         }
 
         public override void Undo()

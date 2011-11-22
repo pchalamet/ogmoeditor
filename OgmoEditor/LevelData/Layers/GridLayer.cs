@@ -16,12 +16,12 @@ namespace OgmoEditor.LevelData.Layers
         public new GridLayerDefinition Definition { get; private set; }
         public bool[,] Grid;
 
-        public GridLayer(GridLayerDefinition definition)
-            : base(definition)
+        public GridLayer(Level level, GridLayerDefinition definition)
+            : base(level, definition)
         {
             Definition = definition;
 
-            Grid = new bool[Ogmo.Project.LevelDefaultSize.Width / definition.Grid.Width, Ogmo.Project.LevelDefaultSize.Height / definition.Grid.Height];
+            Grid = new bool[Level.Size.Width / definition.Grid.Width, Level.Size.Height / definition.Grid.Height];
         }
 
         public override XmlElement GetXML(XmlDocument doc)

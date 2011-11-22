@@ -62,6 +62,11 @@ namespace OgmoEditor.Windows
             tilesetsComboBox.Enabled = (Ogmo.Project.Tilesets.Count > 1);
         }
 
+        public int Tile
+        {
+            get { return tileSelector.Selection; }
+        }
+
         /*
          *  Events
          */

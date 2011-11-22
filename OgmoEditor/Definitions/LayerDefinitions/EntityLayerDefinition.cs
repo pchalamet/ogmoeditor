@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OgmoEditor.LevelData.Layers;
+using OgmoEditor.LevelData;
 
 namespace OgmoEditor.Definitions.LayerDefinitions
 {
@@ -19,9 +20,9 @@ namespace OgmoEditor.Definitions.LayerDefinitions
             return null;
         }
 
-        public override LevelData.Layers.Layer GetInstance()
+        public override LevelData.Layers.Layer GetInstance(Level level)
         {
-            return new EntityLayer(this);
+            return new EntityLayer(level, this);
         }
 
         public override LayerDefinition Clone()

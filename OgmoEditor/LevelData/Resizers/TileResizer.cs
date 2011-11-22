@@ -18,14 +18,16 @@ namespace OgmoEditor.LevelData.Resizers
             Layer = tileLayer;
         }
 
-        public override void Resize(System.Drawing.Size to)
+        public override void Resize()
         {
             oldTiles = Layer.Tiles;
-            Layer.Tiles = new int[to.Width / Layer.Definition.Grid.Width, to.Height / Layer.Definition.Grid.Height];
+            Layer.Tiles = new int[Layer.Level.Size.Width / Layer.Definition.Grid.Width, Layer.Level.Size.Height / Layer.Definition.Grid.Height];
 
             for (int i = 0; i < Layer.Tiles.GetLength(0) && i < oldTiles.GetLength(0); i++)
                 for (int j = 0; j < Layer.Tiles.GetLength(1) && j < oldTiles.GetLength(1); j++)
                     Layer.Tiles[i, j] = oldTiles[i, j];
+
+            Layer.RefreshTexture();
         }
 
         public override void Undo()

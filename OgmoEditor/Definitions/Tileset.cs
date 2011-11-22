@@ -5,6 +5,7 @@ using System.Text;
 using System.Drawing;
 using System.IO;
 using System.Xml.Serialization;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace OgmoEditor.Definitions
 {
@@ -48,6 +49,14 @@ namespace OgmoEditor.Definitions
             return new Rectangle(x * (TileSize.Width + TileSep), y * (TileSize.Height + TileSep), TileSize.Width, TileSize.Height);
         }
 
+        public Microsoft.Xna.Framework.Rectangle GetXNARectFromID(int id)
+        {
+            int y = id / TilesAcross;
+            int x = id % TilesAcross;
+
+            return new Microsoft.Xna.Framework.Rectangle(x * (TileSize.Width + TileSep), y * (TileSize.Height + TileSep), TileSize.Width, TileSize.Height);
+        }
+
         public int TilesAcross
         {
             get
@@ -89,6 +98,14 @@ namespace OgmoEditor.Definitions
                 s.Close();
                 return image;
             }
+        }
+
+        public Texture2D GenerateTexture(GraphicsDevice graphics)
+        {
+            FileStream stream = new FileStream(Path.Combine(Ogmo.Project.SavedDirectory, FilePath), FileMode.Open, FileAccess.Read, FileShare.Read);
+            Texture2D tex = Texture2D.FromStream(graphics, stream);
+            stream.Close();
+            return tex;
         }
 
         public Rectangle Bounds

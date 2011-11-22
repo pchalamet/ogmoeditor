@@ -15,5 +15,11 @@ namespace OgmoEditor.LevelEditors.LayerEditors
         {
             Layer = layer;
         }
+
+        public override void Draw(Content content, bool current, float alpha)
+        {
+            content.SpriteBatch.Draw(Layer.Texture, Microsoft.Xna.Framework.Vector2.Zero, Microsoft.Xna.Framework.Color.White * alpha);
+            base.Draw(content, current, alpha);
+        }
     }
 }

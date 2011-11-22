@@ -4,21 +4,20 @@ using System.Linq;
 using System.Text;
 using OgmoEditor.ProjectEditors.LayerDefinitionEditors;
 using OgmoEditor.LevelData.Layers;
+using OgmoEditor.LevelData;
 
 namespace OgmoEditor.Definitions.LayerDefinitions
 {
     public class TileLayerDefinition : LayerDefinition
     {
-        public enum TileExportMode { CSV, XML };
+        public enum TileExportMode { CSV, TrimmedCSV, XML };
         public TileExportMode ExportMode;
-        public bool TrimEmpty;
 
         public TileLayerDefinition()
             : base()
         {
             Image = "tile.png";
             ExportMode = TileExportMode.CSV;
-            TrimEmpty = false;
         }
 
         public override System.Windows.Forms.UserControl GetEditor()
@@ -26,9 +25,9 @@ namespace OgmoEditor.Definitions.LayerDefinitions
             return new TileLayerDefinitionEditor(this);
         }
 
-        public override LevelData.Layers.Layer GetInstance()
+        public override LevelData.Layers.Layer GetInstance(Level level)
         {
-            return new TileLayer(this);
+            return new TileLayer(level, this);
         }
 
         public override LayerDefinition Clone()
@@ -37,7 +36,6 @@ namespace OgmoEditor.Definitions.LayerDefinitions
             def.Name = Name;
             def.Grid = Grid;
             def.ExportMode = ExportMode;
-            def.TrimEmpty = TrimEmpty;
             return def;
         }
     }

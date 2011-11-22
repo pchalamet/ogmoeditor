@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Xml.Serialization;
 using System.Windows.Forms;
 using OgmoEditor.LevelData.Layers;
+using OgmoEditor.LevelData;
 
 namespace OgmoEditor.Definitions.LayerDefinitions
 {
@@ -43,7 +44,7 @@ namespace OgmoEditor.Definitions.LayerDefinitions
             throw new NotImplementedException();
         }
 
-        public virtual Layer GetInstance()
+        public virtual Layer GetInstance(Level level)
         {
             throw new NotImplementedException();
         }

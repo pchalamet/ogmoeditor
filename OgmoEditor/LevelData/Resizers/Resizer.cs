@@ -16,7 +16,7 @@ namespace OgmoEditor.LevelData.Resizers
             Layer = layer;
         }
 
-        public abstract void Resize(Size to);
+        public abstract void Resize();
         public abstract void Undo();
     }
 }

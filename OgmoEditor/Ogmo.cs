@@ -166,7 +166,7 @@ namespace OgmoEditor
 
             //Start the project
             StartProject(project);
-            Content.LoadEntityTextures(Project);
+            Content.LoadProjectTextures(Project);
 
             //Start a blank level and start at the first layer
             LayersWindow.SetLayer(0);
@@ -243,7 +243,7 @@ namespace OgmoEditor
 
                 //Save the project
                 Project.Save();
-                Content.LoadEntityTextures(Project);
+                Content.LoadProjectTextures(Project);
 
                 //Call the event
                 if (OnProjectEdited != null)

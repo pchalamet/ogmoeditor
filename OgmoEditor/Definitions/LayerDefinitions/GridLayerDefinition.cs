@@ -5,6 +5,7 @@ using System.Text;
 using System.Drawing;
 using OgmoEditor.ProjectEditors.LayerDefinitionEditors;
 using OgmoEditor.LevelData.Layers;
+using OgmoEditor.LevelData;
 
 namespace OgmoEditor.Definitions.LayerDefinitions
 {
@@ -30,9 +31,9 @@ namespace OgmoEditor.Definitions.LayerDefinitions
             return new GridLayerDefinitionEditor(this);
         }
 
-        public override LevelData.Layers.Layer GetInstance()
+        public override LevelData.Layers.Layer GetInstance(Level level)
         {
-            return new GridLayer(this);
+            return new GridLayer(level, this);
         }
 
         public override LayerDefinition Clone()
