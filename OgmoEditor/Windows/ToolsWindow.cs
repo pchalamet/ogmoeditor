@@ -6,6 +6,7 @@ using OgmoEditor.LevelEditors.Tools;
 using OgmoEditor.Definitions.LayerDefinitions;
 using OgmoEditor.LevelEditors.Tools.GridTools;
 using OgmoEditor.LevelEditors.Tools.EntityTools;
+using OgmoEditor.LevelEditors.Tools.TileTools;
 
 namespace OgmoEditor.Windows
 {
@@ -30,7 +31,7 @@ namespace OgmoEditor.Windows
             //Initialize the tool lists
             toolsForLayerTypes = new Dictionary<Type, Tool[]>();
             toolsForLayerTypes.Add(typeof(GridLayerDefinition), new Tool[] { new GridPencilTool(), new GridFloodTool(), new GridRectangleTool(), new GridLineTool() });
-            toolsForLayerTypes.Add(typeof(TileLayerDefinition), new Tool[] { });
+            toolsForLayerTypes.Add(typeof(TileLayerDefinition), new Tool[] { new TilePencilTool(), new TileEyedropperTool() });
             toolsForLayerTypes.Add(typeof(EntityLayerDefinition), new Tool[] { new EntityPlacementTool(), new EntityEraseTool(), new EntitySelectionTool(), new EntityMoveTool(), new EntityResizeTool(), new EntityRotateTool(), new EntityAddNodeTool(), new EntityInsertNodeTool() });
 
             //Events

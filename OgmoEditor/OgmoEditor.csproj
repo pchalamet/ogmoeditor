@@ -133,6 +133,8 @@
     <Compile Include="LevelEditors\Tools\GridTools\GridPencilTool.cs" />
     <Compile Include="LevelEditors\Tools\GridTools\GridRectangleTool.cs" />
     <Compile Include="LevelEditors\Tools\EntityTools\EntityPlacementTool.cs" />
+    <Compile Include="LevelEditors\Tools\TileTools\TileEyedropperTool.cs" />
+    <Compile Include="LevelEditors\Tools\TileTools\TilePencilTool.cs" />
     <Compile Include="LevelEditors\ValueEditors\BoolValueEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -527,6 +529,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\tools\eraser.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\tools\eyedropper.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\tools\flood.png">

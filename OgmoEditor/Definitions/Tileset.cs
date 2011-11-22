@@ -91,6 +91,17 @@ namespace OgmoEditor.Definitions
             }
         }
 
+        public Rectangle Bounds
+        {
+            get
+            {
+                if (Image == null)
+                    return Rectangle.Empty;
+                else
+                    return new Rectangle(0, 0, Image.Width, Image.Height);
+            }
+        }
+
         public Size Size
         {
             get

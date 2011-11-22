@@ -30,7 +30,7 @@ namespace OgmoEditor.Windows
             set
             {
                 tileset = value;
-                Selection = 0;
+                Selection = -1;
                 if (Tileset != null)
                     calculateScale();
                 pictureBox.Refresh();
@@ -58,8 +58,11 @@ namespace OgmoEditor.Windows
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
                 g.DrawImage(tileset.Image, x, y, tileset.Image.Width * scale, tileset.Image.Height * scale);
 
-                Rectangle r = tileset.GetRectFromID(Selection);
-                g.DrawRectangle(new Pen(Color.Lime), x + r.X * scale, y + r.Y * scale, r.Width * scale, r.Height * scale);
+                if (Selection != -1)
+                {
+                    Rectangle r = tileset.GetRectFromID(Selection);
+                    g.DrawRectangle(new Pen(Color.Lime), x + r.X * scale, y + r.Y * scale, r.Width * scale, r.Height * scale);
+                }
             }
         }
 
@@ -77,6 +80,13 @@ namespace OgmoEditor.Windows
                 p.X -= (int)(pictureBox.Width / 2 - tileset.Image.Width / 2 * scale);
                 p.Y -= (int)(pictureBox.Height / 2 - tileset.Image.Height / 2 * scale);
                 p = new Point((int)(p.X / scale), (int)(p.Y / scale));
+
+                if (!tileset.Bounds.Contains(p))
+                {
+                    Selection = -1;
+                    pictureBox.Refresh();
+                    return;
+                }
 
                 for (int i = 0; i < tileset.TilesTotal; i++)
                 {
