@@ -15,12 +15,14 @@ namespace OgmoEditor.LevelData.Layers
     {
         public new TileLayerDefinition Definition { get; private set; }
         public Tileset Tileset;
+        public int[,] Tiles;
 
         public TileLayer(TileLayerDefinition definition)
             : base(definition)
         {
             Definition = definition;
             Tileset = Ogmo.Project.Tilesets[0];
+            Tiles = new int[Ogmo.Project.LevelDefaultSize.Width / definition.Grid.Width, Ogmo.Project.LevelDefaultSize.Height / definition.Grid.Height];
         }
 
         public override XmlElement GetXML(XmlDocument doc)
@@ -40,7 +42,7 @@ namespace OgmoEditor.LevelData.Layers
 
         public override Resizer GetResizer()
         {
-            return null;
+            return new TileResizer(this);
         }
     }
 }

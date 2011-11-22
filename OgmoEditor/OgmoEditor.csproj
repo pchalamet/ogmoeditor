@@ -100,6 +100,7 @@
     <Compile Include="LevelData\Layers\Value.cs" />
     <Compile Include="LevelData\Resizers\GridResizer.cs" />
     <Compile Include="LevelData\Resizers\Resizer.cs" />
+    <Compile Include="LevelData\Resizers\TileResizer.cs" />
     <Compile Include="LevelEditors\Actions\ActionBatch.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntityAddNodeAction.cs" />
     <Compile Include="LevelEditors\Actions\EntityActions\EntityAngleSnapAction.cs" />
