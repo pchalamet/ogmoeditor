@@ -65,6 +65,7 @@ namespace OgmoEditor.Windows
         public int Tile
         {
             get { return tileSelector.Selection; }
+            set { tileSelector.SetSelection(value); }
         }
 
         /*
