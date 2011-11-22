@@ -136,7 +136,10 @@
     <Compile Include="LevelEditors\Tools\GridTools\GridRectangleTool.cs" />
     <Compile Include="LevelEditors\Tools\EntityTools\EntityPlacementTool.cs" />
     <Compile Include="LevelEditors\Tools\TileTools\TileEyedropperTool.cs" />
+    <Compile Include="LevelEditors\Tools\TileTools\TileFloodTool.cs" />
+    <Compile Include="LevelEditors\Tools\TileTools\TileLineTool.cs" />
     <Compile Include="LevelEditors\Tools\TileTools\TilePencilTool.cs" />
+    <Compile Include="LevelEditors\Tools\TileTools\TileRectangleTool.cs" />
     <Compile Include="LevelEditors\ValueEditors\BoolValueEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
