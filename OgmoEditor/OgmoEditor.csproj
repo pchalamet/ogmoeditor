@@ -117,6 +117,7 @@
     <Compile Include="LevelEditors\Actions\EntityActions\EntityAddAction.cs" />
     <Compile Include="LevelEditors\Actions\LevelActions\LevelResizeAction.cs" />
     <Compile Include="LevelEditors\Actions\TileActions\TileDrawAction.cs" />
+    <Compile Include="LevelEditors\Actions\TileActions\TileFloodAction.cs" />
     <Compile Include="LevelEditors\LevelProperties.cs">
       <SubType>Form</SubType>
     </Compile>
