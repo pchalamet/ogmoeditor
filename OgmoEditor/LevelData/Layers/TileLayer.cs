@@ -52,8 +52,14 @@ namespace OgmoEditor.LevelData.Layers
                 {
                     for (int i = 0; i < rows.Length; i++)
                     {
-                        while (rows[i].LastIndexOf(",-1") == rows[i].Length - 3)
+                        int index = rows[i].LastIndexOf(",-1");
+                        while (index != -1 && index == rows[i].Length - 3)
+                        {
                             rows[i] = rows[i].Substring(0, rows[i].Length - 3);
+                            index = rows[i].LastIndexOf(",-1");
+                        }
+                        if (rows[i] == "-1")
+                            rows[i] = "";
                     }
                 }
 
