@@ -77,29 +77,21 @@ namespace OgmoEditor.LevelData.Layers
                 string s = xml.InnerText;
                 int x = 0;
                 int y = 0;
-                for (int i = 0; i < s.Length; i++)
-                {
-                    if (s[i] == ',')
-                        x++;
-                    else if (s[i] == '\n')
-                    {
-                        x = 0;
-                        y++;
-                    }
-                    else
-                    {
-                        int len = s.IndexOf(',', i) - i;
-                        Tiles[x, y] = Convert.ToInt32(s.Substring(i, len));
 
-                        x++;
-                        i += (len - 1);
-                    }
+                string[] rows = s.Split('\n');
+                for (int i = 0; i < rows.Length; i++)
+                {
+                    string[] tiles = rows[i].Split(',');
+                    for (int j = 0; j < tiles.Length; j++)
+                        Tiles[j, i] = Convert.ToInt32(tiles[j]);
                 }
             }
             else if (Definition.ExportMode == TileLayerDefinition.TileExportMode.XML)
             {
 
             }
+
+            RefreshTexture();
         }
 
         public void Clear()
