@@ -13,7 +13,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
     public class EntityPlacementTool : EntityTool
     {
         public EntityPlacementTool()
-            : base("Create", "pencil.png", System.Windows.Forms.Keys.P)
+            : base("Create", "pencil.png", System.Windows.Forms.Keys.Q)
         {
 
         }

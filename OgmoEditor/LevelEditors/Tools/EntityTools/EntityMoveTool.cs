@@ -15,7 +15,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
         private Point moved;
 
         public EntityMoveTool()
-            : base("Move", "move.png", System.Windows.Forms.Keys.M)
+            : base("Move", "move.png", System.Windows.Forms.Keys.R)
         {
             moving = false;
             moveAction = null;

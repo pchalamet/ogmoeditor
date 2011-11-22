@@ -14,7 +14,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
         private bool drawing;
 
         public EntityEraseTool()
-            : base("Erase", "eraser.png", System.Windows.Forms.Keys.E)
+            : base("Erase", "eraser.png", System.Windows.Forms.Keys.W)
         {
             drawing = false;
         }

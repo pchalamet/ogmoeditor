@@ -14,7 +14,7 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
         private GridDrawAction drawAction;
 
         public GridPencilTool()
-            : base("Pencil", "pencil.png", System.Windows.Forms.Keys.P)
+            : base("Pencil", "pencil.png", System.Windows.Forms.Keys.Q)
         {
             drawing = false;
         }

@@ -15,7 +15,7 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
         private Point mouse;
 
         public GridLineTool()
-            : base("Line", "line.png", System.Windows.Forms.Keys.L)
+            : base("Line", "line.png", System.Windows.Forms.Keys.R)
         {
             drawing = false;
         }

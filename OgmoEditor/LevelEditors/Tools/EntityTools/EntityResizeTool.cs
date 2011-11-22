@@ -15,7 +15,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
         private Point moved;
 
         public EntityResizeTool()
-            : base("Resize", "resize.png", System.Windows.Forms.Keys.R)
+            : base("Resize", "resize.png", System.Windows.Forms.Keys.T)
         {
             moving = false;
         }
