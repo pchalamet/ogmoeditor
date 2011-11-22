@@ -9,7 +9,7 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
     public class GridFloodTool : GridTool
     {
         public GridFloodTool()
-            : base("Flood Fill", "flood.png", System.Windows.Forms.Keys.W)
+            : base("Flood Fill", "flood.png")
         {
             
         }

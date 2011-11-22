@@ -11,7 +11,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
     public class EntityAddNodeTool : EntityTool
     {
         public EntityAddNodeTool()
-            : base("Add Node", "addNode.png", System.Windows.Forms.Keys.S)
+            : base("Add Node", "addNode.png")
         {
 
         }

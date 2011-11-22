@@ -8,7 +8,7 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
     public class TileRectangleTool : TileTool
     {
         public TileRectangleTool()
-            : base("Rectangle", "rectangle.png", System.Windows.Forms.Keys.R)
+            : base("Rectangle", "rectangle.png")
         {
 
         }

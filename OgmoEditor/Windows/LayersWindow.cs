@@ -35,7 +35,7 @@ namespace OgmoEditor.Windows
 
         protected override void handleKeyDown(KeyEventArgs e)
         {
-            if (e.KeyCode >= Keys.D1 && e.KeyCode <= Keys.D9)
+            if (e.Control && e.KeyCode >= Keys.D1 && e.KeyCode <= Keys.D9)
             {
                 int i = (int)e.KeyCode - (int)Keys.D1;
                 if (i < Ogmo.Project.LayerDefinitions.Count)

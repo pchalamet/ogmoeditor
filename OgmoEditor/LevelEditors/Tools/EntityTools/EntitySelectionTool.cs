@@ -13,7 +13,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
         private bool drawing;
 
         public EntitySelectionTool()
-            : base("Select", "selection.png", System.Windows.Forms.Keys.E)
+            : base("Select", "selection.png")
         {
 
         }

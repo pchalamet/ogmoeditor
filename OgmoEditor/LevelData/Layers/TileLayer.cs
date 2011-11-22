@@ -81,8 +81,6 @@ namespace OgmoEditor.LevelData.Layers
             {
                 //CSV Import
                 string s = xml.InnerText;
-                int x = 0;
-                int y = 0;
 
                 string[] rows = s.Split('\n');
                 for (int i = 0; i < rows.Length; i++)

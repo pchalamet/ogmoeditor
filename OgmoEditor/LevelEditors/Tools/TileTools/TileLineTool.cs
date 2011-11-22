@@ -8,7 +8,7 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
     public class TileLineTool : TileTool
     {
         public TileLineTool()
-            : base("Line", "line.png", System.Windows.Forms.Keys.T)
+            : base("Line", "line.png")
         {
 
         }

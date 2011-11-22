@@ -16,7 +16,6 @@ namespace OgmoEditor.Windows
         public event Ogmo.ToolCallback OnToolChanged;
 
         private Dictionary<Type, Tool[]> toolsForLayerTypes;
-        private Dictionary<Keys, Tool> hotkeys;
         private Tool[] tools;
 
         public ToolsWindow()
@@ -79,8 +78,12 @@ namespace OgmoEditor.Windows
 
         protected override void handleKeyDown(KeyEventArgs e)
         {
-            if (hotkeys != null && hotkeys.ContainsKey(e.KeyCode))
-                SetTool(hotkeys[e.KeyCode]);
+            if (!e.Control && e.KeyCode >= Keys.D1 && e.KeyCode <= Keys.D9)
+            {
+                int i = (int)e.KeyCode - (int)Keys.D1;
+                if (i < tools.Length)
+                    SetTool(tools[i]);
+            }
         }
 
         /*
@@ -98,13 +101,9 @@ namespace OgmoEditor.Windows
             if (def != null)
             {
                 tools = toolsForLayerTypes[def.GetType()];
-                hotkeys = new Dictionary<Keys, Tool>();
 
                 for (int i = 0; i < tools.Length; i++)
-                {
-                    Controls.Add(new ToolButton(tools[i], (i % 2) * 24, (i / 2) * 24));
-                    hotkeys.Add(tools[i].Hotkey, tools[i]);
-                }
+                    Controls.Add(new ToolButton(tools[i], (i % 2) * 24, (i / 2) * 24, i));
 
                 if (tools.Length > 0)
                     SetTool(tools[0]); 

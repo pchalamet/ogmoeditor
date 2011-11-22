@@ -8,7 +8,7 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
     public class TileEyedropperTool : TileTool
     {
         public TileEyedropperTool()
-            : base("Eyedropper", "eyedropper.png", System.Windows.Forms.Keys.W)
+            : base("Eyedropper", "eyedropper.png")
         {
 
         }

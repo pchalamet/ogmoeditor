@@ -15,7 +15,7 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
         private Point drawTo;
 
         public GridRectangleTool()
-            : base("Rectangle", "rectangle.png", System.Windows.Forms.Keys.E)
+            : base("Rectangle", "rectangle.png")
         {
             drawing = false;
         }

@@ -10,8 +10,8 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
 {
     public abstract class EntityTool : Tool
     {
-        public EntityTool(string name, string image, Keys hotkey)
-            : base(name, image, hotkey)
+        public EntityTool(string name, string image)
+            : base(name, image)
         {
 
         }

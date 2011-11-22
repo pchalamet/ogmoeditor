@@ -17,7 +17,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
         private EntityRotateAction rotateAction;
 
         public EntityRotateTool()
-            : base("Rotate", "rotate.png", System.Windows.Forms.Keys.A)
+            : base("Rotate", "rotate.png")
         {
 
         }

@@ -10,8 +10,8 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
 {
     public abstract class TileTool : Tool
     {
-        public TileTool(string name, string image, Keys hotkey)
-            : base(name, image, hotkey)
+        public TileTool(string name, string image)
+            : base(name, image)
         {
 
         }

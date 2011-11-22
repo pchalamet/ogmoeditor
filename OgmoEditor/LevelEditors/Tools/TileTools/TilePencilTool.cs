@@ -14,7 +14,7 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
         private TileDrawAction drawAction;
 
         public TilePencilTool()
-            : base("Pencil", "pencil.png", System.Windows.Forms.Keys.Q)
+            : base("Pencil", "pencil.png")
         {
             drawing = false;
         }

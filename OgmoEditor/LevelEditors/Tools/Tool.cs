@@ -12,13 +12,11 @@ namespace OgmoEditor.LevelEditors.Tools
     {
         public string Name { get; private set; }
         public string Image { get; private set; }
-        public Keys Hotkey { get; private set; }
 
-        public Tool(string name, string image, Keys hotkey)
+        public Tool(string name, string image)
         {
             Name = name;
             Image = image;
-            Hotkey = hotkey;
         }
 
         public virtual void SwitchTo()

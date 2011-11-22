@@ -18,15 +18,17 @@ namespace OgmoEditor.Windows
         static private readonly OgmoColor NotSelected = new OgmoColor(255, 255, 255);
 
         public Tool Tool { get; private set; }
+        private int num;
 
-        public ToolButton(Tool tool, int x, int y)
+        public ToolButton(Tool tool, int x, int y, int num)
         {
             Tool = tool;
             Location = new Point(x, y);
+            this.num = num;
 
             InitializeComponent();
             button.BackgroundImage = Image.FromFile(Path.Combine(Ogmo.ProgramDirectory, @"Content\tools", Tool.Image));
-            toolTip.SetToolTip(button, Tool.Name + " (" + Tool.Hotkey.ToString() + ")");
+            toolTip.SetToolTip(button, Tool.Name + " (" + (num + 1).ToString() + ")");
             button.BackColor = (tool == Ogmo.ToolsWindow.CurrentTool) ? Selected : NotSelected;
 
             //Events

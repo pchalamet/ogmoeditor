@@ -10,8 +10,8 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
 {
     public abstract class GridTool : Tool
     {
-        public GridTool(string name, string image, Keys hotkey)
-            : base(name, image, hotkey)
+        public GridTool(string name, string image)
+            : base(name, image)
         {
 
         }
