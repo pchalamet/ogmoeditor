@@ -234,5 +234,12 @@ namespace OgmoEditor.LevelData.Layers
             return new Entity(this);
         }
 
+        public void MoveNodes(Point move)
+        {
+            if (Nodes != null)
+                for (int i = 0; i < Nodes.Count; i++)
+                    Nodes[i] = new Point(Nodes[i].X + move.X, Nodes[i].Y + move.Y);
+        }
+
     }
 }

@@ -24,7 +24,10 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
             base.Do();
 
             foreach (Entity e in entities)
+            {
                 e.Position = new Point(e.Position.X + move.X, e.Position.Y + move.Y);
+                e.MoveNodes(move);
+            }
         }
 
         public override void Undo()
@@ -32,7 +35,10 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
             base.Undo();
 
             foreach (Entity e in entities)
+            {
                 e.Position = new Point(e.Position.X - move.X, e.Position.Y - move.Y);
+                e.MoveNodes(new Point(-move.X, -move.Y));
+            }
         }
 
         /*
@@ -43,7 +49,10 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
         public void DoAgain(Point add)
         {
             foreach (Entity e in entities)
+            {
                 e.Position = new Point(e.Position.X + add.X, e.Position.Y + add.Y);
+                e.MoveNodes(add);
+            }
             move = new Point(move.X + add.X, move.Y + add.Y);
         }
     }
