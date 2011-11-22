@@ -9,26 +9,47 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
 {
     public class TileDrawAction : TileAction
     {
-        private Point at;
         private int setTo;
-        private int was;
+        private List<Point> draw;
+        private List<int> was;
 
         public TileDrawAction(TileLayer tileLayer, Point at, int setTo)
             : base(tileLayer)
         {
-            this.at = at;
             this.setTo = setTo;
+
+            draw = new List<Point>();
+            draw.Add(at);
+
+            was = new List<int>();
         }
 
         public override void Do()
         {
-            was = TileLayer.Tiles[at.X, at.Y];
-            TileLayer.Tiles[at.X, at.Y] = setTo;
+            foreach (var at in draw)
+            {
+                was.Add(TileLayer.Tiles[at.X, at.Y]);
+                TileLayer.Tiles[at.X, at.Y] = setTo;
+            }
+
+            TileLayer.RefreshTexture();
         }
 
         public override void Undo()
         {
-            TileLayer.Tiles[at.X, at.Y] = was;
+            for (int i = 0; i < draw.Count; i++)
+                TileLayer.Tiles[draw[i].X, draw[i].Y] = was[i];
+
+            TileLayer.RefreshTexture();
+        }
+
+        public void DoAgain(Point add)
+        {
+            draw.Add(add);
+            was.Add(TileLayer.Tiles[add.X, add.Y]);
+            TileLayer.Tiles[add.X, add.Y] = setTo;
+
+            TileLayer.RefreshTexture();
         }
     }
 }

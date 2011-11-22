@@ -69,11 +69,11 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
                 return;
 
             location = LayerEditor.Layer.Definition.ConvertToGrid(location);
-            if (LayerEditor.Layer.Grid[location.X, location.Y] == drawMode)
+            if (LayerEditor.Layer.Grid[location.X, location.Y] == setTo)
                 return;
 
             if (drawAction == null)
-                LevelEditor.Perform(drawAction = new GridDrawAction(LayerEditor.Layer, location, drawMode));
+                LevelEditor.Perform(drawAction = new GridDrawAction(LayerEditor.Layer, location, setTo));
             else
                 drawAction.DoAgain(location);
         }
