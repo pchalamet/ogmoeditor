@@ -5,6 +5,7 @@ using System.Text;
 using OgmoEditor.LevelData.Layers;
 using System.Windows.Forms;
 using OgmoEditor.LevelEditors.LayerEditors;
+using System.Drawing;
 
 namespace OgmoEditor.LevelEditors.Tools.TileTools
 {
@@ -19,6 +20,11 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
         public TileLayerEditor LayerEditor
         {
             get { return (TileLayerEditor)LevelEditor.LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex]; }
+        }
+
+        public bool IsValidTileCell(Point cell)
+        {
+            return cell.X >= 0 && cell.Y >= 0 && cell.X < LayerEditor.Layer.Tiles.GetLength(0) && cell.Y < LayerEditor.Layer.Tiles.GetLength(1);
         }
     }
 }

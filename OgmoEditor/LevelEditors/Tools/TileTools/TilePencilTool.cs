@@ -67,11 +67,8 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
 
         private void setTile(System.Drawing.Point location, int setTo)
         {
-            if (!LevelEditor.Level.Bounds.Contains(location))
-                return;
-
             location = LayerEditor.Layer.Definition.ConvertToGrid(location);
-            if (LayerEditor.Layer.Tiles[location.X, location.Y] == setTo)
+            if (!IsValidTileCell(location) || LayerEditor.Layer.Tiles[location.X, location.Y] == setTo)
                 return;
 
             if (drawAction == null)
