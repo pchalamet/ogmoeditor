@@ -99,11 +99,14 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
                 r.Y = 0;
             }
 
-            if (r.X + r.Width > LevelEditor.Level.Size.Width)
-                r.Width = LevelEditor.Level.Size.Width - r.X;
+            int width = LayerEditor.Layer.Grid.GetLength(0) * LayerEditor.Layer.Definition.Grid.Width;
+            int height = LayerEditor.Layer.Grid.GetLength(1) * LayerEditor.Layer.Definition.Grid.Height;
 
-            if (r.Y + r.Height > LevelEditor.Level.Size.Height)
-                r.Height = LevelEditor.Level.Size.Height - r.Y;
+            if (r.X + r.Width > width)
+                r.Width = width - r.X;
+
+            if (r.Y + r.Height > height)
+                r.Height = height - r.Y;
 
             return r;
         }
