@@ -65,11 +65,8 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
 
         private void setCell(System.Drawing.Point location, bool setTo)
         {
-            if (!LevelEditor.Level.Bounds.Contains(location))
-                return;
-
             location = LayerEditor.Layer.Definition.ConvertToGrid(location);
-            if (LayerEditor.Layer.Grid[location.X, location.Y] == setTo)
+            if (!IsValidGridCell(location) || LayerEditor.Layer.Grid[location.X, location.Y] == setTo)
                 return;
 
             if (drawAction == null)

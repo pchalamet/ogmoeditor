@@ -16,21 +16,15 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
 
         public override void OnMouseLeftClick(System.Drawing.Point location)
         {
-            if (!LevelEditor.Level.Bounds.Contains(location))
-                return;
-
             location = LayerEditor.Layer.Definition.ConvertToGrid(location);
-            if (!LayerEditor.Layer.Grid[location.X, location.Y])
+            if (IsValidGridCell(location) && !LayerEditor.Layer.Grid[location.X, location.Y])
                 LevelEditor.Perform(new GridFloodAction(LayerEditor.Layer, location.X, location.Y, true)); 
         }
 
         public override void OnMouseRightClick(System.Drawing.Point location)
         {
-            if (!LevelEditor.Level.Bounds.Contains(location))
-                return;
-
             location = LayerEditor.Layer.Definition.ConvertToGrid(location);
-            if (LayerEditor.Layer.Grid[location.X, location.Y])
+            if (IsValidGridCell(location) && LayerEditor.Layer.Grid[location.X, location.Y])
                 LevelEditor.Perform(new GridFloodAction(LayerEditor.Layer, location.X, location.Y, false));
         }
     }

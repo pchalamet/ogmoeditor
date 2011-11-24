@@ -112,13 +112,15 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
                 {
                     if (steep)
                     {
-                        if (y < LayerEditor.Layer.Grid.GetLength(0) && x < LayerEditor.Layer.Grid.GetLength(1))
-                            points.Add(new Point(y, x));
+                        Point p = new Point(y, x);
+                        if (IsValidGridCell(p))
+                            points.Add(p);
                     }
                     else
                     {
-                        if (x < LayerEditor.Layer.Grid.GetLength(0) && y < LayerEditor.Layer.Grid.GetLength(1))
-                            points.Add(new Point(x, y));
+                        Point p = new Point(x, y);
+                        if (IsValidGridCell(p))
+                            points.Add(p);
                     }
                 }
 
