@@ -141,5 +141,10 @@ namespace OgmoEditor.Definitions
                 return image;
             }
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

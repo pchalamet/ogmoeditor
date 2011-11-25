@@ -8,6 +8,7 @@ using OgmoEditor.LevelData.Layers;
 using System.Windows.Forms;
 using OgmoEditor.Definitions;
 using System.Diagnostics;
+using OgmoEditor.LevelEditors.Actions.TileActions;
 
 namespace OgmoEditor.Windows
 {
@@ -30,6 +31,7 @@ namespace OgmoEditor.Windows
             tilesetsComboBox.Width = 104;
             tilesetsComboBox.Enabled = false;
             tilesetsComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            tilesetsComboBox.SelectionChangeCommitted += new EventHandler(tilesetsComboBox_SelectionChangeCommitted);
             Controls.Add(tilesetsComboBox);
 
             Label tilesetsLabel = new Label();
@@ -58,7 +60,7 @@ namespace OgmoEditor.Windows
         {
             tilesetsComboBox.Items.Clear();
             foreach (Tileset t in Ogmo.Project.Tilesets)
-                tilesetsComboBox.Items.Add(t.Name);
+                tilesetsComboBox.Items.Add(t);
             tilesetsComboBox.SelectedIndex = (Ogmo.Project.Tilesets.Count > 0) ? 0 : -1;
             tilesetsComboBox.Enabled = (Ogmo.Project.Tilesets.Count > 1);
         }
@@ -67,6 +69,11 @@ namespace OgmoEditor.Windows
         {
             get { return tileSelector.Selection; }
             set { tileSelector.SetSelection(value); }
+        }
+
+        public void SetTileset(Tileset to)
+        {
+            tilesetsComboBox.SelectedItem = to;
         }
 
         /*
@@ -100,6 +107,11 @@ namespace OgmoEditor.Windows
         private void TilePaletteWindow_ResizeEnd(object sender, EventArgs e)
         {
             tileSelector.Size = new Size(ClientSize.Width - 8, ClientSize.Height - 34);
+        }
+
+        private void  tilesetsComboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            Ogmo.MainWindow.LevelEditors[Ogmo.CurrentLevelIndex].Perform(new TileSetTilesetAction(Ogmo.LayersWindow.CurrentLayer as TileLayer, tilesetsComboBox.SelectedItem as Tileset));
         }
     }
 }
