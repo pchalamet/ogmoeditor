@@ -103,6 +103,7 @@ namespace OgmoEditor.ProjectEditors
             {
                 imageSizeLabel.Visible = false;
                 totalTilesLabel.Visible = false;
+                imagePreviewer.ClearImage();
             }
             else
             {

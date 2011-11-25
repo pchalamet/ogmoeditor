@@ -54,11 +54,7 @@ namespace OgmoEditor
 
         public void ClearImage()
         {
-            if (image != null)
-            {
-                image.Dispose();
-                image = null;
-            }
+            image = null;
             pictureBox.Refresh();
         }
 
