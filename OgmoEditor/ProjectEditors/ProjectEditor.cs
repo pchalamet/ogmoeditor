@@ -21,6 +21,7 @@ namespace OgmoEditor.ProjectEditors
 
         public ProjectEditor(Project project, bool autoClose = false)
         {
+            this.Text = "Project Editor - " + project.Name;
             this.oldProject = project;
             this.autoClose = autoClose;
             InitializeComponent();
