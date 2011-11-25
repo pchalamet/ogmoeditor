@@ -25,6 +25,7 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
             was = TileLayer.Tileset;
             TileLayer.Tileset = setTo;
 
+            TileLayer.RefreshTexture();
             Ogmo.TilePaletteWindow.SetTileset(setTo);
         }
 
@@ -34,6 +35,7 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
 
             TileLayer.Tileset = was;
 
+            TileLayer.RefreshTexture();
             Ogmo.TilePaletteWindow.SetTileset(was);
         }
     }
