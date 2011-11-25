@@ -94,9 +94,7 @@ namespace OgmoEditor.LevelData.Layers
                             xml.AppendChild(tile);
                         }
                     }
-                }
-                
-                
+                }              
             }
 
             return xml;

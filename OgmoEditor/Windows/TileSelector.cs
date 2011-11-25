@@ -100,7 +100,10 @@ namespace OgmoEditor.Windows
                 if (Selection != -1)
                 {
                     Rectangle r = tileset.GetRectFromID(Selection);
-                    g.DrawRectangle(new Pen(Color.Lime), x + r.X * scale, y + r.Y * scale, r.Width * scale, r.Height * scale);
+                    g.DrawRectangle(new Pen(Color.Yellow, 3), x + r.X * scale, y + r.Y * scale, r.Width * scale, r.Height * scale);
+                    Pen p = new Pen(Color.Black);
+                    p.DashPattern = new float[] { 6, 2 };
+                    g.DrawRectangle(p, x + r.X * scale, y + r.Y * scale, r.Width * scale, r.Height * scale);
                 }
             }
         }
