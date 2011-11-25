@@ -68,7 +68,35 @@ namespace OgmoEditor.LevelData.Layers
             }
             else if (Definition.ExportMode == TileLayerDefinition.TileExportMode.XML)
             {
+                //XML Export
+                XmlElement tile;
+                XmlAttribute a;
+                for (int i = 0; i < Tiles.GetLength(0); i++)
+                {
+                    for (int j = 0; j < Tiles.GetLength(1); j++)
+                    {
+                        if (Tiles[i, j] != -1)
+                        {
+                            tile = doc.CreateElement("tile");
 
+                            a = doc.CreateAttribute("x");
+                            a.InnerText = i.ToString();
+                            tile.Attributes.Append(a);
+
+                            a = doc.CreateAttribute("y");
+                            a.InnerText = j.ToString();
+                            tile.Attributes.Append(a);
+
+                            a = doc.CreateAttribute("id");
+                            a.InnerText = Tiles[i, j].ToString();
+                            tile.Attributes.Append(a);
+
+                            xml.AppendChild(tile);
+                        }
+                    }
+                }
+                
+                
             }
 
             return xml;
@@ -92,7 +120,14 @@ namespace OgmoEditor.LevelData.Layers
             }
             else if (Definition.ExportMode == TileLayerDefinition.TileExportMode.XML)
             {
-
+                //XML Import
+                foreach (XmlElement tile in xml)
+                {
+                    int x = Convert.ToInt32(tile.Attributes["x"].InnerText);
+                    int y = Convert.ToInt32(tile.Attributes["y"].InnerText);
+                    int id = Convert.ToInt32(tile.Attributes["id"].InnerText);
+                    Tiles[x, y] = id;
+                }
             }
 
             RefreshTexture();
