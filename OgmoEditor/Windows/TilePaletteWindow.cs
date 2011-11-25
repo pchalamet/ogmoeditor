@@ -114,6 +114,8 @@ namespace OgmoEditor.Windows
         {
             SetTileset(tilesetsComboBox.SelectedItem as Tileset);
             Ogmo.MainWindow.LevelEditors[Ogmo.CurrentLevelIndex].Perform(new TileSetTilesetAction(Ogmo.LayersWindow.CurrentLayer as TileLayer, tilesetsComboBox.SelectedItem as Tileset));
+
+            Ogmo.MainWindow.FocusEditor();
         }
     }
 }

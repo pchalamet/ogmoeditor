@@ -29,8 +29,9 @@ namespace OgmoEditor.Windows
             get { return tileset; }
             set
             {
-                tileset = value;
-                Selection = -1;
+                if (tileset != null)
+                    Selection = value.TransformID(tileset, Selection);
+                tileset = value;              
                 if (Tileset != null)
                     calculateScale();
                 pictureBox.Refresh();
