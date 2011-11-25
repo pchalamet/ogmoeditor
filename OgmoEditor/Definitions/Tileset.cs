@@ -146,5 +146,37 @@ namespace OgmoEditor.Definitions
         {
             return Name;
         }
+
+        public int GetIDFromCell(Point cell)
+        {
+            if (cell.X >= TilesAcross)
+                return -1;
+            if (cell.Y >= TilesDown)
+                return -1;
+
+            return cell.X + cell.Y * TilesAcross;
+        }
+
+        public Point GetCellFromID(int id)
+        {
+            return new Point(id % TilesAcross, id / TilesAcross);
+        }
+
+        public int TransformID(Tileset from, int id)
+        {
+            if (id == -1)
+                return -1;
+
+            return GetIDFromCell(from.GetCellFromID(id));
+        }
+
+        public int[,] TransformMap(Tileset from, int[,] ids)
+        {
+            int[,] transformed = new int[ids.GetLength(0), ids.GetLength(1)];
+            for (int i = 0; i < ids.GetLength(0); i++)
+                for (int j = 0; j < ids.GetLength(1); j++)
+                    transformed[i, j] = TransformID(from, ids[i, j]);
+            return transformed;
+        }
     }
 }
