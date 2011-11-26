@@ -306,15 +306,11 @@ namespace OgmoEditor.LevelEditors
 
         private void onMouseDown(object sender, MouseEventArgs e)
         {
-            if (mouseMode == MouseMode.Pan)
+            if (mouseMode != MouseMode.Normal)
             {
                 //Enter mouse move mode
                 mousePanMode = true;
                 lastMousePoint = e.Location;
-            }
-            else if (mouseMode == MouseMode.Camera)
-            {
-
             }
             else
             {
@@ -334,14 +330,13 @@ namespace OgmoEditor.LevelEditors
 
         private void onMouseUp(object sender, MouseEventArgs e)
         {
-            if (mouseMode == MouseMode.Pan)
+            if (mouseMode != MouseMode.Normal)
             {
+                if (mouseMode == MouseMode.Camera && !Util.Ctrl)
+                    CameraPosition = Ogmo.LayersWindow.CurrentLayer.Definition.SnapToGrid(CameraPosition);
+
                 //Exit mouse move mode
                 mousePanMode = false;
-            }
-            else if (mouseMode == MouseMode.Camera)
-            {
-
             }
             else
             {
@@ -363,9 +358,19 @@ namespace OgmoEditor.LevelEditors
             //Pan the camera if in move mode
             if (mousePanMode)
             {
-                LevelView.X -= (e.Location.X - lastMousePoint.X) / LevelView.Zoom;
-                LevelView.Y -= (e.Location.Y - lastMousePoint.Y) / LevelView.Zoom;
-                lastMousePoint = e.Location;
+                if (mouseMode == MouseMode.Camera)
+                {
+                    int x = CameraPosition.X + (int)((e.Location.X - lastMousePoint.X) / LevelView.Zoom);
+                    int y = CameraPosition.Y + (int)((e.Location.Y - lastMousePoint.Y) / LevelView.Zoom);
+                    CameraPosition = new Point(x, y);
+                    lastMousePoint = e.Location;
+                }
+                else
+                {
+                    LevelView.X -= (e.Location.X - lastMousePoint.X) / LevelView.Zoom;
+                    LevelView.Y -= (e.Location.Y - lastMousePoint.Y) / LevelView.Zoom;
+                    lastMousePoint = e.Location;
+                }
             }
 
             //Update the mouse coord display
