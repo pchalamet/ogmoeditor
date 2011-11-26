@@ -52,6 +52,12 @@ namespace OgmoEditor.ProjectEditors
             this.backgroundColorChooser = new OgmoEditor.ColorChooser();
             this.valuesEditor = new OgmoEditor.ProjectEditors.ValueDefinitionEditors.ValueDefinitionsEditor();
             this.colorChooser1 = new OgmoEditor.ColorChooser();
+            this.label12 = new System.Windows.Forms.Label();
+            this.cameraEnabledCheckbox = new System.Windows.Forms.CheckBox();
+            this.cameraHeightTextBox = new System.Windows.Forms.TextBox();
+            this.cameraWidthTextBox = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // maxHeightTextBox
@@ -254,10 +260,71 @@ namespace OgmoEditor.ProjectEditors
             this.colorChooser1.Size = new System.Drawing.Size(108, 28);
             this.colorChooser1.TabIndex = 36;
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(332, 144);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(49, 13);
+            this.label12.TabIndex = 41;
+            this.label12.Text = "Camera";
+            // 
+            // cameraEnabledCheckbox
+            // 
+            this.cameraEnabledCheckbox.AutoSize = true;
+            this.cameraEnabledCheckbox.Location = new System.Drawing.Point(350, 164);
+            this.cameraEnabledCheckbox.Name = "cameraEnabledCheckbox";
+            this.cameraEnabledCheckbox.Size = new System.Drawing.Size(65, 17);
+            this.cameraEnabledCheckbox.TabIndex = 42;
+            this.cameraEnabledCheckbox.Text = "Enabled";
+            this.cameraEnabledCheckbox.UseVisualStyleBackColor = true;
+            this.cameraEnabledCheckbox.CheckedChanged += new System.EventHandler(this.cameraEnabledCheckbox_CheckedChanged);
+            // 
+            // cameraHeightTextBox
+            // 
+            this.cameraHeightTextBox.Location = new System.Drawing.Point(466, 187);
+            this.cameraHeightTextBox.Name = "cameraHeightTextBox";
+            this.cameraHeightTextBox.Size = new System.Drawing.Size(62, 20);
+            this.cameraHeightTextBox.TabIndex = 44;
+            this.cameraHeightTextBox.Validated += new System.EventHandler(this.cameraWidthTextBox_Validated);
+            // 
+            // cameraWidthTextBox
+            // 
+            this.cameraWidthTextBox.Location = new System.Drawing.Point(380, 187);
+            this.cameraWidthTextBox.Name = "cameraWidthTextBox";
+            this.cameraWidthTextBox.Size = new System.Drawing.Size(62, 20);
+            this.cameraWidthTextBox.TabIndex = 43;
+            this.cameraWidthTextBox.Validated += new System.EventHandler(this.cameraWidthTextBox_Validated);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(347, 190);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(27, 13);
+            this.label13.TabIndex = 46;
+            this.label13.Text = "Size";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(448, 190);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(12, 13);
+            this.label14.TabIndex = 45;
+            this.label14.Text = "x";
+            // 
             // SettingsEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cameraHeightTextBox);
+            this.Controls.Add(this.cameraWidthTextBox);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.cameraEnabledCheckbox);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.angleModeComboBox);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.gridColorChooser);
@@ -312,5 +379,11 @@ namespace OgmoEditor.ProjectEditors
         private ColorChooser gridColorChooser;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox angleModeComboBox;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.CheckBox cameraEnabledCheckbox;
+        private System.Windows.Forms.TextBox cameraHeightTextBox;
+        private System.Windows.Forms.TextBox cameraWidthTextBox;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
     }
 }

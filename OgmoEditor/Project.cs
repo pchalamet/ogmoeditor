@@ -34,6 +34,8 @@ namespace OgmoEditor
         public Size LevelMaximumSize;
         public string Filename;
         public AngleExportMode AngleMode;
+        public bool CameraEnabled;
+        public Size CameraSize;
 
         //Definitions
         public List<ValueDefinition> LevelValueDefinitions;
@@ -52,6 +54,8 @@ namespace OgmoEditor
             GridColor = OgmoColor.DefaultGridColor;
             Filename = "";
             LevelDefaultSize = LevelMinimumSize = LevelMaximumSize = new Size(640, 480);
+            CameraEnabled = false;
+            CameraSize = new Size(640, 480);
 
             //Definitions
             LevelValueDefinitions = new List<ValueDefinition>();
@@ -79,6 +83,8 @@ namespace OgmoEditor
             LevelMinimumSize = copy.LevelMinimumSize;
             LevelMaximumSize = copy.LevelMaximumSize;
             AngleMode = copy.AngleMode;
+            CameraEnabled = copy.CameraEnabled;
+            CameraSize = copy.CameraSize;
 
             //Definitions
             LevelValueDefinitions = new List<ValueDefinition>();

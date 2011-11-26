@@ -34,6 +34,9 @@ namespace OgmoEditor.ProjectEditors
             maxWidthTextBox.Text = project.LevelMaximumSize.Width.ToString();
             maxHeightTextBox.Text = project.LevelMaximumSize.Height.ToString();
             angleModeComboBox.SelectedIndex = (int)project.AngleMode;
+            cameraWidthTextBox.Enabled = cameraHeightTextBox.Enabled = cameraEnabledCheckbox.Checked = project.CameraEnabled;
+            cameraWidthTextBox.Text = project.CameraSize.Width.ToString();
+            cameraHeightTextBox.Text = project.CameraSize.Height.ToString();
 
             valuesEditor.SetList(project.LevelValueDefinitions);
         }
@@ -71,6 +74,16 @@ namespace OgmoEditor.ProjectEditors
         private void angleModeComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
             project.AngleMode = (Project.AngleExportMode)angleModeComboBox.SelectedIndex;
+        }
+
+        private void cameraEnabledCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            cameraWidthTextBox.Enabled = cameraHeightTextBox.Enabled = project.CameraEnabled = cameraEnabledCheckbox.Checked;
+        }
+
+        private void cameraWidthTextBox_Validated(object sender, EventArgs e)
+        {
+            OgmoParse.Parse(ref project.CameraSize, cameraWidthTextBox, cameraHeightTextBox);
         }
 
     }
