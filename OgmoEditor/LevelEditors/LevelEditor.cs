@@ -24,14 +24,18 @@ namespace OgmoEditor.LevelEditors
         private const int UNDO_LIMIT = 60;
         private const float LAYER_ABOVE_ALPHA = .5f;
 
+        private enum MouseMode { Normal, Pan, Camera };
+
+        private MouseMode mouseMode = MouseMode.Normal;
         private bool mousePanMode;
         private Point lastMousePoint;
 
         public Level Level { get; private set; }
-        public Camera Camera { get; private set; }
+        public LevelView LevelView { get; private set; }
         public List<LayerEditor> LayerEditors { get; private set; }
         public Rectangle DrawBounds { get; private set; }
         public new Point MousePosition { get; private set; }
+        public Point CameraPosition { get; private set; }
 
         public LinkedList<OgmoAction> UndoStack { get; private set; }
         public LinkedList<OgmoAction> RedoStack { get; private set; }
@@ -59,8 +63,8 @@ namespace OgmoEditor.LevelEditors
         protected override void Initialize()
         {
             //Init the screen bounds and camera
-            Camera = new Camera();
-            Camera.Origin = new Vector2(Width / 2, Height / 2);
+            LevelView = new LevelView();
+            LevelView.Origin = new Vector2(Width / 2, Height / 2);
             centerCamera();
             DrawBounds = new Rectangle(0, 0, Width, Height);
 
@@ -85,8 +89,8 @@ namespace OgmoEditor.LevelEditors
 
         private void centerCamera()
         {
-            Camera.X = Level.Size.Width / 2;
-            Camera.Y = Level.Size.Height / 2;
+            LevelView.X = Level.Size.Width / 2;
+            LevelView.Y = Level.Size.Height / 2;
         }
 
         protected override void Draw()
@@ -101,12 +105,12 @@ namespace OgmoEditor.LevelEditors
             content.SpriteBatch.End();
 
             //Draw the level onto the control, positioned and scaled by the camera
-            content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, Camera.Matrix);
+            content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, LevelView.Matrix);
             content.DrawRectangle(10, 10, Level.Size.Width, Level.Size.Height, new Color(0, 0, 0, .5f));
             content.DrawRectangle(0, 0, Level.Size.Width, Level.Size.Height, Ogmo.Project.BackgroundColor.ToXNA());
 
             //Draw the grid if turned on and editor is zoomed at least 100%
-            if (Ogmo.MainWindow.EditingGridVisible && Camera.Zoom >= 1)
+            if (Ogmo.MainWindow.EditingGridVisible && LevelView.Zoom >= 1)
                 content.DrawGrid(LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Layer.Definition.Grid, Level.Size, Ogmo.Project.GridColor.ToXNA() * .5f);
 
             //Draw the layers
@@ -123,13 +127,20 @@ namespace OgmoEditor.LevelEditors
                     LayerEditors[i].Draw(content, false,  LAYER_ABOVE_ALPHA);
             }
 
+            //Draw the camera
+            if (Ogmo.Project.CameraEnabled)
+            {
+                content.DrawHollowRect(CameraPosition.X, CameraPosition.Y, Ogmo.Project.CameraSize.Width, Ogmo.Project.CameraSize.Height, Color.Lime);
+                content.DrawHollowRect(CameraPosition.X - 1, CameraPosition.Y - 1, Ogmo.Project.CameraSize.Width + 2, Ogmo.Project.CameraSize.Height + 2, Color.Black);
+            }
+
             content.SpriteBatch.End();
         }
 
         public void SwitchTo()
         {
             Focus();
-            Ogmo.MainWindow.ZoomLabel.Text = Camera.ZoomString;
+            Ogmo.MainWindow.ZoomLabel.Text = LevelView.ZoomString;
         }
 
         /*
@@ -244,56 +255,106 @@ namespace OgmoEditor.LevelEditors
         {
             //Update the screen bounds
             DrawBounds = new Rectangle(0, 0, Width, Height);
-            Camera.Origin = new Vector2(Width / 2, Height / 2);
+            LevelView.Origin = new Vector2(Width / 2, Height / 2);
         }
 
         private void onKeyDown(object sender, KeyEventArgs e)
         {
-            //Call the layer event
-            LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnKeyDown(e.KeyCode);
+            if (mouseMode == MouseMode.Normal && e.KeyCode == System.Windows.Forms.Keys.Space)
+            {
+                mouseMode = MouseMode.Pan;
+            }
+            else if (mouseMode == MouseMode.Normal && e.KeyCode == System.Windows.Forms.Keys.C)
+            {
+                mouseMode = MouseMode.Camera;
+            }
+            else
+            {
+                //Call the layer event
+                LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnKeyDown(e.KeyCode);
+            }
         }
 
         private void onKeyUp(object sender, KeyEventArgs e)
         {
-            //Call the layer event
-            LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnKeyUp(e.KeyCode);
+            if (mouseMode == MouseMode.Pan && e.KeyCode == System.Windows.Forms.Keys.Space)
+            {
+                mouseMode = MouseMode.Normal;
+            }
+            else if (mouseMode == MouseMode.Camera && e.KeyCode == System.Windows.Forms.Keys.C)
+            {
+                mouseMode = MouseMode.Normal;
+            }
+            else
+            {
+                //Call the layer event
+                LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnKeyUp(e.KeyCode);
+            }
         }
 
         private void onMouseClick(object sender, MouseEventArgs e)
         {
+            if (mouseMode != MouseMode.Normal)
+                return;
+
             //Call the layer event
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
-                LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnMouseLeftClick(Camera.ScreenToEditor(e.Location));
+                LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnMouseLeftClick(LevelView.ScreenToEditor(e.Location));
             else if (e.Button == System.Windows.Forms.MouseButtons.Right)
-                LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnMouseRightClick(Camera.ScreenToEditor(e.Location));
+                LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnMouseRightClick(LevelView.ScreenToEditor(e.Location));
         }
 
         private void onMouseDown(object sender, MouseEventArgs e)
         {
-            //Call the layer event
-            if (e.Button == System.Windows.Forms.MouseButtons.Left)
-                LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnMouseLeftDown(Camera.ScreenToEditor(e.Location));
-            else if (e.Button == System.Windows.Forms.MouseButtons.Right)
-                LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnMouseRightDown(Camera.ScreenToEditor(e.Location));
-            else if (e.Button == System.Windows.Forms.MouseButtons.Middle)
+            if (mouseMode == MouseMode.Pan)
             {
                 //Enter mouse move mode
                 mousePanMode = true;
                 lastMousePoint = e.Location;
             }
+            else if (mouseMode == MouseMode.Camera)
+            {
+
+            }
+            else
+            {
+                //Call the layer event
+                if (e.Button == System.Windows.Forms.MouseButtons.Left)
+                    LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnMouseLeftDown(LevelView.ScreenToEditor(e.Location));
+                else if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                    LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnMouseRightDown(LevelView.ScreenToEditor(e.Location));
+                else if (e.Button == System.Windows.Forms.MouseButtons.Middle)
+                {
+                    //Enter mouse move mode
+                    mousePanMode = true;
+                    lastMousePoint = e.Location;
+                }
+            }
         }
 
         private void onMouseUp(object sender, MouseEventArgs e)
         {
-            //Call the layer event
-            if (e.Button == System.Windows.Forms.MouseButtons.Left)
-                LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnMouseLeftUp(Camera.ScreenToEditor(e.Location));
-            else if (e.Button == System.Windows.Forms.MouseButtons.Right)
-                LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnMouseRightUp(Camera.ScreenToEditor(e.Location));
-            else if (e.Button == System.Windows.Forms.MouseButtons.Middle)
+            if (mouseMode == MouseMode.Pan)
             {
                 //Exit mouse move mode
                 mousePanMode = false;
+            }
+            else if (mouseMode == MouseMode.Camera)
+            {
+
+            }
+            else
+            {
+                //Call the layer event
+                if (e.Button == System.Windows.Forms.MouseButtons.Left)
+                    LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnMouseLeftUp(LevelView.ScreenToEditor(e.Location));
+                else if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                    LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].OnMouseRightUp(LevelView.ScreenToEditor(e.Location));
+                else if (e.Button == System.Windows.Forms.MouseButtons.Middle)
+                {
+                    //Exit mouse move mode
+                    mousePanMode = false;
+                }
             }
         }
 
@@ -302,13 +363,13 @@ namespace OgmoEditor.LevelEditors
             //Pan the camera if in move mode
             if (mousePanMode)
             {
-                Camera.X -= (e.Location.X - lastMousePoint.X) / Camera.Zoom;
-                Camera.Y -= (e.Location.Y - lastMousePoint.Y) / Camera.Zoom;
+                LevelView.X -= (e.Location.X - lastMousePoint.X) / LevelView.Zoom;
+                LevelView.Y -= (e.Location.Y - lastMousePoint.Y) / LevelView.Zoom;
                 lastMousePoint = e.Location;
             }
 
             //Update the mouse coord display
-            MousePosition = Camera.ScreenToEditor(e.Location);
+            MousePosition = LevelView.ScreenToEditor(e.Location);
             Point gridPos = Ogmo.Project.LayerDefinitions[Ogmo.LayersWindow.CurrentLayerIndex].ConvertToGrid(MousePosition);
             Ogmo.MainWindow.MouseCoordinatesLabel.Text = "Mouse: ( " + MousePosition.X.ToString() + ", " + MousePosition.Y.ToString() + " )";
             Ogmo.MainWindow.GridCoordinatesLabel.Text = "Grid: ( " + gridPos.X.ToString() + ", " + gridPos.Y.ToString() + " )";
@@ -320,10 +381,10 @@ namespace OgmoEditor.LevelEditors
         private void onMouseWheel(object sender, MouseEventArgs e)
         {
             if (e.Delta > 0)
-                Camera.ZoomIn();
+                LevelView.ZoomIn();
             else
-                Camera.ZoomOut();
-            Ogmo.MainWindow.ZoomLabel.Text = Camera.ZoomString;
+                LevelView.ZoomOut();
+            Ogmo.MainWindow.ZoomLabel.Text = LevelView.ZoomString;
         }
     }
 }

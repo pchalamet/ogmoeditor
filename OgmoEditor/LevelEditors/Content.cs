@@ -17,12 +17,16 @@ namespace OgmoEditor.LevelEditors
 
     public class Content
     {
+        //Constant textures
         public Texture2D TexPixel { get; private set; }
         public Texture2D TexBG { get; private set; }
         public Texture2D TexLogo { get; private set; }
+
+        //Project textures
         public Dictionary<EntityDefinition, Texture2D> EntityTextures { get; private set; }
         public Dictionary<Tileset, Texture2D> TilesetTextures { get; private set; }
 
+        //Rendering stuff
         public GraphicsDevice GraphicsDevice { get; private set; }
         public SpriteBatch SpriteBatch { get; private set; }
 

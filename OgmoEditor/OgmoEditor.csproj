@@ -205,7 +205,7 @@
     <Compile Include="LevelData\Layers\EntityLayer.cs" />
     <Compile Include="LevelData\Layers\TileLayer.cs" />
     <Compile Include="LevelData\Level.cs" />
-    <Compile Include="LevelEditors\Camera.cs" />
+    <Compile Include="LevelEditors\LevelView.cs" />
     <Compile Include="LevelEditors\Actions\LevelActions\LevelAction.cs" />
     <Compile Include="LevelEditors\Actions\OgmoAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridAction.cs" />

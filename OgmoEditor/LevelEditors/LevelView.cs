@@ -8,7 +8,7 @@ namespace OgmoEditor.LevelEditors
 {
     using Point = System.Drawing.Point;
 
-    public class Camera
+    public class LevelView
     {
         static private readonly float[] ZOOMS = new float[] { .25f, .33f, .5f, .66f, 1, 1.25f, 1.5f, 2, 2.5f, 3 };
 
@@ -20,7 +20,7 @@ namespace OgmoEditor.LevelEditors
         private float zoom;
         private bool changed;
 
-        public Camera()
+        public LevelView()
         {
             position = Vector2.Zero;
             zoom = 1;
