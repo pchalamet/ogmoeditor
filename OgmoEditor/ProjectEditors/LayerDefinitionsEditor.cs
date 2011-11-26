@@ -44,12 +44,16 @@ namespace OgmoEditor.ProjectEditors
             nameTextBox.Enabled = true;
             gridXTextBox.Enabled = true;
             gridYTextBox.Enabled = true;
+            scrollXTextBox.Enabled = true;
+            scrollYTextBox.Enabled = true;
             typeComboBox.Enabled = true;
 
             //Load properties
             nameTextBox.Text = definition.Name;
             gridXTextBox.Text = definition.Grid.Width.ToString();
             gridYTextBox.Text = definition.Grid.Height.ToString();
+            scrollXTextBox.Text = definition.ScrollFactor.X.ToString();
+            scrollYTextBox.Text = definition.ScrollFactor.Y.ToString();
             typeComboBox.SelectedIndex = LayerDefinition.LAYER_TYPES.FindIndex(e => e == definition.GetType());
 
             //Remove the old layer editor
@@ -71,6 +75,8 @@ namespace OgmoEditor.ProjectEditors
             nameTextBox.Enabled = false;
             gridXTextBox.Enabled = false;
             gridYTextBox.Enabled = false;
+            scrollXTextBox.Enabled = false;
+            scrollYTextBox.Enabled = false;
             typeComboBox.Enabled = false;
 
             if (layerEditor != null)
@@ -189,6 +195,14 @@ namespace OgmoEditor.ProjectEditors
             newDef.Grid = oldDef.Grid;
             layerDefinitions[listBox.SelectedIndex] = newDef;
             setControlsFromDefinition(newDef);
+        }
+
+        private void scrollXTextBox_Validated(object sender, EventArgs e)
+        {
+            if (listBox.SelectedIndex == -1)
+                return;
+
+            OgmoParse.Parse(ref layerDefinitions[listBox.SelectedIndex].ScrollFactor, scrollXTextBox, scrollYTextBox);
         }
     }
 }

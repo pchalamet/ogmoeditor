@@ -19,7 +19,7 @@ namespace OgmoEditor.ProjectEditors.LayerDefinitionEditors
         {
             this.def = def;
             InitializeComponent();
-            Location = new Point(206, 117);
+            Location = new Point(206, 128);
 
             exportModeComboBox.SelectedIndex = (int)def.ExportMode;
         }

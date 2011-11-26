@@ -26,6 +26,7 @@ namespace OgmoEditor.Definitions.LayerDefinitions
 
         public string Name;
         public Size Grid;
+        public Point ScrollFactor;
 
         public LayerDefinition()
         {

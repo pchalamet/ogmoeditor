@@ -41,12 +41,16 @@
             this.moveUpButton = new System.Windows.Forms.Button();
             this.moveDownButton = new System.Windows.Forms.Button();
             this.listBox = new System.Windows.Forms.ListBox();
+            this.scrollYTextBox = new System.Windows.Forms.TextBox();
+            this.scrollXTextBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // nameTextBox
             // 
             this.nameTextBox.Enabled = false;
-            this.nameTextBox.Location = new System.Drawing.Point(261, 30);
+            this.nameTextBox.Location = new System.Drawing.Point(291, 30);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(123, 20);
             this.nameTextBox.TabIndex = 1;
@@ -55,7 +59,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(220, 33);
+            this.label1.Location = new System.Drawing.Point(250, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 2;
@@ -64,7 +68,7 @@
             // gridYTextBox
             // 
             this.gridYTextBox.Enabled = false;
-            this.gridYTextBox.Location = new System.Drawing.Point(347, 56);
+            this.gridYTextBox.Location = new System.Drawing.Point(377, 56);
             this.gridYTextBox.Name = "gridYTextBox";
             this.gridYTextBox.Size = new System.Drawing.Size(62, 20);
             this.gridYTextBox.TabIndex = 29;
@@ -73,7 +77,7 @@
             // gridXTextBox
             // 
             this.gridXTextBox.Enabled = false;
-            this.gridXTextBox.Location = new System.Drawing.Point(261, 56);
+            this.gridXTextBox.Location = new System.Drawing.Point(291, 56);
             this.gridXTextBox.Name = "gridXTextBox";
             this.gridXTextBox.Size = new System.Drawing.Size(62, 20);
             this.gridXTextBox.TabIndex = 28;
@@ -82,7 +86,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(329, 59);
+            this.label2.Location = new System.Drawing.Point(359, 59);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(12, 13);
             this.label2.TabIndex = 30;
@@ -91,7 +95,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(229, 59);
+            this.label3.Location = new System.Drawing.Point(259, 59);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(26, 13);
             this.label3.TabIndex = 31;
@@ -103,7 +107,7 @@
             this.typeComboBox.Enabled = false;
             this.typeComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.typeComboBox.FormattingEnabled = true;
-            this.typeComboBox.Location = new System.Drawing.Point(261, 83);
+            this.typeComboBox.Location = new System.Drawing.Point(291, 109);
             this.typeComboBox.Name = "typeComboBox";
             this.typeComboBox.Size = new System.Drawing.Size(93, 21);
             this.typeComboBox.TabIndex = 32;
@@ -112,7 +116,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(224, 86);
+            this.label4.Location = new System.Drawing.Point(254, 112);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(31, 13);
             this.label4.TabIndex = 33;
@@ -170,10 +174,49 @@
             this.listBox.TabIndex = 38;
             this.listBox.SelectedIndexChanged += new System.EventHandler(this.listBox_SelectedIndexChanged);
             // 
-            // LayersEditor
+            // scrollYTextBox
+            // 
+            this.scrollYTextBox.Enabled = false;
+            this.scrollYTextBox.Location = new System.Drawing.Point(377, 82);
+            this.scrollYTextBox.Name = "scrollYTextBox";
+            this.scrollYTextBox.Size = new System.Drawing.Size(62, 20);
+            this.scrollYTextBox.TabIndex = 40;
+            // 
+            // scrollXTextBox
+            // 
+            this.scrollXTextBox.Enabled = false;
+            this.scrollXTextBox.Location = new System.Drawing.Point(291, 82);
+            this.scrollXTextBox.Name = "scrollXTextBox";
+            this.scrollXTextBox.Size = new System.Drawing.Size(62, 20);
+            this.scrollXTextBox.TabIndex = 39;
+            this.scrollXTextBox.Validated += new System.EventHandler(this.scrollXTextBox_Validated);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(359, 85);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(10, 13);
+            this.label5.TabIndex = 41;
+            this.label5.Text = ",";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(219, 85);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(66, 13);
+            this.label6.TabIndex = 42;
+            this.label6.Text = "Scroll Factor";
+            // 
+            // LayerDefinitionsEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.scrollYTextBox);
+            this.Controls.Add(this.scrollXTextBox);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.listBox);
             this.Controls.Add(this.moveDownButton);
             this.Controls.Add(this.moveUpButton);
@@ -187,7 +230,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nameTextBox);
-            this.Name = "LayersEditor";
+            this.Name = "LayerDefinitionsEditor";
             this.Size = new System.Drawing.Size(573, 490);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -209,5 +252,9 @@
         private System.Windows.Forms.Button moveUpButton;
         private System.Windows.Forms.Button moveDownButton;
         private System.Windows.Forms.ListBox listBox;
+        private System.Windows.Forms.TextBox scrollYTextBox;
+        private System.Windows.Forms.TextBox scrollXTextBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }
