@@ -41,6 +41,7 @@ namespace OgmoEditor.Definitions.LayerDefinitions
             GridLayerDefinition def = new GridLayerDefinition();
             def.Name = Name;
             def.Grid = Grid;
+            def.ScrollFactor = ScrollFactor;
             def.Color = Color;
             def.ExportMode = ExportMode;
             def.TrimZeroes = TrimZeroes;

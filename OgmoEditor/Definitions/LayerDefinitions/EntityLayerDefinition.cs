@@ -30,6 +30,7 @@ namespace OgmoEditor.Definitions.LayerDefinitions
             EntityLayerDefinition def = new EntityLayerDefinition();
             def.Name = Name;
             def.Grid = Grid;
+            def.ScrollFactor = ScrollFactor;
             return def;
         }
     }

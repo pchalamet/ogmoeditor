@@ -26,12 +26,13 @@ namespace OgmoEditor.Definitions.LayerDefinitions
 
         public string Name;
         public Size Grid;
-        public Point ScrollFactor;
+        public Microsoft.Xna.Framework.Vector2 ScrollFactor;
 
         public LayerDefinition()
         {
             Image = "";
             Name = "";
+            ScrollFactor = Microsoft.Xna.Framework.Vector2.One;
             Visible = true;
         }
 

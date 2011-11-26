@@ -39,6 +39,27 @@ namespace OgmoEditor
             }
         }
 
+        static public void Parse(ref Microsoft.Xna.Framework.Vector2 to, TextBox x, TextBox y)
+        {
+            try
+            {
+                to.X = Convert.ToSingle(x.Text);
+            }
+            catch
+            {
+                x.Text = to.X.ToString();
+            }
+
+            try
+            {
+                to.Y = Convert.ToSingle(y.Text);
+            }
+            catch
+            {
+                y.Text = to.Y.ToString();
+            }
+        }
+
         static public void Parse(ref Size to, TextBox x, TextBox y)
         {
             try
