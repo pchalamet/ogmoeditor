@@ -181,6 +181,7 @@
             this.scrollYTextBox.Name = "scrollYTextBox";
             this.scrollYTextBox.Size = new System.Drawing.Size(62, 20);
             this.scrollYTextBox.TabIndex = 40;
+            this.scrollYTextBox.Validated += new System.EventHandler(this.scrollXTextBox_Validated);
             // 
             // scrollXTextBox
             // 
