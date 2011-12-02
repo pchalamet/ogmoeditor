@@ -32,7 +32,7 @@ namespace OgmoEditor.Definitions.LayerDefinitions
         {
             Image = "";
             Name = "";
-            ScrollFactor = Microsoft.Xna.Framework.Vector2.One;
+            ScrollFactor = Microsoft.Xna.Framework.Vector2.One; 
             Visible = true;
         }
 

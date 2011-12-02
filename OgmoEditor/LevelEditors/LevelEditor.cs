@@ -130,8 +130,31 @@ namespace OgmoEditor.LevelEditors
             //Draw the camera
             if (Ogmo.Project.CameraEnabled)
             {
-                content.DrawHollowRect(CameraPosition.X, CameraPosition.Y, Ogmo.Project.CameraSize.Width, Ogmo.Project.CameraSize.Height, Color.Lime);
-                content.DrawHollowRect(CameraPosition.X - 1, CameraPosition.Y - 1, Ogmo.Project.CameraSize.Width + 2, Ogmo.Project.CameraSize.Height + 2, Color.Black);
+                int w = Ogmo.Project.CameraSize.Width / 8;
+                int h = Ogmo.Project.CameraSize.Height / 8;
+
+                int x2 = CameraPosition.X + Ogmo.Project.CameraSize.Width;
+                int y2 = CameraPosition.Y + Ogmo.Project.CameraSize.Height;
+
+                content.DrawLine(CameraPosition.X - 1, CameraPosition.Y - 1, CameraPosition.X + w, CameraPosition.Y - 1, Color.Red);
+                content.DrawLine(CameraPosition.X, CameraPosition.Y, CameraPosition.X + w, CameraPosition.Y, Color.Red);
+                content.DrawLine(CameraPosition.X - 1, CameraPosition.Y - 1, CameraPosition.X - 1, CameraPosition.Y + h, Color.Red);
+                content.DrawLine(CameraPosition.X, CameraPosition.Y, CameraPosition.X, CameraPosition.Y + h, Color.Red);
+
+                content.DrawLine(x2 - w, CameraPosition.Y - 1, x2 + 1, CameraPosition.Y - 1, Color.Red);
+                content.DrawLine(x2 - w, CameraPosition.Y, x2, CameraPosition.Y, Color.Red);
+                content.DrawLine(x2 + 1, CameraPosition.Y, x2 + 1, CameraPosition.Y + h, Color.Red);
+                content.DrawLine(x2, CameraPosition.Y, x2, CameraPosition.Y + h, Color.Red);
+
+                content.DrawLine(CameraPosition.X - 1, y2 + 1, CameraPosition.X + w, y2 + 1, Color.Red);
+                content.DrawLine(CameraPosition.X - 1, y2, CameraPosition.X + w, y2, Color.Red);
+                content.DrawLine(CameraPosition.X - 1, y2, CameraPosition.X - 1, y2 - h, Color.Red);
+                content.DrawLine(CameraPosition.X, y2, CameraPosition.X, y2 - h, Color.Red);
+
+                content.DrawLine(x2 - w, y2 + 1, x2 + 1, y2 + 1, Color.Red);
+                content.DrawLine(x2 - w, y2, x2, y2, Color.Red);
+                content.DrawLine(x2 + 1, y2 - h, x2 + 1, y2 + 1, Color.Red);
+                content.DrawLine(x2, y2 - h, x2, y2, Color.Red);
             }
 
             content.SpriteBatch.End();
