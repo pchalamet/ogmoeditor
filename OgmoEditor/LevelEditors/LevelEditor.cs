@@ -389,6 +389,8 @@ namespace OgmoEditor.LevelEditors
                     int y = CameraPosition.Y + (int)((e.Location.Y - lastMousePoint.Y) / LevelView.Zoom);
                     CameraPosition = new Point(x, y);
                     lastMousePoint = e.Location;
+                    foreach (var ed in LayerEditors)
+                        ed.UpdateDrawOffset(CameraPosition);
                 }
                 else
                 {
