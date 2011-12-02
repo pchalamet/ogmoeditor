@@ -23,6 +23,10 @@ namespace OgmoEditor.LevelData.Resizers
             oldTiles = Layer.Tiles;
             Layer.Tiles = new int[Layer.Level.Size.Width / Layer.Definition.Grid.Width, Layer.Level.Size.Height / Layer.Definition.Grid.Height];
 
+            for (int i = 0; i < Layer.Tiles.GetLength(0); i++)
+                for (int j = 0; j < Layer.Tiles.GetLength(1); j++)
+                    Layer.Tiles[i, j] = -1;
+
             for (int i = 0; i < Layer.Tiles.GetLength(0) && i < oldTiles.GetLength(0); i++)
                 for (int j = 0; j < Layer.Tiles.GetLength(1) && j < oldTiles.GetLength(1); j++)
                     Layer.Tiles[i, j] = oldTiles[i, j];
