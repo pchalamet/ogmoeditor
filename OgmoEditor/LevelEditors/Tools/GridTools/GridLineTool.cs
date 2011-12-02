@@ -36,7 +36,10 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
                 LevelEditor.StartBatch();
                 List<Point> pts = getPoints(drawStart, LayerEditor.Layer.Definition.ConvertToGrid(location));
                 foreach (var p in pts)
-                    LevelEditor.BatchPerform(new GridDrawAction(LayerEditor.Layer, p, true));
+                {
+                    if (!LayerEditor.Layer.Grid[p.X, p.Y])
+                        LevelEditor.BatchPerform(new GridDrawAction(LayerEditor.Layer, p, true));
+                }
                 LevelEditor.EndBatch();
             }
         }
@@ -57,7 +60,10 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
                 LevelEditor.StartBatch();
                 List<Point> pts = getPoints(drawStart, LayerEditor.Layer.Definition.ConvertToGrid(location));
                 foreach (var p in pts)
-                    LevelEditor.BatchPerform(new GridDrawAction(LayerEditor.Layer, p, false));
+                {
+                    if (LayerEditor.Layer.Grid[p.X, p.Y])
+                        LevelEditor.BatchPerform(new GridDrawAction(LayerEditor.Layer, p, false));
+                }
                 LevelEditor.EndBatch();
             }
         }
