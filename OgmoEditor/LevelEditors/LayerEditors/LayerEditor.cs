@@ -56,41 +56,68 @@ namespace OgmoEditor.LevelEditors.LayerEditors
         public void OnMouseLeftClick(Point location)
         {
             if (Ogmo.ToolsWindow.CurrentTool != null)
+            {
+                location.X -= (int)DrawOffset.X;
+                location.Y -= (int)DrawOffset.Y;
                 Ogmo.ToolsWindow.CurrentTool.OnMouseLeftClick(location);
+            }
         }
 
         public void OnMouseLeftDown(Point location)
         {
             if (Ogmo.ToolsWindow.CurrentTool != null)
+            {
+                location.X -= (int)DrawOffset.X;
+                location.Y -= (int)DrawOffset.Y;
                 Ogmo.ToolsWindow.CurrentTool.OnMouseLeftDown(location);
+            }
         }
 
         public void OnMouseLeftUp(Point location)
         {
             if (Ogmo.ToolsWindow.CurrentTool != null)
+            {
+                location.X -= (int)DrawOffset.X;
+                location.Y -= (int)DrawOffset.Y;
                 Ogmo.ToolsWindow.CurrentTool.OnMouseLeftUp(location);
+            }
         }
 
         public void OnMouseRightClick(Point location)
         {
             if (Ogmo.ToolsWindow.CurrentTool != null)
+            {
+                location.X -= (int)DrawOffset.X;
+                location.Y -= (int)DrawOffset.Y;
                 Ogmo.ToolsWindow.CurrentTool.OnMouseRightClick(location);
+            }
         }
 
         public void OnMouseRightDown(Point location)
         {
             if (Ogmo.ToolsWindow.CurrentTool != null)
+            {
+                location.X -= (int)DrawOffset.X;
+                location.Y -= (int)DrawOffset.Y;
                 Ogmo.ToolsWindow.CurrentTool.OnMouseRightDown(location);
+            }
         }
 
         public void OnMouseRightUp(Point location)
         {
             if (Ogmo.ToolsWindow.CurrentTool != null)
+            {
+                location.X -= (int)DrawOffset.X;
+                location.Y -= (int)DrawOffset.Y;
                 Ogmo.ToolsWindow.CurrentTool.OnMouseRightUp(location);
+            }
         }
 
         public void OnMouseMove(Point location)
         {
+            location.X -= (int)DrawOffset.X;
+            location.Y -= (int)DrawOffset.Y;
+
             MouseSnapPosition = Layer.Definition.SnapToGrid(LevelEditor.MousePosition);
 
             if (Ogmo.ToolsWindow.CurrentTool != null)

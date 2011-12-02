@@ -109,24 +109,37 @@ namespace OgmoEditor.LevelEditors
             content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, LevelView.Matrix);
             content.DrawRectangle(10, 10, Level.Size.Width, Level.Size.Height, new Color(0, 0, 0, .5f));
             content.DrawRectangle(0, 0, Level.Size.Width, Level.Size.Height, Ogmo.Project.BackgroundColor.ToXNA());
-
-            //Draw the grid if turned on and editor is zoomed at least 100%
-            if (Ogmo.MainWindow.EditingGridVisible && LevelView.Zoom >= 1)
-                content.DrawGrid(LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Layer.Definition.Grid, Level.Size, Ogmo.Project.GridColor.ToXNA() * .5f);
             content.SpriteBatch.End();
 
-            //Draw the layers
+            //Layers below the current one
             int i;
             for (i = 0; i < Ogmo.LayersWindow.CurrentLayerIndex; i++)
             {
                 if (Ogmo.Project.LayerDefinitions[i].Visible)
-                    DrawLayer(LayerEditors[i], false, 1);
+                {
+                    content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, LayerEditors[i].DrawMatrix * LevelView.Matrix);
+                    LayerEditors[i].Draw(content, false, 1);
+                    content.SpriteBatch.End();
+                }
             }
-            DrawLayer(LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex], true, 1);
+
+            //Current layer and grid
+            content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, LayerEditors
+                [Ogmo.LayersWindow.CurrentLayerIndex].DrawMatrix * LevelView.Matrix);
+            if (Ogmo.MainWindow.EditingGridVisible && LevelView.Zoom >= 1)
+                content.DrawGrid(LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Layer.Definition.Grid, Level.Size, Ogmo.Project.GridColor.ToXNA() * .5f);
+            LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Draw(content, true, 1);
+            content.SpriteBatch.End();
+
+            //Layers above the current one
             for (; i < LayerEditors.Count; i++)
             {
                 if (i < Ogmo.Project.LayerDefinitions.Count && Ogmo.Project.LayerDefinitions[i].Visible)
-                    DrawLayer(LayerEditors[i], false, LAYER_ABOVE_ALPHA);
+                {
+                    content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, LayerEditors[i].DrawMatrix * LevelView.Matrix);
+                    LayerEditors[i].Draw(content, false, LAYER_ABOVE_ALPHA);
+                    content.SpriteBatch.End();
+                }
             }
 
             //Draw the camera
@@ -165,7 +178,7 @@ namespace OgmoEditor.LevelEditors
 
         private void DrawLayer(LayerEditor layer, bool current, float alpha)
         {
-            Ogmo.Content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, layer.DrawMatrix * LevelView.Matrix);
+            
             layer.Draw(Ogmo.Content, current, alpha);
             Ogmo.Content.SpriteBatch.End();
         }
