@@ -123,12 +123,15 @@ namespace OgmoEditor.LevelEditors
                 }
             }
 
-            //Current layer and grid
+            //Current layer, grid and border
             content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, LayerEditors
                 [Ogmo.LayersWindow.CurrentLayerIndex].DrawMatrix * LevelView.Matrix);
             if (Ogmo.MainWindow.EditingGridVisible && LevelView.Zoom >= 1)
                 content.DrawGrid(LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Layer.Definition.Grid, Level.Size, Ogmo.Project.GridColor.ToXNA() * .5f);
             LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Draw(content, true, 1);
+            content.DrawHollowRect(0, 0, Level.Size.Width + 1, Level.Size.Height, Color.Black);
+            content.DrawHollowRect(-1, -1, Level.Size.Width + 3, Level.Size.Height + 2, Color.Black);
+
             content.SpriteBatch.End();
 
             //Layers above the current one
