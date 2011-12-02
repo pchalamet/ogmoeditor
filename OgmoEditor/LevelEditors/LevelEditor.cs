@@ -113,22 +113,24 @@ namespace OgmoEditor.LevelEditors
             //Draw the grid if turned on and editor is zoomed at least 100%
             if (Ogmo.MainWindow.EditingGridVisible && LevelView.Zoom >= 1)
                 content.DrawGrid(LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Layer.Definition.Grid, Level.Size, Ogmo.Project.GridColor.ToXNA() * .5f);
+            content.SpriteBatch.End();
 
             //Draw the layers
             int i;
             for (i = 0; i < Ogmo.LayersWindow.CurrentLayerIndex; i++)
             {
                 if (Ogmo.Project.LayerDefinitions[i].Visible)
-                    LayerEditors[i].Draw(content, false, 1);
+                    DrawLayer(LayerEditors[i], false, 1);
             }
-            LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Draw(content, true, 1);
+            DrawLayer(LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex], true, 1);
             for (; i < LayerEditors.Count; i++)
             {
                 if (i < Ogmo.Project.LayerDefinitions.Count && Ogmo.Project.LayerDefinitions[i].Visible)
-                    LayerEditors[i].Draw(content, false,  LAYER_ABOVE_ALPHA);
+                    DrawLayer(LayerEditors[i], false, LAYER_ABOVE_ALPHA);
             }
 
             //Draw the camera
+            content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, LevelView.Matrix);
             if (Ogmo.Project.CameraEnabled)
             {
                 int w = Ogmo.Project.CameraSize.Width / 8;
@@ -159,6 +161,13 @@ namespace OgmoEditor.LevelEditors
             }
 
             content.SpriteBatch.End();
+        }
+
+        private void DrawLayer(LayerEditor layer, bool current, float alpha)
+        {
+            Ogmo.Content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, layer.DrawMatrix * LevelView.Matrix);
+            layer.Draw(Ogmo.Content, current, alpha);
+            Ogmo.Content.SpriteBatch.End();
         }
 
         public void SwitchTo()
@@ -358,7 +367,11 @@ namespace OgmoEditor.LevelEditors
             if (mouseMode != MouseMode.Normal)
             {
                 if (mouseMode == MouseMode.Camera && !Util.Ctrl)
+                {
                     CameraPosition = Ogmo.LayersWindow.CurrentLayer.Definition.SnapToGrid(CameraPosition);
+                    foreach (var ed in LayerEditors)
+                        ed.UpdateDrawOffset(CameraPosition);
+                }
 
                 //Exit mouse move mode
                 mousePanMode = false;

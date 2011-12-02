@@ -20,16 +20,19 @@ namespace OgmoEditor.LevelEditors.LayerEditors
         public LevelEditor LevelEditor { get; private set; }
         public Point MouseSnapPosition { get; private set; }
         public Vector2 DrawOffset { get; private set; }
+        public Matrix DrawMatrix { get; private set; }
 
         public LayerEditor(LevelEditor levelEditor, Layer layer)
         {
             LevelEditor = levelEditor;
             Layer = layer;
+            DrawMatrix = Matrix.Identity;
         }
 
         public void UpdateDrawOffset(Point cameraPos)
         {
             DrawOffset = new Vector2(cameraPos.X - cameraPos.X * Layer.Definition.ScrollFactor.X, cameraPos.Y - cameraPos.Y * Layer.Definition.ScrollFactor.Y);
+            DrawMatrix = Matrix.CreateTranslation(DrawOffset.X, DrawOffset.Y, 0);
         }
 
         public virtual void Draw(Content content, bool current, float alpha)
