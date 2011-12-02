@@ -313,10 +313,14 @@ namespace OgmoEditor.LevelEditors
             if (mouseMode == MouseMode.Pan && e.KeyCode == System.Windows.Forms.Keys.Space)
             {
                 mouseMode = MouseMode.Normal;
+                mousePanMode = false;
             }
             else if (mouseMode == MouseMode.Camera && e.KeyCode == System.Windows.Forms.Keys.C)
             {
                 mouseMode = MouseMode.Normal;
+                mousePanMode = false;
+                if (!Util.Ctrl)
+                    SnapCamera();
             }
             else
             {
@@ -367,11 +371,7 @@ namespace OgmoEditor.LevelEditors
             if (mouseMode != MouseMode.Normal)
             {
                 if (mouseMode == MouseMode.Camera && !Util.Ctrl)
-                {
-                    CameraPosition = Ogmo.LayersWindow.CurrentLayer.Definition.SnapToGrid(CameraPosition);
-                    foreach (var ed in LayerEditors)
-                        ed.UpdateDrawOffset(CameraPosition);
-                }
+                    SnapCamera();
 
                 //Exit mouse move mode
                 mousePanMode = false;
@@ -430,6 +430,13 @@ namespace OgmoEditor.LevelEditors
             else
                 LevelView.ZoomOut();
             Ogmo.MainWindow.ZoomLabel.Text = LevelView.ZoomString;
+        }
+
+        private void SnapCamera()
+        {
+            CameraPosition = Ogmo.LayersWindow.CurrentLayer.Definition.SnapToGrid(CameraPosition);
+            foreach (var ed in LayerEditors)
+                ed.UpdateDrawOffset(CameraPosition);
         }
     }
 }
