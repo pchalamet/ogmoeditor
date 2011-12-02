@@ -317,6 +317,7 @@ namespace OgmoEditor.LevelEditors
 
         private void onMouseClick(object sender, MouseEventArgs e)
         {
+            Focus();
             if (mouseMode != MouseMode.Normal)
                 return;
 
