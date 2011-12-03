@@ -112,8 +112,9 @@ namespace OgmoEditor.LevelData.Layers
                 for (int i = 0; i < rows.Length; i++)
                 {
                     string[] tiles = rows[i].Split(',');
-                    for (int j = 0; j < tiles.Length; j++)
-                        Tiles[j, i] = Convert.ToInt32(tiles[j]);
+                    if (tiles[0] != "")
+                        for (int j = 0; j < tiles.Length; j++)
+                            Tiles[j, i] = Convert.ToInt32(tiles[j]);
                 }
             }
             else if (Definition.ExportMode == TileLayerDefinition.TileExportMode.XML)
