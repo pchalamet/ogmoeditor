@@ -25,6 +25,8 @@ namespace OgmoEditor
 
         private ImageList imageList;
 
+        private int rightClicked = -1;      //After a right-click context menu on a tab is closed, switch to this level
+
         public MainWindow()
         {
             InitializeComponent();
@@ -206,14 +208,37 @@ namespace OgmoEditor
             Ogmo.SetLevel(e.TabPageIndex);
         }
 
+        private void MasterTabControl_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                int old = MasterTabControl.SelectedIndex;
+                int num = -1;
+                for (int i = 0; i < MasterTabControl.TabCount; i++)
+                {
+                    if (MasterTabControl.GetTabRect(i).Contains(e.Location))
+                        num = i;
+                }
+
+                if (num != -1 && MasterTabControl.TabPages[num].Name != "startPage")
+                {
+                    rightClicked = num;
+                    tabPageContextMenuStrip.Show(this, e.Location);
+                }
+            }
+        }
+
         /*
-         *  Clicking the File context menu itmes
+         *  Ogmo menu
          */
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
+        /*
+         *  Project menu
+         */
         private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Ogmo.NewProject();
@@ -234,6 +259,21 @@ namespace OgmoEditor
             Ogmo.LoadProject();
         }
 
+        /*
+         *  Level menu
+         */
+        private int getTargetLevel()
+        {
+            if (rightClicked == -1)
+                return SelectedLevelIndex;
+            else
+            {
+                int num = rightClicked;
+                rightClicked = -1;
+                return num;
+            }
+        }
+
         private void levelPropertiesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Ogmo.CurrentLevel.EditProperties();
@@ -251,32 +291,37 @@ namespace OgmoEditor
 
         private void saveLevelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.Levels[SelectedLevelIndex].Save();
+            Ogmo.Levels[getTargetLevel()].Save();
         }
 
         private void saveLevelAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.Levels[SelectedLevelIndex].SaveAs();
+            Ogmo.Levels[getTargetLevel()].SaveAs();
         }
 
         private void closeLevelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.CloseLevel(Ogmo.Levels[SelectedLevelIndex], true);
+            Ogmo.CloseLevel(Ogmo.Levels[getTargetLevel()], true);
         }
 
         private void duplicateLevelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.AddLevel(new Level(Ogmo.Levels[SelectedLevelIndex]));
+            Ogmo.AddLevel(new Level(Ogmo.Levels[getTargetLevel()]));
         }
 
         private void closeOtherLevelsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.CloseOtherLevels(Ogmo.Levels[SelectedLevelIndex]);
+            Ogmo.CloseOtherLevels(Ogmo.Levels[getTargetLevel()]);
         }
 
         private void openAllLevelsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Ogmo.OpenAllLevels();
+        }
+
+        private void saveAsImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
         /*

@@ -69,6 +69,7 @@
             this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deselectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editingGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -79,9 +80,16 @@
             this.entitySelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MasterTabControl = new System.Windows.Forms.TabControl();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.deselectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabPageContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.saveLevelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeLevelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeOthersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.duplicateLevelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveLevelToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.StatusStrip.SuspendLayout();
             this.MenuStrip.SuspendLayout();
+            this.tabPageContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // StatusStrip
@@ -333,6 +341,7 @@
             this.saveAsImageToolStripMenuItem.Name = "saveAsImageToolStripMenuItem";
             this.saveAsImageToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.saveAsImageToolStripMenuItem.Text = "Save As Image...";
+            this.saveAsImageToolStripMenuItem.Click += new System.EventHandler(this.saveAsImageToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -409,6 +418,14 @@
             this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.selectAllToolStripMenuItem.Text = "Select All";
             this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.selectAllToolStripMenuItem_Click);
+            // 
+            // deselectToolStripMenuItem
+            // 
+            this.deselectToolStripMenuItem.Name = "deselectToolStripMenuItem";
+            this.deselectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.deselectToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.deselectToolStripMenuItem.Text = "Deselect";
+            this.deselectToolStripMenuItem.Click += new System.EventHandler(this.deselectToolStripMenuItem_Click);
             // 
             // viewToolStripMenuItem
             // 
@@ -488,19 +505,64 @@
             this.MasterTabControl.Size = new System.Drawing.Size(784, 516);
             this.MasterTabControl.TabIndex = 2;
             this.MasterTabControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.MasterTabControl_Selecting);
+            this.MasterTabControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MasterTabControl_MouseClick);
             // 
             // contextMenuStrip
             // 
             this.contextMenuStrip.Name = "contextMenuStrip";
             this.contextMenuStrip.Size = new System.Drawing.Size(61, 4);
             // 
-            // deselectToolStripMenuItem
+            // tabPageContextMenuStrip
             // 
-            this.deselectToolStripMenuItem.Name = "deselectToolStripMenuItem";
-            this.deselectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.deselectToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-            this.deselectToolStripMenuItem.Text = "Deselect";
-            this.deselectToolStripMenuItem.Click += new System.EventHandler(this.deselectToolStripMenuItem_Click);
+            this.tabPageContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveLevelToolStripMenuItem1,
+            this.closeLevelToolStripMenuItem1,
+            this.closeOthersToolStripMenuItem,
+            this.toolStripSeparator7,
+            this.duplicateLevelToolStripMenuItem1,
+            this.saveLevelToolStripMenuItem2});
+            this.tabPageContextMenuStrip.Name = "tabPageContextMenuStrip";
+            this.tabPageContextMenuStrip.Size = new System.Drawing.Size(160, 142);
+            // 
+            // saveLevelToolStripMenuItem1
+            // 
+            this.saveLevelToolStripMenuItem1.Name = "saveLevelToolStripMenuItem1";
+            this.saveLevelToolStripMenuItem1.Size = new System.Drawing.Size(159, 22);
+            this.saveLevelToolStripMenuItem1.Text = "Save Level";
+            this.saveLevelToolStripMenuItem1.Click += new System.EventHandler(this.saveLevelToolStripMenuItem_Click);
+            // 
+            // closeLevelToolStripMenuItem1
+            // 
+            this.closeLevelToolStripMenuItem1.Name = "closeLevelToolStripMenuItem1";
+            this.closeLevelToolStripMenuItem1.Size = new System.Drawing.Size(159, 22);
+            this.closeLevelToolStripMenuItem1.Text = "Close Level";
+            this.closeLevelToolStripMenuItem1.Click += new System.EventHandler(this.closeLevelToolStripMenuItem_Click);
+            // 
+            // closeOthersToolStripMenuItem
+            // 
+            this.closeOthersToolStripMenuItem.Name = "closeOthersToolStripMenuItem";
+            this.closeOthersToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.closeOthersToolStripMenuItem.Text = "Close Others";
+            this.closeOthersToolStripMenuItem.Click += new System.EventHandler(this.closeOtherLevelsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(156, 6);
+            // 
+            // duplicateLevelToolStripMenuItem1
+            // 
+            this.duplicateLevelToolStripMenuItem1.Name = "duplicateLevelToolStripMenuItem1";
+            this.duplicateLevelToolStripMenuItem1.Size = new System.Drawing.Size(159, 22);
+            this.duplicateLevelToolStripMenuItem1.Text = "Duplicate Level";
+            this.duplicateLevelToolStripMenuItem1.Click += new System.EventHandler(this.duplicateLevelToolStripMenuItem_Click);
+            // 
+            // saveLevelToolStripMenuItem2
+            // 
+            this.saveLevelToolStripMenuItem2.Name = "saveLevelToolStripMenuItem2";
+            this.saveLevelToolStripMenuItem2.Size = new System.Drawing.Size(159, 22);
+            this.saveLevelToolStripMenuItem2.Text = "Save As Image...";
+            this.saveLevelToolStripMenuItem2.Click += new System.EventHandler(this.saveAsImageToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -520,6 +582,7 @@
             this.StatusStrip.PerformLayout();
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
+            this.tabPageContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -577,5 +640,12 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deselectToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip tabPageContextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem saveLevelToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem closeLevelToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem closeOthersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem duplicateLevelToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem saveLevelToolStripMenuItem2;
     }
 }
