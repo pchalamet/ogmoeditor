@@ -347,7 +347,6 @@
     <Compile Include="Windows\OgmoWindow.Designer.cs">
       <DependentUpon>OgmoWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Parse.cs" />
     <Compile Include="Windows\PreferencesWindow.cs">
       <SubType>Form</SubType>
     </Compile>
