@@ -102,7 +102,7 @@ namespace OgmoEditor.LevelEditors
             GraphicsDevice.SetRenderTarget(null);
             content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone);
             content.SpriteBatch.Draw(content.TexBG, DrawBounds, new Rectangle(0, 0, DrawBounds.Width, DrawBounds.Height), this.Focused ? Color.White : NoFocus);
-            content.SpriteBatch.Draw(content.TexLogo, new Vector2(DrawBounds.Width / 2, DrawBounds.Height / 2), null, this.Focused ? Color.White : NoFocus, 0, new Vector2(content.TexLogo.Width / 2, content.TexLogo.Height / 2), 3, SpriteEffects.None, 0);
+            content.SpriteBatch.Draw(content.TexLogo, new Vector2(DrawBounds.Width / 2, DrawBounds.Height / 2), null, this.Focused ? Color.White : NoFocus, 0, new Vector2(content.TexLogo.Width / 2, content.TexLogo.Height / 2), .5f, SpriteEffects.None, 0);
             content.SpriteBatch.End();
 
             //Draw the level onto the control, positioned and scaled by the camera
