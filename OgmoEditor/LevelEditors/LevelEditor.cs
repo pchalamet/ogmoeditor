@@ -431,8 +431,9 @@ namespace OgmoEditor.LevelEditors
 
             //Update the mouse coord display
             MousePosition = LevelView.ScreenToEditor(e.Location);
+            Point mouseDraw = Ogmo.Project.LayerDefinitions[Ogmo.LayersWindow.CurrentLayerIndex].SnapToGrid(MousePosition);
             Point gridPos = Ogmo.Project.LayerDefinitions[Ogmo.LayersWindow.CurrentLayerIndex].ConvertToGrid(MousePosition);
-            Ogmo.MainWindow.MouseCoordinatesLabel.Text = "Mouse: ( " + MousePosition.X.ToString() + ", " + MousePosition.Y.ToString() + " )";
+            Ogmo.MainWindow.MouseCoordinatesLabel.Text = "Mouse: ( " + mouseDraw.X.ToString() + ", " + mouseDraw.Y.ToString() + " )";
             Ogmo.MainWindow.GridCoordinatesLabel.Text = "Grid: ( " + gridPos.X.ToString() + ", " + gridPos.Y.ToString() + " )";
 
             //Call the layer event
