@@ -304,6 +304,7 @@ namespace OgmoEditor
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Multiselect = true;
             dialog.Filter = Ogmo.LEVEL_FILTER;
+            dialog.InitialDirectory = Ogmo.Project.SavedDirectory;
             if (dialog.ShowDialog() == DialogResult.Cancel)
                 return;
 
