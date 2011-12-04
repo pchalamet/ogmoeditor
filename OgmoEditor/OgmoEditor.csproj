@@ -347,6 +347,13 @@
     <Compile Include="Windows\OgmoWindow.Designer.cs">
       <DependentUpon>OgmoWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Parse.cs" />
+    <Compile Include="Windows\PreferencesWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\PreferencesWindow.Designer.cs">
+      <DependentUpon>PreferencesWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\StartPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -468,6 +475,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\OgmoWindow.resx">
       <DependentUpon>OgmoWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\PreferencesWindow.resx">
+      <DependentUpon>PreferencesWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\StartPage.resx">
       <DependentUpon>StartPage.cs</DependentUpon>

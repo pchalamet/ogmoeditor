@@ -235,14 +235,26 @@ namespace OgmoEditor
         /*
          *  Ogmo menu
          */
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            PreferencesWindow pref = new PreferencesWindow();
+            DisableEditing();
+            pref.Show(this);
         }
 
         private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Ogmo.CheckForUpdates(true);
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 
         /*
