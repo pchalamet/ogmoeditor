@@ -22,7 +22,6 @@ namespace OgmoEditor.LevelEditors
     public class LevelEditor : GraphicsDeviceControl
     {
         static private readonly Color NoFocus = new Color(.95f, .95f, .95f);
-        private const int UNDO_LIMIT = 60;
         private const float LAYER_ABOVE_ALPHA = .5f;
 
         private enum MouseMode { Normal, Pan, Camera };
@@ -201,7 +200,7 @@ namespace OgmoEditor.LevelEditors
             EndBatch();
 
             //If you're over the undo limit, chop off an action
-            if (UndoStack.Count == UNDO_LIMIT)
+            if (UndoStack.Count == Config.ConfigFile.UndoLimit)
                 UndoStack.RemoveFirst();
 
             //If the level is so-far unchanged, change it and store that fact
@@ -232,7 +231,7 @@ namespace OgmoEditor.LevelEditors
                 Level.Changed = true;
             }
 
-            if (UndoStack.Count == UNDO_LIMIT)
+            if (UndoStack.Count == Config.ConfigFile.UndoLimit)
                 UndoStack.RemoveFirst();
             UndoStack.AddLast(batch);
             RedoStack.Clear();

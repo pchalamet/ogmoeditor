@@ -119,11 +119,20 @@ namespace OgmoEditor
 
             //Add the exit event
             Application.ApplicationExit += onApplicationExit;
+
+            //Check for updates?
+            if (Config.ConfigFile.CheckForUpdates)
+                CheckForUpdates(false);
         }
 
         static void onApplicationExit(object sender, EventArgs e)
         {
             Config.Save();
+        }
+
+        static public void CheckForUpdates(bool reportNoUpdates)
+        {
+
         }
 
         /*

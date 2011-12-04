@@ -31,6 +31,10 @@ namespace OgmoEditor
         {
             InitializeComponent();
 
+            //Start maximized?
+            if (Config.ConfigFile.StartMaximized)
+                WindowState = FormWindowState.Maximized;
+
             EditingGridVisible = true;
             LevelEditors = new List<LevelEditor>();
 
@@ -234,6 +238,11 @@ namespace OgmoEditor
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ogmo.CheckForUpdates(true);
         }
 
         /*

@@ -42,10 +42,16 @@ namespace OgmoEditor
          *  The actual config file
          */
         public List<RecentProject> RecentProjects;
+        public bool CheckForUpdates;
+        public bool StartMaximized;
+        public int UndoLimit;
 
         private Config()
         {
             RecentProjects = new List<RecentProject>();
+            CheckForUpdates = true;
+            StartMaximized = false;
+            UndoLimit = 30;
         }
 
         public void ClearRecentProjects()
