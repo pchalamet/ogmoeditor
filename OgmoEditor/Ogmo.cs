@@ -19,6 +19,7 @@ using OgmoEditor.Definitions;
 using OgmoEditor.LevelEditors;
 using Microsoft.Xna.Framework.Graphics;
 using OgmoEditor.Clipboard;
+using System.Xml;
 
 namespace OgmoEditor
 {
@@ -129,9 +130,34 @@ namespace OgmoEditor
             Config.Save();
         }
 
-        static public void CheckForUpdates(bool reportNoUpdates)
+        static public void CheckForUpdates(bool reportNoUpdatesOrError)
         {
+            try
+            {
+                XmlTextReader reader = new XmlTextReader("http://ogmoeditor.com/version.xml");
+                reader.MoveToContent();
 
+                string verStr = reader.ReadInnerXml();
+                Version newVersion = new Version(verStr);
+                Version curVersion = new Version(Application.ProductVersion);
+
+                if (curVersion.CompareTo(newVersion) < 0)
+                {
+                    string text = "There is a new version of Ogmo Editor available!\nYour version: " + curVersion.ToString() + "\nNewest version: " + newVersion.ToString() + "\n\nDownload the new version?";
+                    if (MessageBox.Show(Ogmo.MainWindow, text, "Check for Updates", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        System.Diagnostics.Process.Start("http://ogmoeditor.com/OgmoEditor.zip"); 
+                }
+                else
+                {
+                    if (reportNoUpdatesOrError)
+                        MessageBox.Show(Ogmo.MainWindow, "You're running the newest version of Ogmo Editor (" + verStr + ")!", "Check for Updates", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            catch
+            {
+                if (reportNoUpdatesOrError)
+                    MessageBox.Show(Ogmo.MainWindow, "Could not establish connection to check for updates!", "Check for Updates", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /*
