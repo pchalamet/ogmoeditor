@@ -33,17 +33,17 @@ namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
 
         private void roundTextBox_Validated(object sender, EventArgs e)
         {
-            OgmoParse.Parse(ref def.Round, defaultTextBox);
+            OgmoParse.Parse(ref def.Round, roundTextBox);
         }
 
         private void minTextBox_Validated(object sender, EventArgs e)
         {
-            OgmoParse.Parse(ref def.Min, defaultTextBox);
+            OgmoParse.Parse(ref def.Min, minTextBox);
         }
 
         private void maxTextBox_Validated(object sender, EventArgs e)
         {
-            OgmoParse.Parse(ref def.Max, defaultTextBox);
+            OgmoParse.Parse(ref def.Max, maxTextBox);
         }
     }
 }
