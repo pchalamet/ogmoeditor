@@ -321,6 +321,7 @@
             this.openAllLevelsToolStripMenuItem.Name = "openAllLevelsToolStripMenuItem";
             this.openAllLevelsToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.openAllLevelsToolStripMenuItem.Text = "Open All Levels";
+            this.openAllLevelsToolStripMenuItem.Click += new System.EventHandler(this.openAllLevelsToolStripMenuItem_Click);
             // 
             // closeOtherLevelsToolStripMenuItem
             // 
@@ -525,7 +526,7 @@
             this.duplicateLevelToolStripMenuItem1,
             this.saveLevelToolStripMenuItem2});
             this.tabPageContextMenuStrip.Name = "tabPageContextMenuStrip";
-            this.tabPageContextMenuStrip.Size = new System.Drawing.Size(160, 142);
+            this.tabPageContextMenuStrip.Size = new System.Drawing.Size(160, 120);
             // 
             // saveLevelToolStripMenuItem1
             // 

@@ -406,12 +406,14 @@ namespace OgmoEditor
 
         static public void OpenAllLevels()
         {
-            var files = Directory.EnumerateFiles(Project.SavedDirectory, "*.oel");
-            foreach (string str in files)
+            CloseAllLevels();
+            foreach (string str in Directory.EnumerateFiles(Project.SavedDirectory, "*.oel"))
             {
                 if (GetLevelByPath(str) == null)
                     AddLevel(new Level(Project, str));
             }
+
+            Ogmo.MainWindow.StatusText = "Opened all levels in project directory";
         }
     }
 }
