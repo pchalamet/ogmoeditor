@@ -53,7 +53,7 @@ namespace OgmoEditor
             CheckForUpdates = true;
             StartMaximized = false;
             UndoLimit = 30;
-            LevelLimit = 12;
+            LevelLimit = 15;
         }
 
         public void ClearRecentProjects()
