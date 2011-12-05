@@ -317,6 +317,10 @@ namespace OgmoEditor
             if (dialog.ShowDialog() == DialogResult.Cancel)
                 return;
 
+            //If the only open level is an empty one, close it
+            if (Ogmo.Levels.Count == 1 && Ogmo.Levels[0].IsEmpty)
+                Ogmo.CloseLevel(Ogmo.Levels[0], false);
+
             //Load it
             foreach (string f in dialog.FileNames)
             {

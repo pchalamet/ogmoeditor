@@ -125,7 +125,15 @@ namespace OgmoEditor.LevelData
             }
         }
 
-        public bool Saved
+        public bool IsEmpty
+        {
+            get
+            {
+                return !HasBeenSaved && !Changed;
+            }
+        }
+
+        public bool HasBeenSaved
         {
             get { return SavePath != ""; }
         }
