@@ -1,0 +1,27 @@
+﻿			 ________ ________ __________ ________
+			|   __   |        |          |        |
+			|  |  |  |   _____|          |   _    |
+			|  |__|  |  |___  |   |  |   |  |_|   |
+			|________|________|___|__|___|________|
+				   ____ ___  _ ___ ____ ____ 
+				   |___ |  \ |  |  |  | |__/ 
+				   |___ |__/ |  |  |__| |  \  
+
+Ogmo Editor: The generic level editor for indie game developers!
+By Matt Thorson
+www.mattmakesgames.com
+matt@mattmakesgames.com
+
+Character "Ogmo" copyright © 2004 Matt Thorson
+Ogmo Editor copyright © 2011 Matt Thorson
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of version 3 of the GNU General Public License as published by
+the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+The GNU General Public License can be found at http://www.gnu.org/licenses/
