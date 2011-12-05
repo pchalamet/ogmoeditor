@@ -21,6 +21,7 @@ namespace OgmoEditor.Windows
             maximizeCheckBox.Checked = Config.ConfigFile.StartMaximized;
             updatesCheckBox.Checked = Config.ConfigFile.CheckForUpdates;
             undoLimitTextBox.Text = Config.ConfigFile.UndoLimit.ToString();
+            levelLimitTextBox.Text = Config.ConfigFile.LevelLimit.ToString();
 
             clearHistoryButton.Enabled = Config.ConfigFile.RecentProjects.Count > 0;
         }
@@ -30,6 +31,7 @@ namespace OgmoEditor.Windows
             Config.ConfigFile.StartMaximized = maximizeCheckBox.Checked;
             Config.ConfigFile.CheckForUpdates = updatesCheckBox.Checked;
             OgmoParse.Parse(ref Config.ConfigFile.UndoLimit, undoLimitTextBox);
+            OgmoParse.Parse(ref Config.ConfigFile.LevelLimit, levelLimitTextBox);
 
             Config.Save();
             Ogmo.MainWindow.EnableEditing();

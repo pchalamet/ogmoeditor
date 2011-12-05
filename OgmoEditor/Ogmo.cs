@@ -338,14 +338,23 @@ namespace OgmoEditor
             Ogmo.MainWindow.StatusText = "Opened level(s) " + String.Join(", ", files);
         }
 
-        static public void AddLevel(Level level)
+        static public bool AddLevel(Level level)
         {
+            //Can't if past level limit
+            if (Ogmo.Levels.Count >= Config.ConfigFile.LevelLimit)
+            {
+                MessageBox.Show("Couldn't add level because the level limit was exceeded! You can change the level limit in the Preferences menu.", "Error");
+                return false;
+            }
+
             //Add it
             Levels.Add(level);
 
             //Call the event
             if (OnLevelAdded != null)
                 OnLevelAdded(Levels.Count - 1);
+
+            return true;
         }
 
         static public bool CloseLevel(Level level, bool askToSave)
@@ -410,7 +419,10 @@ namespace OgmoEditor
             foreach (string str in Directory.EnumerateFiles(Project.SavedDirectory, "*.oel"))
             {
                 if (GetLevelByPath(str) == null)
-                    AddLevel(new Level(Project, str));
+                {
+                    if (!AddLevel(new Level(Project, str)))
+                        break;
+                }
             }
 
             Ogmo.MainWindow.StatusText = "Opened all levels in project directory";

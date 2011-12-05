@@ -35,6 +35,8 @@
             this.undoLimitTextBox = new System.Windows.Forms.TextBox();
             this.doneButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.levelLimitTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // maximizeCheckBox
@@ -59,7 +61,7 @@
             // 
             // clearHistoryButton
             // 
-            this.clearHistoryButton.Location = new System.Drawing.Point(12, 102);
+            this.clearHistoryButton.Location = new System.Drawing.Point(12, 122);
             this.clearHistoryButton.Name = "clearHistoryButton";
             this.clearHistoryButton.Size = new System.Drawing.Size(134, 23);
             this.clearHistoryButton.TabIndex = 2;
@@ -76,7 +78,7 @@
             // 
             // doneButton
             // 
-            this.doneButton.Location = new System.Drawing.Point(197, 102);
+            this.doneButton.Location = new System.Drawing.Point(197, 122);
             this.doneButton.Name = "doneButton";
             this.doneButton.Size = new System.Drawing.Size(75, 23);
             this.doneButton.TabIndex = 4;
@@ -93,11 +95,29 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Undo limit (per level):";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 89);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(81, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Open level limit:";
+            // 
+            // levelLimitTextBox
+            // 
+            this.levelLimitTextBox.Location = new System.Drawing.Point(127, 86);
+            this.levelLimitTextBox.Name = "levelLimitTextBox";
+            this.levelLimitTextBox.Size = new System.Drawing.Size(52, 20);
+            this.levelLimitTextBox.TabIndex = 7;
+            // 
             // PreferencesWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 135);
+            this.ClientSize = new System.Drawing.Size(284, 155);
+            this.Controls.Add(this.levelLimitTextBox);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.doneButton);
             this.Controls.Add(this.undoLimitTextBox);
@@ -125,5 +145,7 @@
         private System.Windows.Forms.TextBox undoLimitTextBox;
         private System.Windows.Forms.Button doneButton;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox levelLimitTextBox;
     }
 }
