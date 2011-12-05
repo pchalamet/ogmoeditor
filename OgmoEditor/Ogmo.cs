@@ -251,7 +251,7 @@ namespace OgmoEditor
             //Warn!
             if (Ogmo.Levels.Count > 0 && Ogmo.Levels.Find(e => e.Changed) != null)
             {
-                if (MessageBox.Show(MainWindow, "Warning: All levels must be closed if any changes to the project are made. You have unsaved changes in some open levels which will be lost. Still edit the project?", "Warning!", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                if (MessageBox.Show(MainWindow, "Warning: All levels must be closed if any changes to the project are made. You have unsaved changes in some open levels which will be lost. Still edit the project?", "Warning!", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) != DialogResult.OK)
                     return;
             }
 
@@ -368,7 +368,7 @@ namespace OgmoEditor
             //Can't if past level limit
             if (Ogmo.Levels.Count >= Config.ConfigFile.LevelLimit)
             {
-                MessageBox.Show("Couldn't add level because the level limit was exceeded! You can change the level limit in the Preferences menu.", "Error");
+                MessageBox.Show(Ogmo.MainWindow, "Couldn't add level because the level limit was exceeded! You can change the level limit in the Preferences menu.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
@@ -387,7 +387,7 @@ namespace OgmoEditor
             //If it's changed, ask to save it
             if (askToSave && level.Changed)
             {
-                DialogResult result = MessageBox.Show(MainWindow, "Save changes to \"" + level.SaveName + "\" before closing it?", "Unsaved Changes!", MessageBoxButtons.YesNoCancel);
+                DialogResult result = MessageBox.Show(MainWindow, "Save changes to \"" + level.SaveName + "\" before closing it?", "Unsaved Changes!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (result == DialogResult.Cancel)
                     return false;
                 else if (result == DialogResult.Yes)
