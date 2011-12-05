@@ -24,7 +24,6 @@ namespace OgmoEditor
 {
     static public class Ogmo
     {
-        public const float VERSION = .5f;
         public const string PROJECT_EXT = ".oep";
         public const string LEVEL_EXT = ".oel";
         public const string PROJECT_FILTER = "Ogmo Editor Project File|*" + PROJECT_EXT;

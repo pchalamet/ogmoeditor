@@ -249,7 +249,9 @@ namespace OgmoEditor
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            AboutWindow about = new AboutWindow();
+            DisableEditing();
+            about.Show(this);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
