@@ -5,7 +5,7 @@ using System.Text;
 using OgmoEditor.Definitions.LayerDefinitions;
 using System.Xml;
 using OgmoEditor.LevelEditors.LayerEditors;
-using OgmoEditor.LevelData.Resizers;
+using OgmoEditor.LevelEditors.Resizers;
 
 namespace OgmoEditor.LevelData.Layers
 {
@@ -41,11 +41,6 @@ namespace OgmoEditor.LevelData.Layers
         public override LayerEditor GetEditor(LevelEditors.LevelEditor editor)
         {
             return new EntityLayerEditor(editor, this);
-        }
-
-        public override Resizer GetResizer()
-        {
-            return null;
         }
     }
 }

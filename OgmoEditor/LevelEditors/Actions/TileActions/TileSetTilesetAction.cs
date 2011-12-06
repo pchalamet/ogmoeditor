@@ -30,7 +30,7 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
             oldIDs = TileLayer.Tiles;
             TileLayer.Tiles = setTo.TransformMap(was, TileLayer.Tiles);
 
-            TileLayer.RefreshTexture();
+            TileLayer.TileCanvas.RefreshAll();
             Ogmo.TilePaletteWindow.SetTileset(setTo);
         }
 
@@ -41,7 +41,7 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
             TileLayer.Tileset = was;
             TileLayer.Tiles = oldIDs;
 
-            TileLayer.RefreshTexture();
+            TileLayer.TileCanvas.RefreshAll();
             Ogmo.TilePaletteWindow.SetTileset(was);
         }
     }

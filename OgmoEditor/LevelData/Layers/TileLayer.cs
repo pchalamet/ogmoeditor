@@ -5,10 +5,12 @@ using System.Text;
 using OgmoEditor.Definitions.LayerDefinitions;
 using System.Xml;
 using OgmoEditor.LevelEditors.LayerEditors;
-using OgmoEditor.LevelData.Resizers;
+using OgmoEditor.LevelEditors.Resizers;
 using System.Drawing;
 using OgmoEditor.Definitions;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
+using OgmoEditor.LevelEditors.LayersEditors;
 
 namespace OgmoEditor.LevelData.Layers
 {
@@ -17,7 +19,7 @@ namespace OgmoEditor.LevelData.Layers
         public new TileLayerDefinition Definition { get; private set; }
         public Tileset Tileset;
         public int[,] Tiles;
-        public RenderTarget2D Texture;
+        public TileCanvas TileCanvas { get; private set; }
 
         public TileLayer(Level level, TileLayerDefinition definition)
             : base(level, definition)
@@ -28,7 +30,12 @@ namespace OgmoEditor.LevelData.Layers
             Tiles = new int[Level.Size.Width / definition.Grid.Width, Level.Size.Height / definition.Grid.Height];
             Clear();
 
-            RefreshTexture();
+            InitCanvas();
+        }
+
+        public void InitCanvas()
+        {
+            TileCanvas = new TileCanvas(this);
         }
 
         public override XmlElement GetXML(XmlDocument doc)
@@ -128,8 +135,6 @@ namespace OgmoEditor.LevelData.Layers
                     Tiles[x, y] = id;
                 }
             }
-
-            RefreshTexture();
         }
 
         public void Clear()
@@ -141,62 +146,11 @@ namespace OgmoEditor.LevelData.Layers
                     Tiles[i, j] = -1;
                 }
             }
-
-            RefreshTexture();
         }
-
-        public void RefreshTexture()
-        {
-            if (Texture != null)
-                Texture.Dispose();
-            Texture = new RenderTarget2D(Ogmo.GraphicsDevice, Level.Size.Width, Level.Size.Height);
-
-            Ogmo.GraphicsDevice.SetRenderTarget((RenderTarget2D)Texture);
-            Ogmo.GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.Transparent);
-
-            Texture2D tiles = Ogmo.Content.TilesetTextures[Tileset];
-            Ogmo.Content.SpriteBatch.Begin(SpriteSortMode.Texture, BlendState.Opaque);
-            for (int i = 0; i < Tiles.GetLength(0); i++)
-            {
-                for (int j = 0; j < Tiles.GetLength(1); j++)
-                {
-                    if (Tiles[i, j] != -1)
-                        Ogmo.Content.SpriteBatch.Draw(tiles, new Microsoft.Xna.Framework.Vector2(i * Definition.Grid.Width, j * Definition.Grid.Height), Tileset.GetXNARectFromID(Tiles[i, j]), Microsoft.Xna.Framework.Color.White);
-                }
-            }
-            Ogmo.Content.SpriteBatch.End();
-
-            Ogmo.GraphicsDevice.SetRenderTarget(null);
-        }
-
-        /*
-        public void RefreshTiles(params Point[] refresh)
-        {
-            Ogmo.GraphicsDevice.SetRenderTarget((RenderTarget2D)Texture);
-
-            Texture2D tiles = Ogmo.Content.TilesetTextures[Tileset];
-            Ogmo.Content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Opaque);
-            foreach (Point at in refresh)
-            {
-                if (Tiles[at.X, at.Y] == -1)
-                    Ogmo.Content.DrawRectangle(at.X * Definition.Grid.Width, at.Y * Definition.Grid.Height, Definition.Grid.Width, Definition.Grid.Height, Microsoft.Xna.Framework.Color.Transparent);
-                else
-                    Ogmo.Content.SpriteBatch.Draw(tiles, new Microsoft.Xna.Framework.Vector2(at.X * Definition.Grid.Width, at.Y * Definition.Grid.Height), Tileset.GetXNARectFromID(Tiles[at.X, at.Y]), Microsoft.Xna.Framework.Color.White);
-            }
-            Ogmo.Content.SpriteBatch.End();
-
-            Ogmo.GraphicsDevice.SetRenderTarget(null);
-        }
-         */
 
         public override LayerEditor GetEditor(LevelEditors.LevelEditor editor)
         {
             return new TileLayerEditor(editor, this);
-        }
-
-        public override Resizer GetResizer()
-        {
-            return new TileResizer(this);
         }
     }
 }

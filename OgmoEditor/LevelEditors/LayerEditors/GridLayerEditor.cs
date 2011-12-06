@@ -8,6 +8,7 @@ using System.Drawing;
 using OgmoEditor.LevelEditors.Actions.GridActions;
 using System.Diagnostics;
 using OgmoEditor.Clipboard;
+using OgmoEditor.LevelEditors.Resizers;
 
 namespace OgmoEditor.LevelEditors.LayerEditors
 {
@@ -33,6 +34,11 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             }
 
             base.Draw(content, current, alpha);
+        }
+
+        public override Resizer GetResizer()
+        {
+            return new GridResizer(this);
         }
     }
 }

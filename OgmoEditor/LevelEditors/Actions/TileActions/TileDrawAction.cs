@@ -32,7 +32,7 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
                 TileLayer.Tiles[at.X, at.Y] = setTo;
             }
 
-            TileLayer.RefreshTexture();
+            TileLayer.TileCanvas.RefreshAll();
         }
 
         public override void Undo()
@@ -40,7 +40,7 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
             for (int i = 0; i < draw.Count; i++)
                 TileLayer.Tiles[draw[i].X, draw[i].Y] = was[i];
 
-            TileLayer.RefreshTexture();
+            TileLayer.TileCanvas.RefreshAll();
         }
 
         public void DoAgain(Point add)
@@ -49,7 +49,7 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
             was.Add(TileLayer.Tiles[add.X, add.Y]);
             TileLayer.Tiles[add.X, add.Y] = setTo;
 
-            TileLayer.RefreshTexture();
+            TileLayer.TileCanvas.RefreshAll();
         }
     }
 }

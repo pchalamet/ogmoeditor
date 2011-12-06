@@ -7,7 +7,7 @@ using System.Xml;
 using OgmoEditor.LevelEditors.LayerEditors;
 using System.Drawing;
 using System.Diagnostics;
-using OgmoEditor.LevelData.Resizers;
+using OgmoEditor.LevelEditors.Resizers;
 
 namespace OgmoEditor.LevelData.Layers
 {
@@ -191,11 +191,6 @@ namespace OgmoEditor.LevelData.Layers
         public override LayerEditor GetEditor(LevelEditors.LevelEditor editor)
         {
             return new GridLayerEditor(editor, this);
-        }
-
-        public override Resizer GetResizer()
-        {
-            return new GridResizer(this);
         }
     }
 }

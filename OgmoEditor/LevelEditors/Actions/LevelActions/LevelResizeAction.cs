@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using OgmoEditor.LevelData;
 using System.Drawing;
-using OgmoEditor.LevelData.Resizers;
+using OgmoEditor.LevelEditors.Resizers;
 
 namespace OgmoEditor.LevelEditors.Actions.LevelActions
 {
@@ -22,7 +22,7 @@ namespace OgmoEditor.LevelEditors.Actions.LevelActions
 
             Resizer r;
             resizers = new List<Resizer>(level.Layers.Count);
-            foreach (var l in level.Layers)
+            foreach (var l in Ogmo.MainWindow.LevelEditors[Ogmo.CurrentLevelIndex].LayerEditors)
             {
                 r = l.GetResizer();
                 if (r != null)

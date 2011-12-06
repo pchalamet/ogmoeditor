@@ -13,6 +13,7 @@ using OgmoEditor.LevelEditors.Tools;
 namespace OgmoEditor.LevelEditors.LayerEditors
 {
     using Point = System.Drawing.Point;
+    using OgmoEditor.LevelEditors.Resizers;
 
     public abstract class LayerEditor
     {
@@ -123,6 +124,8 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             if (Ogmo.ToolsWindow.CurrentTool != null)
                 Ogmo.ToolsWindow.CurrentTool.OnMouseMove(location);
         }
+
+        public virtual Resizer GetResizer() { return null; }
 
         public virtual bool CanCopyOrCut { get { return false; } }
         public virtual void Copy() { }

@@ -8,7 +8,7 @@ using System.Xml;
 using OgmoEditor.LevelEditors.LayerEditors;
 using OgmoEditor.LevelEditors;
 using System.Drawing;
-using OgmoEditor.LevelData.Resizers;
+using OgmoEditor.LevelEditors.Resizers;
 
 namespace OgmoEditor.LevelData.Layers
 {
@@ -26,6 +26,5 @@ namespace OgmoEditor.LevelData.Layers
         public abstract XmlElement GetXML(XmlDocument doc);
         public abstract void SetXML(XmlElement xml);
         public abstract LayerEditor GetEditor(LevelEditor editor);
-        public abstract Resizer GetResizer();
     }
 }

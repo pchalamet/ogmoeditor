@@ -4,16 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using OgmoEditor.LevelData.Layers;
+using OgmoEditor.LevelEditors.LayerEditors;
 
-namespace OgmoEditor.LevelData.Resizers
+namespace OgmoEditor.LevelEditors.Resizers
 {
     public abstract class Resizer
     {
-        public Layer Layer { get; private set; }
+        public LayerEditor Editor { get; private set; }
 
-        public Resizer(Layer layer)
+        public Resizer(LayerEditor editor)
         {
-            Layer = layer;
+            Editor = editor;
         }
 
         public abstract void Resize();
