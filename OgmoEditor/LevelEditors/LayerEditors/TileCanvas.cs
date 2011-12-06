@@ -64,15 +64,21 @@ namespace OgmoEditor.LevelEditors.LayersEditors
 
         public void RefreshTiles(params Point[] tiles)
         {
+            int found = 0;
+
             foreach (var t in Textures)
             {
                 foreach (var tile in tiles)
                 {
                     if (IsTileInTexture(t, tile))
                     {
+                        found++;
                         RefreshTexture(t);
                         break;
                     }
+
+                    if (found == tiles.Length)
+                        break;
                 }
             }
         }
