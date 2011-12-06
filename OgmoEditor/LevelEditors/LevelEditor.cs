@@ -18,6 +18,7 @@ using OgmoEditor.LevelEditors.Tools;
 namespace OgmoEditor.LevelEditors
 {
     using Point = System.Drawing.Point;
+    using System.IO;
 
     public class LevelEditor : GraphicsDeviceControl
     {
@@ -176,6 +177,50 @@ namespace OgmoEditor.LevelEditors
             }
 
             content.SpriteBatch.End();
+        }
+
+        public void SaveAsImage()
+        {
+            //Get the path!
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Title = "Save Level as Image...";
+            dialog.Filter = "PNG Image File|*.png";
+            dialog.InitialDirectory = Ogmo.Project.SavedDirectory;
+            DialogResult result = dialog.ShowDialog();
+            if (result == DialogResult.Cancel)
+                return;
+
+            //Draw the level!
+            float scale = Math.Min(Math.Min(4096.0f / Level.Size.Width, 1), Math.Min(4096.0f / Level.Size.Height, 1));
+            int width = (int)(scale * Level.Size.Width);
+            int height = (int)(scale * Level.Size.Height);
+            Matrix scaleMatrix = Matrix.CreateScale(scale);
+
+            RenderTarget2D texture = new RenderTarget2D(Ogmo.Content.GraphicsDevice, width, height);
+            Ogmo.Content.GraphicsDevice.SetRenderTarget(texture);
+            Ogmo.Content.GraphicsDevice.Clear(Ogmo.Project.BackgroundColor.ToXNA());
+
+            for (int i = 0; i < LayerEditors.Count; i++)
+            {
+                if (Ogmo.Project.LayerDefinitions[i].Visible)
+                {
+                    Ogmo.Content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, LayerEditors[i].DrawMatrix * scaleMatrix);
+                    LayerEditors[i].Draw(Ogmo.Content, false, 1);
+                    Ogmo.Content.SpriteBatch.End();
+                }
+            }
+            Ogmo.Content.GraphicsDevice.SetRenderTarget(null);
+
+            //Save it then dispose it
+            Stream stream = dialog.OpenFile();
+            texture.SaveAsPng(stream, width, height);
+            stream.Close();
+            texture.Dispose();
+        }
+
+        public void SaveCameraAsImage()
+        {
+
         }
 
         private void DrawLayer(LayerEditor layer, bool current, float alpha)

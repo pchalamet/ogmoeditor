@@ -346,12 +346,12 @@ namespace OgmoEditor
 
         private void saveAsImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            LevelEditors[Ogmo.CurrentLevelIndex].SaveAsImage();
         }
 
         private void saveCameraAsImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            LevelEditors[Ogmo.CurrentLevelIndex].SaveCameraAsImage();
         }
 
         /*
