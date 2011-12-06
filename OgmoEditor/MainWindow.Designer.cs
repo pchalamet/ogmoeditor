@@ -86,7 +86,7 @@
             this.closeOthersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.duplicateLevelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveLevelToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveCameraAsImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StatusStrip.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             this.tabPageContextMenuStrip.SuspendLayout();
@@ -247,7 +247,8 @@
             this.openAllLevelsToolStripMenuItem,
             this.closeOtherLevelsToolStripMenuItem,
             this.duplicateLevelToolStripMenuItem,
-            this.saveAsImageToolStripMenuItem});
+            this.saveAsImageToolStripMenuItem,
+            this.saveCameraAsImageToolStripMenuItem});
             this.levelToolStripMenuItem.Enabled = false;
             this.levelToolStripMenuItem.Name = "levelToolStripMenuItem";
             this.levelToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
@@ -523,50 +524,50 @@
             this.closeLevelToolStripMenuItem1,
             this.closeOthersToolStripMenuItem,
             this.toolStripSeparator7,
-            this.duplicateLevelToolStripMenuItem1,
-            this.saveLevelToolStripMenuItem2});
+            this.duplicateLevelToolStripMenuItem1});
             this.tabPageContextMenuStrip.Name = "tabPageContextMenuStrip";
-            this.tabPageContextMenuStrip.Size = new System.Drawing.Size(160, 120);
+            this.tabPageContextMenuStrip.Size = new System.Drawing.Size(155, 120);
             // 
             // saveLevelToolStripMenuItem1
             // 
             this.saveLevelToolStripMenuItem1.Name = "saveLevelToolStripMenuItem1";
-            this.saveLevelToolStripMenuItem1.Size = new System.Drawing.Size(159, 22);
+            this.saveLevelToolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
             this.saveLevelToolStripMenuItem1.Text = "Save Level";
             this.saveLevelToolStripMenuItem1.Click += new System.EventHandler(this.saveLevelToolStripMenuItem_Click);
             // 
             // closeLevelToolStripMenuItem1
             // 
             this.closeLevelToolStripMenuItem1.Name = "closeLevelToolStripMenuItem1";
-            this.closeLevelToolStripMenuItem1.Size = new System.Drawing.Size(159, 22);
+            this.closeLevelToolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
             this.closeLevelToolStripMenuItem1.Text = "Close Level";
             this.closeLevelToolStripMenuItem1.Click += new System.EventHandler(this.closeLevelToolStripMenuItem_Click);
             // 
             // closeOthersToolStripMenuItem
             // 
             this.closeOthersToolStripMenuItem.Name = "closeOthersToolStripMenuItem";
-            this.closeOthersToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.closeOthersToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.closeOthersToolStripMenuItem.Text = "Close Others";
             this.closeOthersToolStripMenuItem.Click += new System.EventHandler(this.closeOtherLevelsToolStripMenuItem_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(156, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(151, 6);
             // 
             // duplicateLevelToolStripMenuItem1
             // 
             this.duplicateLevelToolStripMenuItem1.Name = "duplicateLevelToolStripMenuItem1";
-            this.duplicateLevelToolStripMenuItem1.Size = new System.Drawing.Size(159, 22);
+            this.duplicateLevelToolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
             this.duplicateLevelToolStripMenuItem1.Text = "Duplicate Level";
             this.duplicateLevelToolStripMenuItem1.Click += new System.EventHandler(this.duplicateLevelToolStripMenuItem_Click);
             // 
-            // saveLevelToolStripMenuItem2
+            // saveCameraAsImageToolStripMenuItem
             // 
-            this.saveLevelToolStripMenuItem2.Name = "saveLevelToolStripMenuItem2";
-            this.saveLevelToolStripMenuItem2.Size = new System.Drawing.Size(159, 22);
-            this.saveLevelToolStripMenuItem2.Text = "Save As Image...";
-            this.saveLevelToolStripMenuItem2.Click += new System.EventHandler(this.saveAsImageToolStripMenuItem_Click);
+            this.saveCameraAsImageToolStripMenuItem.Enabled = false;
+            this.saveCameraAsImageToolStripMenuItem.Name = "saveCameraAsImageToolStripMenuItem";
+            this.saveCameraAsImageToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.saveCameraAsImageToolStripMenuItem.Text = "Save Camera As Image...";
+            this.saveCameraAsImageToolStripMenuItem.Click += new System.EventHandler(this.saveCameraAsImageToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -649,7 +650,7 @@
         private System.Windows.Forms.ToolStripMenuItem closeOthersToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem duplicateLevelToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem saveLevelToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveCameraAsImageToolStripMenuItem;
     }
 }

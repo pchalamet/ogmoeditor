@@ -202,6 +202,8 @@ namespace OgmoEditor
                 duplicateLevelToolStripMenuItem.Enabled =
                 closeOtherLevelsToolStripMenuItem.Enabled =
                 saveAsImageToolStripMenuItem.Enabled = index != -1;
+
+            saveCameraAsImageToolStripMenuItem.Enabled = index != -1 && Ogmo.Project.CameraEnabled;
         }
 
         /*
@@ -343,6 +345,11 @@ namespace OgmoEditor
         }
 
         private void saveAsImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveCameraAsImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
