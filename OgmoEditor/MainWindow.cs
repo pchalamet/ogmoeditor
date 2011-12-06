@@ -54,7 +54,7 @@ namespace OgmoEditor
 
         public void AddStartPage()
         {
-            TabPage start = new TabPage("Ogmo Editor!");
+            TabPage start = new TabPage("Start Page");
             start.Name = "startPage";
             start.Controls.Add(new StartPage());
             start.ImageIndex = 0;

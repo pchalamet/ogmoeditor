@@ -24,6 +24,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
 
         public override void Draw(Content content, bool current, float alpha)
         {
+            //Draw the grid cells
             for (int i = 0; i < Layer.Grid.GetLength(0); i++)
             {
                 for (int j = 0; j < Layer.Grid.GetLength(1); j++)
@@ -32,6 +33,15 @@ namespace OgmoEditor.LevelEditors.LayerEditors
                         content.DrawRectangle(i * Layer.Definition.Grid.Width, j * Layer.Definition.Grid.Height, Layer.Definition.Grid.Width, Layer.Definition.Grid.Height, Layer.Definition.Color.ToXNA() * alpha);
                 }
             }
+
+            //Draw the selection rectangle
+            if (Layer.Selection != null)
+                content.DrawFillRect(
+                    Layer.Selection.Area.X * Layer.Definition.Grid.Width,
+                    Layer.Selection.Area.Y * Layer.Definition.Grid.Height,
+                    Layer.Selection.Area.Width * Layer.Definition.Grid.Width,
+                    Layer.Selection.Area.Height * Layer.Definition.Grid.Height,
+                    Microsoft.Xna.Framework.Color.Yellow * alpha);
 
             base.Draw(content, current, alpha);
         }

@@ -10,7 +10,7 @@ namespace OgmoEditor.LevelEditors.LayersEditors
 {
     public class TileCanvas : IDisposable
     {
-        private const int MAX_TEXTURE_SIZE = 640;
+        private const int MAX_TEXTURE_SIZE = 2560;
 
         public TileLayer TileLayer { get; private set; }
         private List<TextureInfo> Textures;

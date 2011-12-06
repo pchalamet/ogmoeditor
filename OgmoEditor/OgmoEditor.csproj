@@ -117,6 +117,8 @@
       <DependentUpon>ImagePreviewer.cs</DependentUpon>
     </Compile>
     <Compile Include="LevelData\Layers\Entity.cs" />
+    <Compile Include="LevelData\Layers\GridSelection.cs" />
+    <Compile Include="LevelEditors\Actions\GridActions\GridSelectAction.cs" />
     <Compile Include="LevelEditors\LayerEditors\TileCanvas.cs" />
     <Compile Include="LevelData\Layers\Value.cs" />
     <Compile Include="LevelEditors\Resizers\GridResizer.cs" />
@@ -159,6 +161,7 @@
     <Compile Include="LevelEditors\Tools\GridTools\GridPencilTool.cs" />
     <Compile Include="LevelEditors\Tools\GridTools\GridRectangleTool.cs" />
     <Compile Include="LevelEditors\Tools\EntityTools\EntityPlacementTool.cs" />
+    <Compile Include="LevelEditors\Tools\GridTools\GridSelectionTool.cs" />
     <Compile Include="LevelEditors\Tools\TileTools\TileEyedropperTool.cs" />
     <Compile Include="LevelEditors\Tools\TileTools\TileFloodTool.cs" />
     <Compile Include="LevelEditors\Tools\TileTools\TileLineTool.cs" />

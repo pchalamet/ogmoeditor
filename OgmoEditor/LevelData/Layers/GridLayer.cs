@@ -15,6 +15,7 @@ namespace OgmoEditor.LevelData.Layers
     {
         public new GridLayerDefinition Definition { get; private set; }
         public bool[,] Grid;
+        public GridSelection Selection;
 
         public GridLayer(Level level, GridLayerDefinition definition)
             : base(level, definition)
@@ -191,6 +192,41 @@ namespace OgmoEditor.LevelData.Layers
         public override LayerEditor GetEditor(LevelEditors.LevelEditor editor)
         {
             return new GridLayerEditor(editor, this);
+        }
+
+        public Rectangle GetGridRectangle(Point start, Point end)
+        {
+            Rectangle r = new Rectangle();
+
+            //Get the rectangle
+            r.X = Math.Min(start.X, end.X);
+            r.Y = Math.Min(start.Y, end.Y);
+            r.Width = Math.Abs(end.X - start.X) + Definition.Grid.Width;
+            r.Height = Math.Abs(end.Y - start.Y) + Definition.Grid.Height;
+
+            //Enforce Bounds
+            if (r.X < 0)
+            {
+                r.Width += r.X;
+                r.X = 0;
+            }
+
+            if (r.Y < 0)
+            {
+                r.Height += r.Y;
+                r.Y = 0;
+            }
+
+            int width = Grid.GetLength(0) * Definition.Grid.Width;
+            int height = Grid.GetLength(1) * Definition.Grid.Height;
+
+            if (r.X + r.Width > width)
+                r.Width = width - r.X;
+
+            if (r.Y + r.Height > height)
+                r.Height = height - r.Y;
+
+            return r;
         }
     }
 }
