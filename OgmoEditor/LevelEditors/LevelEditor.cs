@@ -220,7 +220,41 @@ namespace OgmoEditor.LevelEditors
 
         public void SaveCameraAsImage()
         {
+            //Get the path!
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Title = "Save Level as Image...";
+            dialog.Filter = "PNG Image File|*.png";
+            dialog.InitialDirectory = Ogmo.Project.SavedDirectory;
+            DialogResult result = dialog.ShowDialog();
+            if (result == DialogResult.Cancel)
+                return;
 
+            //Draw the level!
+            float scale = Math.Min(Math.Min(4096.0f / Ogmo.Project.CameraSize.Width, 1), Math.Min(4096.0f / Ogmo.Project.CameraSize.Height, 1));
+            int width = (int)(scale * Ogmo.Project.CameraSize.Width);
+            int height = (int)(scale * Ogmo.Project.CameraSize.Height);
+            Matrix cameraMatrix = Matrix.CreateScale(scale) * Matrix.CreateTranslation(-CameraPosition.X, -CameraPosition.Y, 0);
+
+            RenderTarget2D texture = new RenderTarget2D(Ogmo.Content.GraphicsDevice, width, height);
+            Ogmo.Content.GraphicsDevice.SetRenderTarget(texture);
+            Ogmo.Content.GraphicsDevice.Clear(Ogmo.Project.BackgroundColor.ToXNA());
+
+            for (int i = 0; i < LayerEditors.Count; i++)
+            {
+                if (Ogmo.Project.LayerDefinitions[i].Visible)
+                {
+                    Ogmo.Content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, LayerEditors[i].DrawMatrix * cameraMatrix);
+                    LayerEditors[i].Draw(Ogmo.Content, false, 1);
+                    Ogmo.Content.SpriteBatch.End();
+                }
+            }
+            Ogmo.Content.GraphicsDevice.SetRenderTarget(null);
+
+            //Save it then dispose it
+            Stream stream = dialog.OpenFile();
+            texture.SaveAsPng(stream, width, height);
+            stream.Close();
+            texture.Dispose();
         }
 
         private void DrawLayer(LayerEditor layer, bool current, float alpha)
