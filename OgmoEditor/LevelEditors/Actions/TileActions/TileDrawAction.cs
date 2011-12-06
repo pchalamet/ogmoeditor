@@ -49,7 +49,7 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
             was.Add(TileLayer.Tiles[add.X, add.Y]);
             TileLayer.Tiles[add.X, add.Y] = setTo;
 
-            TileLayer.TileCanvas.RefreshAll();
+            TileLayer.TileCanvas.RefreshTiles(add);
         }
     }
 }
