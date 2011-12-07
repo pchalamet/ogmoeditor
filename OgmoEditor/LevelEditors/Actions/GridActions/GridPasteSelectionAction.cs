@@ -27,6 +27,7 @@ namespace OgmoEditor.LevelEditors.Actions.GridActions
 
             oldSelection = GridLayer.Selection;
             GridLayer.Selection = new GridSelection(GridLayer, area);
+            GridLayer.Selection.SetUnderFromGrid();
 
             for (int i = 0; i < area.Width; i++)
             {
