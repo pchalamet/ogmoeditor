@@ -27,7 +27,7 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
 
             oldSelection = TileLayer.Selection;
             TileLayer.Selection = new TileSelection(TileLayer, area);
-            TileLayer.Selection.SetUnderFromGrid();
+            TileLayer.Selection.SetUnderFromTiles();
 
             for (int i = 0; i < area.Width; i++)
                 for (int j = 0; j < area.Height; j++)

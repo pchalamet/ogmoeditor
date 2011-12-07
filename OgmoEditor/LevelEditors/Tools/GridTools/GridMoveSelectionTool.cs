@@ -12,7 +12,6 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
         private bool moving;
         private Point mouseStart;
         private Point moved;
-        private GridMoveSelectionAction moveAction;
 
         public GridMoveSelectionTool()
             : base("Move Selection", "move.png")
@@ -53,7 +52,6 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
             if (moving)
             {
                 moving = false;
-                moveAction = null;
                 LevelEditor.EndBatch();
             }
         }
