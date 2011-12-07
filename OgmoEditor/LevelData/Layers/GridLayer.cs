@@ -228,5 +228,15 @@ namespace OgmoEditor.LevelData.Layers
 
             return r;
         }
+
+        public int GridCellsX
+        {
+            get { return Grid.GetLength(0); }
+        }
+
+        public int GridCellsY
+        {
+            get { return Grid.GetLength(1); }
+        }
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using OgmoEditor.LevelEditors;
+using OgmoEditor.LevelEditors.Actions.GridActions;
 
 namespace OgmoEditor.LevelData.Layers
 {
@@ -34,6 +36,12 @@ namespace OgmoEditor.LevelData.Layers
                 for (int j = 0; j < Area.Height; j++)
                     bits[i, j] = Layer.Grid[i + Area.X, j + Area.Y];
             return bits;
+        }
+
+        public void PerformMove(LevelEditor editor, Point move)
+        {
+            if (Area.X + move.X >= 0 && Area.Y + move.Y >= 0 && Area.X + move.X + Area.Width <= Layer.GridCellsX && Area.Y + move.Y + Area.Height <= Layer.GridCellsY)
+                editor.Perform(new GridMoveSelectionAction(Layer, move));
         }
     }
 }

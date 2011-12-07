@@ -108,22 +108,22 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             else if (key == System.Windows.Forms.Keys.D)
             {
                 if (Layer.Selection != null)
-                    LevelEditor.Perform(new GridMoveSelectionAction(Layer, new Point(1, 0)));
+                    Layer.Selection.PerformMove(LevelEditor, new Point(1, 0));
             }
             else if (key == System.Windows.Forms.Keys.S)
             {
                 if (Layer.Selection != null)
-                    LevelEditor.Perform(new GridMoveSelectionAction(Layer, new Point(0, 1)));
+                    Layer.Selection.PerformMove(LevelEditor, new Point(0, 1));
             }
             else if (key == System.Windows.Forms.Keys.W)
             {
                 if (Layer.Selection != null)
-                    LevelEditor.Perform(new GridMoveSelectionAction(Layer, new Point(0, -1)));
+                    Layer.Selection.PerformMove(LevelEditor, new Point(0, -1));
             }
             else if (key == System.Windows.Forms.Keys.A)
             {
                 if (Layer.Selection != null)
-                    LevelEditor.Perform(new GridMoveSelectionAction(Layer, new Point(-1, 0)));
+                    Layer.Selection.PerformMove(LevelEditor, new Point(-1, 0));
             }
         }
     }
