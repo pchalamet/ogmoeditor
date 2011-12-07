@@ -51,6 +51,32 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             return new GridResizer(this);
         }
 
+        public override bool CanSelectAll
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public override void SelectAll()
+        {
+            LevelEditor.Perform(new GridSelectAction(Layer, new Rectangle(0, 0, Layer.Grid.GetLength(0), Layer.Grid.GetLength(1))));
+        }
+
+        public override bool CanDeselect
+        {
+            get
+            {
+                return Layer.Selection != null;
+            }
+        }
+
+        public override void Deselect()
+        {
+            LevelEditor.Perform(new GridClearSelectionAction(Layer));
+        }
+
         public override void OnKeyDown(System.Windows.Forms.Keys key)
         {
             base.OnKeyDown(key);
