@@ -50,5 +50,16 @@ namespace OgmoEditor.LevelEditors.LayerEditors
         {
             return new GridResizer(this);
         }
+
+        public override void OnKeyDown(System.Windows.Forms.Keys key)
+        {
+            base.OnKeyDown(key);
+
+            if (key == System.Windows.Forms.Keys.Delete)
+            {
+                if (Layer.Selection != null)
+                    LevelEditor.Perform(new GridDeleteSelectionAction(Layer));
+            }
+        }
     }
 }
