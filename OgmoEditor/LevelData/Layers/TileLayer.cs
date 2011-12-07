@@ -20,6 +20,7 @@ namespace OgmoEditor.LevelData.Layers
         public Tileset Tileset;
         public int[,] Tiles;
         public TileCanvas TileCanvas { get; private set; }
+        public TileSelection Selection;
 
         public TileLayer(Level level, TileLayerDefinition definition)
             : base(level, definition)
@@ -135,6 +136,41 @@ namespace OgmoEditor.LevelData.Layers
                     Tiles[x, y] = id;
                 }
             }
+        }
+
+        public Rectangle GetTilesRectangle(Point start, Point end)
+        {
+            Rectangle r = new Rectangle();
+
+            //Get the rectangle
+            r.X = Math.Min(start.X, end.X);
+            r.Y = Math.Min(start.Y, end.Y);
+            r.Width = Math.Abs(end.X - start.X) + Definition.Grid.Width;
+            r.Height = Math.Abs(end.Y - start.Y) + Definition.Grid.Height;
+
+            //Enforce Bounds
+            if (r.X < 0)
+            {
+                r.Width += r.X;
+                r.X = 0;
+            }
+
+            if (r.Y < 0)
+            {
+                r.Height += r.Y;
+                r.Y = 0;
+            }
+
+            int width = Tiles.GetLength(0) * Definition.Grid.Width;
+            int height = Tiles.GetLength(1) * Definition.Grid.Height;
+
+            if (r.X + r.Width > width)
+                r.Width = width - r.X;
+
+            if (r.Y + r.Height > height)
+                r.Height = height - r.Y;
+
+            return r;
         }
 
         public void Clear()

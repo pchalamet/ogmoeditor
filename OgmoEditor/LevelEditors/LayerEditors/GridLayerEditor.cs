@@ -61,7 +61,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
 
         public override void SelectAll()
         {
-            LevelEditor.Perform(new GridSelectAction(Layer, new Rectangle(0, 0, Layer.Grid.GetLength(0), Layer.Grid.GetLength(1))));
+            LevelEditor.Perform(new GridSelectAction(Layer, new Rectangle(0, 0, Layer.GridCellsX, Layer.GridCellsY)));
         }
 
         public override bool CanDeselect

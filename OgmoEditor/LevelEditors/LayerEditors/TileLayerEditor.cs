@@ -5,6 +5,8 @@ using System.Text;
 using OgmoEditor.LevelData.Layers;
 using OgmoEditor.LevelEditors.Resizers;
 using OgmoEditor.LevelEditors.LayersEditors;
+using OgmoEditor.LevelEditors.Actions.TileActions;
+using System.Drawing;
 
 namespace OgmoEditor.LevelEditors.LayerEditors
 {
@@ -21,13 +23,50 @@ namespace OgmoEditor.LevelEditors.LayerEditors
 
         public override void Draw(Content content, bool current, float alpha)
         {
+            //Draw the actual tiles
             Layer.TileCanvas.Draw(alpha);
+
+            //Draw the selection box
+            if (Layer.Selection != null)
+                content.DrawFillRect(
+                    Layer.Selection.Area.X * Layer.Definition.Grid.Width,
+                    Layer.Selection.Area.Y * Layer.Definition.Grid.Height,
+                    Layer.Selection.Area.Width * Layer.Definition.Grid.Width,
+                    Layer.Selection.Area.Height * Layer.Definition.Grid.Height,
+                    Microsoft.Xna.Framework.Color.Yellow * alpha);
+
             base.Draw(content, current, alpha);
         }
 
         public override Resizer GetResizer()
         {
             return new TileResizer(this);
+        }
+
+        public override bool CanSelectAll
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public override void SelectAll()
+        {
+            LevelEditor.Perform(new TileSelectAction(Layer, new Rectangle(0, 0, Layer.TileCellsX, Layer.TileCellsY)));
+        }
+
+        public override bool CanDeselect
+        {
+            get
+            {
+                return Layer.Selection != null;
+            }
+        }
+
+        public override void Deselect()
+        {
+            LevelEditor.Perform(new TileClearSelectionAction(Layer));
         }
     }
 }
