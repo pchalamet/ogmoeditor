@@ -18,6 +18,9 @@ namespace OgmoEditor.LevelData.Layers
             Area = area;
 
             Under = new int[area.Width, area.Height];
+            for (int i = 0; i < area.Width; i++)
+                for (int j = 0; j < area.Height; j++)
+                    Under[i, j] = -1;
         }
 
         public void SetUnderFromGrid()

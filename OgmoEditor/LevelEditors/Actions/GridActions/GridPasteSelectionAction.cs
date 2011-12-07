@@ -30,13 +30,8 @@ namespace OgmoEditor.LevelEditors.Actions.GridActions
             GridLayer.Selection.SetUnderFromGrid();
 
             for (int i = 0; i < area.Width; i++)
-            {
                 for (int j = 0; j < area.Height; j++)
-                {
-                    GridLayer.Selection.Under[i, j] = GridLayer.Grid[i + area.X, j + area.Y];
                     GridLayer.Grid[i + area.X, j + area.Y] = newBits[i, j];
-                }
-            }
         }
 
         public override void Undo()

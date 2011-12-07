@@ -7,6 +7,7 @@ using OgmoEditor.LevelEditors.Resizers;
 using OgmoEditor.LevelEditors.LayersEditors;
 using OgmoEditor.LevelEditors.Actions.TileActions;
 using System.Drawing;
+using OgmoEditor.Clipboard;
 
 namespace OgmoEditor.LevelEditors.LayerEditors
 {
@@ -67,6 +68,25 @@ namespace OgmoEditor.LevelEditors.LayerEditors
         public override void Deselect()
         {
             LevelEditor.Perform(new TileClearSelectionAction(Layer));
+        }
+
+        public override bool CanCopyOrCut
+        {
+            get
+            {
+                return Layer.Selection != null;
+            }
+        }
+
+        public override void Copy()
+        {
+            Ogmo.Clipboard = new TileClipboardItem(Layer.Selection.Area, Layer);
+        }
+
+        public override void Cut()
+        {
+            Copy();
+            LevelEditor.Perform(new TileDeleteSelectionAction(Layer));
         }
     }
 }

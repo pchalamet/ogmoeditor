@@ -92,6 +92,7 @@
     <Compile Include="Clipboard\ClipboardItem.cs" />
     <Compile Include="Clipboard\EntityClipboardItem.cs" />
     <Compile Include="Clipboard\GridClipboardItem.cs" />
+    <Compile Include="Clipboard\TileClipboardItem.cs" />
     <Compile Include="ColorChooser.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -126,6 +127,8 @@
     <Compile Include="LevelEditors\Actions\GridActions\GridPasteSelectionAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridSelectAction.cs" />
     <Compile Include="LevelEditors\Actions\TileActions\TileClearSelectionAction.cs" />
+    <Compile Include="LevelEditors\Actions\TileActions\TileDeleteSelectionAction.cs" />
+    <Compile Include="LevelEditors\Actions\TileActions\TilePasteSelectionAction.cs" />
     <Compile Include="LevelEditors\Actions\TileActions\TileSelectAction.cs" />
     <Compile Include="LevelEditors\LayerEditors\TileCanvas.cs" />
     <Compile Include="LevelData\Layers\Value.cs" />
