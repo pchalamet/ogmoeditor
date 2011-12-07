@@ -152,5 +152,15 @@ namespace OgmoEditor.LevelData.Layers
         {
             return new TileLayerEditor(editor, this);
         }
+
+        public int TileCellsX
+        {
+            get { return Tiles.GetLength(0); }
+        }
+
+        public int TileCellsY
+        {
+            get { return Tiles.GetLength(1); }
+        }
     }
 }

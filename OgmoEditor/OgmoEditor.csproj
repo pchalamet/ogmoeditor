@@ -119,6 +119,7 @@
     </Compile>
     <Compile Include="LevelData\Layers\Entity.cs" />
     <Compile Include="LevelData\Layers\GridSelection.cs" />
+    <Compile Include="LevelData\Layers\TileSelection.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridClearSelectionAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridDeleteSelectionAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridMoveSelectionAction.cs" />
@@ -171,8 +172,10 @@
     <Compile Include="LevelEditors\Tools\TileTools\TileEyedropperTool.cs" />
     <Compile Include="LevelEditors\Tools\TileTools\TileFloodTool.cs" />
     <Compile Include="LevelEditors\Tools\TileTools\TileLineTool.cs" />
+    <Compile Include="LevelEditors\Tools\TileTools\TileMoveSelectionTool.cs" />
     <Compile Include="LevelEditors\Tools\TileTools\TilePencilTool.cs" />
     <Compile Include="LevelEditors\Tools\TileTools\TileRectangleTool.cs" />
+    <Compile Include="LevelEditors\Tools\TileTools\TileSelectTool.cs" />
     <Compile Include="LevelEditors\ValueEditors\BoolValueEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
