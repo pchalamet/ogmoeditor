@@ -54,14 +54,5 @@ namespace OgmoEditor.LevelEditors.Actions.GridActions
                 for (int j = 0; j < GridLayer.Selection.Area.Height; j++)
                     GridLayer.Grid[i + GridLayer.Selection.Area.X, j + GridLayer.Selection.Area.Y] = bits[i, j];
         }
-
-        public void DoAgain(Point add)
-        {
-            Point temp = move;
-            move = add;
-            Do();
-            move.X += temp.X;
-            move.Y += temp.Y;
-        }
     }
 }

@@ -275,6 +275,9 @@ namespace OgmoEditor.LevelEditors
          */
         public void Perform(OgmoAction action)
         {
+            if (action == null)
+                return;
+
             //If a batch is in progress, stop it!
             EndBatch();
 
@@ -318,6 +321,9 @@ namespace OgmoEditor.LevelEditors
 
         public void BatchPerform(OgmoAction action)
         {
+            if (action == null)
+                return;
+
             batch.Add(action);
             action.Do();
         }

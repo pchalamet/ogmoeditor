@@ -38,40 +38,12 @@ namespace OgmoEditor.LevelData.Layers
             return bits;
         }
 
-        public void PerformMove(LevelEditor editor, Point move)
+        public GridMoveSelectionAction GetMoveAction(Point move)
         {
             if (Area.X + move.X >= 0 && Area.Y + move.Y >= 0 && Area.X + move.X + Area.Width <= Layer.GridCellsX && Area.Y + move.Y + Area.Height <= Layer.GridCellsY)
-                editor.Perform(new GridMoveSelectionAction(Layer, move));
+                return new GridMoveSelectionAction(Layer, move);
             else
-            {
-                Rectangle rect = Area;
-                if (rect.X + move.X < 0)
-                {
-                    rect.Width += rect.X + move.X;
-                    rect.X = -move.X;
-                }
-                if (rect.Y + move.Y < 0)
-                {
-                    rect.Height += rect.Y + move.Y;
-                    rect.Y = -move.Y;
-                }
-                if (rect.X + rect.Width + move.X > Layer.GridCellsX)
-                {
-                    rect.Width -= Layer.GridCellsX - (rect.X + rect.Width + move.X);
-                }
-                if (rect.Y + rect.Height + move.Y > Layer.GridCellsY)
-                {
-                    rect.Height -= Layer.GridCellsY - (rect.Y + rect.Height + move.Y);
-                }
-
-                if (rect.Width > 0 && rect.Height > 0)
-                {
-                    editor.StartBatch();
-                    editor.BatchPerform(new GridSelectAction(Layer, rect));
-                    editor.BatchPerform(new GridMoveSelectionAction(Layer, move));
-                    editor.EndBatch();
-                }
-            }
+                return null;
         }
     }
 }
