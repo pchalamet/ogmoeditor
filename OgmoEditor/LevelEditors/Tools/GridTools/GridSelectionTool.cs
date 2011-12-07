@@ -56,5 +56,11 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
             if (drawing)
                 drawTo = LayerEditor.MouseSnapPosition;
         }
+
+        public override void OnMouseRightClick(Point location)
+        {
+            if (!drawing)
+                LevelEditor.Perform(new GridClearSelectionAction(LayerEditor.Layer));
+        }
     }
 }

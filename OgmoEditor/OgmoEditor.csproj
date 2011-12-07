@@ -118,6 +118,7 @@
     </Compile>
     <Compile Include="LevelData\Layers\Entity.cs" />
     <Compile Include="LevelData\Layers\GridSelection.cs" />
+    <Compile Include="LevelEditors\Actions\GridActions\GridClearSelectionAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridSelectAction.cs" />
     <Compile Include="LevelEditors\LayerEditors\TileCanvas.cs" />
     <Compile Include="LevelData\Layers\Value.cs" />
