@@ -77,6 +77,25 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             LevelEditor.Perform(new GridClearSelectionAction(Layer));
         }
 
+        public override bool CanCopyOrCut
+        {
+            get
+            {
+                return Layer.Selection != null;
+            }
+        }
+
+        public override void Copy()
+        {
+            Ogmo.Clipboard = new GridClipboardItem(Layer.Selection.Area, Layer);
+        }
+
+        public override void Cut()
+        {
+            Copy();
+            LevelEditor.Perform(new GridDeleteSelectionAction(Layer));
+        }
+
         public override void OnKeyDown(System.Windows.Forms.Keys key)
         {
             base.OnKeyDown(key);

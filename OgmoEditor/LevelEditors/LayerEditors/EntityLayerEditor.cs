@@ -52,7 +52,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
 
         public override void Cut()
         {
-            Ogmo.Clipboard = new EntityClipboardItem(Ogmo.EntitySelectionWindow.Selected);
+            Copy();
             LevelEditor.Perform(new EntityRemoveAction(Layer, Ogmo.EntitySelectionWindow.Selected));
         }
 
