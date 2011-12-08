@@ -79,10 +79,6 @@ namespace OgmoEditor
             //Figure out the program directory
             ProgramDirectory = Application.ExecutablePath.Remove(Application.ExecutablePath.IndexOf(Path.GetFileName(Application.ExecutablePath)));
 
-            //Initialize directory system
-            if (!Directory.Exists("Projects"))
-                Directory.CreateDirectory("Projects");
-
             //Load the config file
             Config.Load();
 
