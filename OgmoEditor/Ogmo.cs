@@ -20,6 +20,7 @@ using OgmoEditor.LevelEditors;
 using Microsoft.Xna.Framework.Graphics;
 using OgmoEditor.Clipboard;
 using System.Xml;
+using System.Net;
 
 namespace OgmoEditor
 {
@@ -154,10 +155,13 @@ namespace OgmoEditor
         {
             try
             {
-                XmlTextReader reader = new XmlTextReader("http://ogmoeditor.com/version.xml");
-                reader.MoveToContent();
+                WebClient client = new WebClient();
+                Stream stream = client.OpenRead(@"http://ogmoeditor.com/version.txt");
+                StreamReader reader = new StreamReader(stream);
+                string verStr = reader.ReadToEnd();
+                stream.Close();
 
-                Version newVersion = new Version(reader.ReadInnerXml());
+                Version newVersion = new Version(verStr);
                 Version curVersion = new Version(Application.ProductVersion);
 
                 if (curVersion.CompareTo(newVersion) < 0)
