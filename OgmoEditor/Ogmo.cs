@@ -77,7 +77,15 @@ namespace OgmoEditor
             else
                 toLoad = "";
 
-            Application.Run(MainWindow);
+            try
+            {
+                Application.Run(MainWindow);
+            }
+            catch (Exception e)
+            {
+                LogException(e);
+                MessageBox.Show("An uncaught exception was thrown! The error was written to errorLog.txt.\n\n" + e.ToString());
+            }
         }
 
         static private void initialize()
@@ -169,6 +177,17 @@ namespace OgmoEditor
                 if (reportNoUpdatesOrError)
                     MessageBox.Show(Ogmo.MainWindow, "Could not establish connection to check for updates!", "Check for Updates", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        static public void LogException(Exception e)
+        {
+            string logPath = Path.Combine(Ogmo.ProgramDirectory, "errorLog.txt");
+
+            FileStream file = new FileStream(logPath, FileMode.Append);
+            StreamWriter logStream = new StreamWriter(file);
+            logStream.Write(e.ToString() + "\r\n\r\n===============================\r\n\r\n");
+            logStream.Close();
+            file.Close();
         }
 
         /*
