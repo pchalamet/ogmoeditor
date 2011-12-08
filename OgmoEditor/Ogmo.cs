@@ -149,20 +149,19 @@ namespace OgmoEditor
                 XmlTextReader reader = new XmlTextReader("http://ogmoeditor.com/version.xml");
                 reader.MoveToContent();
 
-                string verStr = reader.ReadInnerXml();
-                Version newVersion = new Version(verStr);
+                Version newVersion = new Version(reader.ReadInnerXml());
                 Version curVersion = new Version(Application.ProductVersion);
 
                 if (curVersion.CompareTo(newVersion) < 0)
                 {
-                    string text = "There is a new version of Ogmo Editor available!\nYour version: " + curVersion.ToString() + "\nNewest version: " + newVersion.ToString() + "\n\nDownload the new version?";
+                    string text = "There is a new version of Ogmo Editor available!\nYour version: " + curVersion + "\nNewest version: " + newVersion + "\n\nDownload the new version?";
                     if (MessageBox.Show(Ogmo.MainWindow, text, "Check for Updates", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         System.Diagnostics.Process.Start("http://ogmoeditor.com/OgmoEditor.zip"); 
                 }
                 else
                 {
                     if (reportNoUpdatesOrError)
-                        MessageBox.Show(Ogmo.MainWindow, "You're running the newest version of Ogmo Editor (" + curVersion + ")!", "Check for Updates", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show(Ogmo.MainWindow, "Your version of Ogmo Editor is up-to-date!\nYour version: " + curVersion + "\nNewest version: " + newVersion, "Check for Updates", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
             catch
