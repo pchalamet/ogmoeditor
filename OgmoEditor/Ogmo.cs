@@ -150,7 +150,7 @@ namespace OgmoEditor
                 else
                 {
                     if (reportNoUpdatesOrError)
-                        MessageBox.Show(Ogmo.MainWindow, "You're running the newest version of Ogmo Editor (" + verStr + ")!", "Check for Updates", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show(Ogmo.MainWindow, "You're running the newest version of Ogmo Editor (" + curVersion + ")!", "Check for Updates", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
             catch
