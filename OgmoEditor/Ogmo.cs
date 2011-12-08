@@ -52,6 +52,7 @@ namespace OgmoEditor
         static public EntitiesWindow EntitiesWindow { get; private set; }
         static public EntitySelectionWindow EntitySelectionWindow { get; private set; }
 
+        static private string toLoad;
         static public string ProgramDirectory { get; private set; }
         static public Project Project { get; private set; }
         static public List<Level> Levels { get; private set; }
@@ -71,6 +72,11 @@ namespace OgmoEditor
             Application.EnableVisualStyles();
             initialize();
 
+            if (args.Length > 0 && File.Exists(args[0]) && Path.GetExtension(args[0]) == ".oep")
+                toLoad = args[0];
+            else
+                toLoad = "";
+
             Application.Run(MainWindow);
         }
 
@@ -88,6 +94,7 @@ namespace OgmoEditor
 
             //The windows
             MainWindow = new MainWindow();
+            MainWindow.Shown += new EventHandler(MainWindow_Shown);
             LayersWindow = new LayersWindow();
             ToolsWindow = new ToolsWindow();
             TilePaletteWindow = new TilePaletteWindow();
@@ -119,6 +126,15 @@ namespace OgmoEditor
             //Check for updates?
             if (Config.ConfigFile.CheckForUpdates)
                 CheckForUpdates(false);
+        }
+
+        static void MainWindow_Shown(object sender, EventArgs e)
+        {
+            if (toLoad != "")
+            {
+                LoadProject(toLoad);
+                toLoad = "";
+            }
         }
 
         static void onApplicationExit(object sender, EventArgs e)
