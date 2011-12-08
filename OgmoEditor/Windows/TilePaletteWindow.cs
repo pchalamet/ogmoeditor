@@ -49,6 +49,7 @@ namespace OgmoEditor.Windows
             Resize += new EventHandler(TilePaletteWindow_ResizeEnd);
             Ogmo.LayersWindow.OnLayerChanged += onLayerChanged;
             Ogmo.OnProjectStart += initFromProject;
+            Ogmo.OnProjectEdited += initFromProject;
         }
 
         public override bool ShouldBeVisible()

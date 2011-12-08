@@ -626,7 +626,6 @@
     </Content>
     <Content Include="icon32.ico" />
     <Content Include="LICENSE.txt" />
-    <Content Include="version.xml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

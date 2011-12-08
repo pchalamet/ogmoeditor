@@ -78,15 +78,7 @@ namespace OgmoEditor
             else
                 toLoad = "";
 
-            try
-            {
-                Application.Run(MainWindow);
-            }
-            catch (Exception e)
-            {
-                LogException(e);
-                MessageBox.Show("An uncaught exception was thrown! The error was written to errorLog.txt.\n\n" + e.ToString());
-            }
+            Application.Run(MainWindow);
         }
 
         static private void initialize()
