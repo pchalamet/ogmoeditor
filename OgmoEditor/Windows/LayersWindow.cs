@@ -24,8 +24,8 @@ namespace OgmoEditor.Windows
             CurrentLayerIndex = -1;
 
             //Events
-            Ogmo.OnProjectStart += onProjectStart;
-            Ogmo.OnProjectEdited += onProjectEdited;
+            Ogmo.OnProjectStart += initFromProject;
+            Ogmo.OnProjectEdited += initFromProject;
         }
 
         public override bool ShouldBeVisible()
@@ -80,19 +80,6 @@ namespace OgmoEditor.Windows
 
             CurrentLayerIndex = -1;
             SetLayer(0);
-        }
-
-        /*
-         *  Events
-         */
-        private void onProjectStart(Project project)
-        {
-            initFromProject(project);
-        }
-
-        private void onProjectEdited(Project project)
-        {
-            initFromProject(project);
         }
     }
 }
