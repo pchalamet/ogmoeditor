@@ -26,8 +26,8 @@ namespace OgmoEditor.Windows
             CurrentEntity = null;
 
             //Events
-            Ogmo.OnProjectStart += onProjectStart;
-            Ogmo.OnProjectEdited += onProjectEdited;
+            Ogmo.OnProjectStart += initFromProject;
+            Ogmo.OnProjectEdited += initFromProject;
             Ogmo.LayersWindow.OnLayerChanged += onLayerChanged;
         }
 
@@ -66,16 +66,6 @@ namespace OgmoEditor.Windows
         /*
          *  Events
          */
-        private void onProjectStart(Project project)
-        {
-            initFromProject(project);
-        }
-
-        private void onProjectEdited(Project project)
-        {
-            initFromProject(project);
-        }
-
         private void onLayerChanged(LayerDefinition def, int index)
         {
             EditorVisible = def is EntityLayerDefinition;
