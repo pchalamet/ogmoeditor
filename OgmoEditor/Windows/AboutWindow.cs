@@ -21,6 +21,7 @@ namespace OgmoEditor.Windows
         private void button1_Click(object sender, EventArgs e)
         {
             Close();
+            Ogmo.MainWindow.Activate();
             Ogmo.MainWindow.EnableEditing();
         }
     }
