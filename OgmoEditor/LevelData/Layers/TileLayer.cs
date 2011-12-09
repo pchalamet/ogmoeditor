@@ -136,6 +136,8 @@ namespace OgmoEditor.LevelData.Layers
                     Tiles[x, y] = id;
                 }
             }
+
+            TileCanvas.RefreshAll();
         }
 
         public Rectangle GetTilesRectangle(Point start, Point end)
