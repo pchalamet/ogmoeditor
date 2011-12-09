@@ -43,6 +43,11 @@ namespace OgmoEditor.LevelData.Layers
         {
             XmlElement xml = doc.CreateElement(Definition.Name);
 
+            //Save which tileset is being used for this layer
+            XmlAttribute tileset = doc.CreateAttribute("tileset");
+            tileset.InnerText = Tileset.Name;
+            xml.Attributes.Append(tileset);
+
             if (Definition.ExportMode == TileLayerDefinition.TileExportMode.CSV || Definition.ExportMode == TileLayerDefinition.TileExportMode.TrimmedCSV)
             {
                 //Convert all tile values to CSV
@@ -111,6 +116,11 @@ namespace OgmoEditor.LevelData.Layers
         public override void SetXML(XmlElement xml)
         {
             Clear();
+
+            //Load the tileset
+            string tilesetName = xml.Attributes["tileset"].InnerText;
+            Tileset = Ogmo.Project.Tilesets.Find(t => t.Name == tilesetName);
+
             if (Definition.ExportMode == TileLayerDefinition.TileExportMode.CSV || Definition.ExportMode == TileLayerDefinition.TileExportMode.TrimmedCSV)
             {
                 //CSV Import
