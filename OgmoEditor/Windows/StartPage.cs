@@ -45,34 +45,41 @@ namespace OgmoEditor.Windows
 
         void twitter_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
-            XmlDocument xml = new XmlDocument();
-            xml.LoadXml(e.Result);
-
-            List<string> tweets = new List<string>();
-            foreach (XmlElement el in xml.GetElementsByTagName("status"))
+            try
             {
-                if (el["text"].InnerText[0] != '@')
+                XmlDocument xml = new XmlDocument();
+                xml.LoadXml(e.Result);
+
+                List<string> tweets = new List<string>();
+                foreach (XmlElement el in xml.GetElementsByTagName("status"))
                 {
-                    tweets.Add(el["text"].InnerText);
-                    if (tweets.Count >= MAX_TWEETS)
-                        break;
+                    if (el["text"].InnerText[0] != '@')
+                    {
+                        tweets.Add(el["text"].InnerText);
+                        if (tweets.Count >= MAX_TWEETS)
+                            break;
+                    }
+                }
+
+                int addY = 10;
+                foreach (var s in tweets)
+                {
+                    Label label = new Label();
+                    label.Text = s;
+                    label.Location = new Point(4, 24 + addY);
+                    label.Font = new Font(FontFamily.GenericMonospace, 10);
+                    label.TextAlign = ContentAlignment.TopLeft;
+                    label.AutoSize = true;
+                    label.MaximumSize = new Size(172, 600);
+                    label.MinimumSize = new Size(172, 10);
+                    twitterPanel.Controls.Add(label);
+
+                    addY += label.Size.Height + 10;
                 }
             }
-
-            int addY = 10;
-            foreach (var s in tweets)
+            catch
             {
-                Label label = new Label();
-                label.Text = s;
-                label.Location = new Point(4, 24 + addY);
-                label.Font = new Font(FontFamily.GenericMonospace, 10);
-                label.TextAlign = ContentAlignment.TopLeft;
-                label.AutoSize = true;
-                label.MaximumSize = new Size(172, 600);
-                label.MinimumSize = new Size(172, 10);
-                twitterPanel.Controls.Add(label);
-
-                addY += label.Size.Height + 10;
+                Controls.Remove(twitterPanel);
             }
         }
     }
