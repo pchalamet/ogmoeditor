@@ -47,7 +47,7 @@ namespace OgmoEditor.Windows
         {
             get
             {
-                if (Ogmo.CurrentLevel == null)
+                if (Ogmo.CurrentLevel == null || CurrentLayerIndex == -1)
                     return null;
                 else
                     return Ogmo.CurrentLevel.Layers[CurrentLayerIndex];
@@ -79,7 +79,6 @@ namespace OgmoEditor.Windows
                 Controls.Add(new LayerButton(project.LayerDefinitions[i], i * 24));
 
             CurrentLayerIndex = -1;
-            SetLayer(0);
         }
     }
 }

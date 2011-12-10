@@ -312,6 +312,9 @@ namespace OgmoEditor
                 //Start a blank level
                 NewLevel();
 
+                //Set the layer
+                Ogmo.LayersWindow.SetLayer(0);
+
                 //Set the status message
                 Ogmo.MainWindow.StatusText = "Edited project " + Ogmo.Project.Name + ", all levels closed";
                 Config.ConfigFile.UpdateRecentProjects(Project);

@@ -99,7 +99,7 @@ namespace OgmoEditor.Windows
         private void onLayerChanged(LayerDefinition layerDefinition, int index)
         {
             EditorVisible = layerDefinition is TileLayerDefinition;
-            if (EditorVisible)
+            if (EditorVisible && Ogmo.LayersWindow.CurrentLayer != null)
             {
                 tilesetsComboBox.SelectedIndex = Ogmo.Project.Tilesets.IndexOf((Ogmo.LayersWindow.CurrentLayer as TileLayer).Tileset);
                 tileSelector.Tileset = (Ogmo.LayersWindow.CurrentLayer as TileLayer).Tileset;
