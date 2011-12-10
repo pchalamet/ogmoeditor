@@ -29,7 +29,7 @@ namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
 
         private void enforceMaxChars()
         {
-            if (def.MaxChars > 0)
+            if (def.MaxChars > 0 && defaultTextBox.Text.Length > 0)
                 defaultTextBox.Text = defaultTextBox.Text.Substring(0, def.MaxChars);
         }
 
