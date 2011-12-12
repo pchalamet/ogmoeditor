@@ -40,7 +40,7 @@ namespace OgmoEditor.Windows
 
         private void calculateScale()
         {
-            scale = Math.Min((pictureBox.Width - BUFFER) / tileset.Image.Width, (pictureBox.Height - BUFFER) / tileset.Image.Height);
+            scale = Math.Min((pictureBox.Width - BUFFER) / (float)tileset.Image.Width, (pictureBox.Height - BUFFER) / (float)tileset.Image.Height);
         }
 
         public void SetSelection(int to)
