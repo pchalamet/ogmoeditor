@@ -78,6 +78,7 @@ namespace OgmoEditor
             //Default project properties
             Name = copy.Name;
             BackgroundColor = copy.BackgroundColor;
+            GridColor = copy.GridColor;
             Filename = copy.Filename;
             LevelDefaultSize = copy.LevelDefaultSize;
             LevelMinimumSize = copy.LevelMinimumSize;
