@@ -130,11 +130,20 @@ namespace OgmoEditor
             //Check for duplicates and blanks
             s += OgmoParse.CheckDefinitionList(LayerDefinitions);
 
+            //All grid sizes must be > 0
+            foreach (var l in LayerDefinitions)
+            {
+                if (l.Grid.Width <= 0)
+                    s += OgmoParse.Error("Layer \"" + l.Name + "\" has a grid cell width <= 0");
+                if (l.Grid.Height <= 0)
+                    s += OgmoParse.Error("Layer \"" + l.Name + "\" has a grid cell height <= 0");
+            }
+
             //Must have a tileset if you have a tile layer
             if (LayerDefinitions.Find(l => l is TileLayerDefinition) != null && Tilesets.Count == 0)
                 s += OgmoParse.Error("Tile layer(s) are defined, but no tilesets are defined");
 
-            //Must have an object if you have an object layer
+            //Must have an entity if you have an entity layer
             if (LayerDefinitions.Find(l => l is EntityLayerDefinition) != null && EntityDefinitions.Count == 0)
                 s += OgmoParse.Error("Object layer(s) are defined, but no objects are defined");
 
