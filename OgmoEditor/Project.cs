@@ -130,9 +130,9 @@ namespace OgmoEditor
             //Check for duplicates and blanks
             s += OgmoParse.CheckDefinitionList(LayerDefinitions);
 
-            //All grid sizes must be > 0
             foreach (var l in LayerDefinitions)
             {
+                //All grid sizes must be > 0
                 if (l.Grid.Width <= 0)
                     s += OgmoParse.Error("Layer \"" + l.Name + "\" has a grid cell width <= 0");
                 if (l.Grid.Height <= 0)
@@ -153,6 +153,7 @@ namespace OgmoEditor
 
             //Check for duplicates and blanks
             s += OgmoParse.CheckDefinitionList(Tilesets);
+
             foreach (var t in Tilesets)
             {
                 //File must exist
@@ -165,6 +166,7 @@ namespace OgmoEditor
 
             //Check for duplicates and blanks
             s += OgmoParse.CheckDefinitionList(EntityDefinitions);
+
             foreach (var o in EntityDefinitions)
             {
                 //Image file must exist if it is using an image file to draw
