@@ -48,17 +48,17 @@ namespace OgmoEditor.LevelData.Layers
             Position = new Point(Convert.ToInt32(xml.Attributes["x"].InnerText), Convert.ToInt32(xml.Attributes["y"].InnerText));
 
             //Size
-            if (Definition.ResizableX)
+            if (Definition.ResizableX && xml.Attributes["width"] != null)
                 Size.Width = Convert.ToInt32(xml.Attributes["width"].InnerText);
             else
                 Size.Width = Definition.Size.Width;
-            if (Definition.ResizableY)
+            if (Definition.ResizableY && xml.Attributes["height"] != null)
                 Size.Height = Convert.ToInt32(xml.Attributes["height"].InnerText);
             else
                 Size.Height = Definition.Size.Height;
 
             //Rotation
-            if (Definition.Rotatable)
+            if (Definition.Rotatable && xml.Attributes["angle"] != null)
                 Angle = Ogmo.Project.ImportAngle(xml.Attributes["angle"].InnerText);
 
             //Nodes
