@@ -79,7 +79,7 @@ namespace OgmoEditor.LevelData.Layers
                 //Throw it in the xml text
                 xml.InnerText = string.Join("\n", rows);
             }
-            else if (Definition.ExportMode == TileLayerDefinition.TileExportMode.XML)
+            else if (Definition.ExportMode == TileLayerDefinition.TileExportMode.XML || Definition.ExportMode == TileLayerDefinition.TileExportMode.XMLCoords)
             {
                 //XML Export
                 XmlElement tile;
@@ -100,9 +100,24 @@ namespace OgmoEditor.LevelData.Layers
                             a.InnerText = j.ToString();
                             tile.Attributes.Append(a);
 
-                            a = doc.CreateAttribute("id");
-                            a.InnerText = Tiles[i, j].ToString();
-                            tile.Attributes.Append(a);
+                            if (Definition.ExportMode == TileLayerDefinition.TileExportMode.XML)
+                            {
+                                a = doc.CreateAttribute("id");
+                                a.InnerText = Tiles[i, j].ToString();
+                                tile.Attributes.Append(a);
+                            }
+                            else
+                            {
+                                Point p = Tileset.GetCellFromID(Tiles[i, j]);
+
+                                a = doc.CreateAttribute("tx");
+                                a.InnerText = p.X.ToString();
+                                tile.Attributes.Append(a);
+
+                                a = doc.CreateAttribute("ty");
+                                a.InnerText = p.Y.ToString();
+                                tile.Attributes.Append(a);
+                            }
 
                             xml.AppendChild(tile);
                         }
@@ -135,15 +150,25 @@ namespace OgmoEditor.LevelData.Layers
                             Tiles[j, i] = Convert.ToInt32(tiles[j]);
                 }
             }
-            else if (Definition.ExportMode == TileLayerDefinition.TileExportMode.XML)
+            else if (Definition.ExportMode == TileLayerDefinition.TileExportMode.XML || Definition.ExportMode == TileLayerDefinition.TileExportMode.XMLCoords)
             {
                 //XML Import
                 foreach (XmlElement tile in xml)
                 {
                     int x = Convert.ToInt32(tile.Attributes["x"].InnerText);
                     int y = Convert.ToInt32(tile.Attributes["y"].InnerText);
-                    int id = Convert.ToInt32(tile.Attributes["id"].InnerText);
-                    Tiles[x, y] = id;
+
+                    if (tile.Attributes["id"] != null)
+                    {
+                        int id = Convert.ToInt32(tile.Attributes["id"].InnerText);
+                        Tiles[x, y] = id;
+                    }
+                    else if (tile.Attributes["tx"] != null && tile.Attributes["ty"] != null)
+                    {
+                        int tx = Convert.ToInt32(tile.Attributes["tx"].InnerText);
+                        int ty = Convert.ToInt32(tile.Attributes["ty"].InnerText);
+                        Tiles[x, y] = Tileset.GetIDFromCell(new Point(tx, ty));
+                    }
                 }
             }
 

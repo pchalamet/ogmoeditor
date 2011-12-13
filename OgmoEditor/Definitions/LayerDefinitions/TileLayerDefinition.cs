@@ -10,7 +10,7 @@ namespace OgmoEditor.Definitions.LayerDefinitions
 {
     public class TileLayerDefinition : LayerDefinition
     {
-        public enum TileExportMode { CSV, TrimmedCSV, XML };
+        public enum TileExportMode { CSV, TrimmedCSV, XML, XMLCoords };
         public TileExportMode ExportMode;
 
         public TileLayerDefinition()
