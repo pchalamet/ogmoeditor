@@ -44,7 +44,7 @@ namespace OgmoEditor
 
         static public PresentationParameters Parameters;
         static public GraphicsDevice GraphicsDevice { get; private set; }
-        static public Content Content { get; private set; }
+        static public EditorDraw EditorDraw { get; private set; }
 
         static public MainWindow MainWindow { get; private set; }
         static public ToolsWindow ToolsWindow { get; private set; }
@@ -119,7 +119,7 @@ namespace OgmoEditor
             Parameters.PresentationInterval = PresentInterval.Immediate;
             Parameters.IsFullScreen = false;
             GraphicsDevice = new GraphicsDevice(GraphicsAdapter.DefaultAdapter, GraphicsProfile.HiDef, Parameters);
-            Content = new Content(GraphicsDevice);
+            EditorDraw = new EditorDraw(GraphicsDevice);
 
             //Add the exit event
             Application.ApplicationExit += onApplicationExit;
@@ -226,7 +226,7 @@ namespace OgmoEditor
 
             //Start the project
             StartProject(project);
-            Content.LoadProjectTextures(Project);
+            EditorDraw.LoadProjectTextures(Project);
 
             //Start a blank level and start at the first layer
             LayersWindow.SetLayer(0);
@@ -303,7 +303,7 @@ namespace OgmoEditor
 
                 //Save the project
                 Project.Save();
-                Content.LoadProjectTextures(Project);
+                EditorDraw.LoadProjectTextures(Project);
 
                 //Call the event
                 if (OnProjectEdited != null)

@@ -420,7 +420,7 @@
       <DependentUpon>ToolButton.cs</DependentUpon>
     </Compile>
     <Compile Include="Util.cs" />
-    <Compile Include="LevelEditors\Content.cs" />
+    <Compile Include="LevelEditors\EditorDraw.cs" />
     <Compile Include="Windows\ToolsWindow.cs">
       <SubType>Form</SubType>
     </Compile>

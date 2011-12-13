@@ -20,7 +20,7 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
             drawing = false;
         }
 
-        public override void Draw(Content content)
+        public override void Draw(EditorDraw content)
         {
             if (drawing)
             {

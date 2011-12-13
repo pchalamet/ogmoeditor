@@ -15,7 +15,7 @@ namespace OgmoEditor.LevelEditors
     using Color = Microsoft.Xna.Framework.Color;
     using Rectangle = Microsoft.Xna.Framework.Rectangle; 
 
-    public class Content
+    public class EditorDraw
     {
         //Constant textures
         public Texture2D TexPixel { get; private set; }
@@ -30,7 +30,7 @@ namespace OgmoEditor.LevelEditors
         public GraphicsDevice GraphicsDevice { get; private set; }
         public SpriteBatch SpriteBatch { get; private set; }
 
-        public Content(GraphicsDevice device)
+        public EditorDraw(GraphicsDevice device)
         {
             GraphicsDevice = device;
             SpriteBatch = new SpriteBatch(device);

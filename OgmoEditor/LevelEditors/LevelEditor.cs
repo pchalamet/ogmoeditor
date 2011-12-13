@@ -96,7 +96,7 @@ namespace OgmoEditor.LevelEditors
 
         protected override void Draw()
         {
-            Content content = Ogmo.Content;
+            EditorDraw content = Ogmo.EditorDraw;
 
             //Draw the background and logo
             GraphicsDevice.SetRenderTarget(null);
@@ -196,20 +196,20 @@ namespace OgmoEditor.LevelEditors
             int height = (int)(scale * Level.Size.Height);
             Matrix scaleMatrix = Matrix.CreateScale(scale);
 
-            RenderTarget2D texture = new RenderTarget2D(Ogmo.Content.GraphicsDevice, width, height);
-            Ogmo.Content.GraphicsDevice.SetRenderTarget(texture);
-            Ogmo.Content.GraphicsDevice.Clear(Ogmo.Project.BackgroundColor.ToXNA());
+            RenderTarget2D texture = new RenderTarget2D(Ogmo.EditorDraw.GraphicsDevice, width, height);
+            Ogmo.EditorDraw.GraphicsDevice.SetRenderTarget(texture);
+            Ogmo.EditorDraw.GraphicsDevice.Clear(Ogmo.Project.BackgroundColor.ToXNA());
 
             for (int i = 0; i < LayerEditors.Count; i++)
             {
                 if (Ogmo.Project.LayerDefinitions[i].Visible)
                 {
-                    Ogmo.Content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, LayerEditors[i].DrawMatrix * scaleMatrix);
-                    LayerEditors[i].Draw(Ogmo.Content, false, 1);
-                    Ogmo.Content.SpriteBatch.End();
+                    Ogmo.EditorDraw.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, LayerEditors[i].DrawMatrix * scaleMatrix);
+                    LayerEditors[i].Draw(Ogmo.EditorDraw, false, 1);
+                    Ogmo.EditorDraw.SpriteBatch.End();
                 }
             }
-            Ogmo.Content.GraphicsDevice.SetRenderTarget(null);
+            Ogmo.EditorDraw.GraphicsDevice.SetRenderTarget(null);
 
             //Save it then dispose it
             Stream stream = dialog.OpenFile();
@@ -235,20 +235,20 @@ namespace OgmoEditor.LevelEditors
             int height = (int)(scale * Ogmo.Project.CameraSize.Height);
             Matrix cameraMatrix = Matrix.CreateScale(scale) * Matrix.CreateTranslation(-CameraPosition.X, -CameraPosition.Y, 0);
 
-            RenderTarget2D texture = new RenderTarget2D(Ogmo.Content.GraphicsDevice, width, height);
-            Ogmo.Content.GraphicsDevice.SetRenderTarget(texture);
-            Ogmo.Content.GraphicsDevice.Clear(Ogmo.Project.BackgroundColor.ToXNA());
+            RenderTarget2D texture = new RenderTarget2D(Ogmo.EditorDraw.GraphicsDevice, width, height);
+            Ogmo.EditorDraw.GraphicsDevice.SetRenderTarget(texture);
+            Ogmo.EditorDraw.GraphicsDevice.Clear(Ogmo.Project.BackgroundColor.ToXNA());
 
             for (int i = 0; i < LayerEditors.Count; i++)
             {
                 if (Ogmo.Project.LayerDefinitions[i].Visible)
                 {
-                    Ogmo.Content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, LayerEditors[i].DrawMatrix * cameraMatrix);
-                    LayerEditors[i].Draw(Ogmo.Content, false, 1);
-                    Ogmo.Content.SpriteBatch.End();
+                    Ogmo.EditorDraw.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, LayerEditors[i].DrawMatrix * cameraMatrix);
+                    LayerEditors[i].Draw(Ogmo.EditorDraw, false, 1);
+                    Ogmo.EditorDraw.SpriteBatch.End();
                 }
             }
-            Ogmo.Content.GraphicsDevice.SetRenderTarget(null);
+            Ogmo.EditorDraw.GraphicsDevice.SetRenderTarget(null);
 
             //Save it then dispose it
             Stream stream = dialog.OpenFile();
@@ -260,8 +260,8 @@ namespace OgmoEditor.LevelEditors
         private void DrawLayer(LayerEditor layer, bool current, float alpha)
         {
             
-            layer.Draw(Ogmo.Content, current, alpha);
-            Ogmo.Content.SpriteBatch.End();
+            layer.Draw(Ogmo.EditorDraw, current, alpha);
+            Ogmo.EditorDraw.SpriteBatch.End();
         }
 
         public void SwitchTo()

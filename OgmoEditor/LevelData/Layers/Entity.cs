@@ -163,7 +163,7 @@ namespace OgmoEditor.LevelData.Layers
             return xml;
         }
 
-        public void Draw(Content content, bool current, float alpha)
+        public void Draw(EditorDraw content, bool current, float alpha)
         {
             content.DrawEntity(this, alpha);
 

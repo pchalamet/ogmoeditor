@@ -34,7 +34,7 @@ namespace OgmoEditor.LevelEditors.LayersEditors
                 for (int j = 0; j < maxSize.Height; j += texSize.Height)
                 {
                     RenderTarget2D tex = new RenderTarget2D(
-                        Ogmo.Content.GraphicsDevice, 
+                        Ogmo.EditorDraw.GraphicsDevice, 
                         Math.Min(maxSize.Width - i, texSize.Width), 
                         Math.Min(maxSize.Height - j, texSize.Height));
                     Textures.Add(new TextureInfo(tex, new Point(i, j)));
@@ -53,7 +53,7 @@ namespace OgmoEditor.LevelEditors.LayersEditors
         public void Draw(float alpha)
         {
             foreach (var t in Textures)
-                Ogmo.Content.SpriteBatch.Draw(t.Texture, new Microsoft.Xna.Framework.Vector2(t.Position.X, t.Position.Y), Microsoft.Xna.Framework.Color.White * alpha);
+                Ogmo.EditorDraw.SpriteBatch.Draw(t.Texture, new Microsoft.Xna.Framework.Vector2(t.Position.X, t.Position.Y), Microsoft.Xna.Framework.Color.White * alpha);
         }
 
         public void RefreshAll()
@@ -88,8 +88,8 @@ namespace OgmoEditor.LevelEditors.LayersEditors
             Ogmo.GraphicsDevice.SetRenderTarget(texture.Texture);
             Ogmo.GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.Transparent);
 
-            Texture2D tiles = Ogmo.Content.TilesetTextures[TileLayer.Tileset];
-            Ogmo.Content.SpriteBatch.Begin(SpriteSortMode.Texture, BlendState.Opaque);
+            Texture2D tiles = Ogmo.EditorDraw.TilesetTextures[TileLayer.Tileset];
+            Ogmo.EditorDraw.SpriteBatch.Begin(SpriteSortMode.Texture, BlendState.Opaque);
 
             int offsetX = texture.Position.X / TileLayer.Definition.Grid.Width;
             int offsetY = texture.Position.Y / TileLayer.Definition.Grid.Height;
@@ -101,14 +101,14 @@ namespace OgmoEditor.LevelEditors.LayersEditors
                 for (int j = 0; j < tilesHeight; j++)
                 {
                     if (TileLayer.Tiles[i + offsetX, j + offsetY] != -1)
-                        Ogmo.Content.SpriteBatch.Draw(
+                        Ogmo.EditorDraw.SpriteBatch.Draw(
                             tiles, 
                             new Microsoft.Xna.Framework.Vector2(i * TileLayer.Definition.Grid.Width, j * TileLayer.Definition.Grid.Height), 
                             TileLayer.Tileset.GetXNARectFromID(TileLayer.Tiles[i + offsetX, j + offsetY]), 
                             Microsoft.Xna.Framework.Color.White);
                 }
             }
-            Ogmo.Content.SpriteBatch.End();
+            Ogmo.EditorDraw.SpriteBatch.End();
 
             Ogmo.GraphicsDevice.SetRenderTarget(null);
         }

@@ -70,7 +70,7 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
             mouse = LayerEditor.Layer.Definition.ConvertToGrid(location);
         }
 
-        public override void Draw(Content content)
+        public override void Draw(EditorDraw content)
         {
             if (drawing)
             {

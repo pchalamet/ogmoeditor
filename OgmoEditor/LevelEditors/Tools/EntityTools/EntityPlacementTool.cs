@@ -18,7 +18,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
 
         }
 
-        public override void Draw(Content content)
+        public override void Draw(EditorDraw content)
         {
             if (Ogmo.EntitiesWindow.CurrentEntity != null)
                 content.DrawEntity(Ogmo.EntitiesWindow.CurrentEntity, Util.Ctrl ? LevelEditor.MousePosition : LayerEditor.MouseSnapPosition, .5f);

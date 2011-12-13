@@ -19,7 +19,7 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
 
         }
 
-        public override void Draw(Content content)
+        public override void Draw(EditorDraw content)
         {
             if (drawing)
             {

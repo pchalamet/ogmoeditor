@@ -22,7 +22,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             Layer = layer;
         }
 
-        public override void Draw(Content content, bool current, float alpha)
+        public override void Draw(EditorDraw content, bool current, float alpha)
         {
             //Draw the actual tiles
             Layer.TileCanvas.Draw(alpha);
