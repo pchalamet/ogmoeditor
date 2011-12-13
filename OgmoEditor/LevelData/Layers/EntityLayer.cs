@@ -35,7 +35,10 @@ namespace OgmoEditor.LevelData.Layers
         public override void SetXML(XmlElement xml)
         {
             foreach (XmlElement e in xml.ChildNodes)
-                Entities.Add(new Entity(e));
+            {
+                if (Ogmo.Project.EntityDefinitions.Find(d => d.Name == e.Name) != null)
+                    Entities.Add(new Entity(e));
+            }
         }
 
         public override LayerEditor GetEditor(LevelEditors.LevelEditor editor)
