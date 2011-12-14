@@ -153,7 +153,7 @@ namespace OgmoEditor.LevelEditors
             DrawRectangle(x, y + 1, width - 1, height - 1, color * .3f);
         }
 
-        public void DrawLine(int x1, int y1, int x2, int y2, Color color)
+        public void DrawLine(float x1, float y1, float x2, float y2, Color color)
         {
             int length = (int)Math.Sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
             float rotation = (float)Math.Atan2(y2 - y1, x2 - x1);
@@ -166,7 +166,12 @@ namespace OgmoEditor.LevelEditors
             DrawLine(p1.X, p1.Y, p2.X, p2.Y, color);
         }
 
-        public void DrawLineAngle(int x, int y, int length, float rotation, Color color)
+        public void DrawLine(Vector2 p1, Vector2 p2, Color color)
+        {
+            DrawLine(p1.X, p1.Y, p2.X, p2.Y, color);
+        }
+
+        public void DrawLineAngle(float x, float y, int length, float rotation, Color color)
         {
             SpriteBatch.Draw(TexPixel, new Vector2(x, y), null, color, rotation, Vector2.Zero, new Vector2(length, 1), SpriteEffects.None, 0);
         }

@@ -123,15 +123,10 @@ namespace OgmoEditor.LevelEditors
                 }
             }
 
-            //Current layer, grid and border
+            //Current layer
             content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, LayerEditors
                 [Ogmo.LayersWindow.CurrentLayerIndex].DrawMatrix * LevelView.Matrix);
-            if (Ogmo.MainWindow.EditingGridVisible && LevelView.Zoom >= 1)
-                content.DrawGrid(LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Layer.Definition.Grid, Level.Size, Ogmo.Project.GridColor.ToXNA() * .5f);
             LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Draw(content, true, 1);
-            content.DrawHollowRect(0, 0, Level.Size.Width + 1, Level.Size.Height, Color.Black);
-            content.DrawHollowRect(-1, -1, Level.Size.Width + 3, Level.Size.Height + 2, Color.Black);
-
             content.SpriteBatch.End();
 
             //Layers above the current one
@@ -143,6 +138,34 @@ namespace OgmoEditor.LevelEditors
                     LayerEditors[i].Draw(content, false, LAYER_ABOVE_ALPHA);
                     content.SpriteBatch.End();
                 }
+            }
+
+            //Draw the grid
+            if (Ogmo.MainWindow.EditingGridVisible)
+            {
+                content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null);
+
+                Vector2 inc = new Vector2(Ogmo.LayersWindow.CurrentLayer.Definition.Grid.Width * LevelView.Zoom, Ogmo.LayersWindow.CurrentLayer.Definition.Grid.Height * LevelView.Zoom);
+                while (inc.X <= 4)
+                    inc.X *= 2;
+                while (inc.Y <= 4)
+                    inc.Y *= 2;
+
+                float width = Ogmo.CurrentLevel.Size.Width * LevelView.Zoom;
+                float height = Ogmo.CurrentLevel.Size.Height * LevelView.Zoom;
+
+                Vector2 offset = ((-LevelView.Position + LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].DrawOffset) * LevelView.Zoom) + LevelView.Origin;
+
+                for (float xx = inc.X; xx < width; xx += inc.X)
+                    content.DrawLine(offset.X + xx, offset.Y, offset.X + xx, offset.Y + height, Ogmo.Project.GridColor.ToXNA() * .5f);
+
+                for (float yy = inc.Y; yy < height; yy += inc.Y)
+                    content.DrawLine(offset.X, offset.Y + yy, offset.X + width, offset.Y + yy, Ogmo.Project.GridColor.ToXNA() * .5f);
+
+                content.DrawHollowRect((int)offset.X, (int)offset.Y, (int)width + 1, (int)height, Color.Black);
+                content.DrawHollowRect((int)offset.X - 1, (int)offset.Y - 1, (int)width + 3, (int)height + 2, Color.Black);
+
+                content.SpriteBatch.End();
             }
 
             //Draw the camera
