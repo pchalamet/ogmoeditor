@@ -26,7 +26,6 @@ namespace OgmoEditor.LevelData
         public Level(Project project, string filename)
         {
             this.Project = project;
-            initialize();
 
             if (File.Exists(filename))
             {
@@ -41,6 +40,22 @@ namespace OgmoEditor.LevelData
             }
             else
             {
+                //Initialize size
+                Size = Project.LevelDefaultSize;
+
+                //Initialize layers
+                Layers = new List<Layer>();
+                foreach (var def in Project.LayerDefinitions)
+                    Layers.Add(def.GetInstance(this));
+
+                //Initialize values
+                if (Project.LevelValueDefinitions.Count > 0)
+                {
+                    Values = new List<Value>();
+                    foreach (var def in Project.LevelValueDefinitions)
+                        Values.Add(new Value(def));
+                }
+
                 SavePath = "";
             }
 
@@ -70,21 +85,7 @@ namespace OgmoEditor.LevelData
 
         private void initialize()
         {
-            //Initialize size
-            Size = Project.LevelDefaultSize;
-
-            //Initialize layers
-            Layers = new List<Layer>();
-            foreach (var def in Project.LayerDefinitions)
-                Layers.Add(def.GetInstance(this));
-
-            //Initialize values
-            if (Project.LevelValueDefinitions.Count > 0)
-            {
-                Values = new List<Value>();
-                foreach (var def in Project.LevelValueDefinitions)
-                    Values.Add(new Value(def));
-            }
+            
         }
 
         public bool Changed
@@ -197,15 +198,25 @@ namespace OgmoEditor.LevelData
             Size = size;
 
             //Import the level values
-            if (Values != null)
-                OgmoParse.ImportValues(Values, level);
-
-            //Import the layers
-            foreach (XmlElement e in level.ChildNodes)
+            //Initialize values
+            if (Project.LevelValueDefinitions.Count > 0)
             {
-                int index = Ogmo.Project.LayerDefinitions.FindIndex(d => d.Name == e.Name);
-                Layers[index].SetXML(e);
+                Values = new List<Value>();
+                foreach (var def in Project.LevelValueDefinitions)
+                    Values.Add(new Value(def));
+                OgmoParse.ImportValues(Values, level);
+            }    
+
+            //Import layers
+            Layers = new List<Layer>();
+            for (int i = 0; i < Project.LayerDefinitions.Count; i++)
+            {
+                Layer layer = Project.LayerDefinitions[i].GetInstance(this);
+                Layers.Add(layer);
+                if (level[Project.LayerDefinitions[i].Name] != null)
+                    layer.SetXML(level[Project.LayerDefinitions[i].Name]);
             }
+
         }
 
         public void EditProperties()
