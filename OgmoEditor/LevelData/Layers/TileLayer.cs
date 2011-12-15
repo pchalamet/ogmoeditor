@@ -48,6 +48,11 @@ namespace OgmoEditor.LevelData.Layers
             tileset.InnerText = Tileset.Name;
             xml.Attributes.Append(tileset);
 
+            //Save the export mode
+            XmlAttribute export = doc.CreateAttribute("exportMode");
+            export.InnerText = Definition.ExportMode.ToString();
+            xml.Attributes.Append(export);
+
             if (Definition.ExportMode == TileLayerDefinition.TileExportMode.CSV || Definition.ExportMode == TileLayerDefinition.TileExportMode.TrimmedCSV)
             {
                 //Convert all tile values to CSV
@@ -136,7 +141,14 @@ namespace OgmoEditor.LevelData.Layers
             string tilesetName = xml.Attributes["tileset"].InnerText;
             Tileset = Ogmo.Project.Tilesets.Find(t => t.Name == tilesetName);
 
-            if (Definition.ExportMode == TileLayerDefinition.TileExportMode.CSV || Definition.ExportMode == TileLayerDefinition.TileExportMode.TrimmedCSV)
+            //Get the export mode
+            TileLayerDefinition.TileExportMode exportMode;
+            if (xml.Attributes["exportMode"] != null)
+                exportMode = (TileLayerDefinition.TileExportMode)Enum.Parse(typeof(TileLayerDefinition.TileExportMode), xml.Attributes["exportMode"].InnerText);
+            else
+                exportMode = Definition.ExportMode;
+
+            if (exportMode == TileLayerDefinition.TileExportMode.CSV || exportMode == TileLayerDefinition.TileExportMode.TrimmedCSV)
             {
                 //CSV Import
                 string s = xml.InnerText;
@@ -150,7 +162,7 @@ namespace OgmoEditor.LevelData.Layers
                             Tiles[j, i] = Convert.ToInt32(tiles[j]);
                 }
             }
-            else if (Definition.ExportMode == TileLayerDefinition.TileExportMode.XML || Definition.ExportMode == TileLayerDefinition.TileExportMode.XMLCoords)
+            else if (exportMode == TileLayerDefinition.TileExportMode.XML || exportMode == TileLayerDefinition.TileExportMode.XMLCoords)
             {
                 //XML Import
                 foreach (XmlElement tile in xml)
