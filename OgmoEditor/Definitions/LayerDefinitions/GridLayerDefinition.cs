@@ -11,11 +11,10 @@ namespace OgmoEditor.Definitions.LayerDefinitions
 {
     public class GridLayerDefinition : LayerDefinition
     {
-        public enum ExportModes { Bitstring, Rectangles };
+        public enum ExportModes { Bitstring, TrimmedBitstring, Rectangles };
 
         public OgmoColor Color;
         public ExportModes ExportMode;
-        public bool TrimZeroes;
 
         public GridLayerDefinition()
             : base()
@@ -23,7 +22,6 @@ namespace OgmoEditor.Definitions.LayerDefinitions
             Image = "grid.png";
             Color = new OgmoColor(0, 0, 0);
             ExportMode = ExportModes.Bitstring;
-            TrimZeroes = false;
         }
 
         public override System.Windows.Forms.UserControl GetEditor()
@@ -44,7 +42,6 @@ namespace OgmoEditor.Definitions.LayerDefinitions
             def.ScrollFactor = ScrollFactor;
             def.Color = Color;
             def.ExportMode = ExportMode;
-            def.TrimZeroes = TrimZeroes;
             return def;
         }
     }

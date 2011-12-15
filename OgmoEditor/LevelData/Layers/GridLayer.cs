@@ -29,7 +29,12 @@ namespace OgmoEditor.LevelData.Layers
         {
             XmlElement xml = doc.CreateElement(Definition.Name);
 
-            if (Definition.ExportMode == GridLayerDefinition.ExportModes.Bitstring)
+            //Write the export mode
+            XmlAttribute attr = doc.CreateAttribute("exportMode");
+            attr.InnerText = Definition.ExportMode.ToString();
+            xml.Attributes.Append(attr);
+
+            if (Definition.ExportMode == GridLayerDefinition.ExportModes.Bitstring || Definition.ExportMode == GridLayerDefinition.ExportModes.TrimmedBitstring)
             {
                 //Bitstring export
                 string[] rows = new string[Grid.GetLength(1)];
@@ -40,7 +45,7 @@ namespace OgmoEditor.LevelData.Layers
                         rows[i] += Grid[j, i] ? "1" : "0";
                 }
 
-                if (Definition.TrimZeroes)
+                if (Definition.ExportMode == GridLayerDefinition.ExportModes.TrimmedBitstring)
                 {
                     //Trim off trailing zeroes on rows and then trim trailing empty rows
                     for (int i = 0; i < rows.Length; i++)
@@ -132,7 +137,16 @@ namespace OgmoEditor.LevelData.Layers
         public override void SetXML(XmlElement xml)
         {
             Grid.Initialize();
-            if (Definition.ExportMode == GridLayerDefinition.ExportModes.Bitstring)
+
+            //Get the export mode
+            GridLayerDefinition.ExportModes exportMode;
+            if (xml.Attributes["exportMode"] != null)
+                exportMode = (GridLayerDefinition.ExportModes)Enum.Parse(typeof(GridLayerDefinition.ExportModes), xml.Attributes["exportMode"].InnerText);
+            else
+                exportMode = Definition.ExportMode;
+
+            //Import the XML!
+            if (exportMode == GridLayerDefinition.ExportModes.Bitstring || exportMode == GridLayerDefinition.ExportModes.TrimmedBitstring)
             {
                 //Bitstring import
                 string s = xml.InnerText;
@@ -152,7 +166,7 @@ namespace OgmoEditor.LevelData.Layers
                         x++;
                 }
             }
-            else if (Definition.ExportMode == GridLayerDefinition.ExportModes.Rectangles)
+            else if (exportMode == GridLayerDefinition.ExportModes.Rectangles)
             {
                 //Rectangles import
                 foreach (XmlElement r in xml.GetElementsByTagName("rect"))

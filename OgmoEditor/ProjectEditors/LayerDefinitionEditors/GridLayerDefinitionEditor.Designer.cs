@@ -28,20 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.colorChooser = new OgmoEditor.ColorChooser();
             this.label1 = new System.Windows.Forms.Label();
             this.exportModeComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.trimZeroesCheckBox = new System.Windows.Forms.CheckBox();
+            this.colorChooser = new OgmoEditor.ColorChooser();
             this.SuspendLayout();
-            // 
-            // colorChooser
-            // 
-            this.colorChooser.Location = new System.Drawing.Point(87, 12);
-            this.colorChooser.Name = "colorChooser";
-            this.colorChooser.Size = new System.Drawing.Size(108, 28);
-            this.colorChooser.TabIndex = 0;
-            this.colorChooser.ColorChanged += new OgmoEditor.ColorChooser.ColorCallback(this.colorChooser_ColorChanged);
             // 
             // label1
             // 
@@ -58,6 +49,7 @@
             this.exportModeComboBox.FormattingEnabled = true;
             this.exportModeComboBox.Items.AddRange(new object[] {
             "Bitstring",
+            "Trimmed Bitstring",
             "Rectangles"});
             this.exportModeComboBox.Location = new System.Drawing.Point(92, 46);
             this.exportModeComboBox.Name = "exportModeComboBox";
@@ -74,22 +66,18 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Export Mode";
             // 
-            // trimZeroesCheckBox
+            // colorChooser
             // 
-            this.trimZeroesCheckBox.AutoSize = true;
-            this.trimZeroesCheckBox.Location = new System.Drawing.Point(92, 73);
-            this.trimZeroesCheckBox.Name = "trimZeroesCheckBox";
-            this.trimZeroesCheckBox.Size = new System.Drawing.Size(82, 17);
-            this.trimZeroesCheckBox.TabIndex = 4;
-            this.trimZeroesCheckBox.Text = "Trim Zeroes";
-            this.trimZeroesCheckBox.UseVisualStyleBackColor = true;
-            this.trimZeroesCheckBox.CheckedChanged += new System.EventHandler(this.trimZeroesCheckBox_CheckedChanged);
+            this.colorChooser.Location = new System.Drawing.Point(87, 12);
+            this.colorChooser.Name = "colorChooser";
+            this.colorChooser.Size = new System.Drawing.Size(108, 28);
+            this.colorChooser.TabIndex = 0;
+            this.colorChooser.ColorChanged += new OgmoEditor.ColorChooser.ColorCallback(this.colorChooser_ColorChanged);
             // 
             // GridLayerDefinitionEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.trimZeroesCheckBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.exportModeComboBox);
             this.Controls.Add(this.label1);
@@ -107,6 +95,5 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox exportModeComboBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox trimZeroesCheckBox;
     }
 }
