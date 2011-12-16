@@ -306,31 +306,49 @@ namespace OgmoEditor
 
         private void newLevelToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (Ogmo.Project == null)
+                return;
+
             Ogmo.NewLevel();
         }
 
         private void openLevelToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (Ogmo.Project == null)
+                return;
+
             Ogmo.OpenLevel();
         }
 
         private void saveLevelToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (Ogmo.Project == null)
+                return;
+
             Ogmo.Levels[getTargetLevel()].Save();
         }
 
         private void saveLevelAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (Ogmo.Project == null)
+                return;
+
             Ogmo.Levels[getTargetLevel()].SaveAs();
         }
 
         private void closeLevelToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (Ogmo.Project == null)
+                return;
+
             Ogmo.CloseLevel(Ogmo.Levels[getTargetLevel()], true);
         }
 
         private void duplicateLevelToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (Ogmo.Project == null)
+                return;
+
             Ogmo.AddLevel(new Level(Ogmo.Levels[getTargetLevel()]));
         }
 
