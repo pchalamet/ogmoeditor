@@ -29,38 +29,56 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.button = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.entityNameLabel = new System.Windows.Forms.Label();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
-            // 
-            // button
-            // 
-            this.button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button.Location = new System.Drawing.Point(0, 0);
-            this.button.Name = "button";
-            this.button.Size = new System.Drawing.Size(32, 32);
-            this.button.TabIndex = 0;
-            this.button.UseVisualStyleBackColor = true;
-            this.button.Click += new System.EventHandler(this.button_Click);
             // 
             // toolTip
             // 
             this.toolTip.ShowAlways = true;
             // 
+            // entityNameLabel
+            // 
+            this.entityNameLabel.AutoEllipsis = true;
+            this.entityNameLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.entityNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.entityNameLabel.Location = new System.Drawing.Point(33, 2);
+            this.entityNameLabel.Name = "entityNameLabel";
+            this.entityNameLabel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
+            this.entityNameLabel.Size = new System.Drawing.Size(90, 20);
+            this.entityNameLabel.TabIndex = 4;
+            this.entityNameLabel.Text = "Name";
+            this.entityNameLabel.Click += new System.EventHandler(this.label_Click);
+            this.entityNameLabel.MouseEnter += new System.EventHandler(this.entityNameLabel_MouseEnter);
+            this.entityNameLabel.MouseLeave += new System.EventHandler(this.entityNameLabel_MouseLeave);
+            // 
+            // pictureBox
+            // 
+            this.pictureBox.Location = new System.Drawing.Point(5, 0);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(24, 24);
+            this.pictureBox.TabIndex = 3;
+            this.pictureBox.TabStop = false;
+            // 
             // EntityButton
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button);
+            this.Controls.Add(this.entityNameLabel);
+            this.Controls.Add(this.pictureBox);
             this.Name = "EntityButton";
-            this.Size = new System.Drawing.Size(32, 32);
+            this.Size = new System.Drawing.Size(130, 24);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.Label entityNameLabel;
+        private System.Windows.Forms.PictureBox pictureBox;
     }
 }

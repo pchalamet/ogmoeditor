@@ -13,8 +13,9 @@ namespace OgmoEditor.Windows
 {
     public partial class EntityButton : UserControl
     {
-        static private readonly OgmoColor Selected = new OgmoColor(150, 220, 255);
-        static private readonly OgmoColor NotSelected = new OgmoColor(255, 255, 255);
+        static private readonly OgmoColor NotSelected = new OgmoColor(220, 220, 220);
+        static private readonly OgmoColor Selected = new OgmoColor(255, 125, 50);
+        static private readonly OgmoColor Hover = new OgmoColor(255, 220, 130);
 
         public EntityDefinition Definition { get; private set; }
 
@@ -23,38 +24,53 @@ namespace OgmoEditor.Windows
             Definition = definition;
             InitializeComponent();
             Location = new Point(x, y);
-            toolTip.SetToolTip(button, definition.Name);
-            button.BackgroundImage = Definition.Image;
-            button.BackgroundImageLayout = ImageLayout.Zoom;
-            button.BackColor = (definition == Ogmo.EntitiesWindow.CurrentEntity) ? Selected : NotSelected;
+            toolTip.SetToolTip(this, definition.Name);
+
+            pictureBox.BackgroundImage = Definition.Image;
+            pictureBox.BackgroundImageLayout = ImageLayout.Zoom;
+
+            entityNameLabel.Text = definition.Name;
+            entityNameLabel.BackColor = (definition == Ogmo.EntitiesWindow.CurrentEntity) ? Selected : NotSelected;
 
             //Events
-            Ogmo.EntitiesWindow.OnEntityChanged += onObjectChanged;
+            Ogmo.EntitiesWindow.OnEntityChanged += onEntityChanged;
         }
 
         public void OnRemove()
         {
-            Ogmo.EntitiesWindow.OnEntityChanged -= onObjectChanged;
+            Ogmo.EntitiesWindow.OnEntityChanged -= onEntityChanged;
         }
 
         /*
          *  Events
          */
-        private void button_Click(object sender, EventArgs e)
+        private void label_Click(object sender, EventArgs e)
         {
             Ogmo.EntitiesWindow.SetObject(Definition);
             Ogmo.ToolsWindow.SetTool(typeof(EntityPlacementTool));
         }
 
-        private void onObjectChanged(EntityDefinition definition)
+        private void onEntityChanged(EntityDefinition definition)
         {
             if (definition == Definition)
             {
-                button.BackColor = Selected;
+                entityNameLabel.BackColor = Selected;
                 Select();
             }
             else
-                button.BackColor = NotSelected;
+                entityNameLabel.BackColor = NotSelected;
+        }
+
+        private void entityNameLabel_MouseEnter(object sender, EventArgs e)
+        {
+            if (entityNameLabel.BackColor != Selected)
+                entityNameLabel.BackColor = Hover;
+        }
+
+        private void entityNameLabel_MouseLeave(object sender, EventArgs e)
+        {
+            if (entityNameLabel.BackColor == Hover)
+                entityNameLabel.BackColor = NotSelected;
         }
     }
 }

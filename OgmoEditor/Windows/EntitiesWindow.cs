@@ -25,6 +25,10 @@ namespace OgmoEditor.Windows
             Text = "Entities";
             CurrentEntity = null;
 
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            AutoScroll = true;
+            HorizontalScroll.Enabled = false;
+
             //Events
             Ogmo.OnProjectStart += initFromProject;
             Ogmo.OnProjectEdited += initFromProject;
@@ -50,14 +54,16 @@ namespace OgmoEditor.Windows
 
         private void initFromProject(Project project)
         {
-            ClientSize = new Size(96, ((project.EntityDefinitions.Count - 1) / 3) * 32 + 32);
+            ClientSize = new Size(148, 220);
+            MaximumSize = new Size(Size.Width, 1000);
+            MinimumSize = new Size(Size.Width, 80);
 
             foreach (EntityButton b in Controls)
                 b.OnRemove();
             Controls.Clear();
             for (int i = 0; i < project.EntityDefinitions.Count; i++)
             {
-                Controls.Add(new EntityButton(project.EntityDefinitions[i], (i % 3) * 32, (i / 3) * 32));
+                Controls.Add(new EntityButton(project.EntityDefinitions[i], 0, 1 + i * 25));
             }
 
             SetObject(null);
