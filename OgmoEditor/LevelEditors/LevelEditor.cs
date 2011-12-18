@@ -208,6 +208,13 @@ namespace OgmoEditor.LevelEditors
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Title = "Save Level as Image...";
             dialog.Filter = "PNG Image File|*.png";
+
+            string file = Level.SaveName;
+            int num = file.LastIndexOf(".oel");
+            if (num != -1)
+                file = file.Remove(num);
+            file = file + ".png";
+            dialog.FileName = file;
             dialog.InitialDirectory = Ogmo.Project.SavedDirectory;
             DialogResult result = dialog.ShowDialog();
             if (result == DialogResult.Cancel)
