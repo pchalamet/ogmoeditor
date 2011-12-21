@@ -135,7 +135,7 @@ namespace OgmoEditor.ProjectEditors
             this.nameTextBox.Location = new System.Drawing.Point(262, 11);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(133, 20);
-            this.nameTextBox.TabIndex = 49;
+            this.nameTextBox.TabIndex = 0;
             this.nameTextBox.Validated += new System.EventHandler(this.nameTextBox_Validated);
             // 
             // label1
@@ -162,7 +162,7 @@ namespace OgmoEditor.ProjectEditors
             this.sizeXTextBox.Location = new System.Drawing.Point(262, 37);
             this.sizeXTextBox.Name = "sizeXTextBox";
             this.sizeXTextBox.Size = new System.Drawing.Size(42, 20);
-            this.sizeXTextBox.TabIndex = 54;
+            this.sizeXTextBox.TabIndex = 2;
             this.sizeXTextBox.Validated += new System.EventHandler(this.sizeXTextBox_Validated);
             // 
             // label3
@@ -189,7 +189,7 @@ namespace OgmoEditor.ProjectEditors
             this.limitTextBox.Location = new System.Drawing.Point(480, 11);
             this.limitTextBox.Name = "limitTextBox";
             this.limitTextBox.Size = new System.Drawing.Size(62, 20);
-            this.limitTextBox.TabIndex = 58;
+            this.limitTextBox.TabIndex = 1;
             this.limitTextBox.Validated += new System.EventHandler(this.limitTextBox_Validated);
             // 
             // resizableXCheckBox
@@ -199,7 +199,7 @@ namespace OgmoEditor.ProjectEditors
             this.resizableXCheckBox.Location = new System.Drawing.Point(215, 73);
             this.resizableXCheckBox.Name = "resizableXCheckBox";
             this.resizableXCheckBox.Size = new System.Drawing.Size(82, 17);
-            this.resizableXCheckBox.TabIndex = 59;
+            this.resizableXCheckBox.TabIndex = 6;
             this.resizableXCheckBox.Text = "Resizable X";
             this.resizableXCheckBox.UseVisualStyleBackColor = true;
             this.resizableXCheckBox.CheckedChanged += new System.EventHandler(this.resizableXCheckBox_CheckedChanged);
@@ -211,7 +211,7 @@ namespace OgmoEditor.ProjectEditors
             this.resizableYCheckBox.Location = new System.Drawing.Point(331, 73);
             this.resizableYCheckBox.Name = "resizableYCheckBox";
             this.resizableYCheckBox.Size = new System.Drawing.Size(82, 17);
-            this.resizableYCheckBox.TabIndex = 60;
+            this.resizableYCheckBox.TabIndex = 7;
             this.resizableYCheckBox.Text = "Resizable Y";
             this.resizableYCheckBox.UseVisualStyleBackColor = true;
             this.resizableYCheckBox.CheckedChanged += new System.EventHandler(this.resizableYCheckBox_CheckedChanged);
@@ -223,7 +223,7 @@ namespace OgmoEditor.ProjectEditors
             this.rotatableCheckBox.Location = new System.Drawing.Point(215, 96);
             this.rotatableCheckBox.Name = "rotatableCheckBox";
             this.rotatableCheckBox.Size = new System.Drawing.Size(72, 17);
-            this.rotatableCheckBox.TabIndex = 62;
+            this.rotatableCheckBox.TabIndex = 8;
             this.rotatableCheckBox.Text = "Rotatable";
             this.rotatableCheckBox.UseVisualStyleBackColor = true;
             this.rotatableCheckBox.CheckedChanged += new System.EventHandler(this.rotatableCheckBox_CheckedChanged);
@@ -233,7 +233,7 @@ namespace OgmoEditor.ProjectEditors
             this.rotationIncrementTextBox.Location = new System.Drawing.Point(428, 94);
             this.rotationIncrementTextBox.Name = "rotationIncrementTextBox";
             this.rotationIncrementTextBox.Size = new System.Drawing.Size(62, 20);
-            this.rotationIncrementTextBox.TabIndex = 63;
+            this.rotationIncrementTextBox.TabIndex = 9;
             this.rotationIncrementTextBox.Visible = false;
             this.rotationIncrementTextBox.Validated += new System.EventHandler(this.rotationIncrementTextBox_Validated);
             // 
@@ -253,7 +253,7 @@ namespace OgmoEditor.ProjectEditors
             this.sizeYTextBox.Location = new System.Drawing.Point(328, 37);
             this.sizeYTextBox.Name = "sizeYTextBox";
             this.sizeYTextBox.Size = new System.Drawing.Size(42, 20);
-            this.sizeYTextBox.TabIndex = 65;
+            this.sizeYTextBox.TabIndex = 3;
             this.sizeYTextBox.Validated += new System.EventHandler(this.sizeXTextBox_Validated);
             // 
             // originYTextBox
@@ -262,7 +262,7 @@ namespace OgmoEditor.ProjectEditors
             this.originYTextBox.Location = new System.Drawing.Point(500, 37);
             this.originYTextBox.Name = "originYTextBox";
             this.originYTextBox.Size = new System.Drawing.Size(42, 20);
-            this.originYTextBox.TabIndex = 69;
+            this.originYTextBox.TabIndex = 5;
             this.originYTextBox.Validated += new System.EventHandler(this.originXTextBox_Validated);
             // 
             // originXTextBox
@@ -271,7 +271,7 @@ namespace OgmoEditor.ProjectEditors
             this.originXTextBox.Location = new System.Drawing.Point(434, 37);
             this.originXTextBox.Name = "originXTextBox";
             this.originXTextBox.Size = new System.Drawing.Size(42, 20);
-            this.originXTextBox.TabIndex = 67;
+            this.originXTextBox.TabIndex = 4;
             this.originXTextBox.Validated += new System.EventHandler(this.originXTextBox_Validated);
             // 
             // label6
@@ -299,7 +299,7 @@ namespace OgmoEditor.ProjectEditors
             this.nodesCheckBox.Location = new System.Drawing.Point(215, 131);
             this.nodesCheckBox.Name = "nodesCheckBox";
             this.nodesCheckBox.Size = new System.Drawing.Size(79, 17);
-            this.nodesCheckBox.TabIndex = 71;
+            this.nodesCheckBox.TabIndex = 10;
             this.nodesCheckBox.Text = "Has Nodes";
             this.nodesCheckBox.UseVisualStyleBackColor = true;
             this.nodesCheckBox.CheckedChanged += new System.EventHandler(this.nodesCheckBox_CheckedChanged);
@@ -309,7 +309,7 @@ namespace OgmoEditor.ProjectEditors
             this.nodeLimitTextBox.Location = new System.Drawing.Point(363, 129);
             this.nodeLimitTextBox.Name = "nodeLimitTextBox";
             this.nodeLimitTextBox.Size = new System.Drawing.Size(50, 20);
-            this.nodeLimitTextBox.TabIndex = 72;
+            this.nodeLimitTextBox.TabIndex = 11;
             this.nodeLimitTextBox.Visible = false;
             this.nodeLimitTextBox.Validated += new System.EventHandler(this.nodeLimitTextBox_Validated);
             // 
@@ -346,7 +346,7 @@ namespace OgmoEditor.ProjectEditors
             this.nodeDrawComboBox.Location = new System.Drawing.Point(463, 129);
             this.nodeDrawComboBox.Name = "nodeDrawComboBox";
             this.nodeDrawComboBox.Size = new System.Drawing.Size(86, 21);
-            this.nodeDrawComboBox.TabIndex = 75;
+            this.nodeDrawComboBox.TabIndex = 12;
             this.nodeDrawComboBox.Visible = false;
             this.nodeDrawComboBox.SelectionChangeCommitted += new System.EventHandler(this.nodeDrawComboBox_SelectionChangeCommitted);
             // 
@@ -410,7 +410,7 @@ namespace OgmoEditor.ProjectEditors
             this.graphicTypeComboBox.Location = new System.Drawing.Point(285, 366);
             this.graphicTypeComboBox.Name = "graphicTypeComboBox";
             this.graphicTypeComboBox.Size = new System.Drawing.Size(86, 21);
-            this.graphicTypeComboBox.TabIndex = 82;
+            this.graphicTypeComboBox.TabIndex = 14;
             this.graphicTypeComboBox.SelectionChangeCommitted += new System.EventHandler(this.graphicTypeComboBox_SelectionChangeCommitted);
             // 
             // rectangleGraphicPanel
@@ -451,7 +451,7 @@ namespace OgmoEditor.ProjectEditors
             this.imageFileGraphicPanel.Location = new System.Drawing.Point(211, 393);
             this.imageFileGraphicPanel.Name = "imageFileGraphicPanel";
             this.imageFileGraphicPanel.Size = new System.Drawing.Size(343, 88);
-            this.imageFileGraphicPanel.TabIndex = 85;
+            this.imageFileGraphicPanel.TabIndex = 15;
             this.imageFileGraphicPanel.Visible = false;
             // 
             // imagePreviewer
@@ -477,7 +477,7 @@ namespace OgmoEditor.ProjectEditors
             this.imageFileButton.Location = new System.Drawing.Point(231, 7);
             this.imageFileButton.Name = "imageFileButton";
             this.imageFileButton.Size = new System.Drawing.Size(27, 23);
-            this.imageFileButton.TabIndex = 53;
+            this.imageFileButton.TabIndex = 1;
             this.imageFileButton.Text = "...";
             this.imageFileButton.UseVisualStyleBackColor = true;
             this.imageFileButton.Click += new System.EventHandler(this.imageFileButton_Click);
@@ -497,7 +497,7 @@ namespace OgmoEditor.ProjectEditors
             this.imageFileTextBox.Name = "imageFileTextBox";
             this.imageFileTextBox.ReadOnly = true;
             this.imageFileTextBox.Size = new System.Drawing.Size(105, 20);
-            this.imageFileTextBox.TabIndex = 51;
+            this.imageFileTextBox.TabIndex = 0;
             // 
             // imageFileTiledCheckBox
             // 
@@ -505,7 +505,7 @@ namespace OgmoEditor.ProjectEditors
             this.imageFileTiledCheckBox.Location = new System.Drawing.Point(102, 39);
             this.imageFileTiledCheckBox.Name = "imageFileTiledCheckBox";
             this.imageFileTiledCheckBox.Size = new System.Drawing.Size(75, 17);
-            this.imageFileTiledCheckBox.TabIndex = 1;
+            this.imageFileTiledCheckBox.TabIndex = 2;
             this.imageFileTiledCheckBox.Text = "Tile Image";
             this.imageFileTiledCheckBox.UseVisualStyleBackColor = true;
             this.imageFileTiledCheckBox.CheckedChanged += new System.EventHandler(this.imageFileTiledCheckBox_CheckedChanged);
@@ -516,7 +516,7 @@ namespace OgmoEditor.ProjectEditors
             this.valuesEditor.Location = new System.Drawing.Point(211, 163);
             this.valuesEditor.Name = "valuesEditor";
             this.valuesEditor.Size = new System.Drawing.Size(343, 193);
-            this.valuesEditor.TabIndex = 70;
+            this.valuesEditor.TabIndex = 13;
             this.valuesEditor.Title = "Values";
             // 
             // EntityDefinitionsEditor
