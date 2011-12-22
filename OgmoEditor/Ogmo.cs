@@ -118,7 +118,7 @@ namespace OgmoEditor
             Parameters.DeviceWindowHandle = Ogmo.MainWindow.Handle;
             Parameters.PresentationInterval = PresentInterval.Immediate;
             Parameters.IsFullScreen = false;
-            GraphicsDevice = new GraphicsDevice(GraphicsAdapter.DefaultAdapter, GraphicsProfile.HiDef, Parameters);
+            GraphicsDevice = new GraphicsDevice(GraphicsAdapter.DefaultAdapter, GraphicsProfile.Reach, Parameters);
             EditorDraw = new EditorDraw(GraphicsDevice);
 
             //Add the exit event

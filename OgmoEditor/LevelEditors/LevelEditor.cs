@@ -106,7 +106,7 @@ namespace OgmoEditor.LevelEditors
             content.SpriteBatch.End();
 
             //Draw the level onto the control, positioned and scaled by the camera
-            content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, LevelView.Matrix);
+            content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, LevelView.Matrix);
             content.DrawRectangle(10, 10, Level.Size.Width, Level.Size.Height, new Color(0, 0, 0, .5f));
             content.DrawRectangle(0, 0, Level.Size.Width, Level.Size.Height, Ogmo.Project.BackgroundColor.ToXNA());
             content.SpriteBatch.End();
@@ -117,14 +117,14 @@ namespace OgmoEditor.LevelEditors
             {
                 if (Ogmo.Project.LayerDefinitions[i].Visible)
                 {
-                    content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, LayerEditors[i].DrawMatrix * LevelView.Matrix);
+                    content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, LayerEditors[i].DrawMatrix * LevelView.Matrix);
                     LayerEditors[i].Draw(content, false, 1);
                     content.SpriteBatch.End();
                 }
             }
 
             //Current layer
-            content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, LayerEditors
+            content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, LayerEditors
                 [Ogmo.LayersWindow.CurrentLayerIndex].DrawMatrix * LevelView.Matrix);
             LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Draw(content, true, 1);
             content.SpriteBatch.End();
@@ -134,7 +134,7 @@ namespace OgmoEditor.LevelEditors
             {
                 if (i < Ogmo.Project.LayerDefinitions.Count && Ogmo.Project.LayerDefinitions[i].Visible)
                 {
-                    content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, LayerEditors[i].DrawMatrix * LevelView.Matrix);
+                    content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, LayerEditors[i].DrawMatrix * LevelView.Matrix);
                     LayerEditors[i].Draw(content, false, LAYER_ABOVE_ALPHA);
                     content.SpriteBatch.End();
                 }
@@ -143,7 +143,7 @@ namespace OgmoEditor.LevelEditors
             //Draw the grid
             if (Ogmo.MainWindow.EditingGridVisible)
             {
-                content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null);
+                content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null);
 
                 Vector2 inc = new Vector2(Ogmo.LayersWindow.CurrentLayer.Definition.Grid.Width * LevelView.Zoom, Ogmo.LayersWindow.CurrentLayer.Definition.Grid.Height * LevelView.Zoom);
                 while (inc.X <= 4)
@@ -169,7 +169,7 @@ namespace OgmoEditor.LevelEditors
             }
 
             //Draw the camera
-            content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, LevelView.Matrix);
+            content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, LevelView.Matrix);
             if (Ogmo.Project.CameraEnabled)
             {
                 int w = Ogmo.Project.CameraSize.Width / 8;
