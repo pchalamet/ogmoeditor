@@ -26,8 +26,8 @@ namespace OgmoEditor.Definitions.ValueDefinitions
             : base()
         {
             Default = 0;
-            Min = int.MinValue;
-            Max = int.MaxValue;
+            Min = 0;
+            Max = 100;
             ShowSlider = false;
         }
 

@@ -47,6 +47,7 @@
             this.colorButton.Name = "colorButton";
             this.colorButton.Size = new System.Drawing.Size(38, 23);
             this.colorButton.TabIndex = 3;
+            this.colorButton.TabStop = false;
             this.colorButton.UseVisualStyleBackColor = true;
             this.colorButton.Click += new System.EventHandler(this.colorButton_Click);
             // 

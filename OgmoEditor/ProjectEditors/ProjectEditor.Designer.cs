@@ -63,7 +63,7 @@
             this.applyButton.Location = new System.Drawing.Point(344, 525);
             this.applyButton.Name = "applyButton";
             this.applyButton.Size = new System.Drawing.Size(154, 38);
-            this.applyButton.TabIndex = 3;
+            this.applyButton.TabIndex = 1;
             this.applyButton.Text = "Apply";
             this.applyButton.UseVisualStyleBackColor = true;
             this.applyButton.Click += new System.EventHandler(this.saveButton_Click);
@@ -157,7 +157,7 @@
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(581, 516);
-            this.tabControl.TabIndex = 1;
+            this.tabControl.TabIndex = 0;
             // 
             // ProjectEditor
             // 

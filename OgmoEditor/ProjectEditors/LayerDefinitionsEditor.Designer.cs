@@ -53,7 +53,7 @@
             this.nameTextBox.Location = new System.Drawing.Point(291, 30);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(123, 20);
-            this.nameTextBox.TabIndex = 1;
+            this.nameTextBox.TabIndex = 0;
             this.nameTextBox.Validated += new System.EventHandler(this.nameTextBox_Validated);
             // 
             // label1
@@ -71,7 +71,7 @@
             this.gridYTextBox.Location = new System.Drawing.Point(377, 56);
             this.gridYTextBox.Name = "gridYTextBox";
             this.gridYTextBox.Size = new System.Drawing.Size(62, 20);
-            this.gridYTextBox.TabIndex = 29;
+            this.gridYTextBox.TabIndex = 2;
             this.gridYTextBox.Validated += new System.EventHandler(this.gridXTextBox_Validated);
             // 
             // gridXTextBox
@@ -80,7 +80,7 @@
             this.gridXTextBox.Location = new System.Drawing.Point(291, 56);
             this.gridXTextBox.Name = "gridXTextBox";
             this.gridXTextBox.Size = new System.Drawing.Size(62, 20);
-            this.gridXTextBox.TabIndex = 28;
+            this.gridXTextBox.TabIndex = 1;
             this.gridXTextBox.Validated += new System.EventHandler(this.gridXTextBox_Validated);
             // 
             // label2
@@ -110,7 +110,7 @@
             this.typeComboBox.Location = new System.Drawing.Point(291, 109);
             this.typeComboBox.Name = "typeComboBox";
             this.typeComboBox.Size = new System.Drawing.Size(93, 21);
-            this.typeComboBox.TabIndex = 32;
+            this.typeComboBox.TabIndex = 5;
             this.typeComboBox.SelectionChangeCommitted += new System.EventHandler(this.typeComboBox_SelectionChangeCommitted);
             // 
             // label4
@@ -128,6 +128,7 @@
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(89, 23);
             this.addButton.TabIndex = 34;
+            this.addButton.TabStop = false;
             this.addButton.Text = "Create";
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
@@ -139,6 +140,7 @@
             this.removeButton.Name = "removeButton";
             this.removeButton.Size = new System.Drawing.Size(89, 23);
             this.removeButton.TabIndex = 35;
+            this.removeButton.TabStop = false;
             this.removeButton.Text = "Remove";
             this.removeButton.UseVisualStyleBackColor = true;
             this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
@@ -150,6 +152,7 @@
             this.moveUpButton.Name = "moveUpButton";
             this.moveUpButton.Size = new System.Drawing.Size(89, 23);
             this.moveUpButton.TabIndex = 36;
+            this.moveUpButton.TabStop = false;
             this.moveUpButton.Text = "Move Up";
             this.moveUpButton.UseVisualStyleBackColor = true;
             this.moveUpButton.Click += new System.EventHandler(this.moveUpButton_Click);
@@ -161,6 +164,7 @@
             this.moveDownButton.Name = "moveDownButton";
             this.moveDownButton.Size = new System.Drawing.Size(89, 23);
             this.moveDownButton.TabIndex = 37;
+            this.moveDownButton.TabStop = false;
             this.moveDownButton.Text = "Move Down";
             this.moveDownButton.UseVisualStyleBackColor = true;
             this.moveDownButton.Click += new System.EventHandler(this.moveDownButton_Click);
@@ -172,6 +176,7 @@
             this.listBox.Name = "listBox";
             this.listBox.Size = new System.Drawing.Size(184, 420);
             this.listBox.TabIndex = 38;
+            this.listBox.TabStop = false;
             this.listBox.SelectedIndexChanged += new System.EventHandler(this.listBox_SelectedIndexChanged);
             // 
             // scrollYTextBox
@@ -180,7 +185,7 @@
             this.scrollYTextBox.Location = new System.Drawing.Point(377, 82);
             this.scrollYTextBox.Name = "scrollYTextBox";
             this.scrollYTextBox.Size = new System.Drawing.Size(62, 20);
-            this.scrollYTextBox.TabIndex = 40;
+            this.scrollYTextBox.TabIndex = 4;
             this.scrollYTextBox.Validated += new System.EventHandler(this.scrollXTextBox_Validated);
             // 
             // scrollXTextBox
@@ -189,7 +194,7 @@
             this.scrollXTextBox.Location = new System.Drawing.Point(291, 82);
             this.scrollXTextBox.Name = "scrollXTextBox";
             this.scrollXTextBox.Size = new System.Drawing.Size(62, 20);
-            this.scrollXTextBox.TabIndex = 39;
+            this.scrollXTextBox.TabIndex = 3;
             this.scrollXTextBox.Validated += new System.EventHandler(this.scrollXTextBox_Validated);
             // 
             // label5

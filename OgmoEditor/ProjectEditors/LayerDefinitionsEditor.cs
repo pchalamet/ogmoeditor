@@ -62,6 +62,7 @@ namespace OgmoEditor.ProjectEditors
 
             //Add the new one
             layerEditor = definition.GetEditor();
+            layerEditor.TabIndex = 6;
             if (layerEditor != null)
                 Controls.Add(layerEditor);
         }

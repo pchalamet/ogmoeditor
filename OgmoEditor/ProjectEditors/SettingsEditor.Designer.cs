@@ -65,7 +65,7 @@ namespace OgmoEditor.ProjectEditors
             this.maxHeightTextBox.Location = new System.Drawing.Point(207, 217);
             this.maxHeightTextBox.Name = "maxHeightTextBox";
             this.maxHeightTextBox.Size = new System.Drawing.Size(62, 20);
-            this.maxHeightTextBox.TabIndex = 26;
+            this.maxHeightTextBox.TabIndex = 9;
             this.maxHeightTextBox.Validated += new System.EventHandler(this.maxWidthTextBox_TextChanged);
             // 
             // maxWidthTextBox
@@ -73,7 +73,7 @@ namespace OgmoEditor.ProjectEditors
             this.maxWidthTextBox.Location = new System.Drawing.Point(121, 217);
             this.maxWidthTextBox.Name = "maxWidthTextBox";
             this.maxWidthTextBox.Size = new System.Drawing.Size(62, 20);
-            this.maxWidthTextBox.TabIndex = 25;
+            this.maxWidthTextBox.TabIndex = 8;
             this.maxWidthTextBox.TextChanged += new System.EventHandler(this.maxWidthTextBox_TextChanged);
             // 
             // minHeightTextBox
@@ -81,7 +81,7 @@ namespace OgmoEditor.ProjectEditors
             this.minHeightTextBox.Location = new System.Drawing.Point(207, 191);
             this.minHeightTextBox.Name = "minHeightTextBox";
             this.minHeightTextBox.Size = new System.Drawing.Size(62, 20);
-            this.minHeightTextBox.TabIndex = 24;
+            this.minHeightTextBox.TabIndex = 7;
             this.minHeightTextBox.Validated += new System.EventHandler(this.minWidthTextBox_Validated);
             // 
             // minWidthTextBox
@@ -89,7 +89,7 @@ namespace OgmoEditor.ProjectEditors
             this.minWidthTextBox.Location = new System.Drawing.Point(121, 191);
             this.minWidthTextBox.Name = "minWidthTextBox";
             this.minWidthTextBox.Size = new System.Drawing.Size(62, 20);
-            this.minWidthTextBox.TabIndex = 23;
+            this.minWidthTextBox.TabIndex = 6;
             this.minWidthTextBox.Validated += new System.EventHandler(this.minWidthTextBox_Validated);
             // 
             // defaultHeightTextBox
@@ -97,7 +97,7 @@ namespace OgmoEditor.ProjectEditors
             this.defaultHeightTextBox.Location = new System.Drawing.Point(207, 165);
             this.defaultHeightTextBox.Name = "defaultHeightTextBox";
             this.defaultHeightTextBox.Size = new System.Drawing.Size(62, 20);
-            this.defaultHeightTextBox.TabIndex = 22;
+            this.defaultHeightTextBox.TabIndex = 5;
             this.defaultHeightTextBox.Validated += new System.EventHandler(this.defaultWidthTextBox_Validated);
             // 
             // defaultWidthTextBox
@@ -105,7 +105,7 @@ namespace OgmoEditor.ProjectEditors
             this.defaultWidthTextBox.Location = new System.Drawing.Point(121, 165);
             this.defaultWidthTextBox.Name = "defaultWidthTextBox";
             this.defaultWidthTextBox.Size = new System.Drawing.Size(62, 20);
-            this.defaultWidthTextBox.TabIndex = 21;
+            this.defaultWidthTextBox.TabIndex = 4;
             this.defaultWidthTextBox.Validated += new System.EventHandler(this.defaultWidthTextBox_Validated);
             // 
             // projectNameTextBox
@@ -113,7 +113,7 @@ namespace OgmoEditor.ProjectEditors
             this.projectNameTextBox.Location = new System.Drawing.Point(131, 13);
             this.projectNameTextBox.Name = "projectNameTextBox";
             this.projectNameTextBox.Size = new System.Drawing.Size(197, 20);
-            this.projectNameTextBox.TabIndex = 19;
+            this.projectNameTextBox.TabIndex = 0;
             this.projectNameTextBox.Validated += new System.EventHandler(this.projectNameTextBox_Validated);
             // 
             // label8
@@ -226,7 +226,7 @@ namespace OgmoEditor.ProjectEditors
             this.angleModeComboBox.Location = new System.Drawing.Point(131, 103);
             this.angleModeComboBox.Name = "angleModeComboBox";
             this.angleModeComboBox.Size = new System.Drawing.Size(80, 21);
-            this.angleModeComboBox.TabIndex = 40;
+            this.angleModeComboBox.TabIndex = 3;
             this.angleModeComboBox.SelectionChangeCommitted += new System.EventHandler(this.angleModeComboBox_SelectionChangeCommitted);
             // 
             // gridColorChooser
@@ -234,7 +234,7 @@ namespace OgmoEditor.ProjectEditors
             this.gridColorChooser.Location = new System.Drawing.Point(127, 68);
             this.gridColorChooser.Name = "gridColorChooser";
             this.gridColorChooser.Size = new System.Drawing.Size(108, 28);
-            this.gridColorChooser.TabIndex = 38;
+            this.gridColorChooser.TabIndex = 2;
             this.gridColorChooser.ColorChanged += new OgmoEditor.ColorChooser.ColorCallback(this.gridColorChooser_ColorChanged);
             // 
             // backgroundColorChooser
@@ -242,7 +242,7 @@ namespace OgmoEditor.ProjectEditors
             this.backgroundColorChooser.Location = new System.Drawing.Point(127, 39);
             this.backgroundColorChooser.Name = "backgroundColorChooser";
             this.backgroundColorChooser.Size = new System.Drawing.Size(108, 28);
-            this.backgroundColorChooser.TabIndex = 36;
+            this.backgroundColorChooser.TabIndex = 1;
             this.backgroundColorChooser.ColorChanged += new OgmoEditor.ColorChooser.ColorCallback(this.backgroundColorChooser_ColorChanged);
             // 
             // valuesEditor
@@ -250,7 +250,7 @@ namespace OgmoEditor.ProjectEditors
             this.valuesEditor.Location = new System.Drawing.Point(57, 260);
             this.valuesEditor.Name = "valuesEditor";
             this.valuesEditor.Size = new System.Drawing.Size(341, 191);
-            this.valuesEditor.TabIndex = 34;
+            this.valuesEditor.TabIndex = 13;
             this.valuesEditor.Title = "Level Values";
             // 
             // colorChooser1
@@ -276,7 +276,7 @@ namespace OgmoEditor.ProjectEditors
             this.cameraEnabledCheckbox.Location = new System.Drawing.Point(350, 164);
             this.cameraEnabledCheckbox.Name = "cameraEnabledCheckbox";
             this.cameraEnabledCheckbox.Size = new System.Drawing.Size(65, 17);
-            this.cameraEnabledCheckbox.TabIndex = 42;
+            this.cameraEnabledCheckbox.TabIndex = 10;
             this.cameraEnabledCheckbox.Text = "Enabled";
             this.cameraEnabledCheckbox.UseVisualStyleBackColor = true;
             this.cameraEnabledCheckbox.CheckedChanged += new System.EventHandler(this.cameraEnabledCheckbox_CheckedChanged);
@@ -286,7 +286,7 @@ namespace OgmoEditor.ProjectEditors
             this.cameraHeightTextBox.Location = new System.Drawing.Point(466, 187);
             this.cameraHeightTextBox.Name = "cameraHeightTextBox";
             this.cameraHeightTextBox.Size = new System.Drawing.Size(62, 20);
-            this.cameraHeightTextBox.TabIndex = 44;
+            this.cameraHeightTextBox.TabIndex = 12;
             this.cameraHeightTextBox.Validated += new System.EventHandler(this.cameraWidthTextBox_Validated);
             // 
             // cameraWidthTextBox
@@ -294,7 +294,7 @@ namespace OgmoEditor.ProjectEditors
             this.cameraWidthTextBox.Location = new System.Drawing.Point(380, 187);
             this.cameraWidthTextBox.Name = "cameraWidthTextBox";
             this.cameraWidthTextBox.Size = new System.Drawing.Size(62, 20);
-            this.cameraWidthTextBox.TabIndex = 43;
+            this.cameraWidthTextBox.TabIndex = 11;
             this.cameraWidthTextBox.Validated += new System.EventHandler(this.cameraWidthTextBox_Validated);
             // 
             // label13

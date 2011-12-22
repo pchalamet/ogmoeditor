@@ -25,8 +25,8 @@ namespace OgmoEditor.Definitions.ValueDefinitions
             : base()
         {
             Default = 0;
-            Min = float.MinValue;
-            Max = float.MaxValue;
+            Min = 0;
+            Max = 100;
             Round = .1f;
         }
 

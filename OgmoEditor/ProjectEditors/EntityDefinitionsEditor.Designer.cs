@@ -84,6 +84,7 @@ namespace OgmoEditor.ProjectEditors
             this.listBox.Name = "listBox";
             this.listBox.Size = new System.Drawing.Size(184, 420);
             this.listBox.TabIndex = 48;
+            this.listBox.TabStop = false;
             this.listBox.SelectedIndexChanged += new System.EventHandler(this.listBox_SelectedIndexChanged);
             // 
             // moveDownButton
@@ -93,6 +94,7 @@ namespace OgmoEditor.ProjectEditors
             this.moveDownButton.Name = "moveDownButton";
             this.moveDownButton.Size = new System.Drawing.Size(89, 23);
             this.moveDownButton.TabIndex = 47;
+            this.moveDownButton.TabStop = false;
             this.moveDownButton.Text = "Move Down";
             this.moveDownButton.UseVisualStyleBackColor = true;
             this.moveDownButton.Click += new System.EventHandler(this.moveDownButton_Click);
@@ -104,6 +106,7 @@ namespace OgmoEditor.ProjectEditors
             this.moveUpButton.Name = "moveUpButton";
             this.moveUpButton.Size = new System.Drawing.Size(89, 23);
             this.moveUpButton.TabIndex = 46;
+            this.moveUpButton.TabStop = false;
             this.moveUpButton.Text = "Move Up";
             this.moveUpButton.UseVisualStyleBackColor = true;
             this.moveUpButton.Click += new System.EventHandler(this.moveUpButton_Click);
@@ -115,6 +118,7 @@ namespace OgmoEditor.ProjectEditors
             this.removeButton.Name = "removeButton";
             this.removeButton.Size = new System.Drawing.Size(89, 23);
             this.removeButton.TabIndex = 45;
+            this.removeButton.TabStop = false;
             this.removeButton.Text = "Remove";
             this.removeButton.UseVisualStyleBackColor = true;
             this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
@@ -125,6 +129,7 @@ namespace OgmoEditor.ProjectEditors
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(89, 23);
             this.addButton.TabIndex = 44;
+            this.addButton.TabStop = false;
             this.addButton.Text = "Create";
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.addButton_Click);

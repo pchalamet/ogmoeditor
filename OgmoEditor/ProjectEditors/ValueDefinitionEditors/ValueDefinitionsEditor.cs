@@ -67,6 +67,7 @@ namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
 
             //Add the new one!
             valueEditor = v.GetEditor();
+            valueEditor.TabIndex = 2;
             if (valueEditor != null)
                 Controls.Add(valueEditor);
         }

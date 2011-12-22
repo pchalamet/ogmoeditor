@@ -57,6 +57,7 @@
             this.listBox.Name = "listBox";
             this.listBox.Size = new System.Drawing.Size(184, 420);
             this.listBox.TabIndex = 43;
+            this.listBox.TabStop = false;
             this.listBox.SelectedIndexChanged += new System.EventHandler(this.listBox_SelectedIndexChanged);
             // 
             // moveDownButton
@@ -66,6 +67,7 @@
             this.moveDownButton.Name = "moveDownButton";
             this.moveDownButton.Size = new System.Drawing.Size(89, 23);
             this.moveDownButton.TabIndex = 42;
+            this.moveDownButton.TabStop = false;
             this.moveDownButton.Text = "Move Down";
             this.moveDownButton.UseVisualStyleBackColor = true;
             this.moveDownButton.Click += new System.EventHandler(this.moveDownButton_Click);
@@ -77,6 +79,7 @@
             this.moveUpButton.Name = "moveUpButton";
             this.moveUpButton.Size = new System.Drawing.Size(89, 23);
             this.moveUpButton.TabIndex = 41;
+            this.moveUpButton.TabStop = false;
             this.moveUpButton.Text = "Move Up";
             this.moveUpButton.UseVisualStyleBackColor = true;
             this.moveUpButton.Click += new System.EventHandler(this.moveUpButton_Click);
@@ -88,6 +91,7 @@
             this.removeButton.Name = "removeButton";
             this.removeButton.Size = new System.Drawing.Size(89, 23);
             this.removeButton.TabIndex = 40;
+            this.removeButton.TabStop = false;
             this.removeButton.Text = "Remove";
             this.removeButton.UseVisualStyleBackColor = true;
             this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
@@ -98,6 +102,7 @@
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(89, 23);
             this.addButton.TabIndex = 39;
+            this.addButton.TabStop = false;
             this.addButton.Text = "Create";
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
@@ -108,7 +113,7 @@
             this.nameTextBox.Location = new System.Drawing.Point(280, 341);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(100, 20);
-            this.nameTextBox.TabIndex = 45;
+            this.nameTextBox.TabIndex = 0;
             this.nameTextBox.Validated += new System.EventHandler(this.nameTextBox_Validated);
             // 
             // label1
@@ -128,6 +133,7 @@
             this.imageFileTextBox.ReadOnly = true;
             this.imageFileTextBox.Size = new System.Drawing.Size(138, 20);
             this.imageFileTextBox.TabIndex = 47;
+            this.imageFileTextBox.TabStop = false;
             // 
             // label2
             // 
@@ -144,7 +150,7 @@
             this.imageFileButton.Location = new System.Drawing.Point(424, 365);
             this.imageFileButton.Name = "imageFileButton";
             this.imageFileButton.Size = new System.Drawing.Size(27, 23);
-            this.imageFileButton.TabIndex = 49;
+            this.imageFileButton.TabIndex = 1;
             this.imageFileButton.Text = "...";
             this.imageFileButton.UseVisualStyleBackColor = true;
             this.imageFileButton.Click += new System.EventHandler(this.imageFileButton_Click);
@@ -166,7 +172,7 @@
             this.tileSizeYTextBox.Location = new System.Drawing.Point(366, 393);
             this.tileSizeYTextBox.Name = "tileSizeYTextBox";
             this.tileSizeYTextBox.Size = new System.Drawing.Size(62, 20);
-            this.tileSizeYTextBox.TabIndex = 52;
+            this.tileSizeYTextBox.TabIndex = 3;
             this.tileSizeYTextBox.Validated += new System.EventHandler(this.tileSizeXTextBox_Validated);
             // 
             // tileSizeXTextBox
@@ -175,7 +181,7 @@
             this.tileSizeXTextBox.Location = new System.Drawing.Point(280, 393);
             this.tileSizeXTextBox.Name = "tileSizeXTextBox";
             this.tileSizeXTextBox.Size = new System.Drawing.Size(62, 20);
-            this.tileSizeXTextBox.TabIndex = 51;
+            this.tileSizeXTextBox.TabIndex = 2;
             this.tileSizeXTextBox.Validated += new System.EventHandler(this.tileSizeXTextBox_Validated);
             // 
             // label6
@@ -211,7 +217,7 @@
             this.tileSpacingTextBox.Location = new System.Drawing.Point(280, 419);
             this.tileSpacingTextBox.Name = "tileSpacingTextBox";
             this.tileSpacingTextBox.Size = new System.Drawing.Size(62, 20);
-            this.tileSpacingTextBox.TabIndex = 56;
+            this.tileSpacingTextBox.TabIndex = 4;
             this.tileSpacingTextBox.Validated += new System.EventHandler(this.tileSpacingTextBox_Validated);
             // 
             // imageSizeLabel
