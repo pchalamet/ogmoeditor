@@ -16,23 +16,18 @@ namespace OgmoEditor.ProjectEditors
     {
         private Project oldProject;
         private Project newProject;
-        private bool autoClose;
+        private Ogmo.ProjectEditMode editMode;
         private Ogmo.FinishProjectEditAction finishAction;
 
-        public ProjectEditor(Project project, bool autoClose = false)
+        public ProjectEditor(Project project, Ogmo.ProjectEditMode editMode)
         {
             this.Text = "Project Editor - " + project.Name;
             this.oldProject = project;
-            this.autoClose = autoClose;
+            this.editMode = editMode;
             InitializeComponent();
 
             newProject = new Project();
             newProject.CloneFrom(oldProject);
-
-            if (autoClose)
-                finishAction = Ogmo.FinishProjectEditAction.CloseProject;
-            else
-                finishAction = Ogmo.FinishProjectEditAction.None;
 
             //Load the contents of the editors
             settingsEditor.LoadFromProject(newProject);
@@ -51,6 +46,11 @@ namespace OgmoEditor.ProjectEditors
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
+            if (editMode == Ogmo.ProjectEditMode.NormalEdit)
+                finishAction = Ogmo.FinishProjectEditAction.None;
+            else
+                finishAction = Ogmo.FinishProjectEditAction.CloseProject;
+
             Close();
         }
 
@@ -68,7 +68,10 @@ namespace OgmoEditor.ProjectEditors
             oldProject.CloneFrom(newProject);
 
             //Save the project after closing the form
-            finishAction = Ogmo.FinishProjectEditAction.SaveProject;
+            if (editMode == Ogmo.ProjectEditMode.ErrorOnLoad)
+                finishAction = Ogmo.FinishProjectEditAction.LoadAndSaveProject;
+            else
+                finishAction = Ogmo.FinishProjectEditAction.SaveProject;
 
             //Close the project editor
             Close();

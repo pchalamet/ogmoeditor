@@ -34,7 +34,8 @@ namespace OgmoEditor
         public const string NEW_LEVEL_NAME = "Unsaved Level";
         public const string IMAGE_FILE_FILTER = "PNG image file|*.png|BMP image file|*.bmp";
 
-        public enum FinishProjectEditAction { None, CloseProject, SaveProject };
+        public enum FinishProjectEditAction { None, CloseProject, SaveProject, LoadAndSaveProject };
+        public enum ProjectEditMode { NormalEdit, NewProject, ErrorOnLoad };
 
         public delegate void ProjectCallback(Project project);
         public delegate void LevelCallback(int index);
@@ -191,12 +192,12 @@ namespace OgmoEditor
          */
         static public void NewProject()
         {
-            Project project = new Project();
-            project.InitDefault();
-            if (project.SaveAs())
+            Project = new Project();
+            Project.InitDefault();
+            if (Project.SaveAs())
             {
-                StartProject(project);
-                EditProject(true);
+                StartProject(Project);
+                EditProject(ProjectEditMode.NewProject);
             }
         }
 
@@ -220,21 +221,19 @@ namespace OgmoEditor
             //Load it
             XmlSerializer xs = new XmlSerializer(typeof(Project));
             Stream s = new FileStream(filename, FileMode.Open);
-            Project project = (Project)xs.Deserialize(s);
+            Project = (Project)xs.Deserialize(s);
             s.Close();
-            project.Filename = filename;
+            Project.Filename = filename;
 
-            //Start the project
-            StartProject(project);
-            EditorDraw.LoadProjectTextures(Project);
-
-            //Start a blank level and start at the first layer
-            LayersWindow.SetLayer(0);
-            NewLevel();
-
-            Ogmo.MainWindow.StatusText = "Opened project " + Ogmo.Project.Name;
-            Config.ConfigFile.UpdateRecentProjects(Project);
-            GC.Collect();
+            //Error check
+            string errors = Project.ErrorCheck();
+            if (errors == "")
+                FinishProjectEdit(FinishProjectEditAction.LoadAndSaveProject);
+            else
+            {
+                MessageBox.Show(MainWindow, "Project could not be loaded because of the following errors:\n" + errors + "\nFix the errors to continue with loading.");
+                EditProject(ProjectEditMode.ErrorOnLoad);
+            }
         }
 
         static public void StartProject(Project project)
@@ -272,7 +271,7 @@ namespace OgmoEditor
             System.GC.Collect();
         }
 
-        static public void EditProject(bool newProject)
+        static public void EditProject(ProjectEditMode editMode)
         {
             //Warn!
             if (Ogmo.Levels.Count > 0 && Ogmo.Levels.Find(e => e.Changed) != null)
@@ -285,7 +284,7 @@ namespace OgmoEditor
             MainWindow.DisableEditing();
 
             //Show the project editor
-            ProjectEditor editor = new ProjectEditor(Ogmo.Project, newProject);
+            ProjectEditor editor = new ProjectEditor(Project, editMode);
             editor.Show(MainWindow);
         }
 
@@ -317,6 +316,21 @@ namespace OgmoEditor
 
                 //Set the status message
                 Ogmo.MainWindow.StatusText = "Edited project " + Ogmo.Project.Name + ", all levels closed";
+                Config.ConfigFile.UpdateRecentProjects(Project);
+                GC.Collect();
+            }
+            else if (action == FinishProjectEditAction.LoadAndSaveProject)
+            {
+                //Start the project and save it
+                StartProject(Project);
+                Project.Save();
+                EditorDraw.LoadProjectTextures(Project);
+
+                //Start a blank level and start at the first layer
+                LayersWindow.SetLayer(0);
+                NewLevel();
+
+                Ogmo.MainWindow.StatusText = "Opened project " + Ogmo.Project.Name;
                 Config.ConfigFile.UpdateRecentProjects(Project);
                 GC.Collect();
             }

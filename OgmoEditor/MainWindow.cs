@@ -276,7 +276,7 @@ namespace OgmoEditor
 
         private void editProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ogmo.EditProject(false);
+            Ogmo.EditProject(Ogmo.ProjectEditMode.NormalEdit);
         }
 
         private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)
