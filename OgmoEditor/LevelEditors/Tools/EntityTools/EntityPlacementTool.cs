@@ -27,7 +27,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
         public override void OnMouseLeftClick(System.Drawing.Point location)
         {
             if (Ogmo.EntitiesWindow.CurrentEntity != null)
-                LevelEditor.Perform(new EntityAddAction(LayerEditor.Layer, new Entity(Ogmo.EntitiesWindow.CurrentEntity, Util.Ctrl ? LevelEditor.MousePosition : LayerEditor.MouseSnapPosition)));
+                LevelEditor.Perform(new EntityAddAction(LayerEditor.Layer, new Entity(LayerEditor.Layer, Ogmo.EntitiesWindow.CurrentEntity, Util.Ctrl ? LevelEditor.MousePosition : LayerEditor.MouseSnapPosition)));
         }
     }
 }

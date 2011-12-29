@@ -12,16 +12,20 @@ namespace OgmoEditor.LevelData.Layers
 {
     public class Entity
     {
+        public EntityLayer Layer { get; private set; }
         public EntityDefinition Definition { get; private set; }
         public Point Position;
         public Size Size;
         public float Angle;
         public List<Value> Values { get; private set; }
         public List<Point> Nodes;
+        public uint ID { get; private set; }
 
-        public Entity(EntityDefinition def, Point position)
+        public Entity(EntityLayer layer, EntityDefinition def, Point position)
         {
+            Layer = layer;
             Definition = def;
+            ID = layer.GetNewEntityID();
 
             Position = position;
             Size = def.Size;
@@ -40,9 +44,16 @@ namespace OgmoEditor.LevelData.Layers
             }
         }
 
-        public Entity(XmlElement xml)
+        public Entity(EntityLayer layer, XmlElement xml)
         {
+            Layer = layer;
             Definition = Ogmo.Project.EntityDefinitions.Find(d => d.Name == xml.Name);
+
+            //ID
+            if (xml.Attributes["id"] != null)
+                ID = Convert.ToUInt32(xml.Attributes["id"].InnerText);
+            else
+                ID = layer.GetNewEntityID();                
 
             //Position
             Position = new Point(Convert.ToInt32(xml.Attributes["x"].InnerText), Convert.ToInt32(xml.Attributes["y"].InnerText));
@@ -79,9 +90,11 @@ namespace OgmoEditor.LevelData.Layers
             } 
         }
 
-        public Entity(Entity e)
+        public Entity(EntityLayer layer, Entity e)
         {
+            Layer = layer;
             Definition = e.Definition;
+            ID = layer.GetNewEntityID();
 
             Position = e.Position;
             Size = e.Size;
@@ -108,6 +121,11 @@ namespace OgmoEditor.LevelData.Layers
         {
             XmlElement xml = doc.CreateElement(Definition.Name);
             XmlAttribute a;
+
+            //ID
+            a = doc.CreateAttribute("id");
+            a.InnerText = ID.ToString();
+            xml.Attributes.Append(a);
 
             //Position
             a = doc.CreateAttribute("x");
@@ -239,7 +257,7 @@ namespace OgmoEditor.LevelData.Layers
 
         public Entity Clone()
         {
-            return new Entity(this);
+            return new Entity(Layer, this);
         }
 
         public void MoveNodes(Point move)

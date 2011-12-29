@@ -37,13 +37,21 @@ namespace OgmoEditor.LevelData.Layers
             foreach (XmlElement e in xml.ChildNodes)
             {
                 if (Ogmo.Project.EntityDefinitions.Find(d => d.Name == e.Name) != null)
-                    Entities.Add(new Entity(e));
+                    Entities.Add(new Entity(this, e));
             }
         }
 
         public override LayerEditor GetEditor(LevelEditors.LevelEditor editor)
         {
             return new EntityLayerEditor(editor, this);
+        }
+
+        public uint GetNewEntityID()
+        {
+            uint id = 0;
+            while (Entities.Find(e => e.ID == id) != null)
+                id++;
+            return id;
         }
     }
 }
