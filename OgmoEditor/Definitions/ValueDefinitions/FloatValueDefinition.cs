@@ -55,5 +55,10 @@ namespace OgmoEditor.Definitions.ValueDefinitions
         {
             return Default.ToString();
         }
+
+        public override string ToString()
+        {
+            return Name + " (float)";
+        }
     }
 }

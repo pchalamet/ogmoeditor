@@ -50,5 +50,10 @@ namespace OgmoEditor.Definitions.ValueDefinitions
         {
             throw new NotImplementedException();
         }
+
+        public override string ToString()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

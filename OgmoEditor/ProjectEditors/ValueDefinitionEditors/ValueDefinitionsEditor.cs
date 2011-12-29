@@ -18,6 +18,7 @@ namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
 
         private List<ValueDefinition> values;
         private UserControl valueEditor;
+        private bool indexChangeable = true;
 
         public ValueDefinitionsEditor()
         {
@@ -38,7 +39,7 @@ namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
             listBox.SelectedIndex = -1;
             listBox.Items.Clear();
             foreach (ValueDefinition v in values)
-                listBox.Items.Add(v.Name);
+                listBox.Items.Add(v.ToString());
         }
 
         public string Title
@@ -51,10 +52,10 @@ namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
         {
             removeButton.Enabled = true;
 
-            //Set the name
+            //Set the name              
             nameTextBox.CausesValidation = true;
-            nameTextBox.Enabled = true; 
-            nameTextBox.Text = v.Name;
+            nameTextBox.Enabled = true;
+            nameTextBox.Text = v.Name; 
 
             //Set the type
             typeComboBox.CausesValidation = true;
@@ -67,9 +68,11 @@ namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
 
             //Add the new one!
             valueEditor = v.GetEditor();
-            valueEditor.TabIndex = 2;
             if (valueEditor != null)
+            {
+                valueEditor.TabIndex = 2;
                 Controls.Add(valueEditor);
+            }
         }
 
         private void disableControls()
@@ -110,6 +113,9 @@ namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
          */
         private void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (!indexChangeable)
+                return;
+
             if (listBox.SelectedIndex != -1)
                 setControlsFromValue(values[listBox.SelectedIndex]);
             else
@@ -121,7 +127,7 @@ namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
             IntValueDefinition v = new IntValueDefinition();
             v.Name = getNewName();
             values.Add(v);
-            listBox.SelectedIndex = listBox.Items.Add(v.Name);
+            listBox.SelectedIndex = listBox.Items.Add(v.ToString());
         }
 
         private void removeButton_Click(object sender, EventArgs e)
@@ -135,8 +141,10 @@ namespace OgmoEditor.ProjectEditors.ValueDefinitionEditors
 
         private void nameTextBox_Validated(object sender, EventArgs e)
         {
+            indexChangeable = false;
             values[listBox.SelectedIndex].Name = nameTextBox.Text;
-            listBox.Items[listBox.SelectedIndex] = nameTextBox.Text;
+            listBox.Items[listBox.SelectedIndex] = values[listBox.SelectedIndex].ToString();
+            indexChangeable = true;
         }
 
         private void typeComboBox_SelectionChangeCommitted(object sender, EventArgs e)
