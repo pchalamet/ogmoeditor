@@ -18,7 +18,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
 
         }
 
-        public override void Draw(EditorDraw content)
+        public override void Draw()
         {
             if (drawing)
             {
@@ -27,7 +27,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                 int w = Math.Max(mouseStart.X, LevelEditor.MousePosition.X) - x;
                 int h = Math.Max(mouseStart.Y, LevelEditor.MousePosition.Y) - y;
 
-                content.DrawFillRect(x, y, w, h, Microsoft.Xna.Framework.Color.Yellow);
+                Ogmo.EditorDraw.DrawFillRect(x, y, w, h, Microsoft.Xna.Framework.Color.Yellow);
             }
         }
 

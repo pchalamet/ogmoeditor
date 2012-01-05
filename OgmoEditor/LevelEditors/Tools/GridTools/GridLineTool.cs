@@ -73,13 +73,13 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
             mouse = LayerEditor.Layer.Definition.ConvertToGrid(location);
         }
 
-        public override void Draw(EditorDraw content)
+        public override void Draw()
         {
             if (drawing)
             {
                 List<Point> pts = getPoints(drawStart, mouse);
                 foreach (var p in pts)
-                    content.DrawRectangle(p.X * LayerEditor.Layer.Definition.Grid.Width, p.Y * LayerEditor.Layer.Definition.Grid.Height, LayerEditor.Layer.Definition.Grid.Width, LayerEditor.Layer.Definition.Grid.Height, (drawMode ? LayerEditor.Layer.Definition.Color.ToXNA() : LayerEditor.Layer.Definition.Color.Invert().ToXNA()) * .5f);
+                    Ogmo.EditorDraw.DrawRectangle(p.X * LayerEditor.Layer.Definition.Grid.Width, p.Y * LayerEditor.Layer.Definition.Grid.Height, LayerEditor.Layer.Definition.Grid.Width, LayerEditor.Layer.Definition.Grid.Height, (drawMode ? LayerEditor.Layer.Definition.Color.ToXNA() : LayerEditor.Layer.Definition.Color.Invert().ToXNA()) * .5f);
             }
         }
 

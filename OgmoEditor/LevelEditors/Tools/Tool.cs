@@ -24,7 +24,7 @@ namespace OgmoEditor.LevelEditors.Tools
 
         }
 
-        public virtual void Draw(EditorDraw content)
+        public virtual void Draw()
         {
 
         }

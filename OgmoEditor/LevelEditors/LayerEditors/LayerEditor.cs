@@ -36,10 +36,10 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             DrawMatrix = Matrix.CreateTranslation(DrawOffset.X, DrawOffset.Y, 0);
         }
 
-        public virtual void Draw(EditorDraw content, bool current, float alpha)
+        public virtual void Draw(bool current, float alpha)
         {
             if (Ogmo.ToolsWindow.CurrentTool != null)
-                Ogmo.ToolsWindow.CurrentTool.Draw(content);
+                Ogmo.ToolsWindow.CurrentTool.Draw();
         }
 
         public virtual void OnKeyDown(Keys key)

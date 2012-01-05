@@ -181,12 +181,12 @@ namespace OgmoEditor.LevelData.Layers
             return xml;
         }
 
-        public void Draw(EditorDraw content, bool current, float alpha)
+        public void Draw(bool current, float alpha)
         {
-            content.DrawEntity(this, alpha);
+            Ogmo.EditorDraw.DrawEntity(this, alpha);
 
             if (current)
-                content.DrawHollowRect(Position.X - Definition.Origin.X, Position.Y - Definition.Origin.Y - 1, Size.Width + 1, Size.Height + 1, Ogmo.EntitySelectionWindow.IsSelected(this) ? Microsoft.Xna.Framework.Color.Lime : Microsoft.Xna.Framework.Color.Yellow);
+                Ogmo.EditorDraw.DrawHollowRect(Position.X - Definition.Origin.X, Position.Y - Definition.Origin.Y - 1, Size.Width + 1, Size.Height + 1, Ogmo.EntitySelectionWindow.IsSelected(this) ? Microsoft.Xna.Framework.Color.Lime : Microsoft.Xna.Framework.Color.Yellow);
 
             if (Nodes != null)
             {
@@ -194,52 +194,52 @@ namespace OgmoEditor.LevelData.Layers
                 foreach (var p in Nodes)
                 {
                     Position = p;
-                    content.DrawEntity(this, alpha * .35f);
+                    Ogmo.EditorDraw.DrawEntity(this, alpha * .35f);
                 }
                 Position = pp;
 
                 if (Definition.NodesDefinition.DrawMode == EntityNodesDefinition.PathMode.None)
                 {
                     foreach (var p in Nodes)
-                        content.DrawNode(p);
+                        Ogmo.EditorDraw.DrawNode(p);
                 }
                 else if (Definition.NodesDefinition.DrawMode == EntityNodesDefinition.PathMode.Path)
                 {
                     if (Nodes.Count > 0)
                     {
-                        content.DrawLine(Position, Nodes[0], Microsoft.Xna.Framework.Color.Red * .6f);
-                        content.DrawNode(Nodes[0]);
+                        Ogmo.EditorDraw.DrawLine(Position, Nodes[0], Microsoft.Xna.Framework.Color.Red * .6f);
+                        Ogmo.EditorDraw.DrawNode(Nodes[0]);
                     }
 
                     for (int i = 1; i < Nodes.Count; i++)
                     {
-                        content.DrawLine(Nodes[i - 1], Nodes[i], Microsoft.Xna.Framework.Color.Red * .6f);
-                        content.DrawNode(Nodes[i]);
+                        Ogmo.EditorDraw.DrawLine(Nodes[i - 1], Nodes[i], Microsoft.Xna.Framework.Color.Red * .6f);
+                        Ogmo.EditorDraw.DrawNode(Nodes[i]);
                     }
                 }
                 else if (Definition.NodesDefinition.DrawMode == EntityNodesDefinition.PathMode.Circuit)
                 {
                     if (Nodes.Count > 0)
                     {
-                        content.DrawLine(Position, Nodes[0], Microsoft.Xna.Framework.Color.Red * .6f);
-                        content.DrawNode(Nodes[0]);
+                        Ogmo.EditorDraw.DrawLine(Position, Nodes[0], Microsoft.Xna.Framework.Color.Red * .6f);
+                        Ogmo.EditorDraw.DrawNode(Nodes[0]);
                     }
 
                     for (int i = 1; i < Nodes.Count; i++)
                     {
-                        content.DrawLine(Nodes[i - 1], Nodes[i], Microsoft.Xna.Framework.Color.Red * .6f);
-                        content.DrawNode(Nodes[i]);
+                        Ogmo.EditorDraw.DrawLine(Nodes[i - 1], Nodes[i], Microsoft.Xna.Framework.Color.Red * .6f);
+                        Ogmo.EditorDraw.DrawNode(Nodes[i]);
                     }
 
                     if (Nodes.Count > 1)
-                        content.DrawLine(Nodes[Nodes.Count - 1], Position, Microsoft.Xna.Framework.Color.Red * .6f);
+                        Ogmo.EditorDraw.DrawLine(Nodes[Nodes.Count - 1], Position, Microsoft.Xna.Framework.Color.Red * .6f);
                 }
                 else if (Definition.NodesDefinition.DrawMode == EntityNodesDefinition.PathMode.Fan)
                 {
                     foreach (var p in Nodes)
                     {
-                        content.DrawLine(Position, p, Microsoft.Xna.Framework.Color.Red * .6f);
-                        content.DrawNode(p);
+                        Ogmo.EditorDraw.DrawLine(Position, p, Microsoft.Xna.Framework.Color.Red * .6f);
+                        Ogmo.EditorDraw.DrawNode(p);
                     }
                 }
             }

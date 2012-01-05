@@ -70,7 +70,7 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
             mouse = LayerEditor.Layer.Definition.ConvertToGrid(location);
         }
 
-        public override void Draw(EditorDraw content)
+        public override void Draw()
         {
             if (drawing)
             {
@@ -78,14 +78,14 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
                 if (drawTile == -1 || !drawMode)
                 {
                     foreach (var p in pts)
-                        content.DrawRectangle(p.X * LayerEditor.Layer.Definition.Grid.Width, p.Y * LayerEditor.Layer.Definition.Grid.Height, LayerEditor.Layer.Definition.Grid.Width, LayerEditor.Layer.Definition.Grid.Height, Microsoft.Xna.Framework.Color.Red * .5f);
+                        Ogmo.EditorDraw.DrawRectangle(p.X * LayerEditor.Layer.Definition.Grid.Width, p.Y * LayerEditor.Layer.Definition.Grid.Height, LayerEditor.Layer.Definition.Grid.Width, LayerEditor.Layer.Definition.Grid.Height, Microsoft.Xna.Framework.Color.Red * .5f);
                 }
                 else
                 {
                     Microsoft.Xna.Framework.Rectangle rect = LayerEditor.Layer.Tileset.GetXNARectFromID(drawTile);
                     foreach (var p in pts)
-                        content.SpriteBatch.Draw(
-                            content.TilesetTextures[LayerEditor.Layer.Tileset],
+                        Ogmo.EditorDraw.SpriteBatch.Draw(
+                            Ogmo.EditorDraw.TilesetTextures[LayerEditor.Layer.Tileset],
                             new Microsoft.Xna.Framework.Vector2(p.X * LayerEditor.Layer.Definition.Grid.Width, p.Y * LayerEditor.Layer.Definition.Grid.Height),
                             rect,
                             Microsoft.Xna.Framework.Color.White * .5f);

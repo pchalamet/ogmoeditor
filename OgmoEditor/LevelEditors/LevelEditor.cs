@@ -118,7 +118,7 @@ namespace OgmoEditor.LevelEditors
                 if (Ogmo.Project.LayerDefinitions[i].Visible)
                 {
                     content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, LayerEditors[i].DrawMatrix * LevelView.Matrix);
-                    LayerEditors[i].Draw(content, false, 1);
+                    LayerEditors[i].Draw(false, 1);
                     content.SpriteBatch.End();
                 }
             }
@@ -126,7 +126,7 @@ namespace OgmoEditor.LevelEditors
             //Current layer
             content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, LayerEditors
                 [Ogmo.LayersWindow.CurrentLayerIndex].DrawMatrix * LevelView.Matrix);
-            LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Draw(content, true, 1);
+            LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Draw(true, 1);
             content.SpriteBatch.End();
 
             //Layers above the current one
@@ -135,7 +135,7 @@ namespace OgmoEditor.LevelEditors
                 if (i < Ogmo.Project.LayerDefinitions.Count && Ogmo.Project.LayerDefinitions[i].Visible)
                 {
                     content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, LayerEditors[i].DrawMatrix * LevelView.Matrix);
-                    LayerEditors[i].Draw(content, false, LAYER_ABOVE_ALPHA);
+                    LayerEditors[i].Draw(false, LAYER_ABOVE_ALPHA);
                     content.SpriteBatch.End();
                 }
             }
@@ -235,7 +235,7 @@ namespace OgmoEditor.LevelEditors
                 if (Ogmo.Project.LayerDefinitions[i].Visible)
                 {
                     Ogmo.EditorDraw.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, LayerEditors[i].DrawMatrix * scaleMatrix);
-                    LayerEditors[i].Draw(Ogmo.EditorDraw, false, 1);
+                    LayerEditors[i].Draw(false, 1);
                     Ogmo.EditorDraw.SpriteBatch.End();
                 }
             }
@@ -274,7 +274,7 @@ namespace OgmoEditor.LevelEditors
                 if (Ogmo.Project.LayerDefinitions[i].Visible)
                 {
                     Ogmo.EditorDraw.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone, null, LayerEditors[i].DrawMatrix * cameraMatrix);
-                    LayerEditors[i].Draw(Ogmo.EditorDraw, false, 1);
+                    LayerEditors[i].Draw(false, 1);
                     Ogmo.EditorDraw.SpriteBatch.End();
                 }
             }
@@ -290,7 +290,7 @@ namespace OgmoEditor.LevelEditors
         private void DrawLayer(LayerEditor layer, bool current, float alpha)
         {
             
-            layer.Draw(Ogmo.EditorDraw, current, alpha);
+            layer.Draw(current, alpha);
             Ogmo.EditorDraw.SpriteBatch.End();
         }
 

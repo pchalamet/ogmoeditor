@@ -22,21 +22,21 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             Layer = layer;
         }
 
-        public override void Draw(EditorDraw content, bool current, float alpha)
+        public override void Draw(bool current, float alpha)
         {
             //Draw the actual tiles
             Layer.TileCanvas.Draw(alpha);
 
             //Draw the selection box
             if (Layer.Selection != null)
-                content.DrawFillRect(
+                Ogmo.EditorDraw.DrawFillRect(
                     Layer.Selection.Area.X * Layer.Definition.Grid.Width,
                     Layer.Selection.Area.Y * Layer.Definition.Grid.Height,
                     Layer.Selection.Area.Width * Layer.Definition.Grid.Width,
                     Layer.Selection.Area.Height * Layer.Definition.Grid.Height,
                     Microsoft.Xna.Framework.Color.Yellow * alpha);
 
-            base.Draw(content, current, alpha);
+            base.Draw(current, alpha);
         }
 
         public override Resizer GetResizer()

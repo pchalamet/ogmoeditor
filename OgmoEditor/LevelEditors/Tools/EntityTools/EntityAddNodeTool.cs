@@ -46,7 +46,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
             LevelEditor.EndBatch();
         }
 
-        public override void Draw(EditorDraw content)
+        public override void Draw()
         {
             Point mouse = LayerEditor.MouseSnapPosition;
 
@@ -55,10 +55,10 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                 if (e.Definition.NodesDefinition.Enabled && e.Nodes.Count != e.Definition.NodesDefinition.Limit && !e.Nodes.Contains(mouse))
                 {
                     if (e.Nodes.Count == 0)
-                        content.DrawLine(e.Position, mouse, Microsoft.Xna.Framework.Color.Yellow * .5f);
+                        Ogmo.EditorDraw.DrawLine(e.Position, mouse, Microsoft.Xna.Framework.Color.Yellow * .5f);
                     else
-                        content.DrawLine(e.Nodes[e.Nodes.Count - 1], mouse, Microsoft.Xna.Framework.Color.Yellow * .5f);
-                    content.DrawNode(mouse);
+                        Ogmo.EditorDraw.DrawLine(e.Nodes[e.Nodes.Count - 1], mouse, Microsoft.Xna.Framework.Color.Yellow * .5f);
+                    Ogmo.EditorDraw.DrawNode(mouse);
                 }
             }
         }

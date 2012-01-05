@@ -19,13 +19,13 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
 
         }
 
-        public override void Draw(EditorDraw content)
+        public override void Draw()
         {
             if (drawing)
             {
                 Rectangle draw = LayerEditor.Layer.GetTilesRectangle(drawStart, drawTo);
                 if (LevelEditor.Level.Bounds.IntersectsWith(draw))
-                    content.DrawFillRect(draw, Microsoft.Xna.Framework.Color.Yellow * .5f);
+                    Ogmo.EditorDraw.DrawFillRect(draw, Microsoft.Xna.Framework.Color.Yellow * .5f);
             }
         }
 

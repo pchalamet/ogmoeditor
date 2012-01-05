@@ -21,7 +21,7 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
             drawing = false;
         }
 
-        public override void Draw(EditorDraw content)
+        public override void Draw()
         {
             if (drawing)
             {
@@ -29,14 +29,14 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
                 if (LevelEditor.Level.Bounds.IntersectsWith(draw))
                 {
                     if (!drawMode || drawTile == -1)
-                        content.DrawFillRect(draw, Microsoft.Xna.Framework.Color.Red * .5f);
+                        Ogmo.EditorDraw.DrawFillRect(draw, Microsoft.Xna.Framework.Color.Red * .5f);
                     else
                     {
                         Microsoft.Xna.Framework.Rectangle rect = LayerEditor.Layer.Tileset.GetXNARectFromID(drawTile);
                         for (int i = draw.X; i < draw.X + draw.Width; i += LayerEditor.Layer.Definition.Grid.Width)
                             for (int j = draw.Y; j < draw.Y + draw.Height; j += LayerEditor.Layer.Definition.Grid.Height)
-                                content.SpriteBatch.Draw(
-                                    content.TilesetTextures[LayerEditor.Layer.Tileset],
+                                Ogmo.EditorDraw.SpriteBatch.Draw(
+                                    Ogmo.EditorDraw.TilesetTextures[LayerEditor.Layer.Tileset],
                                     new Microsoft.Xna.Framework.Vector2(i, j),
                                     rect,
                                     Microsoft.Xna.Framework.Color.White * .5f);

@@ -18,12 +18,12 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             Layer = layer;
         }
 
-        public override void Draw(EditorDraw content, bool current, float alpha)
+        public override void Draw(bool current, float alpha)
         {
             foreach (Entity e in Layer.Entities)
-                e.Draw(content, current, alpha);
+                e.Draw(current, alpha);
 
-            base.Draw(content, current, alpha);
+            base.Draw(current, alpha);
         }
 
         public override void OnKeyDown(System.Windows.Forms.Keys key)
