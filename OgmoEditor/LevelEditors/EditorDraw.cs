@@ -15,6 +15,12 @@ namespace OgmoEditor.LevelEditors
     using Color = Microsoft.Xna.Framework.Color;
     using Rectangle = Microsoft.Xna.Framework.Rectangle; 
 
+    /*
+     *  EditorDraw class
+     *      - singleton, instantiated by Ogmo.cs when the application starts
+     *      - holds all the XNA data needed by the level/layer editors to draw, such as the SpriteBatch and GraphicsDevice
+     *      - holds all loaded textures
+     */
     public class EditorDraw
     {
         //Constant textures

@@ -20,6 +20,10 @@ namespace OgmoEditor.LevelEditors
     using Point = System.Drawing.Point;
     using System.IO;
 
+    /*
+     *  LevelEditor
+     *      - uses XNA to draw one level that is being edited
+     */
     public class LevelEditor : GraphicsDeviceControl
     {
         static private readonly Color NoFocus = new Color(.95f, .95f, .95f);
