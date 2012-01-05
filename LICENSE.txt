@@ -13,7 +13,7 @@ www.mattmakesgames.com
 matt@mattmakesgames.com
 
 Character "Ogmo" copyright © 2004 Matt Thorson
-Ogmo Editor copyright © 2011 Matt Thorson
+Ogmo Editor copyright © 2012 Matt Thorson
 
 CLARIFICATION: Using Ogmo Editor is free! Any content you produce using Ogmo Editor 
 is your property and is not subject to any license agreement. The remainder of this 
@@ -30,4 +30,4 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
-The GNU General Public License can be found at http://www.gnu.org/licenses/
+The GNU General Public License v3 can be found at http://www.gnu.org/licenses/gpl-3.0.html
