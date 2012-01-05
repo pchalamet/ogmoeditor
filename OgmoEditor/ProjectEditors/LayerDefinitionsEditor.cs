@@ -17,6 +17,7 @@ namespace OgmoEditor.ProjectEditors
 
         private List<LayerDefinition> layerDefinitions;
         private UserControl layerEditor;
+        private bool indexChangeable = true;
 
         public LayerDefinitionsEditor()
         {
@@ -164,8 +165,10 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
+            indexChangeable = false;
             layerDefinitions[listBox.SelectedIndex].Name = nameTextBox.Text;
             listBox.Items[listBox.SelectedIndex] = (nameTextBox.Text == "" ? "(blank)" : nameTextBox.Text);
+            indexChangeable = true;
         }
 
         private void gridXTextBox_Validated(object sender, EventArgs e)
@@ -178,6 +181,9 @@ namespace OgmoEditor.ProjectEditors
 
         private void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (!indexChangeable)
+                return;
+
             if (listBox.SelectedIndex != -1)
                 setControlsFromDefinition(layerDefinitions[listBox.SelectedIndex]);
             else
