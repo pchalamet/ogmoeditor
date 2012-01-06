@@ -135,9 +135,11 @@ namespace OgmoEditor.LevelData.Layers
             return xml;
         }
 
-        public override void SetXML(XmlElement xml)
+        public override bool SetXML(XmlElement xml)
         {
             Clear();
+
+            bool cleanXML = true;
 
             //Load the tileset
             string tilesetName = xml.Attributes["tileset"].InnerText;
@@ -156,11 +158,19 @@ namespace OgmoEditor.LevelData.Layers
                 string s = xml.InnerText;
 
                 string[] rows = s.Split('\n');
-                if (rows.Length > Tiles.GetLength(1)) Array.Resize(ref rows, Tiles.GetLength(1));
+                if (rows.Length > Tiles.GetLength(1))
+                {
+                    Array.Resize(ref rows, Tiles.GetLength(1));
+                    cleanXML = false;
+                }
                 for (int i = 0; i < rows.Length; i++)
                 {
                     string[] tiles = rows[i].Split(',');
-                    if (tiles.Length > Tiles.GetLength(0)) Array.Resize(ref tiles, Tiles.GetLength(0));
+                    if (tiles.Length > Tiles.GetLength(0))
+                    {
+                        Array.Resize(ref tiles, Tiles.GetLength(0));
+                        cleanXML = false;
+                    }
                     if (tiles[0] != "")
                         for (int j = 0; j < tiles.Length; j++)
                             Tiles[j, i] = Convert.ToInt32(tiles[j]);
@@ -189,6 +199,7 @@ namespace OgmoEditor.LevelData.Layers
             }
 
             TileCanvas.RefreshAll();
+            return cleanXML;
         }
 
         public Rectangle GetTilesRectangle(Point start, Point end)

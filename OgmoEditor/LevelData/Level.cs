@@ -34,9 +34,14 @@ namespace OgmoEditor.LevelData
                 FileStream stream = new FileStream(filename, FileMode.Open);
                 doc.Load(stream);
                 stream.Close();
-                LoadFromXML(doc);
 
-                SavePath = filename;
+                if (LoadFromXML(doc))
+                    SavePath = filename;
+                else
+                    if (DialogResult.OK == MessageBox.Show("The selected level is inconsistent with the current project." +
+                        "  It is recomended you save this modified version under a different name before continuing.",
+                        "Salvageable Level", MessageBoxButtons.OKCancel))
+                        SaveAs();
             }
             else
             {
@@ -94,7 +99,8 @@ namespace OgmoEditor.LevelData
             set
             {
                 changed = value;
-                Ogmo.MainWindow.MasterTabControl.TabPages[Ogmo.Levels.FindIndex(l => l == this)].Text = Name;
+                int idx = Ogmo.Levels.FindIndex(l => l == this);
+                if (idx >= 0) Ogmo.MainWindow.MasterTabControl.TabPages[idx].Text = Name;
             }
         }
 
@@ -181,7 +187,7 @@ namespace OgmoEditor.LevelData
             return doc;
         }
 
-        public void LoadFromXML(XmlDocument xml)
+        public bool LoadFromXML(XmlDocument xml)
         {
             XmlElement level = (XmlElement)xml.GetElementsByTagName("level")[0];
 
@@ -208,15 +214,17 @@ namespace OgmoEditor.LevelData
             }    
 
             //Import layers
+            bool cleanXML = true;
             Layers = new List<Layer>();
             for (int i = 0; i < Project.LayerDefinitions.Count; i++)
             {
                 Layer layer = Project.LayerDefinitions[i].GetInstance(this);
                 Layers.Add(layer);
                 if (level[Project.LayerDefinitions[i].Name] != null)
-                    layer.SetXML(level[Project.LayerDefinitions[i].Name]);
+                    cleanXML = cleanXML == layer.SetXML(level[Project.LayerDefinitions[i].Name]);
             }
 
+            return cleanXML;
         }
 
         public void EditProperties()

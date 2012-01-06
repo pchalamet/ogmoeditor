@@ -32,13 +32,14 @@ namespace OgmoEditor.LevelData.Layers
             return xml;
         }
 
-        public override void SetXML(XmlElement xml)
+        public override bool SetXML(XmlElement xml)
         {
             foreach (XmlElement e in xml.ChildNodes)
             {
                 if (Ogmo.Project.EntityDefinitions.Find(d => d.Name == e.Name) != null)
                     Entities.Add(new Entity(this, e));
             }
+            return true;
         }
 
         public override LayerEditor GetEditor(LevelEditors.LevelEditor editor)

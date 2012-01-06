@@ -134,7 +134,7 @@ namespace OgmoEditor.LevelData.Layers
             return xml;
         }
 
-        public override void SetXML(XmlElement xml)
+        public override bool SetXML(XmlElement xml)
         {
             Grid.Initialize();
 
@@ -178,6 +178,7 @@ namespace OgmoEditor.LevelData.Layers
                             Grid[rect.X + i, rect.Y + j] = true;
                 }
             }
+            return true;
         }
 
         /*

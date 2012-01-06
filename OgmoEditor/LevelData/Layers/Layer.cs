@@ -24,7 +24,7 @@ namespace OgmoEditor.LevelData.Layers
         }
 
         public abstract XmlElement GetXML(XmlDocument doc);
-        public abstract void SetXML(XmlElement xml);
+        public abstract bool SetXML(XmlElement xml);
         public abstract LayerEditor GetEditor(LevelEditor editor);
     }
 }
