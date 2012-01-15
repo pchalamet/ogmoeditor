@@ -142,15 +142,22 @@ namespace OgmoEditor.Windows
                 EntitySelectionImage sel = new EntitySelectionImage(selection[0], WIDTH/2 - 16, 24);
                 Controls.Add(sel);
 
+                //Entity ID
+                Label id = new Label();
+                id.TextAlign = ContentAlignment.MiddleCenter;
+                id.Text = "# " + selection[0].ID.ToString();
+                id.Bounds = new Rectangle(0, 58, WIDTH, 16);
+                Controls.Add(id);
+
                 //Entity position
                 Label pos = new Label();
                 pos.TextAlign = ContentAlignment.MiddleCenter;
-                pos.Bounds = new Rectangle(0, 58, WIDTH, 16);
+                pos.Bounds = new Rectangle(0, 74, WIDTH, 16);
                 pos.Text = "( " + selection[0].Position.X.ToString() + ", " + selection[0].Position.Y.ToString() + " )";
                 Controls.Add(pos);
 
                 //Entity size
-                int yy = 74;
+                int yy = 90;
                 if (selection[0].Definition.ResizableX || selection[0].Definition.ResizableY)
                 {
                     Label size = new Label();

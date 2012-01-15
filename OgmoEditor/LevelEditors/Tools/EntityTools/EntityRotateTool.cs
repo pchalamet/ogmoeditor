@@ -9,7 +9,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
 {
     public class EntityRotateTool : EntityTool
     {
-        private const float MOVE_FACTOR = Util.DEGTORAD * .5f;
+        private const float MOVE_FACTOR = Util.DEGTORAD * .01f;
 
         private bool moving;
         private int mouseStart;
