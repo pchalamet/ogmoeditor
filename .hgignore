@@ -1,6 +1,7 @@
 ﻿# use glob syntax.
 syntax: glob
 *.suo
+OgmoEditor/OgmoEditor
 OgmoEditor/publish
 OgmoEditor/bin
 OgmoEditor/obj
