@@ -80,13 +80,26 @@ namespace OgmoEditor.LevelEditors
             if (EntityTextures.ContainsKey(definition))
             {
                 if (definition.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image && definition.ImageDefinition.Tiled)
-                    SpriteBatch.Draw(EntityTextures[definition], 
-                        new Rectangle(position.X, position.Y, definition.Size.Width, definition.Size.Height), 
-                        new Rectangle(0, 0, definition.Size.Width, definition.Size.Height), 
-                        Color.White * alpha, 0, new Vector2(definition.Origin.X, definition.Origin.Y), SpriteEffects.None, 0);
+                {
+                    Rectangle drawTo = Rectangle.Empty;
+                    Texture2D texture = EntityTextures[definition];
+
+                    for (drawTo.X = 0; drawTo.X < definition.Size.Width; drawTo.X += texture.Width)
+                    {
+                        drawTo.Width = Math.Min(texture.Width, definition.Size.Width - drawTo.X);
+                        for (drawTo.Y = 0; drawTo.Y < definition.Size.Height; drawTo.Y += texture.Height)
+                        {
+                            drawTo.Height = Math.Min(texture.Height, definition.Size.Height - drawTo.Y);
+
+                            SpriteBatch.Draw(texture, 
+                                drawTo, new Rectangle(0, 0, drawTo.Width, drawTo.Height), 
+                                Color.White * alpha, 0, new Vector2(definition.Origin.X, definition.Origin.Y), SpriteEffects.None, 0);
+                        }
+                    }
+                }
                 else
-                    SpriteBatch.Draw(EntityTextures[definition], 
-                        new Rectangle(position.X, position.Y, definition.Size.Width, definition.Size.Height), null, 
+                    SpriteBatch.Draw(EntityTextures[definition],
+                        new Rectangle(position.X, position.Y, definition.Size.Width, definition.Size.Height), null,
                         Color.White * alpha, 0, new Vector2(definition.Origin.X, definition.Origin.Y), SpriteEffects.None, 0);
             }
         }
@@ -99,10 +112,24 @@ namespace OgmoEditor.LevelEditors
                 System.Drawing.Point position = entity.Position;
 
                 if (definition.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image && definition.ImageDefinition.Tiled)
-                    SpriteBatch.Draw(EntityTextures[definition], 
-                        new Rectangle(position.X, position.Y, entity.Size.Width, entity.Size.Height), 
-                        new Rectangle(0, 0, entity.Size.Width, entity.Size.Height),
-                        Color.White * alpha, entity.Angle, new Vector2(definition.Origin.X, definition.Origin.Y), SpriteEffects.None, 0);
+                {
+                    Rectangle drawTo = Rectangle.Empty;
+                    Texture2D texture = EntityTextures[definition];
+
+                    for (drawTo.X = 0; drawTo.X < entity.Size.Width; drawTo.X += texture.Width)
+                    {
+                        drawTo.Width = Math.Min(texture.Width, entity.Size.Width - drawTo.X);
+                        for (drawTo.Y = 0; drawTo.Y < entity.Size.Height; drawTo.Y += texture.Height)
+                        {
+                            drawTo.Height = Math.Min(texture.Height, entity.Size.Height - drawTo.Y);
+
+                            SpriteBatch.Draw(texture,
+                                new Rectangle(drawTo.X + position.X, drawTo.Y + position.Y, drawTo.Width, drawTo.Height), 
+                                new Rectangle(0, 0, drawTo.Width, drawTo.Height),
+                                Color.White * alpha, 0, new Vector2(definition.Origin.X, definition.Origin.Y), SpriteEffects.None, 0);
+                        }
+                    }
+                }
                 else
                     SpriteBatch.Draw(EntityTextures[definition], 
                         new Rectangle(position.X, position.Y, entity.Size.Width, entity.Size.Height), null,
