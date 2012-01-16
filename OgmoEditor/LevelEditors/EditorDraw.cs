@@ -133,7 +133,7 @@ namespace OgmoEditor.LevelEditors
                 else
                     SpriteBatch.Draw(EntityTextures[definition], 
                         new Rectangle(position.X, position.Y, entity.Size.Width, entity.Size.Height), null,
-                        Color.White * alpha, entity.Angle, new Vector2(definition.Origin.X, definition.Origin.Y), SpriteEffects.None, 0);
+                        Color.White * alpha, entity.Angle * Util.DEGTORAD, new Vector2(definition.Origin.X, definition.Origin.Y), SpriteEffects.None, 0);
             }
         }
 

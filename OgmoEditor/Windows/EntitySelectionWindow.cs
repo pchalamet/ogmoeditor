@@ -8,6 +8,7 @@ using OgmoEditor.LevelData.Layers;
 using System.Windows.Forms;
 using System.Diagnostics;
 using OgmoEditor.LevelEditors.ValueEditors;
+using OgmoEditor.LevelEditors.Actions.EntityActions;
 
 namespace OgmoEditor.Windows
 {
@@ -217,11 +218,14 @@ namespace OgmoEditor.Windows
                 //Entity angle
                 if (selection[0].Definition.Rotatable)
                 {
-                    Label angle = new Label();
-                    angle.TextAlign = ContentAlignment.MiddleLeft;
-                    angle.Bounds = new Rectangle(CONTENT_X, yy, CONTENT_WIDTH, 16);
-                    angle.Text = (selection[0].Angle * Util.RADTODEG).ToString();
-                    Controls.Add(angle);
+                    yy += 3;
+
+                    TextBox angleTextBox = new TextBox();
+                    angleTextBox.Bounds = new Rectangle(CONTENT_X, yy - 2, CONTENT_WIDTH - 20, 16);
+                    angleTextBox.Text = (selection[0].Angle * Util.RADTODEG).ToString();
+                    angleTextBox.Leave += delegate(object sender, EventArgs e) { hangleAngleChange(angleTextBox); };
+                    angleTextBox.KeyDown += delegate(object sender, KeyEventArgs e) { if (e.KeyCode == Keys.Enter) { hangleAngleChange(angleTextBox); } };
+                    Controls.Add(angleTextBox);
 
                     Label label = new Label();
                     label.TextAlign = ContentAlignment.MiddleRight;
@@ -258,6 +262,15 @@ namespace OgmoEditor.Windows
             }
 
             Ogmo.MainWindow.FocusEditor();
+        }
+
+        private void hangleAngleChange(TextBox textBox)
+        {
+            float to = selection[0].Angle;
+            OgmoParse.Parse(ref to, textBox);
+
+            if (to != selection[0].Angle)
+                Ogmo.MainWindow.LevelEditors[Ogmo.CurrentLevelIndex].Perform(new EntityRotateAction(selection[0].Layer, selection, to));
         }
 
         private void onLayerChanged(LayerDefinition def, int index)

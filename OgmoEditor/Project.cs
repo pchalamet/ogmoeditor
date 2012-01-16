@@ -221,17 +221,17 @@ namespace OgmoEditor
         public string ExportAngle(float angle)
         {
             if (AngleMode == AngleExportMode.Radians)
-                return angle.ToString();
+                return (angle * Util.DEGTORAD).ToString();
             else
-                return (angle * Util.RADTODEG).ToString();
+                return angle.ToString();
         }
 
         public float ImportAngle(string angle)
         {
             if (AngleMode == AngleExportMode.Radians)
-                return Convert.ToSingle(angle);
+                return Convert.ToSingle(angle) * Util.RADTODEG;
             else
-                return Convert.ToSingle(angle) * Util.DEGTORAD;
+                return Convert.ToSingle(angle);
         }
 
         /*
