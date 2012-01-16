@@ -14,6 +14,12 @@ namespace OgmoEditor.Windows
     public class EntitySelectionWindow : OgmoWindow
     {
         private const int WIDTH = 128;
+        private const int TEXT_SPLIT = 56;
+        private const int SPLIT_PAD = 1;
+
+        private const int TITLE_WIDTH = TEXT_SPLIT - SPLIT_PAD;
+        private const int CONTENT_X = TEXT_SPLIT + SPLIT_PAD;
+        private const int CONTENT_WIDTH = WIDTH - TEXT_SPLIT - SPLIT_PAD;
 
         private List<Entity> selection;
 
@@ -135,59 +141,96 @@ namespace OgmoEditor.Windows
                 name.Font = new Font(name.Font, FontStyle.Bold);
                 name.TextAlign = ContentAlignment.MiddleCenter;
                 name.Bounds = new Rectangle(0, 0, WIDTH, 24);
-                name.Text = selection[0].Definition.Name;             
+                name.Text = selection[0].Definition.Name;
                 Controls.Add(name);
 
                 //Add the image
-                EntitySelectionImage sel = new EntitySelectionImage(selection[0], WIDTH/2 - 16, 24);
+                EntitySelectionImage sel = new EntitySelectionImage(selection[0], WIDTH / 2 - 16, 24);
                 Controls.Add(sel);
 
                 //Entity ID
-                Label id = new Label();
-                id.TextAlign = ContentAlignment.MiddleCenter;
-                id.Text = "# " + selection[0].ID.ToString();
-                id.Bounds = new Rectangle(0, 58, WIDTH, 16);
-                Controls.Add(id);
+                {
+                    Label id = new Label();
+                    id.TextAlign = ContentAlignment.MiddleLeft;
+                    id.Text = selection[0].ID.ToString();
+                    id.Bounds = new Rectangle(CONTENT_X, 60, CONTENT_WIDTH, 16);
+                    Controls.Add(id);
+
+                    Label label = new Label();
+                    label.TextAlign = ContentAlignment.MiddleRight;
+                    label.Text = "ID:";
+                    label.Bounds = new Rectangle(0, 60, TITLE_WIDTH, 16);
+                    Controls.Add(label);
+                }
+
+                //Entity count
+                {
+                    Label count = new Label();
+                    count.TextAlign = ContentAlignment.MiddleLeft;
+                    count.Bounds = new Rectangle(CONTENT_X, 78, CONTENT_WIDTH, 16);
+                    count.Text = ((EntityLayer)Ogmo.LayersWindow.CurrentLayer).Entities.Count(e => e.Definition == selection[0].Definition).ToString();
+                    if (selection[0].Definition.Limit > 0)
+                        count.Text += " / " + selection[0].Definition.Limit.ToString();
+                    Controls.Add(count);
+
+                    Label label = new Label();
+                    label.TextAlign = ContentAlignment.MiddleRight;
+                    label.Text = "Count:";
+                    label.Bounds = new Rectangle(0, 78, TITLE_WIDTH, 16);
+                    Controls.Add(label);
+                }
 
                 //Entity position
-                Label pos = new Label();
-                pos.TextAlign = ContentAlignment.MiddleCenter;
-                pos.Bounds = new Rectangle(0, 74, WIDTH, 16);
-                pos.Text = "( " + selection[0].Position.X.ToString() + ", " + selection[0].Position.Y.ToString() + " )";
-                Controls.Add(pos);
+                {
+                    Label pos = new Label();
+                    pos.TextAlign = ContentAlignment.MiddleLeft;
+                    pos.Bounds = new Rectangle(CONTENT_X, 96, CONTENT_WIDTH, 16);
+                    pos.Text = "( " + selection[0].Position.X.ToString() + ", " + selection[0].Position.Y.ToString() + " )";
+                    Controls.Add(pos);
 
-                //Entity size
-                int yy = 90;
+                    Label label = new Label();
+                    label.TextAlign = ContentAlignment.MiddleRight;
+                    label.Text = "Position:";
+                    label.Bounds = new Rectangle(0, 96, TITLE_WIDTH, 16);
+                    Controls.Add(label);
+                }
+
+                //Entity size    
+                int yy = 114;
                 if (selection[0].Definition.ResizableX || selection[0].Definition.ResizableY)
                 {
                     Label size = new Label();
-                    size.TextAlign = ContentAlignment.MiddleCenter;
-                    size.Bounds = new Rectangle(0, yy, WIDTH, 16);
+                    size.TextAlign = ContentAlignment.MiddleLeft;
+                    size.Bounds = new Rectangle(CONTENT_X, yy, CONTENT_WIDTH, 16);
                     size.Text = selection[0].Size.Width.ToString() + " x " + selection[0].Size.Height.ToString();
                     Controls.Add(size);
-                    yy += 16;
+
+                    Label label = new Label();
+                    label.TextAlign = ContentAlignment.MiddleRight;
+                    label.Text = "Size:";
+                    label.Bounds = new Rectangle(0, yy, TITLE_WIDTH, 16);
+                    Controls.Add(label);
+
+                    yy += 18;
                 }
 
                 //Entity angle
                 if (selection[0].Definition.Rotatable)
                 {
                     Label angle = new Label();
-                    angle.TextAlign = ContentAlignment.MiddleCenter;
-                    angle.Bounds = new Rectangle(0, yy, WIDTH, 16);
-                    angle.Text = "Angle: " + (selection[0].Angle * Util.RADTODEG).ToString();
+                    angle.TextAlign = ContentAlignment.MiddleLeft;
+                    angle.Bounds = new Rectangle(CONTENT_X, yy, CONTENT_WIDTH, 16);
+                    angle.Text = (selection[0].Angle * Util.RADTODEG).ToString();
                     Controls.Add(angle);
-                    yy += 16;
-                }
 
-                //Entity count
-                Label count = new Label();
-                count.TextAlign = ContentAlignment.MiddleCenter;
-                count.Bounds = new Rectangle(0, yy, WIDTH, 16);
-                count.Text = "Count: " + ((EntityLayer)Ogmo.LayersWindow.CurrentLayer).Entities.Count(e => e.Definition == selection[0].Definition).ToString();
-                if (selection[0].Definition.Limit > 0)
-                    count.Text += " / " + selection[0].Definition.Limit.ToString();
-                Controls.Add(count);
-                yy += 18;
+                    Label label = new Label();
+                    label.TextAlign = ContentAlignment.MiddleRight;
+                    label.Text = "Angle:";
+                    label.Bounds = new Rectangle(0, yy, TITLE_WIDTH, 16);
+                    Controls.Add(label);
+
+                    yy += 18;
+                }
 
                 //Value editors
                 if (selection[0].Values != null)
