@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 using OgmoEditor.ProjectEditors.ValueDefinitionEditors;
 using OgmoEditor.LevelData.Layers;
 using OgmoEditor.LevelEditors.ValueEditors;
+using OgmoEditor.LevelEditors.LevelValueEditors;
 
 namespace OgmoEditor.Definitions.ValueDefinitions
 {
@@ -24,9 +25,14 @@ namespace OgmoEditor.Definitions.ValueDefinitions
             return new EnumValueDefinitionEditor(this);
         }
 
-        public override LevelEditors.ValueEditors.ValueEditor GetInstanceEditor(Value instance, int x, int y)
+        public override ValueEditor GetInstanceEditor(Value instance, int x, int y)
         {
             return new EnumValueEditor(instance, x, y);
+        }
+
+        public override ValueEditor GetInstanceLevelEditor(Value instance, int x, int y)
+        {
+            return new LevelEnumValueEditor(instance, x, y);
         }
 
         public override ValueDefinition Clone()

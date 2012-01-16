@@ -7,6 +7,7 @@ using OgmoEditor.ProjectEditors.ValueDefinitionEditors;
 using System.Windows.Forms;
 using OgmoEditor.LevelData.Layers;
 using OgmoEditor.LevelEditors.ValueEditors;
+using OgmoEditor.LevelEditors.LevelValueEditors;
 
 namespace OgmoEditor.Definitions.ValueDefinitions
 {
@@ -39,6 +40,11 @@ namespace OgmoEditor.Definitions.ValueDefinitions
         public override ValueEditor GetInstanceEditor(Value instance, int x, int y)
         {
             return new IntValueEditor(instance, x, y);
+        }
+
+        public override ValueEditor GetInstanceLevelEditor(Value instance, int x, int y)
+        {
+            return new LevelIntValueEditor(instance, x, y);
         }
 
         public override ValueDefinition Clone()

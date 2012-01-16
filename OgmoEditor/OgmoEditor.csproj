@@ -133,6 +133,42 @@
     <Compile Include="LevelEditors\Actions\TileActions\TileSelectAction.cs" />
     <Compile Include="LevelEditors\LayerEditors\TileCanvas.cs" />
     <Compile Include="LevelData\Layers\Value.cs" />
+    <Compile Include="LevelEditors\LevelValueEditors\LevelBoolValueEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LevelEditors\LevelValueEditors\LevelBoolValueEditor.Designer.cs">
+      <DependentUpon>LevelBoolValueEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LevelEditors\LevelValueEditors\LevelColorValueEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LevelEditors\LevelValueEditors\LevelColorValueEditor.Designer.cs">
+      <DependentUpon>LevelColorValueEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LevelEditors\LevelValueEditors\LevelEnumValueEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LevelEditors\LevelValueEditors\LevelEnumValueEditor.Designer.cs">
+      <DependentUpon>LevelEnumValueEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LevelEditors\LevelValueEditors\LevelFloatValueEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LevelEditors\LevelValueEditors\LevelFloatValueEditor.Designer.cs">
+      <DependentUpon>LevelFloatValueEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LevelEditors\LevelValueEditors\LevelIntValueEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LevelEditors\LevelValueEditors\LevelIntValueEditor.Designer.cs">
+      <DependentUpon>LevelIntValueEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LevelEditors\LevelValueEditors\LevelStringValueEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LevelEditors\LevelValueEditors\LevelStringValueEditor.Designer.cs">
+      <DependentUpon>LevelStringValueEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="LevelEditors\Resizers\GridResizer.cs" />
     <Compile Include="LevelEditors\Resizers\Resizer.cs" />
     <Compile Include="LevelEditors\Resizers\TileResizer.cs" />
@@ -439,6 +475,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LevelEditors\LevelProperties.resx">
       <DependentUpon>LevelProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LevelEditors\LevelValueEditors\LevelBoolValueEditor.resx">
+      <DependentUpon>LevelBoolValueEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LevelEditors\LevelValueEditors\LevelColorValueEditor.resx">
+      <DependentUpon>LevelColorValueEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LevelEditors\LevelValueEditors\LevelEnumValueEditor.resx">
+      <DependentUpon>LevelEnumValueEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LevelEditors\LevelValueEditors\LevelFloatValueEditor.resx">
+      <DependentUpon>LevelFloatValueEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LevelEditors\LevelValueEditors\LevelIntValueEditor.resx">
+      <DependentUpon>LevelIntValueEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LevelEditors\LevelValueEditors\LevelStringValueEditor.resx">
+      <DependentUpon>LevelStringValueEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LevelEditors\ValueEditors\BoolValueEditor.resx">
       <DependentUpon>BoolValueEditor.cs</DependentUpon>

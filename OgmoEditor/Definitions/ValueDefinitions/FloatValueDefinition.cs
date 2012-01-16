@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 using OgmoEditor.ProjectEditors.ValueDefinitionEditors;
 using OgmoEditor.LevelEditors.ValueEditors;
 using OgmoEditor.LevelData.Layers;
+using OgmoEditor.LevelEditors.LevelValueEditors;
 
 namespace OgmoEditor.Definitions.ValueDefinitions
 {
@@ -35,9 +36,14 @@ namespace OgmoEditor.Definitions.ValueDefinitions
             return new FloatValueDefinitionEditor(this);
         }
 
-        public override LevelEditors.ValueEditors.ValueEditor GetInstanceEditor(Value instance, int x, int y)
+        public override ValueEditor GetInstanceEditor(Value instance, int x, int y)
         {
             return new FloatValueEditor(instance, x, y);
+        }
+
+        public override ValueEditor GetInstanceLevelEditor(Value instance, int x, int y)
+        {
+            return new LevelFloatValueEditor(instance, x, y);
         }
 
         public override ValueDefinition Clone()

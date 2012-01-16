@@ -6,39 +6,31 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using OgmoEditor.Definitions.ValueDefinitions;
+using OgmoEditor.LevelEditors.ValueEditors;
 using OgmoEditor.LevelData.Layers;
-using OgmoEditor.ProjectEditors;
+using OgmoEditor.Definitions.ValueDefinitions;
 using OgmoEditor.LevelEditors.Actions.EntityActions;
 
-namespace OgmoEditor.LevelEditors.ValueEditors
+namespace OgmoEditor.LevelEditors.LevelValueEditors
 {
-    public partial class StringValueEditor : ValueEditor
+    public partial class LevelFloatValueEditor : ValueEditor
     {
-        public StringValueDefinition Definition { get; private set; }
+        public FloatValueDefinition Definition { get; private set; }
 
-        public StringValueEditor(Value value, int x, int y)
+        public LevelFloatValueEditor(Value value, int x, int y)
             : base(value, x, y)
         {
-            Definition = (StringValueDefinition)value.Definition;
+            Definition = (FloatValueDefinition)value.Definition;
             InitializeComponent();
 
-            //Init the textbox
-            if (Definition.MultiLine)
-            {
-                valueTextBox.Multiline = true;
-                valueTextBox.Size = new Size(valueTextBox.Width, valueTextBox.Height * 3);
-                Size = new Size(128, 96);
-            }
             nameLabel.Text = Definition.Name;
-
             valueTextBox.Text = Value.Content;
         }
 
         private void handleTextBox()
         {
             string temp = Value.Content;
-            OgmoParse.ParseString(ref temp, Definition.MaxChars, valueTextBox);
+            OgmoParse.ParseFloatToString(ref temp, Definition.Min, Definition.Max, Definition.Round, valueTextBox);
             if (temp != Value.Content)
                 Ogmo.MainWindow.LevelEditors[Ogmo.CurrentLevelIndex].Perform(
                         new EntitySetValueAction(null, Value, temp)

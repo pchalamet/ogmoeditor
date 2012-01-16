@@ -6,18 +6,18 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using OgmoEditor.Definitions.ValueDefinitions;
+using OgmoEditor.LevelEditors.ValueEditors;
 using OgmoEditor.LevelData.Layers;
-using OgmoEditor.ProjectEditors;
+using OgmoEditor.Definitions.ValueDefinitions;
 using OgmoEditor.LevelEditors.Actions.EntityActions;
 
-namespace OgmoEditor.LevelEditors.ValueEditors
+namespace OgmoEditor.LevelEditors.LevelValueEditors
 {
-    public partial class StringValueEditor : ValueEditor
+    public partial class LevelStringValueEditor : ValueEditor
     {
         public StringValueDefinition Definition { get; private set; }
 
-        public StringValueEditor(Value value, int x, int y)
+        public LevelStringValueEditor(Value value, int x, int y)
             : base(value, x, y)
         {
             Definition = (StringValueDefinition)value.Definition;
@@ -28,7 +28,7 @@ namespace OgmoEditor.LevelEditors.ValueEditors
             {
                 valueTextBox.Multiline = true;
                 valueTextBox.Size = new Size(valueTextBox.Width, valueTextBox.Height * 3);
-                Size = new Size(128, 96);
+                Size = new Size(Size.Width, 64);
             }
             nameLabel.Text = Definition.Name;
 
@@ -50,7 +50,7 @@ namespace OgmoEditor.LevelEditors.ValueEditors
          */
         private void valueTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter && !Definition.MultiLine)
                 handleTextBox();
         }
 

@@ -42,14 +42,14 @@ namespace OgmoEditor.LevelEditors
                 ValueEditor ed;              
                 foreach (var v in level.Values)
                 {
-                    ed = v.Definition.GetInstanceEditor(v, ClientSize.Width / 2 - 64, yy);
+                    ed = v.Definition.GetInstanceLevelEditor(v, ClientSize.Width / 2 - 150, yy);
                     Controls.Add(ed);
                     yy += ed.Height;
                 }
             }
 
             //Resize the form
-            ClientSize = new Size(ClientSize.Width, yy + 42);
+            ClientSize = new Size(ClientSize.Width, yy + 52);
             applyButton.Location = new Point(applyButton.Location.X, ClientSize.Height - 40);
             cancelButton.Location = new Point(cancelButton.Location.X, ClientSize.Height - 40);
         }
