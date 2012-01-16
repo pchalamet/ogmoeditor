@@ -1,6 +1,7 @@
 ﻿# use glob syntax.
 syntax: glob
 *.suo
+OgmoEditor/publish
 OgmoEditor/bin
 OgmoEditor/obj
 OgmoEditor/OgmoEditor.csproj.Debug.cachefile
