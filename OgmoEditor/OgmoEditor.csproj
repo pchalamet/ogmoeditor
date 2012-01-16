@@ -121,6 +121,7 @@
     <Compile Include="LevelData\Layers\Entity.cs" />
     <Compile Include="LevelData\Layers\GridSelection.cs" />
     <Compile Include="LevelData\Layers\TileSelection.cs" />
+    <Compile Include="LevelEditors\Actions\EntityActions\EntityMoveNodeAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridClearSelectionAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridDeleteSelectionAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridMoveSelectionAction.cs" />
