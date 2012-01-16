@@ -180,5 +180,10 @@ namespace OgmoEditor
                 return (Control.ModifierKeys & Keys.Alt) == Keys.Alt;
             }
         }
+
+        static public float Snap(float value, float increment)
+        {
+            return (float)Math.Round(value / increment, MidpointRounding.AwayFromZero) * increment;
+        }
     }
 }

@@ -30,7 +30,10 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
             {
                 was[i] = entities[i].Angle;
                 if (entities[i].Definition.Rotatable)
+                {
                     entities[i].Angle = rotateTo % 360;
+                    entities[i].Angle = Util.Snap(entities[i].Angle, entities[i].Definition.RotateIncrement);
+                }
             }
         }
 
