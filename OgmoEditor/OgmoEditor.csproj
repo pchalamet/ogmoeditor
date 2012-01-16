@@ -25,12 +25,15 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>http://ogmoeditor.com/download/</UpdateUrl>
+    <SupportUrl>http://ogmoeditor.com/</SupportUrl>
+    <ProductName>Ogmo Editor</ProductName>
+    <PublisherName>Matt Thorson</PublisherName>
     <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
-    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -618,6 +621,11 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Xna.Framework.4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft XNA Framework Redistributable 4.0</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bg.png">
@@ -678,8 +686,23 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icon32.ico" />
+    <Content Include="lvl32.ico" />
+    <Content Include="proj32.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <FileAssociation Include=".oel">
+      <Visible>False</Visible>
+      <Description>Ogmo Editor Level File</Description>
+      <Progid>LevelFile</Progid>
+      <DefaultIcon>lvl32.ico</DefaultIcon>
+    </FileAssociation>
+    <FileAssociation Include=".oep">
+      <Visible>False</Visible>
+      <Description>Ogmo Editor Project File</Description>
+      <Progid>ProjectFile</Progid>
+      <DefaultIcon>proj32.ico</DefaultIcon>
+    </FileAssociation>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
