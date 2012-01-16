@@ -16,7 +16,7 @@ namespace OgmoEditor.ProjectEditors
     {
         private const string NEW_NAME = "NewObject";
 
-        private List<EntityDefinition> objects;
+        private List<EntityDefinition> entities;
         private string directory;
 
         public EntityDefinitionsEditor()
@@ -26,8 +26,8 @@ namespace OgmoEditor.ProjectEditors
 
         public void LoadFromProject(Project project)
         {
-            objects = project.EntityDefinitions;
-            foreach (var o in objects)
+            entities = project.EntityDefinitions;
+            foreach (var o in entities)
                 listBox.Items.Add(o.Name);
 
             directory = project.SavedDirectory;
@@ -71,6 +71,7 @@ namespace OgmoEditor.ProjectEditors
             nodesCheckBox.Checked = def.NodesDefinition.Enabled;
             nodeLimitTextBox.Text = def.NodesDefinition.Limit.ToString();
             nodeDrawComboBox.SelectedIndex = (int)def.NodesDefinition.DrawMode;
+            nodeGhostCheckBox.Checked = def.NodesDefinition.Ghost;
             NodesFieldsVisible = def.NodesDefinition.Enabled;
 
             //Values
@@ -123,7 +124,7 @@ namespace OgmoEditor.ProjectEditors
                 name = NEW_NAME + i.ToString();
                 i++;
             }
-            while (objects.Find(o => o.Name == name) != null);
+            while (entities.Find(o => o.Name == name) != null);
 
             def.Name = name;
 
@@ -146,6 +147,7 @@ namespace OgmoEditor.ProjectEditors
                 nodeLimitLabel.Visible = value;
                 nodeDrawComboBox.Visible = nodeDrawComboBox.Enabled = value;
                 nodeDrawLabel.Visible = value;
+                nodeGhostCheckBox.Visible = value;
             }
         }
 
@@ -181,20 +183,20 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 disableControls();
             else
-                setControlsFromObject(objects[listBox.SelectedIndex]);
+                setControlsFromObject(entities[listBox.SelectedIndex]);
         }
 
         private void addButton_Click(object sender, EventArgs e)
         {
             EntityDefinition def = GetDefault();
-            objects.Add(def);
+            entities.Add(def);
             listBox.SelectedIndex = listBox.Items.Add(def.Name);
         }
 
         private void removeButton_Click(object sender, EventArgs e)
         {
             int index = listBox.SelectedIndex;
-            objects.RemoveAt(listBox.SelectedIndex);
+            entities.RemoveAt(listBox.SelectedIndex);
             listBox.Items.RemoveAt(listBox.SelectedIndex);
 
             listBox.SelectedIndex = Math.Min(listBox.Items.Count - 1, index);
@@ -204,12 +206,12 @@ namespace OgmoEditor.ProjectEditors
         {
             int index = listBox.SelectedIndex;
 
-            EntityDefinition temp = objects[index];
-            objects[index] = objects[index - 1];
-            objects[index - 1] = temp;
+            EntityDefinition temp = entities[index];
+            entities[index] = entities[index - 1];
+            entities[index - 1] = temp;
 
-            listBox.Items[index] = objects[index].Name;
-            listBox.Items[index - 1] = objects[index - 1].Name;
+            listBox.Items[index] = entities[index].Name;
+            listBox.Items[index - 1] = entities[index - 1].Name;
             listBox.SelectedIndex = index - 1;
         }
 
@@ -217,12 +219,12 @@ namespace OgmoEditor.ProjectEditors
         {
             int index = listBox.SelectedIndex;
 
-            EntityDefinition temp = objects[index];
-            objects[index] = objects[index + 1];
-            objects[index + 1] = temp;
+            EntityDefinition temp = entities[index];
+            entities[index] = entities[index + 1];
+            entities[index + 1] = temp;
 
-            listBox.Items[index] = objects[index].Name;
-            listBox.Items[index + 1] = objects[index + 1].Name;
+            listBox.Items[index] = entities[index].Name;
+            listBox.Items[index + 1] = entities[index + 1].Name;
             listBox.SelectedIndex = index + 1;
         }
 
@@ -234,7 +236,7 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            objects[listBox.SelectedIndex].Name = nameTextBox.Text;
+            entities[listBox.SelectedIndex].Name = nameTextBox.Text;
             listBox.Items[listBox.SelectedIndex] = nameTextBox.Text;
         }
 
@@ -243,7 +245,7 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            OgmoParse.Parse(ref objects[listBox.SelectedIndex].Limit, limitTextBox);
+            OgmoParse.Parse(ref entities[listBox.SelectedIndex].Limit, limitTextBox);
         }
 
         private void sizeXTextBox_Validated(object sender, EventArgs e)
@@ -251,7 +253,7 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            OgmoParse.Parse(ref objects[listBox.SelectedIndex].Size, sizeXTextBox, sizeYTextBox);
+            OgmoParse.Parse(ref entities[listBox.SelectedIndex].Size, sizeXTextBox, sizeYTextBox);
         }
 
         private void originXTextBox_Validated(object sender, EventArgs e)
@@ -259,7 +261,7 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            OgmoParse.Parse(ref objects[listBox.SelectedIndex].Origin, originXTextBox, originYTextBox);
+            OgmoParse.Parse(ref entities[listBox.SelectedIndex].Origin, originXTextBox, originYTextBox);
         }
 
         /*
@@ -270,7 +272,7 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            objects[listBox.SelectedIndex].ResizableX = resizableXCheckBox.Checked;
+            entities[listBox.SelectedIndex].ResizableX = resizableXCheckBox.Checked;
         }
 
         private void resizableYCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -278,7 +280,7 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            objects[listBox.SelectedIndex].ResizableY = resizableYCheckBox.Checked;
+            entities[listBox.SelectedIndex].ResizableY = resizableYCheckBox.Checked;
         }
 
         private void rotatableCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -286,7 +288,7 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            objects[listBox.SelectedIndex].Rotatable = rotatableCheckBox.Checked;
+            entities[listBox.SelectedIndex].Rotatable = rotatableCheckBox.Checked;
             RotationFieldsVisible = rotatableCheckBox.Checked;
         }
 
@@ -295,7 +297,7 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            OgmoParse.Parse(ref objects[listBox.SelectedIndex].RotateIncrement, rotationIncrementTextBox);
+            OgmoParse.Parse(ref entities[listBox.SelectedIndex].RotateIncrement, rotationIncrementTextBox);
         }
 
         /*
@@ -306,7 +308,7 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            objects[listBox.SelectedIndex].NodesDefinition.Enabled = nodesCheckBox.Checked;
+            entities[listBox.SelectedIndex].NodesDefinition.Enabled = nodesCheckBox.Checked;
             NodesFieldsVisible = nodesCheckBox.Checked;
         }
 
@@ -315,7 +317,7 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            OgmoParse.Parse(ref objects[listBox.SelectedIndex].NodesDefinition.Limit, nodeLimitTextBox);
+            OgmoParse.Parse(ref entities[listBox.SelectedIndex].NodesDefinition.Limit, nodeLimitTextBox);
         }
 
         private void nodeDrawComboBox_SelectionChangeCommitted(object sender, EventArgs e)
@@ -323,7 +325,12 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            objects[listBox.SelectedIndex].NodesDefinition.DrawMode = (EntityNodesDefinition.PathMode)nodeDrawComboBox.SelectedIndex;
+            entities[listBox.SelectedIndex].NodesDefinition.DrawMode = (EntityNodesDefinition.PathMode)nodeDrawComboBox.SelectedIndex;
+        }
+
+        private void nodeGhostCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            entities[listBox.SelectedIndex].NodesDefinition.Ghost = nodeGhostCheckBox.Checked;
         }
 
         /*
@@ -334,7 +341,7 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            objects[listBox.SelectedIndex].ImageDefinition.DrawMode = (EntityImageDefinition.DrawModes)graphicTypeComboBox.SelectedIndex;
+            entities[listBox.SelectedIndex].ImageDefinition.DrawMode = (EntityImageDefinition.DrawModes)graphicTypeComboBox.SelectedIndex;
             GraphicFieldsVisibility = graphicTypeComboBox.SelectedIndex;
         }
 
@@ -343,7 +350,7 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            objects[listBox.SelectedIndex].ImageDefinition.RectColor = color;
+            entities[listBox.SelectedIndex].ImageDefinition.RectColor = color;
         }
 
         private void imageFileTiledCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -351,7 +358,7 @@ namespace OgmoEditor.ProjectEditors
             if (listBox.SelectedIndex == -1)
                 return;
 
-            objects[listBox.SelectedIndex].ImageDefinition.Tiled = imageFileTiledCheckBox.Checked;
+            entities[listBox.SelectedIndex].ImageDefinition.Tiled = imageFileTiledCheckBox.Checked;
         }
 
         private void imageFileButton_Click(object sender, EventArgs e)
@@ -372,7 +379,7 @@ namespace OgmoEditor.ProjectEditors
             imageFileWarningLabel.Visible = !checkImageFile();
             loadImageFilePreview();
 
-            objects[listBox.SelectedIndex].ImageDefinition.ImagePath = imageFileTextBox.Text;
+            entities[listBox.SelectedIndex].ImageDefinition.ImagePath = imageFileTextBox.Text;
         }
     }
 }

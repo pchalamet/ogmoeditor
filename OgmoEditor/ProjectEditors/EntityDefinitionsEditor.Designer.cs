@@ -73,6 +73,7 @@ namespace OgmoEditor.ProjectEditors
             this.imageFileTextBox = new System.Windows.Forms.TextBox();
             this.imageFileTiledCheckBox = new System.Windows.Forms.CheckBox();
             this.valuesEditor = new OgmoEditor.ProjectEditors.ValueDefinitionEditors.ValueDefinitionsEditor();
+            this.nodeGhostCheckBox = new System.Windows.Forms.CheckBox();
             this.rectangleGraphicPanel.SuspendLayout();
             this.imageFileGraphicPanel.SuspendLayout();
             this.SuspendLayout();
@@ -303,15 +304,15 @@ namespace OgmoEditor.ProjectEditors
             this.nodesCheckBox.Enabled = false;
             this.nodesCheckBox.Location = new System.Drawing.Point(215, 131);
             this.nodesCheckBox.Name = "nodesCheckBox";
-            this.nodesCheckBox.Size = new System.Drawing.Size(79, 17);
+            this.nodesCheckBox.Size = new System.Drawing.Size(57, 17);
             this.nodesCheckBox.TabIndex = 10;
-            this.nodesCheckBox.Text = "Has Nodes";
+            this.nodesCheckBox.Text = "Nodes";
             this.nodesCheckBox.UseVisualStyleBackColor = true;
             this.nodesCheckBox.CheckedChanged += new System.EventHandler(this.nodesCheckBox_CheckedChanged);
             // 
             // nodeLimitTextBox
             // 
-            this.nodeLimitTextBox.Location = new System.Drawing.Point(363, 129);
+            this.nodeLimitTextBox.Location = new System.Drawing.Point(316, 130);
             this.nodeLimitTextBox.Name = "nodeLimitTextBox";
             this.nodeLimitTextBox.Size = new System.Drawing.Size(50, 20);
             this.nodeLimitTextBox.TabIndex = 11;
@@ -321,17 +322,17 @@ namespace OgmoEditor.ProjectEditors
             // nodeLimitLabel
             // 
             this.nodeLimitLabel.AutoSize = true;
-            this.nodeLimitLabel.Location = new System.Drawing.Point(300, 132);
+            this.nodeLimitLabel.Location = new System.Drawing.Point(282, 132);
             this.nodeLimitLabel.Name = "nodeLimitLabel";
-            this.nodeLimitLabel.Size = new System.Drawing.Size(57, 13);
+            this.nodeLimitLabel.Size = new System.Drawing.Size(28, 13);
             this.nodeLimitLabel.TabIndex = 73;
-            this.nodeLimitLabel.Text = "Node Limit";
+            this.nodeLimitLabel.Text = "Limit";
             this.nodeLimitLabel.Visible = false;
             // 
             // nodeDrawLabel
             // 
             this.nodeDrawLabel.AutoSize = true;
-            this.nodeDrawLabel.Location = new System.Drawing.Point(425, 132);
+            this.nodeDrawLabel.Location = new System.Drawing.Point(381, 132);
             this.nodeDrawLabel.Name = "nodeDrawLabel";
             this.nodeDrawLabel.Size = new System.Drawing.Size(32, 13);
             this.nodeDrawLabel.TabIndex = 74;
@@ -348,9 +349,9 @@ namespace OgmoEditor.ProjectEditors
             "Path",
             "Circuit",
             "Fan"});
-            this.nodeDrawComboBox.Location = new System.Drawing.Point(463, 129);
+            this.nodeDrawComboBox.Location = new System.Drawing.Point(419, 130);
             this.nodeDrawComboBox.Name = "nodeDrawComboBox";
-            this.nodeDrawComboBox.Size = new System.Drawing.Size(86, 21);
+            this.nodeDrawComboBox.Size = new System.Drawing.Size(57, 21);
             this.nodeDrawComboBox.TabIndex = 12;
             this.nodeDrawComboBox.Visible = false;
             this.nodeDrawComboBox.SelectionChangeCommitted += new System.EventHandler(this.nodeDrawComboBox_SelectionChangeCommitted);
@@ -524,10 +525,24 @@ namespace OgmoEditor.ProjectEditors
             this.valuesEditor.TabIndex = 13;
             this.valuesEditor.Title = "Values";
             // 
+            // nodeGhostCheckBox
+            // 
+            this.nodeGhostCheckBox.AutoSize = true;
+            this.nodeGhostCheckBox.Checked = true;
+            this.nodeGhostCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.nodeGhostCheckBox.Location = new System.Drawing.Point(494, 131);
+            this.nodeGhostCheckBox.Name = "nodeGhostCheckBox";
+            this.nodeGhostCheckBox.Size = new System.Drawing.Size(54, 17);
+            this.nodeGhostCheckBox.TabIndex = 84;
+            this.nodeGhostCheckBox.Text = "Ghost";
+            this.nodeGhostCheckBox.UseVisualStyleBackColor = true;
+            this.nodeGhostCheckBox.CheckedChanged += new System.EventHandler(this.nodeGhostCheckBox_CheckedChanged);
+            // 
             // EntityDefinitionsEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.nodeGhostCheckBox);
             this.Controls.Add(this.imageFileGraphicPanel);
             this.Controls.Add(this.rectangleGraphicPanel);
             this.Controls.Add(this.graphicTypeComboBox);
@@ -621,5 +636,6 @@ namespace OgmoEditor.ProjectEditors
         private System.Windows.Forms.TextBox imageFileTextBox;
         private System.Windows.Forms.CheckBox imageFileTiledCheckBox;
         private ImagePreviewer imagePreviewer;
+        private System.Windows.Forms.CheckBox nodeGhostCheckBox;
     }
 }

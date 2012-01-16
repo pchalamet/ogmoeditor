@@ -190,13 +190,16 @@ namespace OgmoEditor.LevelData.Layers
 
             if (Nodes != null)
             {
-                Point pp = Position;
-                foreach (var p in Nodes)
+                if (Definition.NodesDefinition.Ghost)
                 {
-                    Position = p;
-                    Ogmo.EditorDraw.DrawEntity(this, alpha * .35f);
+                    Point pp = Position;
+                    foreach (var p in Nodes)
+                    {
+                        Position = p;
+                        Ogmo.EditorDraw.DrawEntity(this, alpha * .35f);
+                    }
+                    Position = pp;
                 }
-                Position = pp;
 
                 if (Definition.NodesDefinition.DrawMode == EntityNodesDefinition.PathMode.None)
                 {

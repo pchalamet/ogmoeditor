@@ -149,5 +149,7 @@ namespace OgmoEditor.Definitions
         public int Limit;
         [XmlAttribute]
         public PathMode DrawMode;
+        [XmlAttribute]
+        public bool Ghost;
     }
 }
