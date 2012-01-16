@@ -10,27 +10,77 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
 {
     public class EntityInsertNodeTool : EntityTool
     {
+        private bool moving;
+        private Entity moveEntity;
+        private int moveIndex;
+        private EntityMoveNodeAction moveAction;
+
         public EntityInsertNodeTool()
             : base("Insert Node", "insertNode.png")
         {
 
         }
 
-        public override void OnMouseLeftClick(Point location)
+        public override void OnMouseLeftDown(Point location)
         {
             Point node = LayerEditor.MouseSnapPosition;
 
-            LevelEditor.StartBatch();
-            foreach (var e in Ogmo.EntitySelectionWindow.Selected)
+            if (Ogmo.EntitySelectionWindow.Selected.Count == 1)
             {
-                if (e.Definition.NodesDefinition.Enabled && e.Nodes.Count != e.Definition.NodesDefinition.Limit && !e.Nodes.Contains(node))
-                    LevelEditor.BatchPerform(new EntityInsertNodeAction(LayerEditor.Layer, e, node, GetIndex(e, node)));
+                Entity e = Ogmo.EntitySelectionWindow.Selected[0];
+                if (e.Nodes.Contains(node))
+                {
+                    moving = true;
+                    moveEntity = e;
+                    moveIndex = e.Nodes.FindIndex(p => p == node);
+                }
+                else if (e.Nodes.Count != e.Definition.NodesDefinition.Limit)
+                {
+                    LevelEditor.Perform(new EntityInsertNodeAction(LayerEditor.Layer, e, node, GetIndex(e, node)));
+                }
             }
-            LevelEditor.EndBatch();
+            else
+            {
+                LevelEditor.StartBatch();
+                foreach (var e in Ogmo.EntitySelectionWindow.Selected)
+                {
+                    if (e.Definition.NodesDefinition.Enabled && e.Nodes.Count != e.Definition.NodesDefinition.Limit && !e.Nodes.Contains(node))
+                        LevelEditor.BatchPerform(new EntityInsertNodeAction(LayerEditor.Layer, e, node, GetIndex(e, node)));
+                }
+                LevelEditor.EndBatch();
+            }
+        }
+
+        public override void OnMouseMove(Point location)
+        {
+            if (moving && LayerEditor.MouseSnapPosition != moveEntity.Nodes[moveIndex])
+            {
+                if (moveAction == null)
+                {
+                    moveAction = new EntityMoveNodeAction(LayerEditor.Layer, moveEntity, moveIndex, LayerEditor.MouseSnapPosition);
+                    LevelEditor.Perform(moveAction);
+                }
+                else
+                {
+                    moveAction.DoAgain(LayerEditor.MouseSnapPosition);
+                }
+            }
+        }
+
+        public override void OnMouseLeftUp(Point location)
+        {
+            if (moving)
+            {
+                moving = false;
+                moveAction = null;
+            }
         }
 
         public override void OnMouseRightClick(Point location)
         {
+            if (moving)
+                return;
+
             Point node = LayerEditor.MouseSnapPosition;
 
             LevelEditor.StartBatch();
