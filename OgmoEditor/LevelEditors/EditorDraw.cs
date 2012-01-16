@@ -92,7 +92,8 @@ namespace OgmoEditor.LevelEditors
                             drawTo.Height = Math.Min(texture.Height, definition.Size.Height - drawTo.Y);
 
                             SpriteBatch.Draw(texture, 
-                                drawTo, new Rectangle(0, 0, drawTo.Width, drawTo.Height), 
+                                new Rectangle(drawTo.X + position.X, drawTo.Y + position.Y, drawTo.Width, drawTo.Height), 
+                                new Rectangle(0, 0, drawTo.Width, drawTo.Height), 
                                 Color.White * alpha, 0, new Vector2(definition.Origin.X, definition.Origin.Y), SpriteEffects.None, 0);
                         }
                     }
