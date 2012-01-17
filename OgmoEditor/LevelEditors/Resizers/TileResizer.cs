@@ -24,7 +24,9 @@ namespace OgmoEditor.LevelEditors.Resizers
             TileLayer layer = Editor.Layer;
 
             oldTiles = layer.Tiles;
-            layer.Tiles = new int[layer.Level.Size.Width / layer.Definition.Grid.Width, layer.Level.Size.Height / layer.Definition.Grid.Height];
+            int tileWidth = layer.Level.Size.Width / layer.Definition.Grid.Width + (layer.Level.Size.Width % layer.Definition.Grid.Width != 0 ? 1 : 0);
+            int tileHeight = layer.Level.Size.Height / layer.Definition.Grid.Height + (layer.Level.Size.Height % layer.Definition.Grid.Height != 0 ? 1 : 0);
+            layer.Tiles = new int[tileWidth, tileHeight];
 
             for (int i = 0; i < layer.Tiles.GetLength(0); i++)
                 for (int j = 0; j < layer.Tiles.GetLength(1); j++)
