@@ -20,9 +20,7 @@ namespace OgmoEditor.LevelEditors.LayersEditors
             TileLayer = tileLayer;
 
             //Init the textures array
-            Size texSize = new Size(
-                MAX_TEXTURE_SIZE / TileLayer.Definition.Grid.Width * TileLayer.Definition.Grid.Width, 
-                MAX_TEXTURE_SIZE / TileLayer.Definition.Grid.Height * TileLayer.Definition.Grid.Height);
+            Size texSize = new Size(MAX_TEXTURE_SIZE, MAX_TEXTURE_SIZE);
 
             Size maxSize = new Size(
                 TileLayer.Level.Size.Width / TileLayer.Definition.Grid.Width * TileLayer.Definition.Grid.Width,
