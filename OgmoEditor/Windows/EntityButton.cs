@@ -48,6 +48,7 @@ namespace OgmoEditor.Windows
         {
             Ogmo.EntitiesWindow.SetObject(Definition);
             Ogmo.ToolsWindow.SetTool(typeof(EntityPlacementTool));
+            Ogmo.MainWindow.LevelEditors[Ogmo.CurrentLevelIndex].Focus();
         }
 
         private void onEntityChanged(EntityDefinition definition)
