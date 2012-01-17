@@ -480,20 +480,5 @@ namespace OgmoEditor
                 }
             }
         }
-
-        static public void OpenAllLevels()
-        {
-            CloseAllLevels();
-            foreach (string str in Directory.EnumerateFiles(Project.SavedDirectory, "*.oel"))
-            {
-                if (GetLevelByPath(str) == null)
-                {
-                    if (!AddLevel(new Level(Project, str)))
-                        break;
-                }
-            }
-
-            Ogmo.MainWindow.StatusText = "Opened all levels in project directory";
-        }
     }
 }

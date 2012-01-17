@@ -357,11 +357,6 @@ namespace OgmoEditor
             Ogmo.CloseOtherLevels(Ogmo.Levels[getTargetLevel()]);
         }
 
-        private void openAllLevelsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Ogmo.OpenAllLevels();
-        }
-
         private void saveAsImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LevelEditors[Ogmo.CurrentLevelIndex].SaveAsImage();

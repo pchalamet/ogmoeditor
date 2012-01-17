@@ -56,10 +56,10 @@
             this.saveLevelAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.openAllLevelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeOtherLevelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.duplicateLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveCameraAsImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,7 +86,6 @@
             this.closeOthersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.duplicateLevelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveCameraAsImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StatusStrip.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             this.tabPageContextMenuStrip.SuspendLayout();
@@ -244,7 +243,6 @@
             this.saveLevelAsToolStripMenuItem,
             this.closeLevelToolStripMenuItem,
             this.toolStripSeparator5,
-            this.openAllLevelsToolStripMenuItem,
             this.closeOtherLevelsToolStripMenuItem,
             this.duplicateLevelToolStripMenuItem,
             this.saveAsImageToolStripMenuItem,
@@ -297,8 +295,8 @@
             // 
             this.saveLevelAsToolStripMenuItem.Enabled = false;
             this.saveLevelAsToolStripMenuItem.Name = "saveLevelAsToolStripMenuItem";
-            this.saveLevelAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
-                        | System.Windows.Forms.Keys.S)));
+            this.saveLevelAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
             this.saveLevelAsToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.saveLevelAsToolStripMenuItem.Text = "Save Level As...";
             this.saveLevelAsToolStripMenuItem.Click += new System.EventHandler(this.saveLevelAsToolStripMenuItem_Click);
@@ -316,13 +314,6 @@
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(222, 6);
-            // 
-            // openAllLevelsToolStripMenuItem
-            // 
-            this.openAllLevelsToolStripMenuItem.Name = "openAllLevelsToolStripMenuItem";
-            this.openAllLevelsToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-            this.openAllLevelsToolStripMenuItem.Text = "Open All Levels";
-            this.openAllLevelsToolStripMenuItem.Click += new System.EventHandler(this.openAllLevelsToolStripMenuItem_Click);
             // 
             // closeOtherLevelsToolStripMenuItem
             // 
@@ -347,6 +338,14 @@
             this.saveAsImageToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.saveAsImageToolStripMenuItem.Text = "Save As Image...";
             this.saveAsImageToolStripMenuItem.Click += new System.EventHandler(this.saveAsImageToolStripMenuItem_Click);
+            // 
+            // saveCameraAsImageToolStripMenuItem
+            // 
+            this.saveCameraAsImageToolStripMenuItem.Enabled = false;
+            this.saveCameraAsImageToolStripMenuItem.Name = "saveCameraAsImageToolStripMenuItem";
+            this.saveCameraAsImageToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.saveCameraAsImageToolStripMenuItem.Text = "Save Camera As Image...";
+            this.saveCameraAsImageToolStripMenuItem.Click += new System.EventHandler(this.saveCameraAsImageToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -561,14 +560,6 @@
             this.duplicateLevelToolStripMenuItem1.Text = "Duplicate Level";
             this.duplicateLevelToolStripMenuItem1.Click += new System.EventHandler(this.duplicateLevelToolStripMenuItem_Click);
             // 
-            // saveCameraAsImageToolStripMenuItem
-            // 
-            this.saveCameraAsImageToolStripMenuItem.Enabled = false;
-            this.saveCameraAsImageToolStripMenuItem.Name = "saveCameraAsImageToolStripMenuItem";
-            this.saveCameraAsImageToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-            this.saveCameraAsImageToolStripMenuItem.Text = "Save Camera As Image...";
-            this.saveCameraAsImageToolStripMenuItem.Click += new System.EventHandler(this.saveCameraAsImageToolStripMenuItem_Click);
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -618,7 +609,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editProjectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openAllLevelsToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem layersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
