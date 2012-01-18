@@ -49,8 +49,28 @@ namespace OgmoEditor.LevelEditors.LayersEditors
 
         public void Draw(float alpha)
         {
+            Microsoft.Xna.Framework.Rectangle destRect = new Microsoft.Xna.Framework.Rectangle();
+            Microsoft.Xna.Framework.Rectangle sourceRect = new Microsoft.Xna.Framework.Rectangle();
             foreach (var t in Textures)
-                Ogmo.EditorDraw.SpriteBatch.Draw(t.Texture, new Microsoft.Xna.Framework.Vector2(t.Position.X, t.Position.Y), Microsoft.Xna.Framework.Color.White * alpha);
+            {
+                destRect.X = t.Position.X;
+                destRect.Y = t.Position.Y;
+                sourceRect.Width = destRect.Width = t.Texture.Width;
+                sourceRect.Height = destRect.Height = t.Texture.Height;
+                
+                if (destRect.Width + destRect.X > Ogmo.CurrentLevel.Bounds.Width)
+                {
+                    sourceRect.Width -= destRect.Width + destRect.X - Ogmo.CurrentLevel.Bounds.Width;
+                    destRect.Width -= destRect.Width + destRect.X - Ogmo.CurrentLevel.Bounds.Width;
+                }
+                if (destRect.Height + destRect.Y > Ogmo.CurrentLevel.Bounds.Height)
+                {
+                    sourceRect.Height -= destRect.Height + destRect.Y - Ogmo.CurrentLevel.Bounds.Height;
+                    destRect.Height -= destRect.Height + destRect.Y - Ogmo.CurrentLevel.Bounds.Height;
+                }
+
+                Ogmo.EditorDraw.SpriteBatch.Draw(t.Texture, destRect, sourceRect, Microsoft.Xna.Framework.Color.White * alpha);
+            }
         }
 
         public void RefreshAll()

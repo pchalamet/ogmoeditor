@@ -29,7 +29,7 @@ namespace OgmoEditor.LevelData.Layers
             Tileset = Ogmo.Project.Tilesets[0];
 
             int tileWidth = level.Size.Width / definition.Grid.Width + (Level.Size.Width % definition.Grid.Width != 0 ? 1 : 0);
-            int tileHeight = Level.Size.Height / definition.Grid.Height + (Level.Size.Height / definition.Grid.Height != 0 ? 1 : 0);
+            int tileHeight = Level.Size.Height / definition.Grid.Height + (Level.Size.Height % definition.Grid.Height != 0 ? 1 : 0);
             Tiles = new int[Math.Max(tileWidth, 1), Math.Max(tileHeight, 1)];
             Clear();
 
