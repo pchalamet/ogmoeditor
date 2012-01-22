@@ -109,7 +109,7 @@ namespace OgmoEditor.LevelData
             get
             {
                 string s;
-                if (SavePath == "")
+                if (string.IsNullOrEmpty(SavePath))
                     s = Ogmo.NEW_LEVEL_NAME;
                 else
                     s = Path.GetFileName(SavePath);
@@ -124,7 +124,7 @@ namespace OgmoEditor.LevelData
             get
             {
                 string s;
-                if (SavePath == "")
+                if (string.IsNullOrEmpty(SavePath))
                     s = Ogmo.NEW_LEVEL_NAME;
                 else
                     s = Path.GetFileName(SavePath);
@@ -142,7 +142,7 @@ namespace OgmoEditor.LevelData
 
         public bool HasBeenSaved
         {
-            get { return SavePath != ""; }
+            get { return !string.IsNullOrEmpty(SavePath); }
         }
 
         public Rectangle Bounds
@@ -240,7 +240,7 @@ namespace OgmoEditor.LevelData
         public bool Save()
         {
             //If it hasn't been saved before, do SaveAs instead
-            if (SavePath == "")
+            if (!HasBeenSaved)
                 return SaveAs();
 
             writeTo(SavePath);

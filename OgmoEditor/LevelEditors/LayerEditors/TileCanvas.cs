@@ -20,14 +20,11 @@ namespace OgmoEditor.LevelEditors.LayersEditors
             TileLayer = tileLayer;
 
             //Init the textures array
-            Size texSize = new Size(
-                MAX_TEXTURE_SIZE / TileLayer.Definition.Grid.Width * TileLayer.Definition.Grid.Width, 
-                MAX_TEXTURE_SIZE / TileLayer.Definition.Grid.Height * TileLayer.Definition.Grid.Height);
+            Size texSize = new Size(MAX_TEXTURE_SIZE - (MAX_TEXTURE_SIZE % TileLayer.Definition.Grid.Width), MAX_TEXTURE_SIZE - (MAX_TEXTURE_SIZE % TileLayer.Definition.Grid.Height));
 
-            Size maxSize = new Size(
-                TileLayer.Level.Size.Width / TileLayer.Definition.Grid.Width * TileLayer.Definition.Grid.Width,
-                TileLayer.Level.Size.Height / TileLayer.Definition.Grid.Height * TileLayer.Definition.Grid.Height);
+            Size maxSize = new Size(TileLayer.Definition.Grid.Width * TileLayer.TileCellsX, TileLayer.Definition.Grid.Height * TileLayer.TileCellsY);
 
+            // TODO: Clip the dimensions of the tiles that draw over the edges of the level.
             Textures = new List<TextureInfo>();
             for (int i = 0; i < maxSize.Width; i += texSize.Width)
             {
@@ -52,8 +49,28 @@ namespace OgmoEditor.LevelEditors.LayersEditors
 
         public void Draw(float alpha)
         {
+            Microsoft.Xna.Framework.Rectangle destRect = new Microsoft.Xna.Framework.Rectangle();
+            Microsoft.Xna.Framework.Rectangle sourceRect = new Microsoft.Xna.Framework.Rectangle();
             foreach (var t in Textures)
-                Ogmo.EditorDraw.SpriteBatch.Draw(t.Texture, new Microsoft.Xna.Framework.Vector2(t.Position.X, t.Position.Y), Microsoft.Xna.Framework.Color.White * alpha);
+            {
+                destRect.X = t.Position.X;
+                destRect.Y = t.Position.Y;
+                sourceRect.Width = destRect.Width = t.Texture.Width;
+                sourceRect.Height = destRect.Height = t.Texture.Height;
+                
+                if (destRect.Width + destRect.X > Ogmo.CurrentLevel.Bounds.Width)
+                {
+                    sourceRect.Width -= destRect.Width + destRect.X - Ogmo.CurrentLevel.Bounds.Width;
+                    destRect.Width -= destRect.Width + destRect.X - Ogmo.CurrentLevel.Bounds.Width;
+                }
+                if (destRect.Height + destRect.Y > Ogmo.CurrentLevel.Bounds.Height)
+                {
+                    sourceRect.Height -= destRect.Height + destRect.Y - Ogmo.CurrentLevel.Bounds.Height;
+                    destRect.Height -= destRect.Height + destRect.Y - Ogmo.CurrentLevel.Bounds.Height;
+                }
+
+                Ogmo.EditorDraw.SpriteBatch.Draw(t.Texture, destRect, sourceRect, Microsoft.Xna.Framework.Color.White * alpha);
+            }
         }
 
         public void RefreshAll()
