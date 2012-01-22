@@ -25,12 +25,22 @@ namespace OgmoEditor.LevelEditors.LayerEditors
         public override void Draw(bool current, float alpha)
         {
             //Draw the grid cells
+            Rectangle rect = new Rectangle();
             for (int i = 0; i < Layer.Grid.GetLength(0); i++)
             {
                 for (int j = 0; j < Layer.Grid.GetLength(1); j++)
                 {
                     if (Layer.Grid[i, j])
-                        Ogmo.EditorDraw.DrawRectangle(i * Layer.Definition.Grid.Width, j * Layer.Definition.Grid.Height, Layer.Definition.Grid.Width, Layer.Definition.Grid.Height, Layer.Definition.Color.ToXNA() * alpha);
+                    {
+                        rect.X = i * Layer.Definition.Grid.Width;
+                        rect.Y = j * Layer.Definition.Grid.Height;
+                        rect.Width = Layer.Definition.Grid.Width;
+                        rect.Height = Layer.Definition.Grid.Height;
+                        if(rect.X + rect.Width > Layer.Level.Size.Width) rect.Width = Layer.Level.Size.Width - rect.X;
+                        if(rect.Y + rect.Height > Layer.Level.Size.Height) rect.Height = Layer.Level.Size.Height - rect.Y;
+
+                        Ogmo.EditorDraw.DrawRectangle(rect.X, rect.Y, rect.Width, rect.Height, Layer.Definition.Color.ToXNA() * alpha);
+                    }
                 }
             }
 

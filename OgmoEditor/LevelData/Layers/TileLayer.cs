@@ -28,9 +28,9 @@ namespace OgmoEditor.LevelData.Layers
             Definition = definition;
             Tileset = Ogmo.Project.Tilesets[0];
 
-            int tileWidth = level.Size.Width / definition.Grid.Width + (Level.Size.Width % definition.Grid.Width != 0 ? 1 : 0);
+            int tileWidth = Level.Size.Width / definition.Grid.Width + (Level.Size.Width % definition.Grid.Width != 0 ? 1 : 0);
             int tileHeight = Level.Size.Height / definition.Grid.Height + (Level.Size.Height % definition.Grid.Height != 0 ? 1 : 0);
-            Tiles = new int[Math.Max(tileWidth, 1), Math.Max(tileHeight, 1)];
+            Tiles = new int[tileWidth, tileHeight];
             Clear();
 
             InitCanvas();

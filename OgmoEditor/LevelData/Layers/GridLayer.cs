@@ -22,7 +22,9 @@ namespace OgmoEditor.LevelData.Layers
         {
             Definition = definition;
 
-            Grid = new bool[Level.Size.Width / definition.Grid.Width, Level.Size.Height / definition.Grid.Height];
+            int tileWidth = Level.Size.Width / definition.Grid.Width + (Level.Size.Width % definition.Grid.Width != 0 ? 1 : 0);
+            int tileHeight = Level.Size.Height / definition.Grid.Height + (Level.Size.Height % definition.Grid.Height != 0 ? 1 : 0);
+            Grid = new bool[tileWidth, tileHeight];
         }
 
         public override XmlElement GetXML(XmlDocument doc)

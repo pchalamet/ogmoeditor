@@ -24,7 +24,9 @@ namespace OgmoEditor.LevelEditors.Resizers
             GridLayer layer = Editor.Layer;
 
             oldGrid = layer.Grid;
-            layer.Grid = new bool[layer.Level.Size.Width / layer.Definition.Grid.Width, layer.Level.Size.Height / layer.Definition.Grid.Height];
+            int tileWidth = layer.Level.Size.Width / layer.Definition.Grid.Width + (layer.Level.Size.Width % layer.Definition.Grid.Width != 0 ? 1 : 0);
+            int tileHeight = layer.Level.Size.Height / layer.Definition.Grid.Height + (layer.Level.Size.Height % layer.Definition.Grid.Height != 0 ? 1 : 0);
+            layer.Grid = new bool[tileWidth, tileHeight];
 
             for (int i = 0; i < layer.Grid.GetLength(0) && i < oldGrid.GetLength(0); i++)
                 for (int j = 0; j < layer.Grid.GetLength(1) && j < oldGrid.GetLength(1); j++)
