@@ -161,7 +161,7 @@ namespace OgmoEditor
                 {
                     string text = "There is a new version of Ogmo Editor available!\nYour version: " + curVersion + "\nNewest version: " + newVersion + "\n\nDownload the new version?";
                     if (MessageBox.Show(Ogmo.MainWindow, text, "Check for Updates", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        System.Diagnostics.Process.Start("http://ogmoeditor.com/OgmoEditor.zip"); 
+                        System.Diagnostics.Process.Start("http://ogmoeditor.com/"); 
                 }
                 else
                 {
