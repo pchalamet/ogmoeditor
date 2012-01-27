@@ -124,10 +124,6 @@ namespace OgmoEditor
 
             //Add the exit event
             Application.ApplicationExit += onApplicationExit;
-
-            //Check for updates?
-            if (Config.ConfigFile.CheckForUpdates)
-                CheckForUpdates(false);
         }
 
         static void MainWindow_Shown(object sender, EventArgs e)
@@ -142,38 +138,6 @@ namespace OgmoEditor
         static void onApplicationExit(object sender, EventArgs e)
         {
             Config.Save();
-        }
-
-        static public void CheckForUpdates(bool reportNoUpdatesOrError)
-        {
-            try
-            {
-                WebClient client = new WebClient();
-                Stream stream = client.OpenRead(@"http://ogmoeditor.com/version.txt");
-                StreamReader reader = new StreamReader(stream);
-                string verStr = reader.ReadToEnd();
-                stream.Close();
-
-                Version newVersion = new Version(verStr);
-                Version curVersion = new Version(Application.ProductVersion);
-
-                if (curVersion.CompareTo(newVersion) < 0)
-                {
-                    string text = "There is a new version of Ogmo Editor available!\nYour version: " + curVersion + "\nNewest version: " + newVersion + "\n\nDownload the new version?";
-                    if (MessageBox.Show(Ogmo.MainWindow, text, "Check for Updates", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        System.Diagnostics.Process.Start("http://ogmoeditor.com/"); 
-                }
-                else
-                {
-                    if (reportNoUpdatesOrError)
-                        MessageBox.Show(Ogmo.MainWindow, "Your version of Ogmo Editor is up-to-date!\nYour version: " + curVersion + "\nNewest version: " + newVersion, "Check for Updates", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
-            }
-            catch
-            {
-                if (reportNoUpdatesOrError)
-                    MessageBox.Show(Ogmo.MainWindow, "Could not establish connection to check for updates!", "Check for Updates", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         static public void LogException(Exception e)

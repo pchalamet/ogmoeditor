@@ -244,11 +244,6 @@ namespace OgmoEditor
             pref.Show(this);
         }
 
-        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Ogmo.CheckForUpdates(true);
-        }
-
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutWindow about = new AboutWindow();

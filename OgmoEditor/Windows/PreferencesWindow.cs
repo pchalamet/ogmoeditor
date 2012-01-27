@@ -19,7 +19,6 @@ namespace OgmoEditor.Windows
         private void PreferencesWindow_Shown(object sender, EventArgs e)
         {
             maximizeCheckBox.Checked = Config.ConfigFile.StartMaximized;
-            updatesCheckBox.Checked = Config.ConfigFile.CheckForUpdates;
             undoLimitTextBox.Text = Config.ConfigFile.UndoLimit.ToString();
             levelLimitTextBox.Text = Config.ConfigFile.LevelLimit.ToString();
 
@@ -29,7 +28,6 @@ namespace OgmoEditor.Windows
         private void PreferencesWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
             Config.ConfigFile.StartMaximized = maximizeCheckBox.Checked;
-            Config.ConfigFile.CheckForUpdates = updatesCheckBox.Checked;
             OgmoParse.Parse(ref Config.ConfigFile.UndoLimit, undoLimitTextBox);
             OgmoParse.Parse(ref Config.ConfigFile.LevelLimit, levelLimitTextBox);
 
