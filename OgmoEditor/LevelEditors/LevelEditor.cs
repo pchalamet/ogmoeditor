@@ -483,6 +483,14 @@ namespace OgmoEditor.LevelEditors
                 //Enter mouse move mode
                 mousePanMode = true;
                 lastMousePoint = e.Location;
+
+                if (mouseMode == MouseMode.Camera)
+                {
+                    //Update the camera position
+                    CameraPosition = LevelView.ScreenToEditor(e.Location);
+                    foreach (var ed in LayerEditors)
+                        ed.UpdateDrawOffset(CameraPosition);
+                }
             }
             else
             {
@@ -532,6 +540,7 @@ namespace OgmoEditor.LevelEditors
             {
                 if (mouseMode == MouseMode.Camera)
                 {
+                    //Update the camera position
                     CameraPosition = LevelView.ScreenToEditor(e.Location);
                     foreach (var ed in LayerEditors)
                         ed.UpdateDrawOffset(CameraPosition);
