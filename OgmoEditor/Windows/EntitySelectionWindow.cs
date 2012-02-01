@@ -222,7 +222,7 @@ namespace OgmoEditor.Windows
 
                     TextBox angleTextBox = new TextBox();
                     angleTextBox.Bounds = new Rectangle(CONTENT_X, yy - 2, CONTENT_WIDTH - 20, 16);
-                    angleTextBox.Text = (selection[0].Angle * Util.RADTODEG).ToString();
+                    angleTextBox.Text = selection[0].Angle.ToString();
                     angleTextBox.Leave += delegate(object sender, EventArgs e) { hangleAngleChange(angleTextBox); };
                     angleTextBox.KeyDown += delegate(object sender, KeyEventArgs e) { if (e.KeyCode == Keys.Enter) { hangleAngleChange(angleTextBox); Ogmo.MainWindow.LevelEditors[Ogmo.CurrentLevelIndex].Focus(); } };
                     Controls.Add(angleTextBox);

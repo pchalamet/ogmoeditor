@@ -28,10 +28,10 @@
     <UpdateUrl>http://www.ogmoeditor.com/download/</UpdateUrl>
     <SupportUrl>http://www.ogmoeditor.com/</SupportUrl>
     <ProductName>Ogmo Editor</ProductName>
-    <PublisherName>Matt Thorson</PublisherName>
+    <PublisherName>Ogmo Editor</PublisherName>
     <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>31</ApplicationRevision>
+    <ApplicationRevision>32</ApplicationRevision>
     <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
