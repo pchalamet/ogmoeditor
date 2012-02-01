@@ -159,26 +159,26 @@
             // preferencesToolStripMenuItem
             // 
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
-            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.preferencesToolStripMenuItem.Text = "Preferences...";
             this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(141, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -516,7 +516,7 @@
             this.toolStripSeparator7,
             this.duplicateLevelToolStripMenuItem1});
             this.tabPageContextMenuStrip.Name = "tabPageContextMenuStrip";
-            this.tabPageContextMenuStrip.Size = new System.Drawing.Size(155, 120);
+            this.tabPageContextMenuStrip.Size = new System.Drawing.Size(155, 98);
             // 
             // saveLevelToolStripMenuItem1
             // 
@@ -553,6 +553,7 @@
             // 
             // MainWindow
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
@@ -565,6 +566,8 @@
             this.MinimumSize = new System.Drawing.Size(800, 599);
             this.Name = "MainWindow";
             this.Text = "Ogmo Editor";
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainWindow_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainWindow_DragEnter);
             this.StatusStrip.ResumeLayout(false);
             this.StatusStrip.PerformLayout();
             this.MenuStrip.ResumeLayout(false);

@@ -491,5 +491,27 @@ namespace OgmoEditor
         {
             EditingGridVisible = !EditingGridVisible;
         }
+
+        private void MainWindow_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy;
+        }
+
+        private void MainWindow_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+            if (Ogmo.Project == null)
+            {
+                if (files.Length == 1 && Path.GetExtension(files[0]) == ".oep")
+                    Ogmo.LoadProject(files[0]);
+            }
+            else
+            {
+                foreach (string file in files)
+                    Ogmo.AddLevel(new Level(Ogmo.Project, file));
+            }
+        }
     }
 }
