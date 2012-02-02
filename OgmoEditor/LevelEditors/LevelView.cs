@@ -56,6 +56,21 @@ namespace OgmoEditor.LevelEditors
             return new Point((int)vec.X, (int)vec.Y);
         }
 
+        public Vector2 EditorToScreen(Vector2 editorPos)
+        {
+            if (changed)
+                updateMatrices();
+            return Vector2.Transform(editorPos, matrix);
+        }
+
+        public Point EditorToScreen(Point editorPos)
+        {
+            if (changed)
+                updateMatrices();
+            Vector2 vec = Vector2.Transform(new Vector2(editorPos.X, editorPos.Y), matrix);
+            return new Point((int)vec.X, (int)vec.Y);
+        }
+
         public Matrix Matrix
         {
             get

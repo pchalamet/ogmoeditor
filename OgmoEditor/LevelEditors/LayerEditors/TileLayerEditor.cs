@@ -22,7 +22,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             Layer = layer;
         }
 
-        public override void Draw(bool current, float alpha)
+        public override void DrawLocal(bool current, float alpha)
         {
             //Draw the actual tiles
             Layer.TileCanvas.Draw(alpha);
@@ -35,8 +35,6 @@ namespace OgmoEditor.LevelEditors.LayerEditors
                     Layer.Selection.Area.Width * Layer.Definition.Grid.Width,
                     Layer.Selection.Area.Height * Layer.Definition.Grid.Height,
                     Microsoft.Xna.Framework.Color.Yellow * alpha);
-
-            base.Draw(current, alpha);
         }
 
         public override Resizer GetResizer()

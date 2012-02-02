@@ -36,10 +36,27 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             DrawMatrix = Matrix.CreateTranslation(DrawOffset.X, DrawOffset.Y, 0);
         }
 
-        public virtual void Draw(bool current, float alpha)
+        public void Draw(bool current, float alpha)
         {
+            Ogmo.EditorDraw.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, DrawMatrix * LevelEditor.LevelView.Matrix);
+            DrawLocal(current, alpha);
             if (Ogmo.ToolsWindow.CurrentTool != null)
                 Ogmo.ToolsWindow.CurrentTool.Draw();
+            Ogmo.EditorDraw.SpriteBatch.End();
+
+            Ogmo.EditorDraw.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Matrix.Identity);
+            DrawGlobal(current, alpha);
+            Ogmo.EditorDraw.SpriteBatch.End();
+        }
+
+        public virtual void DrawLocal(bool current, float alpha)
+        {
+            
+        }
+
+        public virtual void DrawGlobal(bool current, float alpha)
+        {
+
         }
 
         public virtual void OnKeyDown(Keys key)
