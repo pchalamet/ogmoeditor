@@ -108,10 +108,22 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
             {
                 if (e.Definition.NodesDefinition.Enabled && e.Nodes.Count != e.Definition.NodesDefinition.Limit && !e.Nodes.Contains(mouse))
                 {
+                    //Draw the node ghost image
+                    if (e.Definition.NodesDefinition.Ghost)
+                    {
+                        Point p = e.Position;
+                        e.Position = mouse;
+                        Ogmo.EditorDraw.DrawEntity(e, .25f);
+                        e.Position = p;
+                    }
+
+                    //Draw the lines
                     if (e.Nodes.Count == 0 || e.Definition.NodesDefinition.DrawMode == Definitions.EntityNodesDefinition.PathMode.Fan)
                         Ogmo.EditorDraw.DrawLine(e.Position, mouse, Microsoft.Xna.Framework.Color.Yellow * .5f);
                     else
                         Ogmo.EditorDraw.DrawLine(e.Nodes[e.Nodes.Count - 1], mouse, Microsoft.Xna.Framework.Color.Yellow * .5f);
+
+                    //Draw the node itself
                     Ogmo.EditorDraw.DrawNode(mouse);
                 }
             }

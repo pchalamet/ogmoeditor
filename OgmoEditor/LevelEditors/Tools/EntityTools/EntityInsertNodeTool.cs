@@ -109,6 +109,16 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                 {
                     int index = GetIndex(e, mouse);
 
+                    //Draw the entity ghost image
+                    if (e.Definition.NodesDefinition.Ghost)
+                    {
+                        Point p = e.Position;
+                        e.Position = mouse;
+                        Ogmo.EditorDraw.DrawEntity(e, .25f);
+                        e.Position = p;
+                    }
+
+                    //Draw the line(s)
                     if (index == 0)
                         Ogmo.EditorDraw.DrawLine(e.Position, mouse, Microsoft.Xna.Framework.Color.Yellow * .5f);
                     else
@@ -117,6 +127,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                     if (index < e.Nodes.Count)
                         Ogmo.EditorDraw.DrawLine(e.Nodes[index], mouse, Microsoft.Xna.Framework.Color.Yellow * .5f);
 
+                    //Draw the node itself
                     Ogmo.EditorDraw.DrawNode(mouse);
                 }
             }
