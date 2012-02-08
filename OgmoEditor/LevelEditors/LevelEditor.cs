@@ -40,7 +40,7 @@ namespace OgmoEditor.LevelEditors
         public List<LayerEditor> LayerEditors { get; private set; }
         public Rectangle DrawBounds { get; private set; }
         public new Point MousePosition { get; private set; }
-        public Point CameraPosition { get; private set; }
+        
 
         public LinkedList<OgmoAction> UndoStack { get; private set; }
         public LinkedList<OgmoAction> RedoStack { get; private set; }
@@ -168,23 +168,23 @@ namespace OgmoEditor.LevelEditors
                 int w = Ogmo.Project.CameraSize.Width / 8;
                 int h = Ogmo.Project.CameraSize.Height / 8;
 
-                int x2 = CameraPosition.X + Ogmo.Project.CameraSize.Width;
-                int y2 = CameraPosition.Y + Ogmo.Project.CameraSize.Height;
+                int x2 = Level.CameraPosition.X + Ogmo.Project.CameraSize.Width;
+                int y2 = Level.CameraPosition.Y + Ogmo.Project.CameraSize.Height;
 
-                content.DrawLine(CameraPosition.X - 1, CameraPosition.Y - 1, CameraPosition.X + w, CameraPosition.Y - 1, Color.Red);
-                content.DrawLine(CameraPosition.X, CameraPosition.Y, CameraPosition.X + w, CameraPosition.Y, Color.Red);
-                content.DrawLine(CameraPosition.X - 1, CameraPosition.Y - 1, CameraPosition.X - 1, CameraPosition.Y + h, Color.Red);
-                content.DrawLine(CameraPosition.X, CameraPosition.Y, CameraPosition.X, CameraPosition.Y + h, Color.Red);
+                content.DrawLine(Level.CameraPosition.X - 1, Level.CameraPosition.Y - 1, Level.CameraPosition.X + w, Level.CameraPosition.Y - 1, Color.Red);
+                content.DrawLine(Level.CameraPosition.X, Level.CameraPosition.Y, Level.CameraPosition.X + w, Level.CameraPosition.Y, Color.Red);
+                content.DrawLine(Level.CameraPosition.X - 1, Level.CameraPosition.Y - 1, Level.CameraPosition.X - 1, Level.CameraPosition.Y + h, Color.Red);
+                content.DrawLine(Level.CameraPosition.X, Level.CameraPosition.Y, Level.CameraPosition.X, Level.CameraPosition.Y + h, Color.Red);
 
-                content.DrawLine(x2 - w, CameraPosition.Y - 1, x2 + 1, CameraPosition.Y - 1, Color.Red);
-                content.DrawLine(x2 - w, CameraPosition.Y, x2, CameraPosition.Y, Color.Red);
-                content.DrawLine(x2 + 1, CameraPosition.Y, x2 + 1, CameraPosition.Y + h, Color.Red);
-                content.DrawLine(x2, CameraPosition.Y, x2, CameraPosition.Y + h, Color.Red);
+                content.DrawLine(x2 - w, Level.CameraPosition.Y - 1, x2 + 1, Level.CameraPosition.Y - 1, Color.Red);
+                content.DrawLine(x2 - w, Level.CameraPosition.Y, x2, Level.CameraPosition.Y, Color.Red);
+                content.DrawLine(x2 + 1, Level.CameraPosition.Y, x2 + 1, Level.CameraPosition.Y + h, Color.Red);
+                content.DrawLine(x2, Level.CameraPosition.Y, x2, Level.CameraPosition.Y + h, Color.Red);
 
-                content.DrawLine(CameraPosition.X - 1, y2 + 1, CameraPosition.X + w, y2 + 1, Color.Red);
-                content.DrawLine(CameraPosition.X - 1, y2, CameraPosition.X + w, y2, Color.Red);
-                content.DrawLine(CameraPosition.X - 1, y2, CameraPosition.X - 1, y2 - h, Color.Red);
-                content.DrawLine(CameraPosition.X, y2, CameraPosition.X, y2 - h, Color.Red);
+                content.DrawLine(Level.CameraPosition.X - 1, y2 + 1, Level.CameraPosition.X + w, y2 + 1, Color.Red);
+                content.DrawLine(Level.CameraPosition.X - 1, y2, Level.CameraPosition.X + w, y2, Color.Red);
+                content.DrawLine(Level.CameraPosition.X - 1, y2, Level.CameraPosition.X - 1, y2 - h, Color.Red);
+                content.DrawLine(Level.CameraPosition.X, y2, Level.CameraPosition.X, y2 - h, Color.Red);
 
                 content.DrawLine(x2 - w, y2 + 1, x2 + 1, y2 + 1, Color.Red);
                 content.DrawLine(x2 - w, y2, x2, y2, Color.Red);
@@ -256,7 +256,7 @@ namespace OgmoEditor.LevelEditors
             float scale = Math.Min(Math.Min(4096.0f / Ogmo.Project.CameraSize.Width, 1), Math.Min(4096.0f / Ogmo.Project.CameraSize.Height, 1));
             int width = (int)(scale * Ogmo.Project.CameraSize.Width);
             int height = (int)(scale * Ogmo.Project.CameraSize.Height);
-            Matrix cameraMatrix = Matrix.CreateScale(scale) * Matrix.CreateTranslation(-CameraPosition.X, -CameraPosition.Y, 0);
+            Matrix cameraMatrix = Matrix.CreateScale(scale) * Matrix.CreateTranslation(-Level.CameraPosition.X, -Level.CameraPosition.Y, 0);
 
             RenderTarget2D texture = new RenderTarget2D(Ogmo.EditorDraw.GraphicsDevice, width, height);
             Ogmo.EditorDraw.GraphicsDevice.SetRenderTarget(texture);
@@ -476,9 +476,9 @@ namespace OgmoEditor.LevelEditors
                 if (mouseMode == MouseMode.Camera)
                 {
                     //Update the camera position
-                    CameraPosition = LevelView.ScreenToEditor(e.Location);
+                    Level.CameraPosition = LevelView.ScreenToEditor(e.Location);
                     foreach (var ed in LayerEditors)
-                        ed.UpdateDrawOffset(CameraPosition);
+                        ed.UpdateDrawOffset(Level.CameraPosition);
                 }
             }
             else
@@ -530,9 +530,9 @@ namespace OgmoEditor.LevelEditors
                 if (mouseMode == MouseMode.Camera)
                 {
                     //Update the camera position
-                    CameraPosition = LevelView.ScreenToEditor(e.Location);
+                    Level.CameraPosition = LevelView.ScreenToEditor(e.Location);
                     foreach (var ed in LayerEditors)
-                        ed.UpdateDrawOffset(CameraPosition);
+                        ed.UpdateDrawOffset(Level.CameraPosition);
                 }
                 else
                 {
@@ -564,9 +564,9 @@ namespace OgmoEditor.LevelEditors
 
         private void SnapCamera()
         {
-            CameraPosition = Ogmo.LayersWindow.CurrentLayer.Definition.SnapToGrid(CameraPosition);
+            Level.CameraPosition = Ogmo.LayersWindow.CurrentLayer.Definition.SnapToGrid(Level.CameraPosition);
             foreach (var ed in LayerEditors)
-                ed.UpdateDrawOffset(CameraPosition);
+                ed.UpdateDrawOffset(Level.CameraPosition);
         }
     }
 }

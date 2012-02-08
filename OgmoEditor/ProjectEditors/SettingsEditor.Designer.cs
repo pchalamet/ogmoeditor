@@ -58,6 +58,7 @@ namespace OgmoEditor.ProjectEditors
             this.cameraWidthTextBox = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.exportCameraPositionCheckbox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // maxHeightTextBox
@@ -315,10 +316,22 @@ namespace OgmoEditor.ProjectEditors
             this.label14.TabIndex = 45;
             this.label14.Text = "x";
             // 
+            // exportCameraPositionCheckbox
+            // 
+            this.exportCameraPositionCheckbox.AutoSize = true;
+            this.exportCameraPositionCheckbox.Location = new System.Drawing.Point(368, 216);
+            this.exportCameraPositionCheckbox.Name = "exportCameraPositionCheckbox";
+            this.exportCameraPositionCheckbox.Size = new System.Drawing.Size(135, 17);
+            this.exportCameraPositionCheckbox.TabIndex = 47;
+            this.exportCameraPositionCheckbox.Text = "Export Camera Position";
+            this.exportCameraPositionCheckbox.UseVisualStyleBackColor = true;
+            this.exportCameraPositionCheckbox.CheckedChanged += new System.EventHandler(this.exportCameraPositionCheckbox_CheckedChanged);
+            // 
             // SettingsEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.exportCameraPositionCheckbox);
             this.Controls.Add(this.cameraHeightTextBox);
             this.Controls.Add(this.cameraWidthTextBox);
             this.Controls.Add(this.label13);
@@ -385,5 +398,6 @@ namespace OgmoEditor.ProjectEditors
         private System.Windows.Forms.TextBox cameraWidthTextBox;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.CheckBox exportCameraPositionCheckbox;
     }
 }

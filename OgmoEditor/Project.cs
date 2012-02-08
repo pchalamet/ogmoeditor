@@ -36,6 +36,7 @@ namespace OgmoEditor
         public AngleExportMode AngleMode;
         public bool CameraEnabled;
         public Size CameraSize;
+        public bool ExportCameraPosition;
 
         //Definitions
         public List<ValueDefinition> LevelValueDefinitions;
@@ -56,6 +57,7 @@ namespace OgmoEditor
             LevelDefaultSize = LevelMinimumSize = LevelMaximumSize = new Size(640, 480);
             CameraEnabled = false;
             CameraSize = new Size(640, 480);
+            ExportCameraPosition = false;
 
             //Definitions
             LevelValueDefinitions = new List<ValueDefinition>();
@@ -86,6 +88,7 @@ namespace OgmoEditor
             AngleMode = copy.AngleMode;
             CameraEnabled = copy.CameraEnabled;
             CameraSize = copy.CameraSize;
+            ExportCameraPosition = copy.ExportCameraPosition;
 
             //Definitions
             LevelValueDefinitions = new List<ValueDefinition>();

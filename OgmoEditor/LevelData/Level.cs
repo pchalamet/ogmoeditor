@@ -22,6 +22,7 @@ namespace OgmoEditor.LevelData
         public Size Size;
         public List<Layer> Layers { get; private set; }
         public List<Value> Values { get; private set; }
+        public Point CameraPosition;
 
         public Level(Project project, string filename)
         {
@@ -175,6 +176,22 @@ namespace OgmoEditor.LevelData
                 level.Attributes.Append(a);
             }
 
+            //Export camera position
+            if (Ogmo.Project.ExportCameraPosition)
+            {
+                XmlElement cam = doc.CreateElement("camera");
+
+                a = doc.CreateAttribute("x");
+                a.InnerText = CameraPosition.X.ToString();
+                cam.Attributes.Append(a);
+
+                a = doc.CreateAttribute("y");
+                a.InnerText = CameraPosition.Y.ToString();
+                cam.Attributes.Append(a);
+
+                level.AppendChild(cam);
+            }
+
             //Export the level values
             if (Values != null)
                 foreach (var v in Values)
@@ -202,6 +219,14 @@ namespace OgmoEditor.LevelData
             else
                 size.Height = Ogmo.Project.LevelDefaultSize.Height;
             Size = size;
+
+            //Import the camera position
+            if (level.GetElementsByTagName("camera").Count > 0)
+            {
+                XmlElement cam = (XmlElement)level.GetElementsByTagName("camera")[0];
+                CameraPosition.X = Convert.ToInt32(cam.Attributes["x"].InnerText);
+                CameraPosition.Y = Convert.ToInt32(cam.Attributes["y"].InnerText);
+            }
 
             //Import the level values
             //Initialize values
