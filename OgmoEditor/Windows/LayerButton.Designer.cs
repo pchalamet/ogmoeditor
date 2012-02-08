@@ -41,6 +41,9 @@
             this.pictureBox.Size = new System.Drawing.Size(24, 24);
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
+            this.pictureBox.Click += new System.EventHandler(this.layerNameLabel_Click);
+            this.pictureBox.MouseEnter += new System.EventHandler(this.layerNameLabel_MouseEnter);
+            this.pictureBox.MouseLeave += new System.EventHandler(this.layerNameLabel_MouseLeave);
             // 
             // layerNameLabel
             // 
