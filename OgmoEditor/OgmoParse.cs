@@ -187,7 +187,7 @@ namespace OgmoEditor
         static public void ParseString(ref string to, int maxChars, TextBox box)
         {
             if (maxChars > 0)
-                to = box.Text.Substring(0, maxChars);
+                to = box.Text.Substring(0, Math.Min(maxChars, box.Text.Length));
             else
                 to = box.Text;
             box.Text = to;
