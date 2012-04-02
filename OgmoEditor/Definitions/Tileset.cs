@@ -157,9 +157,19 @@ namespace OgmoEditor.Definitions
             return cell.X + cell.Y * TilesAcross;
         }
 
+        public int[] GetIDsFromCells(Point[] cell)
+        {
+            return cell.Select(value => this.GetIDFromCell(value)).ToArray();
+        }
+
         public Point GetCellFromID(int id)
         {
             return new Point(id % TilesAcross, id / TilesAcross);
+        }
+
+        public Point[] GetCellsFromIDs(int[] id)
+        {
+            return id.Select(value => this.GetCellFromID(value)).ToArray();
         }
 
         public int TransformID(Tileset from, int id)
@@ -168,6 +178,14 @@ namespace OgmoEditor.Definitions
                 return -1;
 
             return GetIDFromCell(from.GetCellFromID(id));
+        }
+
+        public int[] TransformIDs(Tileset from, int[] id)
+        {
+            if (id.Length == 0)
+                return new int[] { };
+
+            return GetIDsFromCells(from.GetCellsFromIDs(id));
         }
 
         public int[,] TransformMap(Tileset from, int[,] ids)

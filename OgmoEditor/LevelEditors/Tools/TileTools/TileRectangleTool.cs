@@ -50,7 +50,8 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
             drawTo = drawStart = LayerEditor.MouseSnapPosition;
             drawing = true;
             drawMode = true;
-            drawTile = Ogmo.TilePaletteWindow.Tile;
+            // TODO: Allow the user to draw a rectangle of tiles resulting in a pattern.
+            drawTile = Ogmo.TilePaletteWindow.Tiles[0];
         }
 
         public override void OnMouseLeftUp(Point location)

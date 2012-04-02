@@ -66,10 +66,20 @@ namespace OgmoEditor.Windows
             tilesetsComboBox.Enabled = (Ogmo.Project.Tilesets.Count > 1);
         }
 
-        public int Tile
+        public int[] Tiles
         {
             get { return tileSelector.Selection; }
             set { tileSelector.SetSelection(value); }
+        }
+
+        public int TilesWidth
+        {
+            get { return tileSelector.SelectionWidth; }
+        }
+
+        public int TilesHeight
+        {
+            get { return tileSelector.SelectionHeight; }
         }
 
         public void SetTileset(Tileset to)
@@ -83,7 +93,7 @@ namespace OgmoEditor.Windows
          */
         protected override void handleKeyDown(KeyEventArgs e)
         {
-            if (EditorVisible && tileSelector.Selection != -1)
+            if (EditorVisible && tileSelector.Selection.Length != 0)
             {
                 if (e.KeyCode == Keys.A)
                     tileSelector.MoveSelectionLeft();

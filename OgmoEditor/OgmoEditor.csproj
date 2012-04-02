@@ -132,6 +132,7 @@
     <Compile Include="LevelEditors\Actions\GridActions\GridMoveSelectionAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridPasteSelectionAction.cs" />
     <Compile Include="LevelEditors\Actions\GridActions\GridSelectAction.cs" />
+    <Compile Include="LevelEditors\Actions\TileActions\TileDrawAreaAction.cs" />
     <Compile Include="LevelEditors\Actions\TileActions\TileClearSelectionAction.cs" />
     <Compile Include="LevelEditors\Actions\TileActions\TileDeleteSelectionAction.cs" />
     <Compile Include="LevelEditors\Actions\TileActions\TileMoveSelectionAction.cs" />

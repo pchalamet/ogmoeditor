@@ -19,7 +19,7 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
                 return;
 
             location = LayerEditor.Layer.Definition.ConvertToGrid(location);
-            Ogmo.TilePaletteWindow.Tile = LayerEditor.Layer.Tiles[location.X, location.Y];
+            Ogmo.TilePaletteWindow.Tiles = new int[] { LayerEditor.Layer.Tiles[location.X, location.Y] };
         }
     }
 }

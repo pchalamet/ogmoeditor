@@ -26,7 +26,8 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
             drawStart = LayerEditor.Layer.Definition.ConvertToGrid(location);
             drawing = true;
             drawMode = true;
-            drawTile = Ogmo.TilePaletteWindow.Tile;
+            // TODO: Allow user to draw a line of tiles.
+            drawTile = Ogmo.TilePaletteWindow.Tiles[0];
         }
 
         public override void OnMouseLeftUp(Point location)

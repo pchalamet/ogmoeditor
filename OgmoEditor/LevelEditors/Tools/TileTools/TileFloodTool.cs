@@ -17,8 +17,9 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
         public override void OnMouseLeftClick(System.Drawing.Point location)
         {
             location = LayerEditor.Layer.Definition.ConvertToGrid(location);
-            if (IsValidTileCell(location) && LayerEditor.Layer.Tiles[location.X, location.Y] != Ogmo.TilePaletteWindow.Tile)
-                LevelEditor.Perform(new TileFloodAction(LayerEditor.Layer, location, Ogmo.TilePaletteWindow.Tile));
+            // TODO: Allow the user to flood file with a selection of tiles (resulting in a pattern).
+            if (IsValidTileCell(location) && LayerEditor.Layer.Tiles[location.X, location.Y] != Ogmo.TilePaletteWindow.Tiles[0])
+                LevelEditor.Perform(new TileFloodAction(LayerEditor.Layer, location, Ogmo.TilePaletteWindow.Tiles[0]));
         }
 
         public override void OnMouseRightClick(System.Drawing.Point location)
