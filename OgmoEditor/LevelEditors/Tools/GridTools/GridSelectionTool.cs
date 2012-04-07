@@ -47,7 +47,9 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
                 rect.Width /= LayerEditor.Layer.Definition.Grid.Width;
                 rect.Y /= LayerEditor.Layer.Definition.Grid.Height;
                 rect.Height /= LayerEditor.Layer.Definition.Grid.Height;
-                LevelEditor.Perform(new GridSelectAction(LayerEditor.Layer, rect));
+
+                if (rect.IntersectsWith(new Rectangle(0, 0, LayerEditor.Layer.GridCellsX, LayerEditor.Layer.GridCellsY)))
+                    LevelEditor.Perform(new GridSelectAction(LayerEditor.Layer, rect));
             }
         }
 

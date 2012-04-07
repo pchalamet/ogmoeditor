@@ -47,7 +47,9 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
                 rect.Width /= LayerEditor.Layer.Definition.Grid.Width;
                 rect.Y /= LayerEditor.Layer.Definition.Grid.Height;
                 rect.Height /= LayerEditor.Layer.Definition.Grid.Height;
-                LevelEditor.Perform(new TileSelectAction(LayerEditor.Layer, rect));
+
+                if (rect.IntersectsWith(new Rectangle(0, 0, LayerEditor.Layer.TileCellsX, LayerEditor.Layer.TileCellsY)))
+                    LevelEditor.Perform(new TileSelectAction(LayerEditor.Layer, rect));
             }
         }
 
