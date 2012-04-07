@@ -19,6 +19,9 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
         {
             newData = data;
             this.area = area;
+
+            this.area.X = Math.Min(area.X, tileLayer.TileCellsX - area.Width);
+            this.area.Y = Math.Min(area.Y, tileLayer.TileCellsY - area.Height);
         }
 
         public override void Do()
