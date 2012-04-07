@@ -41,9 +41,9 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
             {
                 drawing = true;
                 drawButton = false;
-                drawTiles = new int[] { };
-                drawTilesWidth = 0;
-                drawTilesHeight = 0;
+                drawTiles = new int[] { -1 };
+                drawTilesWidth = 1;
+                drawTilesHeight = 1;
                 setTiles(location, drawTiles);
             }
         }
