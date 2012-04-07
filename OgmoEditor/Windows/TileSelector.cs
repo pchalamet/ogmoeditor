@@ -18,6 +18,7 @@ namespace OgmoEditor.Windows
         private Tileset tileset;
         private int[] ids;
         private float scale;
+        private Point? selectionStart = null;
 
         public int[] Selection
         {
@@ -167,72 +168,30 @@ namespace OgmoEditor.Windows
                 calculateScale();
         }
 
-        /*private void pictureBox_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (tileset != null)
-            {
-                Point p = e.Location;
-                p.X -= (int)(pictureBox.Width / 2 - tileset.Image.Width / 2 * scale);
-                p.Y -= (int)(pictureBox.Height / 2 - tileset.Image.Height / 2 * scale);
-                p = new Point((int)(p.X / scale), (int)(p.Y / scale));
-
-                if (!tileset.Bounds.Contains(p))
-                {
-                    Selection = new int[] { };
-                    pictureBox.Refresh();
-                    return;
-                }
-
-                for (int i = 0; i < tileset.TilesTotal; i++)
-                {
-                    if (tileset.GetRectFromID(i).Contains(p))
-                    {
-                        Selection = new int[] { i };
-                        pictureBox.Refresh();
-                        return;
-                    }
-                }
-            }
-        }*/
-
-        private Point? sStart = null;
-
-        private Point ResolveTilePoint(Point p)
-        {
-            p.X -= (int)(pictureBox.Width / 2 - tileset.Image.Width / 2 * scale);
-            p.Y -= (int)(pictureBox.Height / 2 - tileset.Image.Height / 2 * scale);
-            return new Point((int)(p.X / scale), (int)(p.Y / scale));
-        }
-
         private void pictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             if (tileset == null)
                 return;
 
-            this.sStart = this.ResolveTilePoint(e.Location);
-        }
+            selectionStart = this.ResolveTilePoint(e.Location);
 
-        private Point SnapPoint(Point point, Rectangle to)
-        {
-            Point pt = new Point(point.X, point.Y);
-            if (pt.X < to.X)
-                pt.X = to.X;
-            if (pt.Y < to.Y)
-                pt.Y = to.Y;
-            if (pt.X >= to.X + to.Width)
-                pt.X = to.X + to.Width;
-            if (pt.Y >= to.Y + to.Height)
-                pt.Y = to.Y + to.Height;
-            return pt;
+            for (int i = 0; i < tileset.TilesTotal; i++)
+            {
+                if (tileset.GetRectFromID(i).Contains(selectionStart.Value))
+                {
+                    Selection = new int[] { i };
+                    pictureBox.Refresh();
+                }
+            }
         }
 
         private void pictureBox_MouseMove(object sender, MouseEventArgs e)
         {
-            if (tileset == null || !sStart.HasValue)
+            if (tileset == null || !selectionStart.HasValue)
                 return;
 
             Point end = this.ResolveTilePoint(e.Location);
-            Point start = new Point(this.sStart.Value.X, this.sStart.Value.Y);
+            Point start = new Point(this.selectionStart.Value.X, this.selectionStart.Value.Y);
 
             // Snap the points to within the bounds.
             start = this.SnapPoint(start, tileset.Bounds);
@@ -246,7 +205,7 @@ namespace OgmoEditor.Windows
 
             // Create a temporary list to store IDs.
             List<int> newids = new List<int>();
-            
+
             // Loop over the tileset, adding IDs as we find them.
             this.SelectionWidth = 0;
             this.SelectionHeight = 0;
@@ -279,7 +238,28 @@ namespace OgmoEditor.Windows
 
         private void pictureBox_MouseUp(object sender, MouseEventArgs e)
         {
-            this.sStart = null;
+            this.selectionStart = null;
+        }
+
+        private Point ResolveTilePoint(Point p)
+        {
+            p.X -= (int)(pictureBox.Width / 2 - tileset.Image.Width / 2 * scale);
+            p.Y -= (int)(pictureBox.Height / 2 - tileset.Image.Height / 2 * scale);
+            return new Point((int)(p.X / scale), (int)(p.Y / scale));
+        }
+
+        private Point SnapPoint(Point point, Rectangle to)
+        {
+            Point pt = new Point(point.X, point.Y);
+            if (pt.X < to.X)
+                pt.X = to.X;
+            if (pt.Y < to.Y)
+                pt.Y = to.Y;
+            if (pt.X >= to.X + to.Width)
+                pt.X = to.X + to.Width;
+            if (pt.Y >= to.Y + to.Height)
+                pt.Y = to.Y + to.Height;
+            return pt;
         }
     }
 }
