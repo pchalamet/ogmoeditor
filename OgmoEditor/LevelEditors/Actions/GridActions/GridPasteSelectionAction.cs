@@ -19,6 +19,9 @@ namespace OgmoEditor.LevelEditors.Actions.GridActions
         {
             newBits = bits;
             this.area = area;
+
+            this.area.X = Math.Min(area.X, gridLayer.GridCellsX - area.Width);
+            this.area.Y = Math.Min(area.Y, gridLayer.GridCellsY - area.Height);
         }
 
         public override void Do()

@@ -19,7 +19,7 @@ namespace OgmoEditor.LevelData.Layers
             Layer = layer;
             Area = area;
 
-            Under = new bool[area.Width, area.Height];
+            Under = new bool[Area.Width, Area.Height];
         }
 
         public void SetUnderFromGrid()
