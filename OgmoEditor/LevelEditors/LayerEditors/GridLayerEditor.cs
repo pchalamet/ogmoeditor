@@ -45,7 +45,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             }
 
             //Draw the selection rectangle
-            if (Layer.Selection != null)
+            if (Layer.Selection != null && current)
                 Ogmo.EditorDraw.DrawFillRect(
                     Layer.Selection.Area.X * Layer.Definition.Grid.Width,
                     Layer.Selection.Area.Y * Layer.Definition.Grid.Height,

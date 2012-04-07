@@ -28,7 +28,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             Layer.TileCanvas.Draw(alpha);
 
             //Draw the selection box
-            if (Layer.Selection != null)
+            if (Layer.Selection != null && current)
                 Ogmo.EditorDraw.DrawFillRect(
                     Layer.Selection.Area.X * Layer.Definition.Grid.Width,
                     Layer.Selection.Area.Y * Layer.Definition.Grid.Height,
