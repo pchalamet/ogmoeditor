@@ -178,6 +178,12 @@ namespace OgmoEditor
 
         static public void LoadProject(string filename)
         {
+            if (!File.Exists(filename))
+            {
+                MessageBox.Show(MainWindow, "Project file could not be loaded because it does not exist!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             //Close the current project before loading the new one
             if (Project != null)
                 CloseProject();
@@ -195,7 +201,7 @@ namespace OgmoEditor
                 FinishProjectEdit(FinishProjectEditAction.LoadAndSaveProject);
             else
             {
-                MessageBox.Show(MainWindow, "Project could not be loaded because of the following errors:\n" + errors + "\nFix the errors to continue with loading.");
+                MessageBox.Show(MainWindow, "Project could not be loaded because of the following errors:\n" + errors + "\nFix the errors to continue with loading.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 EditProject(ProjectEditMode.ErrorOnLoad);
             }
         }
@@ -375,7 +381,7 @@ namespace OgmoEditor
             //Can't if past level limit
             if (Ogmo.Levels.Count >= Config.ConfigFile.LevelLimit)
             {
-                MessageBox.Show(Ogmo.MainWindow, "Couldn't add level because the level limit was exceeded! You can change the level limit in the Preferences menu.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Ogmo.MainWindow, "Couldn't add level because the level limit was exceeded! You can change the level limit in the Preferences menu.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
