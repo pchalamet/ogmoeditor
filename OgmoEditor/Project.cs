@@ -172,6 +172,9 @@ namespace OgmoEditor
 
             foreach (var o in EntityDefinitions)
             {
+                //Check Entity values for reserved words
+                s += OgmoParse.CheckEntityValues(o, o.ValueDefinitions);
+
                 //Image file must exist if it is using an image file to draw
                 if (o.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
                     s += OgmoParse.CheckPath(o.ImageDefinition.ImagePath, SavedDirectory, "Object \"" + o.Name + "\" image file");
@@ -180,6 +183,12 @@ namespace OgmoEditor
                 if (o.ImageDefinition.Tiled && o.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image && o.Rotatable)
                     s += OgmoParse.Error("Object \"" + o.Name + "\" has a tiled image and is rotatable. These features are incompatible in this version of Ogmo Editor");
             }
+
+            /*
+             *  VALUES
+             */
+
+            s += OgmoParse.CheckLevelValues(LevelValueDefinitions);
 
             return s;
         }

@@ -275,7 +275,7 @@ namespace OgmoEditor
 
             //Check for blank value names
             if (defs.Find(e => e.Name == "") != null)
-                s += OgmoParse.Error("There are tileset(s) with blank name");
+                s += OgmoParse.Error("There are one or more tilesets with blank name");
 
             return s;
         }
@@ -290,14 +290,14 @@ namespace OgmoEditor
             {
                 if (v.Name != "" && !found.Contains(v.Name) && defs.FindAll(e => e.Name == v.Name).Count > 1)
                 {
-                    s += OgmoParse.Error("There are multiple objects with the name \"" + v.Name + "\"");
+                    s += OgmoParse.Error("There are multiple entities with the name \"" + v.Name + "\"");
                     found.Add(v.Name);
                 }
             }
 
             //Check for blank value names
             if (defs.Find(e => e.Name == "") != null)
-                s += OgmoParse.Error("There are object(s) with blank name");
+                s += OgmoParse.Error("There are one or more entities with blank names");
 
             return s;
         }
@@ -331,6 +331,50 @@ namespace OgmoEditor
             string s = "";
             s += CheckPosInt(size.Width, name + " Width");
             s += CheckPosInt(size.Height, name + " Height");
+            return s;
+        }
+
+        static public string CheckEntityValues(EntityDefinition entity, List<ValueDefinition> list)
+        {
+            string s = "";
+
+            foreach (var v in list)
+            {
+                switch (v.Name)
+                {
+                    default:
+                        break;
+                    case "x":
+                    case "y":
+                    case "id":
+                    case "width":
+                    case "height":
+                    case "angle": 
+                        s += Error("Entity \"" + entity.Name + "\" contains a value with the invalid name \"" + v.Name + "\" (reserved word in entities)");
+                        break;
+                }
+            }
+
+            return s;
+        }
+
+        static public string CheckLevelValues(List<ValueDefinition> list)
+        {
+            string s = "";
+
+            foreach (var v in list)
+            {
+                switch (v.Name)
+                {
+                    default:
+                        break;
+                    case "width":
+                    case "height":
+                        s += Error("Level contains a value with the invalid name \"" + v.Name + "\" (reserved word in levels)");
+                        break;
+                }
+            }
+
             return s;
         }
     }
