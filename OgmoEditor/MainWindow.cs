@@ -98,7 +98,7 @@ namespace OgmoEditor
         private int SelectedLevelIndex
         {
             get { return MasterTabControl.SelectedIndex; }
-            set { MasterTabControl.SelectedIndex = value; }
+            set {  MasterTabControl.SelectedIndex = value; }
         }
 
         public Rectangle EditBounds

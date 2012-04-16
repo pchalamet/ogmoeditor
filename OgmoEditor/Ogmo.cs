@@ -377,11 +377,11 @@ namespace OgmoEditor
                 {
                     Level level = new Level(Project, f);
                     AddLevel(level);
+                    SetLevel(Levels.Count - 1);
                 }
+                else if (dialog.FileNames.Length == 1)
+                    SetLevel(levelID);
             }
-
-            //Set it to the current level
-            SetLevel(Levels.Count - 1);
 
             //Set the status message
             string[] files = new string[dialog.FileNames.Length];
