@@ -151,13 +151,13 @@ namespace OgmoEditor.Windows
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
                 g.DrawImage(tileset.Image, x, y, tileset.Image.Width * scale, tileset.Image.Height * scale);
 
-                foreach (int s in this.Selection)
+                if (Selection.Length > 0)
                 {
-                    Rectangle r = tileset.GetRectFromID(s);
-                    g.DrawRectangle(new Pen(Color.Yellow, 3), x + r.X * scale, y + r.Y * scale, r.Width * scale, r.Height * scale);
+                    Rectangle r = tileset.GetRectFromID(Selection[0]);
+                    g.DrawRectangle(new Pen(Color.Yellow, 3), x + r.X * scale, y + r.Y * scale, r.Width * scale * SelectionWidth, r.Height * scale * SelectionHeight);
                     Pen p = new Pen(Color.Black);
                     p.DashPattern = new float[] { 6, 2 };
-                    g.DrawRectangle(p, x + r.X * scale, y + r.Y * scale, r.Width * scale, r.Height * scale);
+                    g.DrawRectangle(p, x + r.X * scale, y + r.Y * scale, r.Width * scale * SelectionWidth, r.Height * scale * SelectionHeight);
                 }
             }
         }
