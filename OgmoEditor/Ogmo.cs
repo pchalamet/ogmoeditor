@@ -359,11 +359,24 @@ namespace OgmoEditor
             if (Ogmo.Levels.Count == 1 && Ogmo.Levels[0].IsEmpty)
                 Ogmo.CloseLevel(Ogmo.Levels[0], false);
 
-            //Load it
+            //Load it, unless it's already open
             foreach (string f in dialog.FileNames)
             {
-                Level level = new Level(Project, f);
-                AddLevel(level);
+                int levelID = -1;
+                for (int i = 0; i < Ogmo.Levels.Count; i++)
+                {
+                    if (Ogmo.Levels[i].SavePath == f)
+                    {
+                        levelID = i;
+                        break;
+                    }
+                }
+
+                if (levelID == -1)
+                {
+                    Level level = new Level(Project, f);
+                    AddLevel(level);
+                }
             }
 
             //Set it to the current level
