@@ -28,11 +28,13 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
             this.actions.Clear();
             int i = 0;
             for (int y = 0; y < size.Height; y += 1)
+            {
                 for (int x = 0; x < size.Width; x += 1)
                 {
                     this.actions.Add(new TileDrawAction(this.TileLayer, new Point(at.X + x, at.Y + y), setTo[i]));
-                    i += 1;
+                    i++;
                 }
+            }
         }
 
         public override void Do()

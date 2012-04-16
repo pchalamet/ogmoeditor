@@ -180,6 +180,8 @@ namespace OgmoEditor.Windows
                 if (tileset.GetRectFromID(i).Contains(selectionStart.Value))
                 {
                     Selection = new int[] { i };
+                    SelectionWidth = 1;
+                    SelectionHeight = 1;
                     pictureBox.Refresh();
                 }
             }
