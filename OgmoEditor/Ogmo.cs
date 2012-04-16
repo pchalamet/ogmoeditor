@@ -379,7 +379,7 @@ namespace OgmoEditor
                     AddLevel(level);
                     SetLevel(Levels.Count - 1);
                 }
-                else if (dialog.FileNames.Length == 1)
+                else
                     SetLevel(levelID);
             }
 
