@@ -9,3 +9,4 @@ OgmoEditor/OgmoEditor.csproj.Debug.cachefile
 OgmoEditor/OgmoEditor.csproj.Release.cachefile
 OgmoEditor/OgmoEditor.csproj.user
 *.db
+app.config

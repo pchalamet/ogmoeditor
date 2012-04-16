@@ -33,6 +33,7 @@ namespace OgmoEditor
         public const string NEW_PROJECT_NAME = "New Project";
         public const string NEW_LEVEL_NAME = "Unsaved Level";
         public const string IMAGE_FILE_FILTER = "PNG image file|*.png|BMP image file|*.bmp";
+        private const int RECENT_PROJECT_LIMIT = 10;
 
         public enum FinishProjectEditAction { None, CloseProject, SaveProject, LoadAndSaveProject };
         public enum ProjectEditMode { NormalEdit, NewProject, ErrorOnLoad };
@@ -87,8 +88,8 @@ namespace OgmoEditor
             //Figure out the program directory
             ProgramDirectory = Application.ExecutablePath.Remove(Application.ExecutablePath.IndexOf(Path.GetFileName(Application.ExecutablePath)));
 
-            //Load the config file
-            Config.Load();
+            //Make sure the recent project list is valid
+            InitRecentProjects();
 
             //The levels holder
             Levels = new List<Level>();
@@ -137,7 +138,7 @@ namespace OgmoEditor
 
         static void onApplicationExit(object sender, EventArgs e)
         {
-            Config.Save();
+            Properties.Settings.Default.Save();
         }
 
         static public void LogException(Exception e)
@@ -286,7 +287,7 @@ namespace OgmoEditor
 
                 //Set the status message
                 Ogmo.MainWindow.StatusText = "Edited project " + Ogmo.Project.Name + ", all levels closed";
-                Config.ConfigFile.UpdateRecentProjects(Project);
+                UpdateRecentProjects(Project);
                 GC.Collect();
             }
             else if (action == FinishProjectEditAction.LoadAndSaveProject)
@@ -301,7 +302,7 @@ namespace OgmoEditor
                 NewLevel();
 
                 Ogmo.MainWindow.StatusText = "Opened project " + Ogmo.Project.Name;
-                Config.ConfigFile.UpdateRecentProjects(Project);
+                UpdateRecentProjects(Project);
                 GC.Collect();
             }
         }
@@ -392,7 +393,7 @@ namespace OgmoEditor
         static public bool AddLevel(Level level)
         {
             //Can't if past level limit
-            if (Ogmo.Levels.Count >= Config.ConfigFile.LevelLimit)
+            if (Ogmo.Levels.Count >= Properties.Settings.Default.LevelLimit)
             {
                 MessageBox.Show(Ogmo.MainWindow, "Couldn't add level because the level limit was exceeded! You can change the level limit in the Preferences menu.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -461,6 +462,60 @@ namespace OgmoEditor
                     if (!CloseLevel(lev, true))
                         return;
                 }
+            }
+        }
+
+        /*
+         *  Recent Project Stuff
+         */
+
+        static public void InitRecentProjects()
+        {
+            if (Properties.Settings.Default.RecentProjects == null || Properties.Settings.Default.RecentProjectNames == null || Properties.Settings.Default.RecentProjects.Count != Properties.Settings.Default.RecentProjectNames.Count)
+            {
+                Properties.Settings.Default.RecentProjects = new System.Collections.Specialized.StringCollection();
+                Properties.Settings.Default.RecentProjectNames = new System.Collections.Specialized.StringCollection();
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        static public void ClearRecentProjects()
+        {
+            Properties.Settings.Default.RecentProjects.Clear();
+            Properties.Settings.Default.RecentProjectNames.Clear();
+        }
+
+        static public void CheckRecentProjects()
+        {
+            for (int i = 0; i < Properties.Settings.Default.RecentProjects.Count; i++)
+            {
+                if (!File.Exists(Properties.Settings.Default.RecentProjects[i]))
+                {
+                    Properties.Settings.Default.RecentProjects.RemoveAt(i);
+                    Properties.Settings.Default.RecentProjectNames.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+
+        static public void UpdateRecentProjects(Project project)
+        {
+            for (int i = 0; i < Properties.Settings.Default.RecentProjects.Count; i++)
+            {
+                if (Properties.Settings.Default.RecentProjects[i] == project.Filename)
+                {
+                    Properties.Settings.Default.RecentProjects.RemoveAt(i);
+                    Properties.Settings.Default.RecentProjectNames.RemoveAt(i);
+                    break;
+                }
+            }
+
+            Properties.Settings.Default.RecentProjects.Insert(0, project.Filename);
+            Properties.Settings.Default.RecentProjectNames.Insert(0, project.Name);
+            if (Properties.Settings.Default.RecentProjects.Count > RECENT_PROJECT_LIMIT)
+            {
+                Properties.Settings.Default.RecentProjects.RemoveAt(RECENT_PROJECT_LIMIT);
+                Properties.Settings.Default.RecentProjectNames.RemoveAt(RECENT_PROJECT_LIMIT);
             }
         }
     }

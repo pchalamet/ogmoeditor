@@ -23,16 +23,16 @@ namespace OgmoEditor.Windows
             Dock = DockStyle.Fill;
 
             //Recent projects
-            Config.ConfigFile.CheckRecentProjects();
-            for (int i = 0; i < Config.ConfigFile.RecentProjects.Count; i++)
+            Ogmo.CheckRecentProjects();
+            for (int i = 0; i < Properties.Settings.Default.RecentProjects.Count; i++)
             {
                 LinkLabel link = new LinkLabel();
                 link.Location = new Point(4, 24 + (i * 20));
                 link.LinkColor = Color.Red;
                 link.Font = new Font(FontFamily.GenericMonospace, 10);
                 link.Size = new Size(172, 16);
-                link.Text = Config.ConfigFile.RecentProjects[i].Name;
-                link.Name = Config.ConfigFile.RecentProjects[i].Path;
+                link.Text = Properties.Settings.Default.RecentProjectNames[i];
+                link.Name = Properties.Settings.Default.RecentProjects[i];
                 link.Click += delegate(object sender, EventArgs e) { Ogmo.LoadProject(link.Name); };
                 recentPanel.Controls.Add(link);
             }

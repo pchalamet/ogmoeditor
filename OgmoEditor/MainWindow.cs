@@ -32,7 +32,7 @@ namespace OgmoEditor
             InitializeComponent();
 
             //Start maximized?
-            if (Config.ConfigFile.StartMaximized)
+            if (Properties.Settings.Default.StartMaximized)
                 WindowState = FormWindowState.Maximized;
 
             EditingGridVisible = true;

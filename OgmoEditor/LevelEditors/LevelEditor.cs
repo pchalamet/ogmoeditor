@@ -305,7 +305,7 @@ namespace OgmoEditor.LevelEditors
             EndBatch();
 
             //If you're over the undo limit, chop off an action
-            while (UndoStack.Count >= Config.ConfigFile.UndoLimit)
+            while (UndoStack.Count >= Properties.Settings.Default.UndoLimit)
                 UndoStack.RemoveFirst();
 
             //If the level is so-far unchanged, change it and store that fact
@@ -336,7 +336,7 @@ namespace OgmoEditor.LevelEditors
                 Level.Changed = true;
             }
 
-            while (UndoStack.Count >= Config.ConfigFile.UndoLimit)
+            while (UndoStack.Count >= Properties.Settings.Default.UndoLimit)
                 UndoStack.RemoveFirst();
             UndoStack.AddLast(batch);
             RedoStack.Clear();
