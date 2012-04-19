@@ -13,6 +13,7 @@ using System.Diagnostics;
 using OgmoEditor.LevelData;
 using OgmoEditor.Windows;
 using System.IO;
+using System.Deployment.Application;
 
 namespace OgmoEditor
 {
@@ -242,6 +243,14 @@ namespace OgmoEditor
             PreferencesWindow pref = new PreferencesWindow();
             DisableEditing();
             pref.Show(this);
+        }
+
+        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ApplicationDeployment.IsNetworkDeployed)
+                ApplicationDeployment.CurrentDeployment.CheckForUpdate();
+            else
+                MessageBox.Show(this, "You cannot check for updates while debugging Ogmo Editor!", "Nope!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
