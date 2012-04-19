@@ -17,6 +17,7 @@ using OgmoEditor.Definitions.ValueDefinitions;
 using OgmoEditor.Definitions;
 using OgmoEditor.ProjectEditors;
 using OgmoEditor.LevelEditors;
+using System.Deployment.Application;
 
 namespace OgmoEditor
 {
@@ -26,6 +27,7 @@ namespace OgmoEditor
         public enum AngleExportMode { Radians, Degrees };
 
         //Serialized project properties
+        public string OgmoVersion;
         public string Name;
         public OgmoColor BackgroundColor;
         public OgmoColor GridColor;
@@ -78,6 +80,7 @@ namespace OgmoEditor
         public void CloneFrom(Project copy)
         {
             //Default project properties
+            OgmoVersion = copy.OgmoVersion;
             Name = copy.Name;
             BackgroundColor = copy.BackgroundColor;
             GridColor = copy.GridColor;
@@ -287,6 +290,12 @@ namespace OgmoEditor
 
         private void writeTo(string filename)
         {
+            //Set the current Ogmo Editor version in the project file
+            if (ApplicationDeployment.IsNetworkDeployed)
+                OgmoVersion = ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
+            else
+                OgmoVersion = new Version(1, 0).ToString();
+
             XmlSerializer xs = new XmlSerializer(typeof(Project));
             Stream stream = new FileStream(filename, FileMode.Create);
             xs.Serialize(stream, this);

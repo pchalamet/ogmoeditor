@@ -19,7 +19,7 @@ namespace OgmoEditor.Windows
             if (ApplicationDeployment.IsNetworkDeployed)
                 versionLabel.Text = "Version " + ApplicationDeployment.CurrentDeployment.CurrentVersion;
             else
-                versionLabel.Text = "";
+                versionLabel.Text = "Debug Mode";
         }
 
         private void button1_Click(object sender, EventArgs e)
