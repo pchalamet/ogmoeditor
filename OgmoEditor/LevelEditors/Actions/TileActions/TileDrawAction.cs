@@ -28,8 +28,13 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
         {
             foreach (var at in draw)
             {
-                was.Add(TileLayer.Tiles[at.X, at.Y]);
-                TileLayer.Tiles[at.X, at.Y] = setTo;
+                if (at.X < TileLayer.TileCellsX && at.Y < TileLayer.TileCellsY)
+                {
+                    was.Add(TileLayer.Tiles[at.X, at.Y]);
+                    TileLayer.Tiles[at.X, at.Y] = setTo;
+                }
+                else
+                    was.Add(-1);
             }
 
             TileLayer.TileCanvas.RefreshAll();
@@ -38,7 +43,8 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
         public override void Undo()
         {
             for (int i = 0; i < draw.Count; i++)
-                TileLayer.Tiles[draw[i].X, draw[i].Y] = was[i];
+                if (draw[i].X < TileLayer.TileCellsX && draw[i].Y < TileLayer.TileCellsY)
+                    TileLayer.Tiles[draw[i].X, draw[i].Y] = was[i];
 
             TileLayer.TileCanvas.RefreshAll();
         }
