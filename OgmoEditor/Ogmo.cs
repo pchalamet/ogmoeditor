@@ -310,6 +310,7 @@ namespace OgmoEditor
         /*
          *  Level Stuff
          */
+
         static public Level CurrentLevel
         {
             get
@@ -360,8 +361,12 @@ namespace OgmoEditor
             if (Ogmo.Levels.Count == 1 && Ogmo.Levels[0].IsEmpty)
                 Ogmo.CloseLevel(Ogmo.Levels[0], false);
 
-            //Load it, unless it's already open
-            foreach (string f in dialog.FileNames)
+            //Get all the selected files, and alphabetize the list
+            List<string> filenames = new List<string>(dialog.FileNames);
+            filenames.Sort();
+
+            //Load all the levels in the selected list, as long as they aren't already open
+            foreach (string f in filenames)
             {
                 int levelID = -1;
                 for (int i = 0; i < Ogmo.Levels.Count; i++)
