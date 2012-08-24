@@ -157,20 +157,17 @@ namespace OgmoEditor.LevelData
         public XmlDocument GenerateXML()
         {
             XmlDocument doc = new XmlDocument();
+            XmlAttribute a;
 
             XmlElement level = doc.CreateElement("level");
             doc.AppendChild(level);
 
-            //Export the size
-            XmlAttribute a;
-            if (Ogmo.Project.ExportWidth)
+            //Export the size  
             {
                 a = doc.CreateAttribute("width");
                 a.InnerText = Size.Width.ToString();
                 level.Attributes.Append(a);
-            }
-            if (Ogmo.Project.ExportHeight)
-            {
+
                 a = doc.CreateAttribute("height");
                 a.InnerText = Size.Height.ToString();
                 level.Attributes.Append(a);
@@ -210,11 +207,11 @@ namespace OgmoEditor.LevelData
 
             //Import the size
             Size size = new Size();
-            if (Ogmo.Project.ExportWidth)
+            if (level.Attributes["width"] != null)
                 size.Width = Convert.ToInt32(level.Attributes["width"].InnerText);
             else
                 size.Width = Ogmo.Project.LevelDefaultSize.Width;
-            if (Ogmo.Project.ExportHeight)
+            if (level.Attributes["height"] != null)
                 size.Height = Convert.ToInt32(level.Attributes["height"].InnerText);
             else
                 size.Height = Ogmo.Project.LevelDefaultSize.Height;

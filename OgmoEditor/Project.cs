@@ -215,24 +215,6 @@ namespace OgmoEditor
             return SavedDirectory + Path.DirectorySeparatorChar + path;
         }
 
-        [XmlIgnore]
-        public bool ExportWidth
-        {
-            get
-            {
-                return LevelMinimumSize.Width != LevelDefaultSize.Width || LevelMaximumSize.Width != LevelDefaultSize.Width;
-            }
-        }
-
-        [XmlIgnore]
-        public bool ExportHeight
-        {
-            get
-            {
-                return LevelMinimumSize.Height != LevelDefaultSize.Height || LevelMaximumSize.Height != LevelDefaultSize.Height;
-            }
-        }
-
         public string ExportAngle(float angle)
         {
             if (AngleMode == AngleExportMode.Radians)
