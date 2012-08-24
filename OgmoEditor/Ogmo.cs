@@ -363,7 +363,11 @@ namespace OgmoEditor
 
             //Get all the selected files, and alphabetize the list
             List<string> filenames = new List<string>(dialog.FileNames);
-            filenames.Sort();
+        
+            if (filenames.All((s) => { int i; return int.TryParse(Path.GetFileNameWithoutExtension(s), out i); }))
+                filenames.Sort((a, b) => { return Convert.ToInt32(Path.GetFileNameWithoutExtension(a)) - Convert.ToInt32(Path.GetFileNameWithoutExtension(b)); });
+            else
+                filenames.Sort();
 
             //Load all the levels in the selected list, as long as they aren't already open
             foreach (string f in filenames)
