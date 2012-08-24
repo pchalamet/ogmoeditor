@@ -140,6 +140,8 @@ namespace OgmoEditor.LevelData.Layers
         {
             Grid.Initialize();
 
+            bool cleanXML = true;
+
             //Get the export mode
             GridLayerDefinition.ExportModes exportMode;
             if (xml.Attributes["exportMode"] != null)
@@ -156,6 +158,22 @@ namespace OgmoEditor.LevelData.Layers
                 int y = 0;
                 for (int i = 0; i < s.Length; i++)
                 {
+                    //If the grid is bigger than it should be, something has gone wrong with the XML
+                    if (x >= Grid.GetLength(0) && s[i] != '\n')
+                    {
+                        cleanXML = false;
+                        while (i < s.Length && s[i] != '\n')
+                            i++;
+                        x = 0;
+                        y++;
+                        continue;
+                    }
+                    else if (y >= Grid.GetLength(1))
+                    {
+                        cleanXML = false;
+                        break;
+                    }
+
                     if (s[i] == '1')
                         Grid[x, y] = true;
 
@@ -176,11 +194,22 @@ namespace OgmoEditor.LevelData.Layers
                     Rectangle rect = new Rectangle(Convert.ToInt32(r.Attributes["x"].InnerText), Convert.ToInt32(r.Attributes["y"].InnerText), Convert.ToInt32(r.Attributes["w"].InnerText), Convert.ToInt32(r.Attributes["h"].InnerText));
                     rect = levelToGrid(rect);
                     for (int i = 0; i < rect.Width; i++)
+                    {
                         for (int j = 0; j < rect.Height; j++)
+                        {
+                            if (rect.X + i >= Grid.GetLength(0) || rect.Y + j >= Grid.GetLength(1))
+                            {
+                                cleanXML = false;
+                                continue;
+                            }
+
                             Grid[rect.X + i, rect.Y + j] = true;
+                        }
+                    }
                 }
             }
-            return true;
+
+            return cleanXML;
         }
 
         /*

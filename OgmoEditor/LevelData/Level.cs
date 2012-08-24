@@ -203,19 +203,48 @@ namespace OgmoEditor.LevelData
 
         public bool LoadFromXML(XmlDocument xml)
         {
+            bool cleanXML = true;
             XmlElement level = (XmlElement)xml.GetElementsByTagName("level")[0];
 
-            //Import the size
-            Size size = new Size();
-            if (level.Attributes["width"] != null)
-                size.Width = Convert.ToInt32(level.Attributes["width"].InnerText);
-            else
-                size.Width = Ogmo.Project.LevelDefaultSize.Width;
-            if (level.Attributes["height"] != null)
-                size.Height = Convert.ToInt32(level.Attributes["height"].InnerText);
-            else
-                size.Height = Ogmo.Project.LevelDefaultSize.Height;
-            Size = size;
+            {
+                Size size = new Size();
+
+                //Import the size               
+                if (level.Attributes["width"] != null)
+                    size.Width = Convert.ToInt32(level.Attributes["width"].InnerText);
+                else
+                    size.Width = Ogmo.Project.LevelDefaultSize.Width;
+                if (level.Attributes["height"] != null)
+                    size.Height = Convert.ToInt32(level.Attributes["height"].InnerText);
+                else
+                    size.Height = Ogmo.Project.LevelDefaultSize.Height;
+
+                //Error check the width
+                if (size.Width < Ogmo.Project.LevelMinimumSize.Width)
+                {
+                    size.Width = Ogmo.Project.LevelMinimumSize.Width;
+                    cleanXML = false;
+                }
+                else if (size.Width > Ogmo.Project.LevelMaximumSize.Width)
+                {
+                    size.Width = Ogmo.Project.LevelMaximumSize.Width;
+                    cleanXML = false;
+                }
+
+                //Error check the height
+                if (size.Height < Ogmo.Project.LevelMinimumSize.Height)
+                {
+                    size.Height = Ogmo.Project.LevelMinimumSize.Height;
+                    cleanXML = false;
+                }
+                else if (size.Height > Ogmo.Project.LevelMaximumSize.Height)
+                {
+                    size.Height = Ogmo.Project.LevelMaximumSize.Height;
+                    cleanXML = false;
+                }
+
+                Size = size;
+            }
 
             //Import the camera position
             if (level.GetElementsByTagName("camera").Count > 0)
@@ -233,17 +262,16 @@ namespace OgmoEditor.LevelData
                 foreach (var def in Project.LevelValueDefinitions)
                     Values.Add(new Value(def));
                 OgmoParse.ImportValues(Values, level);
-            }    
+            }
 
             //Import layers
-            bool cleanXML = true;
             Layers = new List<Layer>();
             for (int i = 0; i < Project.LayerDefinitions.Count; i++)
             {
                 Layer layer = Project.LayerDefinitions[i].GetInstance(this);
                 Layers.Add(layer);
                 if (level[Project.LayerDefinitions[i].Name] != null)
-                    cleanXML = cleanXML == layer.SetXML(level[Project.LayerDefinitions[i].Name]);
+                    cleanXML = (layer.SetXML(level[Project.LayerDefinitions[i].Name]) && cleanXML);
             }
 
             return cleanXML;
