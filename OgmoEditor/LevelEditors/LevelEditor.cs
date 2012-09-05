@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using OgmoEditor.LevelEditors;
-using OgmoEditor.XNA;
-using Microsoft.Xna.Framework.Content;
 using System.Diagnostics;
 using System.Windows.Forms;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.IO;
 using OgmoEditor.LevelData;
 using OgmoEditor.LevelEditors.LayerEditors;
 using OgmoEditor.LevelEditors.Actions;
@@ -17,17 +15,12 @@ using OgmoEditor.LevelEditors.Tools;
 
 namespace OgmoEditor.LevelEditors
 {
-    using Point = System.Drawing.Point;
-    using System.IO;
-
-    /*
-     *  LevelEditor
-     *      - uses XNA to draw one level that is being edited
-     */
-    public class LevelEditor : GraphicsDeviceControl
+    public class LevelEditor : Control
     {
-        static private readonly Color NoFocus = new Color(.95f, .95f, .95f);
-        private const float LAYER_ABOVE_ALPHA = .5f;
+        static private readonly Brush NoFocusBrush = new SolidBrush(Color.FromArgb(80, 220, 220, 220));
+        static private readonly Brush ShadowBrush = new SolidBrush(Color.FromArgb(120, 0, 0, 0));
+        static private readonly Pen GridBorderPen = new Pen(Color.Black, 2);
+        private const int LAYER_ABOVE_ALPHA = 130;
 
         private enum MouseMode { Normal, Pan, Camera };
 
@@ -37,23 +30,28 @@ namespace OgmoEditor.LevelEditors
 
         public Level Level { get; private set; }
         public LevelView LevelView { get; private set; }
+        public Graphics Graphics { get; private set; }
         public List<LayerEditor> LayerEditors { get; private set; }
-        public Rectangle DrawBounds { get; private set; }
-        public new Point MousePosition { get; private set; }
-        
+        public new Point MousePosition { get; private set; }        
 
         public LinkedList<OgmoAction> UndoStack { get; private set; }
         public LinkedList<OgmoAction> RedoStack { get; private set; }
 
         private EventHandler Repaint;
         private ActionBatch batch;
+        private Brush levelBGBrush;
+        private Pen gridPen;
 
         public LevelEditor(Level level)
             : base()
         {
             Level = level;
-            this.Size = level.Size;
+            Graphics = CreateGraphics();
             Dock = System.Windows.Forms.DockStyle.Fill;
+            SetAutoSizeMode(AutoSizeMode.GrowAndShrink);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+
+            LevelView = new LevelView(this);
 
             //Create the undo/redo stacks
             UndoStack = new LinkedList<OgmoAction>();
@@ -63,19 +61,16 @@ namespace OgmoEditor.LevelEditors
             LayerEditors = new List<LayerEditor>();
             foreach (var l in level.Layers)
                 LayerEditors.Add(l.GetEditor(this));
-        }
 
-        protected override void Initialize()
-        {
-            //Init the screen bounds and camera
-            LevelView = new LevelView();
-            LevelView.Origin = new Vector2(Width / 2, Height / 2);
-            centerCamera();
-            DrawBounds = new Rectangle(0, 0, Width, Height);
+            //Init the level BG brush
+            BackgroundImage = Ogmo.NewEditorDraw.ImgBG;
+            levelBGBrush = new SolidBrush(Ogmo.Project.BackgroundColor);
+            gridPen = new Pen(Ogmo.Project.GridColor);
 
             //Events
             Repaint = delegate { Invalidate(); };
             Application.Idle += Repaint;
+            this.Paint += Draw;
             this.Resize += onResize;
             this.MouseClick += onMouseClick;
             this.MouseDown += onMouseDown;
@@ -92,16 +87,65 @@ namespace OgmoEditor.LevelEditors
             Application.Idle -= Repaint;
         }
 
-        private void centerCamera()
+        private void Draw(object sender, System.Windows.Forms.PaintEventArgs e)
         {
-            LevelView.X = Level.Size.Width / 2;
-            LevelView.Y = Level.Size.Height / 2;
-        }
+            //Draw the background logo
+            e.Graphics.Transform = LevelView.Identity;
+            e.Graphics.DrawImage(Ogmo.NewEditorDraw.ImgLogo, new Rectangle(Width/2 - Ogmo.NewEditorDraw.ImgLogo.Width/4, Height/2 - Ogmo.NewEditorDraw.ImgLogo.Height/4, Ogmo.NewEditorDraw.ImgLogo.Width/2, Ogmo.NewEditorDraw.ImgLogo.Height/2));
+            if (!Focused)
+                e.Graphics.FillRectangle(NoFocusBrush, new Rectangle(0, 0, Width, Height));
 
-        protected override void Draw()
-        {
+            //Draw the level bg
+            e.Graphics.Transform = LevelView.Matrix;
+            e.Graphics.FillRectangle(ShadowBrush, new Rectangle(10, 10, Level.Size.Width, Level.Size.Height));
+            e.Graphics.FillRectangle(levelBGBrush, new Rectangle(0, 0, Level.Size.Width, Level.Size.Height));
+
+            //Layers below the current one
+            int i;
+            for (i = 0; i < Ogmo.LayersWindow.CurrentLayerIndex; i++)
+            {
+                if (Ogmo.Project.LayerDefinitions[i].Visible)
+                    LayerEditors[i].NewDraw(e.Graphics, false, 255);
+            }
+
+            //Current layer
+            LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].NewDraw(e.Graphics, true, 255);
+
+            //Layers above the current one
+            for (; i < LayerEditors.Count; i++)
+            {
+                if (i < Ogmo.Project.LayerDefinitions.Count && Ogmo.Project.LayerDefinitions[i].Visible)
+                    LayerEditors[i].NewDraw(e.Graphics, false, LAYER_ABOVE_ALPHA);
+            }
+
+            //Draw the grid
+            if (Ogmo.MainWindow.EditingGridVisible)
+            {
+                e.Graphics.Transform = LevelView.Identity;
+
+                PointF inc = new PointF(Ogmo.LayersWindow.CurrentLayer.Definition.Grid.Width * LevelView.Zoom, Ogmo.LayersWindow.CurrentLayer.Definition.Grid.Height * LevelView.Zoom);
+                while (inc.X <= 4)
+                    inc.X *= 2;
+                while (inc.Y <= 4)
+                    inc.Y *= 2;
+
+                float width = Ogmo.CurrentLevel.Size.Width * LevelView.Zoom;
+                float height = Ogmo.CurrentLevel.Size.Height * LevelView.Zoom;
+
+                PointF offset = LevelView.EditorToScreen(LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].DrawOffset);
+
+                for (float xx = inc.X; xx < width; xx += inc.X)
+                    e.Graphics.DrawLine(gridPen, offset.X + xx, offset.Y, offset.X + xx, offset.Y + height);
+
+                for (float yy = inc.Y; yy < height; yy += inc.Y)
+                    e.Graphics.DrawLine(gridPen, offset.X, offset.Y + yy, offset.X + width, offset.Y + yy);
+
+                e.Graphics.DrawRectangle(GridBorderPen, new Rectangle((int)offset.X, (int)offset.Y, (int)width + 1, (int)height));
+            }
+
+            /*
             EditorDraw content = Ogmo.EditorDraw;
-
+            
             //Draw the background and logo
             GraphicsDevice.SetRenderTarget(null);
             content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone);
@@ -193,6 +237,7 @@ namespace OgmoEditor.LevelEditors
             }
 
             content.SpriteBatch.End();
+            */
         }
 
         public void SaveAsImage()
@@ -214,6 +259,7 @@ namespace OgmoEditor.LevelEditors
                 return;
 
             //Draw the level!
+            /*
             float scale = Math.Min(Math.Min(4096.0f / Level.Size.Width, 1), Math.Min(4096.0f / Level.Size.Height, 1));
             int width = (int)(scale * Level.Size.Width);
             int height = (int)(scale * Level.Size.Height);
@@ -239,6 +285,7 @@ namespace OgmoEditor.LevelEditors
             texture.SaveAsPng(stream, width, height);
             stream.Close();
             texture.Dispose();
+             */
         }
 
         public void SaveCameraAsImage()
@@ -252,6 +299,7 @@ namespace OgmoEditor.LevelEditors
             if (result == DialogResult.Cancel)
                 return;
 
+            /*
             //Draw the level!
             float scale = Math.Min(Math.Min(4096.0f / Ogmo.Project.CameraSize.Width, 1), Math.Min(4096.0f / Ogmo.Project.CameraSize.Height, 1));
             int width = (int)(scale * Ogmo.Project.CameraSize.Width);
@@ -278,6 +326,7 @@ namespace OgmoEditor.LevelEditors
             texture.SaveAsPng(stream, width, height);
             stream.Close();
             texture.Dispose();
+             */
         }
 
         private void DrawLayer(LayerEditor layer, bool current, float alpha)
@@ -409,9 +458,7 @@ namespace OgmoEditor.LevelEditors
          */
         private void onResize(object sender, EventArgs e)
         {
-            //Update the screen bounds
-            DrawBounds = new Rectangle(0, 0, Width, Height);
-            LevelView.Origin = new Vector2(Width / 2, Height / 2);
+            LevelView.OnParentResized();
         }
 
         private void onKeyDown(object sender, KeyEventArgs e)
@@ -536,8 +583,7 @@ namespace OgmoEditor.LevelEditors
                 }
                 else
                 {
-                    LevelView.X -= (e.Location.X - lastMousePoint.X) / LevelView.Zoom;
-                    LevelView.Y -= (e.Location.Y - lastMousePoint.Y) / LevelView.Zoom;
+                    LevelView.Pan(new Point(e.Location.X - lastMousePoint.X, e.Location.Y - lastMousePoint.Y));
                     lastMousePoint = e.Location;
                 }
             }
@@ -556,9 +602,9 @@ namespace OgmoEditor.LevelEditors
         private void onMouseWheel(object sender, MouseEventArgs e)
         {
             if (e.Delta > 0)
-                LevelView.ZoomIn();
+                LevelView.ZoomIn(e.Location);
             else
-                LevelView.ZoomOut();
+                LevelView.ZoomOut(e.Location);
             Ogmo.MainWindow.ZoomLabel.Text = LevelView.ZoomString;
         }
 

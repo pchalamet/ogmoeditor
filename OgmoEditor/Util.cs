@@ -185,5 +185,28 @@ namespace OgmoEditor
         {
             return (float)Math.Round(value / increment, MidpointRounding.AwayFromZero) * increment;
         }
+
+        /*
+         *  Point operators
+         */
+        static public PointF Add(this PointF a, PointF b)
+        {
+            return new PointF(a.X + b.X, a.Y + b.Y);
+        }
+
+        static public PointF Subtract(this PointF a, PointF b)
+        {
+            return new PointF(a.X - b.X, a.Y - b.Y);
+        }
+
+        static public Point Add(this Point a, Point b)
+        {
+            return new Point(a.X + b.X, a.Y + b.Y);
+        }
+
+        static public Point Subtract(this Point a, Point b)
+        {
+            return new Point(a.X - b.X, a.Y - b.Y);
+        }
     }
 }

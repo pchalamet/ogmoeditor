@@ -47,6 +47,7 @@ namespace OgmoEditor
         static public PresentationParameters Parameters;
         static public GraphicsDevice GraphicsDevice { get; private set; }
         static public EditorDraw EditorDraw { get; private set; }
+        static public NewEditorDraw NewEditorDraw { get; private set; }
 
         static public MainWindow MainWindow { get; private set; }
         static public ToolsWindow ToolsWindow { get; private set; }
@@ -112,16 +113,20 @@ namespace OgmoEditor
             LayersWindow.EditorVisible = ToolsWindow.EditorVisible = TilePaletteWindow.EditorVisible = EntitiesWindow.EditorVisible = EntitySelectionWindow.EditorVisible = false;
 
             //Set up graphics stuff
-            Parameters = new PresentationParameters();
-            Parameters.BackBufferWidth = Math.Max(Ogmo.MainWindow.ClientSize.Width, 1);
-            Parameters.BackBufferHeight = Math.Max(Ogmo.MainWindow.ClientSize.Height, 1);
-            Parameters.BackBufferFormat = SurfaceFormat.Color;
-            Parameters.DepthStencilFormat = DepthFormat.Depth24;
-            Parameters.DeviceWindowHandle = Ogmo.MainWindow.Handle;
-            Parameters.PresentationInterval = PresentInterval.Immediate;
-            Parameters.IsFullScreen = false;
-            GraphicsDevice = new GraphicsDevice(GraphicsAdapter.DefaultAdapter, GraphicsProfile.Reach, Parameters);
-            EditorDraw = new EditorDraw(GraphicsDevice);
+            {
+                //XNA stuff
+                Parameters = new PresentationParameters();
+                Parameters.BackBufferWidth = Math.Max(Ogmo.MainWindow.ClientSize.Width, 1);
+                Parameters.BackBufferHeight = Math.Max(Ogmo.MainWindow.ClientSize.Height, 1);
+                Parameters.BackBufferFormat = SurfaceFormat.Color;
+                Parameters.DepthStencilFormat = DepthFormat.Depth24;
+                Parameters.DeviceWindowHandle = Ogmo.MainWindow.Handle;
+                Parameters.PresentationInterval = PresentInterval.Immediate;
+                Parameters.IsFullScreen = false;
+                GraphicsDevice = new GraphicsDevice(GraphicsAdapter.DefaultAdapter, GraphicsProfile.Reach, Parameters);
+                EditorDraw = new EditorDraw(GraphicsDevice);
+            }
+            NewEditorDraw = new NewEditorDraw();
 
             //Add the exit event
             Application.ApplicationExit += onApplicationExit;

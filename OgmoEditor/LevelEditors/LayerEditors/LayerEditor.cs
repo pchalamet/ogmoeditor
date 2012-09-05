@@ -14,13 +14,14 @@ namespace OgmoEditor.LevelEditors.LayerEditors
 {
     using Point = System.Drawing.Point;
     using OgmoEditor.LevelEditors.Resizers;
+using System.Drawing;
 
     public abstract class LayerEditor
     {
         public Layer Layer { get; private set; }
         public LevelEditor LevelEditor { get; private set; }
         public Point MouseSnapPosition { get; private set; }
-        public Vector2 DrawOffset { get; private set; }
+        public PointF DrawOffset { get; private set; }
         public Matrix DrawMatrix { get; private set; }
 
         public LayerEditor(LevelEditor levelEditor, Layer layer)
@@ -32,12 +33,18 @@ namespace OgmoEditor.LevelEditors.LayerEditors
 
         public void UpdateDrawOffset(Point cameraPos)
         {
-            DrawOffset = new Vector2(cameraPos.X - cameraPos.X * Layer.Definition.ScrollFactor.X, cameraPos.Y - cameraPos.Y * Layer.Definition.ScrollFactor.Y);
+            DrawOffset = new PointF(cameraPos.X - cameraPos.X * Layer.Definition.ScrollFactor.X, cameraPos.Y - cameraPos.Y * Layer.Definition.ScrollFactor.Y);
             DrawMatrix = Matrix.CreateTranslation(DrawOffset.X, DrawOffset.Y, 0);
+        }
+
+        public virtual void NewDraw(Graphics graphics, bool current, int alpha)
+        {
+            
         }
 
         public void Draw(bool current, float alpha)
         {
+            /*
             Ogmo.EditorDraw.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, DrawMatrix * LevelEditor.LevelView.Matrix);
             DrawLocal(current, alpha);
             if (Ogmo.ToolsWindow.CurrentTool != null)
@@ -47,6 +54,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             Ogmo.EditorDraw.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Matrix.Identity);
             DrawGlobal(current, alpha);
             Ogmo.EditorDraw.SpriteBatch.End();
+            */
         }
 
         public virtual void DrawLocal(bool current, float alpha)

@@ -16,10 +16,28 @@ namespace OgmoEditor.LevelEditors.LayerEditors
     {
         public new GridLayer Layer { get; private set; }
 
+        private Brush rectBrush;
+
         public GridLayerEditor(LevelEditor levelEditor, GridLayer layer)
             : base(levelEditor, layer)
         {
             Layer = layer;
+            rectBrush = new SolidBrush(layer.Definition.Color);
+        }
+
+        public override void NewDraw(Graphics graphics, bool current, int alpha)
+        {
+            //Draw the grid cells
+            for (int i = 0; i < Layer.Grid.GetLength(0); i++)
+            {
+                for (int j = 0; j < Layer.Grid.GetLength(1); j++)
+                {
+                    if (Layer.Grid[i, j])
+                    {
+                        graphics.FillRectangle(rectBrush, new Rectangle(i * Layer.Definition.Grid.Width, j * Layer.Definition.Grid.Height, Layer.Definition.Grid.Width, Layer.Definition.Grid.Height));
+                    }
+                }
+            }
         }
 
         public override void DrawLocal(bool current, float alpha)

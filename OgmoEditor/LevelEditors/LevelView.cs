@@ -2,180 +2,151 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Xna.Framework;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Diagnostics;
+using OgmoEditor.LevelData;
 
 namespace OgmoEditor.LevelEditors
 {
-    using Point = System.Drawing.Point;
-
     public class LevelView
     {
+        static public readonly Matrix Identity = new Matrix();
         static private readonly float[] ZOOMS = new float[] { .25f, .33f, .5f, .66f, 1, 1.25f, 1.5f, 2, 2.5f, 3 };
 
-        private Matrix matrix;
-        private Matrix inverse;
+        public LevelEditor LevelEditor { get; private set; }
+        public Matrix Matrix { get; private set; }
+        public Matrix Inverse { get; private set; }
+        public float Zoom { get; private set; }
 
-        private Vector2 origin;
-        private Vector2 position;
-        private float zoom;
-        private bool changed;
+        private Size oldLevelSize;
 
-        public LevelView()
+        public LevelView(LevelEditor levelEditor)
         {
-            position = Vector2.Zero;
-            zoom = 1;
+            LevelEditor = levelEditor;
+            Matrix = new Matrix();
+            Inverse = new Matrix();
+            Zoom = 1;
 
-            updateMatrices();
+            Center();
         }
 
-        //Matrix handlers
-        private void updateMatrices()
+        public void OnParentResized()
         {
-            matrix = Matrix.Identity *
-                    Matrix.CreateTranslation(new Vector3(-position, 0)) *
-                    Matrix.CreateScale(new Vector3(zoom, zoom, 1)) *
-                    Matrix.CreateTranslation(new Vector3(origin, 0));
-
-            inverse = Matrix.Invert(matrix);
-
-            changed = false;
+            Pan(new Point((LevelEditor.Size.Width - oldLevelSize.Width) / 2, (LevelEditor.Size.Height - oldLevelSize.Height) / 2));
+            oldLevelSize = LevelEditor.Size;
         }
 
-        public Vector2 ScreenToEditor(Vector2 screenPos)
+        //Transforming points back and forth
+        public PointF ScreenToEditor(PointF screenPos)
         {
-            if (changed)
-                updateMatrices();
-            return Vector2.Transform(screenPos, inverse);
+            PointF[] points = new PointF[] { screenPos };
+            Inverse.TransformPoints(points);
+            return points[0];
         }
 
         public Point ScreenToEditor(Point screenPos)
         {
-            if (changed)
-                updateMatrices();
-            Vector2 vec = Vector2.Transform(new Vector2(screenPos.X, screenPos.Y), inverse);
-            return new Point((int)vec.X, (int)vec.Y);
+            Point[] points = new Point[] { screenPos };
+            Inverse.TransformPoints(points);
+            return points[0];
         }
 
-        public Vector2 EditorToScreen(Vector2 editorPos)
+        public PointF EditorToScreen(PointF editorPos)
         {
-            if (changed)
-                updateMatrices();
-            return Vector2.Transform(editorPos, matrix);
+            PointF[] points = new PointF[] { editorPos };
+            Matrix.TransformPoints(points);
+            return points[0];
         }
 
         public Point EditorToScreen(Point editorPos)
         {
-            if (changed)
-                updateMatrices();
-            Vector2 vec = Vector2.Transform(new Vector2(editorPos.X, editorPos.Y), matrix);
-            return new Point((int)vec.X, (int)vec.Y);
+            Point[] points = new Point[] { editorPos };
+            Matrix.TransformPoints(points);
+            return points[0];
         }
 
-        public Matrix Matrix
+        //Transformations
+        public void Pan(PointF by)
         {
-            get
-            {
-                if (changed)
-                    updateMatrices();
-                return matrix;
-            }
+            PointF[] p = new PointF[] { by };
+            Inverse.TransformVectors(p);
+            by = p[0];
+
+            Matrix.Translate(by.X, by.Y);
+            Inverse.Translate(-by.X, -by.Y);
         }
 
-        public Matrix Inverse
+        public void PanTo(PointF to)
         {
-            get
-            {
-                if (changed)
-                    updateMatrices();
-                return inverse;
-            }
+            PointF at = EditorToScreen(PointF.Empty);
+            PointF translate = new PointF(to.X - at.X, to.Y - at.Y);
+            translate = ScreenToEditor(translate);
+            Pan(translate);
         }
 
-        //Get/Sets
-        public Vector2 Origin
+        public void Center()
         {
-            get { return origin; }
-            set
-            {
-                changed = true;
-                origin = value;
-            }
+            PanTo(new PointF(LevelEditor.Width / 2 - LevelEditor.Level.Size.Width / 2, LevelEditor.Height / 2 - LevelEditor.Level.Size.Height / 2));
         }
 
-        public Vector2 Position
+        public void CenterOn(PointF on)
         {
-            get { return position; }
-            set
-            {
-                changed = true;
-                position = value;
-            }
+            PanTo(new PointF(LevelEditor.Width / 2 - on.X, LevelEditor.Height / 2 - on.Y));
         }
 
-        public float X
+        private int GetZoomIndex()
         {
-            get { return position.X; }
-            set
-            {
-                changed = true;
-                position.X = value;
-            }
+            for (int i = 0; i < ZOOMS.Length; i++)
+                if (ZOOMS[i] == Zoom)
+                    return i;
+            throw new Exception("Zoom exception!");
         }
 
-        public float Y
+        public void ZoomIn()
         {
-            get { return position.Y; }
-            set
-            {
-                changed = true;
-                position.Y = value;
-            }
+            int at = GetZoomIndex();
+            if (at == ZOOMS.Length - 1)
+                return;
+
+            Zoom = ZOOMS[at + 1];
+            float scale = ZOOMS[at + 1] / ZOOMS[at];
+
+            Matrix.Scale(scale, scale);
+            Inverse = Matrix.Clone();
+            Inverse.Invert();
         }
 
-        public float Zoom
+        public void ZoomIn(PointF mouseAt)
         {
-            get { return zoom; }
-            set
-            {
-                changed = true;
-                zoom = value;
-            }
+            ZoomIn();
+        }
+
+        public void ZoomOut()
+        {
+            int at = GetZoomIndex();
+            if (at == 0)
+                return;
+
+            Zoom = ZOOMS[at - 1];
+            float scale = ZOOMS[at - 1] / ZOOMS[at];
+
+            Matrix.Scale(scale, scale);
+            Inverse = Matrix.Clone();
+            Inverse.Invert();
+        }
+
+        public void ZoomOut(PointF mouseAt)
+        {
+            ZoomOut();
         }
 
         public string ZoomString
         {
             get
             {
-                return ((int)(zoom * 100)).ToString() + "%";
+                return ((int)(Zoom * 100)).ToString() + "%";
             }
-        }
-
-        public void ZoomIn()
-        {
-            int index;
-            for (index = 0; index < ZOOMS.Length; index++)
-            {
-                if (zoom <= ZOOMS[index])
-                    break;
-            }
-
-
-            zoom = ZOOMS[Math.Min(ZOOMS.Length - 1, index + 1)];
-            changed = true;
-        }
-
-        public void ZoomOut()
-        {
-            int index;
-            for (index = 0; index < ZOOMS.Length; index++)
-            {
-                if (zoom <= ZOOMS[index])
-                    break;
-            }
-
-
-            zoom = ZOOMS[Math.Max(0, index - 1)];
-            changed = true;
         }
     }
 }
