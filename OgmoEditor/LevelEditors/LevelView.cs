@@ -74,7 +74,7 @@ namespace OgmoEditor.LevelEditors
             by = p[0];
 
             Matrix.Translate(by.X, by.Y);
-            Inverse.Translate(-by.X, -by.Y);
+            UpdateInverse();
         }
 
         public void PanTo(PointF to)
@@ -113,8 +113,7 @@ namespace OgmoEditor.LevelEditors
             float scale = ZOOMS[at + 1] / ZOOMS[at];
 
             Matrix.Scale(scale, scale);
-            Inverse = Matrix.Clone();
-            Inverse.Invert();
+            UpdateInverse();
         }
 
         public void ZoomIn(PointF mouseAt)
@@ -132,8 +131,7 @@ namespace OgmoEditor.LevelEditors
             float scale = ZOOMS[at - 1] / ZOOMS[at];
 
             Matrix.Scale(scale, scale);
-            Inverse = Matrix.Clone();
-            Inverse.Invert();
+            UpdateInverse();
         }
 
         public void ZoomOut(PointF mouseAt)
@@ -147,6 +145,12 @@ namespace OgmoEditor.LevelEditors
             {
                 return ((int)(Zoom * 100)).ToString() + "%";
             }
+        }
+
+        private void UpdateInverse()
+        {
+            Inverse = Matrix.Clone();
+            Inverse.Invert();
         }
     }
 }

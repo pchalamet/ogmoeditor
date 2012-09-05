@@ -13,12 +13,19 @@ namespace OgmoEditor.Windows
 {
     public partial class TileSelector : UserControl
     {
+        private enum ShiftMode { Left, Right, Up, Down }
         private const int BUFFER = 6;
 
         private Tileset tileset;
         private int[] ids;
         private float scale;
         private Point? selectionStart = null;
+
+        public TileSelector()
+        {
+            InitializeComponent();
+            this.Selection = new int[] { };
+        }
 
         public int[] Selection
         {
@@ -44,12 +51,6 @@ namespace OgmoEditor.Windows
             private set;
         }
 
-        public TileSelector()
-        {
-            InitializeComponent();
-            this.Selection = new int[] { };
-        }
-
         public Tileset Tileset
         {
             get { return tileset; }
@@ -73,14 +74,6 @@ namespace OgmoEditor.Windows
         {
             Selection = to;
             pictureBox.Refresh();
-        }
-
-        private enum ShiftMode
-        {
-            Left,
-            Right,
-            Up,
-            Down
         }
 
         private int ShiftID(int id, ShiftMode mode)
@@ -154,10 +147,11 @@ namespace OgmoEditor.Windows
                 if (Selection.Length > 0)
                 {
                     Rectangle r = tileset.GetRectFromID(Selection[0]);
-                    g.DrawRectangle(new Pen(Color.Yellow, 3), x + r.X * scale, y + r.Y * scale, r.Width * scale * SelectionWidth, r.Height * scale * SelectionHeight);
-                    Pen p = new Pen(Color.Black);
-                    p.DashPattern = new float[] { 6, 2 };
-                    g.DrawRectangle(p, x + r.X * scale, y + r.Y * scale, r.Width * scale * SelectionWidth, r.Height * scale * SelectionHeight);
+                    r.X = (int)(x + r.X * scale);
+                    r.Y = (int)(y + r.Y * scale);
+                    r.Width = (int)(r.Width * scale * SelectionWidth);
+                    r.Height = (int)(r.Height * scale * SelectionHeight);
+                    Ogmo.NewEditorDraw.DrawSelectionRectangle(e.Graphics, r);
                 }
             }
         }

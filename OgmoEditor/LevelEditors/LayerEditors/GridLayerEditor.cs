@@ -16,7 +16,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
     {
         public new GridLayer Layer { get; private set; }
 
-        private Brush rectBrush;
+        private SolidBrush rectBrush;
 
         public GridLayerEditor(LevelEditor levelEditor, GridLayer layer)
             : base(levelEditor, layer)
@@ -28,16 +28,21 @@ namespace OgmoEditor.LevelEditors.LayerEditors
         public override void NewDraw(Graphics graphics, bool current, int alpha)
         {
             //Draw the grid cells
+            rectBrush.Color = Color.FromArgb(alpha, rectBrush.Color);
             for (int i = 0; i < Layer.Grid.GetLength(0); i++)
-            {
                 for (int j = 0; j < Layer.Grid.GetLength(1); j++)
-                {
                     if (Layer.Grid[i, j])
-                    {
                         graphics.FillRectangle(rectBrush, new Rectangle(i * Layer.Definition.Grid.Width, j * Layer.Definition.Grid.Height, Layer.Definition.Grid.Width, Layer.Definition.Grid.Height));
-                    }
-                }
-            }
+
+            //Draw the selection box
+            if (current && Layer.Selection != null)
+                Ogmo.NewEditorDraw.DrawSelectionRectangle(graphics, 
+                    new Rectangle(Layer.Selection.Area.X * Layer.Definition.Grid.Width,
+                        Layer.Selection.Area.Y * Layer.Definition.Grid.Height,
+                        Layer.Selection.Area.Width * Layer.Definition.Grid.Width,
+                        Layer.Selection.Area.Height * Layer.Definition.Grid.Height));
+
+            base.NewDraw(graphics, current, alpha);
         }
 
         public override void DrawLocal(bool current, float alpha)

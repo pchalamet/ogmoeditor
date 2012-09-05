@@ -29,6 +29,11 @@ namespace OgmoEditor.LevelEditors.Tools
 
         }
 
+        public virtual void NewDraw(Graphics graphics)
+        {
+
+        }
+
         public virtual void OnKeyDown(Keys key)
         {
 

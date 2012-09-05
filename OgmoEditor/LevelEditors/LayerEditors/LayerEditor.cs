@@ -39,7 +39,8 @@ using System.Drawing;
 
         public virtual void NewDraw(Graphics graphics, bool current, int alpha)
         {
-            
+            if (current && Ogmo.ToolsWindow.CurrentTool != null)
+                Ogmo.ToolsWindow.CurrentTool.NewDraw(graphics);
         }
 
         public void Draw(bool current, float alpha)

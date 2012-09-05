@@ -65,7 +65,7 @@ namespace OgmoEditor.LevelEditors
             //Init the level BG brush
             BackgroundImage = Ogmo.NewEditorDraw.ImgBG;
             levelBGBrush = new SolidBrush(Ogmo.Project.BackgroundColor);
-            gridPen = new Pen(Ogmo.Project.GridColor);
+            gridPen = new Pen(Color.FromArgb(130, Ogmo.Project.GridColor));
 
             //Events
             Repaint = delegate { Invalidate(); };
