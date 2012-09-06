@@ -13,11 +13,13 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
         private bool drawMode;
         private Point drawStart;
         private Point mouse;
+        private SolidBrush fillBrush;
 
         public GridLineTool()
             : base("Line", "line.png")
         {
             drawing = false;
+            fillBrush = new SolidBrush(Color.Black);
         }
 
         public override void OnMouseLeftDown(System.Drawing.Point location)
@@ -80,6 +82,19 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
                 List<Point> pts = getPoints(drawStart, mouse);
                 foreach (var p in pts)
                     Ogmo.EditorDraw.DrawRectangle(p.X * LayerEditor.Layer.Definition.Grid.Width, p.Y * LayerEditor.Layer.Definition.Grid.Height, LayerEditor.Layer.Definition.Grid.Width, LayerEditor.Layer.Definition.Grid.Height, (drawMode ? LayerEditor.Layer.Definition.Color.ToXNA() : LayerEditor.Layer.Definition.Color.Invert().ToXNA()) * .5f);
+            }
+        }
+
+        public override void NewDraw(Graphics graphics)
+        {
+            if (drawing)
+            {
+                List<Point> pts = getPoints(drawStart, mouse);
+                foreach (var p in pts)
+                {
+                    fillBrush.Color = Color.FromArgb(130, drawMode ? LayerEditor.Layer.Definition.Color : LayerEditor.Layer.Definition.Color.Invert());
+                    graphics.FillRectangle(fillBrush, new Rectangle(p.X * LayerEditor.Layer.Definition.Grid.Width, p.Y * LayerEditor.Layer.Definition.Grid.Height, LayerEditor.Layer.Definition.Grid.Width, LayerEditor.Layer.Definition.Grid.Height));
+                }
             }
         }
 

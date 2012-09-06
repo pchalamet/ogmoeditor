@@ -187,6 +187,14 @@ namespace OgmoEditor
         }
 
         /*
+         *  Color operators
+         */
+        static public Color Invert(this Color color)
+        {
+            return Color.FromArgb(color.A, 255 - color.R, 255 - color.G, 255 - color.B);
+        }
+
+        /*
          *  Point operators
          */
         static public PointF Add(this PointF a, PointF b)

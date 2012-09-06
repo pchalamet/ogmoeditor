@@ -13,11 +13,15 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
         private bool drawMode;
         private Point drawStart;
         private Point drawTo;
+        private Pen drawPen;
+        private SolidBrush fillBrush;
 
         public GridRectangleTool()
             : base("Rectangle", "rectangle.png")
         {
             drawing = false;
+            drawPen = new Pen(Color.Black, 2);
+            fillBrush = new SolidBrush(Color.Black);
         }
 
         public override void Draw()
@@ -27,6 +31,21 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
                 Rectangle draw = LayerEditor.Layer.GetGridRectangle(drawStart, drawTo);
                 if (LevelEditor.Level.Bounds.IntersectsWith(draw))
                     Ogmo.EditorDraw.DrawFillRect(draw, (drawMode ? LayerEditor.Layer.Definition.Color.ToXNA() : LayerEditor.Layer.Definition.Color.Invert().ToXNA()) * .5f);
+            }
+        }
+
+        public override void NewDraw(Graphics graphics)
+        {
+            if (drawing)
+            {
+                Rectangle draw = LayerEditor.Layer.GetGridRectangle(drawStart, drawTo);
+                if (LevelEditor.Level.Bounds.IntersectsWith(draw))
+                {
+                    drawPen.Color = drawMode ? LayerEditor.Layer.Definition.Color : LayerEditor.Layer.Definition.Color.Invert();
+                    fillBrush.Color = Color.FromArgb(130, drawPen.Color);
+                    graphics.FillRectangle(fillBrush, draw);
+                    graphics.DrawRectangle(drawPen, draw);
+                }
             }
         }
 

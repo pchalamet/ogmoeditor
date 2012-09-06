@@ -29,6 +29,16 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
             }
         }
 
+        public override void NewDraw(Graphics graphics)
+        {
+            if (drawing)
+            {
+                Rectangle draw = LayerEditor.Layer.GetGridRectangle(drawStart, drawTo);
+                if (LevelEditor.Level.Bounds.IntersectsWith(draw))
+                    Ogmo.NewEditorDraw.DrawSelectionRectangle(graphics, draw);
+            }
+        }
+
         public override void OnMouseLeftDown(System.Drawing.Point location)
         {
             drawTo = drawStart = LayerEditor.MouseSnapPosition;
