@@ -18,6 +18,14 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             Layer = layer;
         }
 
+        public override void NewDraw(System.Drawing.Graphics graphics, bool current, int alpha)
+        {
+            foreach (Entity e in Layer.Entities)
+                e.NewDraw(alpha);
+
+            base.NewDraw(graphics, current, alpha);
+        }
+
         public override void DrawLocal(bool current, float alpha)
         {
             foreach (Entity e in Layer.Entities)

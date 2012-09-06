@@ -30,8 +30,8 @@ namespace OgmoEditor.Windows
             HorizontalScroll.Enabled = false;
 
             //Events
-            Ogmo.OnProjectStart += initFromProject;
-            Ogmo.OnProjectEdited += initFromProject;
+            Ogmo.OnProjectStart += InitFromProject;
+            Ogmo.OnProjectEdited += InitFromProject;
             Ogmo.LayersWindow.OnLayerChanged += onLayerChanged;
         }
 
@@ -52,7 +52,7 @@ namespace OgmoEditor.Windows
                 OnEntityChanged(def);
         }
 
-        private void initFromProject(Project project)
+        private void InitFromProject(Project project)
         {
             ClientSize = new Size(148, 220);
             MaximumSize = new Size(Size.Width, 1000);
@@ -62,9 +62,7 @@ namespace OgmoEditor.Windows
                 b.OnRemove();
             Controls.Clear();
             for (int i = 0; i < project.EntityDefinitions.Count; i++)
-            {
                 Controls.Add(new EntityButton(project.EntityDefinitions[i], 0, 1 + i * 25));
-            }
 
             SetObject(null);
         }

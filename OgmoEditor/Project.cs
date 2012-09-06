@@ -111,6 +111,12 @@ namespace OgmoEditor
                 EntityDefinitions.Add(d.Clone());
         }
 
+        public void LoadContent()
+        {
+            foreach (var def in EntityDefinitions)
+                def.GenerateImages();
+        }
+
         public string ErrorCheck()
         {
             string s = "";

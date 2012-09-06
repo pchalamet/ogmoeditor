@@ -18,6 +18,7 @@ namespace OgmoEditor.Windows
         static private readonly OgmoColor Hover = new OgmoColor(255, 220, 130);
 
         public EntityDefinition Definition { get; private set; }
+        private Bitmap image;
 
         public EntityButton(EntityDefinition definition, int x, int y)
         {
@@ -26,14 +27,27 @@ namespace OgmoEditor.Windows
             Location = new Point(x, y);
             toolTip.SetToolTip(this, definition.Name);
 
-            pictureBox.BackgroundImage = Definition.Image;
-            pictureBox.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox.Paint += new PaintEventHandler(pictureBox_Paint);
+            image = (Bitmap)Definition.ButtonBitmap.Clone();
 
             entityNameLabel.Text = definition.Name;
             entityNameLabel.BackColor = (definition == Ogmo.EntitiesWindow.CurrentEntity) ? Selected : NotSelected;
 
             //Events
             Ogmo.EntitiesWindow.OnEntityChanged += onEntityChanged;
+        }
+
+        private void pictureBox_Paint(object sender, PaintEventArgs e)
+        {
+            float scale = Math.Min(ClientSize.Width / (float)image.Width, ClientSize.Height / (float)image.Height);
+            int destWidth = (int)(image.Width * scale);
+            int destHeight = (int)(image.Height * scale);
+
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
+            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            e.Graphics.DrawImage(image,
+                new Rectangle(pictureBox.ClientSize.Width / 2 - destWidth / 2, pictureBox.ClientSize.Height / 2 - destHeight / 2, destWidth, destHeight),
+                new Rectangle(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
         }
 
         public void OnRemove()

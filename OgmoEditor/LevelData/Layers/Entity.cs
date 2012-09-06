@@ -181,6 +181,11 @@ namespace OgmoEditor.LevelData.Layers
             return xml;
         }
 
+        public void NewDraw(int alpha)
+        {
+
+        }
+
         public void Draw(float alpha)
         {
             Ogmo.EditorDraw.DrawEntity(this, alpha);

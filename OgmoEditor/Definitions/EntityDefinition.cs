@@ -8,6 +8,7 @@ using OgmoEditor.Definitions.ValueDefinitions;
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
 using OgmoEditor.LevelEditors;
+using System.Diagnostics;
 
 namespace OgmoEditor.Definitions
 {
@@ -32,7 +33,8 @@ namespace OgmoEditor.Definitions
         public List<ValueDefinition> ValueDefinitions;
         public EntityNodesDefinition NodesDefinition;
 
-        private Image image;
+        private Bitmap bitmap;
+        private Bitmap buttonBitmap;
 
         public EntityDefinition()
         {
@@ -67,44 +69,49 @@ namespace OgmoEditor.Definitions
             return def;
         }
 
-        public Image Image
+        public void GenerateImages()
         {
-            get
-            {
-                if (image == null)
-                    image = generateButtonImage();
-                return image;
-            }
-        }
+            //Dispose old stuff
+            if (bitmap != null)
+                bitmap.Dispose();
+            if (buttonBitmap != null && buttonBitmap != bitmap)
+                buttonBitmap.Dispose();
 
-        private Image generateButtonImage()
-        {
-            if (ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Rectangle)
+            //Generate the in-editor image
+            switch (ImageDefinition.DrawMode)
             {
-                //Draw a rectangle
-                Bitmap b = new Bitmap(Size.Width, Size.Height);
-                using (Graphics g = Graphics.FromImage(b))
-                {
-                    g.FillRectangle(new SolidBrush(ImageDefinition.RectColor), new Rectangle(0, 0, Size.Width, Size.Height));
-                }
-                return (Image)b;
-            }
-            else if (ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
-            {
-                //Draw the image
-                if (!File.Exists(Path.Combine(Ogmo.Project.SavedDirectory, ImageDefinition.ImagePath)))
-                    return null;
-                else
-                {
-                    FileStream s = new FileStream(Path.Combine(Ogmo.Project.SavedDirectory, ImageDefinition.ImagePath), FileMode.Open, FileAccess.Read, FileShare.Read);
-                    Image image = Image.FromStream(s);
-                    s.Close();
-                    return image;
-                }
+                case EntityImageDefinition.DrawModes.Rectangle:
+                    Bitmap b = new Bitmap(Size.Width, Size.Height);
+                    using (Graphics g = Graphics.FromImage(b))
+                    {
+                        g.FillRectangle(new SolidBrush(ImageDefinition.RectColor), new Rectangle(0, 0, Size.Width, Size.Height));
+                    }
+                    bitmap = b;
+                    break;
+
+                case EntityImageDefinition.DrawModes.Image:
+                    if (!File.Exists(Path.Combine(Ogmo.Project.SavedDirectory, ImageDefinition.ImagePath)))
+                        throw new Exception("Entity image could not be loaded!");
+                    else
+                        bitmap = new Bitmap(Path.Combine(Ogmo.Project.SavedDirectory, ImageDefinition.ImagePath));
+                    break;
             }
 
-            return null;
+            //Generate the button image
+            if (ImageDefinition.Tiled && ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
+            {
+                buttonBitmap = new Bitmap(Size.Width, Size.Height);
+                using (Graphics g = Graphics.FromImage(ButtonBitmap))
+                {
+                    g.DrawImageUnscaled(Bitmap, Point.Empty);
+                }
+            }
+            else
+                buttonBitmap = Bitmap;
         }
+
+        public Bitmap Bitmap { get { return bitmap; } }
+        public Bitmap ButtonBitmap { get { return buttonBitmap; } }
 
         public Texture2D GenerateTexture(GraphicsDevice graphics)
         {

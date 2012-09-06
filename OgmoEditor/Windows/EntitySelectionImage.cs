@@ -13,16 +13,17 @@ namespace OgmoEditor.Windows
     public partial class EntitySelectionImage : UserControl
     {
         private Entity entity;
-        private Image image;
+        private Bitmap image;
 
         public EntitySelectionImage(Entity entity, int x, int y)
         {
             this.entity = entity;
             Location = new Point(x, y);
             InitializeComponent();
-            image = entity.Definition.Image;
 
             toolTip.SetToolTip(pictureBox, entity.Definition.Name);
+
+            image = (Bitmap)entity.Definition.ButtonBitmap.Clone();
         }
 
         /*
@@ -33,10 +34,10 @@ namespace OgmoEditor.Windows
             float scale = Math.Min(ClientSize.Width / (float)image.Width, ClientSize.Height / (float)image.Height);
             int destWidth = (int)(image.Width * scale);
             int destHeight = (int)(image.Height * scale);
-            Graphics g = e.Graphics;
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
-            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-            g.DrawImage(image,
+
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
+            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            e.Graphics.DrawImage(image,
                 new Rectangle(pictureBox.ClientSize.Width / 2 - destWidth / 2, pictureBox.ClientSize.Height / 2 - destHeight / 2, destWidth, destHeight),
                 new Rectangle(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
         }
@@ -49,7 +50,7 @@ namespace OgmoEditor.Windows
 
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
-                if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
+                if (Util.Ctrl)
                     Ogmo.EntitySelectionWindow.SetSelection(((EntityLayer)Ogmo.CurrentLevel.Layers[Ogmo.LayersWindow.CurrentLayerIndex]).Entities.FindAll(en => en.Definition == entity.Definition));
                 else
                     Ogmo.EntitySelectionWindow.SetSelection(entity);

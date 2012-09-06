@@ -218,6 +218,9 @@ namespace OgmoEditor
 
             Project = project;
 
+            //Load the images
+            Project.LoadContent();
+
             //Call the added event
             if (OnProjectStart != null)
                 OnProjectStart(project);
@@ -278,7 +281,7 @@ namespace OgmoEditor
 
                 //Save the project
                 Project.Save();
-                EditorDraw.LoadProjectTextures(Project);
+                Project.LoadContent();
 
                 //Call the event
                 if (OnProjectEdited != null)
@@ -299,8 +302,7 @@ namespace OgmoEditor
             {
                 //Start the project and save it
                 StartProject(Project);
-                Project.Save();
-                EditorDraw.LoadProjectTextures(Project);
+                Project.Save(); 
 
                 //Start a blank level and start at the first layer
                 LayersWindow.SetLayer(0);
