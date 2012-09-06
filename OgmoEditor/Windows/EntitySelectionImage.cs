@@ -23,7 +23,7 @@ namespace OgmoEditor.Windows
 
             toolTip.SetToolTip(pictureBox, entity.Definition.Name);
 
-            image = (Bitmap)entity.Definition.ButtonBitmap.Clone();
+            image = entity.Definition.GetButtonBitmap();
         }
 
         /*

@@ -101,17 +101,25 @@ namespace OgmoEditor.Definitions
             if (ImageDefinition.Tiled && ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
             {
                 buttonBitmap = new Bitmap(Size.Width, Size.Height);
-                using (Graphics g = Graphics.FromImage(ButtonBitmap))
+                using (Graphics g = Graphics.FromImage(buttonBitmap))
                 {
-                    g.DrawImageUnscaled(Bitmap, Point.Empty);
+                    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                    g.DrawImageUnscaledAndClipped(bitmap, new Rectangle(0, 0, Size.Width, Size.Height));
                 }
             }
             else
-                buttonBitmap = Bitmap;
+                buttonBitmap = bitmap;
         }
 
-        public Bitmap Bitmap { get { return bitmap; } }
-        public Bitmap ButtonBitmap { get { return buttonBitmap; } }
+        public Bitmap GetBitmap()
+        {
+            return (Bitmap)bitmap.Clone();
+        }
+
+        public Bitmap GetButtonBitmap()
+        {
+            return (Bitmap)buttonBitmap.Clone();
+        }
 
         public Texture2D GenerateTexture(GraphicsDevice graphics)
         {

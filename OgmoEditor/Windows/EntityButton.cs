@@ -28,7 +28,7 @@ namespace OgmoEditor.Windows
             toolTip.SetToolTip(this, definition.Name);
 
             pictureBox.Paint += new PaintEventHandler(pictureBox_Paint);
-            image = (Bitmap)Definition.ButtonBitmap.Clone();
+            image = Definition.GetButtonBitmap();
 
             entityNameLabel.Text = definition.Name;
             entityNameLabel.BackColor = (definition == Ogmo.EntitiesWindow.CurrentEntity) ? Selected : NotSelected;
