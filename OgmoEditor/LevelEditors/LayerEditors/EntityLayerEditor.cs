@@ -21,7 +21,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
         public override void NewDraw(System.Drawing.Graphics graphics, bool current, int alpha)
         {
             foreach (Entity e in Layer.Entities)
-                e.NewDraw(alpha);
+                e.NewDraw(graphics, alpha);
 
             base.NewDraw(graphics, current, alpha);
         }

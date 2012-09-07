@@ -21,6 +21,8 @@ namespace OgmoEditor.LevelData.Layers
         public List<Point> Nodes;
         public uint ID { get; private set; }
 
+        private Bitmap bitmap;
+
         public Entity(EntityLayer layer, EntityDefinition def, Point position)
         {
             Layer = layer;
@@ -30,6 +32,9 @@ namespace OgmoEditor.LevelData.Layers
             Position = position;
             Size = def.Size;
             Angle = 0;
+
+            //Init the bitmap
+            bitmap = Definition.GetBitmap();
 
             //Nodes
             if (def.NodesDefinition.Enabled)
@@ -48,6 +53,9 @@ namespace OgmoEditor.LevelData.Layers
         {
             Layer = layer;
             Definition = Ogmo.Project.EntityDefinitions.Find(d => d.Name == xml.Name);
+
+            //Init the bitmap
+            bitmap = Definition.GetBitmap();
 
             //ID
             if (xml.Attributes["id"] != null)
@@ -181,9 +189,26 @@ namespace OgmoEditor.LevelData.Layers
             return xml;
         }
 
-        public void NewDraw(int alpha)
+        public void NewDraw(Graphics graphics, int alpha)
         {
-
+            //Draw the actual entity
+            if (Definition.ImageDefinition.Tiled && Definition.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
+            {
+                Rectangle drawTo = Rectangle.Empty;
+                for (drawTo.X = 0; drawTo.X < Size.Width; drawTo.X += bitmap.Width)
+                {
+                    drawTo.Width = Math.Min(bitmap.Width, Size.Width - drawTo.X);
+                    for (drawTo.Y = 0; drawTo.Y < Size.Height; drawTo.Y += bitmap.Height)
+                    {
+                        drawTo.Height = Math.Min(bitmap.Height, Size.Height - drawTo.Y);
+                        graphics.DrawImageUnscaledAndClipped(bitmap, new Rectangle(drawTo.X + Position.X - Definition.Origin.X, drawTo.Y + Position.Y - Definition.Origin.Y, drawTo.Width, drawTo.Height));
+                    }
+                }
+            }
+            else
+            {
+                graphics.DrawImage(bitmap, new Rectangle(Position.X - Definition.Origin.X, Position.Y - Definition.Origin.Y, Size.Width, Size.Height));
+            }
         }
 
         public void Draw(float alpha)

@@ -89,6 +89,9 @@ namespace OgmoEditor.LevelEditors
 
         private void Draw(object sender, System.Windows.Forms.PaintEventArgs e)
         {
+            e.Graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
+            e.Graphics.SmoothingMode = SmoothingMode.HighSpeed;
+
             //Draw the background logo
             e.Graphics.Transform = LevelView.Identity;
             e.Graphics.DrawImage(Ogmo.NewEditorDraw.ImgLogo, new Rectangle(Width/2 - Ogmo.NewEditorDraw.ImgLogo.Width/4, Height/2 - Ogmo.NewEditorDraw.ImgLogo.Height/4, Ogmo.NewEditorDraw.ImgLogo.Width/2, Ogmo.NewEditorDraw.ImgLogo.Height/2));
