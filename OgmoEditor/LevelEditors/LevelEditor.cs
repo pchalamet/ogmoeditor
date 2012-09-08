@@ -20,7 +20,6 @@ namespace OgmoEditor.LevelEditors
         static private readonly Brush NoFocusBrush = new SolidBrush(Color.FromArgb(80, 220, 220, 220));
         static private readonly Brush ShadowBrush = new SolidBrush(Color.FromArgb(120, 0, 0, 0));
         static private readonly Pen GridBorderPen = new Pen(Color.Black, 2);
-        private const int LAYER_ABOVE_ALPHA = 130;
 
         private enum MouseMode { Normal, Pan, Camera };
 
@@ -89,8 +88,8 @@ namespace OgmoEditor.LevelEditors
 
         private void Draw(object sender, System.Windows.Forms.PaintEventArgs e)
         {
-            e.Graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
             e.Graphics.SmoothingMode = SmoothingMode.HighSpeed;
+            e.Graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
 
             //Draw the background logo
             e.Graphics.Transform = LevelView.Identity;
@@ -108,17 +107,17 @@ namespace OgmoEditor.LevelEditors
             for (i = 0; i < Ogmo.LayersWindow.CurrentLayerIndex; i++)
             {
                 if (Ogmo.Project.LayerDefinitions[i].Visible)
-                    LayerEditors[i].NewDraw(e.Graphics, false, 255);
+                    LayerEditors[i].NewDraw(e.Graphics, false, true);
             }
 
             //Current layer
-            LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].NewDraw(e.Graphics, true, 255);
+            LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].NewDraw(e.Graphics, true, true);
 
             //Layers above the current one
             for (; i < LayerEditors.Count; i++)
             {
                 if (i < Ogmo.Project.LayerDefinitions.Count && Ogmo.Project.LayerDefinitions[i].Visible)
-                    LayerEditors[i].NewDraw(e.Graphics, false, LAYER_ABOVE_ALPHA);
+                    LayerEditors[i].NewDraw(e.Graphics, false, false);
             }
 
             //Draw the grid

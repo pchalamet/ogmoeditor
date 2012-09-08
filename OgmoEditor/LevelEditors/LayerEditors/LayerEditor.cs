@@ -8,16 +8,19 @@ using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 using System.Diagnostics;
 using OgmoEditor.LevelEditors.Actions;
-using OgmoEditor.LevelEditors.Tools;  
+using OgmoEditor.LevelEditors.Tools;
+using OgmoEditor.LevelEditors.Resizers;
+using System.Drawing; 
 
 namespace OgmoEditor.LevelEditors.LayerEditors
 {
     using Point = System.Drawing.Point;
-    using OgmoEditor.LevelEditors.Resizers;
-using System.Drawing;
+    
 
     public abstract class LayerEditor
     {
+        public const int LAYER_ABOVE_ALPHA = 255/2;
+
         public Layer Layer { get; private set; }
         public LevelEditor LevelEditor { get; private set; }
         public Point MouseSnapPosition { get; private set; }
@@ -37,7 +40,7 @@ using System.Drawing;
             DrawMatrix = Matrix.CreateTranslation(DrawOffset.X, DrawOffset.Y, 0);
         }
 
-        public virtual void NewDraw(Graphics graphics, bool current, int alpha)
+        public virtual void NewDraw(Graphics graphics, bool current, bool fullAlpha)
         {
             if (current && Ogmo.ToolsWindow.CurrentTool != null)
                 Ogmo.ToolsWindow.CurrentTool.NewDraw(graphics);

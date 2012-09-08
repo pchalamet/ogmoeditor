@@ -8,11 +8,15 @@ using System.Drawing;
 using Microsoft.Xna.Framework.Graphics;
 using OgmoEditor.LevelEditors;
 using System.Windows.Forms;
+using System.Drawing.Imaging;
 
 namespace OgmoEditor
 {
     static public class Util
     {
+        static public readonly ColorMatrix FullAlphaMatrix = CreateAlphaMatrix(1);
+        static public readonly ColorMatrix HalfAlphaMatrix = CreateAlphaMatrix(.5f);
+        
         public const float UP = (float)(Math.PI * 1.5);
         public const float DOWN = (float)(Math.PI * .5);
         public const float RIGHT = 0;
@@ -155,6 +159,11 @@ namespace OgmoEditor
             int temp = a;
             a = b;
             b = temp;
+        }
+
+        static public ColorMatrix CreateAlphaMatrix(float alpha)
+        {
+            return new ColorMatrix(new float[][] { new float[] { 1, 0, 0, 0, 0 }, new float[] { 0, 1, 0, 0, 0 }, new float[] { 0, 0, 1, 0, 0 }, new float[] { 0, 0, 0, alpha, 0 }, new float[] { 0, 0, 0, 0, 1 } });
         }
 
         static public bool Ctrl

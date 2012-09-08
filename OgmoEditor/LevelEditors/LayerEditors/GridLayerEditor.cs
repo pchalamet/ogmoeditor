@@ -25,10 +25,10 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             rectBrush = new SolidBrush(layer.Definition.Color);
         }
 
-        public override void NewDraw(Graphics graphics, bool current, int alpha)
+        public override void NewDraw(Graphics graphics, bool current, bool fullAlpha)
         {
             //Draw the grid cells
-            rectBrush.Color = Color.FromArgb(alpha, rectBrush.Color);
+            rectBrush.Color = Color.FromArgb(fullAlpha ? 255 : LAYER_ABOVE_ALPHA, rectBrush.Color);
             for (int i = 0; i < Layer.Grid.GetLength(0); i++)
                 for (int j = 0; j < Layer.Grid.GetLength(1); j++)
                     if (Layer.Grid[i, j])
@@ -42,7 +42,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
                         Layer.Selection.Area.Width * Layer.Definition.Grid.Width,
                         Layer.Selection.Area.Height * Layer.Definition.Grid.Height));
 
-            base.NewDraw(graphics, current, alpha);
+            base.NewDraw(graphics, current, fullAlpha);
         }
 
         public override void DrawLocal(bool current, float alpha)

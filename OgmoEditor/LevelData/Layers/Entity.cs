@@ -7,6 +7,7 @@ using OgmoEditor.Definitions;
 using System.Drawing;
 using System.Xml;
 using OgmoEditor.LevelEditors;
+using System.Drawing.Imaging;
 
 namespace OgmoEditor.LevelData.Layers
 {
@@ -22,6 +23,7 @@ namespace OgmoEditor.LevelData.Layers
         public uint ID { get; private set; }
 
         private Bitmap bitmap;
+        private ImageAttributes attributes;
 
         public Entity(EntityLayer layer, EntityDefinition def, Point position)
         {
@@ -35,6 +37,7 @@ namespace OgmoEditor.LevelData.Layers
 
             //Init the bitmap
             bitmap = Definition.GetBitmap();
+            attributes = new ImageAttributes();
 
             //Nodes
             if (def.NodesDefinition.Enabled)
@@ -56,6 +59,7 @@ namespace OgmoEditor.LevelData.Layers
 
             //Init the bitmap
             bitmap = Definition.GetBitmap();
+            attributes = new ImageAttributes();
 
             //ID
             if (xml.Attributes["id"] != null)
@@ -107,6 +111,10 @@ namespace OgmoEditor.LevelData.Layers
             Position = e.Position;
             Size = e.Size;
             Angle = e.Angle;
+
+            //Init the bitmap
+            bitmap = Definition.GetBitmap();
+            attributes = new ImageAttributes();
 
             //Nodes
             if (Definition.NodesDefinition.Enabled)
@@ -189,9 +197,16 @@ namespace OgmoEditor.LevelData.Layers
             return xml;
         }
 
-        public void NewDraw(Graphics graphics, int alpha)
+        public void NewDraw(Graphics graphics, bool current, bool fullAlpha)
         {
+            //Set the alpha blending
+            if (!fullAlpha)
+                attributes.SetColorMatrix(Util.HalfAlphaMatrix);
+            else
+                attributes.SetColorMatrix(Util.FullAlphaMatrix);
+
             //Draw the actual entity
+            graphics.Transform.RotateAt(-Angle, Position); 
             if (Definition.ImageDefinition.Tiled && Definition.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
             {
                 Rectangle drawTo = Rectangle.Empty;
@@ -201,13 +216,13 @@ namespace OgmoEditor.LevelData.Layers
                     for (drawTo.Y = 0; drawTo.Y < Size.Height; drawTo.Y += bitmap.Height)
                     {
                         drawTo.Height = Math.Min(bitmap.Height, Size.Height - drawTo.Y);
-                        graphics.DrawImageUnscaledAndClipped(bitmap, new Rectangle(drawTo.X + Position.X - Definition.Origin.X, drawTo.Y + Position.Y - Definition.Origin.Y, drawTo.Width, drawTo.Height));
+                        graphics.DrawImage(bitmap, new Rectangle(drawTo.X + Position.X - Definition.Origin.X, drawTo.Y + Position.Y - Definition.Origin.Y, drawTo.Width, drawTo.Height), 0, 0, drawTo.Width, drawTo.Height, GraphicsUnit.Pixel, attributes);
                     }
                 }
             }
             else
             {
-                graphics.DrawImage(bitmap, new Rectangle(Position.X - Definition.Origin.X, Position.Y - Definition.Origin.Y, Size.Width, Size.Height));
+                graphics.DrawImage(bitmap, new Rectangle(Position.X - Definition.Origin.X, Position.Y - Definition.Origin.Y, Size.Width, Size.Height), 0, 0, bitmap.Width, bitmap.Height, GraphicsUnit.Pixel, attributes);
             }
         }
 
