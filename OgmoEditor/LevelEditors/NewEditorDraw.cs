@@ -32,6 +32,7 @@ namespace OgmoEditor.LevelEditors
             EntityImages = new Dictionary<EntityDefinition, Bitmap>();
             TilesetImages = new Dictionary<Tileset, Bitmap>();
 
+            //Pens and brushes
             highlightPen = new Pen(Color.Yellow, 2);
             dashPen = new Pen(Color.Teal);
             dashPen.DashPattern = new float[] { 6, 2 };
@@ -39,6 +40,7 @@ namespace OgmoEditor.LevelEditors
             NodePathPen = new Pen(Color.Yellow, 1);
             NodePathPen.DashPattern = new float[] { 3, 1 };
 
+            //Updates the selection box brush
             Application.Idle += new EventHandler(Application_Idle);
         }
 

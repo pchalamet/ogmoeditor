@@ -18,6 +18,19 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
 
         }
 
+        public override void NewDraw(Graphics graphics)
+        {
+            if (drawing)
+            {
+                int x = Math.Min(mouseStart.X, LevelEditor.MousePosition.X);
+                int y = Math.Min(mouseStart.Y, LevelEditor.MousePosition.Y);
+                int w = Math.Max(mouseStart.X, LevelEditor.MousePosition.X) - x;
+                int h = Math.Max(mouseStart.Y, LevelEditor.MousePosition.Y) - y;
+
+                Ogmo.NewEditorDraw.DrawSelectionRectangle(graphics, new Rectangle(x, y, w, h));
+            }
+        }
+
         public override void Draw()
         {
             if (drawing)
@@ -35,6 +48,11 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
         {
             drawing = true;
             mouseStart = location;
+        }
+
+        public override void OnMouseRightDown(Point location)
+        {
+            Ogmo.EntitySelectionWindow.ClearSelection();
         }
 
         public override void OnMouseLeftUp(Point location)
