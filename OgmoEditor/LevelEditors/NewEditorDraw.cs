@@ -19,6 +19,7 @@ namespace OgmoEditor.LevelEditors
         private Pen dashPen;
         private SolidBrush nodeBrush;
         public Pen NodePathPen { get; private set; }
+        public Pen NodeNewPathPen { get; private set; }
 
         //Project images
         public Dictionary<EntityDefinition, Bitmap> EntityImages { get; private set; }
@@ -39,6 +40,8 @@ namespace OgmoEditor.LevelEditors
             nodeBrush = new SolidBrush(Color.Yellow);
             NodePathPen = new Pen(Color.Yellow, 1);
             NodePathPen.DashPattern = new float[] { 3, 1 };
+            NodeNewPathPen = new Pen(Color.FromArgb(255 / 2, Color.Yellow), 1);
+            NodeNewPathPen.DashPattern = new float[] { 3, 1 };
 
             //Updates the selection box brush
             Application.Idle += new EventHandler(Application_Idle);

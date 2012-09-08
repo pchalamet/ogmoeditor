@@ -99,6 +99,35 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
             LevelEditor.EndBatch();
         }
 
+        public override void NewDraw(Graphics graphics)
+        {
+            Point mouse = LayerEditor.MouseSnapPosition;
+
+            foreach (var e in Ogmo.EntitySelectionWindow.Selected)
+            {
+                if (e.Definition.NodesDefinition.Enabled && e.Nodes.Count != e.Definition.NodesDefinition.Limit && !e.Nodes.Contains(mouse))
+                {
+                    int index = GetIndex(e, mouse);
+
+                    //Draw the entity ghost image
+                    if (e.Definition.NodesDefinition.Ghost)
+                        e.Definition.Draw(graphics, mouse, e.Angle, Util.QuarterAlphaAttributes);
+
+                    //Draw the line(s)
+                    if (index == 0)
+                        graphics.DrawLine(Ogmo.NewEditorDraw.NodeNewPathPen, e.Position, mouse);
+                    else
+                        graphics.DrawLine(Ogmo.NewEditorDraw.NodeNewPathPen, e.Nodes[index - 1], mouse);
+
+                    if (index < e.Nodes.Count)
+                        graphics.DrawLine(Ogmo.NewEditorDraw.NodeNewPathPen, e.Nodes[index], mouse);
+
+                    //Draw the node itself
+                    Ogmo.NewEditorDraw.DrawNode(graphics, mouse);
+                }
+            }
+        }
+
         public override void Draw()
         {
             Point mouse = LayerEditor.MouseSnapPosition;
