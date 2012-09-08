@@ -12,11 +12,26 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
     {
         private Point mouseStart;
         private bool drawing;
+        private SolidBrush brush;
 
         public EntityEraseTool()
             : base("Erase", "eraser.png")
         {
             drawing = false;
+            brush = new SolidBrush(Color.Red);
+        }
+
+        public override void NewDraw(Graphics graphics)
+        {
+            if (drawing)
+            {
+                int x = Math.Min(mouseStart.X, LevelEditor.MousePosition.X);
+                int y = Math.Min(mouseStart.Y, LevelEditor.MousePosition.Y);
+                int w = Math.Max(mouseStart.X, LevelEditor.MousePosition.X) - x;
+                int h = Math.Max(mouseStart.Y, LevelEditor.MousePosition.Y) - y;
+
+                graphics.FillRectangle(brush, new Rectangle(x, y, w, h));
+            }
         }
 
         public override void Draw()
