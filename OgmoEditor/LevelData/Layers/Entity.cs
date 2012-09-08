@@ -195,7 +195,7 @@ namespace OgmoEditor.LevelData.Layers
 
         public void NewDraw(Graphics graphics, bool current, bool fullAlpha)
         {
-            DrawImage(graphics, Position, fullAlpha ? Util.FullAlphaAttributes : Util.HalfAlphaAttributes);
+            Definition.Draw(graphics, Position, Angle, fullAlpha ? Util.FullAlphaAttributes : Util.HalfAlphaAttributes);
 
             //Selection box
             if (current && Ogmo.EntitySelectionWindow.IsSelected(this))
@@ -209,7 +209,7 @@ namespace OgmoEditor.LevelData.Layers
                 {
                     ImageAttributes attributes = fullAlpha ? Util.HalfAlphaAttributes : Util.QuarterAlphaAttributes;
                     foreach (var p in Nodes)
-                        DrawImage(graphics, p, attributes);
+                        Definition.Draw(graphics, p, Angle, attributes);
                 }
 
                 switch (Definition.NodesDefinition.DrawMode)
@@ -259,34 +259,6 @@ namespace OgmoEditor.LevelData.Layers
                         break;
                 }
             }
-        }
-
-        private void DrawImage(Graphics graphics, Point position, ImageAttributes attributes)
-        {
-            //Do transformations for position and rotation
-            graphics.TranslateTransform(position.X - Definition.Origin.X, position.Y - Definition.Origin.Y);
-            graphics.RotateTransform(Angle);
-
-            //Draw the actual entity
-            if (Definition.ImageDefinition.Tiled && Definition.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
-            {
-                Rectangle drawTo = Rectangle.Empty;
-                for (drawTo.X = 0; drawTo.X < Size.Width; drawTo.X += bitmap.Width)
-                {
-                    drawTo.Width = Math.Min(bitmap.Width, Size.Width - drawTo.X);
-                    for (drawTo.Y = 0; drawTo.Y < Size.Height; drawTo.Y += bitmap.Height)
-                    {
-                        drawTo.Height = Math.Min(bitmap.Height, Size.Height - drawTo.Y);
-                        graphics.DrawImage(bitmap, drawTo, 0, 0, drawTo.Width, drawTo.Height, GraphicsUnit.Pixel, attributes);
-                    }
-                }
-            }
-            else
-                graphics.DrawImage(bitmap, new Rectangle(0, 0, Size.Width, Size.Height), 0, 0, bitmap.Width, bitmap.Height, GraphicsUnit.Pixel, attributes);
-
-            //Undo the transformations
-            graphics.RotateTransform(-Angle);
-            graphics.TranslateTransform(-position.X + Definition.Origin.X, -position.Y + Definition.Origin.Y);
         }
 
         public void Draw(float alpha)

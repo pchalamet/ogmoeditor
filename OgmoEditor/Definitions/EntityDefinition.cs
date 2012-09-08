@@ -9,6 +9,7 @@ using System.IO;
 using Microsoft.Xna.Framework.Graphics;
 using OgmoEditor.LevelEditors;
 using System.Diagnostics;
+using System.Drawing.Imaging;
 
 namespace OgmoEditor.Definitions
 {
@@ -67,6 +68,34 @@ namespace OgmoEditor.Definitions
             foreach (var d in ValueDefinitions)
                 def.ValueDefinitions.Add(d.Clone());
             return def;
+        }
+
+        public void Draw(Graphics graphics, Point position, float angle, ImageAttributes attributes)
+        {
+            //Do transformations for position and rotation
+            graphics.TranslateTransform(position.X - Origin.X, position.Y - Origin.Y);
+            graphics.RotateTransform(angle);
+
+            //Draw the actual entity
+            if (ImageDefinition.Tiled && ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
+            {
+                Rectangle drawTo = Rectangle.Empty;
+                for (drawTo.X = 0; drawTo.X < Size.Width; drawTo.X += bitmap.Width)
+                {
+                    drawTo.Width = Math.Min(bitmap.Width, Size.Width - drawTo.X);
+                    for (drawTo.Y = 0; drawTo.Y < Size.Height; drawTo.Y += bitmap.Height)
+                    {
+                        drawTo.Height = Math.Min(bitmap.Height, Size.Height - drawTo.Y);
+                        graphics.DrawImage(bitmap, drawTo, 0, 0, drawTo.Width, drawTo.Height, GraphicsUnit.Pixel, attributes);
+                    }
+                }
+            }
+            else
+                graphics.DrawImage(bitmap, new Rectangle(0, 0, Size.Width, Size.Height), 0, 0, bitmap.Width, bitmap.Height, GraphicsUnit.Pixel, attributes);
+
+            //Undo the transformations
+            graphics.RotateTransform(-angle);
+            graphics.TranslateTransform(-position.X + Origin.X, -position.Y + Origin.Y);
         }
 
         public void GenerateImages()
@@ -135,7 +164,6 @@ namespace OgmoEditor.Definitions
 
             return null;
         }
-
     }
 
     [XmlRoot("Image")]
