@@ -44,7 +44,7 @@ namespace OgmoEditor.LevelEditors
 
         void Application_Idle(object sender, EventArgs e)
         {
-            dashPen.DashOffset -= 1f;
+            dashPen.DashOffset -= .35f;
         }
 
         private string BuildPath(string filename)

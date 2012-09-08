@@ -197,6 +197,10 @@ namespace OgmoEditor.LevelData.Layers
         {
             DrawImage(graphics, Position, fullAlpha ? Util.FullAlphaAttributes : Util.HalfAlphaAttributes);
 
+            //Selection box
+            if (current && Ogmo.EntitySelectionWindow.IsSelected(this))
+                Ogmo.NewEditorDraw.DrawSelectionRectangle(graphics, Bounds);
+
             //Draw Nodes
             if (Nodes != null)
             {
