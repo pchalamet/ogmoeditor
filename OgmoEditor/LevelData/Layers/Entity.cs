@@ -23,7 +23,6 @@ namespace OgmoEditor.LevelData.Layers
         public uint ID { get; private set; }
 
         private Bitmap bitmap;
-        private ImageAttributes attributes;
 
         public Entity(EntityLayer layer, EntityDefinition def, Point position)
         {
@@ -37,7 +36,6 @@ namespace OgmoEditor.LevelData.Layers
 
             //Init the bitmap
             bitmap = Definition.GetBitmap();
-            attributes = new ImageAttributes();
 
             //Nodes
             if (def.NodesDefinition.Enabled)
@@ -59,7 +57,6 @@ namespace OgmoEditor.LevelData.Layers
 
             //Init the bitmap
             bitmap = Definition.GetBitmap();
-            attributes = new ImageAttributes();
 
             //ID
             if (xml.Attributes["id"] != null)
@@ -114,7 +111,6 @@ namespace OgmoEditor.LevelData.Layers
 
             //Init the bitmap
             bitmap = Definition.GetBitmap();
-            attributes = new ImageAttributes();
 
             //Nodes
             if (Definition.NodesDefinition.Enabled)
@@ -199,15 +195,73 @@ namespace OgmoEditor.LevelData.Layers
 
         public void NewDraw(Graphics graphics, bool current, bool fullAlpha)
         {
-            //Set the alpha blending
-            if (!fullAlpha)
-                attributes.SetColorMatrix(Util.HalfAlphaMatrix);
-            else
-                attributes.SetColorMatrix(Util.FullAlphaMatrix);
+            DrawImage(graphics, Position, fullAlpha ? Util.FullAlphaAttributes : Util.HalfAlphaAttributes);
 
+            //Draw Nodes
+            if (Nodes != null)
+            {
+                //Node ghost images
+                if (Definition.NodesDefinition.Ghost)
+                {
+                    ImageAttributes attributes = fullAlpha ? Util.HalfAlphaAttributes : Util.QuarterAlphaAttributes;
+                    foreach (var p in Nodes)
+                        DrawImage(graphics, p, attributes);
+                }
+
+                switch (Definition.NodesDefinition.DrawMode)
+                {
+                    case EntityNodesDefinition.PathMode.None:
+                        foreach (var p in Nodes)
+                            Ogmo.NewEditorDraw.DrawNode(graphics, p);
+                        break;
+
+                    case EntityNodesDefinition.PathMode.Path:
+                        if (Nodes.Count > 0)
+                        {
+                            graphics.DrawLine(Ogmo.NewEditorDraw.NodePathPen, Position, Nodes[0]);
+                            Ogmo.NewEditorDraw.DrawNode(graphics, Nodes[0]);
+                        }
+
+                        for (int i = 1; i < Nodes.Count; i++)
+                        {
+                            graphics.DrawLine(Ogmo.NewEditorDraw.NodePathPen, Nodes[i - 1], Nodes[i]);
+                            Ogmo.NewEditorDraw.DrawNode(graphics, Nodes[i]);
+                        }
+                        break;
+
+                    case EntityNodesDefinition.PathMode.Circuit:
+                        if (Nodes.Count > 0)
+                        {
+                            graphics.DrawLine(Ogmo.NewEditorDraw.NodePathPen, Position, Nodes[0]);
+                            Ogmo.NewEditorDraw.DrawNode(graphics, Nodes[0]);
+                        }
+
+                        for (int i = 1; i < Nodes.Count; i++)
+                        {
+                            graphics.DrawLine(Ogmo.NewEditorDraw.NodePathPen, Nodes[i - 1], Nodes[i]);
+                            Ogmo.NewEditorDraw.DrawNode(graphics, Nodes[i]);
+                        }
+
+                        if (Nodes.Count > 1)
+                            graphics.DrawLine(Ogmo.NewEditorDraw.NodePathPen, Nodes[Nodes.Count - 1], Position);
+                        break;
+
+                    case EntityNodesDefinition.PathMode.Fan:
+                        foreach (var p in Nodes)
+                        {
+                            graphics.DrawLine(Ogmo.NewEditorDraw.NodePathPen, Position, p);
+                            Ogmo.NewEditorDraw.DrawNode(graphics, p);
+                        }
+                        break;
+                }
+            }
+        }
+
+        private void DrawImage(Graphics graphics, Point position, ImageAttributes attributes)
+        {
             //Do transformations for position and rotation
-            graphics.TranslateTransform(Position.X - Definition.Origin.X, Position.Y - Definition.Origin.Y);
-            graphics.RotateTransform(90);
+            graphics.TranslateTransform(position.X - Definition.Origin.X, position.Y - Definition.Origin.Y);
+            graphics.RotateTransform(Angle);
 
             //Draw the actual entity
             if (Definition.ImageDefinition.Tiled && Definition.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
@@ -224,12 +278,11 @@ namespace OgmoEditor.LevelData.Layers
                 }
             }
             else
-            {
                 graphics.DrawImage(bitmap, new Rectangle(0, 0, Size.Width, Size.Height), 0, 0, bitmap.Width, bitmap.Height, GraphicsUnit.Pixel, attributes);
-            }
 
-            graphics.RotateTransform(-90);
-            graphics.TranslateTransform(-Position.X + Definition.Origin.X, -Position.Y + Definition.Origin.Y);
+            //Undo the transformations
+            graphics.RotateTransform(-Angle);
+            graphics.TranslateTransform(-position.X + Definition.Origin.X, -position.Y + Definition.Origin.Y);
         }
 
         public void Draw(float alpha)

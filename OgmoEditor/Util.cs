@@ -15,8 +15,9 @@ namespace OgmoEditor
 {
     static public class Util
     {
-        static public readonly ColorMatrix FullAlphaMatrix = CreateAlphaMatrix(1);
-        static public readonly ColorMatrix HalfAlphaMatrix = CreateAlphaMatrix(.5f);
+        static public readonly ImageAttributes FullAlphaAttributes = CreateAlphaAttributes(1);
+        static public readonly ImageAttributes HalfAlphaAttributes = CreateAlphaAttributes(.5f);
+        static public readonly ImageAttributes QuarterAlphaAttributes = CreateAlphaAttributes(.25f);
         
         public const float UP = (float)(Math.PI * 1.5);
         public const float DOWN = (float)(Math.PI * .5);
@@ -165,6 +166,13 @@ namespace OgmoEditor
         static public ColorMatrix CreateAlphaMatrix(float alpha)
         {
             return new ColorMatrix(new float[][] { new float[] { 1, 0, 0, 0, 0 }, new float[] { 0, 1, 0, 0, 0 }, new float[] { 0, 0, 1, 0, 0 }, new float[] { 0, 0, 0, alpha, 0 }, new float[] { 0, 0, 0, 0, 1 } });
+        }
+
+        static public ImageAttributes CreateAlphaAttributes(float alpha)
+        {
+            ImageAttributes a = new ImageAttributes();
+            a.SetColorMatrix(CreateAlphaMatrix(alpha));
+            return a;
         }
 
         static public bool Ctrl

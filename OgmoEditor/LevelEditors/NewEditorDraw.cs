@@ -17,6 +17,8 @@ namespace OgmoEditor.LevelEditors
 
         private Pen highlightPen;
         private Pen dashPen;
+        private SolidBrush nodeBrush;
+        public Pen NodePathPen { get; private set; }
 
         //Project images
         public Dictionary<EntityDefinition, Bitmap> EntityImages { get; private set; }
@@ -30,9 +32,12 @@ namespace OgmoEditor.LevelEditors
             EntityImages = new Dictionary<EntityDefinition, Bitmap>();
             TilesetImages = new Dictionary<Tileset, Bitmap>();
 
-            highlightPen = new Pen(Color.Yellow, 3);
+            highlightPen = new Pen(Color.Yellow, 2);
             dashPen = new Pen(Color.Teal);
             dashPen.DashPattern = new float[] { 6, 2 };
+            nodeBrush = new SolidBrush(Color.Yellow);
+            NodePathPen = new Pen(Color.Yellow, 1);
+            NodePathPen.DashPattern = new float[] { 3, 1 };
 
             Application.Idle += new EventHandler(Application_Idle);
         }
@@ -51,6 +56,11 @@ namespace OgmoEditor.LevelEditors
         {
             graphics.DrawRectangle(highlightPen, rectangle);
             graphics.DrawRectangle(dashPen, rectangle);
+        }
+
+        public void DrawNode(Graphics graphics, Point point)
+        {
+            graphics.FillEllipse(nodeBrush, new Rectangle(point.X - 2, point.Y - 2, 4, 4));
         }
     }
 }
