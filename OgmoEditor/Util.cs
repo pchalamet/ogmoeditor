@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using OgmoEditor.LevelEditors;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
 
 namespace OgmoEditor
 {

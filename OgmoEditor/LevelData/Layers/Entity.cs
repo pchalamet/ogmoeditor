@@ -205,8 +205,11 @@ namespace OgmoEditor.LevelData.Layers
             else
                 attributes.SetColorMatrix(Util.FullAlphaMatrix);
 
+            //Do transformations for position and rotation
+            graphics.TranslateTransform(Position.X - Definition.Origin.X, Position.Y - Definition.Origin.Y);
+            graphics.RotateTransform(90);
+
             //Draw the actual entity
-            graphics.Transform.RotateAt(-Angle, Position); 
             if (Definition.ImageDefinition.Tiled && Definition.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
             {
                 Rectangle drawTo = Rectangle.Empty;
@@ -216,14 +219,17 @@ namespace OgmoEditor.LevelData.Layers
                     for (drawTo.Y = 0; drawTo.Y < Size.Height; drawTo.Y += bitmap.Height)
                     {
                         drawTo.Height = Math.Min(bitmap.Height, Size.Height - drawTo.Y);
-                        graphics.DrawImage(bitmap, new Rectangle(drawTo.X + Position.X - Definition.Origin.X, drawTo.Y + Position.Y - Definition.Origin.Y, drawTo.Width, drawTo.Height), 0, 0, drawTo.Width, drawTo.Height, GraphicsUnit.Pixel, attributes);
+                        graphics.DrawImage(bitmap, drawTo, 0, 0, drawTo.Width, drawTo.Height, GraphicsUnit.Pixel, attributes);
                     }
                 }
             }
             else
             {
-                graphics.DrawImage(bitmap, new Rectangle(Position.X - Definition.Origin.X, Position.Y - Definition.Origin.Y, Size.Width, Size.Height), 0, 0, bitmap.Width, bitmap.Height, GraphicsUnit.Pixel, attributes);
+                graphics.DrawImage(bitmap, new Rectangle(0, 0, Size.Width, Size.Height), 0, 0, bitmap.Width, bitmap.Height, GraphicsUnit.Pixel, attributes);
             }
+
+            graphics.RotateTransform(-90);
+            graphics.TranslateTransform(-Position.X + Definition.Origin.X, -Position.Y + Definition.Origin.Y);
         }
 
         public void Draw(float alpha)
