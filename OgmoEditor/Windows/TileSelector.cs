@@ -25,9 +25,9 @@ namespace OgmoEditor.Windows
         {
             InitializeComponent();
 
-            tileSelectPenA = new Pen(Color.Black, 3);
+            tileSelectPenA = new Pen(Color.Yellow, 3);
 
-            tileSelectPenB = new Pen(Color.Aqua, 1);
+            tileSelectPenB = new Pen(Color.Black, 1);
             tileSelectPenB.DashPattern = new float[] { 4, 2 };
         }
 

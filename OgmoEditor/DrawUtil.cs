@@ -28,8 +28,8 @@ namespace OgmoEditor
             {
                 selectionHighlightPen = new Pen(Color.Yellow, 2);
 
-                selectionDashPen = new Pen(Color.Aqua);
-                selectionDashPen.DashPattern = new float[] { 6, 2 };
+                selectionDashPen = new Pen(Color.Black);
+                selectionDashPen.DashPattern = new float[] { 4, 2 };
 
                 nodeBrush = new SolidBrush(Color.Yellow);
 
