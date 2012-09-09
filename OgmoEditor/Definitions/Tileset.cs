@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing;
+﻿using System.Drawing;
 using System.IO;
-using System.Xml.Serialization;
-using System.Diagnostics;
+using System.Linq;
 
 namespace OgmoEditor.Definitions
 {
@@ -135,6 +130,16 @@ namespace OgmoEditor.Definitions
             return Name;
         }
 
+        public bool ContainsTile(Point tile)
+        {
+            return tile.X >= 0 && tile.Y >= 0 && tile.X < TilesAcross && tile.Y < TilesDown;
+        }
+
+        public bool ContainsTile(int id)
+        {
+            return id >= 0 && id < TilesTotal;
+        }
+
         public int GetIDFromCell(Point cell)
         {
             if (cell.X >= TilesAcross)
@@ -145,19 +150,19 @@ namespace OgmoEditor.Definitions
             return cell.X + cell.Y * TilesAcross;
         }
 
-        public int[] GetIDsFromCells(Point[] cell)
+        public int GetIDFromCell(int cellX, int cellY)
         {
-            return cell.Select(value => this.GetIDFromCell(value)).ToArray();
+            if (cellX >= TilesAcross)
+                return -1;
+            if (cellY >= TilesDown)
+                return -1;
+
+            return cellX + cellY * TilesAcross;
         }
 
         public Point GetCellFromID(int id)
         {
             return new Point(id % TilesAcross, id / TilesAcross);
-        }
-
-        public Point[] GetCellsFromIDs(int[] id)
-        {
-            return id.Select(value => this.GetCellFromID(value)).ToArray();
         }
 
         public int TransformID(Tileset from, int id)
@@ -166,14 +171,6 @@ namespace OgmoEditor.Definitions
                 return -1;
 
             return GetIDFromCell(from.GetCellFromID(id));
-        }
-
-        public int[] TransformIDs(Tileset from, int[] id)
-        {
-            if (id.Length == 0)
-                return new int[] { };
-
-            return GetIDsFromCells(from.GetCellsFromIDs(id));
         }
 
         public int[,] TransformMap(Tileset from, int[,] ids)

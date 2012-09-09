@@ -10,10 +10,10 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
     public class TileRectangleAction : TileAction
     {
         private Rectangle rect;
-        private int setTo;
+        private Rectangle? setTo;
         private int[,] was;
 
-        public TileRectangleAction(TileLayer tileLayer, Rectangle rect, int setTo)
+        public TileRectangleAction(TileLayer tileLayer, Rectangle rect, Rectangle? setTo)
             : base(tileLayer)
         {
             this.rect = rect;
@@ -25,12 +25,15 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
             base.Do();
 
             was = new int[rect.Width, rect.Height];
-            for (int i = rect.X; i < rect.X + rect.Width; i++)
+            for (int i = 0; i < rect.Width; i++)
             {
-                for (int j = rect.Y; j < rect.Y + rect.Height; j++)
+                for (int j = 0; j < rect.Height; j++)
                 {
-                    was[i - rect.X, j - rect.Y] = TileLayer.Tiles[i, j];
-                    TileLayer.Tiles[i, j] = setTo;
+                    was[i, j] = TileLayer.Tiles[i + rect.X, j + rect.Y];
+                    if (setTo.HasValue)
+                        TileLayer.Tiles[i + rect.X, j + rect.Y] = TileLayer.Tileset.GetIDFromCell((setTo.Value.X + i) % setTo.Value.Width, (setTo.Value.Y + j) % setTo.Value.Height);
+                    else
+                        TileLayer.Tiles[i + rect.X, j + rect.Y] = -1;
                 }
             }
         }

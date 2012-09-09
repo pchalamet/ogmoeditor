@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Windows.Forms;
 using System.Xml.Serialization;
-using OgmoEditor.ProjectEditors.ValueDefinitionEditors;
-using System.Windows.Forms;
 using OgmoEditor.LevelData.Layers;
-using OgmoEditor.LevelEditors.ValueEditors;
 using OgmoEditor.LevelEditors.LevelValueEditors;
+using OgmoEditor.LevelEditors.ValueEditors;
+using OgmoEditor.ProjectEditors.ValueDefinitionEditors;
 
 namespace OgmoEditor.Definitions.ValueDefinitions
 {

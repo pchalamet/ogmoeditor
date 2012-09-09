@@ -101,6 +101,11 @@ namespace OgmoEditor
             return diff;
         }
 
+        static public int Clamp(int value, int min, int max)
+        {
+            return Math.Max(min, Math.Min(max, value));
+        }
+
         static public void Swap(ref int a, ref int b)
         {
             int temp = a;
@@ -149,17 +154,64 @@ namespace OgmoEditor
             return (float)Math.Round(value / increment, MidpointRounding.AwayFromZero) * increment;
         }
 
-        /*
-         *  Color operators
-         */
+        static public int Wrap(int value, int max)
+        {
+            if (value < 0)
+                value += (int)(Math.Ceiling((-value) / (float)max) * max);
+            return value % max;
+        }
+
+        #region Matrix Extensions
+
+        static public Point TransformPoint(this Matrix matrix, Point point)
+        {
+            Point[] p = new Point[] { point };
+            matrix.TransformPoints(p);
+            return p[0];
+        }
+
+        #endregion
+
+        #region Color Extensions
+
         static public Color Invert(this Color color)
         {
             return Color.FromArgb(color.A, 255 - color.R, 255 - color.G, 255 - color.B);
         }
 
-        /*
-         *  Point operators
-         */
+        #endregion
+
+        #region Rectangle Extensions
+
+        static public int Area(this Rectangle rect)
+        {
+            return rect.Width * rect.Height;
+        }
+
+        static public Rectangle Multiply(this Rectangle rect, int multX, int multY)
+        {
+            rect.X *= multX;
+            rect.Width *= multX;
+            rect.Y *= multY;
+            rect.Height *= multY;
+
+            return rect;
+        }
+
+        static public Rectangle Multiply(this Rectangle rect, float multX, float multY)
+        {
+            rect.X = (int)(rect.X * multX);
+            rect.Width = (int)(rect.Width * multX);
+            rect.Y = (int)(rect.Y * multY);
+            rect.Height = (int)(rect.Height * multY);
+
+            return rect;
+        }
+
+        #endregion
+
+        #region Point Extensions
+
         static public PointF Add(this PointF a, PointF b)
         {
             return new PointF(a.X + b.X, a.Y + b.Y);
@@ -179,5 +231,7 @@ namespace OgmoEditor
         {
             return new Point(a.X - b.X, a.Y - b.Y);
         }
+
+        #endregion
     }
 }

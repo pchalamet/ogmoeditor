@@ -69,20 +69,37 @@ namespace OgmoEditor.Windows
                 SetTileset(project.Tilesets[0]);
         }
 
-        public int[] Tiles
+        public Rectangle? Tiles
         {
             get { return tileSelector.Selection; }
-            set { tileSelector.SetSelection(value); }
         }
 
-        public int TilesWidth
+        public Point? TilesStart
         {
-            get { return tileSelector.SelectionWidth; }
+            get
+            {
+                if (tileSelector.Selection.HasValue)
+                    return new Point(tileSelector.Selection.Value.X, tileSelector.Selection.Value.Y);
+                else
+                    return null;
+            }
         }
 
-        public int TilesHeight
+        public int TilesStartID
         {
-            get { return tileSelector.SelectionHeight; }
+            get
+            {
+                Point? start = TilesStart;
+                if (start.HasValue)
+                    return tileSelector.Tileset.GetIDFromCell(start.Value);
+                else
+                    return -1;
+            }
+
+            set
+            {
+                tileSelector.SetSelectionID(value);
+            }
         }
 
         public void SetTileset(Tileset to)
@@ -96,7 +113,7 @@ namespace OgmoEditor.Windows
          */
         protected override void handleKeyDown(KeyEventArgs e)
         {
-            if (EditorVisible && tileSelector.Selection.Length != 0)
+            if (EditorVisible)
             {
                 if (e.KeyCode == Keys.A)
                     tileSelector.MoveSelectionLeft();

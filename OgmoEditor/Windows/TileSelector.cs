@@ -4,48 +4,41 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using OgmoEditor.Definitions;
+using System.Diagnostics;
+using System.Drawing.Drawing2D;
 
 namespace OgmoEditor.Windows
 {
     public partial class TileSelector : UserControl
     {
-        private enum ShiftMode { Left, Right, Up, Down }
-        private const int BUFFER = 6;
+        private const int BUFFER = 20;
 
         private Tileset tileset;
         private Bitmap bitmap;
-        private int[] ids;
-        private float scale;
-        private Point? selectionStart = null;
+        private Rectangle? selection;
+        private bool selecting;
+        private Matrix inverseMatrix;
+        private Pen tileSelectPenA;
+        private Pen tileSelectPenB;
 
         public TileSelector()
         {
             InitializeComponent();
-            this.Selection = new int[] { };
+
+            tileSelectPenA = new Pen(Color.Black, 3);
+
+            tileSelectPenB = new Pen(Color.Aqua, 1);
+            tileSelectPenB.DashPattern = new float[] { 4, 2 };
         }
 
-        public int[] Selection
+        public Rectangle? Selection
         {
-            get { return this.ids; }
-            private set
+            get { return selection; }
+            set
             {
-                if (value == null)
-                    this.ids = new int[] { };
-                else
-                    this.ids = value;
+                selection = value;
+                pictureBox.Refresh();
             }
-        }
-
-        public int SelectionWidth
-        {
-            get;
-            private set;
-        }
-
-        public int SelectionHeight
-        {
-            get;
-            private set;
         }
 
         public Tileset Tileset
@@ -55,81 +48,75 @@ namespace OgmoEditor.Windows
             {
                 if (tileset != null)
                 {
-                    Selection = value.TransformIDs(tileset, Selection);
+                    selection = null;
                     bitmap.Dispose();
                 }
                 tileset = value;
                 if (Tileset != null)
-                {
-                    bitmap = Tileset.GetBitmap();
-                    calculateScale();                  
-                }
+                    bitmap = Tileset.GetBitmap();                
                 else
                     bitmap = null;
                 pictureBox.Refresh();
             }
         }
 
-        private void calculateScale()
-        {
-            scale = Math.Min((pictureBox.Width - BUFFER) / (float)bitmap.Width, (pictureBox.Height - BUFFER) / (float)bitmap.Height);
-        }
-
-        public void SetSelection(int[] to)
-        {
-            Selection = to;
-            pictureBox.Refresh();
-        }
-
-        private int ShiftID(int id, ShiftMode mode)
-        {
-            switch (mode)
-            {
-                case ShiftMode.Left:
-                    if (id % Tileset.TilesAcross == 0)
-                        id += Tileset.TilesAcross;
-                    id--;
-                    break;
-                case ShiftMode.Right:
-                    id++;
-                    if (id % Tileset.TilesAcross == 0)
-                        id -= Tileset.TilesAcross;
-                    break;
-                case ShiftMode.Up:
-                    id -= Tileset.TilesAcross;
-                    if (id < 0)
-                        id += Tileset.TilesTotal;
-                    break;
-                case ShiftMode.Down:
-                    id += Tileset.TilesAcross;
-                    if (id >= Tileset.TilesTotal)
-                        id -= Tileset.TilesTotal;
-                    break;
-            }
-            return id;
-        }
-
         public void MoveSelectionLeft()
         {
-            this.Selection = this.Selection.Select(value => this.ShiftID(value, ShiftMode.Left)).ToArray();
-            pictureBox.Refresh();
+            if (selection.HasValue)
+            {
+                if (selection.Value.Y <= 0)
+                    selection = new Rectangle(Tileset.TilesAcross - selection.Value.Width, selection.Value.Y, selection.Value.Width, selection.Value.Height);
+                else
+                    selection = new Rectangle(selection.Value.X - 1, selection.Value.Y, selection.Value.Width, selection.Value.Height);
+                pictureBox.Refresh();
+            }
         }
 
         public void MoveSelectionRight()
         {
-            this.Selection = this.Selection.Select(value => this.ShiftID(value, ShiftMode.Right)).ToArray();
-            pictureBox.Refresh();
+            if (selection.HasValue)
+            {
+                if (selection.Value.Y + selection.Value.Width >= Tileset.TilesAcross)
+                    selection = new Rectangle(0, selection.Value.Y, selection.Value.Width, selection.Value.Height);
+                else
+                    selection = new Rectangle(selection.Value.X + 1, selection.Value.Y, selection.Value.Width, selection.Value.Height);
+                pictureBox.Refresh();
+            }
         }
 
         public void MoveSelectionUp()
         {
-            this.Selection = this.Selection.Select(value => this.ShiftID(value, ShiftMode.Up)).ToArray();
-            pictureBox.Refresh();
+            if (selection.HasValue)
+            {
+                if (selection.Value.Y <= 0)
+                    selection = new Rectangle(selection.Value.X, Tileset.TilesDown - selection.Value.Height, selection.Value.Width, selection.Value.Height);
+                else
+                    selection = new Rectangle(selection.Value.X, selection.Value.Y - 1, selection.Value.Width, selection.Value.Height);
+                pictureBox.Refresh();
+            }
         }
 
         public void MoveSelectionDown()
         {
-            this.Selection = this.Selection.Select(value => this.ShiftID(value, ShiftMode.Down)).ToArray();
+            if (selection.HasValue)
+            {
+                if (selection.Value.Y + selection.Value.Height >= Tileset.TilesDown)
+                    selection = new Rectangle(selection.Value.X, 0, selection.Value.Width, selection.Value.Height);
+                else
+                    selection = new Rectangle(selection.Value.X, selection.Value.Y + 1, selection.Value.Width, selection.Value.Height);
+                pictureBox.Refresh();
+            }
+        }
+
+        public void SetSelectionID(int id)
+        {
+            if (id == -1)
+                selection = null;
+            else
+            {
+                Point at = tileset.GetCellFromID(id);
+                selection = new Rectangle(at.X, at.Y, 1, 1);
+            }
             pictureBox.Refresh();
         }
 
@@ -142,21 +129,30 @@ namespace OgmoEditor.Windows
             {
                 Graphics g = e.Graphics;
 
-                float x = pictureBox.Width / 2 - bitmap.Width / 2 * scale;
-                float y = pictureBox.Height / 2 - bitmap.Height / 2 * scale;
+                float scale = Math.Min((pictureBox.ClientSize.Width - BUFFER) / (float)bitmap.Width, (pictureBox.ClientSize.Height - BUFFER) / (float)bitmap.Height);
 
                 g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-                g.DrawImage(bitmap, x, y, bitmap.Width * scale, bitmap.Height * scale);
 
-                if (Selection.Length > 0)
+                g.ResetTransform();
+                g.TranslateTransform(pictureBox.ClientSize.Width / 2, pictureBox.ClientSize.Height / 2);
+                g.ScaleTransform(scale, scale);
+                g.TranslateTransform(-bitmap.Width / 2, -bitmap.Height / 2);
+
+                g.DrawImage(bitmap, Point.Empty);
+                inverseMatrix = g.Transform.Clone();
+                inverseMatrix.Invert();
+
+                g.TranslateTransform(bitmap.Width / 2, bitmap.Height / 2);
+                g.ScaleTransform(1/scale, 1/scale);
+
+                if (selection.HasValue)
                 {
-                    Rectangle r = tileset.TileRects[Selection[0]];
-                    r.X = (int)(x + r.X * scale);
-                    r.Y = (int)(y + r.Y * scale);
-                    r.Width = (int)(r.Width * scale * SelectionWidth);
-                    r.Height = (int)(r.Height * scale * SelectionHeight);
-                    e.Graphics.DrawSelectionRectangle(r);
+                    Rectangle r = selection.Value.Multiply(Tileset.TileSize.Width * scale, Tileset.TileSize.Height * scale);
+                    r.X -= (int)(bitmap.Width / 2 * scale);
+                    r.Y -= (int)(bitmap.Height / 2 * scale);
+                    e.Graphics.DrawRectangle(tileSelectPenA, r);
+                    e.Graphics.DrawRectangle(tileSelectPenB, r);
                 }
             }
         }
@@ -164,7 +160,7 @@ namespace OgmoEditor.Windows
         private void pictureBox_Resize(object sender, EventArgs e)
         {
             if (Tileset != null)
-                calculateScale();
+                pictureBox.Refresh();
         }
 
         private void pictureBox_MouseDown(object sender, MouseEventArgs e)
@@ -172,81 +168,42 @@ namespace OgmoEditor.Windows
             if (tileset == null)
                 return;
 
-            selectionStart = this.ResolveTilePoint(e.Location);
-
-            for (int i = 0; i < tileset.TilesTotal; i++)
+            Point at = ResolveTilePoint(e.Location);
+            if (tileset.ContainsTile(at))
             {
-                if (tileset.TileRects[i].Contains(selectionStart.Value))
-                {
-                    Selection = new int[] { i };
-                    SelectionWidth = 1;
-                    SelectionHeight = 1;
-                    pictureBox.Refresh();
-                }
+                selecting = true;
+                selection = new Rectangle(at.X, at.Y, 1, 1);
+                pictureBox.Refresh();
             }
         }
 
         private void pictureBox_MouseMove(object sender, MouseEventArgs e)
         {
-            if (tileset == null || !selectionStart.HasValue)
+            if (!selecting)
                 return;
 
-            Point end = this.ResolveTilePoint(e.Location);
-            Point start = new Point(this.selectionStart.Value.X, this.selectionStart.Value.Y);
+            Point at = ResolveTilePoint(e.Location);
+            if (tileset.ContainsTile(at))
+            {
+                Point start = new Point(Math.Min(at.X, selection.Value.X), Math.Min(at.Y, selection.Value.Y));
+                Point end = new Point(Math.Max(at.X, selection.Value.X), Math.Max(at.Y, selection.Value.Y));
 
-            // Snap the points to within the bounds.
-            start = this.SnapPoint(start, tileset.Bounds);
-            end = this.SnapPoint(end, tileset.Bounds);
-
-            // Create a rectangle of our selection bounds.
-            Rectangle sbounds = new Rectangle(
-                new Point(Math.Min(start.X, end.X), Math.Min(start.Y, end.Y)),
-                new Size(Math.Abs(end.X - start.X), Math.Abs(end.Y - start.Y))
-                );
-
-            // Create a temporary list to store IDs.
-            List<int> newids = new List<int>();
-
-            // Loop over the tileset, adding IDs as we find them.
-            this.SelectionWidth = 0;
-            this.SelectionHeight = 0;
-            int width = 0;
-            int height = 0;
-            for (int i = 0; i < tileset.TilesTotal; i++)
-                if (sbounds.IntersectsWith(tileset.TileRects[i]))
-                {
-                    // Update the width / height if we need to.
-                    Rectangle r = tileset.TileRects[i];
-                    if (width < r.X + r.Width)
-                    {
-                        width = r.X + r.Width;
-                        this.SelectionWidth += 1;
-                    }
-                    if (height < r.Y + r.Height)
-                    {
-                        height = r.Y + r.Height;
-                        this.SelectionHeight += 1;
-                    }
-
-                    // Add the new ID.
-                    newids.Add(i);
-                }
-
-            // .. and set the selection values.
-            Selection = newids.ToArray();
-            pictureBox.Refresh();
+                selection = new Rectangle(start.X, start.Y, end.X - start.X + 1, end.Y - start.Y + 1);
+                pictureBox.Refresh();
+            }
         }
 
         private void pictureBox_MouseUp(object sender, MouseEventArgs e)
         {
-            this.selectionStart = null;
+            selecting = false;
         }
 
         private Point ResolveTilePoint(Point p)
         {
-            p.X -= (int)(pictureBox.Width / 2 - bitmap.Width / 2 * scale);
-            p.Y -= (int)(pictureBox.Height / 2 - bitmap.Height / 2 * scale);
-            return new Point((int)(p.X / scale), (int)(p.Y / scale));
+            p = inverseMatrix.TransformPoint(p);
+            p.X /= tileset.TileSize.Width;
+            p.Y /= tileset.TileSize.Height;
+            return p;
         }
 
         private Point SnapPoint(Point point, Rectangle to)

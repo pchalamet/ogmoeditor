@@ -4,21 +4,22 @@ using System.Linq;
 using System.Text;
 using OgmoEditor.LevelData.Layers;
 using System.Drawing;
+using System.Diagnostics;
 
 namespace OgmoEditor.LevelEditors.Actions.TileActions
 {
     public class TileFloodAction : TileAction
     {
-        private int setTo;
+        private Rectangle? setTo;
         private int was;
-        private Point cell;
+        private Point startCell;
 
         private List<Point> changes;
 
-        public TileFloodAction(TileLayer tileLayer, Point cell, int setTo)
+        public TileFloodAction(TileLayer tileLayer, Point cell, Rectangle? setTo)
             : base(tileLayer)
         {
-            this.cell = cell;
+            this.startCell = cell;
             this.setTo = setTo;
         }
 
@@ -26,9 +27,27 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
         {
             base.Do();
 
-            was = TileLayer.Tiles[cell.X, cell.Y];
+            was = TileLayer.Tiles[startCell.X, startCell.Y];
             changes = new List<Point>();
-            flood(cell.X, cell.Y);
+
+            //Do the flood
+            {
+                Stack<Point> points = new Stack<Point>();
+                points.Push(startCell);
+
+                do
+                {
+                    Point current = points.Pop();
+                    if (FloodCell(current))
+                    {
+                        points.Push(new Point(current.X - 1, current.Y));
+                        points.Push(new Point(current.X + 1, current.Y));
+                        points.Push(new Point(current.X, current.Y - 1));
+                        points.Push(new Point(current.X, current.Y + 1));
+                    }
+                }
+                while (points.Count > 0);
+            }
         }
 
         public override void Undo()
@@ -39,18 +58,18 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
                 TileLayer.Tiles[p.X, p.Y] = was;
         }
 
-        private void flood(int cellX, int cellY)
+        private bool FloodCell(Point cell)
         {
-            if (cellX < 0 || cellY < 0 || cellX > TileLayer.Tiles.GetLength(0) - 1 || cellY > TileLayer.Tiles.GetLength(1) - 1 || TileLayer.Tiles[cellX, cellY] != was)
-                return;
+            if (cell.X < 0 || cell.Y < 0 || cell.X > TileLayer.Tiles.GetLength(0) - 1 || cell.Y > TileLayer.Tiles.GetLength(1) - 1 || TileLayer.Tiles[cell.X, cell.Y] != was)
+                return false;
 
-            changes.Add(new Point(cellX, cellY));
-            TileLayer.Tiles[cellX, cellY] = setTo;
+            changes.Add(new Point(cell.X, cell.Y));
+            if (setTo.HasValue)
+                TileLayer.Tiles[cell.X, cell.Y] = TileLayer.Tileset.GetIDFromCell(new Point(setTo.Value.X + Util.Wrap(cell.X - startCell.X, setTo.Value.Width), setTo.Value.Y + Util.Wrap(cell.Y - startCell.Y, setTo.Value.Height)));
+            else
+                TileLayer.Tiles[cell.X, cell.Y] = -1;
 
-            flood(cellX - 1, cellY);
-            flood(cellX + 1, cellY);
-            flood(cellX, cellY - 1);
-            flood(cellX, cellY + 1);
+            return true;
         }
     }
 }

@@ -45,10 +45,13 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
                     TileLayer.Tiles[draw[i].X, draw[i].Y] = was[i];
         }
 
-        public void DoAgain(Point add)
+        public void DoAgain(Point add, int setTo)
         {
-            draw.Add(add);
-            was.Add(TileLayer.Tiles[add.X, add.Y]);
+            if (!draw.Contains(add))
+            {
+                draw.Add(add);
+                was.Add(TileLayer.Tiles[add.X, add.Y]);
+            }
             TileLayer.Tiles[add.X, add.Y] = setTo;
         }
     }

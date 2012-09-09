@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OgmoEditor.LevelEditors.Actions.TileActions;
+using System.Drawing;
+using System.Diagnostics;
 
 namespace OgmoEditor.LevelEditors.Tools.TileTools
 {
@@ -14,22 +16,18 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
 
         }
 
-        public override void OnMouseLeftClick(System.Drawing.Point location)
+        public override void OnMouseLeftClick(Point location)
         {
-            if (Ogmo.TilePaletteWindow.Tiles.Length == 0)
-                return;
-
             location = LayerEditor.Layer.Definition.ConvertToGrid(location);
-            // TODO: Allow the user to flood file with a selection of tiles (resulting in a pattern).
-            if (IsValidTileCell(location) && LayerEditor.Layer.Tiles[location.X, location.Y] != Ogmo.TilePaletteWindow.Tiles[0])
-                LevelEditor.Perform(new TileFloodAction(LayerEditor.Layer, location, Ogmo.TilePaletteWindow.Tiles[0]));
+            if (IsValidTileCell(location) && LayerEditor.Layer.Tiles[location.X, location.Y] != Ogmo.TilePaletteWindow.TilesStartID)
+                LevelEditor.Perform(new TileFloodAction(LayerEditor.Layer, location, Ogmo.TilePaletteWindow.Tiles));
         }
 
-        public override void OnMouseRightClick(System.Drawing.Point location)
+        public override void OnMouseRightClick(Point location)
         {
             location = LayerEditor.Layer.Definition.ConvertToGrid(location);
             if (IsValidTileCell(location) && LayerEditor.Layer.Tiles[location.X, location.Y] != -1)
-                LevelEditor.Perform(new TileFloodAction(LayerEditor.Layer, location, -1));
+                LevelEditor.Perform(new TileFloodAction(LayerEditor.Layer, location, null));
         }
     }
 }

@@ -11,7 +11,6 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
     {
         private bool drawing;
         private bool drawMode;
-        private int drawTile;
         private Point drawStart;
         private Point drawTo;
         private SolidBrush eraseBrush;
@@ -27,17 +26,25 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
         {
             if (drawing)
             {
-                Rectangle draw = getRect();
+                Rectangle draw = GetRect();
                 if (LevelEditor.Level.Bounds.IntersectsWith(draw))
                 {
-                    if (!drawMode || drawTile == -1)
+                    if (!drawMode || !Ogmo.TilePaletteWindow.Tiles.HasValue)
                         graphics.FillRectangle(eraseBrush, draw);
                     else
                     {
-                        Rectangle tileRect = LayerEditor.Layer.Tileset.TileRects[drawTile];
-                        for (int i = draw.X; i < draw.X + draw.Width; i += LayerEditor.Layer.Definition.Grid.Width)
-                            for (int j = draw.Y; j < draw.Y + draw.Height; j += LayerEditor.Layer.Definition.Grid.Height)
-                                graphics.DrawImage(LayerEditor.Layer.Tileset.Bitmap, new Rectangle(i, j, LayerEditor.Layer.Definition.Grid.Width, LayerEditor.Layer.Definition.Grid.Height), tileRect.X, tileRect.Y, tileRect.Width, tileRect.Height, GraphicsUnit.Pixel, Util.HalfAlphaAttributes);
+                        Rectangle selection = Ogmo.TilePaletteWindow.Tiles.Value;
+                        for (int i = 0; i < draw.Width / LayerEditor.Layer.Definition.Grid.Width; i++)
+                        {
+                            for (int j = 0; j < draw.Height / LayerEditor.Layer.Definition.Grid.Height; j++)
+                            {
+                                int id = LayerEditor.Layer.Tileset.GetIDFromCell((selection.X + i) % selection.Width, (selection.Y + j) % selection.Height);
+                                Rectangle tileRect = LayerEditor.Layer.Tileset.TileRects[id];
+                                Point drawAt = new Point(draw.X + i * LayerEditor.Layer.Definition.Grid.Width, draw.Y + j * LayerEditor.Layer.Definition.Grid.Height);
+
+                                graphics.DrawImage(LayerEditor.Layer.Tileset.Bitmap, new Rectangle(drawAt.X, drawAt.Y, LayerEditor.Layer.Definition.Grid.Width, LayerEditor.Layer.Definition.Grid.Height), tileRect.X, tileRect.Y, tileRect.Width, tileRect.Height, GraphicsUnit.Pixel, Util.HalfAlphaAttributes);
+                            }
+                        }
                     }
                 }
             }
@@ -45,20 +52,15 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
 
         public override void OnMouseLeftDown(System.Drawing.Point location)
         {
-            if (Ogmo.TilePaletteWindow.Tiles.Length == 0)
-                return;
-
             drawTo = drawStart = LayerEditor.MouseSnapPosition;
             drawing = true;
             drawMode = true;
-            // TODO: Allow the user to draw a rectangle of tiles resulting in a pattern.
-            drawTile = Ogmo.TilePaletteWindow.Tiles[0];
         }
 
         public override void OnMouseLeftUp(Point location)
         {
             if (drawing && drawMode)
-                drawRect();
+                DrawRect();
         }
 
         public override void OnMouseRightDown(Point location)
@@ -66,13 +68,12 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
             drawTo = drawStart = LayerEditor.MouseSnapPosition;
             drawing = true;
             drawMode = false;
-            drawTile = -1;
         }
 
         public override void OnMouseRightUp(Point location)
         {
             if (drawing && !drawMode)
-                drawRect();
+                DrawRect();
         }
 
         public override void OnMouseMove(Point location)
@@ -84,18 +85,18 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
         /*
          *  Helpers
          */
-        private void drawRect()
+        private void DrawRect()
         {
             drawing = false;
-            Rectangle draw = getRect();
+            Rectangle draw = GetRect();
             if (LevelEditor.Level.Bounds.IntersectsWith(draw))
             {
                 draw = LayerEditor.Layer.Definition.ConvertToGrid(draw);
-                LevelEditor.Perform(new TileRectangleAction(LayerEditor.Layer, draw, drawTile));
+                LevelEditor.Perform(new TileRectangleAction(LayerEditor.Layer, draw, drawMode ? Ogmo.TilePaletteWindow.Tiles : null));
             }
         }
 
-        private Rectangle getRect()
+        private Rectangle GetRect()
         {
             Rectangle r = new Rectangle();
 

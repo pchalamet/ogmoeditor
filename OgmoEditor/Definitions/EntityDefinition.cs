@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
 using System.Drawing;
-using OgmoEditor.Definitions.ValueDefinitions;
-using System.IO;
-using OgmoEditor.LevelEditors;
-using System.Diagnostics;
 using System.Drawing.Imaging;
+using System.IO;
+using System.Xml.Serialization;
+using OgmoEditor.Definitions.ValueDefinitions;
 
 namespace OgmoEditor.Definitions
 {

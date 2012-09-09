@@ -25,14 +25,11 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
 
         public override void OnMouseLeftDown(System.Drawing.Point location)
         {
-            if (Ogmo.TilePaletteWindow.Tiles.Length == 0)
-                return;
-
             drawStart = LayerEditor.Layer.Definition.ConvertToGrid(location);
             drawing = true;
             drawMode = true;
             // TODO: Allow user to draw a line of tiles.
-            drawTile = Ogmo.TilePaletteWindow.Tiles[0];
+            drawTile = Ogmo.TilePaletteWindow.TilesStartID;
         }
 
         public override void OnMouseLeftUp(Point location)
