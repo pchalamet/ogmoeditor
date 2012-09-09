@@ -22,7 +22,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             Layer = layer;
         }
 
-        public override void NewDraw(Graphics graphics, bool current, bool fullAlpha)
+        public override void Draw(Graphics graphics, bool current, bool fullAlpha)
         {
             //Get which tiles to draw (the ones that are visible)
             Rectangle visible = GetVisibleGridArea();

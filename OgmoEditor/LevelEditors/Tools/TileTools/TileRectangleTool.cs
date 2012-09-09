@@ -23,7 +23,7 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
             eraseBrush = new SolidBrush(Color.FromArgb(255 / 2, Color.Red));
         }
 
-        public override void NewDraw(Graphics graphics)
+        public override void Draw(Graphics graphics)
         {
             if (drawing)
             {

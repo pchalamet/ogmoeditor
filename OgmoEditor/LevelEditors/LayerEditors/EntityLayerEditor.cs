@@ -18,7 +18,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             Layer = layer;
         }
 
-        public override void NewDraw(System.Drawing.Graphics graphics, bool current, bool fullAlpha)
+        public override void Draw(System.Drawing.Graphics graphics, bool current, bool fullAlpha)
         {
             foreach (Entity e in Layer.Entities)
                 e.NewDraw(graphics, current, fullAlpha);

@@ -75,7 +75,7 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
             mouse = LayerEditor.Layer.Definition.ConvertToGrid(location);
         }
 
-        public override void NewDraw(Graphics graphics)
+        public override void Draw(Graphics graphics)
         {
             if (drawing)
             {

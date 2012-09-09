@@ -99,7 +99,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
             LevelEditor.EndBatch();
         }
 
-        public override void NewDraw(Graphics graphics)
+        public override void Draw(Graphics graphics)
         {
             Point mouse = LayerEditor.MouseSnapPosition;
 

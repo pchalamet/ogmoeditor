@@ -21,7 +21,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
             brush = new SolidBrush(Color.Red);
         }
 
-        public override void NewDraw(Graphics graphics)
+        public override void Draw(Graphics graphics)
         {
             if (drawing)
             {

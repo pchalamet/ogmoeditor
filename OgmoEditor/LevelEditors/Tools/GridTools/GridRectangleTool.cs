@@ -24,7 +24,7 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
             fillBrush = new SolidBrush(Color.Black);
         }
 
-        public override void NewDraw(Graphics graphics)
+        public override void Draw(Graphics graphics)
         {
             if (drawing)
             {

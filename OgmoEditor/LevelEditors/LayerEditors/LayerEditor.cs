@@ -32,17 +32,17 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             DrawOffset = new PointF(cameraPos.X - cameraPos.X * Layer.Definition.ScrollFactor.X, cameraPos.Y - cameraPos.Y * Layer.Definition.ScrollFactor.Y);
         }
 
-        public void InternalDraw(Graphics graphics, bool current, bool fullAlpha)
+        public void DrawHandler(Graphics graphics, bool current, bool fullAlpha)
         {
             graphics.TranslateTransform(DrawOffset.X, DrawOffset.Y);
-            NewDraw(graphics, current, fullAlpha);
+            Draw(graphics, current, fullAlpha);
             graphics.TranslateTransform(-DrawOffset.X, -DrawOffset.Y);
 
             if (current && Ogmo.ToolsWindow.CurrentTool != null)
-                Ogmo.ToolsWindow.CurrentTool.NewDraw(graphics);
+                Ogmo.ToolsWindow.CurrentTool.Draw(graphics);
         }
 
-        public abstract void NewDraw(Graphics graphics, bool current, bool fullAlpha);
+        public abstract void Draw(Graphics graphics, bool current, bool fullAlpha);
 
         #region Input Events
 

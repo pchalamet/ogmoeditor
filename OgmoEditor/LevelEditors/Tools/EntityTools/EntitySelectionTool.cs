@@ -18,7 +18,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
 
         }
 
-        public override void NewDraw(Graphics graphics)
+        public override void Draw(Graphics graphics)
         {
             if (drawing)
             {

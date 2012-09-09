@@ -19,7 +19,7 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
 
         }
 
-        public override void NewDraw(Graphics graphics)
+        public override void Draw(Graphics graphics)
         {
             if (drawing)
             {

@@ -25,7 +25,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             rectBrush = new SolidBrush(layer.Definition.Color);
         }
 
-        public override void NewDraw(Graphics graphics, bool current, bool fullAlpha)
+        public override void Draw(Graphics graphics, bool current, bool fullAlpha)
         {
             //Draw the grid cells
             Rectangle visible = GetVisibleGridArea();
