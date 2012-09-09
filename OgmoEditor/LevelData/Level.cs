@@ -284,16 +284,15 @@ namespace OgmoEditor.LevelData
             lp.Show(Ogmo.MainWindow);
         }
 
-        /*
-         *  Saving
-         */
+        #region Saving
+
         public bool Save()
         {
             //If it hasn't been saved before, do SaveAs instead
             if (!HasBeenSaved)
                 return SaveAs();
 
-            writeTo(SavePath);
+            WriteTo(SavePath);
             return true;
         }
 
@@ -312,12 +311,12 @@ namespace OgmoEditor.LevelData
                 return false;
 
             SavePath = dialog.FileName;
-            writeTo(dialog.FileName);
+            WriteTo(dialog.FileName);
 
             return true;
         }
 
-        private void writeTo(string filename)
+        public void WriteTo(string filename)
         {
             //Generate the XML and write it!            
             XmlDocument doc = GenerateXML();
@@ -326,5 +325,6 @@ namespace OgmoEditor.LevelData
             Changed = false;
         }
 
+        #endregion
     }
 }

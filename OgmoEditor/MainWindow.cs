@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using OgmoEditor.ProjectEditors;
-using OgmoEditor.LevelEditors;
-using System.Diagnostics;
-using OgmoEditor.LevelData;
-using OgmoEditor.Windows;
-using System.IO;
 using System.Deployment.Application;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
+using OgmoEditor.LevelData;
+using OgmoEditor.LevelEditors;
+using OgmoEditor.Windows;
+using OgmoEditor.Windows.Utilities;
 
 namespace OgmoEditor
 {
@@ -527,7 +522,23 @@ namespace OgmoEditor
 
         private void resaveLevelsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Util.ResaveLevels();
+            Form window = null;
+            foreach (Form form in OwnedForms)
+            {
+                if (form is ResaveLevelsWindow)
+                {
+                    window = form;
+                    break;
+                }
+            }
+
+            if (window == null)
+            {
+                window = new ResaveLevelsWindow();
+                window.Show(this);
+            }
+
+            window.Focus();
         }
 
         #endregion

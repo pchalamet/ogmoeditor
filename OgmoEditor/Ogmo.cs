@@ -452,6 +452,16 @@ namespace OgmoEditor
             }
         }
 
+        static public Level GetLevelByFilepath(string filepath)
+        {
+            foreach (Level level in Levels)
+            {
+                if (level.HasBeenSaved && level.SavePath == filepath)
+                    return level;
+            }
+            return null;
+        }
+
         #endregion
 
         #region Recent Project List

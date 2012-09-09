@@ -27,15 +27,6 @@ namespace OgmoEditor
         public const float DEGTORAD = (float)(Math.PI / 180.0);
         public const float RADTODEG = (float)(180.0 / Math.PI);
 
-        #region Level Batch Utilities
-
-        static public void ResaveLevels()
-        {
-
-        }
-
-        #endregion
-
         #region Filepath Helpers
 
         static public string RelativePath(string absPath, string relTo)
