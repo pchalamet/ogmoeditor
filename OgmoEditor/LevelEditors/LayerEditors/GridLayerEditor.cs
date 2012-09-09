@@ -28,7 +28,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
         public override void Draw(Graphics graphics, bool current, bool fullAlpha)
         {
             //Draw the grid cells
-            Rectangle visible = GetVisibleGridArea();
+            Rectangle visible = GetVisibleGridArea(graphics);
             rectBrush.Color = Color.FromArgb(fullAlpha ? 255 : LAYER_ABOVE_ALPHA, rectBrush.Color);
             for (int i = visible.X; i < visible.Right; i++)
                 for (int j = visible.Y; j < visible.Bottom; j++)

@@ -25,7 +25,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
         public override void Draw(Graphics graphics, bool current, bool fullAlpha)
         {
             //Get which tiles to draw (the ones that are visible)
-            Rectangle visible = GetVisibleGridArea();
+            Rectangle visible = GetVisibleGridArea(graphics);
 
             //Draw the tiles
             ImageAttributes attributes = fullAlpha ? Util.FullAlphaAttributes : Util.HalfAlphaAttributes;

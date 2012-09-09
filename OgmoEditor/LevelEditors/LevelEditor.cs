@@ -12,6 +12,7 @@ using OgmoEditor.LevelData;
 using OgmoEditor.LevelEditors.LayerEditors;
 using OgmoEditor.LevelEditors.Actions;
 using OgmoEditor.LevelEditors.Tools;
+using System.Drawing.Imaging;
 
 namespace OgmoEditor.LevelEditors
 {
@@ -20,6 +21,7 @@ namespace OgmoEditor.LevelEditors
         static private readonly Brush NoFocusBrush = new SolidBrush(Color.FromArgb(80, 220, 220, 220));
         static private readonly Brush ShadowBrush = new SolidBrush(Color.FromArgb(120, 0, 0, 0));
         static private readonly Pen GridBorderPen = new Pen(Color.Black, 2);
+        private const float MAX_IMAGE_SIZE = 4096;
 
         private enum MouseMode { Normal, Pan, Camera };
 
@@ -29,7 +31,6 @@ namespace OgmoEditor.LevelEditors
 
         public Level Level { get; private set; }
         public LevelView LevelView { get; private set; }
-        public Graphics Graphics { get; private set; }
         public List<LayerEditor> LayerEditors { get; private set; }
         public new Point MousePosition { get; private set; }        
 
@@ -40,12 +41,12 @@ namespace OgmoEditor.LevelEditors
         private ActionBatch batch;
         private Brush levelBGBrush;
         private Pen gridPen;
+        private bool firstTime = true;
 
         public LevelEditor(Level level)
             : base()
         {
             Level = level;
-            Graphics = CreateGraphics();
             Dock = System.Windows.Forms.DockStyle.Fill;
             SetAutoSizeMode(AutoSizeMode.GrowAndShrink);
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -86,10 +87,17 @@ namespace OgmoEditor.LevelEditors
             Application.Idle -= Repaint;
         }
 
-        private void Draw(object sender, System.Windows.Forms.PaintEventArgs e)
+        #region Rendering
+
+        private void Draw(object sender, PaintEventArgs e)
         {
-            e.Graphics.SmoothingMode = SmoothingMode.HighSpeed;
-            e.Graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
+            if (firstTime)
+            {
+                e.Graphics.SmoothingMode = SmoothingMode.HighSpeed;
+                e.Graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
+                e.Graphics.Clip = new Region(ClientRectangle);
+                firstTime = false;
+            }
 
             //Draw the background logo
             e.Graphics.Transform = LevelView.Identity;
@@ -155,6 +163,16 @@ namespace OgmoEditor.LevelEditors
 
         public void SaveAsImage()
         {
+            SaveLevelToImage(Level.Bounds);
+        }
+
+        public void SaveCameraAsImage()
+        {
+            SaveLevelToImage(new Rectangle(Level.CameraPosition.X, Level.CameraPosition.Y, Ogmo.Project.CameraSize.Width, Ogmo.Project.CameraSize.Height));
+        }
+
+        private void SaveLevelToImage(Rectangle area)
+        {
             //Get the path!
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Title = "Save Level as Image...";
@@ -171,86 +189,40 @@ namespace OgmoEditor.LevelEditors
             if (result == DialogResult.Cancel)
                 return;
 
-            //Draw the level!
-            /*
-            float scale = Math.Min(Math.Min(4096.0f / Level.Size.Width, 1), Math.Min(4096.0f / Level.Size.Height, 1));
-            int width = (int)(scale * Level.Size.Width);
-            int height = (int)(scale * Level.Size.Height);
-            Matrix scaleMatrix = Matrix.CreateScale(scale);
-
-            RenderTarget2D texture = new RenderTarget2D(Ogmo.EditorDraw.GraphicsDevice, width, height);
-            Ogmo.EditorDraw.GraphicsDevice.SetRenderTarget(texture);
-            Ogmo.EditorDraw.GraphicsDevice.Clear(Ogmo.Project.BackgroundColor.ToXNA());
-
-            for (int i = 0; i < LayerEditors.Count; i++)
+            //Actual rendering
+            Bitmap bmp;
             {
-                if (Ogmo.Project.LayerDefinitions[i].Visible)
-                {
-                    Ogmo.EditorDraw.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, LayerEditors[i].DrawMatrix * scaleMatrix);
-                    LayerEditors[i].DrawLocal(false, 1);
-                    Ogmo.EditorDraw.SpriteBatch.End();
-                }
+                //Init the size vars
+                float scale = Math.Min(Math.Min(MAX_IMAGE_SIZE / area.Width, 1), Math.Min(MAX_IMAGE_SIZE / area.Height, 1));
+                int width = (int)(scale * area.Width);
+                int height = (int)(scale * area.Height);
+
+                //Init the bitmap
+                bmp = new Bitmap(width, height);
+                Graphics g = Graphics.FromImage(bmp);
+                g.Transform.Translate(area.X, area.Y);
+                g.Transform.Scale(scale, scale);
+                g.SmoothingMode = SmoothingMode.HighSpeed;
+                g.InterpolationMode = InterpolationMode.NearestNeighbor;
+                g.Clip = new Region(area);
+
+                //Draw the layers!
+                for (int i = 0; i < LayerEditors.Count; i++)
+                    if (Ogmo.Project.LayerDefinitions[i].Visible)
+                        LayerEditors[i].Draw(g, false, true);
             }
-            Ogmo.EditorDraw.GraphicsDevice.SetRenderTarget(null);
 
             //Save it then dispose it
             Stream stream = dialog.OpenFile();
-            texture.SaveAsPng(stream, width, height);
+            bmp.Save(stream, ImageFormat.Png);
             stream.Close();
-            texture.Dispose();
-             */
+            bmp.Dispose();
         }
 
-        public void SaveCameraAsImage()
-        {
-            //Get the path!
-            SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Title = "Save Level as Image...";
-            dialog.Filter = "PNG Image File|*.png";
-            dialog.InitialDirectory = Ogmo.Project.SavedDirectory;
-            DialogResult result = dialog.ShowDialog();
-            if (result == DialogResult.Cancel)
-                return;
+        #endregion
 
-            /*
-            //Draw the level!
-            float scale = Math.Min(Math.Min(4096.0f / Ogmo.Project.CameraSize.Width, 1), Math.Min(4096.0f / Ogmo.Project.CameraSize.Height, 1));
-            int width = (int)(scale * Ogmo.Project.CameraSize.Width);
-            int height = (int)(scale * Ogmo.Project.CameraSize.Height);
-            Matrix cameraMatrix = Matrix.CreateScale(scale) * Matrix.CreateTranslation(-Level.CameraPosition.X, -Level.CameraPosition.Y, 0);
+        #region Actions
 
-            RenderTarget2D texture = new RenderTarget2D(Ogmo.EditorDraw.GraphicsDevice, width, height);
-            Ogmo.EditorDraw.GraphicsDevice.SetRenderTarget(texture);
-            Ogmo.EditorDraw.GraphicsDevice.Clear(Ogmo.Project.BackgroundColor.ToXNA());
-
-            for (int i = 0; i < LayerEditors.Count; i++)
-            {
-                if (Ogmo.Project.LayerDefinitions[i].Visible)
-                {
-                    Ogmo.EditorDraw.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, LayerEditors[i].DrawMatrix * cameraMatrix);
-                    LayerEditors[i].DrawLocal(false, 1);
-                    Ogmo.EditorDraw.SpriteBatch.End();
-                }
-            }
-            Ogmo.EditorDraw.GraphicsDevice.SetRenderTarget(null);
-
-            //Save it then dispose it
-            Stream stream = dialog.OpenFile();
-            texture.SaveAsPng(stream, width, height);
-            stream.Close();
-            texture.Dispose();
-             */
-        }
-
-        public void SwitchTo()
-        {
-            Focus();
-            Ogmo.MainWindow.ZoomLabel.Text = LevelView.ZoomString;
-        }
-
-        /*
-         *  ACTIONS API
-         */
         public void Perform(OgmoAction action)
         {
             if (action == null)
@@ -278,9 +250,6 @@ namespace OgmoEditor.LevelEditors
             RedoStack.Clear();
         }
 
-        /*
-         *  Action batching so undo/redo affect a group of actions. Call StartBatch, BatchPerform..., and end with EndBatch
-         */
         public void StartBatch()
         {
             batch = new ActionBatch();
@@ -359,12 +328,20 @@ namespace OgmoEditor.LevelEditors
             get { return RedoStack.Count > 0; }
         }
 
-        /*
-         *  EVENTS
-         */
+        #endregion
+
+        #region Events
+
+        public void SwitchTo()
+        {
+            Focus();
+            Ogmo.MainWindow.ZoomLabel.Text = LevelView.ZoomString;
+        }
+
         private void onResize(object sender, EventArgs e)
         {
             LevelView.OnParentResized();
+            firstTime = true;
         }
 
         private void onKeyDown(object sender, KeyEventArgs e)
@@ -518,11 +495,17 @@ namespace OgmoEditor.LevelEditors
             Ogmo.MainWindow.ZoomLabel.Text = LevelView.ZoomString;
         }
 
+        #endregion
+
+        #region Utilities
+
         private void SnapCamera()
         {
             Level.CameraPosition = Ogmo.LayersWindow.CurrentLayer.Definition.SnapToGrid(Level.CameraPosition);
             foreach (var ed in LayerEditors)
                 ed.UpdateDrawOffset(Level.CameraPosition);
         }
+
+        #endregion
     }
 }

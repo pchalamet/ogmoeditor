@@ -149,17 +149,17 @@ namespace OgmoEditor.LevelEditors.LayerEditors
 
         #region Utilities
 
-        public Rectangle GetVisibleGridArea()
+        public Rectangle GetVisibleGridArea(Graphics graphics)
         {
-            Point topLeft = LevelEditor.LevelView.ScreenToEditor(Point.Empty);
-            Point bottomRight = LevelEditor.LevelView.ScreenToEditor(new Point(LevelEditor.ClientSize));
+            PointF topLeft = graphics.ClipBounds.Location;
+            PointF bottomRight = new PointF(graphics.ClipBounds.Right, graphics.ClipBounds.Bottom);
 
-            int x = Math.Max(0, topLeft.X / Layer.Definition.Grid.Width);
-            int y = Math.Max(0, topLeft.Y / Layer.Definition.Grid.Height);
+            int x = (int)Math.Max(0, topLeft.X / Layer.Definition.Grid.Width);
+            int y = (int)Math.Max(0, topLeft.Y / Layer.Definition.Grid.Height);
 
             return new Rectangle(x, y,
-                    Math.Min(LevelEditor.Level.Bounds.Width / Layer.Definition.Grid.Width, bottomRight.X / Layer.Definition.Grid.Width + 1) - x,
-                    Math.Min(LevelEditor.Level.Bounds.Height / Layer.Definition.Grid.Height, bottomRight.Y / Layer.Definition.Grid.Height + 1) - y
+                    (int)Math.Min(LevelEditor.Level.Bounds.Width / Layer.Definition.Grid.Width, bottomRight.X / Layer.Definition.Grid.Width + 1) - x,
+                    (int)Math.Min(LevelEditor.Level.Bounds.Height / Layer.Definition.Grid.Height, bottomRight.Y / Layer.Definition.Grid.Height + 1) - y
                 );
         }
 
