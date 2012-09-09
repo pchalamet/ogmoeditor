@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using OgmoEditor.LevelData.Layers;
-using OgmoEditor.Definitions;
 
 namespace OgmoEditor
 {
@@ -55,13 +50,13 @@ namespace OgmoEditor
             return Path.Combine(Ogmo.ProgramDirectory, "Content", filename);
         }
 
-        static public void DrawSelectionRectangle(Graphics graphics, Rectangle rectangle)
+        static public void DrawSelectionRectangle(this Graphics graphics, Rectangle rectangle)
         {
             graphics.DrawRectangle(highlightPen, rectangle);
             graphics.DrawRectangle(dashPen, rectangle);
         }
 
-        static public void DrawNode(Graphics graphics, Point point)
+        static public void DrawNode(this Graphics graphics, Point point)
         {
             graphics.FillEllipse(nodeBrush, new Rectangle(point.X - 2, point.Y - 2, 4, 4));
         }

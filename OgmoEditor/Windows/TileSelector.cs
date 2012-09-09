@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using OgmoEditor.Definitions;
-using System.Diagnostics;
 
 namespace OgmoEditor.Windows
 {
@@ -160,7 +156,7 @@ namespace OgmoEditor.Windows
                     r.Y = (int)(y + r.Y * scale);
                     r.Width = (int)(r.Width * scale * SelectionWidth);
                     r.Height = (int)(r.Height * scale * SelectionHeight);
-                    DrawUtil.DrawSelectionRectangle(e.Graphics, r);
+                    e.Graphics.DrawSelectionRectangle(r);
                 }
             }
         }

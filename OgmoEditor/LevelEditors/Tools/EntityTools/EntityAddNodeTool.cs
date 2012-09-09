@@ -119,7 +119,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                         graphics.DrawLine(DrawUtil.NodeNewPathPen, e.Nodes[e.Nodes.Count - 1], mouse);
 
                     //Draw the node itself
-                    DrawUtil.DrawNode(graphics, mouse);
+                    graphics.DrawNode(mouse);
                 }
             }
         }

@@ -1,24 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Diagnostics;
+using System.Linq;
+using System.Windows.Forms;
 using System.Xml.Serialization;
-using OgmoEditor.ProjectEditors;
-using System.Reflection;
-using OgmoEditor.LevelData;
-using OgmoEditor.Windows;
-using OgmoEditor.LevelData.Layers;
-using OgmoEditor.Definitions.LayerDefinitions;
-using OgmoEditor.LevelEditors.Tools;
-using OgmoEditor.Definitions;
-using OgmoEditor.LevelEditors;
 using OgmoEditor.Clipboard;
-using System.Xml;
-using System.Net;
+using OgmoEditor.Definitions;
+using OgmoEditor.Definitions.LayerDefinitions;
+using OgmoEditor.LevelData;
+using OgmoEditor.LevelEditors.Tools;
+using OgmoEditor.ProjectEditors;
+using OgmoEditor.Windows;
 
 namespace OgmoEditor
 {

@@ -123,7 +123,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                         graphics.DrawLine(DrawUtil.NodeNewPathPen, e.Nodes[index], mouse);
 
                     //Draw the node itself
-                    DrawUtil.DrawNode(graphics, mouse);
+                    graphics.DrawNode(mouse);
                 }
             }
         }

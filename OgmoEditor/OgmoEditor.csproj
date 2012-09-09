@@ -172,7 +172,7 @@
     <Compile Include="LevelEditors\LevelValueEditors\LevelStringValueEditor.Designer.cs">
       <DependentUpon>LevelStringValueEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewEditorDraw.cs" />
+    <Compile Include="DrawUtil.cs" />
     <Compile Include="LevelEditors\Resizers\GridResizer.cs" />
     <Compile Include="LevelEditors\Resizers\Resizer.cs" />
     <Compile Include="LevelEditors\Resizers\TileResizer.cs" />

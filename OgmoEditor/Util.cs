@@ -81,21 +81,6 @@ namespace OgmoEditor
             return filePath.Remove(filePath.LastIndexOf(d));
         }
 
-        static public Image CropImage(Image image, Rectangle clipRect)
-        {
-            Bitmap src = image as Bitmap;
-            Bitmap target = new Bitmap(clipRect.Width, clipRect.Height);
-
-            using (Graphics g = Graphics.FromImage(target))
-            {
-                g.DrawImage(src, new Rectangle(0, 0, target.Width, target.Height),
-                                 clipRect,
-                                 GraphicsUnit.Pixel);
-            }
-
-            return (Image)target;
-        }
-
         static public int DistanceSquared(Point a, Point b)
         {
             return (b.X - a.X) * (b.X - a.X) + (b.Y - a.Y) * (b.Y - a.Y);

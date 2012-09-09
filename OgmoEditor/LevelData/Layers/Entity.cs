@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OgmoEditor.Definitions;
 using System.Drawing;
-using System.Xml;
-using OgmoEditor.LevelEditors;
 using System.Drawing.Imaging;
+using System.Xml;
+using OgmoEditor.Definitions;
 
 namespace OgmoEditor.LevelData.Layers
 {
@@ -198,7 +195,7 @@ namespace OgmoEditor.LevelData.Layers
 
             //Selection box
             if (current && Ogmo.EntitySelectionWindow.IsSelected(this))
-                DrawUtil.DrawSelectionRectangle(graphics, Bounds);
+                graphics.DrawSelectionRectangle(Bounds);
 
             //Draw Nodes
             if (Nodes != null)
@@ -215,20 +212,20 @@ namespace OgmoEditor.LevelData.Layers
                 {
                     case EntityNodesDefinition.PathMode.None:
                         foreach (var p in Nodes)
-                            DrawUtil.DrawNode(graphics, p);
+                            graphics.DrawNode(p);
                         break;
 
                     case EntityNodesDefinition.PathMode.Path:
                         if (Nodes.Count > 0)
                         {
                             graphics.DrawLine(DrawUtil.NodePathPen, Position, Nodes[0]);
-                            DrawUtil.DrawNode(graphics, Nodes[0]);
+                            graphics.DrawNode(Nodes[0]);
                         }
 
                         for (int i = 1; i < Nodes.Count; i++)
                         {
                             graphics.DrawLine(DrawUtil.NodePathPen, Nodes[i - 1], Nodes[i]);
-                            DrawUtil.DrawNode(graphics, Nodes[i]);
+                            graphics.DrawNode(Nodes[i]);
                         }
                         break;
 
@@ -236,13 +233,13 @@ namespace OgmoEditor.LevelData.Layers
                         if (Nodes.Count > 0)
                         {
                             graphics.DrawLine(DrawUtil.NodePathPen, Position, Nodes[0]);
-                            DrawUtil.DrawNode(graphics, Nodes[0]);
+                            graphics.DrawNode(Nodes[0]);
                         }
 
                         for (int i = 1; i < Nodes.Count; i++)
                         {
                             graphics.DrawLine(DrawUtil.NodePathPen, Nodes[i - 1], Nodes[i]);
-                            DrawUtil.DrawNode(graphics, Nodes[i]);
+                            graphics.DrawNode(Nodes[i]);
                         }
 
                         if (Nodes.Count > 1)
@@ -253,7 +250,7 @@ namespace OgmoEditor.LevelData.Layers
                         foreach (var p in Nodes)
                         {
                             graphics.DrawLine(DrawUtil.NodePathPen, Position, p);
-                            DrawUtil.DrawNode(graphics, p);
+                            graphics.DrawNode(p);
                         }
                         break;
                 }
