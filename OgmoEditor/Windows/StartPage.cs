@@ -85,5 +85,15 @@ namespace OgmoEditor.Windows
                 Controls.Remove(twitterPanel);
             }
         }
+
+        private void donateButton_Click(object sender, EventArgs e)
+        {
+            Ogmo.DonationLink();
+        }
+
+        private void websiteButton_Click(object sender, EventArgs e)
+        {
+            Ogmo.WebsiteLink();
+        }
     }
 }

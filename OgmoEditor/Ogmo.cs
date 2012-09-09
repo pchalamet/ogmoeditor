@@ -129,9 +129,8 @@ namespace OgmoEditor
             file.Close();
         }
 
-        /*
-         *  Project stuff
-         */
+        #region Project Handlers
+
         static public void NewProject()
         {
             Project = new Project();
@@ -286,9 +285,9 @@ namespace OgmoEditor
             }
         }
 
-        /*
-         *  Level Stuff
-         */
+        #endregion
+
+        #region Level Handlers
 
         static public Level CurrentLevel
         {
@@ -453,9 +452,9 @@ namespace OgmoEditor
             }
         }
 
-        /*
-         *  Recent Project Stuff
-         */
+        #endregion
+
+        #region Recent Project List
 
         static public void InitRecentProjects()
         {
@@ -506,5 +505,21 @@ namespace OgmoEditor
                 Properties.Settings.Default.RecentProjectNames.RemoveAt(RECENT_PROJECT_LIMIT);
             }
         }
+
+        #endregion
+
+        #region Web Links
+
+        static public void DonationLink()
+        {
+            System.Diagnostics.Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TAA4QCNQL7SFJ");
+        }
+
+        static public void WebsiteLink()
+        {
+            System.Diagnostics.Process.Start("http://www.ogmoeditor.com/");
+        }
+
+        #endregion
     }
 }
