@@ -23,6 +23,7 @@ namespace OgmoEditor.Windows
         private const int CONTENT_WIDTH = WIDTH - TEXT_SPLIT - SPLIT_PAD;
 
         private List<Entity> selection;
+        private Label positionLabel;
 
         public EntitySelectionWindow()
             : base(HorizontalSnap.Right, VerticalSnap.Bottom)
@@ -129,12 +130,19 @@ namespace OgmoEditor.Windows
             onSelectionChanged();
         }
 
+        public void RefreshPosition()
+        {
+            if (selection.Count == 1)
+                positionLabel.Text = "( " + selection[0].Position.X.ToString() + ", " + selection[0].Position.Y.ToString() + " )";
+        }
+
         /*
          *  Events
          */
         private void onSelectionChanged()
         {
             Controls.Clear();
+            positionLabel = null;
 
             if (selection.Count == 0)
             {
@@ -195,11 +203,11 @@ namespace OgmoEditor.Windows
 
                 //Entity position
                 {
-                    Label pos = new Label();
-                    pos.TextAlign = ContentAlignment.MiddleLeft;
-                    pos.Bounds = new Rectangle(CONTENT_X, 96, CONTENT_WIDTH, 16);
-                    pos.Text = "( " + selection[0].Position.X.ToString() + ", " + selection[0].Position.Y.ToString() + " )";
-                    Controls.Add(pos);
+                    positionLabel = new Label();
+                    positionLabel.TextAlign = ContentAlignment.MiddleLeft;
+                    positionLabel.Bounds = new Rectangle(CONTENT_X, 96, CONTENT_WIDTH, 16);
+                    RefreshPosition();
+                    Controls.Add(positionLabel);
 
                     Label label = new Label();
                     label.TextAlign = ContentAlignment.MiddleRight;

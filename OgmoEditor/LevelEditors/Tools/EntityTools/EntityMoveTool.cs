@@ -47,7 +47,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                     else
                         LevelEditor.Perform(moveAction = new EntityMoveAction(LayerEditor.Layer, Ogmo.EntitySelectionWindow.Selected, move));
                     moved = new Point(move.X + moved.X, move.Y + moved.Y);
-                    Ogmo.EntitySelectionWindow.RefreshContents();
+                    Ogmo.EntitySelectionWindow.RefreshPosition();
                 }
             }
         }

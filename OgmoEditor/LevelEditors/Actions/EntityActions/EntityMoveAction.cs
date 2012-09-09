@@ -41,11 +41,6 @@ namespace OgmoEditor.LevelEditors.Actions.EntityActions
             }
         }
 
-        /*
-         *  To prevent a million EntityMoveAction instances sitting in the undo stack, the EntityMoveTool
-         *  just tells one action to add a bit to its target position as the user continues to move the
-         *  entities around.
-         */
         public void DoAgain(Point add)
         {
             foreach (Entity e in entities)
