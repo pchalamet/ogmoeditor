@@ -69,7 +69,7 @@ namespace OgmoEditor.Windows
         {
             if (selection.HasValue)
             {
-                if (selection.Value.Y <= 0)
+                if (selection.Value.X <= 0)
                     selection = new Rectangle(Tileset.TilesAcross - selection.Value.Width, selection.Value.Y, selection.Value.Width, selection.Value.Height);
                 else
                     selection = new Rectangle(selection.Value.X - 1, selection.Value.Y, selection.Value.Width, selection.Value.Height);
@@ -81,7 +81,7 @@ namespace OgmoEditor.Windows
         {
             if (selection.HasValue)
             {
-                if (selection.Value.Y + selection.Value.Width >= Tileset.TilesAcross)
+                if (selection.Value.X + selection.Value.Width >= Tileset.TilesAcross)
                     selection = new Rectangle(0, selection.Value.Y, selection.Value.Width, selection.Value.Height);
                 else
                     selection = new Rectangle(selection.Value.X + 1, selection.Value.Y, selection.Value.Width, selection.Value.Height);
