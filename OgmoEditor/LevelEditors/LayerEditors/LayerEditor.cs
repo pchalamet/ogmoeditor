@@ -14,8 +14,7 @@ using System.Drawing;
 
 namespace OgmoEditor.LevelEditors.LayerEditors
 {
-    using Point = System.Drawing.Point;
-    
+    using Point = System.Drawing.Point;    
 
     public abstract class LayerEditor
     {
@@ -40,11 +39,17 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             DrawMatrix = Matrix.CreateTranslation(DrawOffset.X, DrawOffset.Y, 0);
         }
 
-        public virtual void NewDraw(Graphics graphics, bool current, bool fullAlpha)
+        public void InternalDraw(Graphics graphics, bool current, bool fullAlpha)
         {
+            graphics.TranslateTransform(DrawOffset.X, DrawOffset.Y);
+            NewDraw(graphics, current, fullAlpha);
+            graphics.TranslateTransform(-DrawOffset.X, -DrawOffset.Y);
+
             if (current && Ogmo.ToolsWindow.CurrentTool != null)
                 Ogmo.ToolsWindow.CurrentTool.NewDraw(graphics);
         }
+
+        public abstract void NewDraw(Graphics graphics, bool current, bool fullAlpha);
 
         public void Draw(bool current, float alpha)
         {

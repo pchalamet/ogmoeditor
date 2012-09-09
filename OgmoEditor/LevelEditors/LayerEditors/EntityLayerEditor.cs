@@ -22,8 +22,6 @@ namespace OgmoEditor.LevelEditors.LayerEditors
         {
             foreach (Entity e in Layer.Entities)
                 e.NewDraw(graphics, current, fullAlpha);
-
-            base.NewDraw(graphics, current, fullAlpha);
         }
 
         public override void DrawLocal(bool current, float alpha)

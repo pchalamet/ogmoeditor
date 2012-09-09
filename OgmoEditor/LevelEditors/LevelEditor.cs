@@ -107,17 +107,17 @@ namespace OgmoEditor.LevelEditors
             for (i = 0; i < Ogmo.LayersWindow.CurrentLayerIndex; i++)
             {
                 if (Ogmo.Project.LayerDefinitions[i].Visible)
-                    LayerEditors[i].NewDraw(e.Graphics, false, true);
+                    LayerEditors[i].InternalDraw(e.Graphics, false, true);
             }
 
             //Current layer
-            LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].NewDraw(e.Graphics, true, true);
+            LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].InternalDraw(e.Graphics, true, true);
 
             //Layers above the current one
             for (; i < LayerEditors.Count; i++)
             {
                 if (i < Ogmo.Project.LayerDefinitions.Count && Ogmo.Project.LayerDefinitions[i].Visible)
-                    LayerEditors[i].NewDraw(e.Graphics, false, false);
+                    LayerEditors[i].InternalDraw(e.Graphics, false, false);
             }
 
             //Draw the grid
