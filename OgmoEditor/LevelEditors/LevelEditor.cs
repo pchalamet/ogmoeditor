@@ -369,11 +369,15 @@ namespace OgmoEditor.LevelEditors
 
         private void onKeyDown(object sender, KeyEventArgs e)
         {
-            if (mouseMode == MouseMode.Normal && e.KeyCode == System.Windows.Forms.Keys.Space)
+            if (e.KeyCode == Keys.Home)
+            {
+                LevelView.Center();
+            }
+            else if (mouseMode == MouseMode.Normal && e.KeyCode == Keys.Space)
             {
                 mouseMode = MouseMode.Pan;
             }
-            else if (mouseMode == MouseMode.Normal && e.KeyCode == System.Windows.Forms.Keys.C)
+            else if (mouseMode == MouseMode.Normal && e.KeyCode == Keys.C)
             {
                 mouseMode = MouseMode.Camera;
             }
@@ -386,12 +390,12 @@ namespace OgmoEditor.LevelEditors
 
         private void onKeyUp(object sender, KeyEventArgs e)
         {
-            if (mouseMode == MouseMode.Pan && e.KeyCode == System.Windows.Forms.Keys.Space)
+            if (mouseMode == MouseMode.Pan && e.KeyCode == Keys.Space)
             {
                 mouseMode = MouseMode.Normal;
                 mousePanMode = false;
             }
-            else if (mouseMode == MouseMode.Camera && e.KeyCode == System.Windows.Forms.Keys.C)
+            else if (mouseMode == MouseMode.Camera && e.KeyCode == Keys.C)
             {
                 mouseMode = MouseMode.Normal;
                 mousePanMode = false;

@@ -77,22 +77,28 @@ namespace OgmoEditor.LevelEditors
             UpdateInverse();
         }
 
-        public void PanTo(PointF to)
-        {
-            PointF at = EditorToScreen(PointF.Empty);
-            PointF translate = new PointF(to.X - at.X, to.Y - at.Y);
-            translate = ScreenToEditor(translate);
-            Pan(translate);
-        }
-
         public void Center()
         {
-            PanTo(new PointF(LevelEditor.Width / 2 - LevelEditor.Level.Size.Width / 2, LevelEditor.Height / 2 - LevelEditor.Level.Size.Height / 2));
+            CenterOn(new PointF(LevelEditor.ClientSize.Width / 2, LevelEditor.ClientSize.Height / 2));
         }
 
         public void CenterOn(PointF on)
         {
-            PanTo(new PointF(LevelEditor.Width / 2 - on.X, LevelEditor.Height / 2 - on.Y));
+            PointF target = new PointF(on.X - LevelEditor.Level.Size.Width / 2 * Zoom, on.Y - LevelEditor.Level.Size.Height / 2 * Zoom);
+            target = ScreenToEditor(target);
+
+            Matrix.Translate(target.X, target.Y);
+            UpdateInverse();
+        }
+
+        public void OriginOn(PointF on)
+        {
+            on = EditorToScreen(on);
+            PointF target = new PointF(LevelEditor.ClientSize.Width / 2 - on.X * Zoom, LevelEditor.ClientSize.Height / 2 - on.Y * Zoom);
+            target = ScreenToEditor(target);
+
+            Matrix.Translate(target.X, target.Y);
+            UpdateInverse();
         }
 
         private int GetZoomIndex()
@@ -102,6 +108,9 @@ namespace OgmoEditor.LevelEditors
                     return i;
             throw new Exception("Zoom exception!");
         }
+
+        private bool CanZoomIn { get { return GetZoomIndex() < ZOOMS.Length - 1; } }
+        private bool CanZoomOut { get { return GetZoomIndex() > 0; } }
 
         public void ZoomIn()
         {
@@ -118,7 +127,11 @@ namespace OgmoEditor.LevelEditors
 
         public void ZoomIn(PointF mouseAt)
         {
-            ZoomIn();
+            if (CanZoomIn)
+            {
+                CenterOn(mouseAt);
+                ZoomIn();
+            }
         }
 
         public void ZoomOut()
@@ -136,7 +149,11 @@ namespace OgmoEditor.LevelEditors
 
         public void ZoomOut(PointF mouseAt)
         {
-            ZoomOut();
+            if (CanZoomOut)
+            {
+                CenterOn(mouseAt);
+                ZoomOut();
+            }
         }
 
         public string ZoomString

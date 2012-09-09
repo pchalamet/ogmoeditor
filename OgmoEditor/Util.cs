@@ -222,6 +222,16 @@ namespace OgmoEditor
             return new PointF(a.X - b.X, a.Y - b.Y);
         }
 
+        static public PointF Multiply(this PointF a, float b)
+        {
+            return new PointF(a.X * b, a.Y * b);
+        }
+
+        static public PointF Divide(this PointF a, float b)
+        {
+            return new PointF(a.X / b, a.Y / b);
+        }
+
         static public Point Add(this Point a, Point b)
         {
             return new Point(a.X + b.X, a.Y + b.Y);
