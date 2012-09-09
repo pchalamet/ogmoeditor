@@ -27,6 +27,17 @@ namespace OgmoEditor
         public const float DEGTORAD = (float)(Math.PI / 180.0);
         public const float RADTODEG = (float)(180.0 / Math.PI);
 
+        #region Level Batch Utilities
+
+        static public void ResaveLevels()
+        {
+
+        }
+
+        #endregion
+
+        #region Filepath Helpers
+
         static public string RelativePath(string absPath, string relTo)
         {
             string[] absDirs = absPath.Split(Path.DirectorySeparatorChar);
@@ -81,6 +92,10 @@ namespace OgmoEditor
             return filePath.Remove(filePath.LastIndexOf(d));
         }
 
+        #endregion
+
+        #region Math Helpers
+
         static public int DistanceSquared(Point a, Point b)
         {
             return (b.X - a.X) * (b.X - a.X) + (b.Y - a.Y) * (b.Y - a.Y);
@@ -113,17 +128,21 @@ namespace OgmoEditor
             b = temp;
         }
 
-        static public ColorMatrix CreateAlphaMatrix(float alpha)
+        static public float Snap(float value, float increment)
         {
-            return new ColorMatrix(new float[][] { new float[] { 1, 0, 0, 0, 0 }, new float[] { 0, 1, 0, 0, 0 }, new float[] { 0, 0, 1, 0, 0 }, new float[] { 0, 0, 0, alpha, 0 }, new float[] { 0, 0, 0, 0, 1 } });
+            return (float)Math.Round(value / increment, MidpointRounding.AwayFromZero) * increment;
         }
 
-        static public ImageAttributes CreateAlphaAttributes(float alpha)
+        static public int Wrap(int value, int max)
         {
-            ImageAttributes a = new ImageAttributes();
-            a.SetColorMatrix(CreateAlphaMatrix(alpha));
-            return a;
+            if (value < 0)
+                value += (int)(Math.Ceiling((-value) / (float)max) * max);
+            return value % max;
         }
+
+        #endregion
+
+        #region Input Helpers
 
         static public bool Ctrl
         {
@@ -149,17 +168,23 @@ namespace OgmoEditor
             }
         }
 
-        static public float Snap(float value, float increment)
+        #endregion
+
+        #region ImageAttributes Helpers
+
+        static public ColorMatrix CreateAlphaMatrix(float alpha)
         {
-            return (float)Math.Round(value / increment, MidpointRounding.AwayFromZero) * increment;
+            return new ColorMatrix(new float[][] { new float[] { 1, 0, 0, 0, 0 }, new float[] { 0, 1, 0, 0, 0 }, new float[] { 0, 0, 1, 0, 0 }, new float[] { 0, 0, 0, alpha, 0 }, new float[] { 0, 0, 0, 0, 1 } });
         }
 
-        static public int Wrap(int value, int max)
+        static public ImageAttributes CreateAlphaAttributes(float alpha)
         {
-            if (value < 0)
-                value += (int)(Math.Ceiling((-value) / (float)max) * max);
-            return value % max;
+            ImageAttributes a = new ImageAttributes();
+            a.SetColorMatrix(CreateAlphaMatrix(alpha));
+            return a;
         }
+
+        #endregion
 
         #region Matrix Extensions
 

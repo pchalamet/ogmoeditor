@@ -72,6 +72,9 @@
             this.deselectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editingGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.centerViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zoomOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zoomInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.layersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,9 +89,8 @@
             this.closeOthersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.duplicateLevelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.centerViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.zoomInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.zoomOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.utilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resaveLevelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StatusStrip.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             this.tabPageContextMenuStrip.SuspendLayout();
@@ -142,7 +144,8 @@
             this.projectToolStripMenuItem,
             this.levelToolStripMenuItem,
             this.editToolStripMenuItem,
-            this.viewToolStripMenuItem});
+            this.viewToolStripMenuItem,
+            this.utilitiesToolStripMenuItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
             this.MenuStrip.Size = new System.Drawing.Size(784, 24);
@@ -461,6 +464,30 @@
             this.editingGridToolStripMenuItem.Text = "Editing Grid";
             this.editingGridToolStripMenuItem.Click += new System.EventHandler(this.editingGridToolStripMenuItem_Click);
             // 
+            // centerViewToolStripMenuItem
+            // 
+            this.centerViewToolStripMenuItem.Name = "centerViewToolStripMenuItem";
+            this.centerViewToolStripMenuItem.ShortcutKeyDisplayString = "Home";
+            this.centerViewToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.centerViewToolStripMenuItem.Text = "Center View";
+            this.centerViewToolStripMenuItem.Click += new System.EventHandler(this.centerViewToolStripMenuItem_Click);
+            // 
+            // zoomOutToolStripMenuItem
+            // 
+            this.zoomOutToolStripMenuItem.Name = "zoomOutToolStripMenuItem";
+            this.zoomOutToolStripMenuItem.ShortcutKeyDisplayString = "-";
+            this.zoomOutToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.zoomOutToolStripMenuItem.Text = "Zoom Out";
+            this.zoomOutToolStripMenuItem.Click += new System.EventHandler(this.zoomOutToolStripMenuItem_Click);
+            // 
+            // zoomInToolStripMenuItem
+            // 
+            this.zoomInToolStripMenuItem.Name = "zoomInToolStripMenuItem";
+            this.zoomInToolStripMenuItem.ShortcutKeyDisplayString = "+";
+            this.zoomInToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.zoomInToolStripMenuItem.Text = "Zoom In";
+            this.zoomInToolStripMenuItem.Click += new System.EventHandler(this.zoomInToolStripMenuItem_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -566,29 +593,21 @@
             this.duplicateLevelToolStripMenuItem1.Text = "Duplicate Level";
             this.duplicateLevelToolStripMenuItem1.Click += new System.EventHandler(this.duplicateLevelToolStripMenuItem_Click);
             // 
-            // centerViewToolStripMenuItem
+            // utilitiesToolStripMenuItem
             // 
-            this.centerViewToolStripMenuItem.Name = "centerViewToolStripMenuItem";
-            this.centerViewToolStripMenuItem.ShortcutKeyDisplayString = "Home";
-            this.centerViewToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.centerViewToolStripMenuItem.Text = "Center View";
-            this.centerViewToolStripMenuItem.Click += new System.EventHandler(this.centerViewToolStripMenuItem_Click);
+            this.utilitiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.resaveLevelsToolStripMenuItem});
+            this.utilitiesToolStripMenuItem.Enabled = false;
+            this.utilitiesToolStripMenuItem.Name = "utilitiesToolStripMenuItem";
+            this.utilitiesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.utilitiesToolStripMenuItem.Text = "Utilities";
             // 
-            // zoomInToolStripMenuItem
+            // resaveLevelsToolStripMenuItem
             // 
-            this.zoomInToolStripMenuItem.Name = "zoomInToolStripMenuItem";
-            this.zoomInToolStripMenuItem.ShortcutKeyDisplayString = "+";
-            this.zoomInToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.zoomInToolStripMenuItem.Text = "Zoom In";
-            this.zoomInToolStripMenuItem.Click += new System.EventHandler(this.zoomInToolStripMenuItem_Click);
-            // 
-            // zoomOutToolStripMenuItem
-            // 
-            this.zoomOutToolStripMenuItem.Name = "zoomOutToolStripMenuItem";
-            this.zoomOutToolStripMenuItem.ShortcutKeyDisplayString = "-";
-            this.zoomOutToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.zoomOutToolStripMenuItem.Text = "Zoom Out";
-            this.zoomOutToolStripMenuItem.Click += new System.EventHandler(this.zoomOutToolStripMenuItem_Click);
+            this.resaveLevelsToolStripMenuItem.Name = "resaveLevelsToolStripMenuItem";
+            this.resaveLevelsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.resaveLevelsToolStripMenuItem.Text = "Resave Levels...";
+            this.resaveLevelsToolStripMenuItem.Click += new System.EventHandler(this.resaveLevelsToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -678,5 +697,7 @@
         private System.Windows.Forms.ToolStripMenuItem centerViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zoomOutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zoomInToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem utilitiesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resaveLevelsToolStripMenuItem;
     }
 }

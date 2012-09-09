@@ -512,7 +512,7 @@ namespace OgmoEditor
 
         static public void DonationLink()
         {
-            System.Diagnostics.Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TAA4QCNQL7SFJ");
+            System.Diagnostics.Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FKQNBEPCUFAU6");
         }
 
         static public void WebsiteLink()

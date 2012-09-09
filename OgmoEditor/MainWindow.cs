@@ -24,7 +24,6 @@ namespace OgmoEditor
         public List<LevelEditor> LevelEditors { get; private set; }
 
         private ImageList imageList;
-
         private int rightClicked = -1;      //After a right-click context menu on a tab is closed, switch to this level
 
         public MainWindow()
@@ -134,9 +133,8 @@ namespace OgmoEditor
             }
         }
 
-        /*
-         *  Ogmo event Callbacks
-         */
+        #region Ogmo Event Callbacks
+
         private void onProjectStart(Project project)
         {
             //Enable menu items
@@ -147,6 +145,7 @@ namespace OgmoEditor
 
             levelToolStripMenuItem.Enabled = true;
             viewToolStripMenuItem.Enabled = true;
+            utilitiesToolStripMenuItem.Enabled = true;
         }
 
         private void onProjectClose(Project project)
@@ -155,10 +154,11 @@ namespace OgmoEditor
             newProjectToolStripMenuItem.Enabled = true;
             openProjectToolStripMenuItem.Enabled = true;
             closeProjectToolStripMenuItem.Enabled = false;
-            editProjectToolStripMenuItem.Enabled = false;
+            editProjectToolStripMenuItem.Enabled = false;          
 
             levelToolStripMenuItem.Enabled = false;
             viewToolStripMenuItem.Enabled = false;
+            utilitiesToolStripMenuItem.Enabled = false;
 
             //Clear mouse/grid readouts
             MouseCoordinatesLabel.Text = GridCoordinatesLabel.Text = "";
@@ -206,9 +206,10 @@ namespace OgmoEditor
             saveCameraAsImageToolStripMenuItem.Enabled = index != -1 && Ogmo.Project.CameraEnabled;
         }
 
-        /*
-         *  Tab control events
-         */
+        #endregion
+
+        #region Tab Control Events
+
         private void MasterTabControl_Selecting(object sender, TabControlCancelEventArgs e)
         {
             Ogmo.SetLevel(e.TabPageIndex);
@@ -234,9 +235,10 @@ namespace OgmoEditor
             }
         }
 
-        /*
-         *  Ogmo menu
-         */
+        #endregion
+
+        #region Ogmo Menu Events
+
         private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PreferencesWindow pref = new PreferencesWindow();
@@ -264,9 +266,10 @@ namespace OgmoEditor
             Application.Exit();
         }
 
-        /*
-         *  Project menu
-         */
+        #endregion
+
+        #region Project Menu Events
+
         private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Ogmo.NewProject();
@@ -287,9 +290,10 @@ namespace OgmoEditor
             Ogmo.LoadProject();
         }
 
-        /*
-         *  Level menu
-         */
+        #endregion
+
+        #region Level Menu Events
+
         private int getTargetLevel()
         {
             if (rightClicked == -1)
@@ -370,9 +374,10 @@ namespace OgmoEditor
             LevelEditors[Ogmo.CurrentLevelIndex].SaveCameraAsImage();
         }
 
-        /*
-         *  Edit Menu Items
-         */
+        #endregion
+
+        #region Edit Menu Events
+
         private void editToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
         {
             undoToolStripMenuItem.Enabled = LevelEditors[Ogmo.CurrentLevelIndex].CanUndo;
@@ -427,9 +432,10 @@ namespace OgmoEditor
                 LevelEditors[Ogmo.CurrentLevelIndex].LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Deselect();
         }
 
-        /*
-         *  View Menu Items
-         */
+        #endregion
+
+        #region View Menu Events
+
         private void viewToolStripMenuItem_DropDownOpened(object sender, EventArgs e)
         {
             editingGridToolStripMenuItem.Checked = EditingGridVisible;
@@ -448,6 +454,11 @@ namespace OgmoEditor
 
             tilePaletteToolStripMenuItem.Enabled = Ogmo.TilePaletteWindow.EditorVisible;
             tilePaletteToolStripMenuItem.Checked = Ogmo.TilePaletteWindow.UserVisible;
+        }
+
+        private void editingGridToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EditingGridVisible = !EditingGridVisible;
         }
 
         private void centerViewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -510,10 +521,18 @@ namespace OgmoEditor
             }
         }
 
-        private void editingGridToolStripMenuItem_Click(object sender, EventArgs e)
+        #endregion
+
+        #region Utilities Menu Events
+
+        private void resaveLevelsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EditingGridVisible = !EditingGridVisible;
+            Util.ResaveLevels();
         }
+
+        #endregion
+
+        #region Drag and Drop Events
 
         private void MainWindow_DragEnter(object sender, DragEventArgs e)
         {
@@ -536,5 +555,7 @@ namespace OgmoEditor
                     Ogmo.AddLevel(new Level(Ogmo.Project, file));
             }
         }
+
+        #endregion
     }
 }
