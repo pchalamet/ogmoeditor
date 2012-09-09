@@ -91,7 +91,7 @@
             this.warningLabel.Name = "warningLabel";
             this.warningLabel.Size = new System.Drawing.Size(440, 23);
             this.warningLabel.TabIndex = 4;
-            this.warningLabel.Text = "Warning: There is no undo for this utility!";
+            this.warningLabel.Text = "Warning: There is no undo for this action!";
             this.warningLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // performButton
