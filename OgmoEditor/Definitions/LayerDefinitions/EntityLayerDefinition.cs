@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using OgmoEditor.LevelData.Layers;
 using OgmoEditor.LevelData;
+using System.Windows.Forms;
 
 namespace OgmoEditor.Definitions.LayerDefinitions
 {
@@ -15,12 +16,12 @@ namespace OgmoEditor.Definitions.LayerDefinitions
             Image = "entity.png";
         }
 
-        public override System.Windows.Forms.UserControl GetEditor()
+        public override UserControl GetEditor()
         {
             return null;
         }
 
-        public override LevelData.Layers.Layer GetInstance(Level level)
+        public override Layer GetInstance(Level level)
         {
             return new EntityLayer(level, this);
         }

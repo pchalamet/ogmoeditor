@@ -6,6 +6,7 @@ using System.Drawing;
 using OgmoEditor.ProjectEditors.LayerDefinitionEditors;
 using OgmoEditor.LevelData.Layers;
 using OgmoEditor.LevelData;
+using System.Windows.Forms;
 
 namespace OgmoEditor.Definitions.LayerDefinitions
 {
@@ -24,12 +25,12 @@ namespace OgmoEditor.Definitions.LayerDefinitions
             ExportMode = ExportModes.Bitstring;
         }
 
-        public override System.Windows.Forms.UserControl GetEditor()
+        public override UserControl GetEditor()
         {
             return new GridLayerDefinitionEditor(this);
         }
 
-        public override LevelData.Layers.Layer GetInstance(Level level)
+        public override Layer GetInstance(Level level)
         {
             return new GridLayer(level, this);
         }

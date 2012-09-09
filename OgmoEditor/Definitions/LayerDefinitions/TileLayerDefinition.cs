@@ -5,6 +5,7 @@ using System.Text;
 using OgmoEditor.ProjectEditors.LayerDefinitionEditors;
 using OgmoEditor.LevelData.Layers;
 using OgmoEditor.LevelData;
+using System.Windows.Forms;
 
 namespace OgmoEditor.Definitions.LayerDefinitions
 {
@@ -20,12 +21,12 @@ namespace OgmoEditor.Definitions.LayerDefinitions
             ExportMode = TileExportMode.CSV;
         }
 
-        public override System.Windows.Forms.UserControl GetEditor()
+        public override UserControl GetEditor()
         {
             return new TileLayerDefinitionEditor(this);
         }
 
-        public override LevelData.Layers.Layer GetInstance(Level level)
+        public override Layer GetInstance(Level level)
         {
             return new TileLayer(level, this);
         }

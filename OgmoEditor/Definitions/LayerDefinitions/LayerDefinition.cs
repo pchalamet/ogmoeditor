@@ -14,7 +14,7 @@ namespace OgmoEditor.Definitions.LayerDefinitions
     [XmlInclude(typeof(TileLayerDefinition))]
     [XmlInclude(typeof(EntityLayerDefinition))]
 
-    public class LayerDefinition
+    public abstract class LayerDefinition
     {
         static public readonly List<Type> LAYER_TYPES = new List<Type>(new Type[] { typeof(GridLayerDefinition), typeof(TileLayerDefinition), typeof(EntityLayerDefinition) });
         static public readonly List<string> LAYER_NAMES = new List<string>(new string[] { "Grid", "Tiles", "Entities" });
@@ -41,20 +41,11 @@ namespace OgmoEditor.Definitions.LayerDefinitions
             return Name + " - " + GetType().ToString();
         }
 
-        public virtual UserControl GetEditor()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract UserControl GetEditor();
+        public abstract Layer GetInstance(Level level);
+        public abstract LayerDefinition Clone();
 
-        public virtual Layer GetInstance(Level level)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual LayerDefinition Clone()
-        {
-            throw new Exception("LayerDefinition subclasses must override virtual method Clone!");
-        }
+        #region Utilities
 
         public Point ConvertToGrid(Point p)
         {
@@ -70,5 +61,7 @@ namespace OgmoEditor.Definitions.LayerDefinitions
         {
             return new Point((p.X / Grid.Width) * Grid.Width, (p.Y / Grid.Height) * Grid.Height);
         }
+
+        #endregion
     }
 }

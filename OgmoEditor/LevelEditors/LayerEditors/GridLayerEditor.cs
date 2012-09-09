@@ -28,9 +28,10 @@ namespace OgmoEditor.LevelEditors.LayerEditors
         public override void NewDraw(Graphics graphics, bool current, bool fullAlpha)
         {
             //Draw the grid cells
+            Rectangle visible = GetVisibleGridArea();
             rectBrush.Color = Color.FromArgb(fullAlpha ? 255 : LAYER_ABOVE_ALPHA, rectBrush.Color);
-            for (int i = 0; i < Layer.Grid.GetLength(0); i++)
-                for (int j = 0; j < Layer.Grid.GetLength(1); j++)
+            for (int i = visible.X; i < visible.Right; i++)
+                for (int j = visible.Y; j < visible.Bottom; j++)
                     if (Layer.Grid[i, j])
                         graphics.FillRectangle(rectBrush, new Rectangle(i * Layer.Definition.Grid.Width, j * Layer.Definition.Grid.Height, Layer.Definition.Grid.Width, Layer.Definition.Grid.Height));
 

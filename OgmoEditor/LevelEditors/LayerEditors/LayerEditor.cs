@@ -44,6 +44,8 @@ namespace OgmoEditor.LevelEditors.LayerEditors
 
         public abstract void NewDraw(Graphics graphics, bool current, bool fullAlpha);
 
+        #region Input Events
+
         public virtual void OnKeyDown(Keys key)
         {
             if (Ogmo.ToolsWindow.CurrentTool != null)
@@ -127,6 +129,10 @@ namespace OgmoEditor.LevelEditors.LayerEditors
                 Ogmo.ToolsWindow.CurrentTool.OnMouseMove(location);
         }
 
+        #endregion
+
+        #region Action Hooks
+
         public virtual Resizer GetResizer() { return null; }
 
         public virtual bool CanCopyOrCut { get { return false; } }
@@ -138,5 +144,25 @@ namespace OgmoEditor.LevelEditors.LayerEditors
 
         public virtual bool CanDeselect { get { return false; } }
         public virtual void Deselect() { }
+
+        #endregion
+
+        #region Utilities
+
+        public Rectangle GetVisibleGridArea()
+        {
+            Point topLeft = LevelEditor.LevelView.ScreenToEditor(Point.Empty);
+            Point bottomRight = LevelEditor.LevelView.ScreenToEditor(new Point(LevelEditor.ClientSize));
+
+            int x = Math.Max(0, topLeft.X / Layer.Definition.Grid.Width);
+            int y = Math.Max(0, topLeft.Y / Layer.Definition.Grid.Height);
+
+            return new Rectangle(x, y,
+                    Math.Min(LevelEditor.Level.Bounds.Width / Layer.Definition.Grid.Width, bottomRight.X / Layer.Definition.Grid.Width + 1) - x,
+                    Math.Min(LevelEditor.Level.Bounds.Height / Layer.Definition.Grid.Height, bottomRight.Y / Layer.Definition.Grid.Height + 1) - y
+                );
+        }
+
+        #endregion
     }
 }
