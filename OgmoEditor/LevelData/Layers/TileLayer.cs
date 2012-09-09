@@ -17,10 +17,10 @@ namespace OgmoEditor.LevelData.Layers
     public class TileLayer : Layer
     {
         public new TileLayerDefinition Definition { get; private set; }
-        public Tileset Tileset;
         public int[,] Tiles;
         public TileCanvas TileCanvas { get; private set; }
         public TileSelection Selection;
+        public Tileset Tileset;
 
         public TileLayer(Level level, TileLayerDefinition definition)
             : base(level, definition)

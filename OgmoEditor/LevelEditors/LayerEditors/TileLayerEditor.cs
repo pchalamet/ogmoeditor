@@ -8,13 +8,13 @@ using OgmoEditor.LevelEditors.LayersEditors;
 using OgmoEditor.LevelEditors.Actions.TileActions;
 using System.Drawing;
 using OgmoEditor.Clipboard;
+using System.Drawing.Imaging;
 
 namespace OgmoEditor.LevelEditors.LayerEditors
 {
     public class TileLayerEditor : LayerEditor
     {
         public new TileLayer Layer { get; private set; }
-        public TileCanvas TileCanvas { get; private set; }
 
         public TileLayerEditor(LevelEditor levelEditor, TileLayer layer)
             : base(levelEditor, layer)
@@ -25,6 +25,18 @@ namespace OgmoEditor.LevelEditors.LayerEditors
         public override void NewDraw(Graphics graphics, bool current, bool fullAlpha)
         {
             //Draw the tiles
+            ImageAttributes attributes = fullAlpha ? Util.FullAlphaAttributes : Util.HalfAlphaAttributes;
+            for (int i = 0; i < Layer.TileCellsX; i++)
+            {
+                for (int j = 0; j < Layer.TileCellsY; j++)
+                {
+                    if (Layer.Tiles[i, j] != -1)
+                    {
+                        Rectangle tileRect = Layer.Tileset.TileRects[Layer.Tiles[i, j]];
+                        graphics.DrawImage(Layer.Tileset.Bitmap, new Rectangle(i * Layer.Definition.Grid.Width, j * Layer.Definition.Grid.Height, Layer.Definition.Grid.Width, Layer.Definition.Grid.Height), tileRect.X, tileRect.Y, tileRect.Width, tileRect.Height, GraphicsUnit.Pixel, attributes);
+                    }
+                }
+            }
 
             //Draw the selection box
             if (current && Layer.Selection != null)

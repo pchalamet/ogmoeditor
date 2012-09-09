@@ -18,6 +18,7 @@ namespace OgmoEditor.Definitions
         public int TileSep;
 
         private Bitmap bitmap;
+        private Rectangle[] tileRects;
 
         public Tileset()
         {
@@ -42,7 +43,7 @@ namespace OgmoEditor.Definitions
             GenerateBitmap();
         }
 
-        public Rectangle GetRectFromID(int id)
+        private Rectangle GetRectFromID(int id)
         {
             int y = id / TilesAcross;
             int x = id % TilesAcross;
@@ -91,10 +92,18 @@ namespace OgmoEditor.Definitions
         public void GenerateBitmap()
         {
             if (!File.Exists(Path.Combine(Ogmo.Project.SavedDirectory, FilePath)))
+            {
                 bitmap = null;
+                tileRects = null;
+            }
             else
+            {
                 bitmap = new Bitmap(Path.Combine(Ogmo.Project.SavedDirectory, FilePath));
-            Debug.WriteLine(bitmap != null);
+
+                tileRects = new Rectangle[TilesTotal];
+                for (int i = 0; i < TilesTotal; i++)
+                    tileRects[i] = GetRectFromID(i);
+            }
         }
 
         public Texture2D GenerateTexture(GraphicsDevice graphics)
@@ -126,6 +135,9 @@ namespace OgmoEditor.Definitions
                     return bitmap.Size;
             }
         }
+
+        public Bitmap Bitmap { get { return bitmap; } }
+        public Rectangle[] TileRects { get { return tileRects; } }
 
         public Bitmap GetBitmap()
         {

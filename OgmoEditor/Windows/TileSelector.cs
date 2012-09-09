@@ -155,7 +155,7 @@ namespace OgmoEditor.Windows
 
                 if (Selection.Length > 0)
                 {
-                    Rectangle r = tileset.GetRectFromID(Selection[0]);
+                    Rectangle r = tileset.TileRects[Selection[0]];
                     r.X = (int)(x + r.X * scale);
                     r.Y = (int)(y + r.Y * scale);
                     r.Width = (int)(r.Width * scale * SelectionWidth);
@@ -180,7 +180,7 @@ namespace OgmoEditor.Windows
 
             for (int i = 0; i < tileset.TilesTotal; i++)
             {
-                if (tileset.GetRectFromID(i).Contains(selectionStart.Value))
+                if (tileset.TileRects[i].Contains(selectionStart.Value))
                 {
                     Selection = new int[] { i };
                     SelectionWidth = 1;
@@ -217,10 +217,10 @@ namespace OgmoEditor.Windows
             int width = 0;
             int height = 0;
             for (int i = 0; i < tileset.TilesTotal; i++)
-                if (sbounds.IntersectsWith(tileset.GetRectFromID(i)))
+                if (sbounds.IntersectsWith(tileset.TileRects[i]))
                 {
                     // Update the width / height if we need to.
-                    Rectangle r = tileset.GetRectFromID(i);
+                    Rectangle r = tileset.TileRects[i];
                     if (width < r.X + r.Width)
                     {
                         width = r.X + r.Width;
