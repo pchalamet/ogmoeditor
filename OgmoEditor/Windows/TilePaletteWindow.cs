@@ -64,6 +64,9 @@ namespace OgmoEditor.Windows
                 tilesetsComboBox.Items.Add(t);
             tilesetsComboBox.SelectedIndex = (Ogmo.Project.Tilesets.Count > 0) ? 0 : -1;
             tilesetsComboBox.Enabled = (Ogmo.Project.Tilesets.Count > 1);
+
+            if (project.Tilesets.Count > 0)
+                SetTileset(project.Tilesets[0]);
         }
 
         public int[] Tiles

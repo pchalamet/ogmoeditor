@@ -14,6 +14,7 @@ namespace OgmoEditor.LevelEditors
     {
         public Bitmap ImgBG;
         public Bitmap ImgLogo;
+        public Bitmap ImgBroken;
 
         private Pen highlightPen;
         private Pen dashPen;
@@ -29,6 +30,7 @@ namespace OgmoEditor.LevelEditors
         {
             ImgBG = new Bitmap(BuildPath("bg.png"));
             ImgLogo = new Bitmap(BuildPath("logo.png"));
+            ImgBroken = new Bitmap(BuildPath("broken.png"));
 
             EntityImages = new Dictionary<EntityDefinition, Bitmap>();
             TilesetImages = new Dictionary<Tileset, Bitmap>();

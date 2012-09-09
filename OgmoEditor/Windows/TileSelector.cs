@@ -17,6 +17,7 @@ namespace OgmoEditor.Windows
         private const int BUFFER = 6;
 
         private Tileset tileset;
+        private Bitmap bitmap;
         private int[] ids;
         private float scale;
         private Point? selectionStart = null;
@@ -57,17 +58,25 @@ namespace OgmoEditor.Windows
             set
             {
                 if (tileset != null)
+                {
                     Selection = value.TransformIDs(tileset, Selection);
-                tileset = value;              
+                    bitmap.Dispose();
+                }
+                tileset = value;
                 if (Tileset != null)
-                    calculateScale();
+                {
+                    bitmap = Tileset.GetBitmap();
+                    calculateScale();                  
+                }
+                else
+                    bitmap = null;
                 pictureBox.Refresh();
             }
         }
 
         private void calculateScale()
         {
-            scale = Math.Min((pictureBox.Width - BUFFER) / (float)tileset.Image.Width, (pictureBox.Height - BUFFER) / (float)tileset.Image.Height);
+            scale = Math.Min((pictureBox.Width - BUFFER) / (float)bitmap.Width, (pictureBox.Height - BUFFER) / (float)bitmap.Height);
         }
 
         public void SetSelection(int[] to)
@@ -133,16 +142,16 @@ namespace OgmoEditor.Windows
          */
         private void pictureBox_Paint(object sender, PaintEventArgs e)
         {
-            if (Tileset != null)
-            { 
+            if (bitmap != null)
+            {
                 Graphics g = e.Graphics;
 
-                float x = pictureBox.Width / 2 - tileset.Image.Width / 2 * scale;
-                float y = pictureBox.Height / 2 - tileset.Image.Height / 2 * scale;
+                float x = pictureBox.Width / 2 - bitmap.Width / 2 * scale;
+                float y = pictureBox.Height / 2 - bitmap.Height / 2 * scale;
 
                 g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-                g.DrawImage(tileset.Image, x, y, tileset.Image.Width * scale, tileset.Image.Height * scale);
+                g.DrawImage(bitmap, x, y, bitmap.Width * scale, bitmap.Height * scale);
 
                 if (Selection.Length > 0)
                 {
@@ -239,8 +248,8 @@ namespace OgmoEditor.Windows
 
         private Point ResolveTilePoint(Point p)
         {
-            p.X -= (int)(pictureBox.Width / 2 - tileset.Image.Width / 2 * scale);
-            p.Y -= (int)(pictureBox.Height / 2 - tileset.Image.Height / 2 * scale);
+            p.X -= (int)(pictureBox.Width / 2 - bitmap.Width / 2 * scale);
+            p.Y -= (int)(pictureBox.Height / 2 - bitmap.Height / 2 * scale);
             return new Point((int)(p.X / scale), (int)(p.Y / scale));
         }
 

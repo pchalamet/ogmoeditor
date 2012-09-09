@@ -115,6 +115,9 @@ namespace OgmoEditor
         {
             foreach (var def in EntityDefinitions)
                 def.GenerateImages();
+
+            foreach (var t in Tilesets)
+                t.GenerateBitmap();
         }
 
         public string ErrorCheck()

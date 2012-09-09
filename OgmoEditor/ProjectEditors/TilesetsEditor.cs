@@ -18,6 +18,7 @@ namespace OgmoEditor.ProjectEditors
 
         private List<Tileset> tilesets;
         private string directory;
+        private Bitmap bitmap;
 
         public TilesetsEditor()
         {
@@ -99,7 +100,8 @@ namespace OgmoEditor.ProjectEditors
 
         private void loadPreview()
         {
-            if (tilesets[listBox.SelectedIndex].Image == null)
+            bitmap = tilesets[listBox.SelectedIndex].GetBitmap();
+            if (bitmap == null)
             {
                 imageSizeLabel.Visible = false;
                 totalTilesLabel.Visible = false;
@@ -107,7 +109,7 @@ namespace OgmoEditor.ProjectEditors
             }
             else
             {
-                imagePreviewer.LoadImage(tilesets[listBox.SelectedIndex].Image);
+                imagePreviewer.LoadImage(bitmap);
                 imageSizeLabel.Visible = true;
                 imageSizeLabel.Text = "Image Size: " + tilesets[listBox.SelectedIndex].Size.Width + " x " + tilesets[listBox.SelectedIndex].Size.Height;
                 totalTilesLabel.Visible = true;
@@ -226,7 +228,7 @@ namespace OgmoEditor.ProjectEditors
             tilesets[listBox.SelectedIndex].SetFilePath(imageFileTextBox.Text);
 
             loadPreview();
-            imageFileWarningLabel.Visible = tilesets[listBox.SelectedIndex].Image == null;          
+            imageFileWarningLabel.Visible = bitmap == null;          
         }
     }
 }

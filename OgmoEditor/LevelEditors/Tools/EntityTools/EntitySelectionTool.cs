@@ -66,7 +66,11 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
             Rectangle r = new Rectangle(x, y, w, h);
 
             List<Entity> hit = LayerEditor.Layer.Entities.FindAll(e => e.Bounds.IntersectsWith(r));
-            Ogmo.EntitySelectionWindow.SetSelection(hit);
+
+            if (Util.Ctrl)
+                Ogmo.EntitySelectionWindow.ToggleSelection(hit);
+            else
+                Ogmo.EntitySelectionWindow.SetSelection(hit);
         }
     }
 }

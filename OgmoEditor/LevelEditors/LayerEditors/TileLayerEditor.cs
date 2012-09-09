@@ -22,6 +22,21 @@ namespace OgmoEditor.LevelEditors.LayerEditors
             Layer = layer;
         }
 
+        public override void NewDraw(Graphics graphics, bool current, bool fullAlpha)
+        {
+            //Draw the tiles
+
+            //Draw the selection box
+            if (current && Layer.Selection != null)
+                Ogmo.NewEditorDraw.DrawSelectionRectangle(graphics, new Rectangle(
+                    Layer.Selection.Area.X * Layer.Definition.Grid.Width,
+                    Layer.Selection.Area.Y * Layer.Definition.Grid.Height,
+                    Layer.Selection.Area.Width * Layer.Definition.Grid.Width,
+                    Layer.Selection.Area.Height * Layer.Definition.Grid.Height));
+
+            base.NewDraw(graphics, current, fullAlpha);
+        }
+
         public override void DrawLocal(bool current, float alpha)
         {
             //Draw the actual tiles

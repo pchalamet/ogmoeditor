@@ -91,6 +91,18 @@ namespace OgmoEditor.Windows
             onSelectionChanged();
         }
 
+        public void ToggleSelection(List<Entity> e)
+        {
+            foreach (Entity ee in e)
+            {
+                if (selection.Contains(ee))
+                    selection.Remove(ee);
+                else
+                    selection.Add(ee);
+            }
+            onSelectionChanged();
+        }
+
         public void ClearSelection()
         {
             selection.Clear();

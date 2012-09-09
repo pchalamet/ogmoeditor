@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Xml.Serialization;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 namespace OgmoEditor.Definitions
 {
@@ -16,7 +17,7 @@ namespace OgmoEditor.Definitions
         public Size TileSize;
         public int TileSep;
 
-        private Image image;
+        private Bitmap bitmap;
 
         public Tileset()
         {
@@ -38,7 +39,7 @@ namespace OgmoEditor.Definitions
         public void SetFilePath(string to)
         {
             FilePath = to;
-            image = generateImage();
+            GenerateBitmap();
         }
 
         public Rectangle GetRectFromID(int id)
@@ -87,17 +88,13 @@ namespace OgmoEditor.Definitions
             }
         }
 
-        private Image generateImage()
+        public void GenerateBitmap()
         {
             if (!File.Exists(Path.Combine(Ogmo.Project.SavedDirectory, FilePath)))
-                return null;
+                bitmap = (Bitmap)Ogmo.NewEditorDraw.ImgBroken.Clone();
             else
-            {
-                FileStream s = new FileStream(Path.Combine(Ogmo.Project.SavedDirectory, FilePath), FileMode.Open, FileAccess.Read, FileShare.Read);
-                Image image = Image.FromStream(s);
-                s.Close();
-                return image;
-            }
+                bitmap = new Bitmap(Path.Combine(Ogmo.Project.SavedDirectory, FilePath));
+            Debug.WriteLine(bitmap != null);
         }
 
         public Texture2D GenerateTexture(GraphicsDevice graphics)
@@ -112,10 +109,10 @@ namespace OgmoEditor.Definitions
         {
             get
             {
-                if (Image == null)
+                if (bitmap == null)
                     return Rectangle.Empty;
                 else
-                    return new Rectangle(0, 0, Image.Width, Image.Height);
+                    return new Rectangle(0, 0, bitmap.Width, bitmap.Height);
             }
         }
 
@@ -123,23 +120,16 @@ namespace OgmoEditor.Definitions
         {
             get
             {
-                if (Image == null)
+                if (bitmap == null)
                     return Size.Empty;
                 else
-                    return Image.Size;
+                    return bitmap.Size;
             }
         }
 
-        public Image Image
+        public Bitmap GetBitmap()
         {
-            get
-            {
-                if (image == null)
-                {
-                    image = generateImage();
-                }
-                return image;
-            }
+            return (Bitmap)bitmap.Clone();
         }
 
         public override string ToString()

@@ -102,6 +102,8 @@ namespace OgmoEditor.LevelEditors.LayersEditors
 
         private void RefreshTexture(TextureInfo texture)
         {
+            return;
+
             Ogmo.GraphicsDevice.SetRenderTarget(texture.Texture);
             Ogmo.GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.Transparent);
 

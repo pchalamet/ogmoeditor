@@ -120,7 +120,7 @@ namespace OgmoEditor.Definitions
 
                 case EntityImageDefinition.DrawModes.Image:
                     if (!File.Exists(Path.Combine(Ogmo.Project.SavedDirectory, ImageDefinition.ImagePath)))
-                        throw new Exception("Entity image could not be loaded!");
+                        bitmap = (Bitmap)Ogmo.NewEditorDraw.ImgBroken.Clone();
                     else
                         bitmap = new Bitmap(Path.Combine(Ogmo.Project.SavedDirectory, ImageDefinition.ImagePath));
                     break;
