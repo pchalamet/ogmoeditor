@@ -18,7 +18,6 @@ namespace OgmoEditor.ProjectEditors
 
         private List<Tileset> tilesets;
         private string directory;
-        private Bitmap bitmap;
 
         public TilesetsEditor()
         {
@@ -55,8 +54,7 @@ namespace OgmoEditor.ProjectEditors
             tileSizeYTextBox.Text = t.TileSize.Height.ToString();
             tileSpacingTextBox.Text = t.TileSep.ToString();
 
-            imageFileWarningLabel.Visible = !checkImageFile();
-            loadPreview();
+            LoadPreview();
         }
 
         private void disableControls()
@@ -93,14 +91,10 @@ namespace OgmoEditor.ProjectEditors
             return name;
         }
 
-        private bool checkImageFile()
+        private void LoadPreview()
         {
-            return File.Exists(Path.Combine(directory, imageFileTextBox.Text));
-        }
-
-        private void loadPreview()
-        {
-            bitmap = tilesets[listBox.SelectedIndex].GetBitmap();
+            tilesets[listBox.SelectedIndex].GenerateBitmap();
+            Bitmap bitmap = tilesets[listBox.SelectedIndex].GetBitmap();
             if (bitmap == null)
             {
                 imageSizeLabel.Visible = false;
@@ -115,6 +109,8 @@ namespace OgmoEditor.ProjectEditors
                 totalTilesLabel.Visible = true;
                 updateTotalTiles();               
             }
+
+            imageFileWarningLabel.Visible = !imagePreviewer.BitmapValid; 
         }
 
         private void clearPreview()
@@ -216,7 +212,7 @@ namespace OgmoEditor.ProjectEditors
             dialog.Filter = Ogmo.IMAGE_FILE_FILTER;
             dialog.CheckFileExists = true;
 
-            if (checkImageFile())
+            if (File.Exists(Path.Combine(directory, imageFileTextBox.Text)))
                 dialog.InitialDirectory = Path.Combine(directory, imageFileTextBox.Text);
             else
                 dialog.InitialDirectory = directory;
@@ -227,8 +223,7 @@ namespace OgmoEditor.ProjectEditors
             imageFileTextBox.Text = Util.RelativePath(directory, dialog.FileName);
             tilesets[listBox.SelectedIndex].SetFilePath(imageFileTextBox.Text);
 
-            loadPreview();
-            imageFileWarningLabel.Visible = bitmap == null;          
+            LoadPreview();       
         }
     }
 }

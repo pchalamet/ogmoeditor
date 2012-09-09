@@ -120,14 +120,16 @@ namespace OgmoEditor.Definitions
 
                 case EntityImageDefinition.DrawModes.Image:
                     if (!File.Exists(Path.Combine(Ogmo.Project.SavedDirectory, ImageDefinition.ImagePath)))
-                        bitmap = (Bitmap)Ogmo.NewEditorDraw.ImgBroken.Clone();
+                        bitmap = null;
                     else
                         bitmap = new Bitmap(Path.Combine(Ogmo.Project.SavedDirectory, ImageDefinition.ImagePath));
                     break;
             }
 
             //Generate the button image
-            if (ImageDefinition.Tiled && ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
+            if (bitmap == null)
+                buttonBitmap = null;
+            else if (ImageDefinition.Tiled && ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
             {
                 buttonBitmap = new Bitmap(Size.Width, Size.Height);
                 using (Graphics g = Graphics.FromImage(buttonBitmap))
@@ -142,12 +144,18 @@ namespace OgmoEditor.Definitions
 
         public Bitmap GetBitmap()
         {
-            return (Bitmap)bitmap.Clone();
+            if (bitmap == null)
+                return null;
+            else
+                return (Bitmap)bitmap.Clone();
         }
 
         public Bitmap GetButtonBitmap()
         {
-            return (Bitmap)buttonBitmap.Clone();
+            if (buttonBitmap == null)
+                return null;
+            else
+                return (Bitmap)buttonBitmap.Clone();
         }
 
         public Texture2D GenerateTexture(GraphicsDevice graphics)

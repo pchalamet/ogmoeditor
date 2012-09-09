@@ -91,7 +91,7 @@ namespace OgmoEditor.Definitions
         public void GenerateBitmap()
         {
             if (!File.Exists(Path.Combine(Ogmo.Project.SavedDirectory, FilePath)))
-                bitmap = (Bitmap)Ogmo.NewEditorDraw.ImgBroken.Clone();
+                bitmap = null;
             else
                 bitmap = new Bitmap(Path.Combine(Ogmo.Project.SavedDirectory, FilePath));
             Debug.WriteLine(bitmap != null);
@@ -129,7 +129,10 @@ namespace OgmoEditor.Definitions
 
         public Bitmap GetBitmap()
         {
-            return (Bitmap)bitmap.Clone();
+            if (bitmap == null)
+                return null;
+            else
+                return (Bitmap)bitmap.Clone();
         }
 
         public override string ToString()

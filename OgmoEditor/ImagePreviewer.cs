@@ -13,7 +13,7 @@ namespace OgmoEditor
 {
     public partial class ImagePreviewer : UserControl
     {
-        private Image image;
+        private Bitmap bitmap;
         private Rectangle clipRect;
 
         public ImagePreviewer()
@@ -25,10 +25,8 @@ namespace OgmoEditor
         {
             if (File.Exists(path))
             {
-                FileStream s = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
-                image = Image.FromStream(s);
-                s.Close();
-                clipRect = clip ?? new Rectangle(0, 0, image.Width, image.Height);
+                bitmap = new Bitmap(path);
+                clipRect = clip ?? new Rectangle(0, 0, bitmap.Width, bitmap.Height);
                 pictureBox.Refresh();
                 return true;
             }
@@ -39,10 +37,10 @@ namespace OgmoEditor
             }
         }
 
-        public void LoadImage(Image img, Rectangle? clip = null)
+        public void LoadImage(Bitmap bmp, Rectangle? clip = null)
         {
-            image = img;
-            clipRect = clip ?? new Rectangle(0, 0, image.Width, image.Height);
+            bitmap = bmp;
+            clipRect = clip ?? new Rectangle(0, 0, bitmap.Width, bitmap.Height);
             pictureBox.Refresh();
         }
 
@@ -54,33 +52,33 @@ namespace OgmoEditor
 
         public void ClearImage()
         {
-            image = null;
+            bitmap = null;
             pictureBox.Refresh();
         }
 
         private void pictureBox_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            if (image != null)
+            if (bitmap != null)
             {
                 if (clipRect.Width > ClientSize.Width || clipRect.Height > ClientSize.Height)
                 {
                     float scale = Math.Min(ClientSize.Width / (float)clipRect.Width, ClientSize.Height / (float)clipRect.Height);
                     int destWidth = (int)(clipRect.Width * scale);
                     int destHeight = (int)(clipRect.Height * scale);
-                    g.DrawImage(image,
+                    g.DrawImage(bitmap,
                         new Rectangle(pictureBox.ClientSize.Width / 2 - destWidth / 2, pictureBox.ClientSize.Height / 2 - destHeight / 2, destWidth, destHeight),
                         clipRect, GraphicsUnit.Pixel);
                 }
                 else
-                    g.DrawImage(image,
+                    g.DrawImage(bitmap,
                         pictureBox.ClientSize.Width / 2 - clipRect.Width / 2, pictureBox.ClientSize.Height / 2 - clipRect.Height / 2,
                         clipRect, GraphicsUnit.Pixel);
             }
             else
             {
-                g.DrawImage(pictureBox.ErrorImage,
-                    new Point(pictureBox.ClientSize.Width / 2 - pictureBox.ErrorImage.Width / 2 - 7, pictureBox.ClientSize.Height / 2 - pictureBox.ErrorImage.Height / 2 - 7));
+                g.DrawImage(Ogmo.NewEditorDraw.ImgBroken,
+                    new Point(pictureBox.ClientSize.Width / 2 - Ogmo.NewEditorDraw.ImgBroken.Width / 2, pictureBox.ClientSize.Height / 2 - Ogmo.NewEditorDraw.ImgBroken.Height / 2));
             }
         }
 
@@ -88,7 +86,7 @@ namespace OgmoEditor
         {
             get
             {
-                if (image == null)
+                if (bitmap == null)
                     return -1;
                 else 
                     return clipRect.Width;
@@ -99,11 +97,13 @@ namespace OgmoEditor
         {
             get
             {
-                if (image == null)
+                if (bitmap == null)
                     return -1;
                 else
                     return clipRect.Height;
             }
         }
+
+        public bool BitmapValid { get { return bitmap != null; } }
     }
 }
