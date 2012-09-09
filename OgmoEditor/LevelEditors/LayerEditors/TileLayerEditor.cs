@@ -9,6 +9,7 @@ using OgmoEditor.LevelEditors.Actions.TileActions;
 using System.Drawing;
 using OgmoEditor.Clipboard;
 using System.Drawing.Imaging;
+using System.Diagnostics;
 
 namespace OgmoEditor.LevelEditors.LayerEditors
 {
@@ -24,11 +25,19 @@ namespace OgmoEditor.LevelEditors.LayerEditors
 
         public override void NewDraw(Graphics graphics, bool current, bool fullAlpha)
         {
+            //Get which tiles to draw (the ones that are visible)
+            Point topLeft = LevelEditor.LevelView.ScreenToEditor(Point.Empty);
+            Point bottomRight = LevelEditor.LevelView.ScreenToEditor(new Point(LevelEditor.ClientSize));
+            int fromX = Math.Max(0, topLeft.X / Layer.Definition.Grid.Width);
+            int fromY = Math.Max(0, topLeft.Y / Layer.Definition.Grid.Height);
+            int toX = Math.Min(Layer.TileCellsX, bottomRight.X / Layer.Definition.Grid.Width + 1);
+            int toY = Math.Min(Layer.TileCellsY, bottomRight.Y / Layer.Definition.Grid.Height + 1);
+
             //Draw the tiles
             ImageAttributes attributes = fullAlpha ? Util.FullAlphaAttributes : Util.HalfAlphaAttributes;
-            for (int i = 0; i < Layer.TileCellsX; i++)
+            for (int i = fromX; i < toX; i++)
             {
-                for (int j = 0; j < Layer.TileCellsY; j++)
+                for (int j = fromY; j < toY; j++)
                 {
                     if (Layer.Tiles[i, j] != -1)
                     {
