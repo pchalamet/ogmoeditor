@@ -114,12 +114,12 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
 
                     //Draw the lines
                     if (e.Nodes.Count == 0 || e.Definition.NodesDefinition.DrawMode == Definitions.EntityNodesDefinition.PathMode.Fan)
-                        graphics.DrawLine(Ogmo.NewEditorDraw.NodeNewPathPen, e.Position, mouse);
+                        graphics.DrawLine(DrawUtil.NodeNewPathPen, e.Position, mouse);
                     else
-                        graphics.DrawLine(Ogmo.NewEditorDraw.NodeNewPathPen, e.Nodes[e.Nodes.Count - 1], mouse);
+                        graphics.DrawLine(DrawUtil.NodeNewPathPen, e.Nodes[e.Nodes.Count - 1], mouse);
 
                     //Draw the node itself
-                    Ogmo.NewEditorDraw.DrawNode(graphics, mouse);
+                    DrawUtil.DrawNode(graphics, mouse);
                 }
             }
         }

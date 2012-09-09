@@ -43,7 +43,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
 
             //Draw the selection box
             if (current && Layer.Selection != null)
-                Ogmo.NewEditorDraw.DrawSelectionRectangle(graphics, new Rectangle(
+                DrawUtil.DrawSelectionRectangle(graphics, new Rectangle(
                     Layer.Selection.Area.X * Layer.Definition.Grid.Width,
                     Layer.Selection.Area.Y * Layer.Definition.Grid.Height,
                     Layer.Selection.Area.Width * Layer.Definition.Grid.Width,

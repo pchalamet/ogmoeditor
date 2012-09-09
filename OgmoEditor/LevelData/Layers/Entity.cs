@@ -198,7 +198,7 @@ namespace OgmoEditor.LevelData.Layers
 
             //Selection box
             if (current && Ogmo.EntitySelectionWindow.IsSelected(this))
-                Ogmo.NewEditorDraw.DrawSelectionRectangle(graphics, Bounds);
+                DrawUtil.DrawSelectionRectangle(graphics, Bounds);
 
             //Draw Nodes
             if (Nodes != null)
@@ -215,45 +215,45 @@ namespace OgmoEditor.LevelData.Layers
                 {
                     case EntityNodesDefinition.PathMode.None:
                         foreach (var p in Nodes)
-                            Ogmo.NewEditorDraw.DrawNode(graphics, p);
+                            DrawUtil.DrawNode(graphics, p);
                         break;
 
                     case EntityNodesDefinition.PathMode.Path:
                         if (Nodes.Count > 0)
                         {
-                            graphics.DrawLine(Ogmo.NewEditorDraw.NodePathPen, Position, Nodes[0]);
-                            Ogmo.NewEditorDraw.DrawNode(graphics, Nodes[0]);
+                            graphics.DrawLine(DrawUtil.NodePathPen, Position, Nodes[0]);
+                            DrawUtil.DrawNode(graphics, Nodes[0]);
                         }
 
                         for (int i = 1; i < Nodes.Count; i++)
                         {
-                            graphics.DrawLine(Ogmo.NewEditorDraw.NodePathPen, Nodes[i - 1], Nodes[i]);
-                            Ogmo.NewEditorDraw.DrawNode(graphics, Nodes[i]);
+                            graphics.DrawLine(DrawUtil.NodePathPen, Nodes[i - 1], Nodes[i]);
+                            DrawUtil.DrawNode(graphics, Nodes[i]);
                         }
                         break;
 
                     case EntityNodesDefinition.PathMode.Circuit:
                         if (Nodes.Count > 0)
                         {
-                            graphics.DrawLine(Ogmo.NewEditorDraw.NodePathPen, Position, Nodes[0]);
-                            Ogmo.NewEditorDraw.DrawNode(graphics, Nodes[0]);
+                            graphics.DrawLine(DrawUtil.NodePathPen, Position, Nodes[0]);
+                            DrawUtil.DrawNode(graphics, Nodes[0]);
                         }
 
                         for (int i = 1; i < Nodes.Count; i++)
                         {
-                            graphics.DrawLine(Ogmo.NewEditorDraw.NodePathPen, Nodes[i - 1], Nodes[i]);
-                            Ogmo.NewEditorDraw.DrawNode(graphics, Nodes[i]);
+                            graphics.DrawLine(DrawUtil.NodePathPen, Nodes[i - 1], Nodes[i]);
+                            DrawUtil.DrawNode(graphics, Nodes[i]);
                         }
 
                         if (Nodes.Count > 1)
-                            graphics.DrawLine(Ogmo.NewEditorDraw.NodePathPen, Nodes[Nodes.Count - 1], Position);
+                            graphics.DrawLine(DrawUtil.NodePathPen, Nodes[Nodes.Count - 1], Position);
                         break;
 
                     case EntityNodesDefinition.PathMode.Fan:
                         foreach (var p in Nodes)
                         {
-                            graphics.DrawLine(Ogmo.NewEditorDraw.NodePathPen, Position, p);
-                            Ogmo.NewEditorDraw.DrawNode(graphics, p);
+                            graphics.DrawLine(DrawUtil.NodePathPen, Position, p);
+                            DrawUtil.DrawNode(graphics, p);
                         }
                         break;
                 }

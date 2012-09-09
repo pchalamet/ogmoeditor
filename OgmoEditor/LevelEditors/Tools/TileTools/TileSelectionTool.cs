@@ -25,7 +25,7 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
             {
                 Rectangle draw = LayerEditor.Layer.GetTilesRectangle(drawStart, drawTo);
                 if (LevelEditor.Level.Bounds.IntersectsWith(draw))
-                    Ogmo.NewEditorDraw.DrawSelectionRectangle(graphics, draw);
+                    DrawUtil.DrawSelectionRectangle(graphics, draw);
             }
         }
 

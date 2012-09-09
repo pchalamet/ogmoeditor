@@ -62,7 +62,7 @@ namespace OgmoEditor.LevelEditors
                 LayerEditors.Add(l.GetEditor(this));
 
             //Init the level BG brush
-            BackgroundImage = Ogmo.NewEditorDraw.ImgBG;
+            BackgroundImage = DrawUtil.ImgBG;
             levelBGBrush = new SolidBrush(Ogmo.Project.BackgroundColor);
             gridPen = new Pen(Color.FromArgb(130, Ogmo.Project.GridColor));
 
@@ -93,7 +93,7 @@ namespace OgmoEditor.LevelEditors
 
             //Draw the background logo
             e.Graphics.Transform = LevelView.Identity;
-            e.Graphics.DrawImage(Ogmo.NewEditorDraw.ImgLogo, new Rectangle(Width/2 - Ogmo.NewEditorDraw.ImgLogo.Width/4, Height/2 - Ogmo.NewEditorDraw.ImgLogo.Height/4, Ogmo.NewEditorDraw.ImgLogo.Width/2, Ogmo.NewEditorDraw.ImgLogo.Height/2));
+            e.Graphics.DrawImage(DrawUtil.ImgLogo, new Rectangle(Width / 2 - DrawUtil.ImgLogo.Width / 4, Height / 2 - DrawUtil.ImgLogo.Height / 4, DrawUtil.ImgLogo.Width / 2, DrawUtil.ImgLogo.Height / 2));
             if (!Focused)
                 e.Graphics.FillRectangle(NoFocusBrush, new Rectangle(0, 0, Width, Height));
 
@@ -149,104 +149,8 @@ namespace OgmoEditor.LevelEditors
             if (Ogmo.Project.CameraEnabled)
             {
                 e.Graphics.Transform = LevelView.Matrix;
-                e.Graphics.DrawRectangle(Ogmo.NewEditorDraw.CameraRectPen, new Rectangle(Level.CameraPosition.X, Level.CameraPosition.Y, Ogmo.Project.CameraSize.Width, Ogmo.Project.CameraSize.Height));
+                e.Graphics.DrawRectangle(DrawUtil.CameraRectPen, new Rectangle(Level.CameraPosition.X, Level.CameraPosition.Y, Ogmo.Project.CameraSize.Width, Ogmo.Project.CameraSize.Height));
             }
-
-            /*
-            EditorDraw content = Ogmo.EditorDraw;
-            
-            //Draw the background and logo
-            GraphicsDevice.SetRenderTarget(null);
-            content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone);
-            content.SpriteBatch.Draw(content.TexBG, DrawBounds, new Rectangle(0, 0, DrawBounds.Width, DrawBounds.Height), this.Focused ? Color.White : NoFocus);
-            content.SpriteBatch.Draw(content.TexLogo, new Vector2(DrawBounds.Width / 2, DrawBounds.Height / 2), null, this.Focused ? Color.White : NoFocus, 0, new Vector2(content.TexLogo.Width / 2, content.TexLogo.Height / 2), .5f, SpriteEffects.None, 0);
-            content.SpriteBatch.End();
-
-            //Draw the level onto the control, positioned and scaled by the camera
-            content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, LevelView.Matrix);
-            content.DrawRectangle(10, 10, Level.Size.Width, Level.Size.Height, new Color(0, 0, 0, .5f));
-            content.DrawRectangle(0, 0, Level.Size.Width, Level.Size.Height, Ogmo.Project.BackgroundColor.ToXNA());
-            content.SpriteBatch.End();
-
-            //Layers below the current one
-            int i;
-            for (i = 0; i < Ogmo.LayersWindow.CurrentLayerIndex; i++)
-            {
-                if (Ogmo.Project.LayerDefinitions[i].Visible)
-                    LayerEditors[i].Draw(false, 1);
-            }
-
-            //Current layer
-            LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].Draw(true, 1);
-
-            //Layers above the current one
-            for (; i < LayerEditors.Count; i++)
-            {
-                if (i < Ogmo.Project.LayerDefinitions.Count && Ogmo.Project.LayerDefinitions[i].Visible)
-                    LayerEditors[i].Draw(false, LAYER_ABOVE_ALPHA);
-            }
-
-            //Draw the grid
-            if (Ogmo.MainWindow.EditingGridVisible)
-            {
-                content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null);
-
-                Vector2 inc = new Vector2(Ogmo.LayersWindow.CurrentLayer.Definition.Grid.Width * LevelView.Zoom, Ogmo.LayersWindow.CurrentLayer.Definition.Grid.Height * LevelView.Zoom);
-                while (inc.X <= 4)
-                    inc.X *= 2;
-                while (inc.Y <= 4)
-                    inc.Y *= 2;
-
-                float width = Ogmo.CurrentLevel.Size.Width * LevelView.Zoom;
-                float height = Ogmo.CurrentLevel.Size.Height * LevelView.Zoom;
-
-                Vector2 offset = ((-LevelView.Position + LayerEditors[Ogmo.LayersWindow.CurrentLayerIndex].DrawOffset) * LevelView.Zoom) + LevelView.Origin;
-
-                for (float xx = inc.X; xx < width; xx += inc.X)
-                    content.DrawLine(offset.X + xx, offset.Y, offset.X + xx, offset.Y + height, Ogmo.Project.GridColor.ToXNA() * .5f);
-
-                for (float yy = inc.Y; yy < height; yy += inc.Y)
-                    content.DrawLine(offset.X, offset.Y + yy, offset.X + width, offset.Y + yy, Ogmo.Project.GridColor.ToXNA() * .5f);
-
-                content.DrawHollowRect((int)offset.X, (int)offset.Y, (int)width + 1, (int)height, Color.Black);
-                content.DrawHollowRect((int)offset.X - 1, (int)offset.Y - 1, (int)width + 3, (int)height + 2, Color.Black);
-
-                content.SpriteBatch.End();
-            }
-
-            //Draw the camera
-            content.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, LevelView.Matrix);
-            if (Ogmo.Project.CameraEnabled)
-            {
-                int w = Ogmo.Project.CameraSize.Width / 8;
-                int h = Ogmo.Project.CameraSize.Height / 8;
-
-                int x2 = Level.CameraPosition.X + Ogmo.Project.CameraSize.Width;
-                int y2 = Level.CameraPosition.Y + Ogmo.Project.CameraSize.Height;
-
-                content.DrawLine(Level.CameraPosition.X - 1, Level.CameraPosition.Y - 1, Level.CameraPosition.X + w, Level.CameraPosition.Y - 1, Color.Red);
-                content.DrawLine(Level.CameraPosition.X, Level.CameraPosition.Y, Level.CameraPosition.X + w, Level.CameraPosition.Y, Color.Red);
-                content.DrawLine(Level.CameraPosition.X - 1, Level.CameraPosition.Y - 1, Level.CameraPosition.X - 1, Level.CameraPosition.Y + h, Color.Red);
-                content.DrawLine(Level.CameraPosition.X, Level.CameraPosition.Y, Level.CameraPosition.X, Level.CameraPosition.Y + h, Color.Red);
-
-                content.DrawLine(x2 - w, Level.CameraPosition.Y - 1, x2 + 1, Level.CameraPosition.Y - 1, Color.Red);
-                content.DrawLine(x2 - w, Level.CameraPosition.Y, x2, Level.CameraPosition.Y, Color.Red);
-                content.DrawLine(x2 + 1, Level.CameraPosition.Y, x2 + 1, Level.CameraPosition.Y + h, Color.Red);
-                content.DrawLine(x2, Level.CameraPosition.Y, x2, Level.CameraPosition.Y + h, Color.Red);
-
-                content.DrawLine(Level.CameraPosition.X - 1, y2 + 1, Level.CameraPosition.X + w, y2 + 1, Color.Red);
-                content.DrawLine(Level.CameraPosition.X - 1, y2, Level.CameraPosition.X + w, y2, Color.Red);
-                content.DrawLine(Level.CameraPosition.X - 1, y2, Level.CameraPosition.X - 1, y2 - h, Color.Red);
-                content.DrawLine(Level.CameraPosition.X, y2, Level.CameraPosition.X, y2 - h, Color.Red);
-
-                content.DrawLine(x2 - w, y2 + 1, x2 + 1, y2 + 1, Color.Red);
-                content.DrawLine(x2 - w, y2, x2, y2, Color.Red);
-                content.DrawLine(x2 + 1, y2 - h, x2 + 1, y2 + 1, Color.Red);
-                content.DrawLine(x2, y2 - h, x2, y2, Color.Red);
-            }
-
-            content.SpriteBatch.End();
-            */
         }
 
         public void SaveAsImage()

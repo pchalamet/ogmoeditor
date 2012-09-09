@@ -77,8 +77,8 @@ namespace OgmoEditor
             }
             else
             {
-                g.DrawImage(Ogmo.NewEditorDraw.ImgBroken,
-                    new Point(pictureBox.ClientSize.Width / 2 - Ogmo.NewEditorDraw.ImgBroken.Width / 2, pictureBox.ClientSize.Height / 2 - Ogmo.NewEditorDraw.ImgBroken.Height / 2));
+                g.DrawImage(DrawUtil.ImgBroken,
+                    new Point(pictureBox.ClientSize.Width / 2 - DrawUtil.ImgBroken.Width / 2, pictureBox.ClientSize.Height / 2 - DrawUtil.ImgBroken.Height / 2));
             }
         }
 

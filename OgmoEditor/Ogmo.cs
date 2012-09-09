@@ -42,8 +42,6 @@ namespace OgmoEditor
         public delegate void ToolCallback(Tool tool);
         public delegate void EntityCallback(EntityDefinition objectDefinition);
 
-        static public NewEditorDraw NewEditorDraw { get; private set; }
-
         static public MainWindow MainWindow { get; private set; }
         static public ToolsWindow ToolsWindow { get; private set; }
         static public LayersWindow LayersWindow { get; private set; }
@@ -84,6 +82,9 @@ namespace OgmoEditor
             //Figure out the program directory
             ProgramDirectory = Application.ExecutablePath.Remove(Application.ExecutablePath.IndexOf(Path.GetFileName(Application.ExecutablePath)));
 
+            //Initialize global pens/brushes/bitmaps
+            DrawUtil.Initialize();
+
             //Make sure the recent project list is valid
             InitRecentProjects();
 
@@ -106,9 +107,6 @@ namespace OgmoEditor
             EntitiesWindow.Show(MainWindow);
             EntitySelectionWindow.Show(MainWindow);
             LayersWindow.EditorVisible = ToolsWindow.EditorVisible = TilePaletteWindow.EditorVisible = EntitiesWindow.EditorVisible = EntitySelectionWindow.EditorVisible = false;
-
-            //Set up graphics stuff
-            NewEditorDraw = new NewEditorDraw();
 
             //Add the exit event
             Application.ApplicationExit += onApplicationExit;

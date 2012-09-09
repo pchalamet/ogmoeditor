@@ -160,7 +160,7 @@ namespace OgmoEditor.Windows
                     r.Y = (int)(y + r.Y * scale);
                     r.Width = (int)(r.Width * scale * SelectionWidth);
                     r.Height = (int)(r.Height * scale * SelectionHeight);
-                    Ogmo.NewEditorDraw.DrawSelectionRectangle(e.Graphics, r);
+                    DrawUtil.DrawSelectionRectangle(e.Graphics, r);
                 }
             }
         }

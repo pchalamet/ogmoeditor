@@ -27,7 +27,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                 int w = Math.Max(mouseStart.X, LevelEditor.MousePosition.X) - x;
                 int h = Math.Max(mouseStart.Y, LevelEditor.MousePosition.Y) - y;
 
-                Ogmo.NewEditorDraw.DrawSelectionRectangle(graphics, new Rectangle(x, y, w, h));
+                DrawUtil.DrawSelectionRectangle(graphics, new Rectangle(x, y, w, h));
             }
         }
 

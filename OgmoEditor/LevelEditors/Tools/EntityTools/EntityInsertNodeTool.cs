@@ -115,15 +115,15 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
 
                     //Draw the line(s)
                     if (index == 0)
-                        graphics.DrawLine(Ogmo.NewEditorDraw.NodeNewPathPen, e.Position, mouse);
+                        graphics.DrawLine(DrawUtil.NodeNewPathPen, e.Position, mouse);
                     else
-                        graphics.DrawLine(Ogmo.NewEditorDraw.NodeNewPathPen, e.Nodes[index - 1], mouse);
+                        graphics.DrawLine(DrawUtil.NodeNewPathPen, e.Nodes[index - 1], mouse);
 
                     if (index < e.Nodes.Count)
-                        graphics.DrawLine(Ogmo.NewEditorDraw.NodeNewPathPen, e.Nodes[index], mouse);
+                        graphics.DrawLine(DrawUtil.NodeNewPathPen, e.Nodes[index], mouse);
 
                     //Draw the node itself
-                    Ogmo.NewEditorDraw.DrawNode(graphics, mouse);
+                    DrawUtil.DrawNode(graphics, mouse);
                 }
             }
         }
