@@ -24,6 +24,7 @@ namespace OgmoEditor.Windows
 
         private List<Entity> selection;
         private Label positionLabel;
+        private Label sizeLabel;
 
         public EntitySelectionWindow()
             : base(HorizontalSnap.Right, VerticalSnap.Bottom)
@@ -34,6 +35,16 @@ namespace OgmoEditor.Windows
             selection = new List<Entity>();
             onSelectionChanged();
             DoubleBuffered = true;
+
+            //Init some of the labels
+            {
+                positionLabel = new Label();
+                positionLabel.TextAlign = ContentAlignment.MiddleLeft;
+                positionLabel.Bounds = new Rectangle(CONTENT_X, 96, CONTENT_WIDTH, 16);
+
+                sizeLabel = new Label();
+                sizeLabel.TextAlign = ContentAlignment.MiddleLeft;
+            }
 
             //Events
             Ogmo.LayersWindow.OnLayerChanged += onLayerChanged;
@@ -136,13 +147,18 @@ namespace OgmoEditor.Windows
                 positionLabel.Text = "( " + selection[0].Position.X.ToString() + ", " + selection[0].Position.Y.ToString() + " )";
         }
 
+        public void RefreshSize()
+        {
+            if (selection.Count == 1)
+                sizeLabel.Text = selection[0].Size.Width.ToString() + " x " + selection[0].Size.Height.ToString();
+        }
+
         /*
          *  Events
          */
         private void onSelectionChanged()
         {
             Controls.Clear();
-            positionLabel = null;
 
             if (selection.Count == 0)
             {
@@ -203,9 +219,6 @@ namespace OgmoEditor.Windows
 
                 //Entity position
                 {
-                    positionLabel = new Label();
-                    positionLabel.TextAlign = ContentAlignment.MiddleLeft;
-                    positionLabel.Bounds = new Rectangle(CONTENT_X, 96, CONTENT_WIDTH, 16);
                     RefreshPosition();
                     Controls.Add(positionLabel);
 
@@ -220,11 +233,9 @@ namespace OgmoEditor.Windows
                 int yy = 114;
                 if (selection[0].Definition.ResizableX || selection[0].Definition.ResizableY)
                 {
-                    Label size = new Label();
-                    size.TextAlign = ContentAlignment.MiddleLeft;
-                    size.Bounds = new Rectangle(CONTENT_X, yy, CONTENT_WIDTH, 16);
-                    size.Text = selection[0].Size.Width.ToString() + " x " + selection[0].Size.Height.ToString();
-                    Controls.Add(size);
+                    sizeLabel.Bounds = new Rectangle(CONTENT_X, yy, CONTENT_WIDTH, 16);
+                    RefreshSize();
+                    Controls.Add(sizeLabel);
 
                     Label label = new Label();
                     label.TextAlign = ContentAlignment.MiddleRight;
