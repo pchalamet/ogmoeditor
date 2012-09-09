@@ -19,6 +19,16 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
 
         }
 
+        public override void NewDraw(Graphics graphics)
+        {
+            if (drawing)
+            {
+                Rectangle draw = LayerEditor.Layer.GetTilesRectangle(drawStart, drawTo);
+                if (LevelEditor.Level.Bounds.IntersectsWith(draw))
+                    Ogmo.NewEditorDraw.DrawSelectionRectangle(graphics, draw);
+            }
+        }
+
         public override void Draw()
         {
             if (drawing)

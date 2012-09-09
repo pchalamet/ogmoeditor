@@ -14,11 +14,33 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
         private int drawTile;
         private Point drawStart;
         private Point drawTo;
+        private SolidBrush eraseBrush;
 
         public TileRectangleTool()
             : base("Rectangle", "rectangle.png")
         {
             drawing = false;
+            eraseBrush = new SolidBrush(Color.FromArgb(255 / 2, Color.Red));
+        }
+
+        public override void NewDraw(Graphics graphics)
+        {
+            if (drawing)
+            {
+                Rectangle draw = getRect();
+                if (LevelEditor.Level.Bounds.IntersectsWith(draw))
+                {
+                    if (!drawMode || drawTile == -1)
+                        graphics.FillRectangle(eraseBrush, draw);
+                    else
+                    {
+                        Rectangle tileRect = LayerEditor.Layer.Tileset.TileRects[drawTile];
+                        for (int i = draw.X; i < draw.X + draw.Width; i += LayerEditor.Layer.Definition.Grid.Width)
+                            for (int j = draw.Y; j < draw.Y + draw.Height; j += LayerEditor.Layer.Definition.Grid.Height)
+                                graphics.DrawImage(LayerEditor.Layer.Tileset.Bitmap, new Rectangle(i, j, LayerEditor.Layer.Definition.Grid.Width, LayerEditor.Layer.Definition.Grid.Height), tileRect.X, tileRect.Y, tileRect.Width, tileRect.Height, GraphicsUnit.Pixel, Util.HalfAlphaAttributes);
+                    }
+                }
+            }
         }
 
         public override void Draw()
