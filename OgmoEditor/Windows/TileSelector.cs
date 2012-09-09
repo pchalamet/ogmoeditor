@@ -154,9 +154,10 @@ namespace OgmoEditor.Windows
 
                 if (selection.HasValue)
                 {
-                    Rectangle r = selection.Value.Multiply(Tileset.TileSize.Width * scale, Tileset.TileSize.Height * scale);
-                    r.X -= (int)(bitmap.Width / 2 * scale);
-                    r.Y -= (int)(bitmap.Height / 2 * scale);
+                    Rectangle r = tileset.GetVisualRectFromSelection(selection.Value);
+                    r.X -= bitmap.Width / 2;
+                    r.Y -= bitmap.Height / 2;
+                    r = r.Multiply(scale, scale);                
                     e.Graphics.DrawRectangle(tileSelectPenA, r);
                     e.Graphics.DrawRectangle(tileSelectPenB, r);
                 }
@@ -213,9 +214,7 @@ namespace OgmoEditor.Windows
         private Point ResolveTilePoint(Point p)
         {
             p = inverseMatrix.TransformPoint(p);
-            p.X /= tileset.TileSize.Width;
-            p.Y /= tileset.TileSize.Height;
-            return p;
+            return tileset.GetCellFromID(tileset.GetTileHit(p));
         }
 
         private Point SnapPoint(Point point, Rectangle to)

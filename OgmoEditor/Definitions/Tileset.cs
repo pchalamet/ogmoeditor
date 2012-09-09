@@ -45,6 +45,25 @@ namespace OgmoEditor.Definitions
             return new Rectangle(x * (TileSize.Width + TileSep), y * (TileSize.Height + TileSep), TileSize.Width, TileSize.Height);
         }
 
+        public Rectangle GetVisualRectFromSelection(Rectangle selection)
+        {
+            return new Rectangle(selection.X * (TileSize.Width + TileSep), selection.Y * (TileSize.Height + TileSep), selection.Width * TileSize.Width + (selection.Width - 1) * TileSep, selection.Height * TileSize.Height + (selection.Height - 1) * TileSep);
+        }
+
+        public int GetTileHit(Point at)
+        {
+            for (int i = 0; i < tileRects.Length; i++)
+            {
+                Rectangle hit = tileRects[i];
+                hit.Width += TileSep;
+                hit.Height += TileSep;
+                if (hit.Contains(at))
+                    return i;
+
+            }
+            return -1;
+        }
+
         public int TilesAcross
         {
             get

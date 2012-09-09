@@ -38,14 +38,16 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.versionLabel = new System.Windows.Forms.Label();
+            this.donateButton = new System.Windows.Forms.Button();
+            this.websiteButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(397, 304);
+            this.button1.Location = new System.Drawing.Point(358, 304);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(114, 23);
             this.button1.TabIndex = 0;
             this.button1.Text = "Done";
             this.button1.UseVisualStyleBackColor = true;
@@ -102,7 +104,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(19, 290);
+            this.label5.Location = new System.Drawing.Point(19, 292);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(314, 13);
             this.label5.TabIndex = 6;
@@ -111,7 +113,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(19, 308);
+            this.label6.Location = new System.Drawing.Point(19, 309);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(193, 13);
             this.label6.TabIndex = 7;
@@ -127,12 +129,34 @@
             this.versionLabel.Text = "Version";
             this.versionLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // donateButton
+            // 
+            this.donateButton.Location = new System.Drawing.Point(358, 251);
+            this.donateButton.Name = "donateButton";
+            this.donateButton.Size = new System.Drawing.Size(114, 23);
+            this.donateButton.TabIndex = 9;
+            this.donateButton.Text = "Donate (PayPal)";
+            this.donateButton.UseVisualStyleBackColor = true;
+            this.donateButton.Click += new System.EventHandler(this.donateButton_Click);
+            // 
+            // websiteButton
+            // 
+            this.websiteButton.Location = new System.Drawing.Point(358, 278);
+            this.websiteButton.Name = "websiteButton";
+            this.websiteButton.Size = new System.Drawing.Size(114, 23);
+            this.websiteButton.TabIndex = 10;
+            this.websiteButton.Text = "Open Website";
+            this.websiteButton.UseVisualStyleBackColor = true;
+            this.websiteButton.Click += new System.EventHandler(this.websiteButton_Click);
+            // 
             // AboutWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 338);
             this.ControlBox = false;
+            this.Controls.Add(this.websiteButton);
+            this.Controls.Add(this.donateButton);
             this.Controls.Add(this.versionLabel);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -165,5 +189,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label versionLabel;
+        private System.Windows.Forms.Button donateButton;
+        private System.Windows.Forms.Button websiteButton;
     }
 }
