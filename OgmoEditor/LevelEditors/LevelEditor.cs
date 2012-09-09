@@ -200,16 +200,15 @@ namespace OgmoEditor.LevelEditors
                 //Init the bitmap
                 bmp = new Bitmap(width, height);
                 Graphics g = Graphics.FromImage(bmp);
-                g.Transform.Translate(area.X, area.Y);
-                g.Transform.Scale(scale, scale);
                 g.SmoothingMode = SmoothingMode.HighSpeed;
                 g.InterpolationMode = InterpolationMode.NearestNeighbor;
-                g.Clip = new Region(area);
+                g.TranslateTransform(-area.X, -area.Y);
+                g.ScaleTransform(scale, scale);
 
                 //Draw the layers!
                 for (int i = 0; i < LayerEditors.Count; i++)
                     if (Ogmo.Project.LayerDefinitions[i].Visible)
-                        LayerEditors[i].Draw(g, false, true);
+                        LayerEditors[i].DrawHandler(g, false, true);
             }
 
             //Save it then dispose it
