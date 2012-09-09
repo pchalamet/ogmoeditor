@@ -15,19 +15,22 @@ namespace OgmoEditor.Windows
 
         private Tileset tileset;
         private Bitmap bitmap;
-        private Rectangle? selection;
-        private bool selecting;
         private Matrix inverseMatrix;
+        private Rectangle? selection;
+
         private Pen tileSelectPenA;
         private Pen tileSelectPenB;
+
+        private bool selecting;
+        private Point selectingStart;
 
         public TileSelector()
         {
             InitializeComponent();
 
-            tileSelectPenA = new Pen(Color.Yellow, 3);
+            tileSelectPenA = new Pen(Color.Yellow, 4);
 
-            tileSelectPenB = new Pen(Color.Black, 1);
+            tileSelectPenB = new Pen(Color.Black, 2);
             tileSelectPenB.DashPattern = new float[] { 4, 2 };
         }
 
@@ -59,6 +62,8 @@ namespace OgmoEditor.Windows
                 pictureBox.Refresh();
             }
         }
+
+        #region Changing the Selection
 
         public void MoveSelectionLeft()
         {
@@ -120,9 +125,10 @@ namespace OgmoEditor.Windows
             pictureBox.Refresh();
         }
 
-        /*
-         *  Events
-         */
+        #endregion
+
+        #region Events
+
         private void pictureBox_Paint(object sender, PaintEventArgs e)
         {
             if (bitmap != null)
@@ -172,6 +178,7 @@ namespace OgmoEditor.Windows
             if (tileset.ContainsTile(at))
             {
                 selecting = true;
+                selectingStart = at;
                 selection = new Rectangle(at.X, at.Y, 1, 1);
                 pictureBox.Refresh();
             }
@@ -185,8 +192,8 @@ namespace OgmoEditor.Windows
             Point at = ResolveTilePoint(e.Location);
             if (tileset.ContainsTile(at))
             {
-                Point start = new Point(Math.Min(at.X, selection.Value.X), Math.Min(at.Y, selection.Value.Y));
-                Point end = new Point(Math.Max(at.X, selection.Value.X), Math.Max(at.Y, selection.Value.Y));
+                Point start = new Point(Math.Min(at.X, selectingStart.X), Math.Min(at.Y, selectingStart.Y));
+                Point end = new Point(Math.Max(at.X, selectingStart.X), Math.Max(at.Y, selectingStart.Y));
 
                 selection = new Rectangle(start.X, start.Y, end.X - start.X + 1, end.Y - start.Y + 1);
                 pictureBox.Refresh();
@@ -197,6 +204,10 @@ namespace OgmoEditor.Windows
         {
             selecting = false;
         }
+
+        #endregion
+
+        #region Utilities
 
         private Point ResolveTilePoint(Point p)
         {
@@ -219,5 +230,7 @@ namespace OgmoEditor.Windows
                 pt.Y = to.Y + to.Height;
             return pt;
         }
+
+        #endregion
     }
 }

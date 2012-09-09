@@ -20,9 +20,12 @@ namespace OgmoEditor
 
         static public void Initialize()
         {
-            ImgBG = new Bitmap(BuildPath("bg.png"));
-            ImgLogo = new Bitmap(BuildPath("logo.png"));
-            ImgBroken = new Bitmap(BuildPath("broken.png"));
+            //Load all the static bitmaps
+            {
+                ImgBG = new Bitmap(BuildPath("bg.png"));
+                ImgLogo = new Bitmap(BuildPath("logo.png"));
+                ImgBroken = new Bitmap(BuildPath("broken.png"));
+            }
 
             //Pens and brushes
             {
