@@ -349,6 +349,14 @@ namespace OgmoEditor.LevelEditors
             {
                 LevelView.Center();
             }
+            else if (e.KeyCode == Keys.Oemplus)
+            {
+                LevelView.ZoomIn(LevelView.EditorToScreen(MousePosition));
+            }
+            else if (e.KeyCode == Keys.OemMinus)
+            {
+                LevelView.ZoomOut(LevelView.EditorToScreen(MousePosition));
+            }
             else if (mouseMode == MouseMode.Normal && e.KeyCode == Keys.Space)
             {
                 mouseMode = MouseMode.Pan;

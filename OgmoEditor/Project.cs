@@ -190,10 +190,6 @@ namespace OgmoEditor
                 //Image file must exist if it is using an image file to draw
                 if (o.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
                     s += OgmoParse.CheckPath(o.ImageDefinition.ImagePath, SavedDirectory, "Object \"" + o.Name + "\" image file");
-
-                //An entity can't have a tiled image and be rotatable
-                if (o.ImageDefinition.Tiled && o.ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image && o.Rotatable)
-                    s += OgmoParse.Error("Object \"" + o.Name + "\" has a tiled image and is rotatable. These features are incompatible in this version of Ogmo Editor");
             }
 
             /*

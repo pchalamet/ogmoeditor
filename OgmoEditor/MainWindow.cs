@@ -450,6 +450,21 @@ namespace OgmoEditor
             tilePaletteToolStripMenuItem.Checked = Ogmo.TilePaletteWindow.UserVisible;
         }
 
+        private void centerViewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LevelEditors[Ogmo.CurrentLevelIndex].LevelView.Center();
+        }
+
+        private void zoomOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LevelEditors[Ogmo.CurrentLevelIndex].LevelView.ZoomOut();
+        }
+
+        private void zoomInToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LevelEditors[Ogmo.CurrentLevelIndex].LevelView.ZoomIn();
+        }
+
         private void layersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Ogmo.LayersWindow.EditorVisible)

@@ -91,16 +91,6 @@ namespace OgmoEditor.LevelEditors
             UpdateInverse();
         }
 
-        public void OriginOn(PointF on)
-        {
-            on = EditorToScreen(on);
-            PointF target = new PointF(LevelEditor.ClientSize.Width / 2 - on.X * Zoom, LevelEditor.ClientSize.Height / 2 - on.Y * Zoom);
-            target = ScreenToEditor(target);
-
-            Matrix.Translate(target.X, target.Y);
-            UpdateInverse();
-        }
-
         private int GetZoomIndex()
         {
             for (int i = 0; i < ZOOMS.Length; i++)

@@ -628,6 +628,9 @@
     <Content Include="Content\broken.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\changelog.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\icons\icon32.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

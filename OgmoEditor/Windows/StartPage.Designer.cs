@@ -34,6 +34,7 @@
             this.recentPanel = new System.Windows.Forms.Panel();
             this.twitterPanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.webBrowser = new System.Windows.Forms.WebBrowser();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.recentPanel.SuspendLayout();
             this.twitterPanel.SuspendLayout();
@@ -41,8 +42,8 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
@@ -65,8 +66,8 @@
             // 
             // recentPanel
             // 
-            this.recentPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.recentPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.recentPanel.BackColor = System.Drawing.Color.White;
             this.recentPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.recentPanel.Controls.Add(this.recentLabel);
@@ -77,8 +78,8 @@
             // 
             // twitterPanel
             // 
-            this.twitterPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.twitterPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.twitterPanel.BackColor = System.Drawing.Color.White;
             this.twitterPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.twitterPanel.Controls.Add(this.label1);
@@ -97,11 +98,28 @@
             this.label1.Text = "@OgmoEditor";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // webBrowser
+            // 
+            this.webBrowser.AllowNavigation = false;
+            this.webBrowser.AllowWebBrowserDrop = false;
+            this.webBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.webBrowser.IsWebBrowserContextMenuEnabled = false;
+            this.webBrowser.Location = new System.Drawing.Point(190, 212);
+            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser.Name = "webBrowser";
+            this.webBrowser.Size = new System.Drawing.Size(264, 265);
+            this.webBrowser.TabIndex = 4;
+            this.webBrowser.Url = new System.Uri("http://www.mattmakesgames.com", System.UriKind.Absolute);
+            this.webBrowser.WebBrowserShortcutsEnabled = false;
+            // 
             // StartPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.webBrowser);
             this.Controls.Add(this.twitterPanel);
             this.Controls.Add(this.recentPanel);
             this.Controls.Add(this.pictureBox1);
@@ -121,5 +139,6 @@
         private System.Windows.Forms.Panel recentPanel;
         private System.Windows.Forms.Panel twitterPanel;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.WebBrowser webBrowser;
     }
 }

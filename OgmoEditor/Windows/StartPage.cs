@@ -41,6 +41,9 @@ namespace OgmoEditor.Windows
             WebClient twitter = new WebClient();
             twitter.DownloadStringCompleted += new DownloadStringCompletedEventHandler(twitter_DownloadStringCompleted);
             twitter.DownloadStringAsync(new Uri(@"http://api.twitter.com/1/statuses/user_timeline.xml?screen_name=OgmoEditor"));
+
+            //Browser
+            webBrowser.Url = new Uri(Path.Combine(Ogmo.ProgramDirectory, "Content", "changelog.html"));
         }
 
         void twitter_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
