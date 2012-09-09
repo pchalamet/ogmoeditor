@@ -145,6 +145,13 @@ namespace OgmoEditor.LevelEditors
                 e.Graphics.DrawRectangle(GridBorderPen, new Rectangle((int)offset.X, (int)offset.Y, (int)width + 1, (int)height));
             }
 
+            //Draw the camera
+            if (Ogmo.Project.CameraEnabled)
+            {
+                e.Graphics.Transform = LevelView.Matrix;
+                e.Graphics.DrawRectangle(Ogmo.NewEditorDraw.CameraRectPen, new Rectangle(Level.CameraPosition.X, Level.CameraPosition.Y, Ogmo.Project.CameraSize.Width, Ogmo.Project.CameraSize.Height));
+            }
+
             /*
             EditorDraw content = Ogmo.EditorDraw;
             
