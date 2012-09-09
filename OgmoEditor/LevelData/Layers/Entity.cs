@@ -189,9 +189,9 @@ namespace OgmoEditor.LevelData.Layers
             return xml;
         }
 
-        public void NewDraw(Graphics graphics, bool current, bool fullAlpha)
+        public void Draw(Graphics graphics, bool current, bool fullAlpha)
         {
-            Definition.Draw(graphics, Position, Angle, fullAlpha ? Util.FullAlphaAttributes : Util.HalfAlphaAttributes);
+            Definition.Draw(graphics, Position, Size, Angle, fullAlpha ? Util.FullAlphaAttributes : Util.HalfAlphaAttributes);
 
             //Selection box
             if (current && Ogmo.EntitySelectionWindow.IsSelected(this))
@@ -205,7 +205,7 @@ namespace OgmoEditor.LevelData.Layers
                 {
                     ImageAttributes attributes = fullAlpha ? Util.HalfAlphaAttributes : Util.QuarterAlphaAttributes;
                     foreach (var p in Nodes)
-                        Definition.Draw(graphics, p, Angle, attributes);
+                        Definition.Draw(graphics, p, Size, Angle, attributes);
                 }
 
                 switch (Definition.NodesDefinition.DrawMode)

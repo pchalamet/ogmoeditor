@@ -21,7 +21,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
         public override void Draw(System.Drawing.Graphics graphics, bool current, bool fullAlpha)
         {
             foreach (Entity e in Layer.Entities)
-                e.NewDraw(graphics, current, fullAlpha);
+                e.Draw(graphics, current, fullAlpha);
         }
 
         public override void OnKeyDown(System.Windows.Forms.Keys key)

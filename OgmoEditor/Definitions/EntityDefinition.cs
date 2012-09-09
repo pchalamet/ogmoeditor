@@ -65,7 +65,7 @@ namespace OgmoEditor.Definitions
             return def;
         }
 
-        public void Draw(Graphics graphics, Point position, float angle, ImageAttributes attributes)
+        public void Draw(Graphics graphics, Point position, Size size, float angle, ImageAttributes attributes)
         {
             //Do transformations for position and rotation
             graphics.TranslateTransform(position.X - Origin.X, position.Y - Origin.Y);
@@ -75,22 +75,27 @@ namespace OgmoEditor.Definitions
             if (ImageDefinition.Tiled && ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
             {
                 Rectangle drawTo = Rectangle.Empty;
-                for (drawTo.X = 0; drawTo.X < Size.Width; drawTo.X += bitmap.Width)
+                for (drawTo.X = 0; drawTo.X < size.Width; drawTo.X += bitmap.Width)
                 {
-                    drawTo.Width = Math.Min(bitmap.Width, Size.Width - drawTo.X);
-                    for (drawTo.Y = 0; drawTo.Y < Size.Height; drawTo.Y += bitmap.Height)
+                    drawTo.Width = Math.Min(bitmap.Width, size.Width - drawTo.X);
+                    for (drawTo.Y = 0; drawTo.Y < size.Height; drawTo.Y += bitmap.Height)
                     {
-                        drawTo.Height = Math.Min(bitmap.Height, Size.Height - drawTo.Y);
+                        drawTo.Height = Math.Min(bitmap.Height, size.Height - drawTo.Y);
                         graphics.DrawImage(bitmap, drawTo, 0, 0, drawTo.Width, drawTo.Height, GraphicsUnit.Pixel, attributes);
                     }
                 }
             }
             else
-                graphics.DrawImage(bitmap, new Rectangle(0, 0, Size.Width, Size.Height), 0, 0, bitmap.Width, bitmap.Height, GraphicsUnit.Pixel, attributes);
+                graphics.DrawImage(bitmap, new Rectangle(0, 0, size.Width, size.Height), 0, 0, bitmap.Width, bitmap.Height, GraphicsUnit.Pixel, attributes);
 
             //Undo the transformations
             graphics.RotateTransform(-angle);
             graphics.TranslateTransform(-position.X + Origin.X, -position.Y + Origin.Y);
+        }
+
+        public void Draw(Graphics graphics, Point position, float angle, ImageAttributes attributes)
+        {
+            Draw(graphics, position, Size, angle, attributes);
         }
 
         public void GenerateImages()
