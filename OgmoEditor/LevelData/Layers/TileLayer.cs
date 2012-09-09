@@ -8,9 +8,7 @@ using OgmoEditor.LevelEditors.LayerEditors;
 using OgmoEditor.LevelEditors.Resizers;
 using System.Drawing;
 using OgmoEditor.Definitions;
-using Microsoft.Xna.Framework.Graphics;
 using System.Diagnostics;
-using OgmoEditor.LevelEditors.LayersEditors;
 
 namespace OgmoEditor.LevelData.Layers
 {
@@ -18,7 +16,6 @@ namespace OgmoEditor.LevelData.Layers
     {
         public new TileLayerDefinition Definition { get; private set; }
         public int[,] Tiles;
-        public TileCanvas TileCanvas { get; private set; }
         public TileSelection Selection;
         public Tileset Tileset;
 
@@ -32,13 +29,6 @@ namespace OgmoEditor.LevelData.Layers
             int tileHeight = Level.Size.Height / definition.Grid.Height + (Level.Size.Height % definition.Grid.Height != 0 ? 1 : 0);
             Tiles = new int[tileWidth, tileHeight];
             Clear();
-
-            InitCanvas();
-        }
-
-        public void InitCanvas()
-        {
-            TileCanvas = new TileCanvas(this);
         }
 
         public override XmlElement GetXML(XmlDocument doc)
@@ -200,7 +190,6 @@ namespace OgmoEditor.LevelData.Layers
                 }
             }
 
-            TileCanvas.RefreshAll();
             return cleanXML;
         }
 

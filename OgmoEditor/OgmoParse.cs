@@ -39,7 +39,7 @@ namespace OgmoEditor
             }
         }
 
-        static public void Parse(ref Microsoft.Xna.Framework.Vector2 to, TextBox x, TextBox y)
+        static public void Parse(ref PointF to, TextBox x, TextBox y)
         {
             try
             {

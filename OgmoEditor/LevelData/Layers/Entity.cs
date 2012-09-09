@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Xna.Framework.Graphics;
 using OgmoEditor.Definitions;
 using System.Drawing;
 using System.Xml;
@@ -261,84 +260,9 @@ namespace OgmoEditor.LevelData.Layers
             }
         }
 
-        public void Draw(float alpha)
-        {
-            Ogmo.EditorDraw.DrawEntity(this, alpha);
-
-            if (Ogmo.EntitySelectionWindow.IsSelected(this))
-                Ogmo.EditorDraw.DrawHollowRect(Position.X - Definition.Origin.X, Position.Y - Definition.Origin.Y - 1, Size.Width + 1, Size.Height + 1, Microsoft.Xna.Framework.Color.Lime);
-
-            /*
-             *  Draw nodes
-             */
-            if (Nodes != null)
-            {
-                if (Definition.NodesDefinition.Ghost)
-                {
-                    Point pp = Position;
-                    foreach (var p in Nodes)
-                    {
-                        Position = p;
-                        Ogmo.EditorDraw.DrawEntity(this, alpha * .35f);
-                    }
-                    Position = pp;
-                }
-
-                if (Definition.NodesDefinition.DrawMode == EntityNodesDefinition.PathMode.None)
-                {
-                    foreach (var p in Nodes)
-                        Ogmo.EditorDraw.DrawNode(p);
-                }
-                else if (Definition.NodesDefinition.DrawMode == EntityNodesDefinition.PathMode.Path)
-                {
-                    if (Nodes.Count > 0)
-                    {
-                        Ogmo.EditorDraw.DrawLine(Position, Nodes[0], Microsoft.Xna.Framework.Color.Red * .6f);
-                        Ogmo.EditorDraw.DrawNode(Nodes[0]);
-                    }
-
-                    for (int i = 1; i < Nodes.Count; i++)
-                    {
-                        Ogmo.EditorDraw.DrawLine(Nodes[i - 1], Nodes[i], Microsoft.Xna.Framework.Color.Red * .6f);
-                        Ogmo.EditorDraw.DrawNode(Nodes[i]);
-                    }
-                }
-                else if (Definition.NodesDefinition.DrawMode == EntityNodesDefinition.PathMode.Circuit)
-                {
-                    if (Nodes.Count > 0)
-                    {
-                        Ogmo.EditorDraw.DrawLine(Position, Nodes[0], Microsoft.Xna.Framework.Color.Red * .6f);
-                        Ogmo.EditorDraw.DrawNode(Nodes[0]);
-                    }
-
-                    for (int i = 1; i < Nodes.Count; i++)
-                    {
-                        Ogmo.EditorDraw.DrawLine(Nodes[i - 1], Nodes[i], Microsoft.Xna.Framework.Color.Red * .6f);
-                        Ogmo.EditorDraw.DrawNode(Nodes[i]);
-                    }
-
-                    if (Nodes.Count > 1)
-                        Ogmo.EditorDraw.DrawLine(Nodes[Nodes.Count - 1], Position, Microsoft.Xna.Framework.Color.Red * .6f);
-                }
-                else if (Definition.NodesDefinition.DrawMode == EntityNodesDefinition.PathMode.Fan)
-                {
-                    foreach (var p in Nodes)
-                    {
-                        Ogmo.EditorDraw.DrawLine(Position, p, Microsoft.Xna.Framework.Color.Red * .6f);
-                        Ogmo.EditorDraw.DrawNode(p);
-                    }
-                }
-            }
-        }
-
         public Rectangle Bounds
         {
             get { return new Rectangle(Position.X - Definition.Origin.X, Position.Y - Definition.Origin.Y, Size.Width, Size.Height); }
-        }
-
-        public Microsoft.Xna.Framework.Rectangle XNABounds
-        {
-            get { return new Microsoft.Xna.Framework.Rectangle(Position.X - Definition.Origin.X, Position.Y - Definition.Origin.Y, Size.Width, Size.Height); }
         }
 
         public Entity Clone()

@@ -43,30 +43,6 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
             }
         }
 
-        public override void Draw()
-        {
-            if (drawing)
-            {
-                Rectangle draw = getRect();
-                if (LevelEditor.Level.Bounds.IntersectsWith(draw))
-                {
-                    if (!drawMode || drawTile == -1)
-                        Ogmo.EditorDraw.DrawFillRect(draw, Microsoft.Xna.Framework.Color.Red * .5f);
-                    else
-                    {
-                        Microsoft.Xna.Framework.Rectangle rect = LayerEditor.Layer.Tileset.GetXNARectFromID(drawTile);
-                        for (int i = draw.X; i < draw.X + draw.Width; i += LayerEditor.Layer.Definition.Grid.Width)
-                            for (int j = draw.Y; j < draw.Y + draw.Height; j += LayerEditor.Layer.Definition.Grid.Height)
-                                Ogmo.EditorDraw.SpriteBatch.Draw(
-                                    Ogmo.EditorDraw.TilesetTextures[LayerEditor.Layer.Tileset],
-                                    new Microsoft.Xna.Framework.Vector2(i, j),
-                                    rect,
-                                    Microsoft.Xna.Framework.Color.White * .5f);
-                    }
-                }
-            }
-        }
-
         public override void OnMouseLeftDown(System.Drawing.Point location)
         {
             if (Ogmo.TilePaletteWindow.Tiles.Length == 0)

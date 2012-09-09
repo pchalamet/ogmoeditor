@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Xna.Framework;
 using OgmoEditor.LevelData.Layers;
 using OgmoEditor.LevelEditors.Actions.EntityActions;
 
 namespace OgmoEditor.LevelEditors.Tools.EntityTools
 {
-    using Rectangle = Microsoft.Xna.Framework.Rectangle;  
-
     public class EntityPlacementTool : EntityTool
     {
         public EntityPlacementTool()
@@ -22,12 +19,6 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
         {
             if (Ogmo.EntitiesWindow.CurrentEntity != null && LevelEditor.Focused)
                 Ogmo.EntitiesWindow.CurrentEntity.Draw(graphics, Util.Ctrl ? LevelEditor.MousePosition : LayerEditor.MouseSnapPosition, 0, Util.HalfAlphaAttributes);
-        }
-
-        public override void Draw()
-        {
-            if (Ogmo.EntitiesWindow.CurrentEntity != null && LevelEditor.Focused)
-                Ogmo.EditorDraw.DrawEntity(Ogmo.EntitiesWindow.CurrentEntity, Util.Ctrl ? LevelEditor.MousePosition : LayerEditor.MouseSnapPosition, .5f);
         }
 
         public override void OnMouseLeftClick(System.Drawing.Point location)

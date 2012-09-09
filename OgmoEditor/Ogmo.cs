@@ -8,7 +8,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Diagnostics;
 using System.Xml.Serialization;
 using OgmoEditor.ProjectEditors;
-using OgmoEditor.XNA;
 using System.Reflection;
 using OgmoEditor.LevelData;
 using OgmoEditor.Windows;
@@ -17,7 +16,6 @@ using OgmoEditor.Definitions.LayerDefinitions;
 using OgmoEditor.LevelEditors.Tools;
 using OgmoEditor.Definitions;
 using OgmoEditor.LevelEditors;
-using Microsoft.Xna.Framework.Graphics;
 using OgmoEditor.Clipboard;
 using System.Xml;
 using System.Net;
@@ -44,9 +42,6 @@ namespace OgmoEditor
         public delegate void ToolCallback(Tool tool);
         public delegate void EntityCallback(EntityDefinition objectDefinition);
 
-        static public PresentationParameters Parameters;
-        static public GraphicsDevice GraphicsDevice { get; private set; }
-        static public EditorDraw EditorDraw { get; private set; }
         static public NewEditorDraw NewEditorDraw { get; private set; }
 
         static public MainWindow MainWindow { get; private set; }
@@ -113,19 +108,6 @@ namespace OgmoEditor
             LayersWindow.EditorVisible = ToolsWindow.EditorVisible = TilePaletteWindow.EditorVisible = EntitiesWindow.EditorVisible = EntitySelectionWindow.EditorVisible = false;
 
             //Set up graphics stuff
-            {
-                //XNA stuff
-                Parameters = new PresentationParameters();
-                Parameters.BackBufferWidth = Math.Max(Ogmo.MainWindow.ClientSize.Width, 1);
-                Parameters.BackBufferHeight = Math.Max(Ogmo.MainWindow.ClientSize.Height, 1);
-                Parameters.BackBufferFormat = SurfaceFormat.Color;
-                Parameters.DepthStencilFormat = DepthFormat.Depth24;
-                Parameters.DeviceWindowHandle = Ogmo.MainWindow.Handle;
-                Parameters.PresentationInterval = PresentInterval.Immediate;
-                Parameters.IsFullScreen = false;
-                GraphicsDevice = new GraphicsDevice(GraphicsAdapter.DefaultAdapter, GraphicsProfile.Reach, Parameters);
-                EditorDraw = new EditorDraw(GraphicsDevice);
-            }
             NewEditorDraw = new NewEditorDraw();
 
             //Add the exit event

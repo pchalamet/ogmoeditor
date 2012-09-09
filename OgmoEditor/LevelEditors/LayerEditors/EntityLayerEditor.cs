@@ -24,17 +24,6 @@ namespace OgmoEditor.LevelEditors.LayerEditors
                 e.NewDraw(graphics, current, fullAlpha);
         }
 
-        public override void DrawLocal(bool current, float alpha)
-        {
-            foreach (Entity e in Layer.Entities)
-                e.Draw(alpha);
-        }
-
-        public override void DrawGlobal(bool current, float alpha)
-        {
-
-        }
-
         public override void OnKeyDown(System.Windows.Forms.Keys key)
         {
             base.OnKeyDown(key);

@@ -98,11 +98,6 @@ namespace OgmoEditor
             return Regex.IsMatch(color, REGEX32);
         }
 
-        public Microsoft.Xna.Framework.Color ToXNA()
-        {
-            return new Microsoft.Xna.Framework.Color(R, G, B);
-        }
-
         public OgmoColor Invert()
         {
             return new OgmoColor((byte)(255 - R), (byte)(255 - G), (byte)(255 - B), A);

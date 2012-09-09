@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OgmoEditor.LevelData.Layers;
-using Microsoft.Xna.Framework.Graphics;
 using System.Windows.Forms;
-using Microsoft.Xna.Framework;
 using System.Diagnostics;
 using OgmoEditor.LevelEditors.Actions;
 using OgmoEditor.LevelEditors.Tools;
@@ -14,8 +12,6 @@ using System.Drawing;
 
 namespace OgmoEditor.LevelEditors.LayerEditors
 {
-    using Point = System.Drawing.Point;    
-
     public abstract class LayerEditor
     {
         public const int LAYER_ABOVE_ALPHA = 255/2;
@@ -24,19 +20,16 @@ namespace OgmoEditor.LevelEditors.LayerEditors
         public LevelEditor LevelEditor { get; private set; }
         public Point MouseSnapPosition { get; private set; }
         public PointF DrawOffset { get; private set; }
-        public Matrix DrawMatrix { get; private set; }
 
         public LayerEditor(LevelEditor levelEditor, Layer layer)
         {
             LevelEditor = levelEditor;
             Layer = layer;
-            DrawMatrix = Matrix.Identity;
         }
 
         public void UpdateDrawOffset(Point cameraPos)
         {
             DrawOffset = new PointF(cameraPos.X - cameraPos.X * Layer.Definition.ScrollFactor.X, cameraPos.Y - cameraPos.Y * Layer.Definition.ScrollFactor.Y);
-            DrawMatrix = Matrix.CreateTranslation(DrawOffset.X, DrawOffset.Y, 0);
         }
 
         public void InternalDraw(Graphics graphics, bool current, bool fullAlpha)
@@ -50,31 +43,6 @@ namespace OgmoEditor.LevelEditors.LayerEditors
         }
 
         public abstract void NewDraw(Graphics graphics, bool current, bool fullAlpha);
-
-        public void Draw(bool current, float alpha)
-        {
-            /*
-            Ogmo.EditorDraw.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, DrawMatrix * LevelEditor.LevelView.Matrix);
-            DrawLocal(current, alpha);
-            if (Ogmo.ToolsWindow.CurrentTool != null)
-                Ogmo.ToolsWindow.CurrentTool.Draw();
-            Ogmo.EditorDraw.SpriteBatch.End();
-
-            Ogmo.EditorDraw.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Matrix.Identity);
-            DrawGlobal(current, alpha);
-            Ogmo.EditorDraw.SpriteBatch.End();
-            */
-        }
-
-        public virtual void DrawLocal(bool current, float alpha)
-        {
-            
-        }
-
-        public virtual void DrawGlobal(bool current, float alpha)
-        {
-
-        }
 
         public virtual void OnKeyDown(Keys key)
         {

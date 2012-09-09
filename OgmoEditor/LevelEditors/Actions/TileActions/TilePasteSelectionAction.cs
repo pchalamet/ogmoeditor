@@ -35,8 +35,6 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
             for (int i = 0; i < area.Width; i++)
                 for (int j = 0; j < area.Height; j++)
                     TileLayer.Tiles[i + area.X, j + area.Y] = newData[i, j];
-
-            TileLayer.TileCanvas.RefreshAll();
         }
 
         public override void Undo()
@@ -48,7 +46,6 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
                     TileLayer.Tiles[i + area.X, j + area.Y] = TileLayer.Selection.Under[i, j];
 
             TileLayer.Selection = oldSelection;
-            TileLayer.TileCanvas.RefreshAll();
         }
     }
 }

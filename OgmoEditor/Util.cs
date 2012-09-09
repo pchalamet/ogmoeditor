@@ -5,7 +5,6 @@ using System.Text;
 using System.IO;
 using System.Diagnostics;
 using System.Drawing;
-using Microsoft.Xna.Framework.Graphics;
 using OgmoEditor.LevelEditors;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
@@ -87,53 +86,14 @@ namespace OgmoEditor
             Bitmap src = image as Bitmap;
             Bitmap target = new Bitmap(clipRect.Width, clipRect.Height);
 
-            using(Graphics g = Graphics.FromImage(target))
+            using (Graphics g = Graphics.FromImage(target))
             {
-               g.DrawImage(src, new Rectangle(0, 0, target.Width, target.Height), 
-                                clipRect,                        
-                                GraphicsUnit.Pixel);
+                g.DrawImage(src, new Rectangle(0, 0, target.Width, target.Height),
+                                 clipRect,
+                                 GraphicsUnit.Pixel);
             }
 
             return (Image)target;
-        }
-
-        static public Texture2D CropTexture(Texture2D texture, Rectangle clipRect)
-        {
-            Texture2D tex = new Texture2D(texture.GraphicsDevice, clipRect.Width, clipRect.Height);
-
-            Color[] data = new Color[texture.Width * texture.Height];
-            texture.GetData<Color>(data);
-            Color[] outData = new Color[clipRect.Width * clipRect.Height];
-
-            for (int i = 0; i < clipRect.Width; i++)
-                for (int j = 0; j < clipRect.Height; j++)
-                    outData[i + (j * clipRect.Width)] = data[i + clipRect.X + ((j + clipRect.Y) * texture.Width)];
-
-            tex.SetData<Color>(outData);
-            return tex;
-        }
-
-        static public System.Drawing.Rectangle XNAToSystem(Microsoft.Xna.Framework.Rectangle rect)
-        {
-            return new System.Drawing.Rectangle(rect.X, rect.Y, rect.Width, rect.Height);
-        }
-
-        static public Microsoft.Xna.Framework.Rectangle SystemToXNA(System.Drawing.Rectangle rect)
-        {
-            return new Microsoft.Xna.Framework.Rectangle(rect.X, rect.Y, rect.Width, rect.Height);
-        }
-
-        static public Texture2D CreateRect(GraphicsDevice device, Microsoft.Xna.Framework.Color color, int width, int height)
-        {
-            Texture2D texture = new Texture2D(device, width, height, false, SurfaceFormat.Color);
-
-            Microsoft.Xna.Framework.Color[] data = new Microsoft.Xna.Framework.Color[width * height];
-            for (int i = 0; i < data.Length; i++)
-                data[i] = color;
-
-            texture.SetData<Microsoft.Xna.Framework.Color>(data);
-
-            return texture;
         }
 
         static public int DistanceSquared(Point a, Point b)

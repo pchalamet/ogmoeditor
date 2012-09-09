@@ -43,38 +43,6 @@ namespace OgmoEditor.LevelEditors.LayerEditors
                         Layer.Selection.Area.Height * Layer.Definition.Grid.Height));
         }
 
-        public override void DrawLocal(bool current, float alpha)
-        {
-            //Draw the grid cells
-            Rectangle rect = new Rectangle();
-            for (int i = 0; i < Layer.Grid.GetLength(0); i++)
-            {
-                for (int j = 0; j < Layer.Grid.GetLength(1); j++)
-                {
-                    if (Layer.Grid[i, j])
-                    {
-                        rect.X = i * Layer.Definition.Grid.Width;
-                        rect.Y = j * Layer.Definition.Grid.Height;
-                        rect.Width = Layer.Definition.Grid.Width;
-                        rect.Height = Layer.Definition.Grid.Height;
-                        if(rect.X + rect.Width > Layer.Level.Size.Width) rect.Width = Layer.Level.Size.Width - rect.X;
-                        if(rect.Y + rect.Height > Layer.Level.Size.Height) rect.Height = Layer.Level.Size.Height - rect.Y;
-
-                        Ogmo.EditorDraw.DrawRectangle(rect.X, rect.Y, rect.Width, rect.Height, Layer.Definition.Color.ToXNA() * alpha);
-                    }
-                }
-            }
-
-            //Draw the selection rectangle
-            if (Layer.Selection != null && current)
-                Ogmo.EditorDraw.DrawFillRect(
-                    Layer.Selection.Area.X * Layer.Definition.Grid.Width,
-                    Layer.Selection.Area.Y * Layer.Definition.Grid.Height,
-                    Layer.Selection.Area.Width * Layer.Definition.Grid.Width,
-                    Layer.Selection.Area.Height * Layer.Definition.Grid.Height,
-                    Microsoft.Xna.Framework.Color.Yellow * alpha);
-        }
-
         public override Resizer GetResizer()
         {
             return new GridResizer(this);

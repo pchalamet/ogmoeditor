@@ -33,8 +33,6 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
                     TileLayer.Tiles[i, j] = setTo;
                 }
             }
-
-            TileLayer.TileCanvas.RefreshAll();
         }
 
         public override void Undo()
@@ -46,7 +44,6 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
                     TileLayer.Tiles[i, j] = was[i - rect.X, j - rect.Y];
 
             was = null;
-            TileLayer.TileCanvas.RefreshAll();
         }
     }
 }

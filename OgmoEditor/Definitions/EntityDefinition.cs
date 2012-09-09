@@ -6,7 +6,6 @@ using System.Xml.Serialization;
 using System.Drawing;
 using OgmoEditor.Definitions.ValueDefinitions;
 using System.IO;
-using Microsoft.Xna.Framework.Graphics;
 using OgmoEditor.LevelEditors;
 using System.Diagnostics;
 using System.Drawing.Imaging;
@@ -156,21 +155,6 @@ namespace OgmoEditor.Definitions
                 return null;
             else
                 return (Bitmap)buttonBitmap.Clone();
-        }
-
-        public Texture2D GenerateTexture(GraphicsDevice graphics)
-        {
-            if (ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Rectangle)
-                return Util.CreateRect(graphics, ImageDefinition.RectColor.ToXNA(), Size.Width, Size.Height);
-            else if (ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
-            {
-                FileStream stream = new FileStream(Path.Combine(Ogmo.Project.SavedDirectory, ImageDefinition.ImagePath), FileMode.Open, FileAccess.Read, FileShare.Read);
-                Texture2D tex = Texture2D.FromStream(graphics, stream);                
-                stream.Close();
-                return tex;
-            }
-
-            return null;
         }
     }
 

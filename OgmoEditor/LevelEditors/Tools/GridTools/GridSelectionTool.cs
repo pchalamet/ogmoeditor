@@ -19,16 +19,6 @@ namespace OgmoEditor.LevelEditors.Tools.GridTools
 
         }
 
-        public override void Draw()
-        {
-            if (drawing)
-            {
-                Rectangle draw = LayerEditor.Layer.GetGridRectangle(drawStart, drawTo);
-                if (LevelEditor.Level.Bounds.IntersectsWith(draw))
-                    Ogmo.EditorDraw.DrawFillRect(draw, Microsoft.Xna.Framework.Color.Yellow * .5f);
-            }
-        }
-
         public override void NewDraw(Graphics graphics)
         {
             if (drawing)

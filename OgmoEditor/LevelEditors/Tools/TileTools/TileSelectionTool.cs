@@ -29,16 +29,6 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
             }
         }
 
-        public override void Draw()
-        {
-            if (drawing)
-            {
-                Rectangle draw = LayerEditor.Layer.GetTilesRectangle(drawStart, drawTo);
-                if (LevelEditor.Level.Bounds.IntersectsWith(draw))
-                    Ogmo.EditorDraw.DrawFillRect(draw, Microsoft.Xna.Framework.Color.Yellow * .5f);
-            }
-        }
-
         public override void OnMouseLeftDown(System.Drawing.Point location)
         {
             drawTo = drawStart = LayerEditor.MouseSnapPosition;

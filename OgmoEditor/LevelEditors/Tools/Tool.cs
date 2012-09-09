@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace OgmoEditor.LevelEditors.Tools
 {

@@ -29,7 +29,6 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
             was = TileLayer.Tiles[cell.X, cell.Y];
             changes = new List<Point>();
             flood(cell.X, cell.Y);
-            TileLayer.TileCanvas.RefreshAll();
         }
 
         public override void Undo()
@@ -38,7 +37,6 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
 
             foreach (var p in changes)
                 TileLayer.Tiles[p.X, p.Y] = was;
-            TileLayer.TileCanvas.RefreshAll();
         }
 
         private void flood(int cellX, int cellY)

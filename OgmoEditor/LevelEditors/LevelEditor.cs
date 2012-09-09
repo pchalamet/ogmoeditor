@@ -338,13 +338,6 @@ namespace OgmoEditor.LevelEditors
              */
         }
 
-        private void DrawLayer(LayerEditor layer, bool current, float alpha)
-        {
-            
-            layer.DrawLocal(current, alpha);
-            Ogmo.EditorDraw.SpriteBatch.End();
-        }
-
         public void SwitchTo()
         {
             Focus();

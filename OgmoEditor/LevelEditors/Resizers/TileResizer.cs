@@ -35,8 +35,6 @@ namespace OgmoEditor.LevelEditors.Resizers
             for (int i = 0; i < layer.Tiles.GetLength(0) && i < oldTiles.GetLength(0); i++)
                 for (int j = 0; j < layer.Tiles.GetLength(1) && j < oldTiles.GetLength(1); j++)
                     layer.Tiles[i, j] = oldTiles[i, j];
-
-            Editor.Layer.InitCanvas();
         }
 
         public override void Undo()

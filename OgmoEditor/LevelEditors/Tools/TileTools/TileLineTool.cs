@@ -95,29 +95,6 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
             }
         }
 
-        public override void Draw()
-        {
-            if (drawing)
-            {
-                List<Point> pts = getPoints(drawStart, mouse);
-                if (drawTile == -1 || !drawMode)
-                {
-                    foreach (var p in pts)
-                        Ogmo.EditorDraw.DrawRectangle(p.X * LayerEditor.Layer.Definition.Grid.Width, p.Y * LayerEditor.Layer.Definition.Grid.Height, LayerEditor.Layer.Definition.Grid.Width, LayerEditor.Layer.Definition.Grid.Height, Microsoft.Xna.Framework.Color.Red * .5f);
-                }
-                else
-                {
-                    Microsoft.Xna.Framework.Rectangle rect = LayerEditor.Layer.Tileset.GetXNARectFromID(drawTile);
-                    foreach (var p in pts)
-                        Ogmo.EditorDraw.SpriteBatch.Draw(
-                            Ogmo.EditorDraw.TilesetTextures[LayerEditor.Layer.Tileset],
-                            new Microsoft.Xna.Framework.Vector2(p.X * LayerEditor.Layer.Definition.Grid.Width, p.Y * LayerEditor.Layer.Definition.Grid.Height),
-                            rect,
-                            Microsoft.Xna.Framework.Color.White * .5f);
-                }
-            }
-        }
-
         private List<Point> getPoints(Point start, Point end)
         {
             int aX = start.X;

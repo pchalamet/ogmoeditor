@@ -34,19 +34,6 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
             }
         }
 
-        public override void Draw()
-        {
-            if (drawing)
-            {
-                int x = Math.Min(mouseStart.X, LevelEditor.MousePosition.X);
-                int y = Math.Min(mouseStart.Y, LevelEditor.MousePosition.Y);
-                int w = Math.Max(mouseStart.X, LevelEditor.MousePosition.X) - x;
-                int h = Math.Max(mouseStart.Y, LevelEditor.MousePosition.Y) - y;
-
-                Ogmo.EditorDraw.DrawFillRect(x, y, w, h, Microsoft.Xna.Framework.Color.Red);
-            }
-        }
-
         public override void OnMouseLeftDown(System.Drawing.Point location)
         {
             drawing = true;
