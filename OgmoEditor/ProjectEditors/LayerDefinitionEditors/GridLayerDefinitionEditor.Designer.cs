@@ -50,7 +50,8 @@
             this.exportModeComboBox.Items.AddRange(new object[] {
             "Bitstring",
             "Trimmed Bitstring",
-            "Rectangles"});
+            "Rectangles",
+            "Grid Rectangles"});
             this.exportModeComboBox.Location = new System.Drawing.Point(92, 46);
             this.exportModeComboBox.Name = "exportModeComboBox";
             this.exportModeComboBox.Size = new System.Drawing.Size(121, 21);

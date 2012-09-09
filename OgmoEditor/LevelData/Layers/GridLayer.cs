@@ -36,101 +36,108 @@ namespace OgmoEditor.LevelData.Layers
             attr.InnerText = Definition.ExportMode.ToString();
             xml.Attributes.Append(attr);
 
-            if (Definition.ExportMode == GridLayerDefinition.ExportModes.Bitstring || Definition.ExportMode == GridLayerDefinition.ExportModes.TrimmedBitstring)
+            switch (Definition.ExportMode)
             {
-                //Bitstring export
-                string[] rows = new string[Grid.GetLength(1)];
-                for (int i = 0; i < Grid.GetLength(1); i++)
-                {
-                    rows[i] = "";
-                    for (int j = 0; j < Grid.GetLength(0); j++)
-                        rows[i] += Grid[j, i] ? "1" : "0";
-                }
-
-                if (Definition.ExportMode == GridLayerDefinition.ExportModes.TrimmedBitstring)
-                {
-                    //Trim off trailing zeroes on rows and then trim trailing empty rows
-                    for (int i = 0; i < rows.Length; i++)
-                        rows[i] = rows[i].TrimEnd('0');
-
-                    string s = string.Join("\n", rows, 0, rows.Length);
-                    s = s.TrimEnd('\n');
-                    xml.InnerText = s;
-                }
-                else
-                    xml.InnerText = string.Join("\n", rows, 0, rows.Length);
-            }
-            else if (Definition.ExportMode == GridLayerDefinition.ExportModes.Rectangles)
-            {
-                //Rectangles export
-                bool[,] copy = (bool[,])Grid.Clone();
-                List<Rectangle> rects = new List<Rectangle>();
-
-                //Create the rectangles
-                Point p = getFirstCell(copy);
-                while (p.X != -1)
-                {
-                    copy[p.X, p.Y] = false;
-                    int w = 1;
-                    int h = 1;
-
-                    //Extend it to the right
-                    while (p.X + w < copy.GetLength(0) && copy[p.X + w, p.Y])
+                case GridLayerDefinition.ExportModes.Bitstring:
+                case GridLayerDefinition.ExportModes.TrimmedBitstring:
+                    //Bitstring export
+                    string[] rows = new string[Grid.GetLength(1)];
+                    for (int i = 0; i < Grid.GetLength(1); i++)
                     {
-                        copy[p.X + w, p.Y] = false;
-                        w++;
+                        rows[i] = "";
+                        for (int j = 0; j < Grid.GetLength(0); j++)
+                            rows[i] += Grid[j, i] ? "1" : "0";
                     }
 
-                    //Extend it downward
-                    while (p.Y + h < copy.GetLength(1))
+                    if (Definition.ExportMode == GridLayerDefinition.ExportModes.TrimmedBitstring)
                     {
-                        bool done = false;
-                        for (int i = p.X; i < p.X + w; i++)
+                        //Trim off trailing zeroes on rows and then trim trailing empty rows
+                        for (int i = 0; i < rows.Length; i++)
+                            rows[i] = rows[i].TrimEnd('0');
+
+                        string s = string.Join("\n", rows, 0, rows.Length);
+                        s = s.TrimEnd('\n');
+                        xml.InnerText = s;
+                    }
+                    else
+                        xml.InnerText = string.Join("\n", rows, 0, rows.Length);
+                    break;
+
+                case GridLayerDefinition.ExportModes.Rectangles:
+                case GridLayerDefinition.ExportModes.GridRectangles:
+                    //Rectangles export
+                    bool[,] copy = (bool[,])Grid.Clone();
+                    List<Rectangle> rects = new List<Rectangle>();
+
+                    //Create the rectangles
+                    Point p = getFirstCell(copy);
+                    while (p.X != -1)
+                    {
+                        copy[p.X, p.Y] = false;
+                        int w = 1;
+                        int h = 1;
+
+                        //Extend it to the right
+                        while (p.X + w < copy.GetLength(0) && copy[p.X + w, p.Y])
                         {
-                            if (!copy[i, p.Y + h])
-                            {
-                                done = true;
-                                break;
-                            }
+                            copy[p.X + w, p.Y] = false;
+                            w++;
                         }
-                        if (done)
-                            break;
 
-                        for (int i = p.X; i < p.X + w; i++)
-                            copy[i, p.Y + h] = false;
-                        h++;
+                        //Extend it downward
+                        while (p.Y + h < copy.GetLength(1))
+                        {
+                            bool done = false;
+                            for (int i = p.X; i < p.X + w; i++)
+                            {
+                                if (!copy[i, p.Y + h])
+                                {
+                                    done = true;
+                                    break;
+                                }
+                            }
+                            if (done)
+                                break;
+
+                            for (int i = p.X; i < p.X + w; i++)
+                                copy[i, p.Y + h] = false;
+                            h++;
+                        }
+
+                        //Push the rectangle
+                        Rectangle rect = new Rectangle(p.X, p.Y, w, h);
+                        if (Definition.ExportMode == GridLayerDefinition.ExportModes.Rectangles)
+                            rect = GridToLevel(rect);
+                        rects.Add(rect);
+
+                        p = getFirstCell(copy);
                     }
 
-                    //Push the rectangle
-                    rects.Add(gridToLevel(new Rectangle(p.X, p.Y, w, h)));
+                    //Export them as tags
+                    foreach (Rectangle r in rects)
+                    {
+                        XmlElement rx = doc.CreateElement("rect");
+                        XmlAttribute a;
 
-                    p = getFirstCell(copy);
-                }
+                        a = doc.CreateAttribute("x");
+                        a.InnerText = r.X.ToString();
+                        rx.Attributes.Append(a);
 
-                //Export them as tags
-                foreach (Rectangle r in rects)
-                {
-                    XmlElement rx = doc.CreateElement("rect");
-                    XmlAttribute a;
+                        a = doc.CreateAttribute("y");
+                        a.InnerText = r.Y.ToString();
+                        rx.Attributes.Append(a);
 
-                    a = doc.CreateAttribute("x");
-                    a.InnerText = r.X.ToString();
-                    rx.Attributes.Append(a);
+                        a = doc.CreateAttribute("w");
+                        a.InnerText = r.Width.ToString();
+                        rx.Attributes.Append(a);
 
-                    a = doc.CreateAttribute("y");
-                    a.InnerText = r.Y.ToString();
-                    rx.Attributes.Append(a);
+                        a = doc.CreateAttribute("h");
+                        a.InnerText = r.Height.ToString();
+                        rx.Attributes.Append(a);
 
-                    a = doc.CreateAttribute("w");
-                    a.InnerText = r.Width.ToString();
-                    rx.Attributes.Append(a);
-
-                    a = doc.CreateAttribute("h");
-                    a.InnerText = r.Height.ToString();
-                    rx.Attributes.Append(a);
-
-                    xml.AppendChild(rx);
-                }
+                        xml.AppendChild(rx);
+                    }
+                    break;
             }
 
             return xml;
@@ -150,63 +157,70 @@ namespace OgmoEditor.LevelData.Layers
                 exportMode = Definition.ExportMode;
 
             //Import the XML!
-            if (exportMode == GridLayerDefinition.ExportModes.Bitstring || exportMode == GridLayerDefinition.ExportModes.TrimmedBitstring)
+            switch (exportMode)
             {
-                //Bitstring import
-                string s = xml.InnerText;
-                int x = 0;
-                int y = 0;
-                for (int i = 0; i < s.Length; i++)
-                {
-                    //If the grid is bigger than it should be, something has gone wrong with the XML
-                    if (x >= Grid.GetLength(0) && s[i] != '\n')
+                case GridLayerDefinition.ExportModes.Bitstring:
+                case GridLayerDefinition.ExportModes.TrimmedBitstring:
+                    //Bitstring import
+                    string s = xml.InnerText;
+                    int x = 0;
+                    int y = 0;
+                    for (int i = 0; i < s.Length; i++)
                     {
-                        cleanXML = false;
-                        while (i < s.Length && s[i] != '\n')
-                            i++;
-                        x = 0;
-                        y++;
-                        continue;
-                    }
-                    else if (y >= Grid.GetLength(1))
-                    {
-                        cleanXML = false;
-                        break;
-                    }
-
-                    if (s[i] == '1')
-                        Grid[x, y] = true;
-
-                    if (s[i] == '\n')
-                    {
-                        x = 0;
-                        y++;
-                    }
-                    else
-                        x++;
-                }
-            }
-            else if (exportMode == GridLayerDefinition.ExportModes.Rectangles)
-            {
-                //Rectangles import
-                foreach (XmlElement r in xml.GetElementsByTagName("rect"))
-                {
-                    Rectangle rect = new Rectangle(Convert.ToInt32(r.Attributes["x"].InnerText), Convert.ToInt32(r.Attributes["y"].InnerText), Convert.ToInt32(r.Attributes["w"].InnerText), Convert.ToInt32(r.Attributes["h"].InnerText));
-                    rect = levelToGrid(rect);
-                    for (int i = 0; i < rect.Width; i++)
-                    {
-                        for (int j = 0; j < rect.Height; j++)
+                        //If the grid is bigger than it should be, something has gone wrong with the XML
+                        if (x >= Grid.GetLength(0) && s[i] != '\n')
                         {
-                            if (rect.X + i >= Grid.GetLength(0) || rect.Y + j >= Grid.GetLength(1))
-                            {
-                                cleanXML = false;
-                                continue;
-                            }
+                            cleanXML = false;
+                            while (i < s.Length && s[i] != '\n')
+                                i++;
+                            x = 0;
+                            y++;
+                            continue;
+                        }
+                        else if (y >= Grid.GetLength(1))
+                        {
+                            cleanXML = false;
+                            break;
+                        }
 
-                            Grid[rect.X + i, rect.Y + j] = true;
+                        if (s[i] == '1')
+                            Grid[x, y] = true;
+
+                        if (s[i] == '\n')
+                        {
+                            x = 0;
+                            y++;
+                        }
+                        else
+                            x++;
+                    }
+                    break;
+
+                case GridLayerDefinition.ExportModes.Rectangles:
+                case GridLayerDefinition.ExportModes.GridRectangles:
+                    //Rectangles import
+                    foreach (XmlElement r in xml.GetElementsByTagName("rect"))
+                    {
+                        Rectangle rect = new Rectangle(Convert.ToInt32(r.Attributes["x"].InnerText), Convert.ToInt32(r.Attributes["y"].InnerText), Convert.ToInt32(r.Attributes["w"].InnerText), Convert.ToInt32(r.Attributes["h"].InnerText));
+
+                        if (exportMode == GridLayerDefinition.ExportModes.Rectangles)
+                            rect = LevelToGrid(rect);
+
+                        for (int i = 0; i < rect.Width; i++)
+                        {
+                            for (int j = 0; j < rect.Height; j++)
+                            {
+                                if (rect.X + i >= Grid.GetLength(0) || rect.Y + j >= Grid.GetLength(1))
+                                {
+                                    cleanXML = false;
+                                    continue;
+                                }
+
+                                Grid[rect.X + i, rect.Y + j] = true;
+                            }
                         }
                     }
-                }
+                    break;
             }
 
             return cleanXML;
@@ -225,12 +239,12 @@ namespace OgmoEditor.LevelData.Layers
             return new Point(-1, -1);
         }
 
-        private Rectangle gridToLevel(Rectangle r)
+        private Rectangle GridToLevel(Rectangle r)
         {
             return new Rectangle(r.X * Definition.Grid.Width, r.Y * Definition.Grid.Height, r.Width * Definition.Grid.Width, r.Height * Definition.Grid.Height);
         }
 
-        private Rectangle levelToGrid(Rectangle r)
+        private Rectangle LevelToGrid(Rectangle r)
         {
             return new Rectangle(r.X / Definition.Grid.Width, r.Y / Definition.Grid.Height, r.Width / Definition.Grid.Width, r.Height / Definition.Grid.Height); 
         }
