@@ -14,11 +14,13 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
         private Point drawStart;
         private Point mouse;
         private int drawTile;
+        private SolidBrush eraseBrush;
 
         public TileLineTool()
             : base("Line", "line.png")
         {
             drawing = false;
+            eraseBrush = new SolidBrush(Color.FromArgb(255/2, Color.Red));
         }
 
         public override void OnMouseLeftDown(System.Drawing.Point location)
@@ -72,6 +74,25 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
         public override void OnMouseMove(Point location)
         {
             mouse = LayerEditor.Layer.Definition.ConvertToGrid(location);
+        }
+
+        public override void NewDraw(Graphics graphics)
+        {
+            if (drawing)
+            {
+                List<Point> pts = getPoints(drawStart, mouse);
+                if (drawTile == -1 || !drawMode)
+                {
+                    foreach (var p in pts)
+                        graphics.FillRectangle(eraseBrush, p.X * LayerEditor.Layer.Definition.Grid.Width, p.Y * LayerEditor.Layer.Definition.Grid.Height, LayerEditor.Layer.Definition.Grid.Width, LayerEditor.Layer.Definition.Grid.Height);
+                }
+                else
+                {
+                    Rectangle tileRect = LayerEditor.Layer.Tileset.TileRects[drawTile];
+                    foreach (var p in pts)
+                        graphics.DrawImage(LayerEditor.Layer.Tileset.Bitmap, new Rectangle(p.X * LayerEditor.Layer.Definition.Grid.Width, p.Y * LayerEditor.Layer.Definition.Grid.Height, LayerEditor.Layer.Definition.Grid.Width, LayerEditor.Layer.Definition.Grid.Height), tileRect.X, tileRect.Y, tileRect.Width, tileRect.Height, GraphicsUnit.Pixel, Util.HalfAlphaAttributes);
+                }
+            }
         }
 
         public override void Draw()
