@@ -203,6 +203,7 @@ namespace OgmoEditor.Windows
         private void pictureBox_MouseUp(object sender, MouseEventArgs e)
         {
             selecting = false;
+            Ogmo.MainWindow.FocusEditor();
         }
 
         #endregion
