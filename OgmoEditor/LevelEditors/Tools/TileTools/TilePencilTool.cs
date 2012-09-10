@@ -99,10 +99,9 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
                     drawStart = location;
 
                 //Draw the tiles
-                int i = 0;
-                for (int x = 0; x < setTo.Value.Width; x += 1)
+                for (int x = 0; x < setTo.Value.Width && location.X + x < LayerEditor.Layer.TileCellsX; x++)
                 {
-                    for (int y = 0; y < setTo.Value.Height; y += 1)
+                    for (int y = 0; y < setTo.Value.Height && location.Y + y < LayerEditor.Layer.TileCellsY; y++)
                     {
                         int id = LayerEditor.Layer.Tileset.GetIDFromSelectionRectPoint(setTo.Value, drawStart, new Point(location.X + x, location.Y + y));
 
@@ -113,7 +112,6 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
                             else
                                 drawAction.DoAgain(new Point(location.X + x, location.Y + y), id);
                         }
-                        i++;
                     }
                 }
             }
