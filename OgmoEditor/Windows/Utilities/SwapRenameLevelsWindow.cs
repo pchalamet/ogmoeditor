@@ -23,8 +23,15 @@ namespace OgmoEditor.Windows.Utilities
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = "Swap Level A";
             dialog.Filter = Ogmo.LEVEL_FILTER;
-            dialog.InitialDirectory = Ogmo.Project.SavedDirectory;
             dialog.CheckFileExists = true;
+
+            if (levelATextbox.Text != "")
+                dialog.InitialDirectory = Path.GetDirectoryName(Path.Combine(Ogmo.Project.SavedDirectory, levelATextbox.Text));
+            else if (levelBTextbox.Text != "")
+                dialog.InitialDirectory = Path.GetDirectoryName(Path.Combine(Ogmo.Project.SavedDirectory, levelBTextbox.Text));
+            else
+                dialog.InitialDirectory = Ogmo.Project.SavedDirectory;
+        
             DialogResult result = dialog.ShowDialog(this);
 
             if (result == System.Windows.Forms.DialogResult.OK)
@@ -36,8 +43,15 @@ namespace OgmoEditor.Windows.Utilities
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = "Swap Level B";
             dialog.Filter = Ogmo.LEVEL_FILTER;
-            dialog.InitialDirectory = Ogmo.Project.SavedDirectory;
             dialog.CheckFileExists = true;
+
+            if (levelBTextbox.Text != "")
+                dialog.InitialDirectory = Path.GetDirectoryName(Path.Combine(Ogmo.Project.SavedDirectory, levelBTextbox.Text));
+            else if (levelATextbox.Text != "")
+                dialog.InitialDirectory = Path.GetDirectoryName(Path.Combine(Ogmo.Project.SavedDirectory, levelATextbox.Text));
+            else
+                dialog.InitialDirectory = Ogmo.Project.SavedDirectory;
+           
             DialogResult result = dialog.ShowDialog(this);
 
             if (result == System.Windows.Forms.DialogResult.OK)
@@ -62,6 +76,13 @@ namespace OgmoEditor.Windows.Utilities
             else if (!File.Exists(levelB))
             {
                 MessageBox.Show(this, "Level file B does not exist!", "Swap Renamer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            //If they're the same file, error
+            if (levelA == levelB)
+            {
+                MessageBox.Show(this, "Cannot swap a file with itself!", "Swap Renamer", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
