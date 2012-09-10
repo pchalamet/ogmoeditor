@@ -364,6 +364,25 @@ namespace OgmoEditor
                 if (levelID == -1)
                 {
                     Level level = new Level(Project, f);
+
+                    //If it's salvaged...
+                    if (level.Salvaged)
+                    {
+                        DialogResult result = MessageBox.Show("The selected level is inconsistent with the current project and has been automatically modified to make it loadable. Would you like to save this modified version under a different name before continuing?",
+                        "Salvaged Level", MessageBoxButtons.YesNoCancel);
+
+                        switch (result)
+                        {
+                            case DialogResult.Yes:
+                                level.SaveAs();
+                                break;
+
+                            case DialogResult.Cancel:
+                                continue;
+                        }                        
+                    }
+
+                    //Init the level editor
                     AddLevel(level);
                     SetLevel(Levels.Count - 1);
                 }
@@ -453,21 +472,24 @@ namespace OgmoEditor
             }
         }
 
-        static public void CloseLevelsByFilepaths(IEnumerable<string> filepaths)
+        static public bool CloseLevelsByFilepaths(IEnumerable<string> filepaths)
         {
             foreach (var f in filepaths)
             {
                 Level level = Ogmo.GetLevelByFilepath(f);
                 if (level != null)
-                    Ogmo.CloseLevel(level, true);
+                    if (!Ogmo.CloseLevel(level, true))
+                        return false;
             }
+            return true;
         }
 
-        static public void CloseLevelByFilepath(string filepath)
+        static public bool CloseLevelByFilepath(string filepath)
         {
             Level level = GetLevelByFilepath(filepath);
             if (level != null)
-                Ogmo.CloseLevel(level, true);
+                return Ogmo.CloseLevel(level, true);
+            return true;
         }
 
         static public Level GetLevelByFilepath(string filepath)

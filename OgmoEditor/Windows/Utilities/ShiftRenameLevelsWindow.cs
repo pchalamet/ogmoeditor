@@ -71,6 +71,16 @@ namespace OgmoEditor.Windows.Utilities
             if (result != System.Windows.Forms.DialogResult.Yes)
                 return;
 
+            //Close involved levels
+            foreach (int i in toShift)
+            {
+                string source = Path.Combine(Ogmo.Project.SavedDirectory, pattern.Replace("#", toShift[i].ToString()));
+                string dest = Path.Combine(Ogmo.Project.SavedDirectory, pattern.Replace("#", (toShift[i] + shift).ToString()));
+
+                if (!Ogmo.CloseLevelByFilepath(source) || !Ogmo.CloseLevelByFilepath(dest))
+                    return;
+            }
+
             //Do the renaming!
             for (int i = 0; i < toShift.Count; i++)
             {

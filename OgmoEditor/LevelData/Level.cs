@@ -17,6 +17,7 @@ namespace OgmoEditor.LevelData
         public Project Project { get; private set; }
         public string SavePath;
         private bool changed;
+        public bool Salvaged { get; private set; }
 
         //Actual parameters to be edited/exported
         public Size Size;
@@ -36,13 +37,8 @@ namespace OgmoEditor.LevelData
                 doc.Load(stream);
                 stream.Close();
 
-                if (LoadFromXML(doc))
-                    SavePath = filename;
-                else
-                    if (DialogResult.OK == MessageBox.Show("The selected level is inconsistent with the current project." +
-                        "  It is recomended you save this modified version under a different name before continuing.",
-                        "Salvageable Level", MessageBoxButtons.OKCancel))
-                        SaveAs();
+                LoadFromXML(doc);
+                SavePath = filename;
             }
             else
             {
@@ -201,7 +197,7 @@ namespace OgmoEditor.LevelData
             return doc;
         }
 
-        public bool LoadFromXML(XmlDocument xml)
+        private void LoadFromXML(XmlDocument xml)
         {
             bool cleanXML = true;
             XmlElement level = (XmlElement)xml.GetElementsByTagName("level")[0];
@@ -274,7 +270,7 @@ namespace OgmoEditor.LevelData
                     cleanXML = (layer.SetXML(level[Project.LayerDefinitions[i].Name]) && cleanXML);
             }
 
-            return cleanXML;
+            Salvaged = !cleanXML;
         }
 
         public void EditProperties()

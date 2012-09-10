@@ -85,7 +85,8 @@ namespace OgmoEditor.Windows.Utilities
         {
             //If any of the levels are open, close them
             if (files != null)
-                Ogmo.CloseLevelsByFilepaths(files);
+                if (!Ogmo.CloseLevelsByFilepaths(files))
+                    return;
 
             //Resave the levels
             int i = 0;
@@ -96,8 +97,11 @@ namespace OgmoEditor.Windows.Utilities
                     if (File.Exists(f))
                     {
                         Level level = new Level(Ogmo.Project, f);
-                        level.WriteTo(level.SavePath);
-                        i++;
+                        if (!level.Salvaged)
+                        {
+                            level.WriteTo(level.SavePath);
+                            i++;
+                        }
                     }
                 }
             }
