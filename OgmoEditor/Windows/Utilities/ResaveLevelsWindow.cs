@@ -52,7 +52,7 @@ namespace OgmoEditor.Windows.Utilities
             {
                 OpenFileDialog dialog = new OpenFileDialog();
                 dialog.InitialDirectory = Ogmo.Project.SavedDirectory;
-                dialog.Title = "Resave Levels...";
+                dialog.Title = "Batch Resaver";
                 dialog.Multiselect = true;
                 dialog.Filter = Ogmo.LEVEL_FILTER;
                 dialog.CheckFileExists = true;
@@ -84,17 +84,8 @@ namespace OgmoEditor.Windows.Utilities
         private void ResaveLevels(IEnumerable<string> files)
         {
             //If any of the levels are open, close them
-            {
-                if (files != null)
-                {
-                    foreach (var f in files)
-                    {
-                        Level level = Ogmo.GetLevelByFilepath(f);
-                        if (level != null)
-                            Ogmo.CloseLevel(level, true);
-                    }
-                }
-            }
+            if (files != null)
+                Ogmo.CloseLevelsByFilepaths(files);
 
             //Resave the levels
             int i = 0;
@@ -111,7 +102,7 @@ namespace OgmoEditor.Windows.Utilities
                 }
             }
 
-            MessageBox.Show(this, "Resave Utility finished, resaved " + i + " level(s).", "Resave Levels");
+            MessageBox.Show(this, "Resave Utility finished, resaved " + i + " level(s).", "Batch Resaver");
             Close();
         }
     }

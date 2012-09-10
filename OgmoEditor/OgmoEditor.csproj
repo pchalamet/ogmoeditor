@@ -460,6 +460,12 @@
     <Compile Include="Windows\ToolsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Windows\Utilities\ShiftRenameLevelsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Utilities\ShiftRenameLevelsWindow.Designer.cs">
+      <DependentUpon>ShiftRenameLevelsWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Utilities\ResaveLevelsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -589,6 +595,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\ToolButton.resx">
       <DependentUpon>ToolButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Utilities\ShiftRenameLevelsWindow.resx">
+      <DependentUpon>ShiftRenameLevelsWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Utilities\ResaveLevelsWindow.resx">
       <DependentUpon>ResaveLevelsWindow.cs</DependentUpon>

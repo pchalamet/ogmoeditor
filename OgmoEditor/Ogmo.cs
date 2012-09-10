@@ -452,6 +452,16 @@ namespace OgmoEditor
             }
         }
 
+        static public void CloseLevelsByFilepaths(IEnumerable<string> filepaths)
+        {
+            foreach (var f in filepaths)
+            {
+                Level level = Ogmo.GetLevelByFilepath(f);
+                if (level != null)
+                    Ogmo.CloseLevel(level, true);
+            }
+        }
+
         static public Level GetLevelByFilepath(string filepath)
         {
             foreach (Level level in Levels)

@@ -541,6 +541,27 @@ namespace OgmoEditor
             window.Focus();
         }
 
+        private void shiftRenamerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form window = null;
+            foreach (Form form in OwnedForms)
+            {
+                if (form is ShiftRenameLevelsWindow)
+                {
+                    window = form;
+                    break;
+                }
+            }
+
+            if (window == null)
+            {
+                window = new ShiftRenameLevelsWindow();
+                window.Show(this);
+            }
+
+            window.Focus();
+        }
+
         #endregion
 
         #region Drag and Drop Events
@@ -568,5 +589,6 @@ namespace OgmoEditor
         }
 
         #endregion
+        
     }
 }

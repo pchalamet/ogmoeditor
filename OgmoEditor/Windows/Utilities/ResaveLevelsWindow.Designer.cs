@@ -128,7 +128,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ResaveLevelsWindow";
-            this.Text = "Resave Levels";
+            this.Text = "Batch Resaver";
             this.ResumeLayout(false);
             this.PerformLayout();
 

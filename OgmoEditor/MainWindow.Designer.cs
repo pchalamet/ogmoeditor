@@ -81,6 +81,8 @@
             this.tilePaletteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entitySelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.utilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resaveLevelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MasterTabControl = new System.Windows.Forms.TabControl();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tabPageContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -89,8 +91,7 @@
             this.closeOthersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.duplicateLevelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.utilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.resaveLevelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.shiftRenamerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StatusStrip.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             this.tabPageContextMenuStrip.SuspendLayout();
@@ -533,6 +534,23 @@
             this.entitySelectionToolStripMenuItem.Text = "Entity Selection";
             this.entitySelectionToolStripMenuItem.Click += new System.EventHandler(this.entitySelectionToolStripMenuItem_Click);
             // 
+            // utilitiesToolStripMenuItem
+            // 
+            this.utilitiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.resaveLevelsToolStripMenuItem,
+            this.shiftRenamerToolStripMenuItem});
+            this.utilitiesToolStripMenuItem.Enabled = false;
+            this.utilitiesToolStripMenuItem.Name = "utilitiesToolStripMenuItem";
+            this.utilitiesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.utilitiesToolStripMenuItem.Text = "Utilities";
+            // 
+            // resaveLevelsToolStripMenuItem
+            // 
+            this.resaveLevelsToolStripMenuItem.Name = "resaveLevelsToolStripMenuItem";
+            this.resaveLevelsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resaveLevelsToolStripMenuItem.Text = "Batch Resaver";
+            this.resaveLevelsToolStripMenuItem.Click += new System.EventHandler(this.resaveLevelsToolStripMenuItem_Click);
+            // 
             // MasterTabControl
             // 
             this.MasterTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -593,21 +611,12 @@
             this.duplicateLevelToolStripMenuItem1.Text = "Duplicate Level";
             this.duplicateLevelToolStripMenuItem1.Click += new System.EventHandler(this.duplicateLevelToolStripMenuItem_Click);
             // 
-            // utilitiesToolStripMenuItem
+            // shiftRenamerToolStripMenuItem
             // 
-            this.utilitiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.resaveLevelsToolStripMenuItem});
-            this.utilitiesToolStripMenuItem.Enabled = false;
-            this.utilitiesToolStripMenuItem.Name = "utilitiesToolStripMenuItem";
-            this.utilitiesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
-            this.utilitiesToolStripMenuItem.Text = "Utilities";
-            // 
-            // resaveLevelsToolStripMenuItem
-            // 
-            this.resaveLevelsToolStripMenuItem.Name = "resaveLevelsToolStripMenuItem";
-            this.resaveLevelsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.resaveLevelsToolStripMenuItem.Text = "Resave Levels...";
-            this.resaveLevelsToolStripMenuItem.Click += new System.EventHandler(this.resaveLevelsToolStripMenuItem_Click);
+            this.shiftRenamerToolStripMenuItem.Name = "shiftRenamerToolStripMenuItem";
+            this.shiftRenamerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.shiftRenamerToolStripMenuItem.Text = "Shift Renamer";
+            this.shiftRenamerToolStripMenuItem.Click += new System.EventHandler(this.shiftRenamerToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -699,5 +708,6 @@
         private System.Windows.Forms.ToolStripMenuItem zoomInToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem utilitiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resaveLevelsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem shiftRenamerToolStripMenuItem;
     }
 }
