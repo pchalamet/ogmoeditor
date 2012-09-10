@@ -97,6 +97,14 @@ namespace OgmoEditor
             return Math.Atan2(b.Y - a.Y, b.X - a.X);
         }
 
+        static public float Approach(float value, float target, float amount)
+        {
+            if (value > target)
+                return Math.Max(target, value - amount);
+            else
+                return Math.Min(target, value + amount);
+        }
+
         static public double AngleDifference(double a, double b)
         {
             double diff = b - a;

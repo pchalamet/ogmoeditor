@@ -69,7 +69,7 @@ namespace OgmoEditor.LevelEditors
 
             //Events
             Repaint = delegate { Invalidate(); };
-            Application.Idle += Repaint;
+            Application.Idle += new EventHandler(Application_Idle);
             this.Paint += Draw;
             this.Resize += onResize;
             this.MouseClick += onMouseClick;
@@ -79,6 +79,12 @@ namespace OgmoEditor.LevelEditors
             this.MouseWheel += onMouseWheel;
             this.KeyDown += onKeyDown;
             this.KeyUp += onKeyUp;
+        }
+
+        void Application_Idle(object sender, EventArgs e)
+        {
+            Repaint(sender, e);
+            LevelView.Update();
         }
 
         public void OnRemove()

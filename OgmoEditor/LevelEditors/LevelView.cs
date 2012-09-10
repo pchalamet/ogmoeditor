@@ -13,22 +13,51 @@ namespace OgmoEditor.LevelEditors
     {
         static public readonly Matrix Identity = new Matrix();
         static private readonly float[] ZOOMS = new float[] { .25f, .33f, .5f, .66f, 1, 1.25f, 1.5f, 2, 2.5f, 3 };
+        private const float ZOOM_SPEED = 6;
 
         public LevelEditor LevelEditor { get; private set; }
         public Matrix Matrix { get; private set; }
         public Matrix Inverse { get; private set; }
         public float Zoom { get; private set; }
 
+        private float targetZoom;
         private Size oldLevelSize;
+        private Stopwatch stopwatch;
+        private double lastTime;
+        private PointF zoomAt;
 
         public LevelView(LevelEditor levelEditor)
         {
             LevelEditor = levelEditor;
             Matrix = new Matrix();
             Inverse = new Matrix();
-            Zoom = 1;
+            targetZoom = Zoom = 1;
+
+            stopwatch = new Stopwatch();
 
             Center();
+        }
+
+        public void Update()
+        {
+            if (Zoom != targetZoom)
+            {
+                double elapsed = stopwatch.Elapsed.TotalSeconds - lastTime;
+
+                float oldZoom = Zoom;
+                Zoom = Util.Approach(Zoom, targetZoom, (float)elapsed * ZOOM_SPEED);
+                float scale = Zoom / oldZoom;
+                lastTime = stopwatch.Elapsed.TotalSeconds;
+
+                PointF at = ScreenToEditor(zoomAt);
+                Matrix.Translate(at.X, at.Y);
+                Matrix.Scale(scale, scale);
+                Matrix.Translate(-at.X, -at.Y);
+                UpdateInverse();
+
+                if (Zoom == targetZoom)
+                    stopwatch.Stop();
+            }
         }
 
         public void OnParentResized()
@@ -94,65 +123,60 @@ namespace OgmoEditor.LevelEditors
         private int GetZoomIndex()
         {
             for (int i = 0; i < ZOOMS.Length; i++)
-                if (ZOOMS[i] == Zoom)
+                if (ZOOMS[i] == targetZoom)
                     return i;
             throw new Exception("Zoom exception!");
         }
 
-        private bool CanZoomIn { get { return GetZoomIndex() < ZOOMS.Length - 1; } }
-        private bool CanZoomOut { get { return GetZoomIndex() > 0; } }
-
-        public void ZoomIn()
+        public void ZoomIn(PointF? zoomAt = null)
         {
+            //Make sure you can zoom
             int at = GetZoomIndex();
             if (at == ZOOMS.Length - 1)
                 return;
 
-            Zoom = ZOOMS[at + 1];
-            float scale = ZOOMS[at + 1] / ZOOMS[at];
+            //Set the zoom origin
+            if (zoomAt.HasValue)
+                this.zoomAt = zoomAt.Value;
+            else
+                this.zoomAt = LevelEditor.Level.Center;
 
-            Matrix.Scale(scale, scale);
-            UpdateInverse();
+            //Increase the target zoom
+            targetZoom = ZOOMS[at + 1];
             Ogmo.MainWindow.ZoomLabel.Text = ZoomString;
+
+            //Start the tween
+            stopwatch.Restart();
+            lastTime = 0;          
         }
 
-        public void ZoomIn(PointF mouseAt)
+        public void ZoomOut(PointF? zoomAt = null)
         {
-            if (CanZoomIn)
-            {
-                CenterOn(mouseAt);
-                ZoomIn();
-            }
-        }
-
-        public void ZoomOut()
-        {
+            //Make sure you can zoom
             int at = GetZoomIndex();
             if (at == 0)
                 return;
 
-            Zoom = ZOOMS[at - 1];
-            float scale = ZOOMS[at - 1] / ZOOMS[at];
+            //Set the zoom origin
+            if (zoomAt.HasValue)
+                this.zoomAt = zoomAt.Value;
+            else
+                this.zoomAt = LevelEditor.Level.Center;
 
-            Matrix.Scale(scale, scale);
-            UpdateInverse();
+            //Increase the target zoom
+            targetZoom = ZOOMS[at - 1];
             Ogmo.MainWindow.ZoomLabel.Text = ZoomString;
-        }
 
-        public void ZoomOut(PointF mouseAt)
-        {
-            if (CanZoomOut)
-            {
-                CenterOn(mouseAt);
-                ZoomOut();
-            }
+            //Start the tween
+            stopwatch.Restart();
+            lastTime = 0;
         }
 
         public string ZoomString
         {
             get
             {
-                return ((int)(Zoom * 100)).ToString() + "%";
+                return ((int)(targetZoom * 100)).ToString() + "%";
             }
         }
 

@@ -147,6 +147,11 @@ namespace OgmoEditor.LevelData
             get { return new Rectangle(0, 0, Size.Width, Size.Height); }
         }
 
+        public PointF Center
+        {
+            get { return new PointF(Size.Width / 2, Size.Height / 2); }
+        }
+
         /*
          *  XML
          */
