@@ -11,6 +11,7 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
     {
         private bool drawing;
         private bool drawMode;
+        private Point drawStart;
         private TileDrawAction drawAction;
 
         public TilePencilTool()
@@ -25,8 +26,8 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
             {
                 drawing = true;
                 drawMode = true;
-
-                setTiles(location, Ogmo.TilePaletteWindow.Tiles);
+ 
+                SetTiles(location, Ogmo.TilePaletteWindow.Tiles, true);
             }
         }
 
@@ -37,7 +38,7 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
                 drawing = true;
                 drawMode = false;
 
-                setTiles(location, null);
+                SetTiles(location, null);
             }
         }
 
@@ -62,10 +63,10 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
         public override void OnMouseMove(Point location)
         {
             if (drawing)
-                setTiles(location, drawMode ? Ogmo.TilePaletteWindow.Tiles : null);
+                SetTiles(location, drawMode ? Ogmo.TilePaletteWindow.Tiles : null);
         }
 
-        private void setTiles(Point location, Rectangle? setTo)
+        private void SetTiles(Point location, Rectangle? setTo, bool start = false)
         {
             location = LayerEditor.Layer.Definition.ConvertToGrid(location);
             if (!IsValidTileCell(location))
@@ -94,13 +95,17 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
             }
             else
             {
+                if (start)
+                    drawStart = location;
+
                 //Draw the tiles
                 int i = 0;
                 for (int x = 0; x < setTo.Value.Width; x += 1)
                 {
                     for (int y = 0; y < setTo.Value.Height; y += 1)
                     {
-                        int id = LayerEditor.Layer.Tileset.GetIDFromCell(new Point(setTo.Value.X + x, setTo.Value.Y + y));
+                        int id = LayerEditor.Layer.Tileset.GetIDFromSelectionRectPoint(setTo.Value, drawStart, new Point(location.X + x, location.Y + y));
+
                         if (LayerEditor.Layer.Tiles[location.X + x, location.Y + y] != id)
                         {
                             if (drawAction == null)

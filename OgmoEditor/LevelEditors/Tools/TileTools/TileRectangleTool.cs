@@ -38,7 +38,7 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
                         {
                             for (int j = 0; j < draw.Height / LayerEditor.Layer.Definition.Grid.Height; j++)
                             {
-                                int id = LayerEditor.Layer.Tileset.GetIDFromCell((selection.X + i) % selection.Width, (selection.Y + j) % selection.Height);
+                                int id = LayerEditor.Layer.Tileset.GetIDFromSelectionRectPoint(selection, new Point(draw.X / LayerEditor.Layer.Definition.Grid.Width, draw.Y / LayerEditor.Layer.Definition.Grid.Height), new Point(draw.X / LayerEditor.Layer.Definition.Grid.Width + i, draw.Y / LayerEditor.Layer.Definition.Grid.Height + j));
                                 Rectangle tileRect = LayerEditor.Layer.Tileset.TileRects[id];
                                 Point drawAt = new Point(draw.X + i * LayerEditor.Layer.Definition.Grid.Width, draw.Y + j * LayerEditor.Layer.Definition.Grid.Height);
 

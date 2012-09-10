@@ -13,7 +13,7 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
         private bool drawMode;
         private Point drawStart;
         private Point mouse;
-        private int drawTile;
+        private Rectangle? selection;
         private SolidBrush eraseBrush;
 
         public TileLineTool()
@@ -23,13 +23,13 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
             eraseBrush = new SolidBrush(Color.FromArgb(255/2, Color.Red));
         }
 
-        public override void OnMouseLeftDown(System.Drawing.Point location)
+        public override void OnMouseLeftDown(Point location)
         {
             drawStart = LayerEditor.Layer.Definition.ConvertToGrid(location);
             drawing = true;
             drawMode = true;
-            // TODO: Allow user to draw a line of tiles.
-            drawTile = Ogmo.TilePaletteWindow.TilesStartID;
+
+            selection = Ogmo.TilePaletteWindow.Tiles;
         }
 
         public override void OnMouseLeftUp(Point location)
@@ -41,7 +41,12 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
                 LevelEditor.StartBatch();
                 List<Point> pts = getPoints(drawStart, LayerEditor.Layer.Definition.ConvertToGrid(location));
                 foreach (var p in pts)
-                    LevelEditor.BatchPerform(new TileDrawAction(LayerEditor.Layer, p, drawTile));
+                {
+                    int id = -1;
+                    if (selection.HasValue)
+                        id = LayerEditor.Layer.Tileset.GetIDFromSelectionRectPoint(selection.Value, drawStart, p);
+                    LevelEditor.BatchPerform(new TileDrawAction(LayerEditor.Layer, p, id));
+                }
                 LevelEditor.EndBatch();
             }
         }
@@ -51,7 +56,7 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
             drawStart = LayerEditor.Layer.Definition.ConvertToGrid(location);
             drawing = true;
             drawMode = false;
-            drawTile = -1;
+            selection = null;
         }
 
         public override void OnMouseRightUp(Point location)
@@ -63,7 +68,7 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
                 LevelEditor.StartBatch();
                 List<Point> pts = getPoints(drawStart, LayerEditor.Layer.Definition.ConvertToGrid(location));
                 foreach (var p in pts)
-                    LevelEditor.BatchPerform(new TileDrawAction(LayerEditor.Layer, p, drawTile));
+                    LevelEditor.BatchPerform(new TileDrawAction(LayerEditor.Layer, p, -1));
                 LevelEditor.EndBatch();
             }
         }
@@ -78,16 +83,20 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
             if (drawing)
             {
                 List<Point> pts = getPoints(drawStart, mouse);
-                if (drawTile == -1 || !drawMode)
+                if (!selection.HasValue)
                 {
                     foreach (var p in pts)
                         graphics.FillRectangle(eraseBrush, p.X * LayerEditor.Layer.Definition.Grid.Width, p.Y * LayerEditor.Layer.Definition.Grid.Height, LayerEditor.Layer.Definition.Grid.Width, LayerEditor.Layer.Definition.Grid.Height);
                 }
                 else
                 {
-                    Rectangle tileRect = LayerEditor.Layer.Tileset.TileRects[drawTile];
                     foreach (var p in pts)
+                    {
+                        int id = LayerEditor.Layer.Tileset.GetIDFromSelectionRectPoint(selection.Value, drawStart, p);
+                        Rectangle tileRect = LayerEditor.Layer.Tileset.TileRects[id];
+
                         graphics.DrawImage(LayerEditor.Layer.Tileset.Bitmap, new Rectangle(p.X * LayerEditor.Layer.Definition.Grid.Width, p.Y * LayerEditor.Layer.Definition.Grid.Height, LayerEditor.Layer.Definition.Grid.Width, LayerEditor.Layer.Definition.Grid.Height), tileRect.X, tileRect.Y, tileRect.Width, tileRect.Height, GraphicsUnit.Pixel, Util.HalfAlphaAttributes);
+                    }
                 }
             }
         }

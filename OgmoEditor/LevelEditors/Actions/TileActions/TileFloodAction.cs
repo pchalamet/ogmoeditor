@@ -65,7 +65,7 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
 
             changes.Add(new Point(cell.X, cell.Y));
             if (setTo.HasValue)
-                TileLayer.Tiles[cell.X, cell.Y] = TileLayer.Tileset.GetIDFromCell(new Point(setTo.Value.X + Util.Wrap(cell.X - startCell.X, setTo.Value.Width), setTo.Value.Y + Util.Wrap(cell.Y - startCell.Y, setTo.Value.Height)));
+                TileLayer.Tiles[cell.X, cell.Y] = TileLayer.Tileset.GetIDFromSelectionRectPoint(setTo.Value, startCell, cell);
             else
                 TileLayer.Tiles[cell.X, cell.Y] = -1;
 

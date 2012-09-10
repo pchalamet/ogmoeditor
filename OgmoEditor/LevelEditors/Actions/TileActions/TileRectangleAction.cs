@@ -31,7 +31,7 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
                 {
                     was[i, j] = TileLayer.Tiles[i + rect.X, j + rect.Y];
                     if (setTo.HasValue)
-                        TileLayer.Tiles[i + rect.X, j + rect.Y] = TileLayer.Tileset.GetIDFromCell((setTo.Value.X + i) % setTo.Value.Width, (setTo.Value.Y + j) % setTo.Value.Height);
+                        TileLayer.Tiles[i + rect.X, j + rect.Y] = TileLayer.Tileset.GetIDFromSelectionRectPoint(setTo.Value, rect.Location, new Point(rect.X + i, rect.Y + j));
                     else
                         TileLayer.Tiles[i + rect.X, j + rect.Y] = -1;
                 }

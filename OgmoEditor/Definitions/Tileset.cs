@@ -50,6 +50,11 @@ namespace OgmoEditor.Definitions
             return new Rectangle(selection.X * (TileSize.Width + TileSep), selection.Y * (TileSize.Height + TileSep), selection.Width * TileSize.Width + (selection.Width - 1) * TileSep, selection.Height * TileSize.Height + (selection.Height - 1) * TileSep);
         }
 
+        public int GetIDFromSelectionRectPoint(Rectangle selection, Point startCell, Point currentCell)
+        {
+            return GetIDFromCell(new Point(selection.X + Util.Wrap(currentCell.X - startCell.X, selection.Width), selection.Y + Util.Wrap(currentCell.Y - startCell.Y, selection.Height)));
+        }
+
         public int GetTileHit(Point at)
         {
             for (int i = 0; i < tileRects.Length; i++)
