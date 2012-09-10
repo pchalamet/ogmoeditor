@@ -499,7 +499,6 @@ namespace OgmoEditor.LevelEditors
                 LevelView.ZoomIn(e.Location);
             else
                 LevelView.ZoomOut(e.Location);
-            Ogmo.MainWindow.ZoomLabel.Text = LevelView.ZoomString;
         }
 
         #endregion

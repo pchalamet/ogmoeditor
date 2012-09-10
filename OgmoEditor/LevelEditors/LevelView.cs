@@ -113,6 +113,7 @@ namespace OgmoEditor.LevelEditors
 
             Matrix.Scale(scale, scale);
             UpdateInverse();
+            Ogmo.MainWindow.ZoomLabel.Text = ZoomString;
         }
 
         public void ZoomIn(PointF mouseAt)
@@ -135,6 +136,7 @@ namespace OgmoEditor.LevelEditors
 
             Matrix.Scale(scale, scale);
             UpdateInverse();
+            Ogmo.MainWindow.ZoomLabel.Text = ZoomString;
         }
 
         public void ZoomOut(PointF mouseAt)
