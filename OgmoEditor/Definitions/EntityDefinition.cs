@@ -65,14 +65,19 @@ namespace OgmoEditor.Definitions
             return def;
         }
 
-        public void Draw(Graphics graphics, Point position, Size size, float angle, ImageAttributes attributes)
+        public void Draw(Graphics graphics, Point position, Size size, float angle, DrawUtil.AlphaMode alphaMode)
         {
             //Do transformations for position and rotation
             graphics.TranslateTransform(position.X - Origin.X, position.Y - Origin.Y);
             graphics.RotateTransform(angle);
 
             //Draw the actual entity
-            if (ImageDefinition.Tiled && ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Image)
+            if (ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Rectangle)
+            {
+                DrawUtil.EntityRectBrush.Color = Color.FromArgb(DrawUtil.AlphaInts[(int)alphaMode], ImageDefinition.RectColor);
+                graphics.FillRectangle(DrawUtil.EntityRectBrush, new Rectangle(0, 0, size.Width, size.Height));
+            }
+            else if (ImageDefinition.Tiled)
             {
                 Rectangle drawTo = Rectangle.Empty;
                 for (drawTo.X = 0; drawTo.X < size.Width; drawTo.X += bitmap.Width)
@@ -81,21 +86,21 @@ namespace OgmoEditor.Definitions
                     for (drawTo.Y = 0; drawTo.Y < size.Height; drawTo.Y += bitmap.Height)
                     {
                         drawTo.Height = Math.Min(bitmap.Height, size.Height - drawTo.Y);
-                        graphics.DrawImage(bitmap, drawTo, 0, 0, drawTo.Width, drawTo.Height, GraphicsUnit.Pixel, attributes);
+                        graphics.DrawImage(bitmap, drawTo, 0, 0, drawTo.Width, drawTo.Height, GraphicsUnit.Pixel, DrawUtil.AlphaAttributes[(int)alphaMode]);
                     }
                 }
             }
             else
-                graphics.DrawImage(bitmap, new Rectangle(0, 0, size.Width, size.Height), 0, 0, bitmap.Width, bitmap.Height, GraphicsUnit.Pixel, attributes);
+                graphics.DrawImage(bitmap, new Rectangle(0, 0, size.Width, size.Height), 0, 0, bitmap.Width, bitmap.Height, GraphicsUnit.Pixel, DrawUtil.AlphaAttributes[(int)alphaMode]);
 
             //Undo the transformations
             graphics.RotateTransform(-angle);
             graphics.TranslateTransform(-position.X + Origin.X, -position.Y + Origin.Y);
         }
 
-        public void Draw(Graphics graphics, Point position, float angle, ImageAttributes attributes)
+        public void Draw(Graphics graphics, Point position, float angle, DrawUtil.AlphaMode alphaMode)
         {
-            Draw(graphics, position, Size, angle, attributes);
+            Draw(graphics, position, Size, angle, alphaMode);
         }
 
         public void GenerateImages()
@@ -140,14 +145,6 @@ namespace OgmoEditor.Definitions
             }
             else
                 buttonBitmap = bitmap;
-        }
-
-        public Bitmap GetBitmap()
-        {
-            if (bitmap == null)
-                return null;
-            else
-                return (Bitmap)bitmap.Clone();
         }
 
         public Bitmap GetButtonBitmap()

@@ -110,7 +110,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
                 {
                     //Draw the node ghost image
                     if (e.Definition.NodesDefinition.Ghost)
-                        e.Definition.Draw(graphics, mouse, e.Angle, Util.QuarterAlphaAttributes);
+                        e.Definition.Draw(graphics, mouse, e.Angle, DrawUtil.AlphaMode.Quarter);
 
                     //Draw the lines
                     if (e.Nodes.Count == 0 || e.Definition.NodesDefinition.DrawMode == Definitions.EntityNodesDefinition.PathMode.Fan)

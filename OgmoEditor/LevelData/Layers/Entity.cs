@@ -18,8 +18,6 @@ namespace OgmoEditor.LevelData.Layers
         public List<Point> Nodes;
         public uint ID { get; private set; }
 
-        private Bitmap bitmap;
-
         public Entity(EntityLayer layer, EntityDefinition def, Point position)
         {
             Layer = layer;
@@ -29,9 +27,6 @@ namespace OgmoEditor.LevelData.Layers
             Position = position;
             Size = def.Size;
             Angle = 0;
-
-            //Init the bitmap
-            bitmap = Definition.GetBitmap();
 
             //Nodes
             if (def.NodesDefinition.Enabled)
@@ -50,9 +45,6 @@ namespace OgmoEditor.LevelData.Layers
         {
             Layer = layer;
             Definition = Ogmo.Project.EntityDefinitions.Find(d => d.Name == xml.Name);
-
-            //Init the bitmap
-            bitmap = Definition.GetBitmap();
 
             //ID
             if (xml.Attributes["id"] != null)
@@ -104,9 +96,6 @@ namespace OgmoEditor.LevelData.Layers
             Position = e.Position;
             Size = e.Size;
             Angle = e.Angle;
-
-            //Init the bitmap
-            bitmap = Definition.GetBitmap();
 
             //Nodes
             if (Definition.NodesDefinition.Enabled)
@@ -191,7 +180,7 @@ namespace OgmoEditor.LevelData.Layers
 
         public void Draw(Graphics graphics, bool current, bool fullAlpha)
         {
-            Definition.Draw(graphics, Position, Size, Angle, fullAlpha ? Util.FullAlphaAttributes : Util.HalfAlphaAttributes);
+            Definition.Draw(graphics, Position, Size, Angle, fullAlpha ? DrawUtil.AlphaMode.Full : DrawUtil.AlphaMode.Half);
 
             //Selection box
             if (current && Ogmo.EntitySelectionWindow.IsSelected(this))
@@ -203,9 +192,9 @@ namespace OgmoEditor.LevelData.Layers
                 //Node ghost images
                 if (Definition.NodesDefinition.Ghost)
                 {
-                    ImageAttributes attributes = fullAlpha ? Util.HalfAlphaAttributes : Util.QuarterAlphaAttributes;
+                    DrawUtil.AlphaMode alphaMode = fullAlpha ? DrawUtil.AlphaMode.Half : DrawUtil.AlphaMode.Quarter;
                     foreach (var p in Nodes)
-                        Definition.Draw(graphics, p, Size, Angle, attributes);
+                        Definition.Draw(graphics, p, Size, Angle, alphaMode);
                 }
 
                 switch (Definition.NodesDefinition.DrawMode)

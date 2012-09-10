@@ -2,11 +2,16 @@
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Drawing.Imaging;
 
 namespace OgmoEditor
 {
     static public class DrawUtil
     {
+        static public readonly ImageAttributes[] AlphaAttributes = new ImageAttributes[] { new ImageAttributes(), Util.CreateAlphaAttributes(.5f), Util.CreateAlphaAttributes(.25f) };
+        static public readonly int[] AlphaInts = new int[] { 255, 255 / 2, 255 / 4 };
+        public enum AlphaMode { Full = 0, Half, Quarter };
+
         static public Bitmap ImgBG;
         static public Bitmap ImgLogo;
         static public Bitmap ImgBroken;
@@ -17,6 +22,7 @@ namespace OgmoEditor
         static public Pen NodePathPen { get; private set; }
         static public Pen NodeNewPathPen { get; private set; }
         static public Pen CameraRectPen { get; private set; }
+        static public SolidBrush EntityRectBrush { get; private set; }
 
         static public void Initialize()
         {
@@ -44,6 +50,8 @@ namespace OgmoEditor
 
                 CameraRectPen = new Pen(Color.FromArgb(255 / 2, Color.Red), 2);
                 CameraRectPen.DashPattern = new float[] { 4, 2 };
+
+                EntityRectBrush = new SolidBrush(Color.Black);
             }
 
             //Updates the selection box brush

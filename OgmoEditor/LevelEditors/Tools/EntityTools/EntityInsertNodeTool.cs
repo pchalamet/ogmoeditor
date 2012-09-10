@@ -111,7 +111,7 @@ namespace OgmoEditor.LevelEditors.Tools.EntityTools
 
                     //Draw the entity ghost image
                     if (e.Definition.NodesDefinition.Ghost)
-                        e.Definition.Draw(graphics, mouse, e.Angle, Util.QuarterAlphaAttributes);
+                        e.Definition.Draw(graphics, mouse, e.Angle, DrawUtil.AlphaMode.Quarter);
 
                     //Draw the line(s)
                     if (index == 0)
