@@ -228,6 +228,8 @@ namespace OgmoEditor
                     tabPageContextMenuStrip.Show(this, e.Location);
                 }
             }
+            else
+                FocusEditor();
         }
 
         #endregion

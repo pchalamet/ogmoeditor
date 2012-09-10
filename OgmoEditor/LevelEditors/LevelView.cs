@@ -139,7 +139,7 @@ namespace OgmoEditor.LevelEditors
             if (zoomAt.HasValue)
                 this.zoomAt = zoomAt.Value;
             else
-                this.zoomAt = LevelEditor.Level.Center;
+                this.zoomAt = EditorToScreen(LevelEditor.Level.Center);
 
             //Increase the target zoom
             targetZoom = ZOOMS[at + 1];
@@ -161,7 +161,7 @@ namespace OgmoEditor.LevelEditors
             if (zoomAt.HasValue)
                 this.zoomAt = zoomAt.Value;
             else
-                this.zoomAt = LevelEditor.Level.Center;
+                this.zoomAt = EditorToScreen(LevelEditor.Level.Center);
 
             //Increase the target zoom
             targetZoom = ZOOMS[at - 1];
