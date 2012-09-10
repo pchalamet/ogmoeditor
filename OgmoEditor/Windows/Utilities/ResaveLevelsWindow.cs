@@ -11,7 +11,7 @@ using System.IO;
 
 namespace OgmoEditor.Windows.Utilities
 {
-    public partial class ResaveLevelsWindow : Form
+    public partial class ResaveLevelsWindow : UtilityForm
     {
         public ResaveLevelsWindow()
         {

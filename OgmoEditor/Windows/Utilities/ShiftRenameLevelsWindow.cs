@@ -12,7 +12,7 @@ using OgmoEditor.LevelData;
 
 namespace OgmoEditor.Windows.Utilities
 {
-    public partial class ShiftRenameLevelsWindow : Form
+    public partial class ShiftRenameLevelsWindow : UtilityForm
     {
         public ShiftRenameLevelsWindow()
         {

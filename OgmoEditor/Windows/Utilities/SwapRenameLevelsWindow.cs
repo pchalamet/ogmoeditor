@@ -11,7 +11,7 @@ using System.IO;
 
 namespace OgmoEditor.Windows.Utilities
 {
-    public partial class SwapRenameLevelsWindow : Form
+    public partial class SwapRenameLevelsWindow : UtilityForm
     {
         public SwapRenameLevelsWindow()
         {

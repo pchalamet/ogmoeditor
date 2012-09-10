@@ -478,6 +478,9 @@
     <Compile Include="Windows\Utilities\SwapRenameLevelsWindow.Designer.cs">
       <DependentUpon>SwapRenameLevelsWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Utilities\UtilityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ColorChooser.resx">
