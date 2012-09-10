@@ -472,6 +472,12 @@
     <Compile Include="Windows\Utilities\ResaveLevelsWindow.Designer.cs">
       <DependentUpon>ResaveLevelsWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Utilities\SwapRenameLevelsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Utilities\SwapRenameLevelsWindow.Designer.cs">
+      <DependentUpon>SwapRenameLevelsWindow.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ColorChooser.resx">
@@ -601,6 +607,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Utilities\ResaveLevelsWindow.resx">
       <DependentUpon>ResaveLevelsWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Utilities\SwapRenameLevelsWindow.resx">
+      <DependentUpon>SwapRenameLevelsWindow.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

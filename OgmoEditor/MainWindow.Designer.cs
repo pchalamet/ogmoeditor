@@ -92,6 +92,7 @@
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.duplicateLevelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.shiftRenamerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.swapRenamerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StatusStrip.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             this.tabPageContextMenuStrip.SuspendLayout();
@@ -538,7 +539,8 @@
             // 
             this.utilitiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.resaveLevelsToolStripMenuItem,
-            this.shiftRenamerToolStripMenuItem});
+            this.shiftRenamerToolStripMenuItem,
+            this.swapRenamerToolStripMenuItem});
             this.utilitiesToolStripMenuItem.Enabled = false;
             this.utilitiesToolStripMenuItem.Name = "utilitiesToolStripMenuItem";
             this.utilitiesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
@@ -617,6 +619,13 @@
             this.shiftRenamerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.shiftRenamerToolStripMenuItem.Text = "Shift Renamer";
             this.shiftRenamerToolStripMenuItem.Click += new System.EventHandler(this.shiftRenamerToolStripMenuItem_Click);
+            // 
+            // swapRenamerToolStripMenuItem
+            // 
+            this.swapRenamerToolStripMenuItem.Name = "swapRenamerToolStripMenuItem";
+            this.swapRenamerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.swapRenamerToolStripMenuItem.Text = "Swap Renamer";
+            this.swapRenamerToolStripMenuItem.Click += new System.EventHandler(this.swapRenamerToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -709,5 +718,6 @@
         private System.Windows.Forms.ToolStripMenuItem utilitiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resaveLevelsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem shiftRenamerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem swapRenamerToolStripMenuItem;
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using OgmoEditor.LevelData;
 
 namespace OgmoEditor.Windows.Utilities
 {
@@ -73,8 +74,15 @@ namespace OgmoEditor.Windows.Utilities
             //Do the renaming!
             for (int i = 0; i < toShift.Count; i++)
             {
+                //Figure out the file paths
                 string source = Path.Combine(Ogmo.Project.SavedDirectory, pattern.Replace("#", toShift[i].ToString()));
                 string dest = Path.Combine(Ogmo.Project.SavedDirectory, pattern.Replace("#", (toShift[i] + shift).ToString()));
+
+                //Close the levels if they're open
+                Ogmo.CloseLevelByFilepath(source);
+                Ogmo.CloseLevelByFilepath(dest);
+                
+                //Rename it
                 File.Copy(source, dest, overwrite);
                 File.Delete(source);
             }

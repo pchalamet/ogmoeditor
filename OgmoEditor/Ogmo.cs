@@ -11,6 +11,7 @@ using OgmoEditor.LevelData;
 using OgmoEditor.LevelEditors.Tools;
 using OgmoEditor.ProjectEditors;
 using OgmoEditor.Windows;
+using System.Diagnostics;
 
 namespace OgmoEditor
 {
@@ -462,8 +463,16 @@ namespace OgmoEditor
             }
         }
 
+        static public void CloseLevelByFilepath(string filepath)
+        {
+            Level level = GetLevelByFilepath(filepath);
+            if (level != null)
+                Ogmo.CloseLevel(level, true);
+        }
+
         static public Level GetLevelByFilepath(string filepath)
         {
+            filepath = filepath.Replace('/', '\\');
             foreach (Level level in Levels)
             {
                 if (level.HasBeenSaved && level.SavePath == filepath)
