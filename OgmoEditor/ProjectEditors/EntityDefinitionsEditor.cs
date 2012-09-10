@@ -33,7 +33,7 @@ namespace OgmoEditor.ProjectEditors
             directory = project.SavedDirectory;
         }
 
-        private void setControlsFromObject(EntityDefinition def)
+        private void SetControlsFromObject(EntityDefinition def)
         {
             removeButton.Enabled = true;
             moveUpButton.Enabled = listBox.SelectedIndex > 0;
@@ -83,11 +83,11 @@ namespace OgmoEditor.ProjectEditors
             rectangleColorChooser.Color = def.ImageDefinition.RectColor;
             imageFileTextBox.Text = def.ImageDefinition.ImagePath;
             imageFileTiledCheckBox.Checked = def.ImageDefinition.Tiled;
-            imageFileWarningLabel.Visible = !checkImageFile();
-            loadImageFilePreview();
+            imageFileWarningLabel.Visible = !CheckImageFile();
+            LoadImageFilePreview();
         }
 
-        private void disableControls()
+        private void DisableControls()
         {
             removeButton.Enabled = false;
             moveUpButton.Enabled = false;
@@ -109,7 +109,7 @@ namespace OgmoEditor.ProjectEditors
             RotationFieldsVisible = false;
             NodesFieldsVisible = false;
             GraphicFieldsVisibility = -1;
-            clearImageFilePreview();
+            ClearImageFilePreview();
         }
 
         private EntityDefinition GetDefault()
@@ -160,30 +160,29 @@ namespace OgmoEditor.ProjectEditors
             }
         }
 
-        private bool checkImageFile()
+        private bool CheckImageFile()
         {
             return File.Exists(Path.Combine(directory, imageFileTextBox.Text));
         }
 
-        private void loadImageFilePreview()
+        private void LoadImageFilePreview()
         {
             imagePreviewer.LoadImage(Path.Combine(directory, imageFileTextBox.Text));
         }
 
-        private void clearImageFilePreview()
+        private void ClearImageFilePreview()
         {
             imagePreviewer.ClearImage();
         }
 
-        /*
-         *  Selector Events
-         */
+        #region Selector Events
+
         private void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBox.SelectedIndex == -1)
-                disableControls();
+                DisableControls();
             else
-                setControlsFromObject(entities[listBox.SelectedIndex]);
+                SetControlsFromObject(entities[listBox.SelectedIndex]);
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -228,9 +227,10 @@ namespace OgmoEditor.ProjectEditors
             listBox.SelectedIndex = index + 1;
         }
 
-        /*
-         *  Basic Settings Events
-         */
+        #endregion
+
+        #region Basic Settings Events
+
         private void nameTextBox_Validated(object sender, EventArgs e)
         {
             if (listBox.SelectedIndex == -1)
@@ -264,9 +264,10 @@ namespace OgmoEditor.ProjectEditors
             OgmoParse.Parse(ref entities[listBox.SelectedIndex].Origin, originXTextBox, originYTextBox);
         }
 
-        /*
-         *  Size/Rotate Events
-         */
+        #endregion
+
+        #region Size/Rotate Events
+
         private void resizableXCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (listBox.SelectedIndex == -1)
@@ -300,9 +301,10 @@ namespace OgmoEditor.ProjectEditors
             OgmoParse.Parse(ref entities[listBox.SelectedIndex].RotateIncrement, rotationIncrementTextBox);
         }
 
-        /*
-         *  Nodes Events
-         */
+        #endregion
+
+        #region Nodes Events
+
         private void nodesCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (listBox.SelectedIndex == -1)
@@ -333,9 +335,10 @@ namespace OgmoEditor.ProjectEditors
             entities[listBox.SelectedIndex].NodesDefinition.Ghost = nodeGhostCheckBox.Checked;
         }
 
-        /*
-         *  Graphics Events
-         */
+        #endregion
+
+        #region Graphics Events
+
         private void graphicTypeComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
             if (listBox.SelectedIndex == -1)
@@ -367,7 +370,7 @@ namespace OgmoEditor.ProjectEditors
             dialog.Filter = Ogmo.IMAGE_FILE_FILTER;
             dialog.CheckFileExists = true;
 
-            if (checkImageFile())
+            if (CheckImageFile())
                 dialog.InitialDirectory = Util.DirectoryPath(Path.Combine(directory, imageFileTextBox.Text));
             else
                 dialog.InitialDirectory = directory;
@@ -376,10 +379,12 @@ namespace OgmoEditor.ProjectEditors
                 return;
 
             imageFileTextBox.Text = Util.RelativePath(directory, dialog.FileName);
-            imageFileWarningLabel.Visible = !checkImageFile();
-            loadImageFilePreview();
+            imageFileWarningLabel.Visible = !CheckImageFile();
+            LoadImageFilePreview();
 
             entities[listBox.SelectedIndex].ImageDefinition.ImagePath = imageFileTextBox.Text;
         }
+
+        #endregion
     }
 }
