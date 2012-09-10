@@ -37,11 +37,9 @@ namespace OgmoEditor.LevelEditors
         public LinkedList<OgmoAction> UndoStack { get; private set; }
         public LinkedList<OgmoAction> RedoStack { get; private set; }
 
-        private EventHandler Repaint;
         private ActionBatch batch;
         private Brush levelBGBrush;
         private Pen gridPen;
-        private bool firstTime = true;
 
         public LevelEditor(Level level)
             : base()
@@ -68,8 +66,7 @@ namespace OgmoEditor.LevelEditors
             gridPen = new Pen(Color.FromArgb(130, Ogmo.Project.GridColor));
 
             //Events
-            Repaint = delegate { Invalidate(); };
-            Application.Idle += new EventHandler(Application_Idle);
+            Application.Idle += Application_Idle;
             this.Paint += Draw;
             this.Resize += onResize;
             this.MouseClick += onMouseClick;
@@ -83,27 +80,22 @@ namespace OgmoEditor.LevelEditors
 
         void Application_Idle(object sender, EventArgs e)
         {
-            Repaint(sender, e);
+            Invalidate();
             LevelView.Update();
         }
 
         public void OnRemove()
         {
             //Remove external events
-            Application.Idle -= Repaint;
+            Application.Idle -= Application_Idle;
         }
 
         #region Rendering
 
         private void Draw(object sender, PaintEventArgs e)
         {
-            if (firstTime)
-            {
-                e.Graphics.SmoothingMode = SmoothingMode.HighSpeed;
-                e.Graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
-                e.Graphics.Clip = new Region(ClientRectangle);
-                firstTime = false;
-            }
+            e.Graphics.SmoothingMode = SmoothingMode.HighSpeed;
+            e.Graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
 
             //Draw the background logo
             e.Graphics.Transform = LevelView.Identity;
@@ -346,7 +338,6 @@ namespace OgmoEditor.LevelEditors
         private void onResize(object sender, EventArgs e)
         {
             LevelView.OnParentResized();
-            firstTime = true;
         }
 
         private void onKeyDown(object sender, KeyEventArgs e)

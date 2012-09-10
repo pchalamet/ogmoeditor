@@ -40,7 +40,7 @@ namespace OgmoEditor.LevelEditors
 
         public void Update()
         {
-            if (Zoom != targetZoom)
+            if (stopwatch.IsRunning)
             {
                 double elapsed = stopwatch.Elapsed.TotalSeconds - lastTime;
 
