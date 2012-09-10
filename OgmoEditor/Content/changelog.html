@@ -46,28 +46,36 @@
 
 	<body>
 		<h1>ChangeLog</h1>
-
-		<div class="version">
-			<h2>2.1.0.0</h2>
-			<p class="date">September 9, 2012</p>
-				<h3>Changes</h3>
-					<ul>
-						<li>Rewrote rendering code to remove XNA from Ogmo Editor!</li>
+    
+		    <div class="version">
+			    <h2>2.1.0.0</h2>
+			    <p class="date">September 9, 2012</p>
+				    <h3>Changes</h3>
+          <ul>
+            <li>Rewrote rendering code to remove XNA from Ogmo Editor!</li>
             <li>Various visual improvements</li>
-            <li>Better broken file path image in project editor</li>
-            <li>All tile actions sped up dramatically</li>
-            <li>Entity move and scale actions optimized</li>           
-						<li>Zooming now scales at the mouse position</li>
-						<li>Can now press the HOME key to center the level view</li>
-						<li>Can now press +/- to zoom in/out</li>
-						<li>Entities can be both tiled and rotatable now</li>
-            <li>Added Grid layer export option: Grid Rectangles</li>
+            <li>Entities can now be both tiled and rotatable</li>
+            <li>Added grid layer export option: Grid Rectangles</li>
+            <li>Better and More descriptive salvaged level options</li>
+            <li>
+              Lots of optimizations, particularly:<ul>
+              <li>All tile layer actions</li>
+              <li>Entity move and scale actions</li>
+            </ul></li>
+            <li>View changes:<ul>
+						  <li>Zooming now scales at the mouse position</li>
+						  <li>Can now press the HOME key to center the level view</li>
+						  <li>Can now press +/- to zoom in/out</li>
+            </ul></li>						
 						<li>Entity selection tool:<ul>
 							<li>Right-click now deselects</li>
 							<li>CTRL+select now toggles selection on entity</li>
 						</ul></li>
-            <li>Added Batch Resaver utility: mass resave levels to quickly apply project changes</li>
-            <li>Added Shift Renamer utility: mass rename levels to rearrange their numerical order faster</li>
+            <li>Added level batch utilities:<ul>
+              <li>Batch Resaver - resave levels to quickly apply project changes</li>
+              <li>Shift Renamer - rename levels to help rearrange their numerical order</li>
+              <li>Swap Renamer - quickly swap the filenames of two level files</li>
+            </ul></li> 
 						<li>Added this changelog to the start page</li>
 						<li>Added website/donate buttons to the about window and start page</li>
 					</ul>
@@ -81,6 +89,7 @@
 						<li>Tile tools now correctly apply multi-tile selections</li>
 						<li>Entity previews in the entity selector now crop correctly</li>
 					</ul>
-		</div>
+		
+    </div>
 	</body>
 </html>

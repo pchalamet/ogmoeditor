@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="topLabel.Text" xml:space="preserve">
-    <value>The Resave Levels utility loads and resaves a batch of level files, quickly applying project changes. It is equivalent to opening each level individually and using Save As to resave it with the same filename.
+    <value>The Batch Resaver loads and resaves a batch of level files, quickly applying project changes. It is equivalent to opening each level individually and using Save As to resave it with the same filename.
 
 </value>
   </data>
