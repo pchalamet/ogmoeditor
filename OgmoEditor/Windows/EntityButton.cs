@@ -18,7 +18,6 @@ namespace OgmoEditor.Windows
         static private readonly OgmoColor Hover = new OgmoColor(255, 220, 130);
 
         public EntityDefinition Definition { get; private set; }
-        private Bitmap image;
 
         public EntityButton(EntityDefinition definition, int x, int y)
         {
@@ -28,7 +27,6 @@ namespace OgmoEditor.Windows
             toolTip.SetToolTip(this, definition.Name);
 
             pictureBox.Paint += new PaintEventHandler(pictureBox_Paint);
-            image = Definition.GetButtonBitmap();
 
             entityNameLabel.Text = definition.Name;
             entityNameLabel.BackColor = (definition == Ogmo.EntitiesWindow.CurrentEntity) ? Selected : NotSelected;
@@ -37,8 +35,16 @@ namespace OgmoEditor.Windows
             Ogmo.EntitiesWindow.OnEntityChanged += onEntityChanged;
         }
 
+        public void OnRemove()
+        {
+            Ogmo.EntitiesWindow.OnEntityChanged -= onEntityChanged;
+        }
+
+        #region Events
+
         private void pictureBox_Paint(object sender, PaintEventArgs e)
         {
+            Image image = Definition.ButtonBitmap;
             float scale = Math.Min(ClientSize.Width / (float)image.Width, ClientSize.Height / (float)image.Height);
             int destWidth = (int)(image.Width * scale);
             int destHeight = (int)(image.Height * scale);
@@ -50,14 +56,6 @@ namespace OgmoEditor.Windows
                 new Rectangle(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
         }
 
-        public void OnRemove()
-        {
-            Ogmo.EntitiesWindow.OnEntityChanged -= onEntityChanged;
-        }
-
-        /*
-         *  Events
-         */
         private void label_Click(object sender, EventArgs e)
         {
             Ogmo.EntitiesWindow.SetObject(Definition);
@@ -87,5 +85,7 @@ namespace OgmoEditor.Windows
             if (entityNameLabel.BackColor == Hover)
                 entityNameLabel.BackColor = NotSelected;
         }
+
+        #endregion
     }
 }

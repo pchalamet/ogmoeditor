@@ -147,13 +147,7 @@ namespace OgmoEditor.Definitions
                 buttonBitmap = bitmap;
         }
 
-        public Bitmap GetButtonBitmap()
-        {
-            if (buttonBitmap == null)
-                return null;
-            else
-                return (Bitmap)buttonBitmap.Clone();
-        }
+        public Bitmap ButtonBitmap { get { return buttonBitmap; } }
     }
 
     [XmlRoot("Image")]

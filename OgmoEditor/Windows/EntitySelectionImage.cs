@@ -13,7 +13,6 @@ namespace OgmoEditor.Windows
     public partial class EntitySelectionImage : UserControl
     {
         private Entity entity;
-        private Bitmap image;
 
         public EntitySelectionImage(Entity entity, int x, int y)
         {
@@ -22,15 +21,13 @@ namespace OgmoEditor.Windows
             InitializeComponent();
 
             toolTip.SetToolTip(pictureBox, entity.Definition.Name);
-
-            image = entity.Definition.GetButtonBitmap();
         }
 
-        /*
-         *  Events
-         */
+        #region Events
+
         private void pictureBox_Paint(object sender, PaintEventArgs e)
         {
+            Image image = entity.Definition.ButtonBitmap;
             float scale = Math.Min(ClientSize.Width / (float)image.Width, ClientSize.Height / (float)image.Height);
             int destWidth = (int)(image.Width * scale);
             int destHeight = (int)(image.Height * scale);
@@ -60,5 +57,7 @@ namespace OgmoEditor.Windows
                 Ogmo.EntitySelectionWindow.RemoveFromSelection(entity);
             }
         }
+
+        #endregion
     }
 }
