@@ -27,10 +27,18 @@ namespace OgmoEditor.Clipboard
 
         public override void Paste(LevelEditor editor, Layer layer)
         {
+            List<Entity> created = new List<Entity>();
+
             editor.StartBatch();
             foreach (var e in entities)
-                editor.BatchPerform(new EntityAddAction(layer as EntityLayer, e.Clone()));
+            {
+                Entity ee = e.Clone();
+                created.Add(ee);
+                editor.BatchPerform(new EntityAddAction(layer as EntityLayer, ee));
+            }
             editor.EndBatch();
+
+            Ogmo.EntitySelectionWindow.SetSelection(created);
         }
     }
 }
