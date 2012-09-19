@@ -23,7 +23,8 @@ namespace OgmoEditor.Windows
         {
             Name = "ToolsWindow";
             Text = "Tools";
-            ClientSize = new Size(48, 144);
+            AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            AutoSize = true;
 
             CurrentTool = null;
 
