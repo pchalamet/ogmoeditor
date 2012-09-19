@@ -660,6 +660,7 @@
     </Content>
     <Content Include="Content\changelog.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Content\icons\icon32.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

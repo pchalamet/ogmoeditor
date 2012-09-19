@@ -149,15 +149,12 @@ namespace OgmoEditor.Windows
                 inverseMatrix = g.Transform.Clone();
                 inverseMatrix.Invert();
 
-                g.TranslateTransform(bitmap.Width / 2, bitmap.Height / 2);
-                g.ScaleTransform(1/scale, 1/scale);
-
                 if (selection.HasValue)
                 {
-                    Rectangle r = tileset.GetVisualRectFromSelection(selection.Value);
-                    r.X -= bitmap.Width / 2;
-                    r.Y -= bitmap.Height / 2;
-                    r = r.Multiply(scale, scale);                
+                    tileSelectPenA.Width = 4 / scale;
+                    tileSelectPenB.Width = 2 / scale;
+
+                    Rectangle r = tileset.GetVisualRectFromSelection(selection.Value);                  
                     e.Graphics.DrawRectangle(tileSelectPenA, r);
                     e.Graphics.DrawRectangle(tileSelectPenB, r);
                 }

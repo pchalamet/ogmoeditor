@@ -234,6 +234,35 @@ namespace OgmoEditor
 
         #endregion
 
+        #region RectangleF Extensions
+
+        static public float Area(this RectangleF rect)
+        {
+            return rect.Width * rect.Height;
+        }
+
+        static public RectangleF Multiply(this RectangleF rect, int multX, int multY)
+        {
+            rect.X *= multX;
+            rect.Width *= multX;
+            rect.Y *= multY;
+            rect.Height *= multY;
+
+            return rect;
+        }
+
+        static public RectangleF Multiply(this RectangleF rect, float multX, float multY)
+        {
+            rect.X = (int)(rect.X * multX);
+            rect.Width = (int)(rect.Width * multX);
+            rect.Y = (int)(rect.Y * multY);
+            rect.Height = (int)(rect.Height * multY);
+
+            return rect;
+        }
+
+        #endregion
+
         #region Point Extensions
 
         static public PointF Add(this PointF a, PointF b)

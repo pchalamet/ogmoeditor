@@ -94,6 +94,7 @@ namespace OgmoEditor.LevelEditors
 
         private void Draw(object sender, PaintEventArgs e)
         {
+            e.Graphics.CompositingQuality = CompositingQuality.HighSpeed;
             e.Graphics.SmoothingMode = SmoothingMode.HighSpeed;
             e.Graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
 
@@ -132,9 +133,9 @@ namespace OgmoEditor.LevelEditors
                 e.Graphics.Transform = LevelView.Identity;
 
                 PointF inc = new PointF(Ogmo.LayersWindow.CurrentLayer.Definition.Grid.Width * LevelView.Zoom, Ogmo.LayersWindow.CurrentLayer.Definition.Grid.Height * LevelView.Zoom);
-                while (inc.X <= 4)
+                while (inc.X <= 5)
                     inc.X *= 2;
-                while (inc.Y <= 4)
+                while (inc.Y <= 5)
                     inc.Y *= 2;
 
                 float width = Ogmo.CurrentLevel.Size.Width * LevelView.Zoom;
