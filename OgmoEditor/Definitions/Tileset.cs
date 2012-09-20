@@ -1,6 +1,5 @@
 ﻿using System.Drawing;
 using System.IO;
-using System.Linq;
 
 namespace OgmoEditor.Definitions
 {
@@ -109,7 +108,6 @@ namespace OgmoEditor.Definitions
             else
             {
                 bitmap = new Bitmap(Path.Combine(Ogmo.Project.SavedDirectory, FilePath));
-
                 tileRects = new Rectangle[TilesTotal];
                 for (int i = 0; i < TilesTotal; i++)
                     tileRects[i] = GetRectFromID(i);

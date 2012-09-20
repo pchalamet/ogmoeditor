@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using OgmoEditor.Definitions;
-using System.Diagnostics;
 using System.Drawing.Drawing2D;
 
 namespace OgmoEditor.Windows
@@ -135,29 +132,30 @@ namespace OgmoEditor.Windows
             {
                 Graphics g = e.Graphics;
 
-                float scale = Math.Min((pictureBox.ClientSize.Width - BUFFER) / (float)bitmap.Width, (pictureBox.ClientSize.Height - BUFFER) / (float)bitmap.Height);
+                float scale = Math.Min((pictureBox.ClientSize.Width - BUFFER) / (float)Tileset.Bitmap.Width, (pictureBox.ClientSize.Height - BUFFER) / (float)Tileset.Bitmap.Height);
 
                 g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
 
                 g.ResetTransform();
-                g.TranslateTransform(pictureBox.ClientSize.Width / 2, pictureBox.ClientSize.Height / 2);
+                g.TranslateTransform(pictureBox.ClientSize.Width / 2f, pictureBox.ClientSize.Height / 2f);
                 g.ScaleTransform(scale, scale);
-                g.TranslateTransform(-bitmap.Width / 2, -bitmap.Height / 2);
-
-                g.DrawImage(bitmap, Point.Empty);
-                inverseMatrix = g.Transform.Clone();
-                inverseMatrix.Invert();
+                g.TranslateTransform(-Tileset.Bitmap.Width / 2f, -Tileset.Bitmap.Height / 2f);
+                
+                g.DrawImage(Tileset.Bitmap, 0, 0, Tileset.Bitmap.Width, Tileset.Bitmap.Height);
 
                 if (selection.HasValue)
                 {
                     tileSelectPenA.Width = 4 / scale;
                     tileSelectPenB.Width = 2 / scale;
+                    Rectangle r = tileset.GetVisualRectFromSelection(selection.Value);
 
-                    Rectangle r = tileset.GetVisualRectFromSelection(selection.Value);                  
-                    e.Graphics.DrawRectangle(tileSelectPenA, r);
-                    e.Graphics.DrawRectangle(tileSelectPenB, r);
+                    g.DrawRectangle(tileSelectPenA, r);
+                    g.DrawRectangle(tileSelectPenB, r);
                 }
+
+                inverseMatrix = g.Transform.Clone();
+                inverseMatrix.Invert();
             }
         }
 
