@@ -68,8 +68,9 @@ namespace OgmoEditor.Definitions
         public void Draw(Graphics graphics, Point position, Size size, float angle, DrawUtil.AlphaMode alphaMode)
         {
             //Do transformations for position and rotation
-            graphics.TranslateTransform(position.X - Origin.X, position.Y - Origin.Y);
+            graphics.TranslateTransform(position.X, position.Y);
             graphics.RotateTransform(angle);
+            graphics.TranslateTransform(-Origin.X, -Origin.Y);
 
             //Draw the actual entity
             if (ImageDefinition.DrawMode == EntityImageDefinition.DrawModes.Rectangle)
@@ -94,8 +95,9 @@ namespace OgmoEditor.Definitions
                 graphics.DrawImage(bitmap, new Rectangle(0, 0, size.Width, size.Height), 0, 0, bitmap.Width, bitmap.Height, GraphicsUnit.Pixel, DrawUtil.AlphaAttributes[(int)alphaMode]);
 
             //Undo the transformations
+            graphics.TranslateTransform(Origin.X, Origin.Y);
             graphics.RotateTransform(-angle);
-            graphics.TranslateTransform(-position.X + Origin.X, -position.Y + Origin.Y);
+            graphics.TranslateTransform(-position.X, -position.Y);
         }
 
         public void Draw(Graphics graphics, Point position, float angle, DrawUtil.AlphaMode alphaMode)
