@@ -25,6 +25,14 @@ namespace OgmoEditor.LevelEditors.LayerEditors
         public override void Draw(Graphics graphics, bool current, bool fullAlpha)
         {
             graphics.DrawImage(Layer.Bitmap, Point.Empty);
+
+            //Draw the selection box
+            if (current && Layer.Selection != null)
+                graphics.DrawSelectionRectangle(new Rectangle(
+                    Layer.Selection.Area.X * Layer.Definition.Grid.Width,
+                    Layer.Selection.Area.Y * Layer.Definition.Grid.Height,
+                    Layer.Selection.Area.Width * Layer.Definition.Grid.Width,
+                    Layer.Selection.Area.Height * Layer.Definition.Grid.Height));
         }
 
         public override Resizer GetResizer()
