@@ -25,7 +25,7 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
 
             for (int i = 0; i < TileLayer.Selection.Area.Width; i++)
                 for (int j = 0; j < TileLayer.Selection.Area.Height; j++)
-                    TileLayer.Tiles[i + TileLayer.Selection.Area.X, j + TileLayer.Selection.Area.Y] = TileLayer.Selection.Under[i, j];
+                    TileLayer[i + TileLayer.Selection.Area.X, j + TileLayer.Selection.Area.Y] = TileLayer.Selection.Under[i, j];
 
             TileLayer.Selection.Area.X += move.X;
             TileLayer.Selection.Area.Y += move.Y;
@@ -33,7 +33,7 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
 
             for (int i = 0; i < TileLayer.Selection.Area.Width; i++)
                 for (int j = 0; j < TileLayer.Selection.Area.Height; j++)
-                    TileLayer.Tiles[i + TileLayer.Selection.Area.X, j + TileLayer.Selection.Area.Y] = data[i, j];
+                    TileLayer[i + TileLayer.Selection.Area.X, j + TileLayer.Selection.Area.Y] = data[i, j];
         }
 
         public override void Undo()
@@ -44,7 +44,7 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
 
             for (int i = 0; i < TileLayer.Selection.Area.Width; i++)
                 for (int j = 0; j < TileLayer.Selection.Area.Height; j++)
-                    TileLayer.Tiles[i + TileLayer.Selection.Area.X, j + TileLayer.Selection.Area.Y] = TileLayer.Selection.Under[i, j];
+                    TileLayer[i + TileLayer.Selection.Area.X, j + TileLayer.Selection.Area.Y] = TileLayer.Selection.Under[i, j];
 
             TileLayer.Selection.Area.X -= move.X;
             TileLayer.Selection.Area.Y -= move.Y;
@@ -52,7 +52,7 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
 
             for (int i = 0; i < TileLayer.Selection.Area.Width; i++)
                 for (int j = 0; j < TileLayer.Selection.Area.Height; j++)
-                    TileLayer.Tiles[i + TileLayer.Selection.Area.X, j + TileLayer.Selection.Area.Y] = data[i, j];
+                    TileLayer[i + TileLayer.Selection.Area.X, j + TileLayer.Selection.Area.Y] = data[i, j];
         }
     }
 }

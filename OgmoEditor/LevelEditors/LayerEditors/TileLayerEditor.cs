@@ -24,30 +24,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
 
         public override void Draw(Graphics graphics, bool current, bool fullAlpha)
         {
-            //Get which tiles to draw (the ones that are visible)
-            Rectangle visible = GetVisibleGridArea(graphics);
-
-            //Draw the tiles
-            ImageAttributes attributes = fullAlpha ? Util.FullAlphaAttributes : Util.HalfAlphaAttributes;
-            for (int i = visible.X; i < visible.Right; i++)
-            {
-                for (int j = visible.Y; j < visible.Bottom; j++)
-                {
-                    if (Layer.Tiles[i, j] != -1)
-                    {
-                        Rectangle tileRect = Layer.Tileset.TileRects[Layer.Tiles[i, j]];
-                        graphics.DrawImage(Layer.Tileset.Bitmap, new Rectangle(i * Layer.Definition.Grid.Width, j * Layer.Definition.Grid.Height, Layer.Definition.Grid.Width, Layer.Definition.Grid.Height), tileRect.X, tileRect.Y, tileRect.Width, tileRect.Height, GraphicsUnit.Pixel, attributes);
-                    }
-                }
-            }
-
-            //Draw the selection box
-            if (current && Layer.Selection != null)
-                graphics.DrawSelectionRectangle(new Rectangle(
-                    Layer.Selection.Area.X * Layer.Definition.Grid.Width,
-                    Layer.Selection.Area.Y * Layer.Definition.Grid.Height,
-                    Layer.Selection.Area.Width * Layer.Definition.Grid.Width,
-                    Layer.Selection.Area.Height * Layer.Definition.Grid.Height));
+            graphics.DrawImage(Layer.Bitmap, Point.Empty);
         }
 
         public override Resizer GetResizer()

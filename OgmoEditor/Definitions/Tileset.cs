@@ -36,7 +36,7 @@ namespace OgmoEditor.Definitions
             GenerateBitmap();
         }
 
-        private Rectangle GetRectFromID(int id)
+        public Rectangle GetRectFromID(int id)
         {
             int y = id / TilesAcross;
             int x = id % TilesAcross;

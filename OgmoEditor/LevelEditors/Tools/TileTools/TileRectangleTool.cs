@@ -119,8 +119,8 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
                 r.Y = 0;
             }
 
-            int width = LayerEditor.Layer.Tiles.GetLength(0) * LayerEditor.Layer.Definition.Grid.Width;
-            int height = LayerEditor.Layer.Tiles.GetLength(1) * LayerEditor.Layer.Definition.Grid.Height;
+            int width = LayerEditor.Layer.TileCellsX * LayerEditor.Layer.Definition.Grid.Width;
+            int height = LayerEditor.Layer.TileCellsY * LayerEditor.Layer.Definition.Grid.Height;
 
             if (r.X + r.Width > width)
                 r.Width = width - r.X;

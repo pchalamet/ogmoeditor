@@ -27,7 +27,7 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
         {
             base.Do();
 
-            was = TileLayer.Tiles[startCell.X, startCell.Y];
+            was = TileLayer[startCell.X, startCell.Y];
             changes = new List<Point>();
 
             //Do the flood
@@ -55,19 +55,19 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
             base.Undo();
 
             foreach (var p in changes)
-                TileLayer.Tiles[p.X, p.Y] = was;
+                TileLayer[p.X, p.Y] = was;
         }
 
         private bool FloodCell(Point cell)
         {
-            if (cell.X < 0 || cell.Y < 0 || cell.X > TileLayer.Tiles.GetLength(0) - 1 || cell.Y > TileLayer.Tiles.GetLength(1) - 1 || TileLayer.Tiles[cell.X, cell.Y] != was)
+            if (cell.X < 0 || cell.Y < 0 || cell.X > TileLayer.TileCellsX - 1 || cell.Y > TileLayer.TileCellsY - 1 || TileLayer[cell.X, cell.Y] != was)
                 return false;
 
             changes.Add(new Point(cell.X, cell.Y));
             if (setTo.HasValue)
-                TileLayer.Tiles[cell.X, cell.Y] = TileLayer.Tileset.GetIDFromSelectionRectPoint(setTo.Value, startCell, cell);
+                TileLayer[cell.X, cell.Y] = TileLayer.Tileset.GetIDFromSelectionRectPoint(setTo.Value, startCell, cell);
             else
-                TileLayer.Tiles[cell.X, cell.Y] = -1;
+                TileLayer[cell.X, cell.Y] = -1;
 
             return true;
         }

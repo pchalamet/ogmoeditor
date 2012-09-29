@@ -28,7 +28,7 @@ namespace OgmoEditor.LevelData.Layers
         {
             for (int i = 0; i < Area.Width; i++)
                 for (int j = 0; j < Area.Height; j++)
-                    Under[i, j] = Layer.Tiles[i + Area.X, j + Area.Y];
+                    Under[i, j] = Layer[i + Area.X, j + Area.Y];
         }
 
         public int[,] GetDataFromTiles()
@@ -36,7 +36,7 @@ namespace OgmoEditor.LevelData.Layers
             int[,] data = new int[Area.Width, Area.Height];
             for (int i = 0; i < Area.Width; i++)
                 for (int j = 0; j < Area.Height; j++)
-                    data[i, j] = Layer.Tiles[i + Area.X, j + Area.Y];
+                    data[i, j] = Layer[i + Area.X, j + Area.Y];
             return data;
         }
 

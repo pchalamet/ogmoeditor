@@ -29,8 +29,8 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
             {
                 for (int j = 0; j < oldSelection.Area.Height; j++)
                 {
-                    oldData[i, j] = TileLayer.Tiles[i + oldSelection.Area.X, j + oldSelection.Area.Y];
-                    TileLayer.Tiles[i + oldSelection.Area.X, j + oldSelection.Area.Y] = oldSelection.Under[i, j];
+                    oldData[i, j] = TileLayer[i + oldSelection.Area.X, j + oldSelection.Area.Y];
+                    TileLayer[i + oldSelection.Area.X, j + oldSelection.Area.Y] = oldSelection.Under[i, j];
                 }
             }
         }
@@ -43,7 +43,7 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
             for (int i = 0; i < oldSelection.Area.Width; i++)
             {
                 for (int j = 0; j < oldSelection.Area.Height; j++)
-                    TileLayer.Tiles[i + oldSelection.Area.X, j + oldSelection.Area.Y] = oldData[i, j];
+                    TileLayer[i + oldSelection.Area.X, j + oldSelection.Area.Y] = oldData[i, j];
             }
         }
     }

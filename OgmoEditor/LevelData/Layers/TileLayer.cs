@@ -9,15 +9,19 @@ using OgmoEditor.LevelEditors.Resizers;
 using System.Drawing;
 using OgmoEditor.Definitions;
 using System.Diagnostics;
+using System.Drawing.Drawing2D;
 
 namespace OgmoEditor.LevelData.Layers
 {
     public class TileLayer : Layer
     {
-        public new TileLayerDefinition Definition { get; private set; }
-        public int[,] Tiles;
+        public new TileLayerDefinition Definition { get; private set; }       
         public TileSelection Selection;
         public Tileset Tileset;
+
+        private int[,] tiles;
+        private Bitmap canvas;
+        private Graphics canvasGraphics;
 
         public TileLayer(Level level, TileLayerDefinition definition)
             : base(level, definition)
@@ -27,8 +31,10 @@ namespace OgmoEditor.LevelData.Layers
 
             int tileWidth = Level.Size.Width / definition.Grid.Width + (Level.Size.Width % definition.Grid.Width != 0 ? 1 : 0);
             int tileHeight = Level.Size.Height / definition.Grid.Height + (Level.Size.Height % definition.Grid.Height != 0 ? 1 : 0);
-            Tiles = new int[tileWidth, tileHeight];
+            tiles = new int[tileWidth, tileHeight];
             Clear();
+
+            BuildTilesEmpty();
         }
 
         public override XmlElement GetXML(XmlDocument doc)
@@ -48,15 +54,15 @@ namespace OgmoEditor.LevelData.Layers
             if (Definition.ExportMode == TileLayerDefinition.TileExportMode.CSV || Definition.ExportMode == TileLayerDefinition.TileExportMode.TrimmedCSV)
             {
                 //Convert all tile values to CSV
-                string[] rows = new string[Tiles.GetLength(1)];
-                for (int i = 0; i < Tiles.GetLength(1); i++)
+                string[] rows = new string[TileCellsY];
+                for (int i = 0; i < TileCellsY; i++)
                 {
-                    string[] tiles = new string[Tiles.GetLength(0)];
-                    for (int j = 0; j < Tiles.GetLength(0); j++)
+                    string[] tileStrs = new string[TileCellsX];
+                    for (int j = 0; j < tileStrs.GetLength(0); j++)
                     {
-                        tiles[j] = Tiles[j, i].ToString();
+                        tileStrs[j] = tiles[j, i].ToString();
                     }
-                    rows[i] = string.Join(",", tiles);
+                    rows[i] = string.Join(",", tileStrs);
                 }
 
                 //Trim off trailing empties
@@ -83,11 +89,11 @@ namespace OgmoEditor.LevelData.Layers
                 //XML Export
                 XmlElement tile;
                 XmlAttribute a;
-                for (int i = 0; i < Tiles.GetLength(0); i++)
+                for (int i = 0; i < tiles.GetLength(0); i++)
                 {
-                    for (int j = 0; j < Tiles.GetLength(1); j++)
+                    for (int j = 0; j < tiles.GetLength(1); j++)
                     {
-                        if (Tiles[i, j] != -1)
+                        if (tiles[i, j] != -1)
                         {
                             tile = doc.CreateElement("tile");
 
@@ -102,12 +108,12 @@ namespace OgmoEditor.LevelData.Layers
                             if (Definition.ExportMode == TileLayerDefinition.TileExportMode.XML)
                             {
                                 a = doc.CreateAttribute("id");
-                                a.InnerText = Tiles[i, j].ToString();
+                                a.InnerText = tiles[i, j].ToString();
                                 tile.Attributes.Append(a);
                             }
                             else
                             {
-                                Point p = Tileset.GetCellFromID(Tiles[i, j]);
+                                Point p = Tileset.GetCellFromID(tiles[i, j]);
 
                                 a = doc.CreateAttribute("tx");
                                 a.InnerText = p.X.ToString();
@@ -150,22 +156,22 @@ namespace OgmoEditor.LevelData.Layers
                 string s = xml.InnerText;
 
                 string[] rows = s.Split('\n');
-                if (rows.Length > Tiles.GetLength(1))
+                if (rows.Length > tiles.GetLength(1))
                 {
-                    Array.Resize(ref rows, Tiles.GetLength(1));
+                    Array.Resize(ref rows, tiles.GetLength(1));
                     cleanXML = false;
                 }
                 for (int i = 0; i < rows.Length; i++)
                 {
-                    string[] tiles = rows[i].Split(',');
-                    if (tiles.Length > Tiles.GetLength(0))
+                    string[] tileStrs = rows[i].Split(',');
+                    if (tileStrs.Length > TileCellsX)
                     {
-                        Array.Resize(ref tiles, Tiles.GetLength(0));
+                        Array.Resize(ref tileStrs, TileCellsX);
                         cleanXML = false;
                     }
-                    if (tiles[0] != "")
-                        for (int j = 0; j < tiles.Length; j++)
-                            Tiles[j, i] = Convert.ToInt32(tiles[j]);
+                    if (tileStrs[0] != "")
+                        for (int j = 0; j < tileStrs.Length; j++)
+                            tiles[j, i] = Convert.ToInt32(tileStrs[j]);
                 }
             }
             else if (exportMode == TileLayerDefinition.TileExportMode.XML || exportMode == TileLayerDefinition.TileExportMode.XMLCoords)
@@ -179,18 +185,50 @@ namespace OgmoEditor.LevelData.Layers
                     if (tile.Attributes["id"] != null)
                     {
                         int id = Convert.ToInt32(tile.Attributes["id"].InnerText);
-                        Tiles[x, y] = id;
+                        tiles[x, y] = id;
                     }
                     else if (tile.Attributes["tx"] != null && tile.Attributes["ty"] != null)
                     {
                         int tx = Convert.ToInt32(tile.Attributes["tx"].InnerText);
                         int ty = Convert.ToInt32(tile.Attributes["ty"].InnerText);
-                        Tiles[x, y] = Tileset.GetIDFromCell(new Point(tx, ty));
+                        tiles[x, y] = Tileset.GetIDFromCell(new Point(tx, ty));
                     }
                 }
             }
 
+            BuildTiles();
             return cleanXML;
+        }
+
+        public int this[int tx, int ty]
+        {
+            get
+            {
+                return tiles[tx, ty];
+            }
+
+            set
+            {
+                if (tiles[tx, ty] != value)
+                {
+                    tiles[tx, ty] = value;
+                    UpdateTile(tx, ty);
+                }
+            }
+        }
+
+        public int[,] Tiles
+        {
+            get
+            {
+                return tiles;
+            }
+
+            set
+            {
+                tiles = value;
+                BuildTiles();
+            }
         }
 
         public Rectangle GetTilesRectangle(Point start, Point end)
@@ -216,8 +254,8 @@ namespace OgmoEditor.LevelData.Layers
                 r.Y = 0;
             }
 
-            int width = Tiles.GetLength(0) * Definition.Grid.Width;
-            int height = Tiles.GetLength(1) * Definition.Grid.Height;
+            int width = tiles.GetLength(0) * Definition.Grid.Width;
+            int height = tiles.GetLength(1) * Definition.Grid.Height;
 
             if (r.X + r.Width > width)
                 r.Width = width - r.X;
@@ -230,13 +268,11 @@ namespace OgmoEditor.LevelData.Layers
 
         public void Clear()
         {
-            for (int i = 0; i < Tiles.GetLength(0); i++)
-            {
-                for (int j = 0; j < Tiles.GetLength(1); j++)
-                {
-                    Tiles[i, j] = -1;
-                }
-            }
+            for (int i = 0; i < tiles.GetLength(0); i++)
+                for (int j = 0; j < tiles.GetLength(1); j++)
+                    tiles[i, j] = -1;
+
+            BuildTilesEmpty();
         }
 
         public override LayerEditor GetEditor(LevelEditors.LevelEditor editor)
@@ -246,12 +282,64 @@ namespace OgmoEditor.LevelData.Layers
 
         public int TileCellsX
         {
-            get { return Tiles.GetLength(0); }
+            get { return tiles.GetLength(0); }
         }
 
         public int TileCellsY
         {
-            get { return Tiles.GetLength(1); }
+            get { return tiles.GetLength(1); }
         }
+
+        public Bitmap Bitmap
+        {
+            get { return canvas; }
+        }
+
+        #region Update the Cache
+
+        private void BuildTilesEmpty()
+        {
+            if (canvas != null)
+            {
+                canvas.Dispose();
+                canvasGraphics.Dispose();
+            }
+
+            canvas = new Bitmap(Level.Size.Width, Level.Size.Height);
+            canvasGraphics = Graphics.FromImage(canvas);
+            canvasGraphics.CompositingMode = CompositingMode.SourceCopy;
+            canvasGraphics.CompositingQuality = CompositingQuality.HighSpeed;
+            canvasGraphics.SmoothingMode = SmoothingMode.HighSpeed;
+            canvasGraphics.InterpolationMode = InterpolationMode.NearestNeighbor;
+        }
+
+        private void BuildTiles()
+        {
+            BuildTilesEmpty();
+
+            for (int i = 0; i < TileCellsX; i++)
+            {
+                for (int j = 0; j < TileCellsY; j++)
+                {
+                    if (tiles[i, j] != -1)
+                    {
+                        canvasGraphics.DrawImage(Tileset.Bitmap,
+                            new Rectangle(i * Definition.Grid.Width, j * Definition.Grid.Height, Definition.Grid.Width, Definition.Grid.Height),
+                            Tileset.GetRectFromID(tiles[i, j]),
+                            GraphicsUnit.Pixel);
+                    }
+                }
+            }
+        }
+
+        private void UpdateTile(int tx, int ty)
+        {
+            canvasGraphics.DrawImage(Tileset.Bitmap,
+                new Rectangle(tx * Definition.Grid.Width, ty * Definition.Grid.Height, Definition.Grid.Width, Definition.Grid.Height),
+                Tileset.GetRectFromID(tiles[tx, ty]),
+                GraphicsUnit.Pixel);
+        }
+
+        #endregion
     }
 }

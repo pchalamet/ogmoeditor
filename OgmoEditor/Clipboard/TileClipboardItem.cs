@@ -22,7 +22,7 @@ namespace OgmoEditor.Clipboard
             Data = new int[Area.Width, Area.Height];
             for (int i = 0; i < Area.Width; i++)
                 for (int j = 0; j < Area.Height; j++)
-                    Data[i, j] = layer.Tiles[i + Area.X, j + Area.Y];
+                    Data[i, j] = layer[i + Area.X, j + Area.Y];
         }
 
         public override bool CanPaste(Layer layer)

@@ -74,7 +74,7 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
 
             if (!setTo.HasValue)
             {
-                if (LayerEditor.Layer.Tiles[location.X, location.Y] != -1)
+                if (LayerEditor.Layer[location.X, location.Y] != -1)
                 {
                     if (drawAction == null)
                         LevelEditor.Perform(drawAction = new TileDrawAction(LayerEditor.Layer, location, -1));
@@ -85,7 +85,7 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
             else if (setTo.Value.Area() == 1)
             {
                 int id = LayerEditor.Layer.Tileset.GetIDFromCell(setTo.Value.Location);
-                if (LayerEditor.Layer.Tiles[location.X, location.Y] != id)
+                if (LayerEditor.Layer[location.X, location.Y] != id)
                 {
                     if (drawAction == null)
                         LevelEditor.Perform(drawAction = new TileDrawAction(LayerEditor.Layer, location, id));
@@ -105,7 +105,7 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
                     {
                         int id = LayerEditor.Layer.Tileset.GetIDFromSelectionRectPoint(setTo.Value, drawStart, new Point(location.X + x, location.Y + y));
 
-                        if (LayerEditor.Layer.Tiles[location.X + x, location.Y + y] != id)
+                        if (LayerEditor.Layer[location.X + x, location.Y + y] != id)
                         {
                             if (drawAction == null)
                                 LevelEditor.Perform(drawAction = new TileDrawAction(LayerEditor.Layer, location, id));

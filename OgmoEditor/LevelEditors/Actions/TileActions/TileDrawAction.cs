@@ -30,11 +30,12 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
             {
                 if (at.X < TileLayer.TileCellsX && at.Y < TileLayer.TileCellsY)
                 {
-                    was.Add(TileLayer.Tiles[at.X, at.Y]);
-                    TileLayer.Tiles[at.X, at.Y] = setTo;
+                    was.Add(TileLayer[at.X, at.Y]);
+                    TileLayer[at.X, at.Y] = setTo;
                 }
                 else
                     was.Add(-1);
+                
             }
         }
 
@@ -42,7 +43,7 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
         {
             for (int i = 0; i < draw.Count; i++)
                 if (draw[i].X < TileLayer.TileCellsX && draw[i].Y < TileLayer.TileCellsY)
-                    TileLayer.Tiles[draw[i].X, draw[i].Y] = was[i];
+                    TileLayer[draw[i].X, draw[i].Y] = was[i];
         }
 
         public void DoAgain(Point add, int setTo)
@@ -50,9 +51,9 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
             if (!draw.Contains(add))
             {
                 draw.Add(add);
-                was.Add(TileLayer.Tiles[add.X, add.Y]);
+                was.Add(TileLayer[add.X, add.Y]);
             }
-            TileLayer.Tiles[add.X, add.Y] = setTo;
+            TileLayer[add.X, add.Y] = setTo;
         }
     }
 }

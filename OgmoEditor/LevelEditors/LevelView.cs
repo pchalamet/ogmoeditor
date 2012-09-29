@@ -55,6 +55,8 @@ namespace OgmoEditor.LevelEditors
                 Matrix.Translate(-at.X, -at.Y);
                 UpdateInverse();
 
+                LevelEditor.Invalidate();
+
                 if (Zoom == targetZoom)
                     stopwatch.Stop();
             }

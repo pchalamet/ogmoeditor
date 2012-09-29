@@ -24,7 +24,7 @@ namespace OgmoEditor.LevelEditors.Tools.TileTools
 
         public bool IsValidTileCell(Point cell)
         {
-            return cell.X >= 0 && cell.Y >= 0 && cell.X < LayerEditor.Layer.Tiles.GetLength(0) && cell.Y < LayerEditor.Layer.Tiles.GetLength(1);
+            return cell.X >= 0 && cell.Y >= 0 && cell.X < LayerEditor.Layer.TileCellsX && cell.Y < LayerEditor.Layer.TileCellsY;
         } 
     }
 }

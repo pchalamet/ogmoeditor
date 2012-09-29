@@ -29,11 +29,11 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
             {
                 for (int j = 0; j < rect.Height; j++)
                 {
-                    was[i, j] = TileLayer.Tiles[i + rect.X, j + rect.Y];
+                    was[i, j] = TileLayer[i + rect.X, j + rect.Y];
                     if (setTo.HasValue)
-                        TileLayer.Tiles[i + rect.X, j + rect.Y] = TileLayer.Tileset.GetIDFromSelectionRectPoint(setTo.Value, rect.Location, new Point(rect.X + i, rect.Y + j));
+                        TileLayer[i + rect.X, j + rect.Y] = TileLayer.Tileset.GetIDFromSelectionRectPoint(setTo.Value, rect.Location, new Point(rect.X + i, rect.Y + j));
                     else
-                        TileLayer.Tiles[i + rect.X, j + rect.Y] = -1;
+                        TileLayer[i + rect.X, j + rect.Y] = -1;
                 }
             }
         }
@@ -44,7 +44,7 @@ namespace OgmoEditor.LevelEditors.Actions.TileActions
 
             for (int i = rect.X; i < rect.X + rect.Width; i++)
                 for (int j = rect.Y; j < rect.Y + rect.Height; j++)
-                    TileLayer.Tiles[i, j] = was[i - rect.X, j - rect.Y];
+                    TileLayer[i, j] = was[i - rect.X, j - rect.Y];
 
             was = null;
         }

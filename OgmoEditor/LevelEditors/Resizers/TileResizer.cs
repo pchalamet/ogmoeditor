@@ -23,18 +23,20 @@ namespace OgmoEditor.LevelEditors.Resizers
         {
             TileLayer layer = Editor.Layer;
 
-            oldTiles = layer.Tiles;
+            oldTiles = layer.Tiles.Clone() as int[,];
             int tileWidth = layer.Level.Size.Width / layer.Definition.Grid.Width + (layer.Level.Size.Width % layer.Definition.Grid.Width != 0 ? 1 : 0);
             int tileHeight = layer.Level.Size.Height / layer.Definition.Grid.Height + (layer.Level.Size.Height % layer.Definition.Grid.Height != 0 ? 1 : 0);
-            layer.Tiles = new int[tileWidth, tileHeight];
+            int[,] newTiles = new int[tileWidth, tileHeight];
 
-            for (int i = 0; i < layer.Tiles.GetLength(0); i++)
-                for (int j = 0; j < layer.Tiles.GetLength(1); j++)
-                    layer.Tiles[i, j] = -1;
+            for (int i = 0; i < tileWidth; i++)
+                for (int j = 0; j < tileHeight; j++)
+                    newTiles[i, j] = -1;
 
-            for (int i = 0; i < layer.Tiles.GetLength(0) && i < oldTiles.GetLength(0); i++)
-                for (int j = 0; j < layer.Tiles.GetLength(1) && j < oldTiles.GetLength(1); j++)
-                    layer.Tiles[i, j] = oldTiles[i, j];
+            for (int i = 0; i < layer.TileCellsX && i < oldTiles.GetLength(0); i++)
+                for (int j = 0; j < layer.TileCellsY && j < oldTiles.GetLength(1); j++)
+                    newTiles[i, j] = oldTiles[i, j];
+
+            layer.Tiles = newTiles;
         }
 
         public override void Undo()
