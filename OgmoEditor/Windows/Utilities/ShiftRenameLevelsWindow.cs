@@ -74,8 +74,8 @@ namespace OgmoEditor.Windows.Utilities
             //Close involved levels
             foreach (int i in toShift)
             {
-                string source = Path.Combine(Ogmo.Project.SavedDirectory, pattern.Replace("#", toShift[i].ToString()));
-                string dest = Path.Combine(Ogmo.Project.SavedDirectory, pattern.Replace("#", (toShift[i] + shift).ToString()));
+                string source = Path.Combine(Ogmo.Project.SavedDirectory, pattern.Replace("#", i.ToString()));
+                string dest = Path.Combine(Ogmo.Project.SavedDirectory, pattern.Replace("#", (i + shift).ToString()));
 
                 if (!Ogmo.CloseLevelByFilepath(source) || !Ogmo.CloseLevelByFilepath(dest))
                     return;
