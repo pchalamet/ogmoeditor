@@ -32,8 +32,8 @@ namespace OgmoEditor.LevelEditors.Resizers
                 for (int j = 0; j < tileHeight; j++)
                     newTiles[i, j] = -1;
 
-            for (int i = 0; i < layer.TileCellsX && i < oldTiles.GetLength(0); i++)
-                for (int j = 0; j < layer.TileCellsY && j < oldTiles.GetLength(1); j++)
+            for (int i = 0; i < newTiles.GetLength(0) && i < oldTiles.GetLength(0); i++)
+                for (int j = 0; j < newTiles.GetLength(1) && j < oldTiles.GetLength(1); j++)
                     newTiles[i, j] = oldTiles[i, j];
 
             layer.Tiles = newTiles;
