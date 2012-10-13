@@ -76,7 +76,7 @@ namespace OgmoEditor.Windows
                 b.OnRemove();
             Controls.Clear();
             for (int i = 0; i < project.LayerDefinitions.Count; i++)
-                Controls.Add(new LayerButton(project.LayerDefinitions[i], i * 24));
+                Controls.Add(new LayerButton(project.LayerDefinitions[i], (project.LayerDefinitions.Count - i - 1) * 24));
 
             CurrentLayerIndex = -1;
         }

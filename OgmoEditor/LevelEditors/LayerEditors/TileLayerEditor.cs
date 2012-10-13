@@ -24,7 +24,7 @@ namespace OgmoEditor.LevelEditors.LayerEditors
 
         public override void Draw(Graphics graphics, bool current, bool fullAlpha)
         {
-            graphics.DrawImage(Layer.Bitmap, Point.Empty);
+            graphics.DrawImage(Layer.Bitmap, new Rectangle(0, 0, Layer.Bitmap.Width, Layer.Bitmap.Height), 0, 0, Layer.Bitmap.Width, Layer.Bitmap.Height, GraphicsUnit.Pixel, fullAlpha ? Util.FullAlphaAttributes : Util.HalfAlphaAttributes);
 
             //Draw the selection box
             if (current && Layer.Selection != null)
