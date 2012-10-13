@@ -182,6 +182,12 @@ namespace OgmoEditor.LevelData.Layers
                     int x = Convert.ToInt32(tile.Attributes["x"].InnerText);
                     int y = Convert.ToInt32(tile.Attributes["y"].InnerText);
 
+                    if (x >= Tiles.GetLength(0) || y >= Tiles.GetLength(1))
+                    {
+                        cleanXML = false;
+                        continue;
+                    }
+
                     if (tile.Attributes["id"] != null)
                     {
                         int id = Convert.ToInt32(tile.Attributes["id"].InnerText);
