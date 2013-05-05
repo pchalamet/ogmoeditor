@@ -279,11 +279,11 @@ namespace OgmoEditor.Windows
                     }
                 }
 
-                ClientSize = new Size(WIDTH, yy + 4);
+                ClientSize = new Size(ClientSize.Width, yy + 4);
             }
             else
             {
-                ClientSize = new Size(WIDTH, ((selection.Count - 1) / 4) * 32 + 32);
+                ClientSize = new Size(ClientSize.Width, ((selection.Count - 1) / 4) * 32 + 32);
 
                 for (int i = 0; i < selection.Count; i++)
                 {
